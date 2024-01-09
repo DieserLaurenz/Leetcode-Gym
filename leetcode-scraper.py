@@ -43,14 +43,16 @@ def fetch_problem_links(directory="html_files"):
             hrefs = extract_problem_links(soup)
             problem_links.update(hrefs)
     return problem_links
+
 def init_driver():
     """Initialisieren des Chrome WebDriver"""
     options = webdriver.ChromeOptions()
     options.headless = True
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return driver
-def extract_text_from_page(driver, url):
-    """Funktion, um Text aus den angegebenen Klassen zu extrahieren"""
+
+def extract_data_from_page(driver, url):
+    """Funktion, um Daten aus den angegebenen Klassen zu extrahieren"""
     driver.get(url)
     time.sleep(2)  # Wartezeit für das Laden der Seite
 
@@ -139,11 +141,12 @@ def extract_text_from_page(driver, url):
 
     # Extrahiere den Code für die verschiedenen Sprachen
     javascript_code_text = extract_code_for_language("JavaScript")
+    java_code_text = extract_code_for_language("Java")
     erlang_code_text = extract_code_for_language("Erlang")
-    ruby_code_text = extract_code_for_language("Ruby")
-    csharp_code_text = extract_code_for_language("C#")
+    elixir_code_text = extract_code_for_language("Elixir")
 
-    return premium_message, title, content, difficulty, content_image, javascript_code_text, erlang_code_text, ruby_code_text, csharp_code_text
+    return premium_message, title, content, difficulty, content_image, javascript_code_text, java_code_text, erlang_code_text, elixir_code_text
+
 def scrape_and_save(problem_links, save_directory="scraped_data"):
     """Hauptfunktion, um die Webseiten zu durchlaufen und die Daten zu extrahieren"""
 
@@ -159,7 +162,7 @@ def scrape_and_save(problem_links, save_directory="scraped_data"):
             print("Data already extracted")
             continue
 
-        premium_message, title, content, difficulty, content_image, javascript_code_text, erlang_code_text, ruby_code_text, csharp_code_text = extract_text_from_page(driver, url)
+        premium_message, title, content, difficulty, content_image, javascript_code_text, java_code_text, erlang_code_text, elixir_code_text = extract_data_from_page(driver, url)
 
         if premium_message:
             print("Premium problem. SKIP")
@@ -169,8 +172,8 @@ def scrape_and_save(problem_links, save_directory="scraped_data"):
             print("Image in content. SKIP")
             continue
 
-        if any(text == "" for text in [javascript_code_text, erlang_code_text, ruby_code_text, csharp_code_text]):
-            print("Not all languages Available. SKIP")
+        if any(text == "" for text in [javascript_code_text, java_code_text, erlang_code_text, elixir_code_text]):
+            print("Not all languages available. SKIP")
             continue
 
 
@@ -193,26 +196,26 @@ def scrape_and_save(problem_links, save_directory="scraped_data"):
         file_path_of_javascript_code_text = os.path.join(file_path_of_name, "javascript_code_text.txt")
 
         with open(file_path_of_javascript_code_text, 'w', encoding='utf-8') as file:
-            file.write(javascript_code_text)
+            file.write(f"Solve the following problem in JavaScript. Use the template as a starting point\n\nTemplate:\n\n{javascript_code_text}\n\nProblem:\n\n{content}")
             print(f"Data saved: {file_path_of_javascript_code_text}")
+
+        file_path_of_java_code_text = os.path.join(file_path_of_name, "java_code_text.txt")
+
+        with open(file_path_of_java_code_text, 'w', encoding='utf-8') as file:
+            file.write(f"Solve the following problem in Java. Use the template as a starting point\n\nTemplate:\n\n{java_code_text}\n\nProblem:\n\n{content}")
+            print(f"Data saved: {file_path_of_java_code_text}")
 
         file_path_of_erlang_code_text = os.path.join(file_path_of_name, "erlang_code_text.txt")
 
         with open(file_path_of_erlang_code_text, 'w', encoding='utf-8') as file:
-            file.write(erlang_code_text)
+            file.write(f"Solve the following problem in Erlang. Use the template as a starting point\n\nTemplate:\n\n{erlang_code_text}\n\nProblem:\n\n{content}")
             print(f"Data saved: {file_path_of_erlang_code_text}")
 
-        file_path_of_ruby_code_text = os.path.join(file_path_of_name, "ruby_code_text.txt")
+        file_path_of_elixir_code_text = os.path.join(file_path_of_name, "elixir_code_text.txt")
 
-        with open(file_path_of_ruby_code_text, 'w', encoding='utf-8') as file:
-            file.write(ruby_code_text)
-            print(f"Data saved: {file_path_of_ruby_code_text}")
-
-        file_path_of_csharp_code_text = os.path.join(file_path_of_name, "csharp_code_text.txt")
-
-        with open(file_path_of_csharp_code_text, 'w', encoding='utf-8') as file:
-            file.write(csharp_code_text)
-            print(f"Data saved: {file_path_of_csharp_code_text}")
+        with open(file_path_of_elixir_code_text, 'w', encoding='utf-8') as file:
+            file.write(f"Solve the following problem in Elixir. Use the template as a starting point\n\nTemplate:\n\n{elixir_code_text}\n\nProblem:\n\n{content}")
+            print(f"Data saved: {file_path_of_elixir_code_text}")
 
     driver.quit()
 

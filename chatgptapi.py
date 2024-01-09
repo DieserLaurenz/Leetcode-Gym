@@ -17,58 +17,50 @@ messages = []
 user_input = None
 
 while user_input != 'quit':
-    print("Hallo")
-    # Nutzereingabe erhalten
-    user_input = """ Code a JavaScript to the following Problem. Use the template as a starting point:
+    user_input = """Solve the following problem in Elixir. Use the template as a starting point
 
 Template:
 
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
-var minOperations = function(nums, k) {
+defmodule Solution do
+  @spec find_column_width(grid :: [[integer]]) :: [integer]
+  def find_column_width(grid) do
     
-};
+  end
+end
 
 Problem:
 
-You are given a 0-indexed integer array nums and a positive integer k.
+You are given a 0-indexed m x n integer matrix grid. The width of a column is the maximum length of its integers.
 
-You can apply the following operation on the array any number of times:
+For example, if grid = [[-10], [3], [12]], the width of the only column is 3 since -10 is of length 3.
+Return an integer array ans of size n where ans[i] is the width of the ith column.
 
-Choose any element of the array and flip a bit in its binary representation. Flipping a bit means changing a 0 to 1 or vice versa.
-Return the minimum number of operations required to make the bitwise XOR of all elements of the final array equal to k.
-
-Note that you can flip leading zero bits in the binary representation of elements. For example, for the number (101)2 you can flip the fourth bit and obtain (1101)2.
+The length of an integer x with len digits is equal to len if x is non-negative, and len + 1 otherwise.
 
  
 
 Example 1:
 
-Input: nums = [2,1,3,4], k = 1
-Output: 2
-Explanation: We can do the following operations:
-- Choose element 2 which is 3 == (011)2, we flip the first bit and we obtain (010)2 == 2. nums becomes [2,1,2,4].
-- Choose element 0 which is 2 == (010)2, we flip the third bit and we obtain (110)2 = 6. nums becomes [6,1,2,4].
-The XOR of elements of the final array is (6 XOR 1 XOR 2 XOR 4) == 1 == k.
-It can be shown that we cannot make the XOR equal to k in less than 2 operations.
+Input: grid = [[1],[22],[333]]
+Output: [3]
+Explanation: In the 0th column, 333 is of length 3.
 Example 2:
 
-Input: nums = [2,0,2,0], k = 0
-Output: 0
-Explanation: The XOR of elements of the array is (2 XOR 0 XOR 2 XOR 0) == 0 == k. So no operation is needed.
+Input: grid = [[-15,1,3],[15,7,12],[5,6,-2]]
+Output: [3,1,2]
+Explanation: 
+In the 0th column, only -15 is of length 3.
+In the 1st column, all integers are of length 1. 
+In the 2nd column, both 12 and -2 are of length 2.
  
 
 Constraints:
 
-1 <= nums.length <= 105
-0 <= nums[i] <= 106
-0 <= k <= 106
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 100 
+-109 <= grid[r][c] <= 109"""
 
-"""
-    # Hinzufügen zur Nachrichtenliste
     messages.append({'role':'user','content':user_input})
 
     # Senden an die ChatGPT API unter Verwendung aller bisherigen Nachrichten
@@ -84,7 +76,7 @@ Constraints:
     # Antwort erhalten und ausgeben
     answer = response.choices[0].message.content
 
-    pattern = r"```javascript\n([\s\S]*?)\n```"
+    pattern = r"```elixir\n([\s\S]*?)\n```"
 
     match = re.search(pattern, answer)
 
