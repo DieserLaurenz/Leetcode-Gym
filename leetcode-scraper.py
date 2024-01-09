@@ -1,224 +1,249 @@
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import os
+import tls_client
+import json
 import time
-import os
 
-def is_html_file(filename):
-    """Prüft, ob eine Datei eine HTML-Datei ist."""
-    _, ext = os.path.splitext(filename)
-    return ext in ['.html', '.htm']
+REQUEST_DELAY = 0
 
-def parse_html_file(file_path):
-    """Liest und parst eine HTML-Datei, gibt die BeautifulSoup-Instanz zurück."""
-    with open(file_path, 'r', encoding='utf-8') as file:
-        html_content = file.read()
-    print(f"Successfully read: {file_path}")
-    return BeautifulSoup(html_content, 'html.parser')
+def send_request(url, cookies=None, headers=None, json_data=None):
 
-def extract_problem_links(soup):
-    """Extrahiert Problem-Links aus der BeautifulSoup-Instanz."""
-    hrefs = set()
-    divs = soup.find_all('div', class_="inline-block min-w-full")
-    for div in divs:
-        links = div.find_all('a', href=True)
-        for link in links:
-            href = str(link['href'])
-            if href.startswith('https://leetcode.com/problems/') and not href.endswith('/solution'):
-                hrefs.add(href)
-    return hrefs
+    session = tls_client.Session(
+        client_identifier="chrome112",
+        random_tls_extension_order=True
+    )
 
-def fetch_problem_links(directory="html_files"):
-    """Sammelt alle Problem-Links aus HTML-Dateien im angegebenen Verzeichnis."""
-    problem_links = set()
-    for filename in os.listdir(directory):
-        if is_html_file(filename):
-            file_path = os.path.join(directory, filename)
-            soup = parse_html_file(file_path)
-            hrefs = extract_problem_links(soup)
-            problem_links.update(hrefs)
-    return problem_links
+    res = session.post(
+        url=url,
+        headers=headers,
+        cookies=cookies,
+        json=json_data
+    )
 
-def init_driver():
-    """Initialisieren des Chrome WebDriver"""
-    options = webdriver.ChromeOptions()
-    options.headless = True
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    return driver
+    return res
 
-def extract_data_from_page(driver, url):
-    """Funktion, um Daten aus den angegebenen Klassen zu extrahieren"""
-    driver.get(url)
-    time.sleep(2)  # Wartezeit für das Laden der Seite
+def fetch_questions():
 
-    try:
-        premium_message_xpath = '//*[@id="qd-content"]/div[4]/div/div[2]'
-        premium_message = driver.execute_script(
-            "return document.evaluate(arguments[0], document, null, XPathResult.STRING_TYPE, null).stringValue;",
-            premium_message_xpath)
+    headers = {
+        'authority': 'leetcode.com',
+        'accept': '*/*',
+        'accept-language': 'de-DE,de;q=0.9,en-GB;q=0.8,en;q=0.7,en-US;q=0.6,es;q=0.5,it;q=0.4,fr;q=0.3',
+        'authorization': '',
+        'content-type': 'application/json',
+        'dnt': '1',
+        'origin': 'https://leetcode.com',
+        'referer': 'https://leetcode.com/problemset/?sorting=W3sic29ydE9yZGVyIjoiREVTQ0VORElORyIsIm9yZGVyQnkiOiJGUk9OVEVORF9JRCJ9XQ%3D%3D',
+        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    }
 
-    except Exception as e:
-        premium_message = ""
+    json_data = {
+    'query': '\n    query problemsetQuestionList($categorySlug: String, $limit: Int, $skip: Int, $filters: QuestionListFilterInput) {\n  problemsetQuestionList: questionList(\n    categorySlug: $categorySlug\n    limit: $limit\n    skip: $skip\n    filters: $filters\n  ) {\n    total: totalNum\n    questions: data {\n      acRate\n      difficulty\n      freqBar\n      frontendQuestionId: questionFrontendId\n      isFavor\n      paidOnly: isPaidOnly\n      status\n      title\n      titleSlug\n      topicTags {\n        name\n        id\n        slug\n      }\n      hasSolution\n      hasVideoSolution\n    }\n  }\n}\n    ',
+    'variables': {
+        'categorySlug': 'all-code-essentials',
+        'skip': 0,
+        'limit': 500,
+        'filters': {
+            'orderBy': 'FRONTEND_ID',
+            'sortOrder': 'DESCENDING',
+        },
+    },
+    'operationName': 'problemsetQuestionList'
+}
 
-    if premium_message:
-        return True, "", "", "", "", "", "", "", ""
+    res = send_request("https://leetcode.com/graphql/", headers=headers, json_data=json_data)
 
-    try:
-        # Extrahieren des Inhalts und prüfen ob Inhalt ein Bild enthält
-        content_element = driver.find_element(By.CLASS_NAME, "px-5.pt-4")
-        content = content_element.text
+    response_data = res.json()
 
-        if content_element.find_elements(By.TAG_NAME, "img"):
-            content_image = True
-            return "", "", "", "", content_image, "", "", "", ""
-        else:
-            content_image = False
+    questions = response_data["data"]["problemsetQuestionList"]["questions"]
 
-    except Exception as e:
-        content = ""
-        content_image = False
+    return questions
 
-    try:
-        # Extrahiere die difficulty des Problems
-        difficulty_xpath = '//*[@id="qd-content"]/div[1]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div[1]'
-        difficulty = driver.execute_script(
-            "return document.evaluate(arguments[0], document, null, XPathResult.STRING_TYPE, null).stringValue;",
-            difficulty_xpath)
+def fetch_question_content(title):
 
-    except Exception as e:
-        difficulty = ""
+    headers = {
+        'authority': 'leetcode.com',
+        'accept': '*/*',
+        'accept-language': 'de-DE,de;q=0.9,en-GB;q=0.8,en;q=0.7,en-US;q=0.6,es;q=0.5,it;q=0.4,fr;q=0.3',
+        'authorization': '',
+        'baggage': 'sentry-environment=production,sentry-release=8c964d1c,sentry-transaction=%2Fproblems%2F%5Bslug%5D%2F%5B%5B...tab%5D%5D,sentry-public_key=2a051f9838e2450fbdd5a77eb62cc83c,sentry-trace_id=36aebb91d00b4c5fa4bf514605792576,sentry-sample_rate=0.03',
+        'content-type': 'application/json',
+        'dnt': '1',
+        'origin': 'https://leetcode.com',
+        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    }
 
-    try:
-        # Extrahiere die ID des Problems
-        id_xpath = "//*[@id='qd-content']//a/text()[1]"
-        problem_id = driver.execute_script(
-            "return document.evaluate(arguments[0], document, null, XPathResult.STRING_TYPE, null).stringValue;",
-            id_xpath)
+    json_data = {
+    "query": "\n    query combinedData($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    content\n    mysqlSchemas\n    dataSchemas\n    questionId\n    questionFrontendId\n    codeSnippets {\n      lang\n      langSlug\n      code\n    }\n    envInfo\n    enableRunCode\n    hasFrontendPreview\n    frontendPreviews\n  }\n}\n    ",
+    "variables": {
+        "titleSlug": title
+    },
+    "operationName": "combinedData"
+    }
 
-        # Extrahiere den Namen des Problems
-        name_xpath = "//*[@id='qd-content']//a/text()[4]"
-        problem_name = driver.execute_script(
-            "return document.evaluate(arguments[0], document, null, XPathResult.STRING_TYPE, null).stringValue;",
-            name_xpath)
+    res = send_request("https://leetcode.com/graphql/", headers=headers, json_data=json_data)
 
-        title = problem_id + " " + problem_name
-    except Exception as e:
-        title = ""
+    response_data = res.json()
 
-    def extract_code_for_language(language):
-        """Hilfsfunktion, um den Code für eine bestimmte Sprache zu extrahieren"""
+    return response_data
 
-        try:
-            # Wählen Sie den Button aus, dessen ID mit "headlessui-listbox-button-" beginnt
-            button_css_selector = "[id^='headlessui-listbox-button-']"
-            button = WebDriverWait(driver, 2).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, button_css_selector))
-            )
-            button.click()
+def fetch_question_definition():
+    pass
 
-            # Warte auf das Laden der Liste und wähle die Sprache aus
-            language_option_xpath = f"//div[contains(@class, 'whitespace-nowrap') and text()='{language}']"
-            language_option = WebDriverWait(driver, 2).until(
-                EC.element_to_be_clickable((By.XPATH, language_option_xpath))
-            )
-            language_option.click()
+def clean_content(html_text):
+    """
+    Cleans the provided content, removing tags, newlines, tab characters,
+    unicode characters, and formats the text by correcting quotation marks.
+    """
 
-            time.sleep(2)
+    # Parse the HTML content using BeautifulSoup
+    soup = BeautifulSoup(html_text, 'html.parser')
 
-            # Extrahiere den Text aus der Klasse 'view-lines monaco-mouse-cursor-text'
-            code_text_element = WebDriverWait(driver, 2).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "view-lines.monaco-mouse-cursor-text"))
-            )
-            return code_text_element.text
+    # Get text from the parsed HTML
+    text = soup.get_text()
 
-        except Exception as e:
-            return ""
+    # Replace newline and tab characters with a space
+    text = text.replace('\n', ' ').replace('\t', ' ')
 
-    # Extrahiere den Code für die verschiedenen Sprachen
-    javascript_code_text = extract_code_for_language("JavaScript")
-    java_code_text = extract_code_for_language("Java")
-    erlang_code_text = extract_code_for_language("Erlang")
-    elixir_code_text = extract_code_for_language("Elixir")
+    # Remove unicode characters like \u00a0
+    text = str(text.encode('ascii', 'ignore').decode('ascii'))
 
-    return premium_message, title, content, difficulty, content_image, javascript_code_text, java_code_text, erlang_code_text, elixir_code_text
+    return text
 
-def scrape_and_save(problem_links, save_directory="scraped_data"):
-    """Hauptfunktion, um die Webseiten zu durchlaufen und die Daten zu extrahieren"""
+def clean_code_snippets(code_snippets):
 
-    if not os.path.exists(save_directory):
-        os.makedirs(save_directory)
+    for code_snippet in code_snippets:
+        code_snippet["code"] = code_snippet["code"].replace('\n', ' ').replace('\t', ' ')
 
-    driver = init_driver()
+    return code_snippets
 
-    for url in problem_links:
-        difficulty_levels = ['Easy', 'Medium', 'Hard']
-        file_name = url.split('/')[-1]
-        if any(os.path.exists(f"./scraped_data/{level}/{file_name}") for level in difficulty_levels):
-            print("Data already extracted")
-            continue
+def add_question_content(filtered_questions):
 
-        premium_message, title, content, difficulty, content_image, javascript_code_text, java_code_text, erlang_code_text, elixir_code_text = extract_data_from_page(driver, url)
+    for question in filtered_questions:
+        title = question["titleSlug"]
+        question_content = fetch_question_content(title)
 
-        if premium_message:
-            print("Premium problem. SKIP")
-            continue
+        code_snippets = clean_code_snippets(question_content["data"]["question"]["codeSnippets"])
+        content = clean_content(question_content["data"]["question"]["content"])
 
-        if content_image:
-            print("Image in content. SKIP")
-            continue
+        question["codeSnippets"] = code_snippets
+        question["content"] = content
 
-        if any(text == "" for text in [javascript_code_text, java_code_text, erlang_code_text, elixir_code_text]):
-            print("Not all languages available. SKIP")
-            continue
+        print(f"SUCCESSFULLY ADDED QUESTION CONTENT FOR: {title}")
+        time.sleep(REQUEST_DELAY)
+
+    return filtered_questions
+
+def check_creation_date():
+    pass
+    # Still TO DO
+# USE THIS REQUEST
+"""
+import requests
+
+cookies = {
+    'gr_user_id': 'c20eeae6-f608-463d-8536-9316811c1efa',
+    'csrftoken': '3t2BwQ1zt2HWpBuNoZqhNztBMk7LFQ9I8SEgdEXWRNlIuDop2MUTttXRzcLxtFtT',
+    '87b5a3c3f1a55520_gr_last_sent_cs1': 'laurenzgilbert',
+    '__stripe_mid': '03a47ab3-0f6f-4511-9e28-b1d6a0324f7a6b1996',
+    '_gid': 'GA1.2.1226416597.1704723056',
+    '87b5a3c3f1a55520_gr_session_id': '8850a70a-b390-47f9-9566-95b18aca60bb',
+    '87b5a3c3f1a55520_gr_last_sent_sid_with_cs1': '8850a70a-b390-47f9-9566-95b18aca60bb',
+    '87b5a3c3f1a55520_gr_session_id_sent_vst': '8850a70a-b390-47f9-9566-95b18aca60bb',
+    'LEETCODE_SESSION': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiMTEyODU1MjAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJhbGxhdXRoLmFjY291bnQuYXV0aF9iYWNrZW5kcy5BdXRoZW50aWNhdGlvbkJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmOTJlY2UwZjU0YWQ4Y2JkNTJhMjQ2MjE5NDVhMDliY2Q5NzFjNmI4ZDMzZmYxMGUyOTQzMmRkNzVhZjM2YTE3IiwiaWQiOjExMjg1NTIwLCJlbWFpbCI6ImxhdXJlbnpnaWxiZXJ0QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoibGF1cmVuemdpbGJlcnQiLCJ1c2VyX3NsdWciOiJsYXVyZW56Z2lsYmVydCIsImF2YXRhciI6Imh0dHBzOi8vYXNzZXRzLmxlZXRjb2RlLmNvbS91c2Vycy9hdmF0YXJzL2F2YXRhcl8xNjk4NjYzNTcyLnBuZyIsInJlZnJlc2hlZF9hdCI6MTcwNDgwOTUxMywiaXAiOiI1LjE4MC42MS4yMjMiLCJpZGVudGl0eSI6IjljMWNlMjdmMDhiMTY0NzlkMmUxNzc0MzA2MmIyOGVkIiwic2Vzc2lvbl9pZCI6NTI3ODQxMDB9.DIN2gxA7SyCcehkeAub1ZPODKhbCKSbqQHMFB1BzB3g',
+    '_dd_s': 'rum=0&expire=1704810415902',
+    '__stripe_sid': 'd964d365-6255-4e1e-8354-4e07a86d5185794873',
+    '_ga': 'GA1.1.1899578593.1704278487',
+    '87b5a3c3f1a55520_gr_cs1': 'laurenzgilbert',
+    '_ga_CDRWKZTDEX': 'GS1.1.1704808858.9.1.1704809962.12.0.0',
+}
+
+headers = {
+    'authority': 'leetcode.com',
+    'accept': '*/*',
+    'accept-language': 'de-DE,de;q=0.9,en-GB;q=0.8,en;q=0.7,en-US;q=0.6,es;q=0.5,it;q=0.4,fr;q=0.3',
+    'authorization': '',
+    'baggage': 'sentry-environment=production,sentry-release=8c964d1c,sentry-transaction=%2Fproblems%2F%5Bslug%5D%2F%5B%5B...tab%5D%5D,sentry-public_key=2a051f9838e2450fbdd5a77eb62cc83c,sentry-trace_id=f12a165118ca4b7794d1dd1f22f38d14,sentry-sample_rate=0.03',
+    'content-type': 'application/json',
+    # 'cookie': 'gr_user_id=c20eeae6-f608-463d-8536-9316811c1efa; csrftoken=3t2BwQ1zt2HWpBuNoZqhNztBMk7LFQ9I8SEgdEXWRNlIuDop2MUTttXRzcLxtFtT; 87b5a3c3f1a55520_gr_last_sent_cs1=laurenzgilbert; __stripe_mid=03a47ab3-0f6f-4511-9e28-b1d6a0324f7a6b1996; _gid=GA1.2.1226416597.1704723056; 87b5a3c3f1a55520_gr_session_id=8850a70a-b390-47f9-9566-95b18aca60bb; 87b5a3c3f1a55520_gr_last_sent_sid_with_cs1=8850a70a-b390-47f9-9566-95b18aca60bb; 87b5a3c3f1a55520_gr_session_id_sent_vst=8850a70a-b390-47f9-9566-95b18aca60bb; LEETCODE_SESSION=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiMTEyODU1MjAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJhbGxhdXRoLmFjY291bnQuYXV0aF9iYWNrZW5kcy5BdXRoZW50aWNhdGlvbkJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmOTJlY2UwZjU0YWQ4Y2JkNTJhMjQ2MjE5NDVhMDliY2Q5NzFjNmI4ZDMzZmYxMGUyOTQzMmRkNzVhZjM2YTE3IiwiaWQiOjExMjg1NTIwLCJlbWFpbCI6ImxhdXJlbnpnaWxiZXJ0QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoibGF1cmVuemdpbGJlcnQiLCJ1c2VyX3NsdWciOiJsYXVyZW56Z2lsYmVydCIsImF2YXRhciI6Imh0dHBzOi8vYXNzZXRzLmxlZXRjb2RlLmNvbS91c2Vycy9hdmF0YXJzL2F2YXRhcl8xNjk4NjYzNTcyLnBuZyIsInJlZnJlc2hlZF9hdCI6MTcwNDgwOTUxMywiaXAiOiI1LjE4MC42MS4yMjMiLCJpZGVudGl0eSI6IjljMWNlMjdmMDhiMTY0NzlkMmUxNzc0MzA2MmIyOGVkIiwic2Vzc2lvbl9pZCI6NTI3ODQxMDB9.DIN2gxA7SyCcehkeAub1ZPODKhbCKSbqQHMFB1BzB3g; _dd_s=rum=0&expire=1704810415902; __stripe_sid=d964d365-6255-4e1e-8354-4e07a86d5185794873; _ga=GA1.1.1899578593.1704278487; 87b5a3c3f1a55520_gr_cs1=laurenzgilbert; _ga_CDRWKZTDEX=GS1.1.1704808858.9.1.1704809962.12.0.0',
+    'dnt': '1',
+    'origin': 'https://leetcode.com',
+    'random-uuid': 'c24a4174-870a-8b0c-938a-76e4e199e541',
+    'referer': 'https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/solutions/',
+    'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'sentry-trace': 'f12a165118ca4b7794d1dd1f22f38d14-86d56736dce2e18c-0',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'uuuserid': '2fda2e1f9702473b0cd10f8210046556',
+    'x-csrftoken': '3t2BwQ1zt2HWpBuNoZqhNztBMk7LFQ9I8SEgdEXWRNlIuDop2MUTttXRzcLxtFtT',
+    'x-newrelic-id': 'UAQDVFVRGwIAUVhbAAMFXlQ=',
+}
+
+json_data = {
+    'query': '\n    query communitySolutions($questionSlug: String!, $skip: Int!, $first: Int!, $query: String, $orderBy: TopicSortingOption, $languageTags: [String!], $topicTags: [String!]) {\n  questionSolutions(\n    filters: {questionSlug: $questionSlug, skip: $skip, first: $first, query: $query, orderBy: $orderBy, languageTags: $languageTags, topicTags: $topicTags}\n  ) {\n    hasDirectResults\n    totalNum\n    solutions {\n      id\n      title\n      commentCount\n      topLevelCommentCount\n      viewCount\n      pinned\n      isFavorite\n      solutionTags {\n        name\n        slug\n      }\n      post {\n        id\n        status\n        voteStatus\n        voteCount\n        creationDate\n        isHidden\n        author {\n          username\n          isActive\n          nameColor\n          activeBadge {\n            displayName\n            icon\n          }\n          profile {\n            userAvatar\n            reputation\n          }\n        }\n      }\n      searchMeta {\n        content\n        contentType\n        commentAuthor {\n          username\n        }\n        replyAuthor {\n          username\n        }\n        highlights\n      }\n    }\n  }\n}\n    ',
+    'variables': {
+        'query': '',
+        'languageTags': [],
+        'topicTags': [],
+        'questionSlug': 'find-score-of-an-array-after-marking-all-elements',
+        'skip': 0,
+        'first': 15,
+        'orderBy': 'newest_to_oldest',
+    },
+    'operationName': 'communitySolutions',
+}
+
+response = requests.post('https://leetcode.com/graphql/', cookies=cookies, headers=headers, json=json_data)
+
+# Note: json_data will not be serialized by requests
+# exactly as it was in the original request.
+#data = '{"query":"\\n    query communitySolutions($questionSlug: String!, $skip: Int!, $first: Int!, $query: String, $orderBy: TopicSortingOption, $languageTags: [String!], $topicTags: [String!]) {\\n  questionSolutions(\\n    filters: {questionSlug: $questionSlug, skip: $skip, first: $first, query: $query, orderBy: $orderBy, languageTags: $languageTags, topicTags: $topicTags}\\n  ) {\\n    hasDirectResults\\n    totalNum\\n    solutions {\\n      id\\n      title\\n      commentCount\\n      topLevelCommentCount\\n      viewCount\\n      pinned\\n      isFavorite\\n      solutionTags {\\n        name\\n        slug\\n      }\\n      post {\\n        id\\n        status\\n        voteStatus\\n        voteCount\\n        creationDate\\n        isHidden\\n        author {\\n          username\\n          isActive\\n          nameColor\\n          activeBadge {\\n            displayName\\n            icon\\n          }\\n          profile {\\n            userAvatar\\n            reputation\\n          }\\n        }\\n      }\\n      searchMeta {\\n        content\\n        contentType\\n        commentAuthor {\\n          username\\n        }\\n        replyAuthor {\\n          username\\n        }\\n        highlights\\n      }\\n    }\\n  }\\n}\\n    ","variables":{"query":"","languageTags":[],"topicTags":[],"questionSlug":"find-score-of-an-array-after-marking-all-elements","skip":0,"first":15,"orderBy":"newest_to_oldest"},"operationName":"communitySolutions"}'
+#response = requests.post('https://leetcode.com/graphql/', cookies=cookies, headers=headers, data=data)
+"""
+
+def filter_questions(questions):
+    filtered_questions = [question for question in questions if not
+                     question['paidOnly'] and int(question['frontendQuestionId']) >= 2600]
+
+    return filtered_questions
+
+def save_questions_to_folder(questions):
+
+    for question in questions:
+
+        path = f"./questions/{question['difficulty']}/{question['titleSlug']}"
+
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        with open(f"{path}/{question['titleSlug']}.json", "w+") as f:
+            json.dump(question, f, indent=4)
 
 
-        file_path_of_difficulty = os.path.join(save_directory, difficulty)
-
-        if not os.path.exists(file_path_of_difficulty):
-            os.makedirs(file_path_of_difficulty)
-
-        file_path_of_name = os.path.join(file_path_of_difficulty, file_name)
-
-        if not os.path.exists(file_path_of_name):
-            os.makedirs(file_path_of_name)
-
-        file_path_of_content = os.path.join(file_path_of_name, f"{title}.txt")
-
-        with open(file_path_of_content, 'w', encoding='utf-8') as file:
-            file.write(title + "\n\n" + content)
-            print(f"Data saved: {file_path_of_content}")
-
-        file_path_of_javascript_code_text = os.path.join(file_path_of_name, "javascript_code_text.txt")
-
-        with open(file_path_of_javascript_code_text, 'w', encoding='utf-8') as file:
-            file.write(f"Solve the following problem in JavaScript. Use the template as a starting point\n\nTemplate:\n\n{javascript_code_text}\n\nProblem:\n\n{content}")
-            print(f"Data saved: {file_path_of_javascript_code_text}")
-
-        file_path_of_java_code_text = os.path.join(file_path_of_name, "java_code_text.txt")
-
-        with open(file_path_of_java_code_text, 'w', encoding='utf-8') as file:
-            file.write(f"Solve the following problem in Java. Use the template as a starting point\n\nTemplate:\n\n{java_code_text}\n\nProblem:\n\n{content}")
-            print(f"Data saved: {file_path_of_java_code_text}")
-
-        file_path_of_erlang_code_text = os.path.join(file_path_of_name, "erlang_code_text.txt")
-
-        with open(file_path_of_erlang_code_text, 'w', encoding='utf-8') as file:
-            file.write(f"Solve the following problem in Erlang. Use the template as a starting point\n\nTemplate:\n\n{erlang_code_text}\n\nProblem:\n\n{content}")
-            print(f"Data saved: {file_path_of_erlang_code_text}")
-
-        file_path_of_elixir_code_text = os.path.join(file_path_of_name, "elixir_code_text.txt")
-
-        with open(file_path_of_elixir_code_text, 'w', encoding='utf-8') as file:
-            file.write(f"Solve the following problem in Elixir. Use the template as a starting point\n\nTemplate:\n\n{elixir_code_text}\n\nProblem:\n\n{content}")
-            print(f"Data saved: {file_path_of_elixir_code_text}")
-
-    driver.quit()
 
 if __name__ == '__main__':
-    problem_links = fetch_problem_links()
-    scrape_and_save(problem_links)
+    questions = fetch_questions()
+
+    filtered_questions = filter_questions(questions)
+
+    questions_with_content = add_question_content(filtered_questions)
+
+    save_questions_to_folder(questions_with_content)
+
+
+
