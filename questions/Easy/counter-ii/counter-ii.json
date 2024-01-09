@@ -1,0 +1,27 @@
+{
+    "acRate": 79.66627972396505,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2665",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Counter II",
+    "titleSlug": "counter-ii",
+    "topicTags": [],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {integer} init  * @return { increment: Function, decrement: Function, reset: Function }  */ var createCounter = function(init) {      };  /**  * const counter = createCounter(5)  * counter.increment(); // 6  * counter.reset(); // 5  * counter.decrement(); // 4  */"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "type Counter = {     increment: () => number,     decrement: () => number,     reset: () => number, }  function createCounter(init: number): Counter {      };  /**  * const counter = createCounter(5)  * counter.increment(); // 6  * counter.reset(); // 5  * counter.decrement(); // 4  */"
+        }
+    ],
+    "content": "Write a functioncreateCounter. It should accept an initial integerinit. It should return an object with three functions. The three functions are:  increment()increasesthe current value by 1 and then returns it. decrement()reduces the current value by 1 and then returns it. reset()sets the current value toinitand then returns it.   Example 1:  Input: init = 5, calls = [\"increment\",\"reset\",\"decrement\"] Output: [6,5,4] Explanation: const counter = createCounter(5); counter.increment(); // 6 counter.reset(); // 5 counter.decrement(); // 4  Example 2:  Input: init = 0, calls = [\"increment\",\"increment\",\"decrement\",\"reset\",\"reset\"] Output: [1,2,1,0,0] Explanation: const counter = createCounter(0); counter.increment(); // 1 counter.increment(); // 2 counter.decrement(); // 1 counter.reset(); // 0 counter.reset(); // 0   Constraints:  -1000 <= init <= 1000 0 <= calls.length <= 1000 calls[i] is one of \"increment\", \"decrement\" and\"reset\"  "
+}

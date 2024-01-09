@@ -1,0 +1,138 @@
+{
+    "acRate": 68.26884563005687,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2641",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Cousins in Binary Tree II",
+    "titleSlug": "cousins-in-binary-tree-ii",
+    "topicTags": [
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Tree",
+            "id": "VG9waWNUYWdOb2RlOjIw",
+            "slug": "tree"
+        },
+        {
+            "name": "Depth-First Search",
+            "id": "VG9waWNUYWdOb2RlOjIx",
+            "slug": "depth-first-search"
+        },
+        {
+            "name": "Breadth-First Search",
+            "id": "VG9waWNUYWdOb2RlOjIy",
+            "slug": "breadth-first-search"
+        },
+        {
+            "name": "Binary Tree",
+            "id": "VG9waWNUYWdOb2RlOjYxMDU3",
+            "slug": "binary-tree"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "/**  * Definition for a binary tree node.  * struct TreeNode {  *     int val;  *     TreeNode *left;  *     TreeNode *right;  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}  * };  */ class Solution { public:     TreeNode* replaceValueInTree(TreeNode* root) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "/**  * Definition for a binary tree node.  * public class TreeNode {  *     int val;  *     TreeNode left;  *     TreeNode right;  *     TreeNode() {}  *     TreeNode(int val) { this.val = val; }  *     TreeNode(int val, TreeNode left, TreeNode right) {  *         this.val = val;  *         this.left = left;  *         this.right = right;  *     }  * }  */ class Solution {     public TreeNode replaceValueInTree(TreeNode root) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "# Definition for a binary tree node. # class TreeNode(object): #     def __init__(self, val=0, left=None, right=None): #         self.val = val #         self.left = left #         self.right = right class Solution(object):     def replaceValueInTree(self, root):         \"\"\"         :type root: Optional[TreeNode]         :rtype: Optional[TreeNode]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "# Definition for a binary tree node. # class TreeNode: #     def __init__(self, val=0, left=None, right=None): #         self.val = val #         self.left = left #         self.right = right class Solution:     def replaceValueInTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Definition for a binary tree node.  * struct TreeNode {  *     int val;  *     struct TreeNode *left;  *     struct TreeNode *right;  * };  */ struct TreeNode* replaceValueInTree(struct TreeNode* root) {      }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "/**  * Definition for a binary tree node.  * public class TreeNode {  *     public int val;  *     public TreeNode left;  *     public TreeNode right;  *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {  *         this.val = val;  *         this.left = left;  *         this.right = right;  *     }  * }  */ public class Solution {     public TreeNode ReplaceValueInTree(TreeNode root) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * Definition for a binary tree node.  * function TreeNode(val, left, right) {  *     this.val = (val===undefined ? 0 : val)  *     this.left = (left===undefined ? null : left)  *     this.right = (right===undefined ? null : right)  * }  */ /**  * @param {TreeNode} root  * @return {TreeNode}  */ var replaceValueInTree = function(root) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "/**  * Definition for a binary tree node.  * class TreeNode {  *     val: number  *     left: TreeNode | null  *     right: TreeNode | null  *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {  *         this.val = (val===undefined ? 0 : val)  *         this.left = (left===undefined ? null : left)  *         this.right = (right===undefined ? null : right)  *     }  * }  */  function replaceValueInTree(root: TreeNode | null): TreeNode | null {      };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "/**  * Definition for a binary tree node.  * class TreeNode {  *     public $val = null;  *     public $left = null;  *     public $right = null;  *     function __construct($val = 0, $left = null, $right = null) {  *         $this->val = $val;  *         $this->left = $left;  *         $this->right = $right;  *     }  * }  */ class Solution {      /**      * @param TreeNode $root      * @return TreeNode      */     function replaceValueInTree($root) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "/**  * Definition for a binary tree node.  * public class TreeNode {  *     public var val: Int  *     public var left: TreeNode?  *     public var right: TreeNode?  *     public init() { self.val = 0; self.left = nil; self.right = nil; }  *     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }  *     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {  *         self.val = val  *         self.left = left  *         self.right = right  *     }  * }  */ class Solution {     func replaceValueInTree(_ root: TreeNode?) -> TreeNode? {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "/**  * Example:  * var ti = TreeNode(5)  * var v = ti.`val`  * Definition for a binary tree node.  * class TreeNode(var `val`: Int) {  *     var left: TreeNode? = null  *     var right: TreeNode? = null  * }  */ class Solution {     fun replaceValueInTree(root: TreeNode?): TreeNode? {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "/**  * Definition for a binary tree node.  * class TreeNode {  *   int val;  *   TreeNode? left;  *   TreeNode? right;  *   TreeNode([this.val = 0, this.left, this.right]);  * }  */ class Solution {   TreeNode? replaceValueInTree(TreeNode? root) {        } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "/**  * Definition for a binary tree node.  * type TreeNode struct {  *     Val int  *     Left *TreeNode  *     Right *TreeNode  * }  */ func replaceValueInTree(root *TreeNode) *TreeNode {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# Definition for a binary tree node. # class TreeNode #     attr_accessor :val, :left, :right #     def initialize(val = 0, left = nil, right = nil) #         @val = val #         @left = left #         @right = right #     end # end # @param {TreeNode} root # @return {TreeNode} def replace_value_in_tree(root)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "/**  * Definition for a binary tree node.  * class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) {  *   var value: Int = _value  *   var left: TreeNode = _left  *   var right: TreeNode = _right  * }  */ object Solution {     def replaceValueInTree(root: TreeNode): TreeNode = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "// Definition for a binary tree node. // #[derive(Debug, PartialEq, Eq)] // pub struct TreeNode { //   pub val: i32, //   pub left: Option<Rc<RefCell<TreeNode>>>, //   pub right: Option<Rc<RefCell<TreeNode>>>, // } //  // impl TreeNode { //   #[inline] //   pub fn new(val: i32) -> Self { //     TreeNode { //       val, //       left: None, //       right: None //     } //   } // } use std::rc::Rc; use std::cell::RefCell; impl Solution {     pub fn replace_value_in_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "; Definition for a binary tree node. #|  ; val : integer? ; left : (or/c tree-node? #f) ; right : (or/c tree-node? #f) (struct tree-node   (val left right) #:mutable #:transparent)  ; constructor (define (make-tree-node [val 0])   (tree-node val #f #f))  |#  (define/contract (replace-value-in-tree root)   (-> (or/c tree-node? #f) (or/c tree-node? #f))   )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "%% Definition for a binary tree node. %% %% -record(tree_node, {val = 0 :: integer(), %%                     left = null  :: 'null' | #tree_node{}, %%                     right = null :: 'null' | #tree_node{}}).  -spec replace_value_in_tree(Root :: #tree_node{} | null) -> #tree_node{} | null. replace_value_in_tree(Root) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "# Definition for a binary tree node. # # defmodule TreeNode do #   @type t :: %__MODULE__{ #           val: integer, #           left: TreeNode.t() | nil, #           right: TreeNode.t() | nil #         } #   defstruct val: 0, left: nil, right: nil # end  defmodule Solution do   @spec replace_value_in_tree(root :: TreeNode.t | nil) :: TreeNode.t | nil   def replace_value_in_tree(root) do        end end"
+        }
+    ],
+    "content": "Given the root of a binary tree, replace the value of each node in the tree with the sum of all its cousins' values. Two nodes of a binary tree are cousins if they have the same depth with different parents. Return the root of the modified tree. Note that the depth of a node is the number of edges in the path from the root node to it.  Example 1:   Input: root = [5,4,9,1,10,null,7] Output: [0,0,0,7,7,null,11] Explanation: The diagram above shows the initial binary tree and the binary tree after changing the value of each node. - Node with value 5 does not have any cousins so its sum is 0. - Node with value 4 does not have any cousins so its sum is 0. - Node with value 9 does not have any cousins so its sum is 0. - Node with value 1 has a cousin with value 7 so its sum is 7. - Node with value 10 has a cousin with value 7 so its sum is 7. - Node with value 7 has cousins with values 1 and 10 so its sum is 11.  Example 2:   Input: root = [3,1,2] Output: [0,0,0] Explanation: The diagram above shows the initial binary tree and the binary tree after changing the value of each node. - Node with value 3 does not have any cousins so its sum is 0. - Node with value 1 does not have any cousins so its sum is 0. - Node with value 2 does not have any cousins so its sum is 0.   Constraints:  The number of nodes in the tree is in the range [1, 105]. 1 <= Node.val <= 104  "
+}

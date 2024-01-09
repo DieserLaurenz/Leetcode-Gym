@@ -1,0 +1,133 @@
+{
+    "acRate": 49.639526291614246,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2645",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Minimum Additions to Make Valid String",
+    "titleSlug": "minimum-additions-to-make-valid-string",
+    "topicTags": [
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        },
+        {
+            "name": "Stack",
+            "id": "VG9waWNUYWdOb2RlOjE1",
+            "slug": "stack"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int addMinimum(string word) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int addMinimum(String word) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def addMinimum(self, word):         \"\"\"         :type word: str         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def addMinimum(self, word: str) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int addMinimum(char * word){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int AddMinimum(string word) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string} word  * @return {number}  */ var addMinimum = function(word) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function addMinimum(word: string): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String $word      * @return Integer      */     function addMinimum($word) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func addMinimum(_ word: String) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun addMinimum(word: String): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int addMinimum(String word) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func addMinimum(word string) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} word # @return {Integer} def add_minimum(word)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def addMinimum(word: String): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn add_minimum(word: String) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (add-minimum word)   (-> string? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec add_minimum(Word :: unicode:unicode_binary()) -> integer(). add_minimum(Word) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec add_minimum(word :: String.t) :: integer   def add_minimum(word) do    end end"
+        }
+    ],
+    "content": "Given a string word to which you can insert letters \"a\", \"b\" or \"c\" anywhere and any number of times, return the minimum number of letters that must be inserted so that word becomes valid. A string is called valid if it can be formed by concatenating the string \"abc\" several times.  Example 1:  Input: word = \"b\" Output: 2 Explanation: Insert the letter \"a\" right before \"b\", and the letter \"c\" right next to \"a\" to obtain the valid string \"abc\".  Example 2:  Input: word = \"aaa\" Output: 6 Explanation: Insert letters \"b\" and \"c\" next to each \"a\" to obtain the valid string \"abcabcabc\".  Example 3:  Input: word = \"abc\" Output: 0 Explanation: word is already valid. No modifications are needed.    Constraints:  1 <= word.length <= 50 word consists of letters \"a\", \"b\"and \"c\" only.  "
+}

@@ -1,0 +1,128 @@
+{
+    "acRate": 52.04084426072436,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2938",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Separate Black and White Balls",
+    "titleSlug": "separate-black-and-white-balls",
+    "topicTags": [
+        {
+            "name": "Two Pointers",
+            "id": "VG9waWNUYWdOb2RlOjk=",
+            "slug": "two-pointers"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     long long minimumSteps(string s) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public long minimumSteps(String s) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def minimumSteps(self, s):         \"\"\"         :type s: str         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def minimumSteps(self, s: str) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "long long minimumSteps(char* s) {      }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public long MinimumSteps(string s) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string} s  * @return {number}  */ var minimumSteps = function(s) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function minimumSteps(s: string): number {      };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String $s      * @return Integer      */     function minimumSteps($s) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func minimumSteps(_ s: String) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun minimumSteps(s: String): Long {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int minimumSteps(String s) {        } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func minimumSteps(s string) int64 {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} s # @return {Integer} def minimum_steps(s)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def minimumSteps(s: String): Long = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn minimum_steps(s: String) -> i64 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (minimum-steps s)   (-> string? exact-integer?)   )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec minimum_steps(S :: unicode:unicode_binary()) -> integer(). minimum_steps(S) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec minimum_steps(s :: String.t) :: integer   def minimum_steps(s) do        end end"
+        }
+    ],
+    "content": "There are n balls on a table, each ball has a color black or white. You are given a 0-indexed binary string s of length n, where 1 and 0 represent black and white balls, respectively. In each step, you can choose two adjacent balls and swap them. Return the minimum number of steps to group all the black balls to the right and all the white balls to the left.  Example 1:  Input: s = \"101\" Output: 1 Explanation: We can group all the black balls to the right in the following way: - Swap s[0] and s[1], s = \"011\". Initially, 1s are not grouped together, requiring at least 1 step to group them to the right. Example 2:  Input: s = \"100\" Output: 2 Explanation: We can group all the black balls to the right in the following way: - Swap s[0] and s[1], s = \"010\". - Swap s[1] and s[2], s = \"001\". It can be proven that the minimum number of steps needed is 2.  Example 3:  Input: s = \"0111\" Output: 0 Explanation: All the black balls are already grouped to the right.   Constraints:  1 <= n == s.length <= 105 s[i] is either '0' or '1'.  "
+}

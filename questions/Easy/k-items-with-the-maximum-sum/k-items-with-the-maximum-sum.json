@@ -1,0 +1,123 @@
+{
+    "acRate": 61.03218324151928,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2600",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "K Items With the Maximum Sum",
+    "titleSlug": "k-items-with-the-maximum-sum",
+    "topicTags": [
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def kItemsWithMaximumSum(self, numOnes, numZeros, numNegOnes, k):         \"\"\"         :type numOnes: int         :type numZeros: int         :type numNegOnes: int         :type k: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def kItemsWithMaximumSum(self, numOnes: int, numZeros: int, numNegOnes: int, k: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int KItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} numOnes  * @param {number} numZeros  * @param {number} numNegOnes  * @param {number} k  * @return {number}  */ var kItemsWithMaximumSum = function(numOnes, numZeros, numNegOnes, k) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function kItemsWithMaximumSum(numOnes: number, numZeros: number, numNegOnes: number, k: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $numOnes      * @param Integer $numZeros      * @param Integer $numNegOnes      * @param Integer $k      * @return Integer      */     function kItemsWithMaximumSum($numOnes, $numZeros, $numNegOnes, $k) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func kItemsWithMaximumSum(_ numOnes: Int, _ numZeros: Int, _ numNegOnes: Int, _ k: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun kItemsWithMaximumSum(numOnes: Int, numZeros: Int, numNegOnes: Int, k: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func kItemsWithMaximumSum(numOnes int, numZeros int, numNegOnes int, k int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} num_ones # @param {Integer} num_zeros # @param {Integer} num_neg_ones # @param {Integer} k # @return {Integer} def k_items_with_maximum_sum(num_ones, num_zeros, num_neg_ones, k)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def kItemsWithMaximumSum(numOnes: Int, numZeros: Int, numNegOnes: Int, k: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn k_items_with_maximum_sum(num_ones: i32, num_zeros: i32, num_neg_ones: i32, k: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (k-items-with-maximum-sum numOnes numZeros numNegOnes k)   (-> exact-integer? exact-integer? exact-integer? exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec k_items_with_maximum_sum(NumOnes :: integer(), NumZeros :: integer(), NumNegOnes :: integer(), K :: integer()) -> integer(). k_items_with_maximum_sum(NumOnes, NumZeros, NumNegOnes, K) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec k_items_with_maximum_sum(num_ones :: integer, num_zeros :: integer, num_neg_ones :: integer, k :: integer) :: integer   def k_items_with_maximum_sum(num_ones, num_zeros, num_neg_ones, k) do    end end"
+        }
+    ],
+    "content": "There is a bag that consists of items, each itemhas a number 1, 0, or -1 written on it. You are given four non-negative integers numOnes, numZeros, numNegOnes, and k. The bag initially contains:  numOnes items with 1s written on them. numZeroes items with 0s written on them. numNegOnes items with -1s written on them.  We want to pick exactly k items among the available items. Return the maximum possible sum of numbers written on the items.  Example 1:  Input: numOnes = 3, numZeros = 2, numNegOnes = 0, k = 2 Output: 2 Explanation: We have a bag of items with numbers written on them {1, 1, 1, 0, 0}. We take 2 items with 1 written on them and get a sum in a total of 2. It can be proven that 2 is the maximum possible sum.  Example 2:  Input: numOnes = 3, numZeros = 2, numNegOnes = 0, k = 4 Output: 3 Explanation: We have a bag of items with numbers written on them {1, 1, 1, 0, 0}. We take 3 items with 1 written on them, and 1 item with 0 written on it, and get a sum in a total of 3. It can be proven that 3 is the maximum possible sum.   Constraints:  0 <= numOnes, numZeros, numNegOnes <= 50 0 <= k <= numOnes + numZeros + numNegOnes  "
+}

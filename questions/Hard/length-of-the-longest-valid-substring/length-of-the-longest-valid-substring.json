@@ -1,0 +1,133 @@
+{
+    "acRate": 34.45871651339464,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "frontendQuestionId": "2781",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Length of the Longest Valid Substring",
+    "titleSlug": "length-of-the-longest-valid-substring",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Sliding Window",
+            "id": "VG9waWNUYWdOb2RlOjU1ODIx",
+            "slug": "sliding-window"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int longestValidSubstring(string word, vector<string>& forbidden) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int longestValidSubstring(String word, List<String> forbidden) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def longestValidSubstring(self, word, forbidden):         \"\"\"         :type word: str         :type forbidden: List[str]         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int longestValidSubstring(char * word, char ** forbidden, int forbiddenSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int LongestValidSubstring(string word, IList<string> forbidden) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string} word  * @param {string[]} forbidden  * @return {number}  */ var longestValidSubstring = function(word, forbidden) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function longestValidSubstring(word: string, forbidden: string[]): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String $word      * @param String[] $forbidden      * @return Integer      */     function longestValidSubstring($word, $forbidden) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func longestValidSubstring(_ word: String, _ forbidden: [String]) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun longestValidSubstring(word: String, forbidden: List<String>): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int longestValidSubstring(String word, List<String> forbidden) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func longestValidSubstring(word string, forbidden []string) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} word # @param {String[]} forbidden # @return {Integer} def longest_valid_substring(word, forbidden)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def longestValidSubstring(word: String, forbidden: List[String]): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn longest_valid_substring(word: String, forbidden: Vec<String>) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (longest-valid-substring word forbidden)   (-> string? (listof string?) exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec longest_valid_substring(Word :: unicode:unicode_binary(), Forbidden :: [unicode:unicode_binary()]) -> integer(). longest_valid_substring(Word, Forbidden) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec longest_valid_substring(word :: String.t, forbidden :: [String.t]) :: integer   def longest_valid_substring(word, forbidden) do    end end"
+        }
+    ],
+    "content": "You are given a string word and an array of strings forbidden. A string is called valid if none of its substrings are present in forbidden. Return the length of the longest valid substring of the string word. A substring is a contiguous sequence of characters in a string, possibly empty.  Example 1:  Input: word = \"cbaaaabc\", forbidden = [\"aaa\",\"cb\"] Output: 4 Explanation: There are 11 valid substrings in word: \"c\", \"b\", \"a\", \"ba\", \"aa\", \"bc\", \"baa\", \"aab\", \"ab\", \"abc\" and \"aabc\". The length of the longest valid substring is 4.  It can be shown that all other substrings contain either \"aaa\" or \"cb\" as a substring.  Example 2:  Input: word = \"leetcode\", forbidden = [\"de\",\"le\",\"e\"] Output: 4 Explanation: There are 11 valid substrings in word: \"l\", \"t\", \"c\", \"o\", \"d\", \"tc\", \"co\", \"od\", \"tco\", \"cod\", and \"tcod\". The length of the longest valid substring is 4. It can be shown that all other substrings contain either \"de\", \"le\", or \"e\" as a substring.    Constraints:  1 <= word.length <= 105 word consists only of lowercase English letters. 1 <= forbidden.length <= 105 1 <= forbidden[i].length <= 10 forbidden[i] consists only of lowercase English letters.  "
+}

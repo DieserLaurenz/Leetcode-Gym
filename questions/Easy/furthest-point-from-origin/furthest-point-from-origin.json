@@ -1,0 +1,123 @@
+{
+    "acRate": 63.43502789736257,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2833",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Furthest Point From Origin",
+    "titleSlug": "furthest-point-from-origin",
+    "topicTags": [
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Counting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDYy",
+            "slug": "counting"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int furthestDistanceFromOrigin(string moves) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int furthestDistanceFromOrigin(String moves) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def furthestDistanceFromOrigin(self, moves):         \"\"\"         :type moves: str         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def furthestDistanceFromOrigin(self, moves: str) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int furthestDistanceFromOrigin(char * moves){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int FurthestDistanceFromOrigin(string moves) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string} moves  * @return {number}  */ var furthestDistanceFromOrigin = function(moves) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function furthestDistanceFromOrigin(moves: string): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String $moves      * @return Integer      */     function furthestDistanceFromOrigin($moves) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func furthestDistanceFromOrigin(_ moves: String) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun furthestDistanceFromOrigin(moves: String): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int furthestDistanceFromOrigin(String moves) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func furthestDistanceFromOrigin(moves string) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} moves # @return {Integer} def furthest_distance_from_origin(moves)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def furthestDistanceFromOrigin(moves: String): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn furthest_distance_from_origin(moves: String) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (furthest-distance-from-origin moves)   (-> string? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec furthest_distance_from_origin(Moves :: unicode:unicode_binary()) -> integer(). furthest_distance_from_origin(Moves) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec furthest_distance_from_origin(moves :: String.t) :: integer   def furthest_distance_from_origin(moves) do    end end"
+        }
+    ],
+    "content": "You are given a string moves of length n consisting only of characters 'L', 'R', and '_'. The string represents your movement on a number line starting from the origin 0. In the ith move, you can choose one of the following directions:  move to the left if moves[i] = 'L' or moves[i] = '_' move to the right if moves[i] = 'R' or moves[i] = '_'  Return the distance from the origin of the furthest point you can get to after n moves.  Example 1:  Input: moves = \"L_RL__R\" Output: 3 Explanation: The furthest point we can reach from the origin 0 is point -3 through the following sequence of moves \"LLRLLLR\".  Example 2:  Input: moves = \"_R__LL_\" Output: 5 Explanation: The furthest point we can reach from the origin 0 is point -5 through the following sequence of moves \"LRLLLLL\".  Example 3:  Input: moves = \"_______\" Output: 7 Explanation: The furthest point we can reach from the origin 0 is point 7 through the following sequence of moves \"RRRRRRR\".   Constraints:  1 <= moves.length == n <= 50 moves consists only of characters 'L', 'R' and '_'.  "
+}

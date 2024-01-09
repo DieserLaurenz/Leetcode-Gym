@@ -1,0 +1,133 @@
+{
+    "acRate": 40.15659213058191,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2680",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Maximum OR",
+    "titleSlug": "maximum-or",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        },
+        {
+            "name": "Bit Manipulation",
+            "id": "VG9waWNUYWdOb2RlOjE5",
+            "slug": "bit-manipulation"
+        },
+        {
+            "name": "Prefix Sum",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY4",
+            "slug": "prefix-sum"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     long long maximumOr(vector<int>& nums, int k) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public long maximumOr(int[] nums, int k) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def maximumOr(self, nums, k):         \"\"\"         :type nums: List[int]         :type k: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def maximumOr(self, nums: List[int], k: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "long long maximumOr(int* nums, int numsSize, int k){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public long MaximumOr(int[] nums, int k) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} nums  * @param {number} k  * @return {number}  */ var maximumOr = function(nums, k) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function maximumOr(nums: number[], k: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $k      * @return Integer      */     function maximumOr($nums, $k) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func maximumOr(_ nums: [Int], _ k: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun maximumOr(nums: IntArray, k: Int): Long {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int maximumOr(List<int> nums, int k) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func maximumOr(nums []int, k int) int64 {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums # @param {Integer} k # @return {Integer} def maximum_or(nums, k)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def maximumOr(nums: Array[Int], k: Int): Long = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn maximum_or(nums: Vec<i32>, k: i32) -> i64 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (maximum-or nums k)   (-> (listof exact-integer?) exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec maximum_or(Nums :: [integer()], K :: integer()) -> integer(). maximum_or(Nums, K) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec maximum_or(nums :: [integer], k :: integer) :: integer   def maximum_or(nums, k) do    end end"
+        }
+    ],
+    "content": "You are given a 0-indexed integer array nums of length n and an integer k. In an operation, you can choose an element and multiply it by 2. Return the maximum possible value of nums[0] | nums[1] | ... | nums[n - 1] that can be obtained after applying the operation on nums at most k times. Note that a | b denotes the bitwise or between two integers a and b.  Example 1:  Input: nums = [12,9], k = 1 Output: 30 Explanation: If we apply the operation to index 1, our new array nums will be equal to [12,18]. Thus, we return the bitwise or of 12 and 18, which is 30.  Example 2:  Input: nums = [8,1,2], k = 2 Output: 35 Explanation: If we apply the operation twice on index 0, we yield a new array of [32,1,2]. Thus, we return 32|1|2 = 35.   Constraints:  1 <= nums.length <= 105 1 <= nums[i] <= 109 1 <= k <= 15  "
+}

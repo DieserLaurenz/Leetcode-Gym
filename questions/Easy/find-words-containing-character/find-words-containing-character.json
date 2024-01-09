@@ -1,0 +1,123 @@
+{
+    "acRate": 88.04954377497927,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2942",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Find Words Containing Character",
+    "titleSlug": "find-words-containing-character",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     vector<int> findWordsContaining(vector<string>& words, char x) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public List<Integer> findWordsContaining(String[] words, char x) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def findWordsContaining(self, words, x):         \"\"\"         :type words: List[str]         :type x: str         :rtype: List[int]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def findWordsContaining(self, words: List[str], x: str) -> List[int]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* findWordsContaining(char** words, int wordsSize, char x, int* returnSize) {      }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public IList<int> FindWordsContaining(string[] words, char x) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string[]} words  * @param {character} x  * @return {number[]}  */ var findWordsContaining = function(words, x) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function findWordsContaining(words: string[], x: string): number[] {      };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String[] $words      * @param String $x      * @return Integer[]      */     function findWordsContaining($words, $x) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func findWordsContaining(_ words: [String], _ x: Character) -> [Int] {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun findWordsContaining(words: Array<String>, x: Char): List<Int> {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   List<int> findWordsContaining(List<String> words, String x) {        } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func findWordsContaining(words []string, x byte) []int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String[]} words # @param {Character} x # @return {Integer[]} def find_words_containing(words, x)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def findWordsContaining(words: Array[String], x: Char): List[Int] = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn find_words_containing(words: Vec<String>, x: char) -> Vec<i32> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (find-words-containing words x)   (-> (listof string?) char? (listof exact-integer?))   )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec find_words_containing(Words :: [unicode:unicode_binary()], X :: char()) -> [integer()]. find_words_containing(Words, X) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec find_words_containing(words :: [String.t], x :: char) :: [integer]   def find_words_containing(words, x) do        end end"
+        }
+    ],
+    "content": "You are given a 0-indexed array of strings words and a character x. Return an array of indices representing the words that contain the character x. Note that the returned array may be in any order.  Example 1:  Input: words = [\"leet\",\"code\"], x = \"e\" Output: [0,1] Explanation: \"e\" occurs in both words: \"leet\", and \"code\". Hence, we return indices 0 and 1.  Example 2:  Input: words = [\"abc\",\"bcd\",\"aaaa\",\"cbc\"], x = \"a\" Output: [0,2] Explanation: \"a\" occurs in \"abc\", and \"aaaa\". Hence, we return indices 0 and 2.  Example 3:  Input: words = [\"abc\",\"bcd\",\"aaaa\",\"cbc\"], x = \"z\" Output: [] Explanation: \"z\" does not occur in any of the words. Hence, we return an empty array.   Constraints:  1 <= words.length <= 50 1 <= words[i].length <= 50 x is a lowercase English letter. words[i] consists only of lowercase English letters.  "
+}

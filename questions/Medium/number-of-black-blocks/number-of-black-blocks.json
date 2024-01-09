@@ -1,0 +1,128 @@
+{
+    "acRate": 35.78217717796566,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2768",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Number of Black Blocks",
+    "titleSlug": "number-of-black-blocks",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Enumeration",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY2",
+            "slug": "enumeration"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     vector<long long> countBlackBlocks(int m, int n, vector<vector<int>>& coordinates) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public long[] countBlackBlocks(int m, int n, int[][] coordinates) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def countBlackBlocks(self, m, n, coordinates):         \"\"\"         :type m: int         :type n: int         :type coordinates: List[List[int]]         :rtype: List[int]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def countBlackBlocks(self, m: int, n: int, coordinates: List[List[int]]) -> List[int]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ long long* countBlackBlocks(int m, int n, int** coordinates, int coordinatesSize, int* coordinatesColSize, int* returnSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public long[] CountBlackBlocks(int m, int n, int[][] coordinates) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} m  * @param {number} n  * @param {number[][]} coordinates  * @return {number[]}  */ var countBlackBlocks = function(m, n, coordinates) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countBlackBlocks(m: number, n: number, coordinates: number[][]): number[] {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $m      * @param Integer $n      * @param Integer[][] $coordinates      * @return Integer[]      */     function countBlackBlocks($m, $n, $coordinates) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func countBlackBlocks(_ m: Int, _ n: Int, _ coordinates: [[Int]]) -> [Int] {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun countBlackBlocks(m: Int, n: Int, coordinates: Array<IntArray>): LongArray {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   List<int> countBlackBlocks(int m, int n, List<List<int>> coordinates) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countBlackBlocks(m int, n int, coordinates [][]int) []int64 {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} m # @param {Integer} n # @param {Integer[][]} coordinates # @return {Integer[]} def count_black_blocks(m, n, coordinates)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def countBlackBlocks(m: Int, n: Int, coordinates: Array[Array[Int]]): Array[Long] = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn count_black_blocks(m: i32, n: i32, coordinates: Vec<Vec<i32>>) -> Vec<i64> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-black-blocks m n coordinates)   (-> exact-integer? exact-integer? (listof (listof exact-integer?)) (listof exact-integer?))    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_black_blocks(M :: integer(), N :: integer(), Coordinates :: [[integer()]]) -> [integer()]. count_black_blocks(M, N, Coordinates) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec count_black_blocks(m :: integer, n :: integer, coordinates :: [[integer]]) :: [integer]   def count_black_blocks(m, n, coordinates) do    end end"
+        }
+    ],
+    "content": "You are given two integers m and n representing the dimensions of a0-indexedm x n grid. You are also given a 0-indexed 2D integer matrix coordinates, where coordinates[i] = [x, y] indicates that the cell with coordinates [x, y] is colored black. All cells in the grid that do not appear in coordinates are white. A block is defined as a 2 x 2 submatrix of the grid. More formally, a block with cell [x, y] as its top-left corner where 0 <= x < m - 1 and 0 <= y < n - 1 contains the coordinates [x, y], [x + 1, y], [x, y + 1], and [x + 1, y + 1]. Return a 0-indexed integer array arr of size 5 such that arr[i] is the number of blocks that contains exactly i black cells.  Example 1:  Input: m = 3, n = 3, coordinates = [[0,0]] Output: [3,1,0,0,0] Explanation: The grid looks like this:  There is only 1 block with one black cell, and it is the block starting with cell [0,0]. The other 3 blocks start with cells [0,1], [1,0] and [1,1]. They all have zero black cells.  Thus, we return [3,1,0,0,0].   Example 2:  Input: m = 3, n = 3, coordinates = [[0,0],[1,1],[0,2]] Output: [0,2,2,0,0] Explanation: The grid looks like this:  There are 2 blocks with two black cells (the ones starting with cell coordinates [0,0] and [0,1]). The other 2 blocks have starting cell coordinates of [1,0] and [1,1]. They both have 1 black cell. Therefore, we return [0,2,2,0,0].   Constraints:  2 <= m <= 105 2 <= n <= 105 0 <= coordinates.length <= 104 coordinates[i].length == 2 0 <= coordinates[i][0] < m 0 <= coordinates[i][1] < n It is guaranteed that coordinates contains pairwise distinct coordinates.  "
+}

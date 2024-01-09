@@ -1,0 +1,123 @@
+{
+    "acRate": 75.96909573314198,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2678",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Number of Senior Citizens",
+    "titleSlug": "number-of-senior-citizens",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int countSeniors(vector<string>& details) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int countSeniors(String[] details) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def countSeniors(self, details):         \"\"\"         :type details: List[str]         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def countSeniors(self, details: List[str]) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int countSeniors(char ** details, int detailsSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int CountSeniors(string[] details) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string[]} details  * @return {number}  */ var countSeniors = function(details) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countSeniors(details: string[]): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String[] $details      * @return Integer      */     function countSeniors($details) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func countSeniors(_ details: [String]) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun countSeniors(details: Array<String>): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int countSeniors(List<String> details) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countSeniors(details []string) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String[]} details # @return {Integer} def count_seniors(details)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def countSeniors(details: Array[String]): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn count_seniors(details: Vec<String>) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-seniors details)   (-> (listof string?) exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_seniors(Details :: [unicode:unicode_binary()]) -> integer(). count_seniors(Details) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec count_seniors(details :: [String.t]) :: integer   def count_seniors(details) do    end end"
+        }
+    ],
+    "content": "You are given a 0-indexed array of strings details. Each element of details provides information about a given passenger compressed into a string of length 15. The system is such that:  The first ten characters consist of the phone number of passengers. The next character denotes the gender of the person. The following two characters are used to indicate the age of the person. The last two characters determine the seat allotted to that person.  Return the number of passengers who are strictly more than 60 years old.  Example 1:  Input: details = [\"7868190130M7522\",\"5303914400F9211\",\"9273338290F4010\"] Output: 2 Explanation: The passengers at indices 0, 1, and 2 have ages 75, 92, and 40. Thus, there are 2 people who are over 60 years old.  Example 2:  Input: details = [\"1313579440F2036\",\"2921522980M5644\"] Output: 0 Explanation: None of the passengers are older than 60.   Constraints:  1 <= details.length <= 100 details[i].length == 15 details[i] consists of digits from '0' to '9'. details[i][10] is either 'M' or 'F' or 'O'. The phone numbers and seat numbers of the passengers are distinct.  "
+}

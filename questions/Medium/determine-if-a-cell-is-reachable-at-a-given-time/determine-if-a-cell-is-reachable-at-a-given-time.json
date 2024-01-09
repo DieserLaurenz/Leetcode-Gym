@@ -1,0 +1,118 @@
+{
+    "acRate": 35.78932253091085,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2849",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Determine if a Cell Is Reachable at a Given Time",
+    "titleSlug": "determine-if-a-cell-is-reachable-at-a-given-time",
+    "topicTags": [
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        }
+    ],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     bool isReachableAtTime(int sx, int sy, int fx, int fy, int t) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public boolean isReachableAtTime(int sx, int sy, int fx, int fy, int t) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def isReachableAtTime(self, sx, sy, fx, fy, t):         \"\"\"         :type sx: int         :type sy: int         :type fx: int         :type fy: int         :type t: int         :rtype: bool         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def isReachableAtTime(self, sx: int, sy: int, fx: int, fy: int, t: int) -> bool:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "bool isReachableAtTime(int sx, int sy, int fx, int fy, int t){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public bool IsReachableAtTime(int sx, int sy, int fx, int fy, int t) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} sx  * @param {number} sy  * @param {number} fx  * @param {number} fy  * @param {number} t  * @return {boolean}  */ var isReachableAtTime = function(sx, sy, fx, fy, t) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function isReachableAtTime(sx: number, sy: number, fx: number, fy: number, t: number): boolean {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $sx      * @param Integer $sy      * @param Integer $fx      * @param Integer $fy      * @param Integer $t      * @return Boolean      */     function isReachableAtTime($sx, $sy, $fx, $fy, $t) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func isReachableAtTime(_ sx: Int, _ sy: Int, _ fx: Int, _ fy: Int, _ t: Int) -> Bool {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun isReachableAtTime(sx: Int, sy: Int, fx: Int, fy: Int, t: Int): Boolean {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   bool isReachableAtTime(int sx, int sy, int fx, int fy, int t) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func isReachableAtTime(sx int, sy int, fx int, fy int, t int) bool {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} sx # @param {Integer} sy # @param {Integer} fx # @param {Integer} fy # @param {Integer} t # @return {Boolean} def is_reachable_at_time(sx, sy, fx, fy, t)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def isReachableAtTime(sx: Int, sy: Int, fx: Int, fy: Int, t: Int): Boolean = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn is_reachable_at_time(sx: i32, sy: i32, fx: i32, fy: i32, t: i32) -> bool {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (is-reachable-at-time sx sy fx fy t)   (-> exact-integer? exact-integer? exact-integer? exact-integer? exact-integer? boolean?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec is_reachable_at_time(Sx :: integer(), Sy :: integer(), Fx :: integer(), Fy :: integer(), T :: integer()) -> boolean(). is_reachable_at_time(Sx, Sy, Fx, Fy, T) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec is_reachable_at_time(sx :: integer, sy :: integer, fx :: integer, fy :: integer, t :: integer) :: boolean   def is_reachable_at_time(sx, sy, fx, fy, t) do    end end"
+        }
+    ],
+    "content": "You are given four integers sx, sy, fx, fy, and a non-negative integer t. In an infinite 2D grid, you start at the cell (sx, sy). Each second, you must move to any of its adjacent cells. Return true if you can reach cell (fx, fy) after exactly t seconds, or false otherwise. A cell's adjacent cells are the 8 cells around it that share at least one corner with it. You can visit the same cell several times.  Example 1:   Input: sx = 2, sy = 4, fx = 7, fy = 7, t = 6 Output: true Explanation: Starting at cell (2, 4), we can reach cell (7, 7) in exactly 6 seconds by going through the cells depicted in the picture above.   Example 2:   Input: sx = 3, sy = 1, fx = 7, fy = 3, t = 3 Output: false Explanation: Starting at cell (3, 1), it takes at least 4 seconds to reach cell (7, 3) by going through the cells depicted in the picture above. Hence, we cannot reach cell (7, 3) at the third second.   Constraints:  1 <= sx, sy, fx, fy <= 109 0 <= t <= 109  "
+}

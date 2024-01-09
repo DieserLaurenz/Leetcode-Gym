@@ -1,0 +1,133 @@
+{
+    "acRate": 19.51614839716653,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "frontendQuestionId": "2902",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Count of Sub-Multisets With Bounded Sum",
+    "titleSlug": "count-of-sub-multisets-with-bounded-sum",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        },
+        {
+            "name": "Sliding Window",
+            "id": "VG9waWNUYWdOb2RlOjU1ODIx",
+            "slug": "sliding-window"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int countSubMultisets(vector<int>& nums, int l, int r) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int countSubMultisets(List<Integer> nums, int l, int r) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def countSubMultisets(self, nums, l, r):         \"\"\"         :type nums: List[int]         :type l: int         :type r: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def countSubMultisets(self, nums: List[int], l: int, r: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int countSubMultisets(int* nums, int numsSize, int l, int r) {      }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int CountSubMultisets(IList<int> nums, int l, int r) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} nums  * @param {number} l  * @param {number} r  * @return {number}  */ var countSubMultisets = function(nums, l, r) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countSubMultisets(nums: number[], l: number, r: number): number {      };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $l      * @param Integer $r      * @return Integer      */     function countSubMultisets($nums, $l, $r) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func countSubMultisets(_ nums: [Int], _ l: Int, _ r: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun countSubMultisets(nums: List<Int>, l: Int, r: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int countSubMultisets(List<int> nums, int l, int r) {        } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countSubMultisets(nums []int, l int, r int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums # @param {Integer} l # @param {Integer} r # @return {Integer} def count_sub_multisets(nums, l, r)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def countSubMultisets(nums: List[Int], l: Int, r: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn count_sub_multisets(nums: Vec<i32>, l: i32, r: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-sub-multisets nums l r)   (-> (listof exact-integer?) exact-integer? exact-integer? exact-integer?)   )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_sub_multisets(Nums :: [integer()], L :: integer(), R :: integer()) -> integer(). count_sub_multisets(Nums, L, R) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec count_sub_multisets(nums :: [integer], l :: integer, r :: integer) :: integer   def count_sub_multisets(nums, l, r) do        end end"
+        }
+    ],
+    "content": "You are given a 0-indexed array nums of non-negative integers, and two integers l and r. Return the count of sub-multisets within nums where the sum of elements in each subset falls within the inclusive range of [l, r]. Since the answer may be large, return it modulo 109 + 7. A sub-multiset is an unordered collection of elements of the array in which a given value x can occur 0, 1, ..., occ[x] times, where occ[x] is the number of occurrences of x in the array. Note that:  Two sub-multisets are the same if sorting both sub-multisets results in identical multisets. The sum of an empty multiset is 0.   Example 1:  Input: nums = [1,2,2,3], l = 6, r = 6 Output: 1 Explanation: The only subset of nums that has a sum of 6 is {1, 2, 3}.  Example 2:  Input: nums = [2,1,4,2,7], l = 1, r = 5 Output: 7 Explanation: The subsets of nums that have a sum within the range [1, 5] are {1}, {2}, {4}, {2, 2}, {1, 2}, {1, 4}, and {1, 2, 2}.  Example 3:  Input: nums = [1,2,1,3,5,2], l = 3, r = 5 Output: 9 Explanation: The subsets of nums that have a sum within the range [3, 5] are {3}, {5}, {1, 2}, {1, 3}, {2, 2}, {2, 3}, {1, 1, 2}, {1, 1, 3}, and {1, 2, 2}.  Constraints:  1 <= nums.length <= 2 * 104 0 <= nums[i] <= 2 * 104 Sum of nums does not exceed 2 * 104. 0 <= l <= r <= 2 * 104  "
+}

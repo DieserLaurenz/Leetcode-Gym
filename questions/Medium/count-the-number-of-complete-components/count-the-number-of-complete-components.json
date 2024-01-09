@@ -1,0 +1,128 @@
+{
+    "acRate": 65.01420805534964,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2685",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Count the Number of Complete Components",
+    "titleSlug": "count-the-number-of-complete-components",
+    "topicTags": [
+        {
+            "name": "Depth-First Search",
+            "id": "VG9waWNUYWdOb2RlOjIx",
+            "slug": "depth-first-search"
+        },
+        {
+            "name": "Breadth-First Search",
+            "id": "VG9waWNUYWdOb2RlOjIy",
+            "slug": "breadth-first-search"
+        },
+        {
+            "name": "Graph",
+            "id": "VG9waWNUYWdOb2RlOjI0",
+            "slug": "graph"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int countCompleteComponents(int n, vector<vector<int>>& edges) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int countCompleteComponents(int n, int[][] edges) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def countCompleteComponents(self, n, edges):         \"\"\"         :type n: int         :type edges: List[List[int]]         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def countCompleteComponents(self, n: int, edges: List[List[int]]) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int countCompleteComponents(int n, int** edges, int edgesSize, int* edgesColSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int CountCompleteComponents(int n, int[][] edges) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} n  * @param {number[][]} edges  * @return {number}  */ var countCompleteComponents = function(n, edges) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countCompleteComponents(n: number, edges: number[][]): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $n      * @param Integer[][] $edges      * @return Integer      */     function countCompleteComponents($n, $edges) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func countCompleteComponents(_ n: Int, _ edges: [[Int]]) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun countCompleteComponents(n: Int, edges: Array<IntArray>): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int countCompleteComponents(int n, List<List<int>> edges) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countCompleteComponents(n int, edges [][]int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} n # @param {Integer[][]} edges # @return {Integer} def count_complete_components(n, edges)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def countCompleteComponents(n: Int, edges: Array[Array[Int]]): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn count_complete_components(n: i32, edges: Vec<Vec<i32>>) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-complete-components n edges)   (-> exact-integer? (listof (listof exact-integer?)) exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_complete_components(N :: integer(), Edges :: [[integer()]]) -> integer(). count_complete_components(N, Edges) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec count_complete_components(n :: integer, edges :: [[integer]]) :: integer   def count_complete_components(n, edges) do    end end"
+        }
+    ],
+    "content": "You are given an integer n. There is an undirected graph with n vertices, numbered from 0 to n - 1. You are given a 2D integer array edges where edges[i] = [ai, bi] denotes that there exists an undirected edge connecting vertices ai and bi. Return the number of complete connected components of the graph. A connected component is a subgraph of a graph in which there exists a path between any two vertices, and no vertex of the subgraph shares an edge with a vertex outside of the subgraph. A connected component is said to be complete if there exists an edge between every pair of its vertices.  Example 1:   Input: n = 6, edges = [[0,1],[0,2],[1,2],[3,4]] Output: 3 Explanation: From the picture above, one can see that all of the components of this graph are complete.  Example 2:   Input: n = 6, edges = [[0,1],[0,2],[1,2],[3,4],[3,5]] Output: 1 Explanation: The component containing vertices 0, 1, and 2 is complete since there is an edge between every pair of two vertices. On the other hand, the component containing vertices 3, 4, and 5 is not complete since there is no edge between vertices 4 and 5. Thus, the number of complete components in this graph is 1.   Constraints:  1 <= n <= 50 0 <= edges.length <= n * (n - 1) / 2 edges[i].length == 2 0 <= ai, bi <= n - 1 ai != bi There are no repeated edges.  "
+}

@@ -1,0 +1,27 @@
+{
+    "acRate": 93.25209708641485,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2703",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Return Length of Arguments Passed",
+    "titleSlug": "return-length-of-arguments-passed",
+    "topicTags": [],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {...(null|boolean|number|string|Array|Object)} args  * @return {number}  */ var argumentsLength = function(...args) {      };  /**  * argumentsLength(1, 2, 3); // 3  */"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };  function argumentsLength(...args: JSONValue[]): number {      };  /**  * argumentsLength(1, 2, 3); // 3  */"
+        }
+    ],
+    "content": "Write a functionargumentsLength that returns the count of arguments passed to it.  Example 1:  Input: args = [5] Output: 1 Explanation: argumentsLength(5); // 1  One value was passed to the function so it should return 1.  Example 2:  Input: args = [{}, null, \"3\"] Output: 3 Explanation:  argumentsLength({}, null, \"3\"); // 3  Three values were passed to the function so it should return 3.   Constraints:  argsis a valid JSON array 0 <= args.length <= 100  "
+}

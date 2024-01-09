@@ -1,0 +1,143 @@
+{
+    "acRate": 31.708350996184826,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "frontendQuestionId": "2818",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Apply Operations to Maximize Score",
+    "titleSlug": "apply-operations-to-maximize-score",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "Stack",
+            "id": "VG9waWNUYWdOb2RlOjE1",
+            "slug": "stack"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        },
+        {
+            "name": "Monotonic Stack",
+            "id": "VG9waWNUYWdOb2RlOjYxMDU0",
+            "slug": "monotonic-stack"
+        },
+        {
+            "name": "Number Theory",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY3",
+            "slug": "number-theory"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int maximumScore(vector<int>& nums, int k) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int maximumScore(List<Integer> nums, int k) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def maximumScore(self, nums, k):         \"\"\"         :type nums: List[int]         :type k: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def maximumScore(self, nums: List[int], k: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int maximumScore(int* nums, int numsSize, int k){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int MaximumScore(IList<int> nums, int k) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} nums  * @param {number} k  * @return {number}  */ var maximumScore = function(nums, k) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function maximumScore(nums: number[], k: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $k      * @return Integer      */     function maximumScore($nums, $k) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func maximumScore(_ nums: [Int], _ k: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun maximumScore(nums: List<Int>, k: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int maximumScore(List<int> nums, int k) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func maximumScore(nums []int, k int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums # @param {Integer} k # @return {Integer} def maximum_score(nums, k)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def maximumScore(nums: List[Int], k: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn maximum_score(nums: Vec<i32>, k: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (maximum-score nums k)   (-> (listof exact-integer?) exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec maximum_score(Nums :: [integer()], K :: integer()) -> integer(). maximum_score(Nums, K) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec maximum_score(nums :: [integer], k :: integer) :: integer   def maximum_score(nums, k) do    end end"
+        }
+    ],
+    "content": "You are given an array nums of n positive integers and an integer k. Initially, you start with a score of 1. You have to maximize your score by applying the following operation at most k times:  Choose any non-empty subarray nums[l, ..., r] that you haven't chosen previously. Choose an element x of nums[l, ..., r] with the highest prime score. If multiple such elements exist, choose the one with the smallest index. Multiply your score by x.  Here, nums[l, ..., r] denotes the subarray of nums starting at index l and ending at the index r, both ends being inclusive. The prime score of an integer x is equal to the number of distinct prime factors of x. For example, the prime score of 300 is 3 since 300 = 2 * 2 * 3 * 5 * 5. Return the maximum possible score after applying at most k operations. Since the answer may be large, return it modulo 109 + 7.  Example 1:  Input: nums = [8,3,9,3,8], k = 2 Output: 81 Explanation: To get a score of 81, we can apply the following operations: - Choose subarray nums[2, ..., 2]. nums[2] is the only element in this subarray. Hence, we multiply the score by nums[2]. The score becomes 1 * 9 = 9. - Choose subarray nums[2, ..., 3]. Both nums[2] and nums[3] have a prime score of 1, but nums[2] has the smaller index. Hence, we multiply the score by nums[2]. The score becomes 9 * 9 = 81. It can be proven that 81 is the highest score one can obtain. Example 2:  Input: nums = [19,12,14,6,10,18], k = 3 Output: 4788 Explanation: To get a score of 4788, we can apply the following operations:  - Choose subarray nums[0, ..., 0]. nums[0] is the only element in this subarray. Hence, we multiply the score by nums[0]. The score becomes 1 * 19 = 19. - Choose subarray nums[5, ..., 5]. nums[5] is the only element in this subarray. Hence, we multiply the score by nums[5]. The score becomes 19 * 18 = 342. - Choose subarray nums[2, ..., 3]. Both nums[2] and nums[3] have a prime score of 2, but nums[2] has the smaller index. Hence, we multipy the score by nums[2]. The score becomes 342 * 14 = 4788. It can be proven that 4788 is the highest score one can obtain.   Constraints:  1 <= nums.length == n <= 105 1 <= nums[i] <= 105 1 <= k <= min(n * (n + 1) / 2, 109)  "
+}

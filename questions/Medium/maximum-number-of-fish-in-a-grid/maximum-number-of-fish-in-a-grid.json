@@ -1,0 +1,138 @@
+{
+    "acRate": 59.07378683802349,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2658",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Maximum Number of Fish in a Grid",
+    "titleSlug": "maximum-number-of-fish-in-a-grid",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Depth-First Search",
+            "id": "VG9waWNUYWdOb2RlOjIx",
+            "slug": "depth-first-search"
+        },
+        {
+            "name": "Breadth-First Search",
+            "id": "VG9waWNUYWdOb2RlOjIy",
+            "slug": "breadth-first-search"
+        },
+        {
+            "name": "Union Find",
+            "id": "VG9waWNUYWdOb2RlOjIz",
+            "slug": "union-find"
+        },
+        {
+            "name": "Matrix",
+            "id": "VG9waWNUYWdOb2RlOjYxMDUz",
+            "slug": "matrix"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int findMaxFish(vector<vector<int>>& grid) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int findMaxFish(int[][] grid) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def findMaxFish(self, grid):         \"\"\"         :type grid: List[List[int]]         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def findMaxFish(self, grid: List[List[int]]) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int findMaxFish(int** grid, int gridSize, int* gridColSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int FindMaxFish(int[][] grid) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[][]} grid  * @return {number}  */ var findMaxFish = function(grid) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function findMaxFish(grid: number[][]): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[][] $grid      * @return Integer      */     function findMaxFish($grid) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func findMaxFish(_ grid: [[Int]]) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun findMaxFish(grid: Array<IntArray>): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int findMaxFish(List<List<int>> grid) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func findMaxFish(grid [][]int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[][]} grid # @return {Integer} def find_max_fish(grid)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def findMaxFish(grid: Array[Array[Int]]): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn find_max_fish(grid: Vec<Vec<i32>>) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (find-max-fish grid)   (-> (listof (listof exact-integer?)) exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec find_max_fish(Grid :: [[integer()]]) -> integer(). find_max_fish(Grid) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec find_max_fish(grid :: [[integer]]) :: integer   def find_max_fish(grid) do    end end"
+        }
+    ],
+    "content": "You are given a 0-indexed 2D matrix grid of size m x n, where (r, c) represents:  A land cell if grid[r][c] = 0, or A water cell containing grid[r][c] fish, if grid[r][c] > 0.  A fisher can start at any water cell (r, c) and can do the following operations any number of times:  Catch all the fish at cell (r, c), or Move to any adjacent water cell.  Return the maximum number of fish the fisher can catch if he chooses his starting cell optimally, or 0 if no water cell exists. An adjacent cell of the cell (r, c), is one of the cells (r, c + 1), (r, c - 1), (r + 1, c) or (r - 1, c) if it exists.  Example 1:   Input: grid = [[0,2,1,0],[4,0,0,3],[1,0,0,4],[0,3,2,0]] Output: 7 Explanation: The fisher can start at cell (1,3) and collect 3 fish, then move to cell (2,3)and collect 4 fish.  Example 2:   Input: grid = [[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,1]] Output: 1 Explanation: The fisher can start at cells (0,0) or (3,3) and collect a single fish.    Constraints:  m == grid.length n == grid[i].length 1 <= m, n <= 10 0 <= grid[i][j] <= 10  "
+}

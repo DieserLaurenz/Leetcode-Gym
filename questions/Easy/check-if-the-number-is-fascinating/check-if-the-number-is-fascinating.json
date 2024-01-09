@@ -1,0 +1,123 @@
+{
+    "acRate": 51.65550906555091,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2729",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Check if The Number is Fascinating",
+    "titleSlug": "check-if-the-number-is-fascinating",
+    "topicTags": [
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     bool isFascinating(int n) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public boolean isFascinating(int n) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def isFascinating(self, n):         \"\"\"         :type n: int         :rtype: bool         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def isFascinating(self, n: int) -> bool:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "bool isFascinating(int n){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public bool IsFascinating(int n) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} n  * @return {boolean}  */ var isFascinating = function(n) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function isFascinating(n: number): boolean {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $n      * @return Boolean      */     function isFascinating($n) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func isFascinating(_ n: Int) -> Bool {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun isFascinating(n: Int): Boolean {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   bool isFascinating(int n) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func isFascinating(n int) bool {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} n # @return {Boolean} def is_fascinating(n)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def isFascinating(n: Int): Boolean = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn is_fascinating(n: i32) -> bool {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (is-fascinating n)   (-> exact-integer? boolean?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec is_fascinating(N :: integer()) -> boolean(). is_fascinating(N) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec is_fascinating(n :: integer) :: boolean   def is_fascinating(n) do    end end"
+        }
+    ],
+    "content": "You are given an integer n that consists of exactly 3 digits. We call the number n fascinating if, after the following modification, the resulting number contains all the digits from 1 to 9 exactly once and does not contain any 0's:  Concatenate n with the numbers 2 * n and 3 * n.  Return true if n is fascinating, or false otherwise. Concatenating two numbers means joining them together. For example, the concatenation of 121 and 371 is 121371.  Example 1:  Input: n = 192 Output: true Explanation: We concatenate the numbers n = 192 and 2 * n = 384 and 3 * n = 576. The resulting number is 192384576. This number contains all the digits from 1 to 9 exactly once.  Example 2:  Input: n = 100 Output: false Explanation: We concatenate the numbers n = 100 and 2 * n = 200 and 3 * n = 300. The resulting number is 100200300. This number does not satisfy any of the conditions.   Constraints:  100 <= n <= 999  "
+}

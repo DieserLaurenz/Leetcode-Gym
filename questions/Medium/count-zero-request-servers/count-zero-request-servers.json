@@ -1,0 +1,133 @@
+{
+    "acRate": 31.542010526999803,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2747",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Count Zero Request Servers",
+    "titleSlug": "count-zero-request-servers",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Sliding Window",
+            "id": "VG9waWNUYWdOb2RlOjU1ODIx",
+            "slug": "sliding-window"
+        },
+        {
+            "name": "Sorting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDQ5",
+            "slug": "sorting"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     vector<int> countServers(int n, vector<vector<int>>& logs, int x, vector<int>& queries) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int[] countServers(int n, int[][] logs, int x, int[] queries) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def countServers(self, n, logs, x, queries):         \"\"\"         :type n: int         :type logs: List[List[int]]         :type x: int         :type queries: List[int]         :rtype: List[int]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def countServers(self, n: int, logs: List[List[int]], x: int, queries: List[int]) -> List[int]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* countServers(int n, int** logs, int logsSize, int* logsColSize, int x, int* queries, int queriesSize, int* returnSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int[] CountServers(int n, int[][] logs, int x, int[] queries) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} n  * @param {number[][]} logs  * @param {number} x  * @param {number[]} queries  * @return {number[]}  */ var countServers = function(n, logs, x, queries) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countServers(n: number, logs: number[][], x: number, queries: number[]): number[] {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $n      * @param Integer[][] $logs      * @param Integer $x      * @param Integer[] $queries      * @return Integer[]      */     function countServers($n, $logs, $x, $queries) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func countServers(_ n: Int, _ logs: [[Int]], _ x: Int, _ queries: [Int]) -> [Int] {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun countServers(n: Int, logs: Array<IntArray>, x: Int, queries: IntArray): IntArray {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   List<int> countServers(int n, List<List<int>> logs, int x, List<int> queries) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countServers(n int, logs [][]int, x int, queries []int) []int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} n # @param {Integer[][]} logs # @param {Integer} x # @param {Integer[]} queries # @return {Integer[]} def count_servers(n, logs, x, queries)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def countServers(n: Int, logs: Array[Array[Int]], x: Int, queries: Array[Int]): Array[Int] = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn count_servers(n: i32, logs: Vec<Vec<i32>>, x: i32, queries: Vec<i32>) -> Vec<i32> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-servers n logs x queries)   (-> exact-integer? (listof (listof exact-integer?)) exact-integer? (listof exact-integer?) (listof exact-integer?))    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_servers(N :: integer(), Logs :: [[integer()]], X :: integer(), Queries :: [integer()]) -> [integer()]. count_servers(N, Logs, X, Queries) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec count_servers(n :: integer, logs :: [[integer]], x :: integer, queries :: [integer]) :: [integer]   def count_servers(n, logs, x, queries) do    end end"
+        }
+    ],
+    "content": "You are given an integer n denoting the total number of servers and a 2D 0-indexed integer array logs, where logs[i] = [server_id, time] denotes that the server with id server_id received a request at time time. You are also given an integer x and a 0-indexed integer array queries. Return a 0-indexed integer array arr of length queries.length where arr[i] represents the number of servers that did not receive any requests during the time interval [queries[i] - x, queries[i]]. Note that the time intervals are inclusive.  Example 1:  Input: n = 3, logs = [[1,3],[2,6],[1,5]], x = 5, queries = [10,11] Output: [1,2] Explanation:  For queries[0]: The servers with ids 1 and 2 get requests in the duration of [5, 10]. Hence, only server 3 gets zero requests. For queries[1]: Only the server with id 2 gets a request in duration of [6,11]. Hence, the servers with ids 1 and 3 are the only servers that do not receive any requests during that time period.   Example 2:  Input: n = 3, logs = [[2,4],[2,1],[1,2],[3,1]], x = 2, queries = [3,4] Output: [0,1] Explanation:  For queries[0]: All servers get at least one request in the duration of [1, 3]. For queries[1]: Only server with id 3 gets no request in the duration [2,4].    Constraints:  1 <= n <= 105 1 <= logs.length <= 105 1 <= queries.length <= 105 logs[i].length == 2 1 <= logs[i][0] <= n 1 <= logs[i][1] <= 106 1 <= x <= 105 x <queries[i]<= 106  "
+}

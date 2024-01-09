@@ -1,0 +1,27 @@
+{
+    "acRate": 80.43763615996261,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2667",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Create Hello World Function",
+    "titleSlug": "create-hello-world-function",
+    "topicTags": [],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @return {Function}  */ var createHelloWorld = function() {          return function(...args) {              } };  /**  * const f = createHelloWorld();  * f(); // \"Hello World\"  */"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function createHelloWorld() {          return function(...args): string {              }; };  /**  * const f = createHelloWorld();  * f(); // \"Hello World\"  */"
+        }
+    ],
+    "content": "Write a functioncreateHelloWorld.It should return a new function that always returns\"Hello World\".  Example 1:  Input: args = [] Output: \"Hello World\" Explanation: const f = createHelloWorld(); f(); // \"Hello World\"  The function returned by createHelloWorld should always return \"Hello World\".  Example 2:  Input: args = [{},null,42] Output: \"Hello World\" Explanation: const f = createHelloWorld(); f({}, null, 42); // \"Hello World\"  Any arguments could be passed to the function but it should still always return \"Hello World\".   Constraints:  0 <= args.length <= 10  "
+}

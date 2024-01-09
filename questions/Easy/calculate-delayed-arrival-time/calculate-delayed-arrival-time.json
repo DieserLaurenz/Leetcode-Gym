@@ -1,0 +1,118 @@
+{
+    "acRate": 78.7547046591163,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2651",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Calculate Delayed Arrival Time",
+    "titleSlug": "calculate-delayed-arrival-time",
+    "topicTags": [
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int findDelayedArrivalTime(int arrivalTime, int delayedTime) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int findDelayedArrivalTime(int arrivalTime, int delayedTime) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def findDelayedArrivalTime(self, arrivalTime, delayedTime):         \"\"\"         :type arrivalTime: int         :type delayedTime: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def findDelayedArrivalTime(self, arrivalTime: int, delayedTime: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int findDelayedArrivalTime(int arrivalTime, int delayedTime){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int FindDelayedArrivalTime(int arrivalTime, int delayedTime) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} arrivalTime  * @param {number} delayedTime  * @return {number}  */ var findDelayedArrivalTime = function(arrivalTime, delayedTime) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function findDelayedArrivalTime(arrivalTime: number, delayedTime: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $arrivalTime      * @param Integer $delayedTime      * @return Integer      */     function findDelayedArrivalTime($arrivalTime, $delayedTime) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func findDelayedArrivalTime(_ arrivalTime: Int, _ delayedTime: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun findDelayedArrivalTime(arrivalTime: Int, delayedTime: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int findDelayedArrivalTime(int arrivalTime, int delayedTime) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func findDelayedArrivalTime(arrivalTime int, delayedTime int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} arrival_time # @param {Integer} delayed_time # @return {Integer} def find_delayed_arrival_time(arrival_time, delayed_time)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def findDelayedArrivalTime(arrivalTime: Int, delayedTime: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn find_delayed_arrival_time(arrival_time: i32, delayed_time: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (find-delayed-arrival-time arrivalTime delayedTime)   (-> exact-integer? exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec find_delayed_arrival_time(ArrivalTime :: integer(), DelayedTime :: integer()) -> integer(). find_delayed_arrival_time(ArrivalTime, DelayedTime) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec find_delayed_arrival_time(arrival_time :: integer, delayed_time :: integer) :: integer   def find_delayed_arrival_time(arrival_time, delayed_time) do    end end"
+        }
+    ],
+    "content": "You are given a positive integer arrivalTime denoting the arrival time of a train in hours, and another positive integer delayedTime denoting the amount of delay in hours. Return the time when the train will arrive at the station. Note that the time in this problem is in 24-hours format.  Example 1:  Input: arrivalTime = 15, delayedTime = 5  Output: 20  Explanation: Arrival time of the train was 15:00 hours. It is delayed by 5 hours. Now it will reach at 15+5 = 20 (20:00 hours).  Example 2:  Input: arrivalTime = 13, delayedTime = 11 Output: 0 Explanation: Arrival time of the train was 13:00 hours. It is delayed by 11 hours. Now it will reach at 13+11=24 (Which is denoted by 00:00 in 24 hours format so return 0).   Constraints:  1 <= arrivaltime <24 1 <= delayedTime <= 24  "
+}

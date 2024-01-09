@@ -1,0 +1,123 @@
+{
+    "acRate": 38.62875734372248,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2739",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Total Distance Traveled",
+    "titleSlug": "total-distance-traveled",
+    "topicTags": [
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "Simulation",
+            "id": "VG9waWNUYWdOb2RlOjYxMDU1",
+            "slug": "simulation"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int distanceTraveled(int mainTank, int additionalTank) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int distanceTraveled(int mainTank, int additionalTank) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def distanceTraveled(self, mainTank, additionalTank):         \"\"\"         :type mainTank: int         :type additionalTank: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def distanceTraveled(self, mainTank: int, additionalTank: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int distanceTraveled(int mainTank, int additionalTank){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int DistanceTraveled(int mainTank, int additionalTank) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} mainTank  * @param {number} additionalTank  * @return {number}  */ var distanceTraveled = function(mainTank, additionalTank) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function distanceTraveled(mainTank: number, additionalTank: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $mainTank      * @param Integer $additionalTank      * @return Integer      */     function distanceTraveled($mainTank, $additionalTank) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func distanceTraveled(_ mainTank: Int, _ additionalTank: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun distanceTraveled(mainTank: Int, additionalTank: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int distanceTraveled(int mainTank, int additionalTank) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func distanceTraveled(mainTank int, additionalTank int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} main_tank # @param {Integer} additional_tank # @return {Integer} def distance_traveled(main_tank, additional_tank)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def distanceTraveled(mainTank: Int, additionalTank: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn distance_traveled(main_tank: i32, additional_tank: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (distance-traveled mainTank additionalTank)   (-> exact-integer? exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec distance_traveled(MainTank :: integer(), AdditionalTank :: integer()) -> integer(). distance_traveled(MainTank, AdditionalTank) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec distance_traveled(main_tank :: integer, additional_tank :: integer) :: integer   def distance_traveled(main_tank, additional_tank) do    end end"
+        }
+    ],
+    "content": "A truck has two fuel tanks. You are given two integers, mainTank representing the fuel present in the main tank in liters and additionalTank representing the fuel present in the additional tank in liters. The truck has a mileage of 10 km per liter. Whenever 5 liters of fuel getused up in the main tank,if the additional tank has at least 1 liters of fuel, 1 liters of fuel will be transferred from the additional tank to the main tank. Return the maximum distance which can be traveled. Note: Injection from the additional tank is not continuous. It happens suddenly and immediately for every 5 liters consumed.  Example 1:  Input: mainTank = 5, additionalTank = 10 Output: 60 Explanation:  After spending 5 litre of fuel, fuel remaining is (5 - 5 + 1) = 1 litre and distance traveled is 50km. After spending another 1 litre of fuel, no fuel gets injected in the main tank and the main tank becomes empty. Total distance traveled is 60km.  Example 2:  Input: mainTank = 1, additionalTank = 2 Output: 10 Explanation:  After spending 1 litre of fuel, the main tank becomes empty. Total distance traveled is 10km.    Constraints:  1 <= mainTank, additionalTank <= 100  "
+}

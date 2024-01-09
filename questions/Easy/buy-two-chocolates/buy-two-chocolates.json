@@ -1,0 +1,123 @@
+{
+    "acRate": 70.12855928601785,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2706",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Buy Two Chocolates",
+    "titleSlug": "buy-two-chocolates",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Sorting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDQ5",
+            "slug": "sorting"
+        }
+    ],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int buyChoco(vector<int>& prices, int money) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int buyChoco(int[] prices, int money) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def buyChoco(self, prices, money):         \"\"\"         :type prices: List[int]         :type money: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def buyChoco(self, prices: List[int], money: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int buyChoco(int* prices, int pricesSize, int money){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int BuyChoco(int[] prices, int money) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} prices  * @param {number} money  * @return {number}  */ var buyChoco = function(prices, money) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function buyChoco(prices: number[], money: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $prices      * @param Integer $money      * @return Integer      */     function buyChoco($prices, $money) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func buyChoco(_ prices: [Int], _ money: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun buyChoco(prices: IntArray, money: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int buyChoco(List<int> prices, int money) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func buyChoco(prices []int, money int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} prices # @param {Integer} money # @return {Integer} def buy_choco(prices, money)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def buyChoco(prices: Array[Int], money: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn buy_choco(prices: Vec<i32>, money: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (buy-choco prices money)   (-> (listof exact-integer?) exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec buy_choco(Prices :: [integer()], Money :: integer()) -> integer(). buy_choco(Prices, Money) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec buy_choco(prices :: [integer], money :: integer) :: integer   def buy_choco(prices, money) do    end end"
+        }
+    ],
+    "content": "You are given an integer array prices representing the prices of various chocolates in a store. You are also given a single integer money, which represents your initial amount of money. You must buy exactly two chocolates in such a way that you still have some non-negative leftover money. You would like to minimize the sum of the prices of the two chocolates you buy. Return the amount of money you will have leftover after buying the two chocolates. If there is no way for you to buy two chocolates without ending up in debt, return money. Note that the leftover must be non-negative.  Example 1:  Input: prices = [1,2,2], money = 3 Output: 0 Explanation: Purchase the chocolates priced at 1 and 2 units respectively. You will have 3 - 3 = 0 units of money afterwards. Thus, we return 0.  Example 2:  Input: prices = [3,2,3], money = 3 Output: 3 Explanation: You cannot buy 2 chocolates without going in debt, so we return 3.   Constraints:  2 <= prices.length <= 50 1 <= prices[i] <= 100 1 <= money <= 100  "
+}
