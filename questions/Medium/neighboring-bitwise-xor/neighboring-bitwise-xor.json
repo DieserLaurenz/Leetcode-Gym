@@ -1,0 +1,123 @@
+{
+    "acRate": 61.01374045801526,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2683",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Neighboring Bitwise XOR",
+    "titleSlug": "neighboring-bitwise-xor",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Bit Manipulation",
+            "id": "VG9waWNUYWdOb2RlOjE5",
+            "slug": "bit-manipulation"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     bool doesValidArrayExist(vector<int>& derived) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public boolean doesValidArrayExist(int[] derived) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def doesValidArrayExist(self, derived):         \"\"\"         :type derived: List[int]         :rtype: bool         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def doesValidArrayExist(self, derived: List[int]) -> bool:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "bool doesValidArrayExist(int* derived, int derivedSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public bool DoesValidArrayExist(int[] derived) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} derived  * @return {boolean}  */ var doesValidArrayExist = function(derived) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function doesValidArrayExist(derived: number[]): boolean {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $derived      * @return Boolean      */     function doesValidArrayExist($derived) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func doesValidArrayExist(_ derived: [Int]) -> Bool {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun doesValidArrayExist(derived: IntArray): Boolean {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   bool doesValidArrayExist(List<int> derived) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func doesValidArrayExist(derived []int) bool {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} derived # @return {Boolean} def does_valid_array_exist(derived)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def doesValidArrayExist(derived: Array[Int]): Boolean = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn does_valid_array_exist(derived: Vec<i32>) -> bool {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (does-valid-array-exist derived)   (-> (listof exact-integer?) boolean?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec does_valid_array_exist(Derived :: [integer()]) -> boolean(). does_valid_array_exist(Derived) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec does_valid_array_exist(derived :: [integer]) :: boolean   def does_valid_array_exist(derived) do    end end"
+        }
+    ],
+    "content": "A 0-indexed array derived with length n is derived by computing the bitwise XOR() of adjacent values in a binary array original of length n. Specifically, for each index i in the range [0, n - 1]:  If i = n - 1, then derived[i] = original[i]  original[0]. Otherwise, derived[i] = original[i]  original[i + 1].  Given an array derived, your task is to determine whether there exists a valid binary array original that could have formed derived. Return true if such an array exists or false otherwise.  A binary array is an array containing only 0's and 1's   Example 1:  Input: derived = [1,1,0] Output: true Explanation: A valid original array that gives derived is [0,1,0]. derived[0] = original[0]  original[1] = 0  1 = 1  derived[1] = original[1]  original[2] = 1  0 = 1 derived[2] = original[2]  original[0] = 0  0 = 0  Example 2:  Input: derived = [1,1] Output: true Explanation: A valid original array that gives derived is [0,1]. derived[0] = original[0]  original[1] = 1 derived[1] = original[1]  original[0] = 1  Example 3:  Input: derived = [1,0] Output: false Explanation: There is no valid original array that gives derived.   Constraints:  n == derived.length 1 <= n<= 105 The values in derivedare either 0's or 1's  "
+}

@@ -1,0 +1,123 @@
+{
+    "acRate": 51.30108944556242,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "frontendQuestionId": "2742",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Painting the Walls",
+    "titleSlug": "painting-the-walls",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        }
+    ],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int paintWalls(vector<int>& cost, vector<int>& time) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int paintWalls(int[] cost, int[] time) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def paintWalls(self, cost, time):         \"\"\"         :type cost: List[int]         :type time: List[int]         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def paintWalls(self, cost: List[int], time: List[int]) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int paintWalls(int* cost, int costSize, int* time, int timeSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int PaintWalls(int[] cost, int[] time) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} cost  * @param {number[]} time  * @return {number}  */ var paintWalls = function(cost, time) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function paintWalls(cost: number[], time: number[]): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $cost      * @param Integer[] $time      * @return Integer      */     function paintWalls($cost, $time) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func paintWalls(_ cost: [Int], _ time: [Int]) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun paintWalls(cost: IntArray, time: IntArray): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int paintWalls(List<int> cost, List<int> time) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func paintWalls(cost []int, time []int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} cost # @param {Integer[]} time # @return {Integer} def paint_walls(cost, time)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def paintWalls(cost: Array[Int], time: Array[Int]): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn paint_walls(cost: Vec<i32>, time: Vec<i32>) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (paint-walls cost time)   (-> (listof exact-integer?) (listof exact-integer?) exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec paint_walls(Cost :: [integer()], Time :: [integer()]) -> integer(). paint_walls(Cost, Time) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec paint_walls(cost :: [integer], time :: [integer]) :: integer   def paint_walls(cost, time) do    end end"
+        }
+    ],
+    "content": "You are given two 0-indexed integer arrays,cost and time, of size n representing the costs and the time taken to paint n different walls respectively. There are two painters available:  Apaid painterthat paints the ith wall in time[i] units of time and takes cost[i] units of money. Afree painter that paintsany wall in 1 unit of time at a cost of 0. But thefree painter can only be used if the paid painter is already occupied.  Return the minimum amount of money required to paint the nwalls.  Example 1:  Input: cost = [1,2,3,2], time = [1,2,3,2] Output: 3 Explanation: The walls at index 0 and 1 will be painted by the paid painter, and it will take 3 units of time; meanwhile, the free painter will paint the walls at index 2 and 3, free of cost in 2 units of time. Thus, the total cost is 1 + 2 = 3.  Example 2:  Input: cost = [2,3,4,2], time = [1,1,1,1] Output: 4 Explanation: The walls at index 0 and 3 will be painted by the paid painter, and it will take 2 units of time; meanwhile, the free painter will paint the walls at index 1 and 2, free of cost in 2 units of time. Thus, the total cost is 2 + 2 = 4.   Constraints:  1 <= cost.length <= 500 cost.length == time.length 1 <= cost[i] <= 106 1 <= time[i] <= 500  "
+}

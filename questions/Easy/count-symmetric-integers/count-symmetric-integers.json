@@ -1,0 +1,123 @@
+{
+    "acRate": 74.02376574332207,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2843",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "  Count Symmetric Integers",
+    "titleSlug": "count-symmetric-integers",
+    "topicTags": [
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "Enumeration",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY2",
+            "slug": "enumeration"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int countSymmetricIntegers(int low, int high) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int countSymmetricIntegers(int low, int high) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def countSymmetricIntegers(self, low, high):         \"\"\"         :type low: int         :type high: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def countSymmetricIntegers(self, low: int, high: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int countSymmetricIntegers(int low, int high){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int CountSymmetricIntegers(int low, int high) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} low  * @param {number} high  * @return {number}  */ var countSymmetricIntegers = function(low, high) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countSymmetricIntegers(low: number, high: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $low      * @param Integer $high      * @return Integer      */     function countSymmetricIntegers($low, $high) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func countSymmetricIntegers(_ low: Int, _ high: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun countSymmetricIntegers(low: Int, high: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int countSymmetricIntegers(int low, int high) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countSymmetricIntegers(low int, high int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} low # @param {Integer} high # @return {Integer} def count_symmetric_integers(low, high)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def countSymmetricIntegers(low: Int, high: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn count_symmetric_integers(low: i32, high: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-symmetric-integers low high)   (-> exact-integer? exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_symmetric_integers(Low :: integer(), High :: integer()) -> integer(). count_symmetric_integers(Low, High) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec count_symmetric_integers(low :: integer, high :: integer) :: integer   def count_symmetric_integers(low, high) do    end end"
+        }
+    ],
+    "content": "You are given two positive integers low and high. An integer x consisting of 2 * n digits is symmetric if the sum of the first n digits of x is equal to the sum of the last n digits of x. Numbers with an odd number of digits are never symmetric. Return the number of symmetric integers in the range [low, high].  Example 1:  Input: low = 1, high = 100 Output: 9 Explanation: There are 9 symmetric integers between 1 and 100: 11, 22, 33, 44, 55, 66, 77, 88, and 99.  Example 2:  Input: low = 1200, high = 1230 Output: 4 Explanation: There are 4 symmetric integers between 1200 and 1230: 1203, 1212, 1221, and 1230.   Constraints:  1 <= low <= high <= 104  "
+}

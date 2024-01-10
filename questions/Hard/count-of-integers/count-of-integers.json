@@ -1,0 +1,128 @@
+{
+    "acRate": 33.645229783711805,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "frontendQuestionId": "2719",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Count of Integers",
+    "titleSlug": "count-of-integers",
+    "topicTags": [
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int count(string num1, string num2, int min_sum, int max_sum) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int count(String num1, String num2, int min_sum, int max_sum) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def count(self, num1, num2, min_sum, max_sum):         \"\"\"         :type num1: str         :type num2: str         :type min_sum: int         :type max_sum: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def count(self, num1: str, num2: str, min_sum: int, max_sum: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int count(char * num1, char * num2, int min_sum, int max_sum){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int Count(string num1, string num2, int min_sum, int max_sum) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string} num1  * @param {string} num2  * @param {number} min_sum  * @param {number} max_sum  * @return {number}  */ var count = function(num1, num2, min_sum, max_sum) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function count(num1: string, num2: string, min_sum: number, max_sum: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String $num1      * @param String $num2      * @param Integer $min_sum      * @param Integer $max_sum      * @return Integer      */     function count($num1, $num2, $min_sum, $max_sum) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func count(_ num1: String, _ num2: String, _ min_sum: Int, _ max_sum: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun count(num1: String, num2: String, min_sum: Int, max_sum: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int count(String num1, String num2, int min_sum, int max_sum) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func count(num1 string, num2 string, min_sum int, max_sum int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} num1 # @param {String} num2 # @param {Integer} min_sum # @param {Integer} max_sum # @return {Integer} def count(num1, num2, min_sum, max_sum)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def count(num1: String, num2: String, min_sum: Int, max_sum: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn count(num1: String, num2: String, min_sum: i32, max_sum: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count num1 num2 min_sum max_sum)   (-> string? string? exact-integer? exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count(Num1 :: unicode:unicode_binary(), Num2 :: unicode:unicode_binary(), Min_sum :: integer(), Max_sum :: integer()) -> integer(). count(Num1, Num2, Min_sum, Max_sum) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec count(num1 :: String.t, num2 :: String.t, min_sum :: integer, max_sum :: integer) :: integer   def count(num1, num2, min_sum, max_sum) do    end end"
+        }
+    ],
+    "content": "You are given two numeric strings num1 and num2 and two integers max_sum and min_sum. We denote an integer x to be good if:  num1 <= x <= num2 min_sum <= digit_sum(x) <= max_sum.  Return the number of good integers. Since the answer may be large, return it modulo 109 + 7. Note that digit_sum(x) denotes the sum of the digits of x.  Example 1:  Input: num1 = \"1\", num2 = \"12\", min_sum = 1, max_sum = 8 Output: 11 Explanation: There are 11 integers whose sum of digits lies between 1 and 8 are 1,2,3,4,5,6,7,8,10,11, and 12. Thus, we return 11.  Example 2:  Input: num1 = \"1\", num2 = \"5\", min_sum = 1, max_sum = 5 Output: 5 Explanation: The 5 integers whose sum of digits lies between 1 and 5 are 1,2,3,4, and 5. Thus, we return 5.   Constraints:  1 <= num1 <= num2 <= 1022 1 <= min_sum <= max_sum <= 400  "
+}

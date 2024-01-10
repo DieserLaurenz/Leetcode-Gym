@@ -1,0 +1,128 @@
+{
+    "acRate": 26.558454213882005,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2901",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Longest Unequal Adjacent Groups Subsequence II",
+    "titleSlug": "longest-unequal-adjacent-groups-subsequence-ii",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public List<String> getWordsInLongestSubsequence(int n, String[] words, int[] groups) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def getWordsInLongestSubsequence(self, n, words, groups):         \"\"\"         :type n: int         :type words: List[str]         :type groups: List[int]         :rtype: List[str]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def getWordsInLongestSubsequence(self, n: int, words: List[str], groups: List[int]) -> List[str]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ char** getWordsInLongestSubsequence(int n, char** words, int wordsSize, int* groups, int groupsSize, int* returnSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public IList<string> GetWordsInLongestSubsequence(int n, string[] words, int[] groups) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} n  * @param {string[]} words  * @param {number[]} groups  * @return {string[]}  */ var getWordsInLongestSubsequence = function(n, words, groups) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function getWordsInLongestSubsequence(n: number, words: string[], groups: number[]): string[] {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $n      * @param String[] $words      * @param Integer[] $groups      * @return String[]      */     function getWordsInLongestSubsequence($n, $words, $groups) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func getWordsInLongestSubsequence(_ n: Int, _ words: [String], _ groups: [Int]) -> [String] {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun getWordsInLongestSubsequence(n: Int, words: Array<String>, groups: IntArray): List<String> {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   List<String> getWordsInLongestSubsequence(int n, List<String> words, List<int> groups) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func getWordsInLongestSubsequence(n int, words []string, groups []int) []string {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} n # @param {String[]} words # @param {Integer[]} groups # @return {String[]} def get_words_in_longest_subsequence(n, words, groups)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def getWordsInLongestSubsequence(n: Int, words: Array[String], groups: Array[Int]): List[String] = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn get_words_in_longest_subsequence(n: i32, words: Vec<String>, groups: Vec<i32>) -> Vec<String> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (get-words-in-longest-subsequence n words groups)   (-> exact-integer? (listof string?) (listof exact-integer?) (listof string?))    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec get_words_in_longest_subsequence(N :: integer(), Words :: [unicode:unicode_binary()], Groups :: [integer()]) -> [unicode:unicode_binary()]. get_words_in_longest_subsequence(N, Words, Groups) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec get_words_in_longest_subsequence(n :: integer, words :: [String.t], groups :: [integer]) :: [String.t]   def get_words_in_longest_subsequence(n, words, groups) do    end end"
+        }
+    ],
+    "content": "You are given an integer n, a 0-indexed string array words, and a 0-indexed array groups, both arrays having length n. The hamming distance between two strings of equal length is the number of positions at which the corresponding characters are different. You need to select the longest subsequence from an array of indices [0, 1, ..., n - 1], such that for the subsequence denoted as [i0, i1, ..., ik - 1] having length k, the following holds:  For adjacent indices in the subsequence, their corresponding groups are unequal, i.e., groups[ij] != groups[ij + 1], for each j where 0 < j + 1 < k. words[ij] and words[ij + 1] are equal in length, and the hamming distance between them is 1, where 0 < j + 1 < k, for all indices in the subsequence.  Return a string array containing the words corresponding to the indices (in order) in the selected subsequence. If there are multiple answers, return any of them. A subsequence of an array is a new array that is formed from the original array by deleting some (possibly none) of the elements without disturbing the relative positions of the remaining elements. Note: strings in words may be unequal in length.  Example 1:  Input: n = 3, words = [\"bab\",\"dab\",\"cab\"], groups = [1,2,2] Output: [\"bab\",\"cab\"] Explanation: A subsequence that can be selected is [0,2]. - groups[0] != groups[2] - words[0].length == words[2].length, and the hamming distance between them is 1. So, a valid answer is [words[0],words[2]] = [\"bab\",\"cab\"]. Another subsequence that can be selected is [0,1]. - groups[0] != groups[1] - words[0].length == words[1].length, and the hamming distance between them is 1. So, another valid answer is [words[0],words[1]] = [\"bab\",\"dab\"]. It can be shown that the length of the longest subsequence of indices that satisfies the conditions is 2.   Example 2:  Input: n = 4, words = [\"a\",\"b\",\"c\",\"d\"], groups = [1,2,3,4] Output: [\"a\",\"b\",\"c\",\"d\"] Explanation: We can select the subsequence [0,1,2,3]. It satisfies both conditions. Hence, the answer is [words[0],words[1],words[2],words[3]] = [\"a\",\"b\",\"c\",\"d\"]. It has the longest length among all subsequences of indices that satisfy the conditions. Hence, it is the only answer.   Constraints:  1 <= n == words.length == groups.length <= 1000 1 <= words[i].length <= 10 1 <= groups[i] <= n words consists of distinct strings. words[i] consists of lowercase English letters.  "
+}

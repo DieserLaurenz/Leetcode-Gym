@@ -1,0 +1,123 @@
+{
+    "acRate": 28.89460454784591,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2760",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Longest Even Odd Subarray With Threshold",
+    "titleSlug": "longest-even-odd-subarray-with-threshold",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Sliding Window",
+            "id": "VG9waWNUYWdOb2RlOjU1ODIx",
+            "slug": "sliding-window"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int longestAlternatingSubarray(vector<int>& nums, int threshold) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int longestAlternatingSubarray(int[] nums, int threshold) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def longestAlternatingSubarray(self, nums, threshold):         \"\"\"         :type nums: List[int]         :type threshold: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def longestAlternatingSubarray(self, nums: List[int], threshold: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int longestAlternatingSubarray(int* nums, int numsSize, int threshold){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int LongestAlternatingSubarray(int[] nums, int threshold) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} nums  * @param {number} threshold  * @return {number}  */ var longestAlternatingSubarray = function(nums, threshold) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function longestAlternatingSubarray(nums: number[], threshold: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $threshold      * @return Integer      */     function longestAlternatingSubarray($nums, $threshold) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func longestAlternatingSubarray(_ nums: [Int], _ threshold: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun longestAlternatingSubarray(nums: IntArray, threshold: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int longestAlternatingSubarray(List<int> nums, int threshold) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func longestAlternatingSubarray(nums []int, threshold int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums # @param {Integer} threshold # @return {Integer} def longest_alternating_subarray(nums, threshold)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def longestAlternatingSubarray(nums: Array[Int], threshold: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn longest_alternating_subarray(nums: Vec<i32>, threshold: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (longest-alternating-subarray nums threshold)   (-> (listof exact-integer?) exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec longest_alternating_subarray(Nums :: [integer()], Threshold :: integer()) -> integer(). longest_alternating_subarray(Nums, Threshold) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec longest_alternating_subarray(nums :: [integer], threshold :: integer) :: integer   def longest_alternating_subarray(nums, threshold) do    end end"
+        }
+    ],
+    "content": "You are given a 0-indexed integer array nums and an integer threshold. Find the length of the longest subarray of nums starting at index l and ending at index r (0 <= l <= r < nums.length) that satisfies the following conditions:  nums[l] % 2 == 0 For all indices i in the range [l, r - 1], nums[i] % 2 != nums[i + 1] % 2 For all indices i in the range [l, r], nums[i] <= threshold  Return an integer denoting the length of the longest such subarray. Note: A subarray is a contiguous non-empty sequence of elements within an array.  Example 1:  Input: nums = [3,2,5,4], threshold = 5 Output: 3 Explanation: In this example, we can select the subarray that starts at l = 1 and ends at r = 3 => [2,5,4]. This subarray satisfies the conditions. Hence, the answer is the length of the subarray, 3. We can show that 3 is the maximum possible achievable length. Example 2:  Input: nums = [1,2], threshold = 2 Output: 1 Explanation: In this example, we can select the subarray that starts at l = 1 and ends at r = 1 => [2].  It satisfies all the conditions and we can show that 1 is the maximum possible achievable length.  Example 3:  Input: nums = [2,3,4,5], threshold = 4 Output: 3 Explanation: In this example, we can select the subarray that starts at l = 0 and ends at r = 2 => [2,3,4].  It satisfies all the conditions. Hence, the answer is the length of the subarray, 3. We can show that 3 is the maximum possible achievable length.   Constraints:  1 <= nums.length <= 100  1 <= nums[i] <= 100  1 <= threshold <= 100  "
+}

@@ -157,10 +157,10 @@ def add_question_content_and_save_to_file(filtered_questions):
 
         print(Fore.LIGHTGREEN_EX + f"Successfully added content: {title}")
 
-        print(Fore.LIGHTWHITE_EX + f"Saving to file: {title}")
+        print(Fore.LIGHTWHITE_EX + f"Saving to: {path}")
 
         save_question_to_folder(question)
-        print(Fore.LIGHTGREEN_EX + f"Successfully saved the file: {title}")
+        print(Fore.LIGHTGREEN_EX + f"Successfully saved to: {path}")
         time.sleep(REQUEST_DELAY)
 
 

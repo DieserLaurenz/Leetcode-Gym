@@ -1,0 +1,133 @@
+{
+    "acRate": 73.81615598885793,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2965",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Find Missing and Repeated Values",
+    "titleSlug": "find-missing-and-repeated-values",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "Matrix",
+            "id": "VG9waWNUYWdOb2RlOjYxMDUz",
+            "slug": "matrix"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int[] findMissingAndRepeatedValues(int[][] grid) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def findMissingAndRepeatedValues(self, grid):         \"\"\"         :type grid: List[List[int]]         :rtype: List[int]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def findMissingAndRepeatedValues(self, grid: List[List[int]]) -> List[int]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* findMissingAndRepeatedValues(int** grid, int gridSize, int* gridColSize, int* returnSize) {      }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int[] FindMissingAndRepeatedValues(int[][] grid) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[][]} grid  * @return {number[]}  */ var findMissingAndRepeatedValues = function(grid) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function findMissingAndRepeatedValues(grid: number[][]): number[] {      };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[][] $grid      * @return Integer[]      */     function findMissingAndRepeatedValues($grid) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func findMissingAndRepeatedValues(_ grid: [[Int]]) -> [Int] {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun findMissingAndRepeatedValues(grid: Array<IntArray>): IntArray {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   List<int> findMissingAndRepeatedValues(List<List<int>> grid) {        } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func findMissingAndRepeatedValues(grid [][]int) []int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[][]} grid # @return {Integer[]} def find_missing_and_repeated_values(grid)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def findMissingAndRepeatedValues(grid: Array[Array[Int]]): Array[Int] = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn find_missing_and_repeated_values(grid: Vec<Vec<i32>>) -> Vec<i32> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (find-missing-and-repeated-values grid)   (-> (listof (listof exact-integer?)) (listof exact-integer?))   )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec find_missing_and_repeated_values(Grid :: [[integer()]]) -> [integer()]. find_missing_and_repeated_values(Grid) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec find_missing_and_repeated_values(grid :: [[integer]]) :: [integer]   def find_missing_and_repeated_values(grid) do        end end"
+        }
+    ],
+    "content": "You are given a 0-indexed 2D integer matrix grid of size n * n with values in the range [1, n2]. Each integer appears exactly once except a which appears twice and b which is missing. The task is to find the repeating and missing numbers a and b. Return a 0-indexed integer array ans of size 2 where ans[0] equals to a and ans[1] equals to b.  Example 1:  Input: grid = [[1,3],[2,2]] Output: [2,4] Explanation: Number 2 is repeated and number 4 is missing so the answer is [2,4].  Example 2:  Input: grid = [[9,1,7],[8,9,2],[3,4,6]] Output: [9,5] Explanation: Number 9 is repeated and number 5 is missing so the answer is [9,5].   Constraints:  2 <= n == grid.length == grid[i].length <= 50 1 <= grid[i][j] <= n * n For all x that 1 <= x <= n * n there is exactly one x that is not equal to any of the grid members. For all x that 1 <= x <= n * n there is exactly one x that is equal to exactly two of the grid members. For all x that 1 <= x <= n * n except two of them there is exatly one pair of i, j that 0 <= i, j <= n - 1 and grid[i][j] == x.  "
+}

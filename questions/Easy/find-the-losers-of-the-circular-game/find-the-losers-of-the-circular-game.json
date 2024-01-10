@@ -1,0 +1,128 @@
+{
+    "acRate": 48.26837285747828,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2682",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Find the Losers of the Circular Game",
+    "titleSlug": "find-the-losers-of-the-circular-game",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Simulation",
+            "id": "VG9waWNUYWdOb2RlOjYxMDU1",
+            "slug": "simulation"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     vector<int> circularGameLosers(int n, int k) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int[] circularGameLosers(int n, int k) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def circularGameLosers(self, n, k):         \"\"\"         :type n: int         :type k: int         :rtype: List[int]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def circularGameLosers(self, n: int, k: int) -> List[int]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* circularGameLosers(int n, int k, int* returnSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int[] CircularGameLosers(int n, int k) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number} n  * @param {number} k  * @return {number[]}  */ var circularGameLosers = function(n, k) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function circularGameLosers(n: number, k: number): number[] {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer $n      * @param Integer $k      * @return Integer[]      */     function circularGameLosers($n, $k) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func circularGameLosers(_ n: Int, _ k: Int) -> [Int] {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun circularGameLosers(n: Int, k: Int): IntArray {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   List<int> circularGameLosers(int n, int k) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func circularGameLosers(n int, k int) []int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} n # @param {Integer} k # @return {Integer[]} def circular_game_losers(n, k)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def circularGameLosers(n: Int, k: Int): Array[Int] = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn circular_game_losers(n: i32, k: i32) -> Vec<i32> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (circular-game-losers n k)   (-> exact-integer? exact-integer? (listof exact-integer?))    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec circular_game_losers(N :: integer(), K :: integer()) -> [integer()]. circular_game_losers(N, K) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec circular_game_losers(n :: integer, k :: integer) :: [integer]   def circular_game_losers(n, k) do    end end"
+        }
+    ],
+    "content": "There are n friends that are playing a game. The friends are sitting in a circle and are numbered from 1 to n in clockwise order. More formally, moving clockwise from the ith friend brings you to the (i+1)th friend for 1 <= i < n, and moving clockwise from the nth friend brings you to the 1st friend. The rules of the game are as follows: 1st friend receives the ball.  After that, 1st friend passes it to the friend who is k steps away from them in the clockwise direction. After that, the friend who receives the ball should pass it to the friend who is 2 * k steps away from them in the clockwise direction. After that, the friend who receives the ball should pass it to the friend who is 3 * k steps away from them in the clockwise direction, and so on and so forth.  In other words, on the ith turn, the friend holding the ball should pass it to the friend who is i * k steps away from them in the clockwise direction. The game is finished when some friend receives the ball for the second time. The losers of the game are friends who did not receive the ball in the entire game. Given the number of friends, n, and an integer k, return the array answer, which contains the losers of the game in the ascending order.  Example 1:  Input: n = 5, k = 2 Output: [4,5] Explanation: The game goes as follows: 1) Start at 1stfriend and pass the ball to the friend who is 2 steps away from them - 3rdfriend. 2) 3rdfriend passes the ball to the friend who is 4 steps away from them - 2ndfriend. 3) 2ndfriend passes the ball to the friend who is 6 steps away from them  - 3rdfriend. 4) The game ends as 3rdfriend receives the ball for the second time.  Example 2:  Input: n = 4, k = 4 Output: [2,3,4] Explanation: The game goes as follows: 1) Start at the 1stfriend and pass the ball to the friend who is 4 steps away from them - 1stfriend. 2) The game ends as 1stfriend receives the ball for the second time.   Constraints:  1 <= k <= n <= 50  "
+}

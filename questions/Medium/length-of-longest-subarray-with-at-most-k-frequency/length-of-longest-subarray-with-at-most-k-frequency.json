@@ -1,0 +1,128 @@
+{
+    "acRate": 41.40452761198043,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2958",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Length of Longest Subarray With at Most K Frequency",
+    "titleSlug": "length-of-longest-subarray-with-at-most-k-frequency",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Sliding Window",
+            "id": "VG9waWNUYWdOb2RlOjU1ODIx",
+            "slug": "sliding-window"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int maxSubarrayLength(vector<int>& nums, int k) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int maxSubarrayLength(int[] nums, int k) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def maxSubarrayLength(self, nums, k):         \"\"\"         :type nums: List[int]         :type k: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def maxSubarrayLength(self, nums: List[int], k: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int maxSubarrayLength(int* nums, int numsSize, int k) {      }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int MaxSubarrayLength(int[] nums, int k) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} nums  * @param {number} k  * @return {number}  */ var maxSubarrayLength = function(nums, k) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function maxSubarrayLength(nums: number[], k: number): number {      };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $k      * @return Integer      */     function maxSubarrayLength($nums, $k) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func maxSubarrayLength(_ nums: [Int], _ k: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun maxSubarrayLength(nums: IntArray, k: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int maxSubarrayLength(List<int> nums, int k) {        } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func maxSubarrayLength(nums []int, k int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums # @param {Integer} k # @return {Integer} def max_subarray_length(nums, k)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def maxSubarrayLength(nums: Array[Int], k: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn max_subarray_length(nums: Vec<i32>, k: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (max-subarray-length nums k)   (-> (listof exact-integer?) exact-integer? exact-integer?)   )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec max_subarray_length(Nums :: [integer()], K :: integer()) -> integer(). max_subarray_length(Nums, K) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec max_subarray_length(nums :: [integer], k :: integer) :: integer   def max_subarray_length(nums, k) do        end end"
+        }
+    ],
+    "content": "You are given an integer array nums and an integer k. The frequency of an element x is the number of times it occurs in an array. An array is called good if the frequency of each element in this array is less than or equal to k. Return the length of the longest good subarray of nums. A subarray is a contiguous non-empty sequence of elements within an array.  Example 1:  Input: nums = [1,2,3,1,2,3,1,2], k = 2 Output: 6 Explanation: The longest possible good subarray is [1,2,3,1,2,3] since the values 1, 2, and 3 occur at most twice in this subarray. Note that the subarrays [2,3,1,2,3,1] and [3,1,2,3,1,2] are also good. It can be shown that there are no good subarrays with length more than 6.  Example 2:  Input: nums = [1,2,1,2,1,2,1,2], k = 1 Output: 2 Explanation: The longest possible good subarray is [1,2] since the values 1 and 2 occur at most once in this subarray. Note that the subarray [2,1] is also good. It can be shown that there are no good subarrays with length more than 2.  Example 3:  Input: nums = [5,5,5,5,5,5,5], k = 4 Output: 4 Explanation: The longest possible good subarray is [5,5,5,5] since the value 5 occurs 4 times in this subarray. It can be shown that there are no good subarrays with length more than 4.   Constraints:  1 <= nums.length <= 105 1 <= nums[i] <= 109 1 <= k <= nums.length  "
+}

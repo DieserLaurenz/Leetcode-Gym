@@ -1,0 +1,133 @@
+{
+    "acRate": 80.51223576879221,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "frontendQuestionId": "2744",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Find Maximum Number of String Pairs",
+    "titleSlug": "find-maximum-number-of-string-pairs",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Simulation",
+            "id": "VG9waWNUYWdOb2RlOjYxMDU1",
+            "slug": "simulation"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int maximumNumberOfStringPairs(vector<string>& words) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int maximumNumberOfStringPairs(String[] words) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def maximumNumberOfStringPairs(self, words):         \"\"\"         :type words: List[str]         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def maximumNumberOfStringPairs(self, words: List[str]) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int maximumNumberOfStringPairs(char ** words, int wordsSize){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int MaximumNumberOfStringPairs(string[] words) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {string[]} words  * @return {number}  */ var maximumNumberOfStringPairs = function(words) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function maximumNumberOfStringPairs(words: string[]): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param String[] $words      * @return Integer      */     function maximumNumberOfStringPairs($words) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func maximumNumberOfStringPairs(_ words: [String]) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun maximumNumberOfStringPairs(words: Array<String>): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int maximumNumberOfStringPairs(List<String> words) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func maximumNumberOfStringPairs(words []string) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String[]} words # @return {Integer} def maximum_number_of_string_pairs(words)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def maximumNumberOfStringPairs(words: Array[String]): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn maximum_number_of_string_pairs(words: Vec<String>) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (maximum-number-of-string-pairs words)   (-> (listof string?) exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec maximum_number_of_string_pairs(Words :: [unicode:unicode_binary()]) -> integer(). maximum_number_of_string_pairs(Words) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec maximum_number_of_string_pairs(words :: [String.t]) :: integer   def maximum_number_of_string_pairs(words) do    end end"
+        }
+    ],
+    "content": "You are given a 0-indexed array words consisting of distinct strings. The string words[i] can be paired with the string words[j] if:  The string words[i] is equal to the reversed string of words[j]. 0 <= i < j < words.length.  Return the maximum number of pairs that can be formed from the array words. Note thateach string can belong inat most one pair.  Example 1:  Input: words = [\"cd\",\"ac\",\"dc\",\"ca\",\"zz\"] Output: 2 Explanation: In this example, we can form 2 pair of strings in the following way: - We pair the 0th string with the 2nd string, as the reversed string of word[0] is \"dc\" and is equal to words[2]. - We pair the 1st string with the 3rd string, as the reversed string of word[1] is \"ca\" and is equal to words[3]. It can be proven that 2 is the maximum number of pairs that can be formed. Example 2:  Input: words = [\"ab\",\"ba\",\"cc\"] Output: 1 Explanation: In this example, we can form 1 pair of strings in the following way: - We pair the 0th string with the 1st string, as the reversed string of words[1] is \"ab\" and is equal to words[0]. It can be proven that 1 is the maximum number of pairs that can be formed.  Example 3:  Input: words = [\"aa\",\"ab\"] Output: 0 Explanation: In this example, we are unable to form any pair of strings.   Constraints:  1 <= words.length <= 50 words[i].length == 2 wordsconsists of distinct strings. words[i]contains only lowercase English letters.  "
+}

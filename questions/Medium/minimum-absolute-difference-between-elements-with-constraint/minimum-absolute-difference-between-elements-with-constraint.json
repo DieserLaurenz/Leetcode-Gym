@@ -1,0 +1,128 @@
+{
+    "acRate": 32.232051513510264,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2817",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Minimum Absolute Difference Between Elements With Constraint",
+    "titleSlug": "minimum-absolute-difference-between-elements-with-constraint",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Binary Search",
+            "id": "VG9waWNUYWdOb2RlOjEx",
+            "slug": "binary-search"
+        },
+        {
+            "name": "Ordered Set",
+            "id": "VG9waWNUYWdOb2RlOjYxMDcw",
+            "slug": "ordered-set"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     int minAbsoluteDifference(vector<int>& nums, int x) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int minAbsoluteDifference(List<Integer> nums, int x) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def minAbsoluteDifference(self, nums, x):         \"\"\"         :type nums: List[int]         :type x: int         :rtype: int         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def minAbsoluteDifference(self, nums: List[int], x: int) -> int:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int minAbsoluteDifference(int* nums, int numsSize, int x){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int MinAbsoluteDifference(IList<int> nums, int x) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[]} nums  * @param {number} x  * @return {number}  */ var minAbsoluteDifference = function(nums, x) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function minAbsoluteDifference(nums: number[], x: number): number {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $x      * @return Integer      */     function minAbsoluteDifference($nums, $x) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func minAbsoluteDifference(_ nums: [Int], _ x: Int) -> Int {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun minAbsoluteDifference(nums: List<Int>, x: Int): Int {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   int minAbsoluteDifference(List<int> nums, int x) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func minAbsoluteDifference(nums []int, x int) int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums # @param {Integer} x # @return {Integer} def min_absolute_difference(nums, x)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def minAbsoluteDifference(nums: List[Int], x: Int): Int = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn min_absolute_difference(nums: Vec<i32>, x: i32) -> i32 {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (min-absolute-difference nums x)   (-> (listof exact-integer?) exact-integer? exact-integer?)    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec min_absolute_difference(Nums :: [integer()], X :: integer()) -> integer(). min_absolute_difference(Nums, X) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec min_absolute_difference(nums :: [integer], x :: integer) :: integer   def min_absolute_difference(nums, x) do    end end"
+        }
+    ],
+    "content": "You are given a 0-indexed integer array nums and an integer x. Find the minimum absolute difference between two elements in the array that are at least x indices apart. In other words, find two indices i and j such that abs(i - j) >= x and abs(nums[i] - nums[j]) is minimized. Return an integer denoting the minimum absolute difference between two elements that are at least x indices apart.  Example 1:  Input: nums = [4,3,2,4], x = 2 Output: 0 Explanation: We can select nums[0] = 4 and nums[3] = 4.  They are at least 2 indices apart, and their absolute difference is the minimum, 0.  It can be shown that 0 is the optimal answer.  Example 2:  Input: nums = [5,3,2,10,15], x = 1 Output: 1 Explanation: We can select nums[1] = 3 and nums[2] = 2. They are at least 1 index apart, and their absolute difference is the minimum, 1. It can be shown that 1 is the optimal answer.  Example 3:  Input: nums = [1,2,3,4], x = 3 Output: 3 Explanation: We can select nums[0] = 1 and nums[3] = 4. They are at least 3 indices apart, and their absolute difference is the minimum, 3. It can be shown that 3 is the optimal answer.   Constraints:  1 <= nums.length <= 105 1 <= nums[i] <= 109 0 <= x < nums.length  "
+}

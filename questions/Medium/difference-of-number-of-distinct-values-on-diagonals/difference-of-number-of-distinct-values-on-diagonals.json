@@ -1,0 +1,128 @@
+{
+    "acRate": 70.54998645353562,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "frontendQuestionId": "2711",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Difference of Number of Distinct Values on Diagonals",
+    "titleSlug": "difference-of-number-of-distinct-values-on-diagonals",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Matrix",
+            "id": "VG9waWNUYWdOb2RlOjYxMDUz",
+            "slug": "matrix"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution { public:     vector<vector<int>> differenceOfDistinctValues(vector<vector<int>>& grid) {              } };"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {     public int[][] differenceOfDistinctValues(int[][] grid) {              } }"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):     def differenceOfDistinctValues(self, grid):         \"\"\"         :type grid: List[List[int]]         :rtype: List[List[int]]         \"\"\"         "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:     def differenceOfDistinctValues(self, grid: List[List[int]]) -> List[List[int]]:         "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**  * Return an array of arrays of size *returnSize.  * The sizes of the arrays are returned as *returnColumnSizes array.  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().  */ int** differenceOfDistinctValues(int** grid, int gridSize, int* gridColSize, int* returnSize, int** returnColumnSizes){  }"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {     public int[][] DifferenceOfDistinctValues(int[][] grid) {              } }"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**  * @param {number[][]} grid  * @return {number[][]}  */ var differenceOfDistinctValues = function(grid) {      };"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function differenceOfDistinctValues(grid: number[][]): number[][] {  };"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {      /**      * @param Integer[][] $grid      * @return Integer[][]      */     function differenceOfDistinctValues($grid) {              } }"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {     func differenceOfDistinctValues(_ grid: [[Int]]) -> [[Int]] {              } }"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {     fun differenceOfDistinctValues(grid: Array<IntArray>): Array<IntArray> {              } }"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {   List<List<int>> differenceOfDistinctValues(List<List<int>> grid) {    } }"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func differenceOfDistinctValues(grid [][]int) [][]int {      }"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[][]} grid # @return {Integer[][]} def difference_of_distinct_values(grid)      end"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {     def differenceOfDistinctValues(grid: Array[Array[Int]]): Array[Array[Int]] = {              } }"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {     pub fn difference_of_distinct_values(grid: Vec<Vec<i32>>) -> Vec<Vec<i32>> {              } }"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (difference-of-distinct-values grid)   (-> (listof (listof exact-integer?)) (listof (listof exact-integer?)))    )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec difference_of_distinct_values(Grid :: [[integer()]]) -> [[integer()]]. difference_of_distinct_values(Grid) ->   ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do   @spec difference_of_distinct_values(grid :: [[integer]]) :: [[integer]]   def difference_of_distinct_values(grid) do    end end"
+        }
+    ],
+    "content": "Given a 0-indexed 2D grid of size m x n, you should find the matrix answer of size m x n. The value of each cell (r, c) of the matrix answer is calculated in the following way:  Let topLeft[r][c] be the number of distinct values in the top-left diagonal of the cell (r, c) in the matrix grid. Let bottomRight[r][c] be the number of distinct values in the bottom-right diagonal of the cell (r, c) in the matrix grid.  Then answer[r][c] = |topLeft[r][c] - bottomRight[r][c]|. Return the matrix answer. A matrix diagonal is a diagonal line of cells starting from some cell in either the topmost row or leftmost column and going in the bottom-right direction until reaching the matrix's end. A cell (r1, c1) belongs to the top-left diagonal of the cell (r, c), if both belong to the same diagonal and r1 < r. Similarly is defined bottom-right diagonal.  Example 1:    Input: grid = [[1,2,3],[3,1,5],[3,2,1]] Output: [[1,1,0],[1,0,1],[0,1,1]] Explanation: The 1st diagram denotes the initial grid. The 2nd diagram denotes a grid for cell (0,0), where blue-colored cells are cells on its bottom-right diagonal. The 3rd diagram denotes a grid for cell (1,2), where red-colored cells are cells on its top-left diagonal. The 4th diagram denotes a grid for cell (1,1), where blue-colored cells are cells on its bottom-right diagonal and red-colored cells are cells on its top-left diagonal. - The cell (0,0) contains [1,1] on its bottom-right diagonal and [] on its top-left diagonal. The answer is |1 - 0| = 1. - The cell (1,2) contains [] on its bottom-right diagonal and [2] on its top-left diagonal. The answer is |0 - 1| = 1. - The cell (1,1) contains [1] on its bottom-right diagonal and [1] on its top-left diagonal. The answer is |1 - 1| = 0. The answers of other cells are similarly calculated.  Example 2:  Input: grid = [[1]] Output: [[0]] Explanation: - The cell (0,0) contains [] on its bottom-right diagonal and [] on its top-left diagonal. The answer is |0 - 0| = 0.   Constraints:  m == grid.length n == grid[i].length 1 <= m, n, grid[i][j] <= 50  "
+}
