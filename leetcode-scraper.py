@@ -1,25 +1,34 @@
-import datetime
 import json
 import os
 import shelve
 import time
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
+from colorama import Fore
 
-REQUEST_DELAY = 0
+REQUEST_DELAY = 2
 QUESTIONS_TO_FETCH = 400  # Ascending problem number
+FILTER_OUT_PAID_QUESTIONS = True
+PROBLEM_FETCH_START_DATE = "14-05-2023"  # DD-MM-YYYY (UTC+2)
 
 
 def send_request(url, cookies=None, headers=None, json_data=None):
-    res = requests.post(
-        url=url,
-        headers=headers,
-        cookies=cookies,
-        json=json_data
-    )
+    try:
+        response = requests.post(
+            url=url,
+            headers=headers,
+            cookies=cookies,
+            json=json_data,
+            timeout=5
+        )
+        response.raise_for_status()  # Raises HTTPError for bad responses
+        return response
 
-    return res
+    except Exception as e:
+        print(Fore.LIGHTRED_EX + "Error while sending request: ", e)
+        exit()
 
 
 def fetch_questions():
@@ -41,13 +50,33 @@ def fetch_questions():
         'operationName': 'problemsetQuestionList'
     }
 
-    res = send_request("https://leetcode.com/graphql/", headers=headers, json_data=json_data)
+    try:
+        print(Fore.LIGHTCYAN_EX + "[REQUEST] Fetching questions...")
+        res = send_request("https://leetcode.com/graphql/", headers=headers, json_data=json_data)
 
-    response_data = res.json()
+        # Check if the HTTP request was successful
+        if res.status_code == 200:
+            try:
+                response_data = res.json()
+            except ValueError as e:
+                print(Fore.LIGHTRED_EX + "Error decoding JSON:", e)
+                exit()
 
-    questions = response_data["data"]["problemsetQuestionList"]["questions"]
+            # Safely extract questions from response_data
+            questions = response_data.get("data", {}).get("problemsetQuestionList", {}).get("questions")
+            if questions is not None:
+                print(Fore.LIGHTGREEN_EX + "Successfully fetched questions!")
+                return questions
+            else:
+                print(Fore.LIGHTRED_EX + "Questions data not found in response")
+                exit()
+        else:
+            print(Fore.LIGHTRED_EX + f"Failed to fetch questions. HTTP Status Code: {res.status_code}")
+            exit()
 
-    return questions
+    except Exception as e:
+        print(Fore.LIGHTRED_EX + "An error occurred:", e)
+        exit()
 
 
 def fetch_question_content(title):
@@ -99,26 +128,39 @@ def clean_code_snippets(code_snippets):
 
 
 def add_question_content_and_save_to_file(filtered_questions):
+
     for question in filtered_questions:
 
         path = f"./questions/{question['difficulty']}/{question['titleSlug']}/{question['titleSlug']}.json"
 
         if os.path.exists(path):
-            print(f"{question['titleSlug']} HAS ALREADY BEEN SAVED")
+            print(Fore.LIGHTYELLOW_EX + f"File has already been created: {question['titleSlug']}")
             continue
 
         title = question["titleSlug"]
+
+        print(Fore.LIGHTCYAN_EX + f"[REQUEST] Fetching question content: {title}")
+
         question_content = fetch_question_content(title)
 
+        print(Fore.LIGHTGREEN_EX + f"Successfully fetched content: {title}")
+
+        print(Fore.LIGHTWHITE_EX + f"Cleaning up content: {title}")
         code_snippets = clean_code_snippets(question_content["data"]["question"]["codeSnippets"])
         content = clean_content(question_content["data"]["question"]["content"])
+        print(Fore.LIGHTGREEN_EX + f"Successfully cleaned up content: {title}")
+
+        print(Fore.LIGHTWHITE_EX + f"Adding content: {title}")
 
         question["codeSnippets"] = code_snippets
         question["content"] = content
 
-        print(f"SUCCESSFULLY ADDED QUESTION CONTENT FOR: {title}")
+        print(Fore.LIGHTGREEN_EX + f"Successfully added content: {title}")
+
+        print(Fore.LIGHTWHITE_EX + f"Saving to file: {title}")
+
         save_question_to_folder(question)
-        print(f"SUCCESSFULLY SAVED QUESTION TO FOLDER: {title}")
+        print(Fore.LIGHTGREEN_EX + f"Successfully saved the file: {title}")
         time.sleep(REQUEST_DELAY)
 
 
@@ -141,53 +183,76 @@ def fetch_first_submission_timestamp(title):
         'operationName': 'communitySolutions',
     }
 
-    response = send_request('https://leetcode.com/graphql/', headers=headers, json_data=json_data)
+    try:
+        print(Fore.LIGHTCYAN_EX + f"[REQUEST] Retrieving timestamp data: {title}")
+        res = send_request('https://leetcode.com/graphql/', headers=headers, json_data=json_data)
 
-    response_data = response.json()
+        # Check if the HTTP request was successful
+        if res.status_code == 200:
+            try:
+                response_data = res.json()
+            except ValueError as e:
+                print(Fore.LIGHTRED_EX + "Error decoding JSON:", e)
+                exit()
 
-    first_submission_timestamp = response_data['data']['questionSolutions']['solutions'][0]['post']['creationDate']
+            # Safely extract first submission timestamp from response_data
+            first_submission_timestamp = response_data.get("data", {}).get("questionSolutions", {}).get("solutions", [{}])[0].get("post", {}).get("creationDate")
+            if first_submission_timestamp:
+                print(Fore.LIGHTGREEN_EX + f"Timestamp data has successfully been retrieved: {title}")
+                return first_submission_timestamp
+            else:
+                print(Fore.LIGHTRED_EX + "First submission timestamp not found in response")
+                exit()
+        else:
+            print(Fore.LIGHTRED_EX + f"Failed to fetch first submission timestamp. HTTP Status Code: {res.status_code}")
+            exit()
 
-    return first_submission_timestamp
+    except Exception as e:
+        print(Fore.LIGHTRED_EX + "An error occurred:", e)
+        exit()
 
 
 def filter_questions(questions):
-    nonpaid_questions = [question for question in questions if not
-    question['paidOnly']]
+    # Convert start date to Unix timestamp once
+    try:
+        start_date_unix = int(time.mktime(datetime.strptime(PROBLEM_FETCH_START_DATE, "%d-%m-%Y").timetuple()))
+    except Exception as e:
+        print(Fore.LIGHTRED_EX + "An error occurred while converting datetime to unix timestamp:", e)
+        exit()
 
-    # Set the date to 14 days after knowledge cutoff to ensure users had enough time to submit answer UTC+0
-    date_time = datetime.datetime(2023, 5, 14, 2, 0)
-
-    # Convert the string to datetime object
-    unix_timestamp = int(time.mktime(date_time.timetuple()))
+    # Filter out paid questions if required
+    if FILTER_OUT_PAID_QUESTIONS:
+        print(Fore.LIGHTWHITE_EX + "Filtering out paid questions...")
+        questions = [question for question in questions if not question['paidOnly']]
+        print(Fore.LIGHTGREEN_EX + "Successfully filtered out paid questions!")
 
     filtered_questions = []
 
-    for question in nonpaid_questions:
+    print(Fore.LIGHTWHITE_EX + "Filtering out questions before cutoff date...")
 
-        title = question['titleSlug']
-
-        with shelve.open('request_cache.db') as cache:
+    with shelve.open('request_cache.db') as cache:
+        for question in questions:
+            title = question['titleSlug']
             cache_key = title
 
+            # Check if data is already in cache
             if cache_key in cache:
 
-                print("TIMESTAMP ALREADY IN CACHE")
-
+                print(Fore.LIGHTYELLOW_EX + f"Timestamp data has already been retrieved: {title}")
                 first_submission_timestamp = cache[cache_key]
 
-                if first_submission_timestamp > unix_timestamp:
-                    filtered_questions.append(question)
-                    print("APPENDED")
-
             else:
+                # Fetch data and update cache
+                time.sleep(REQUEST_DELAY)
                 first_submission_timestamp = fetch_first_submission_timestamp(title)
                 cache[cache_key] = first_submission_timestamp
 
-                if first_submission_timestamp > unix_timestamp:
-                    filtered_questions.append(question)
-                    print("APPENDED")
-
-                time.sleep(REQUEST_DELAY)
+            # Append to filtered questions if criteria are met
+            if first_submission_timestamp >= start_date_unix:
+                print(Fore.LIGHTGREEN_EX + f"First submission after cutoff date: {title}")
+                filtered_questions.append(question)
+            else:
+                print(Fore.LIGHTRED_EX + f"First submission created before cutoff date: {title}")
 
     return filtered_questions
 
