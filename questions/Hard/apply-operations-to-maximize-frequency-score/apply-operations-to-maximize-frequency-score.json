@@ -1,5 +1,5 @@
 {
-    "acRate": 37.19162015691984,
+    "acRate": 37.22150468195027,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2968",
@@ -39,98 +39,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int maxFrequencyScore(vector<int>& nums, long long k) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int maxFrequencyScore(int[] nums, long k) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def maxFrequencyScore(self, nums, k):         \"\"\"         :type nums: List[int]         :type k: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def maxFrequencyScore(self, nums: List[int], k: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int maxFrequencyScore(int* nums, int numsSize, long long k) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MaxFrequencyScore(int[] nums, long k) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} nums  * @param {number} k  * @return {number}  */ var maxFrequencyScore = function(nums, k) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function maxFrequencyScore(nums: number[], k: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $k      * @return Integer      */     function maxFrequencyScore($nums, $k) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func maxFrequencyScore(_ nums: [Int], _ k: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun maxFrequencyScore(nums: IntArray, k: Long): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int maxFrequencyScore(List<int> nums, int k) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func maxFrequencyScore(nums []int, k int64) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} nums # @param {Integer} k # @return {Integer} def max_frequency_score(nums, k)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def maxFrequencyScore(nums: Array[Int], k: Long): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn max_frequency_score(nums: Vec<i32>, k: i64) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (max-frequency-score nums k)   (-> (listof exact-integer?) exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec max_frequency_score(Nums :: [integer()], K :: integer()) -> integer(). max_frequency_score(Nums, K) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec max_frequency_score(nums :: [integer], k :: integer) :: integer   def max_frequency_score(nums, k) do        end end"
         }
     ],

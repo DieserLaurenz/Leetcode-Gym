@@ -1,5 +1,5 @@
 {
-    "acRate": 48.09607228471326,
+    "acRate": 48.10126582278481,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2925",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     long long maximumScoreAfterOperations(vector<vector<int>>& edges, vector<int>& values) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public long maximumScoreAfterOperations(int[][] edges, int[] values) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def maximumScoreAfterOperations(self, edges, values):         \"\"\"         :type edges: List[List[int]]         :type values: List[int]         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def maximumScoreAfterOperations(self, edges: List[List[int]], values: List[int]) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "long long maximumScoreAfterOperations(int** edges, int edgesSize, int* edgesColSize, int* values, int valuesSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public long MaximumScoreAfterOperations(int[][] edges, int[] values) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[][]} edges  * @param {number[]} values  * @return {number}  */ var maximumScoreAfterOperations = function(edges, values) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function maximumScoreAfterOperations(edges: number[][], values: number[]): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[][] $edges      * @param Integer[] $values      * @return Integer      */     function maximumScoreAfterOperations($edges, $values) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func maximumScoreAfterOperations(_ edges: [[Int]], _ values: [Int]) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun maximumScoreAfterOperations(edges: Array<IntArray>, values: IntArray): Long {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int maximumScoreAfterOperations(List<List<int>> edges, List<int> values) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func maximumScoreAfterOperations(edges [][]int, values []int) int64 {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[][]} edges # @param {Integer[]} values # @return {Integer} def maximum_score_after_operations(edges, values)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def maximumScoreAfterOperations(edges: Array[Array[Int]], values: Array[Int]): Long = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn maximum_score_after_operations(edges: Vec<Vec<i32>>, values: Vec<i32>) -> i64 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (maximum-score-after-operations edges values)   (-> (listof (listof exact-integer?)) (listof exact-integer?) exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec maximum_score_after_operations(Edges :: [[integer()]], Values :: [integer()]) -> integer(). maximum_score_after_operations(Edges, Values) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec maximum_score_after_operations(edges :: [[integer]], values :: [integer]) :: integer   def maximum_score_after_operations(edges, values) do        end end"
         }
     ],

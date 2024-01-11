@@ -1,5 +1,5 @@
 {
-    "acRate": 40.90355577204092,
+    "acRate": 41.18791440028586,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2998",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int minimumOperationsToMakeEqual(int x, int y) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int minimumOperationsToMakeEqual(int x, int y) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def minimumOperationsToMakeEqual(self, x, y):         \"\"\"         :type x: int         :type y: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def minimumOperationsToMakeEqual(self, x: int, y: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int minimumOperationsToMakeEqual(int x, int y) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MinimumOperationsToMakeEqual(int x, int y) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number} x  * @param {number} y  * @return {number}  */ var minimumOperationsToMakeEqual = function(x, y) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function minimumOperationsToMakeEqual(x: number, y: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer $x      * @param Integer $y      * @return Integer      */     function minimumOperationsToMakeEqual($x, $y) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func minimumOperationsToMakeEqual(_ x: Int, _ y: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun minimumOperationsToMakeEqual(x: Int, y: Int): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int minimumOperationsToMakeEqual(int x, int y) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func minimumOperationsToMakeEqual(x int, y int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer} x # @param {Integer} y # @return {Integer} def minimum_operations_to_make_equal(x, y)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def minimumOperationsToMakeEqual(x: Int, y: Int): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn minimum_operations_to_make_equal(x: i32, y: i32) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (minimum-operations-to-make-equal x y)   (-> exact-integer? exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec minimum_operations_to_make_equal(X :: integer(), Y :: integer()) -> integer(). minimum_operations_to_make_equal(X, Y) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec minimum_operations_to_make_equal(x :: integer, y :: integer) :: integer   def minimum_operations_to_make_equal(x, y) do        end end"
         }
     ],

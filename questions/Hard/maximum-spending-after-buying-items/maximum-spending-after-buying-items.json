@@ -1,5 +1,5 @@
 {
-    "acRate": 64.62424099045818,
+    "acRate": 64.62617190577483,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2931",
@@ -39,98 +39,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     long long maxSpending(vector<vector<int>>& values) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public long maxSpending(int[][] values) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def maxSpending(self, values):         \"\"\"         :type values: List[List[int]]         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def maxSpending(self, values: List[List[int]]) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "long long maxSpending(int** values, int valuesSize, int* valuesColSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public long MaxSpending(int[][] values) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[][]} values  * @return {number}  */ var maxSpending = function(values) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function maxSpending(values: number[][]): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[][] $values      * @return Integer      */     function maxSpending($values) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func maxSpending(_ values: [[Int]]) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun maxSpending(values: Array<IntArray>): Long {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int maxSpending(List<List<int>> values) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func maxSpending(values [][]int) int64 {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[][]} values # @return {Integer} def max_spending(values)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def maxSpending(values: Array[Array[Int]]): Long = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn max_spending(values: Vec<Vec<i32>>) -> i64 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (max-spending values)   (-> (listof (listof exact-integer?)) exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec max_spending(Values :: [[integer()]]) -> integer(). max_spending(Values) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec max_spending(values :: [[integer]]) :: integer   def max_spending(values) do        end end"
         }
     ],

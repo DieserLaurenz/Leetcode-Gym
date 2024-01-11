@@ -1,5 +1,5 @@
 {
-    "acRate": 52.338107226876886,
+    "acRate": 52.337988711737324,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2952",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int minimumAddedCoins(vector<int>& coins, int target) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int minimumAddedCoins(int[] coins, int target) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def minimumAddedCoins(self, coins, target):         \"\"\"         :type coins: List[int]         :type target: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def minimumAddedCoins(self, coins: List[int], target: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int minimumAddedCoins(int* coins, int coinsSize, int target) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MinimumAddedCoins(int[] coins, int target) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} coins  * @param {number} target  * @return {number}  */ var minimumAddedCoins = function(coins, target) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function minimumAddedCoins(coins: number[], target: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $coins      * @param Integer $target      * @return Integer      */     function minimumAddedCoins($coins, $target) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func minimumAddedCoins(_ coins: [Int], _ target: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun minimumAddedCoins(coins: IntArray, target: Int): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int minimumAddedCoins(List<int> coins, int target) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func minimumAddedCoins(coins []int, target int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} coins # @param {Integer} target # @return {Integer} def minimum_added_coins(coins, target)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def minimumAddedCoins(coins: Array[Int], target: Int): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn minimum_added_coins(coins: Vec<i32>, target: i32) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (minimum-added-coins coins target)   (-> (listof exact-integer?) exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec minimum_added_coins(Coins :: [integer()], Target :: integer()) -> integer(). minimum_added_coins(Coins, Target) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec minimum_added_coins(coins :: [integer], target :: integer) :: integer   def minimum_added_coins(coins, target) do        end end"
         }
     ],

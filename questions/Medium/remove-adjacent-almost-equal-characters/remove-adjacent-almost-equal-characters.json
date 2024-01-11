@@ -1,5 +1,5 @@
 {
-    "acRate": 50.581711116828174,
+    "acRate": 50.603475333124095,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2957",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int removeAlmostEqualCharacters(string word) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int removeAlmostEqualCharacters(String word) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def removeAlmostEqualCharacters(self, word):         \"\"\"         :type word: str         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def removeAlmostEqualCharacters(self, word: str) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int removeAlmostEqualCharacters(char* word) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int RemoveAlmostEqualCharacters(string word) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {string} word  * @return {number}  */ var removeAlmostEqualCharacters = function(word) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function removeAlmostEqualCharacters(word: string): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param String $word      * @return Integer      */     function removeAlmostEqualCharacters($word) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func removeAlmostEqualCharacters(_ word: String) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun removeAlmostEqualCharacters(word: String): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int removeAlmostEqualCharacters(String word) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func removeAlmostEqualCharacters(word string) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {String} word # @return {Integer} def remove_almost_equal_characters(word)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def removeAlmostEqualCharacters(word: String): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn remove_almost_equal_characters(word: String) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (remove-almost-equal-characters word)   (-> string? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec remove_almost_equal_characters(Word :: unicode:unicode_binary()) -> integer(). remove_almost_equal_characters(Word) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec remove_almost_equal_characters(word :: String.t) :: integer   def remove_almost_equal_characters(word) do        end end"
         }
     ],

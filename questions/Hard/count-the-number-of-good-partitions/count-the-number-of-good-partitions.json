@@ -1,5 +1,5 @@
 {
-    "acRate": 48.69439942373492,
+    "acRate": 48.71519062985538,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2963",
@@ -34,98 +34,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int numberOfGoodPartitions(vector<int>& nums) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int numberOfGoodPartitions(int[] nums) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def numberOfGoodPartitions(self, nums):         \"\"\"         :type nums: List[int]         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def numberOfGoodPartitions(self, nums: List[int]) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int numberOfGoodPartitions(int* nums, int numsSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int NumberOfGoodPartitions(int[] nums) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} nums  * @return {number}  */ var numberOfGoodPartitions = function(nums) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function numberOfGoodPartitions(nums: number[]): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $nums      * @return Integer      */     function numberOfGoodPartitions($nums) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func numberOfGoodPartitions(_ nums: [Int]) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun numberOfGoodPartitions(nums: IntArray): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int numberOfGoodPartitions(List<int> nums) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func numberOfGoodPartitions(nums []int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} nums # @return {Integer} def number_of_good_partitions(nums)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def numberOfGoodPartitions(nums: Array[Int]): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn number_of_good_partitions(nums: Vec<i32>) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (number-of-good-partitions nums)   (-> (listof exact-integer?) exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec number_of_good_partitions(Nums :: [integer()]) -> integer(). number_of_good_partitions(Nums) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec number_of_good_partitions(nums :: [integer]) :: integer   def number_of_good_partitions(nums) do        end end"
         }
     ],

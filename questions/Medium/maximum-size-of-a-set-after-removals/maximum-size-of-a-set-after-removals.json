@@ -1,5 +1,5 @@
 {
-    "acRate": 41.19088681129164,
+    "acRate": 41.55501866900945,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "3002",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int maximumSetSize(vector<int>& nums1, vector<int>& nums2) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int maximumSetSize(int[] nums1, int[] nums2) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def maximumSetSize(self, nums1, nums2):         \"\"\"         :type nums1: List[int]         :type nums2: List[int]         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def maximumSetSize(self, nums1: List[int], nums2: List[int]) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int maximumSetSize(int* nums1, int nums1Size, int* nums2, int nums2Size) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MaximumSetSize(int[] nums1, int[] nums2) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} nums1  * @param {number[]} nums2  * @return {number}  */ var maximumSetSize = function(nums1, nums2) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function maximumSetSize(nums1: number[], nums2: number[]): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $nums1      * @param Integer[] $nums2      * @return Integer      */     function maximumSetSize($nums1, $nums2) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func maximumSetSize(_ nums1: [Int], _ nums2: [Int]) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun maximumSetSize(nums1: IntArray, nums2: IntArray): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int maximumSetSize(List<int> nums1, List<int> nums2) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func maximumSetSize(nums1 []int, nums2 []int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} nums1 # @param {Integer[]} nums2 # @return {Integer} def maximum_set_size(nums1, nums2)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def maximumSetSize(nums1: Array[Int], nums2: Array[Int]): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn maximum_set_size(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (maximum-set-size nums1 nums2)   (-> (listof exact-integer?) (listof exact-integer?) exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec maximum_set_size(Nums1 :: [integer()], Nums2 :: [integer()]) -> integer(). maximum_set_size(Nums1, Nums2) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec maximum_set_size(nums1 :: [integer], nums2 :: [integer]) :: integer   def maximum_set_size(nums1, nums2) do        end end"
         }
     ],

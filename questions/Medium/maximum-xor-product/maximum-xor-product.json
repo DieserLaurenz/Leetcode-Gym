@@ -1,5 +1,5 @@
 {
-    "acRate": 24.487715721767252,
+    "acRate": 24.511869644613007,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2939",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int maximumXorProduct(long long a, long long b, int n) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int maximumXorProduct(long a, long b, int n) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def maximumXorProduct(self, a, b, n):         \"\"\"         :type a: int         :type b: int         :type n: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def maximumXorProduct(self, a: int, b: int, n: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int maximumXorProduct(long long a, long long b, int n) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MaximumXorProduct(long a, long b, int n) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number} a  * @param {number} b  * @param {number} n  * @return {number}  */ var maximumXorProduct = function(a, b, n) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function maximumXorProduct(a: number, b: number, n: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer $a      * @param Integer $b      * @param Integer $n      * @return Integer      */     function maximumXorProduct($a, $b, $n) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func maximumXorProduct(_ a: Int, _ b: Int, _ n: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun maximumXorProduct(a: Long, b: Long, n: Int): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int maximumXorProduct(int a, int b, int n) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func maximumXorProduct(a int64, b int64, n int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer} a # @param {Integer} b # @param {Integer} n # @return {Integer} def maximum_xor_product(a, b, n)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def maximumXorProduct(a: Long, b: Long, n: Int): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn maximum_xor_product(a: i64, b: i64, n: i32) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (maximum-xor-product a b n)   (-> exact-integer? exact-integer? exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec maximum_xor_product(A :: integer(), B :: integer(), N :: integer()) -> integer(). maximum_xor_product(A, B, N) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec maximum_xor_product(a :: integer, b :: integer, n :: integer) :: integer   def maximum_xor_product(a, b, n) do        end end"
         }
     ],

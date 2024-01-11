@@ -1,5 +1,5 @@
 {
-    "acRate": 23.348847517730498,
+    "acRate": 23.384513420965426,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2983",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<bool> canMakePalindromeQueries(string s, vector<vector<int>>& queries) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public boolean[] canMakePalindromeQueries(String s, int[][] queries) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def canMakePalindromeQueries(self, s, queries):         \"\"\"         :type s: str         :type queries: List[List[int]]         :rtype: List[bool]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def canMakePalindromeQueries(self, s: str, queries: List[List[int]]) -> List[bool]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ bool* canMakePalindromeQueries(char* s, int** queries, int queriesSize, int* queriesColSize, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public bool[] CanMakePalindromeQueries(string s, int[][] queries) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {string} s  * @param {number[][]} queries  * @return {boolean[]}  */ var canMakePalindromeQueries = function(s, queries) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function canMakePalindromeQueries(s: string, queries: number[][]): boolean[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param String $s      * @param Integer[][] $queries      * @return Boolean[]      */     function canMakePalindromeQueries($s, $queries) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func canMakePalindromeQueries(_ s: String, _ queries: [[Int]]) -> [Bool] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun canMakePalindromeQueries(s: String, queries: Array<IntArray>): BooleanArray {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<bool> canMakePalindromeQueries(String s, List<List<int>> queries) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func canMakePalindromeQueries(s string, queries [][]int) []bool {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {String} s # @param {Integer[][]} queries # @return {Boolean[]} def can_make_palindrome_queries(s, queries)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def canMakePalindromeQueries(s: String, queries: Array[Array[Int]]): Array[Boolean] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn can_make_palindrome_queries(s: String, queries: Vec<Vec<i32>>) -> Vec<bool> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (can-make-palindrome-queries s queries)   (-> string? (listof (listof exact-integer?)) (listof boolean?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec can_make_palindrome_queries(S :: unicode:unicode_binary(), Queries :: [[integer()]]) -> [boolean()]. can_make_palindrome_queries(S, Queries) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec can_make_palindrome_queries(s :: String.t, queries :: [[integer]]) :: [boolean]   def can_make_palindrome_queries(s, queries) do        end end"
         }
     ],

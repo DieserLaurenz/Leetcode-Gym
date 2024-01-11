@@ -8,10 +8,12 @@ import requests
 from bs4 import BeautifulSoup
 from colorama import Fore
 
-REQUEST_DELAY = 2
-QUESTIONS_TO_FETCH = 400  # Ascending problem number
-FILTER_OUT_PAID_QUESTIONS = True
-PROBLEM_FETCH_START_DATE = "14-05-2023"  # DD-MM-YYYY (UTC+2)
+# Constants for configuration
+REQUEST_DELAY = 2  # Delay between requests in seconds
+QUESTIONS_TO_FETCH = 400  # Number of questions to fetch in ascending order
+FILTER_OUT_PAID_QUESTIONS = True  # Flag to filter out paid questions
+PROBLEM_FETCH_START_DATE = "14-05-2023"  # Start date for fetching problems (DD-MM-YYYY)
+
 
 
 def send_request(url, cookies=None, headers=None, json_data=None):
@@ -92,11 +94,26 @@ def fetch_question_content(title):
         "operationName": "combinedData"
     }
 
-    res = send_request("https://leetcode.com/graphql/", headers=headers, json_data=json_data)
+    try:
+        res = send_request("https://leetcode.com/graphql/", headers=headers, json_data=json_data)
 
-    response_data = res.json()
+        # Check if the HTTP request was successful
+        if res.status_code == 200:
+            try:
+                response_data = res.json()
+            except ValueError as e:
+                print(Fore.LIGHTRED_EX + "Error decoding JSON:", e)
+                exit()
 
-    return response_data
+            return response_data
+        else:
+            print(Fore.LIGHTRED_EX + f"Failed to fetch question content. HTTP Status Code: {res.status_code}")
+            exit()
+
+    except Exception as e:
+        print(Fore.LIGHTRED_EX + "An error occurred:", e)
+        exit()
+
 
 
 def clean_content(html_text):
@@ -105,63 +122,102 @@ def clean_content(html_text):
     unicode characters, and formats the text by correcting quotation marks.
     """
 
-    # Parse the HTML content using BeautifulSoup
-    soup = BeautifulSoup(html_text, 'html.parser')
+    try:
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(html_text, 'html.parser')
 
-    # Get text from the parsed HTML
-    text = soup.get_text()
+        # Get text from the parsed HTML
+        text = soup.get_text()
 
-    # Replace newline and tab characters with a space
-    text = text.replace('\n', ' ').replace('\t', ' ')
+        # Replace newline and tab characters with a space
+        text = text.replace('\n', ' ').replace('\t', ' ')
 
-    # Remove unicode characters like \u00a0
-    text = str(text.encode('ascii', 'ignore').decode('ascii'))
+        # Remove unicode characters like \u00a0
+        text = str(text.encode('ascii', 'ignore').decode('ascii'))
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Optionally, return a default value or re-raise the exception
+        text = ""
 
     return text
 
 
 def clean_code_snippets(code_snippets):
-    for code_snippet in code_snippets:
-        code_snippet["code"] = code_snippet["code"].replace('\n', ' ').replace('\t', ' ')
+    cleaned_snippets = []
 
-    return code_snippets
+    for code_snippet in code_snippets:
+        try:
+            # Assuming code_snippet is a dictionary with a key "code"
+            cleaned_code = code_snippet["code"].replace('\n', ' ').replace('\t', ' ')
+            cleaned_snippets.append({"code": cleaned_code})
+
+        except KeyError:
+            print("KeyError: 'code' key not found in one of the snippets.")
+            # Handle the exception (e.g., skip this snippet or add a placeholder)
+            continue
+        except TypeError:
+            print("TypeError: Invalid type encountered in code snippets.")
+            # Handle the exception (e.g., skip this snippet or add a placeholder)
+            continue
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            # Handle other unforeseen exceptions
+            continue
+
+    return cleaned_snippets
+
 
 
 def add_question_content_and_save_to_file(filtered_questions):
 
     for question in filtered_questions:
 
-        path = f"./questions/{question['difficulty']}/{question['titleSlug']}/{question['titleSlug']}.json"
-
-        if os.path.exists(path):
-            print(Fore.LIGHTYELLOW_EX + f"File has already been created: {question['titleSlug']}")
-            continue
-
         title = question["titleSlug"]
 
-        print(Fore.LIGHTCYAN_EX + f"[REQUEST] Fetching question content: {title}")
+        path = f"./questions/{question['difficulty']}/{question['titleSlug']}/{question['titleSlug']}.json"
 
-        question_content = fetch_question_content(title)
+        try:
+            if os.path.exists(path):
+                print(Fore.LIGHTYELLOW_EX + f"File has already been created: {question['titleSlug']}")
+                continue
 
-        print(Fore.LIGHTGREEN_EX + f"Successfully fetched content: {title}")
+            print(Fore.LIGHTCYAN_EX + f"[REQUEST] Fetching question content: {title}")
 
-        print(Fore.LIGHTWHITE_EX + f"Cleaning up content: {title}")
-        code_snippets = clean_code_snippets(question_content["data"]["question"]["codeSnippets"])
-        content = clean_content(question_content["data"]["question"]["content"])
-        print(Fore.LIGHTGREEN_EX + f"Successfully cleaned up content: {title}")
+            try:
+                question_content = fetch_question_content(title)
+            except Exception as e:
+                print(Fore.LIGHTRED_EX + f"Error fetching question content for {title}:", e)
+                continue
 
-        print(Fore.LIGHTWHITE_EX + f"Adding content: {title}")
+            print(Fore.LIGHTGREEN_EX + f"Successfully fetched content: {title}")
 
-        question["codeSnippets"] = code_snippets
-        question["content"] = content
+            try:
+                print(Fore.LIGHTWHITE_EX + f"Cleaning up content: {title}")
+                code_snippets = clean_code_snippets(question_content["data"]["question"]["codeSnippets"])
+                content = clean_content(question_content["data"]["question"]["content"])
+            except Exception as e:
+                print(Fore.LIGHTRED_EX + f"Error cleaning content for {title}:", e)
+                continue
 
-        print(Fore.LIGHTGREEN_EX + f"Successfully added content: {title}")
+            print(Fore.LIGHTGREEN_EX + f"Successfully cleaned up content: {title}")
 
-        print(Fore.LIGHTWHITE_EX + f"Saving to: {path}")
+            question["codeSnippets"] = code_snippets
+            question["content"] = content
 
-        save_question_to_folder(question)
-        print(Fore.LIGHTGREEN_EX + f"Successfully saved to: {path}")
-        time.sleep(REQUEST_DELAY)
+            try:
+                print(Fore.LIGHTWHITE_EX + f"Saving to: {path}")
+                os.makedirs(os.path.dirname(path), exist_ok=True)  # Ensure the directory exists
+                save_question_to_folder(question)
+            except Exception as e:
+                print(Fore.LIGHTRED_EX + f"Error saving {title} to file:", e)
+                continue
+
+            print(Fore.LIGHTGREEN_EX + f"Successfully saved to: {path}")
+            time.sleep(REQUEST_DELAY)
+        except Exception as e:
+            print(Fore.LIGHTRED_EX + f"An unexpected error occurred for {title}:", e)
+
 
 
 def fetch_first_submission_timestamp(title):
@@ -230,41 +286,67 @@ def filter_questions(questions):
 
     print(Fore.LIGHTWHITE_EX + "Filtering out questions before cutoff date...")
 
-    with shelve.open('request_cache.db') as cache:
-        for question in questions:
-            title = question['titleSlug']
-            cache_key = title
+    try:
+        with shelve.open('request_cache.db') as cache:
+            for question in questions:
+                title = question['titleSlug']
+                cache_key = title
 
-            # Check if data is already in cache
-            if cache_key in cache:
+                # Check if data is already in cache
+                if cache_key in cache:
+                    print(Fore.LIGHTYELLOW_EX + f"Timestamp data has already been retrieved: {title}")
+                    first_submission_timestamp = cache[cache_key]
+                else:
+                    # Fetch data and update cache
+                    try:
+                        time.sleep(REQUEST_DELAY)
+                        first_submission_timestamp = fetch_first_submission_timestamp(title)
+                        cache[cache_key] = first_submission_timestamp
+                    except Exception as e:
+                        print(Fore.LIGHTRED_EX + f"An error occurred while fetching timestamp data for {title}:", e)
+                        continue
 
-                print(Fore.LIGHTYELLOW_EX + f"Timestamp data has already been retrieved: {title}")
-                first_submission_timestamp = cache[cache_key]
-
-            else:
-                # Fetch data and update cache
-                time.sleep(REQUEST_DELAY)
-                first_submission_timestamp = fetch_first_submission_timestamp(title)
-                cache[cache_key] = first_submission_timestamp
-
-            # Append to filtered questions if criteria are met
-            if first_submission_timestamp >= start_date_unix:
-                print(Fore.LIGHTGREEN_EX + f"First submission after cutoff date: {title}")
-                filtered_questions.append(question)
-            else:
-                print(Fore.LIGHTRED_EX + f"First submission created before cutoff date: {title}")
+                # Append to filtered questions if criteria are met
+                if first_submission_timestamp >= start_date_unix:
+                    print(Fore.LIGHTGREEN_EX + f"First submission after cutoff date: {title}")
+                    filtered_questions.append(question)
+                else:
+                    print(Fore.LIGHTRED_EX + f"First submission created before cutoff date: {title}")
+    except Exception as e:
+        print(Fore.LIGHTRED_EX + "An error occurred while accessing the cache database:", e)
+        exit()
 
     return filtered_questions
 
 
 def save_question_to_folder(question):
-    path = f"./questions/{question['difficulty']}/{question['titleSlug']}"
+    try:
+        # Constructing the file path
+        path = f"./questions/{question['difficulty']}/{question['titleSlug']}"
 
-    if not os.path.exists(path):
-        os.makedirs(path)
+        # Creating the directory if it doesn't exist
+        if not os.path.exists(path):
+            os.makedirs(path)
 
-    with open(f"{path}/{question['titleSlug']}.json", "w+") as f:
-        json.dump(question, f, indent=4)
+        # Writing the question data to a JSON file
+        with open(f"{path}/{question['titleSlug']}.json", "w+") as f:
+            json.dump(question, f, indent=4)
+
+    except KeyError as e:
+        print(f"KeyError: Missing key in question dictionary - {e}")
+        # Handle the KeyError (e.g., log the error, skip saving this question)
+
+    except OSError as e:
+        print(f"OSError: Issue with file system operations - {e}")
+        # Handle the OSError (e.g., log the error, attempt a retry, skip saving)
+
+    except json.JSONDecodeError as e:
+        print(f"JSONDecodeError: Issue with JSON data - {e}")
+        # Handle JSON errors (e.g., log the error, skip saving this question)
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        # Handle other unforeseen exceptions
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 {
-    "acRate": 22.341184867951462,
+    "acRate": 22.729654208871814,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2999",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     long long numberOfPowerfulInt(long long start, long long finish, int limit, string s) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public long numberOfPowerfulInt(long start, long finish, int limit, String s) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def numberOfPowerfulInt(self, start, finish, limit, s):         \"\"\"         :type start: int         :type finish: int         :type limit: int         :type s: str         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def numberOfPowerfulInt(self, start: int, finish: int, limit: int, s: str) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "long long numberOfPowerfulInt(long long start, long long finish, int limit, char* s) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public long NumberOfPowerfulInt(long start, long finish, int limit, string s) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number} start  * @param {number} finish  * @param {number} limit  * @param {string} s  * @return {number}  */ var numberOfPowerfulInt = function(start, finish, limit, s) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function numberOfPowerfulInt(start: number, finish: number, limit: number, s: string): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer $start      * @param Integer $finish      * @param Integer $limit      * @param String $s      * @return Integer      */     function numberOfPowerfulInt($start, $finish, $limit, $s) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func numberOfPowerfulInt(_ start: Int, _ finish: Int, _ limit: Int, _ s: String) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun numberOfPowerfulInt(start: Long, finish: Long, limit: Int, s: String): Long {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int numberOfPowerfulInt(int start, int finish, int limit, String s) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func numberOfPowerfulInt(start int64, finish int64, limit int, s string) int64 {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer} start # @param {Integer} finish # @param {Integer} limit # @param {String} s # @return {Integer} def number_of_powerful_int(start, finish, limit, s)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def numberOfPowerfulInt(start: Long, finish: Long, limit: Int, s: String): Long = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn number_of_powerful_int(start: i64, finish: i64, limit: i32, s: String) -> i64 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (number-of-powerful-int start finish limit s)   (-> exact-integer? exact-integer? exact-integer? string? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec number_of_powerful_int(Start :: integer(), Finish :: integer(), Limit :: integer(), S :: unicode:unicode_binary()) -> integer(). number_of_powerful_int(Start, Finish, Limit, S) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec number_of_powerful_int(start :: integer, finish :: integer, limit :: integer, s :: String.t) :: integer   def number_of_powerful_int(start, finish, limit, s) do        end end"
         }
     ],

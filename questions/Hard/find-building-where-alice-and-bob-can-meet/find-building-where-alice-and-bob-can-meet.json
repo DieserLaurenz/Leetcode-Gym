@@ -1,5 +1,5 @@
 {
-    "acRate": 33.644921771413415,
+    "acRate": 33.66015236833388,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2940",
@@ -49,98 +49,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<int> leftmostBuildingQueries(vector<int>& heights, vector<vector<int>>& queries) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int[] leftmostBuildingQueries(int[] heights, int[][] queries) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def leftmostBuildingQueries(self, heights, queries):         \"\"\"         :type heights: List[int]         :type queries: List[List[int]]         :rtype: List[int]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def leftmostBuildingQueries(self, heights: List[int], queries: List[List[int]]) -> List[int]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* leftmostBuildingQueries(int* heights, int heightsSize, int** queries, int queriesSize, int* queriesColSize, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int[] LeftmostBuildingQueries(int[] heights, int[][] queries) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} heights  * @param {number[][]} queries  * @return {number[]}  */ var leftmostBuildingQueries = function(heights, queries) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function leftmostBuildingQueries(heights: number[], queries: number[][]): number[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $heights      * @param Integer[][] $queries      * @return Integer[]      */     function leftmostBuildingQueries($heights, $queries) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func leftmostBuildingQueries(_ heights: [Int], _ queries: [[Int]]) -> [Int] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun leftmostBuildingQueries(heights: IntArray, queries: Array<IntArray>): IntArray {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<int> leftmostBuildingQueries(List<int> heights, List<List<int>> queries) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func leftmostBuildingQueries(heights []int, queries [][]int) []int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} heights # @param {Integer[][]} queries # @return {Integer[]} def leftmost_building_queries(heights, queries)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def leftmostBuildingQueries(heights: Array[Int], queries: Array[Array[Int]]): Array[Int] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn leftmost_building_queries(heights: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (leftmost-building-queries heights queries)   (-> (listof exact-integer?) (listof (listof exact-integer?)) (listof exact-integer?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec leftmost_building_queries(Heights :: [integer()], Queries :: [[integer()]]) -> [integer()]. leftmost_building_queries(Heights, Queries) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec leftmost_building_queries(heights :: [integer], queries :: [[integer]]) :: [integer]   def leftmost_building_queries(heights, queries) do        end end"
         }
     ],

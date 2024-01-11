@@ -1,5 +1,5 @@
 {
-    "acRate": 73.81615598885793,
+    "acRate": 73.86245854063019,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "2965",
@@ -34,98 +34,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int[] findMissingAndRepeatedValues(int[][] grid) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def findMissingAndRepeatedValues(self, grid):         \"\"\"         :type grid: List[List[int]]         :rtype: List[int]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def findMissingAndRepeatedValues(self, grid: List[List[int]]) -> List[int]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* findMissingAndRepeatedValues(int** grid, int gridSize, int* gridColSize, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int[] FindMissingAndRepeatedValues(int[][] grid) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[][]} grid  * @return {number[]}  */ var findMissingAndRepeatedValues = function(grid) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function findMissingAndRepeatedValues(grid: number[][]): number[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[][] $grid      * @return Integer[]      */     function findMissingAndRepeatedValues($grid) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func findMissingAndRepeatedValues(_ grid: [[Int]]) -> [Int] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun findMissingAndRepeatedValues(grid: Array<IntArray>): IntArray {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<int> findMissingAndRepeatedValues(List<List<int>> grid) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func findMissingAndRepeatedValues(grid [][]int) []int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[][]} grid # @return {Integer[]} def find_missing_and_repeated_values(grid)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def findMissingAndRepeatedValues(grid: Array[Array[Int]]): Array[Int] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn find_missing_and_repeated_values(grid: Vec<Vec<i32>>) -> Vec<i32> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (find-missing-and-repeated-values grid)   (-> (listof (listof exact-integer?)) (listof exact-integer?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec find_missing_and_repeated_values(Grid :: [[integer()]]) -> [integer()]. find_missing_and_repeated_values(Grid) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec find_missing_and_repeated_values(grid :: [[integer]]) :: [integer]   def find_missing_and_repeated_values(grid) do        end end"
         }
     ],

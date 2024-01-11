@@ -1,5 +1,5 @@
 {
-    "acRate": 81.59109991603695,
+    "acRate": 81.62057686589354,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "2956",
@@ -24,98 +24,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int[] findIntersectionValues(int[] nums1, int[] nums2) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def findIntersectionValues(self, nums1, nums2):         \"\"\"         :type nums1: List[int]         :type nums2: List[int]         :rtype: List[int]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def findIntersectionValues(self, nums1: List[int], nums2: List[int]) -> List[int]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* findIntersectionValues(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int[] FindIntersectionValues(int[] nums1, int[] nums2) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} nums1  * @param {number[]} nums2  * @return {number[]}  */ var findIntersectionValues = function(nums1, nums2) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function findIntersectionValues(nums1: number[], nums2: number[]): number[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $nums1      * @param Integer[] $nums2      * @return Integer[]      */     function findIntersectionValues($nums1, $nums2) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func findIntersectionValues(_ nums1: [Int], _ nums2: [Int]) -> [Int] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun findIntersectionValues(nums1: IntArray, nums2: IntArray): IntArray {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<int> findIntersectionValues(List<int> nums1, List<int> nums2) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func findIntersectionValues(nums1 []int, nums2 []int) []int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} nums1 # @param {Integer[]} nums2 # @return {Integer[]} def find_intersection_values(nums1, nums2)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def findIntersectionValues(nums1: Array[Int], nums2: Array[Int]): Array[Int] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn find_intersection_values(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (find-intersection-values nums1 nums2)   (-> (listof exact-integer?) (listof exact-integer?) (listof exact-integer?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec find_intersection_values(Nums1 :: [integer()], Nums2 :: [integer()]) -> [integer()]. find_intersection_values(Nums1, Nums2) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec find_intersection_values(nums1 :: [integer], nums2 :: [integer]) :: [integer]   def find_intersection_values(nums1, nums2) do        end end"
         }
     ],

@@ -1,5 +1,5 @@
 {
-    "acRate": 76.21413813845228,
+    "acRate": 76.18118430637944,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "2951",
@@ -24,98 +24,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<int> findPeaks(vector<int>& mountain) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public List<Integer> findPeaks(int[] mountain) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def findPeaks(self, mountain):         \"\"\"         :type mountain: List[int]         :rtype: List[int]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def findPeaks(self, mountain: List[int]) -> List[int]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* findPeaks(int* mountain, int mountainSize, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public IList<int> FindPeaks(int[] mountain) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} mountain  * @return {number[]}  */ var findPeaks = function(mountain) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function findPeaks(mountain: number[]): number[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $mountain      * @return Integer[]      */     function findPeaks($mountain) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func findPeaks(_ mountain: [Int]) -> [Int] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun findPeaks(mountain: IntArray): List<Int> {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<int> findPeaks(List<int> mountain) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func findPeaks(mountain []int) []int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} mountain # @return {Integer[]} def find_peaks(mountain)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def findPeaks(mountain: Array[Int]): List[Int] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn find_peaks(mountain: Vec<i32>) -> Vec<i32> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (find-peaks mountain)   (-> (listof exact-integer?) (listof exact-integer?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec find_peaks(Mountain :: [integer()]) -> [integer()]. find_peaks(Mountain) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec find_peaks(mountain :: [integer]) :: [integer]   def find_peaks(mountain) do        end end"
         }
     ],

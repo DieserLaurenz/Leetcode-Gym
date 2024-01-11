@@ -1,5 +1,5 @@
 {
-    "acRate": 28.68519048983099,
+    "acRate": 28.677733257012022,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2935",
@@ -39,98 +39,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int maximumStrongPairXor(vector<int>& nums) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int maximumStrongPairXor(int[] nums) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def maximumStrongPairXor(self, nums):         \"\"\"         :type nums: List[int]         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def maximumStrongPairXor(self, nums: List[int]) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int maximumStrongPairXor(int* nums, int numsSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MaximumStrongPairXor(int[] nums) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} nums  * @return {number}  */ var maximumStrongPairXor = function(nums) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function maximumStrongPairXor(nums: number[]): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $nums      * @return Integer      */     function maximumStrongPairXor($nums) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func maximumStrongPairXor(_ nums: [Int]) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun maximumStrongPairXor(nums: IntArray): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int maximumStrongPairXor(List<int> nums) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func maximumStrongPairXor(nums []int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} nums # @return {Integer} def maximum_strong_pair_xor(nums)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def maximumStrongPairXor(nums: Array[Int]): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn maximum_strong_pair_xor(nums: Vec<i32>) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (maximum-strong-pair-xor nums)   (-> (listof exact-integer?) exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec maximum_strong_pair_xor(Nums :: [integer()]) -> integer(). maximum_strong_pair_xor(Nums) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec maximum_strong_pair_xor(nums :: [integer]) :: integer   def maximum_strong_pair_xor(nums) do        end end"
         }
     ],

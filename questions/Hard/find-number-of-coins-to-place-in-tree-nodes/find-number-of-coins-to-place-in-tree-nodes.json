@@ -1,5 +1,5 @@
 {
-    "acRate": 32.57184966838614,
+    "acRate": 32.602161020391584,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2973",
@@ -39,98 +39,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<long long> placedCoins(vector<vector<int>>& edges, vector<int>& cost) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public long[] placedCoins(int[][] edges, int[] cost) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def placedCoins(self, edges, cost):         \"\"\"         :type edges: List[List[int]]         :type cost: List[int]         :rtype: List[int]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def placedCoins(self, edges: List[List[int]], cost: List[int]) -> List[int]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ long long* placedCoins(int** edges, int edgesSize, int* edgesColSize, int* cost, int costSize, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public long[] PlacedCoins(int[][] edges, int[] cost) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[][]} edges  * @param {number[]} cost  * @return {number[]}  */ var placedCoins = function(edges, cost) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function placedCoins(edges: number[][], cost: number[]): number[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[][] $edges      * @param Integer[] $cost      * @return Integer[]      */     function placedCoins($edges, $cost) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func placedCoins(_ edges: [[Int]], _ cost: [Int]) -> [Int] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun placedCoins(edges: Array<IntArray>, cost: IntArray): LongArray {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<int> placedCoins(List<List<int>> edges, List<int> cost) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func placedCoins(edges [][]int, cost []int) []int64 {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[][]} edges # @param {Integer[]} cost # @return {Integer[]} def placed_coins(edges, cost)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def placedCoins(edges: Array[Array[Int]], cost: Array[Int]): Array[Long] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn placed_coins(edges: Vec<Vec<i32>>, cost: Vec<i32>) -> Vec<i64> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (placed-coins edges cost)   (-> (listof (listof exact-integer?)) (listof exact-integer?) (listof exact-integer?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec placed_coins(Edges :: [[integer()]], Cost :: [integer()]) -> [integer()]. placed_coins(Edges, Cost) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec placed_coins(edges :: [[integer]], cost :: [integer]) :: [integer]   def placed_coins(edges, cost) do        end end"
         }
     ],

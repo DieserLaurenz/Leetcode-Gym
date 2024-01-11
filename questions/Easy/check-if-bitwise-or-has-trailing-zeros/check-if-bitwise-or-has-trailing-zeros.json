@@ -1,5 +1,5 @@
 {
-    "acRate": 68.25326998650947,
+    "acRate": 68.32686188071118,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "2980",
@@ -24,98 +24,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     bool hasTrailingZeros(vector<int>& nums) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public boolean hasTrailingZeros(int[] nums) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def hasTrailingZeros(self, nums):         \"\"\"         :type nums: List[int]         :rtype: bool         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def hasTrailingZeros(self, nums: List[int]) -> bool:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "bool hasTrailingZeros(int* nums, int numsSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public bool HasTrailingZeros(int[] nums) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} nums  * @return {boolean}  */ var hasTrailingZeros = function(nums) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function hasTrailingZeros(nums: number[]): boolean {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $nums      * @return Boolean      */     function hasTrailingZeros($nums) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func hasTrailingZeros(_ nums: [Int]) -> Bool {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun hasTrailingZeros(nums: IntArray): Boolean {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   bool hasTrailingZeros(List<int> nums) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func hasTrailingZeros(nums []int) bool {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} nums # @return {Boolean} def has_trailing_zeros(nums)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def hasTrailingZeros(nums: Array[Int]): Boolean = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn has_trailing_zeros(nums: Vec<i32>) -> bool {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (has-trailing-zeros nums)   (-> (listof exact-integer?) boolean?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec has_trailing_zeros(Nums :: [integer()]) -> boolean(). has_trailing_zeros(Nums) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec has_trailing_zeros(nums :: [integer]) :: boolean   def has_trailing_zeros(nums) do        end end"
         }
     ],

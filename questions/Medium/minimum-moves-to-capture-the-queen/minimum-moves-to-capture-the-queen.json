@@ -1,5 +1,5 @@
 {
-    "acRate": 18.858312940118864,
+    "acRate": 19.012365634850077,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "3001",
@@ -24,98 +24,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def minMovesToCaptureTheQueen(self, a, b, c, d, e, f):         \"\"\"         :type a: int         :type b: int         :type c: int         :type d: int         :type e: int         :type f: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def minMovesToCaptureTheQueen(self, a: int, b: int, c: int, d: int, e: int, f: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MinMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number} a  * @param {number} b  * @param {number} c  * @param {number} d  * @param {number} e  * @param {number} f  * @return {number}  */ var minMovesToCaptureTheQueen = function(a, b, c, d, e, f) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function minMovesToCaptureTheQueen(a: number, b: number, c: number, d: number, e: number, f: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer $a      * @param Integer $b      * @param Integer $c      * @param Integer $d      * @param Integer $e      * @param Integer $f      * @return Integer      */     function minMovesToCaptureTheQueen($a, $b, $c, $d, $e, $f) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func minMovesToCaptureTheQueen(_ a: Int, _ b: Int, _ c: Int, _ d: Int, _ e: Int, _ f: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun minMovesToCaptureTheQueen(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func minMovesToCaptureTheQueen(a int, b int, c int, d int, e int, f int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer} a # @param {Integer} b # @param {Integer} c # @param {Integer} d # @param {Integer} e # @param {Integer} f # @return {Integer} def min_moves_to_capture_the_queen(a, b, c, d, e, f)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def minMovesToCaptureTheQueen(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn min_moves_to_capture_the_queen(a: i32, b: i32, c: i32, d: i32, e: i32, f: i32) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (min-moves-to-capture-the-queen a b c d e f)   (-> exact-integer? exact-integer? exact-integer? exact-integer? exact-integer? exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec min_moves_to_capture_the_queen(A :: integer(), B :: integer(), C :: integer(), D :: integer(), E :: integer(), F :: integer()) -> integer(). min_moves_to_capture_the_queen(A, B, C, D, E, F) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec min_moves_to_capture_the_queen(a :: integer, b :: integer, c :: integer, d :: integer, e :: integer, f :: integer) :: integer   def min_moves_to_capture_the_queen(a, b, c, d, e, f) do        end end"
         }
     ],

@@ -1,5 +1,5 @@
 {
-    "acRate": 88.05159032960488,
+    "acRate": 88.0816626816259,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "2942",
@@ -24,98 +24,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<int> findWordsContaining(vector<string>& words, char x) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public List<Integer> findWordsContaining(String[] words, char x) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def findWordsContaining(self, words, x):         \"\"\"         :type words: List[str]         :type x: str         :rtype: List[int]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def findWordsContaining(self, words: List[str], x: str) -> List[int]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* findWordsContaining(char** words, int wordsSize, char x, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public IList<int> FindWordsContaining(string[] words, char x) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {string[]} words  * @param {character} x  * @return {number[]}  */ var findWordsContaining = function(words, x) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function findWordsContaining(words: string[], x: string): number[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param String[] $words      * @param String $x      * @return Integer[]      */     function findWordsContaining($words, $x) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func findWordsContaining(_ words: [String], _ x: Character) -> [Int] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun findWordsContaining(words: Array<String>, x: Char): List<Int> {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<int> findWordsContaining(List<String> words, String x) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func findWordsContaining(words []string, x byte) []int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {String[]} words # @param {Character} x # @return {Integer[]} def find_words_containing(words, x)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def findWordsContaining(words: Array[String], x: Char): List[Int] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn find_words_containing(words: Vec<String>, x: char) -> Vec<i32> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (find-words-containing words x)   (-> (listof string?) char? (listof exact-integer?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec find_words_containing(Words :: [unicode:unicode_binary()], X :: char()) -> [integer()]. find_words_containing(Words, X) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec find_words_containing(words :: [String.t], x :: char) :: [integer]   def find_words_containing(words, x) do        end end"
         }
     ],

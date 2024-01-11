@@ -1,5 +1,5 @@
 {
-    "acRate": 41.40452761198043,
+    "acRate": 41.4507910968088,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2958",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int maxSubarrayLength(vector<int>& nums, int k) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int maxSubarrayLength(int[] nums, int k) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def maxSubarrayLength(self, nums, k):         \"\"\"         :type nums: List[int]         :type k: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def maxSubarrayLength(self, nums: List[int], k: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int maxSubarrayLength(int* nums, int numsSize, int k) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int MaxSubarrayLength(int[] nums, int k) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[]} nums  * @param {number} k  * @return {number}  */ var maxSubarrayLength = function(nums, k) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function maxSubarrayLength(nums: number[], k: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $k      * @return Integer      */     function maxSubarrayLength($nums, $k) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func maxSubarrayLength(_ nums: [Int], _ k: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun maxSubarrayLength(nums: IntArray, k: Int): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int maxSubarrayLength(List<int> nums, int k) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func maxSubarrayLength(nums []int, k int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[]} nums # @param {Integer} k # @return {Integer} def max_subarray_length(nums, k)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def maxSubarrayLength(nums: Array[Int], k: Int): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn max_subarray_length(nums: Vec<i32>, k: i32) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (max-subarray-length nums k)   (-> (listof exact-integer?) exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec max_subarray_length(Nums :: [integer()], K :: integer()) -> integer(). max_subarray_length(Nums, K) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec max_subarray_length(nums :: [integer], k :: integer) :: integer   def max_subarray_length(nums, k) do        end end"
         }
     ],

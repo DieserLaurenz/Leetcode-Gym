@@ -1,5 +1,5 @@
 {
-    "acRate": 46.389915011237115,
+    "acRate": 46.422860679837,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2961",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     vector<int> getGoodIndices(vector<vector<int>>& variables, int target) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public List<Integer> getGoodIndices(int[][] variables, int target) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def getGoodIndices(self, variables, target):         \"\"\"         :type variables: List[List[int]]         :type target: int         :rtype: List[int]         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def getGoodIndices(self, variables: List[List[int]], target: int) -> List[int]:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* getGoodIndices(int** variables, int variablesSize, int* variablesColSize, int target, int* returnSize) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public IList<int> GetGoodIndices(int[][] variables, int target) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number[][]} variables  * @param {number} target  * @return {number[]}  */ var getGoodIndices = function(variables, target) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function getGoodIndices(variables: number[][], target: number): number[] {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer[][] $variables      * @param Integer $target      * @return Integer[]      */     function getGoodIndices($variables, $target) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func getGoodIndices(_ variables: [[Int]], _ target: Int) -> [Int] {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun getGoodIndices(variables: Array<IntArray>, target: Int): List<Int> {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   List<int> getGoodIndices(List<List<int>> variables, int target) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func getGoodIndices(variables [][]int, target int) []int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer[][]} variables # @param {Integer} target # @return {Integer[]} def get_good_indices(variables, target)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def getGoodIndices(variables: Array[Array[Int]], target: Int): List[Int] = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn get_good_indices(variables: Vec<Vec<i32>>, target: i32) -> Vec<i32> {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (get-good-indices variables target)   (-> (listof (listof exact-integer?)) exact-integer? (listof exact-integer?))   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec get_good_indices(Variables :: [[integer()]], Target :: integer()) -> [integer()]. get_good_indices(Variables, Target) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec get_good_indices(variables :: [[integer]], target :: integer) :: [integer]   def get_good_indices(variables, target) do        end end"
         }
     ],

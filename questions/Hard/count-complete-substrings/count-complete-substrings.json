@@ -1,5 +1,5 @@
 {
-    "acRate": 24.798767763092517,
+    "acRate": 24.811470529867037,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2953",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int countCompleteSubstrings(string word, int k) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int countCompleteSubstrings(String word, int k) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def countCompleteSubstrings(self, word, k):         \"\"\"         :type word: str         :type k: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def countCompleteSubstrings(self, word: str, k: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int countCompleteSubstrings(char* word, int k) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int CountCompleteSubstrings(string word, int k) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {string} word  * @param {number} k  * @return {number}  */ var countCompleteSubstrings = function(word, k) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function countCompleteSubstrings(word: string, k: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param String $word      * @param Integer $k      * @return Integer      */     function countCompleteSubstrings($word, $k) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func countCompleteSubstrings(_ word: String, _ k: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun countCompleteSubstrings(word: String, k: Int): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int countCompleteSubstrings(String word, int k) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func countCompleteSubstrings(word string, k int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {String} word # @param {Integer} k # @return {Integer} def count_complete_substrings(word, k)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def countCompleteSubstrings(word: String, k: Int): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn count_complete_substrings(word: String, k: i32) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (count-complete-substrings word k)   (-> string? exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec count_complete_substrings(Word :: unicode:unicode_binary(), K :: integer()) -> integer(). count_complete_substrings(Word, K) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec count_complete_substrings(word :: String.t, k :: integer) :: integer   def count_complete_substrings(word, k) do        end end"
         }
     ],

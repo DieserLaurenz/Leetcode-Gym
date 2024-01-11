@@ -1,5 +1,5 @@
 {
-    "acRate": 73.27115468930607,
+    "acRate": 73.27706334355217,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "2928",
@@ -29,98 +29,60 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "lang": "C++",
-            "langSlug": "cpp",
             "code": "class Solution { public:     int distributeCandies(int n, int limit) {              } };"
         },
         {
-            "lang": "Java",
-            "langSlug": "java",
             "code": "class Solution {     public int distributeCandies(int n, int limit) {              } }"
         },
         {
-            "lang": "Python",
-            "langSlug": "python",
             "code": "class Solution(object):     def distributeCandies(self, n, limit):         \"\"\"         :type n: int         :type limit: int         :rtype: int         \"\"\"         "
         },
         {
-            "lang": "Python3",
-            "langSlug": "python3",
             "code": "class Solution:     def distributeCandies(self, n: int, limit: int) -> int:         "
         },
         {
-            "lang": "C",
-            "langSlug": "c",
             "code": "int distributeCandies(int n, int limit) {      }"
         },
         {
-            "lang": "C#",
-            "langSlug": "csharp",
             "code": "public class Solution {     public int DistributeCandies(int n, int limit) {              } }"
         },
         {
-            "lang": "JavaScript",
-            "langSlug": "javascript",
             "code": "/**  * @param {number} n  * @param {number} limit  * @return {number}  */ var distributeCandies = function(n, limit) {      };"
         },
         {
-            "lang": "TypeScript",
-            "langSlug": "typescript",
             "code": "function distributeCandies(n: number, limit: number): number {      };"
         },
         {
-            "lang": "PHP",
-            "langSlug": "php",
             "code": "class Solution {      /**      * @param Integer $n      * @param Integer $limit      * @return Integer      */     function distributeCandies($n, $limit) {              } }"
         },
         {
-            "lang": "Swift",
-            "langSlug": "swift",
             "code": "class Solution {     func distributeCandies(_ n: Int, _ limit: Int) -> Int {              } }"
         },
         {
-            "lang": "Kotlin",
-            "langSlug": "kotlin",
             "code": "class Solution {     fun distributeCandies(n: Int, limit: Int): Int {              } }"
         },
         {
-            "lang": "Dart",
-            "langSlug": "dart",
             "code": "class Solution {   int distributeCandies(int n, int limit) {        } }"
         },
         {
-            "lang": "Go",
-            "langSlug": "golang",
             "code": "func distributeCandies(n int, limit int) int {      }"
         },
         {
-            "lang": "Ruby",
-            "langSlug": "ruby",
             "code": "# @param {Integer} n # @param {Integer} limit # @return {Integer} def distribute_candies(n, limit)      end"
         },
         {
-            "lang": "Scala",
-            "langSlug": "scala",
             "code": "object Solution {     def distributeCandies(n: Int, limit: Int): Int = {              } }"
         },
         {
-            "lang": "Rust",
-            "langSlug": "rust",
             "code": "impl Solution {     pub fn distribute_candies(n: i32, limit: i32) -> i32 {              } }"
         },
         {
-            "lang": "Racket",
-            "langSlug": "racket",
             "code": "(define/contract (distribute-candies n limit)   (-> exact-integer? exact-integer? exact-integer?)   )"
         },
         {
-            "lang": "Erlang",
-            "langSlug": "erlang",
             "code": "-spec distribute_candies(N :: integer(), Limit :: integer()) -> integer(). distribute_candies(N, Limit) ->   ."
         },
         {
-            "lang": "Elixir",
-            "langSlug": "elixir",
             "code": "defmodule Solution do   @spec distribute_candies(n :: integer, limit :: integer) :: integer   def distribute_candies(n, limit) do        end end"
         }
     ],
