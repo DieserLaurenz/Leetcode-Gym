@@ -15,8 +15,22 @@ FILTER_OUT_PAID_QUESTIONS = True  # Flag to filter out paid questions
 PROBLEM_FETCH_START_DATE = "14-05-2023"  # Start date for fetching problems (DD-MM-YYYY)
 
 
-
 def send_request(url, cookies=None, headers=None, json_data=None):
+    """
+    Send a POST request to the given URL with optional cookies, headers, and JSON data.
+
+    Parameters:
+    - url (str): The URL to send the request to.
+    - cookies (dict, optional): Cookies to be sent with the request.
+    - headers (dict, optional): Headers to be sent with the request.
+    - json_data (dict, optional): JSON payload for the request.
+
+    Returns:
+    - response: The response object from the request.
+
+    Raises:
+    - Prints error message and exits on failure.
+    """
     try:
         response = requests.post(
             url=url,
@@ -34,6 +48,15 @@ def send_request(url, cookies=None, headers=None, json_data=None):
 
 
 def fetch_questions():
+    """
+    Fetch questions using a predefined GraphQL query and headers.
+
+    Returns:
+    - list: A list of fetched questions, or None if an error occurs.
+
+    Raises:
+    - Prints error message and exits on failure.
+    """
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     }
@@ -82,6 +105,16 @@ def fetch_questions():
 
 
 def fetch_question_content(title):
+    """
+    Fetch question content using a predefined GraphQL query and headers.
+
+    Returns:
+    - list: A list of fetched question_content, or None if an error occurs.
+
+    Raises:
+    - Logs an error message and re-raises exception on failure.
+    """
+
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     }
@@ -113,7 +146,6 @@ def fetch_question_content(title):
     except Exception as e:
         print(Fore.LIGHTRED_EX + "An error occurred:", e)
         exit()
-
 
 
 def clean_content(html_text):
@@ -168,9 +200,7 @@ def clean_code_snippets(code_snippets):
     return cleaned_snippets
 
 
-
 def add_question_content_and_save_to_file(filtered_questions):
-
     for question in filtered_questions:
 
         title = question["titleSlug"]
@@ -219,7 +249,6 @@ def add_question_content_and_save_to_file(filtered_questions):
             print(Fore.LIGHTRED_EX + f"An unexpected error occurred for {title}:", e)
 
 
-
 def fetch_first_submission_timestamp(title):
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -252,7 +281,9 @@ def fetch_first_submission_timestamp(title):
                 exit()
 
             # Safely extract first submission timestamp from response_data
-            first_submission_timestamp = response_data.get("data", {}).get("questionSolutions", {}).get("solutions", [{}])[0].get("post", {}).get("creationDate")
+            first_submission_timestamp = \
+            response_data.get("data", {}).get("questionSolutions", {}).get("solutions", [{}])[0].get("post", {}).get(
+                "creationDate")
             if first_submission_timestamp:
                 print(Fore.LIGHTGREEN_EX + f"Timestamp data has successfully been retrieved: {title}")
                 return first_submission_timestamp
