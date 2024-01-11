@@ -1,5 +1,5 @@
 {
-    "acRate": 34.70353724635301,
+    "acRate": 34.705680683291845,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "3000",
@@ -19,61 +19,61 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "code": "class Solution { public:     int areaOfMaxDiagonal(vector<vector<int>>& dimensions) {              } };"
+            "cpp": "class Solution { public:     int areaOfMaxDiagonal(vector<vector<int>>& dimensions) {              } };"
         },
         {
-            "code": "class Solution {     public int areaOfMaxDiagonal(int[][] dimensions) {              } }"
+            "java": "class Solution {     public int areaOfMaxDiagonal(int[][] dimensions) {              } }"
         },
         {
-            "code": "class Solution(object):     def areaOfMaxDiagonal(self, dimensions):         \"\"\"         :type dimensions: List[List[int]]         :rtype: int         \"\"\"         "
+            "python": "class Solution(object):     def areaOfMaxDiagonal(self, dimensions):         \"\"\"         :type dimensions: List[List[int]]         :rtype: int         \"\"\"         "
         },
         {
-            "code": "class Solution:     def areaOfMaxDiagonal(self, dimensions: List[List[int]]) -> int:         "
+            "python3": "class Solution:     def areaOfMaxDiagonal(self, dimensions: List[List[int]]) -> int:         "
         },
         {
-            "code": "int areaOfMaxDiagonal(int** dimensions, int dimensionsSize, int* dimensionsColSize) {      }"
+            "c": "int areaOfMaxDiagonal(int** dimensions, int dimensionsSize, int* dimensionsColSize) {      }"
         },
         {
-            "code": "public class Solution {     public int AreaOfMaxDiagonal(int[][] dimensions) {              } }"
+            "csharp": "public class Solution {     public int AreaOfMaxDiagonal(int[][] dimensions) {              } }"
         },
         {
-            "code": "/**  * @param {number[][]} dimensions  * @return {number}  */ var areaOfMaxDiagonal = function(dimensions) {      };"
+            "javascript": "/**  * @param {number[][]} dimensions  * @return {number}  */ var areaOfMaxDiagonal = function(dimensions) {      };"
         },
         {
-            "code": "function areaOfMaxDiagonal(dimensions: number[][]): number {      };"
+            "typescript": "function areaOfMaxDiagonal(dimensions: number[][]): number {      };"
         },
         {
-            "code": "class Solution {      /**      * @param Integer[][] $dimensions      * @return Integer      */     function areaOfMaxDiagonal($dimensions) {              } }"
+            "php": "class Solution {      /**      * @param Integer[][] $dimensions      * @return Integer      */     function areaOfMaxDiagonal($dimensions) {              } }"
         },
         {
-            "code": "class Solution {     func areaOfMaxDiagonal(_ dimensions: [[Int]]) -> Int {              } }"
+            "swift": "class Solution {     func areaOfMaxDiagonal(_ dimensions: [[Int]]) -> Int {              } }"
         },
         {
-            "code": "class Solution {     fun areaOfMaxDiagonal(dimensions: Array<IntArray>): Int {              } }"
+            "kotlin": "class Solution {     fun areaOfMaxDiagonal(dimensions: Array<IntArray>): Int {              } }"
         },
         {
-            "code": "class Solution {   int areaOfMaxDiagonal(List<List<int>> dimensions) {        } }"
+            "dart": "class Solution {   int areaOfMaxDiagonal(List<List<int>> dimensions) {        } }"
         },
         {
-            "code": "func areaOfMaxDiagonal(dimensions [][]int) int {      }"
+            "golang": "func areaOfMaxDiagonal(dimensions [][]int) int {      }"
         },
         {
-            "code": "# @param {Integer[][]} dimensions # @return {Integer} def area_of_max_diagonal(dimensions)      end"
+            "ruby": "# @param {Integer[][]} dimensions # @return {Integer} def area_of_max_diagonal(dimensions)      end"
         },
         {
-            "code": "object Solution {     def areaOfMaxDiagonal(dimensions: Array[Array[Int]]): Int = {              } }"
+            "scala": "object Solution {     def areaOfMaxDiagonal(dimensions: Array[Array[Int]]): Int = {              } }"
         },
         {
-            "code": "impl Solution {     pub fn area_of_max_diagonal(dimensions: Vec<Vec<i32>>) -> i32 {              } }"
+            "rust": "impl Solution {     pub fn area_of_max_diagonal(dimensions: Vec<Vec<i32>>) -> i32 {              } }"
         },
         {
-            "code": "(define/contract (area-of-max-diagonal dimensions)   (-> (listof (listof exact-integer?)) exact-integer?)   )"
+            "racket": "(define/contract (area-of-max-diagonal dimensions)   (-> (listof (listof exact-integer?)) exact-integer?)   )"
         },
         {
-            "code": "-spec area_of_max_diagonal(Dimensions :: [[integer()]]) -> integer(). area_of_max_diagonal(Dimensions) ->   ."
+            "erlang": "-spec area_of_max_diagonal(Dimensions :: [[integer()]]) -> integer(). area_of_max_diagonal(Dimensions) ->   ."
         },
         {
-            "code": "defmodule Solution do   @spec area_of_max_diagonal(dimensions :: [[integer]]) :: integer   def area_of_max_diagonal(dimensions) do        end end"
+            "elixir": "defmodule Solution do   @spec area_of_max_diagonal(dimensions :: [[integer]]) :: integer   def area_of_max_diagonal(dimensions) do        end end"
         }
     ],
     "content": "You are given a 2D 0-indexed integer array dimensions. For all indices i, 0 <= i < dimensions.length, dimensions[i][0] represents the length and dimensions[i][1] represents the width of the rectangle i. Return the area of the rectangle having the longest diagonal. If there are multiple rectangles with the longest diagonal, return the area of the rectangle having the maximum area.  Example 1:  Input: dimensions = [[9,3],[8,6]] Output: 48 Explanation:  For index = 0, length = 9 and width = 3. Diagonal length = sqrt(9 * 9 + 3 * 3) = sqrt(90)  9.487. For index = 1, length = 8 and width = 6. Diagonal length = sqrt(8 * 8 + 6 * 6) = sqrt(100) = 10. So, the rectangle at index 1 has a greater diagonal length therefore we return area = 8 * 6 = 48.  Example 2:  Input: dimensions = [[3,4],[4,3]] Output: 12 Explanation: Length of diagonal is the same for both which is 5, so maximum area = 12.   Constraints:  1 <= dimensions.length <= 100 dimensions[i].length == 2 1 <= dimensions[i][0], dimensions[i][1] <= 100  "

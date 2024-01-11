@@ -1,5 +1,5 @@
 {
-    "acRate": 29.778501732700935,
+    "acRate": 29.79236158769172,
     "difficulty": "Easy",
     "freqBar": null,
     "frontendQuestionId": "2996",
@@ -29,61 +29,61 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "code": "class Solution { public:     int missingInteger(vector<int>& nums) {              } };"
+            "cpp": "class Solution { public:     int missingInteger(vector<int>& nums) {              } };"
         },
         {
-            "code": "class Solution {     public int missingInteger(int[] nums) {              } }"
+            "java": "class Solution {     public int missingInteger(int[] nums) {              } }"
         },
         {
-            "code": "class Solution(object):     def missingInteger(self, nums):         \"\"\"         :type nums: List[int]         :rtype: int         \"\"\"         "
+            "python": "class Solution(object):     def missingInteger(self, nums):         \"\"\"         :type nums: List[int]         :rtype: int         \"\"\"         "
         },
         {
-            "code": "class Solution:     def missingInteger(self, nums: List[int]) -> int:         "
+            "python3": "class Solution:     def missingInteger(self, nums: List[int]) -> int:         "
         },
         {
-            "code": "int missingInteger(int* nums, int numsSize) {      }"
+            "c": "int missingInteger(int* nums, int numsSize) {      }"
         },
         {
-            "code": "public class Solution {     public int MissingInteger(int[] nums) {              } }"
+            "csharp": "public class Solution {     public int MissingInteger(int[] nums) {              } }"
         },
         {
-            "code": "/**  * @param {number[]} nums  * @return {number}  */ var missingInteger = function(nums) {      };"
+            "javascript": "/**  * @param {number[]} nums  * @return {number}  */ var missingInteger = function(nums) {      };"
         },
         {
-            "code": "function missingInteger(nums: number[]): number {      };"
+            "typescript": "function missingInteger(nums: number[]): number {      };"
         },
         {
-            "code": "class Solution {      /**      * @param Integer[] $nums      * @return Integer      */     function missingInteger($nums) {              } }"
+            "php": "class Solution {      /**      * @param Integer[] $nums      * @return Integer      */     function missingInteger($nums) {              } }"
         },
         {
-            "code": "class Solution {     func missingInteger(_ nums: [Int]) -> Int {              } }"
+            "swift": "class Solution {     func missingInteger(_ nums: [Int]) -> Int {              } }"
         },
         {
-            "code": "class Solution {     fun missingInteger(nums: IntArray): Int {              } }"
+            "kotlin": "class Solution {     fun missingInteger(nums: IntArray): Int {              } }"
         },
         {
-            "code": "class Solution {   int missingInteger(List<int> nums) {        } }"
+            "dart": "class Solution {   int missingInteger(List<int> nums) {        } }"
         },
         {
-            "code": "func missingInteger(nums []int) int {      }"
+            "golang": "func missingInteger(nums []int) int {      }"
         },
         {
-            "code": "# @param {Integer[]} nums # @return {Integer} def missing_integer(nums)      end"
+            "ruby": "# @param {Integer[]} nums # @return {Integer} def missing_integer(nums)      end"
         },
         {
-            "code": "object Solution {     def missingInteger(nums: Array[Int]): Int = {              } }"
+            "scala": "object Solution {     def missingInteger(nums: Array[Int]): Int = {              } }"
         },
         {
-            "code": "impl Solution {     pub fn missing_integer(nums: Vec<i32>) -> i32 {              } }"
+            "rust": "impl Solution {     pub fn missing_integer(nums: Vec<i32>) -> i32 {              } }"
         },
         {
-            "code": "(define/contract (missing-integer nums)   (-> (listof exact-integer?) exact-integer?)   )"
+            "racket": "(define/contract (missing-integer nums)   (-> (listof exact-integer?) exact-integer?)   )"
         },
         {
-            "code": "-spec missing_integer(Nums :: [integer()]) -> integer(). missing_integer(Nums) ->   ."
+            "erlang": "-spec missing_integer(Nums :: [integer()]) -> integer(). missing_integer(Nums) ->   ."
         },
         {
-            "code": "defmodule Solution do   @spec missing_integer(nums :: [integer]) :: integer   def missing_integer(nums) do        end end"
+            "elixir": "defmodule Solution do   @spec missing_integer(nums :: [integer]) :: integer   def missing_integer(nums) do        end end"
         }
     ],
     "content": "You are given a 0-indexed array of integers nums. A prefix nums[0..i] is sequential if, for all 1 <= j <= i, nums[j] = nums[j - 1] + 1. In particular, the prefix consisting only of nums[0] is sequential. Return the smallest integer x missing from nums such that x is greater than or equal to the sum of the longest sequential prefix.  Example 1:  Input: nums = [1,2,3,2,5] Output: 6 Explanation: The longest sequential prefix of nums is [1,2,3] with a sum of 6. 6 is not in the array, therefore 6 is the smallest missing integer greater than or equal to the sum of the longest sequential prefix.  Example 2:  Input: nums = [3,4,5,1,12,14,13] Output: 15 Explanation: The longest sequential prefix of nums is [3,4,5] with a sum of 12. 12, 13, and 14 belong to the array while 15 does not. Therefore 15 is the smallest missing integer greater than or equal to the sum of the longest sequential prefix.   Constraints:  1 <= nums.length <= 50 1 <= nums[i] <= 50  "

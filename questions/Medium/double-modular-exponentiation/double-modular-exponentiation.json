@@ -29,61 +29,61 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "code": "class Solution { public:     vector<int> getGoodIndices(vector<vector<int>>& variables, int target) {              } };"
+            "cpp": "class Solution { public:     vector<int> getGoodIndices(vector<vector<int>>& variables, int target) {              } };"
         },
         {
-            "code": "class Solution {     public List<Integer> getGoodIndices(int[][] variables, int target) {              } }"
+            "java": "class Solution {     public List<Integer> getGoodIndices(int[][] variables, int target) {              } }"
         },
         {
-            "code": "class Solution(object):     def getGoodIndices(self, variables, target):         \"\"\"         :type variables: List[List[int]]         :type target: int         :rtype: List[int]         \"\"\"         "
+            "python": "class Solution(object):     def getGoodIndices(self, variables, target):         \"\"\"         :type variables: List[List[int]]         :type target: int         :rtype: List[int]         \"\"\"         "
         },
         {
-            "code": "class Solution:     def getGoodIndices(self, variables: List[List[int]], target: int) -> List[int]:         "
+            "python3": "class Solution:     def getGoodIndices(self, variables: List[List[int]], target: int) -> List[int]:         "
         },
         {
-            "code": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* getGoodIndices(int** variables, int variablesSize, int* variablesColSize, int target, int* returnSize) {      }"
+            "c": "/**  * Note: The returned array must be malloced, assume caller calls free().  */ int* getGoodIndices(int** variables, int variablesSize, int* variablesColSize, int target, int* returnSize) {      }"
         },
         {
-            "code": "public class Solution {     public IList<int> GetGoodIndices(int[][] variables, int target) {              } }"
+            "csharp": "public class Solution {     public IList<int> GetGoodIndices(int[][] variables, int target) {              } }"
         },
         {
-            "code": "/**  * @param {number[][]} variables  * @param {number} target  * @return {number[]}  */ var getGoodIndices = function(variables, target) {      };"
+            "javascript": "/**  * @param {number[][]} variables  * @param {number} target  * @return {number[]}  */ var getGoodIndices = function(variables, target) {      };"
         },
         {
-            "code": "function getGoodIndices(variables: number[][], target: number): number[] {      };"
+            "typescript": "function getGoodIndices(variables: number[][], target: number): number[] {      };"
         },
         {
-            "code": "class Solution {      /**      * @param Integer[][] $variables      * @param Integer $target      * @return Integer[]      */     function getGoodIndices($variables, $target) {              } }"
+            "php": "class Solution {      /**      * @param Integer[][] $variables      * @param Integer $target      * @return Integer[]      */     function getGoodIndices($variables, $target) {              } }"
         },
         {
-            "code": "class Solution {     func getGoodIndices(_ variables: [[Int]], _ target: Int) -> [Int] {              } }"
+            "swift": "class Solution {     func getGoodIndices(_ variables: [[Int]], _ target: Int) -> [Int] {              } }"
         },
         {
-            "code": "class Solution {     fun getGoodIndices(variables: Array<IntArray>, target: Int): List<Int> {              } }"
+            "kotlin": "class Solution {     fun getGoodIndices(variables: Array<IntArray>, target: Int): List<Int> {              } }"
         },
         {
-            "code": "class Solution {   List<int> getGoodIndices(List<List<int>> variables, int target) {        } }"
+            "dart": "class Solution {   List<int> getGoodIndices(List<List<int>> variables, int target) {        } }"
         },
         {
-            "code": "func getGoodIndices(variables [][]int, target int) []int {      }"
+            "golang": "func getGoodIndices(variables [][]int, target int) []int {      }"
         },
         {
-            "code": "# @param {Integer[][]} variables # @param {Integer} target # @return {Integer[]} def get_good_indices(variables, target)      end"
+            "ruby": "# @param {Integer[][]} variables # @param {Integer} target # @return {Integer[]} def get_good_indices(variables, target)      end"
         },
         {
-            "code": "object Solution {     def getGoodIndices(variables: Array[Array[Int]], target: Int): List[Int] = {              } }"
+            "scala": "object Solution {     def getGoodIndices(variables: Array[Array[Int]], target: Int): List[Int] = {              } }"
         },
         {
-            "code": "impl Solution {     pub fn get_good_indices(variables: Vec<Vec<i32>>, target: i32) -> Vec<i32> {              } }"
+            "rust": "impl Solution {     pub fn get_good_indices(variables: Vec<Vec<i32>>, target: i32) -> Vec<i32> {              } }"
         },
         {
-            "code": "(define/contract (get-good-indices variables target)   (-> (listof (listof exact-integer?)) exact-integer? (listof exact-integer?))   )"
+            "racket": "(define/contract (get-good-indices variables target)   (-> (listof (listof exact-integer?)) exact-integer? (listof exact-integer?))   )"
         },
         {
-            "code": "-spec get_good_indices(Variables :: [[integer()]], Target :: integer()) -> [integer()]. get_good_indices(Variables, Target) ->   ."
+            "erlang": "-spec get_good_indices(Variables :: [[integer()]], Target :: integer()) -> [integer()]. get_good_indices(Variables, Target) ->   ."
         },
         {
-            "code": "defmodule Solution do   @spec get_good_indices(variables :: [[integer]], target :: integer) :: [integer]   def get_good_indices(variables, target) do        end end"
+            "elixir": "defmodule Solution do   @spec get_good_indices(variables :: [[integer]], target :: integer) :: [integer]   def get_good_indices(variables, target) do        end end"
         }
     ],
     "content": "You are given a 0-indexed 2D array variables where variables[i] = [ai, bi, ci, mi], and an integer target. An index i is good if the following formula holds:  0 <= i < variables.length ((aibi % 10)ci) % mi == target  Return an array consisting of good indices in any order.  Example 1:  Input: variables = [[2,3,3,10],[3,3,3,1],[6,1,1,4]], target = 2 Output: [0,2] Explanation: For each index i in the variables array: 1) For the index 0, variables[0] = [2,3,3,10], (23 % 10)3 % 10 = 2. 2) For the index 1, variables[1] = [3,3,3,1], (33 % 10)3 % 1 = 0. 3) For the index 2, variables[2] = [6,1,1,4], (61 % 10)1 % 4 = 2. Therefore we return [0,2] as the answer.  Example 2:  Input: variables = [[39,3,1000,1000]], target = 17 Output: [] Explanation: For each index i in the variables array: 1) For the index 0, variables[0] = [39,3,1000,1000], (393 % 10)1000 % 1000 = 1. Therefore we return [] as the answer.   Constraints:  1 <= variables.length <= 100 variables[i] == [ai, bi, ci, mi] 1 <= ai, bi, ci, mi <= 103 0 <= target <= 103  "

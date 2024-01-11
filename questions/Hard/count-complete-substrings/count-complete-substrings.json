@@ -1,5 +1,5 @@
 {
-    "acRate": 24.811470529867037,
+    "acRate": 24.81520067470358,
     "difficulty": "Hard",
     "freqBar": null,
     "frontendQuestionId": "2953",
@@ -29,61 +29,61 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "code": "class Solution { public:     int countCompleteSubstrings(string word, int k) {              } };"
+            "cpp": "class Solution { public:     int countCompleteSubstrings(string word, int k) {              } };"
         },
         {
-            "code": "class Solution {     public int countCompleteSubstrings(String word, int k) {              } }"
+            "java": "class Solution {     public int countCompleteSubstrings(String word, int k) {              } }"
         },
         {
-            "code": "class Solution(object):     def countCompleteSubstrings(self, word, k):         \"\"\"         :type word: str         :type k: int         :rtype: int         \"\"\"         "
+            "python": "class Solution(object):     def countCompleteSubstrings(self, word, k):         \"\"\"         :type word: str         :type k: int         :rtype: int         \"\"\"         "
         },
         {
-            "code": "class Solution:     def countCompleteSubstrings(self, word: str, k: int) -> int:         "
+            "python3": "class Solution:     def countCompleteSubstrings(self, word: str, k: int) -> int:         "
         },
         {
-            "code": "int countCompleteSubstrings(char* word, int k) {      }"
+            "c": "int countCompleteSubstrings(char* word, int k) {      }"
         },
         {
-            "code": "public class Solution {     public int CountCompleteSubstrings(string word, int k) {              } }"
+            "csharp": "public class Solution {     public int CountCompleteSubstrings(string word, int k) {              } }"
         },
         {
-            "code": "/**  * @param {string} word  * @param {number} k  * @return {number}  */ var countCompleteSubstrings = function(word, k) {      };"
+            "javascript": "/**  * @param {string} word  * @param {number} k  * @return {number}  */ var countCompleteSubstrings = function(word, k) {      };"
         },
         {
-            "code": "function countCompleteSubstrings(word: string, k: number): number {      };"
+            "typescript": "function countCompleteSubstrings(word: string, k: number): number {      };"
         },
         {
-            "code": "class Solution {      /**      * @param String $word      * @param Integer $k      * @return Integer      */     function countCompleteSubstrings($word, $k) {              } }"
+            "php": "class Solution {      /**      * @param String $word      * @param Integer $k      * @return Integer      */     function countCompleteSubstrings($word, $k) {              } }"
         },
         {
-            "code": "class Solution {     func countCompleteSubstrings(_ word: String, _ k: Int) -> Int {              } }"
+            "swift": "class Solution {     func countCompleteSubstrings(_ word: String, _ k: Int) -> Int {              } }"
         },
         {
-            "code": "class Solution {     fun countCompleteSubstrings(word: String, k: Int): Int {              } }"
+            "kotlin": "class Solution {     fun countCompleteSubstrings(word: String, k: Int): Int {              } }"
         },
         {
-            "code": "class Solution {   int countCompleteSubstrings(String word, int k) {        } }"
+            "dart": "class Solution {   int countCompleteSubstrings(String word, int k) {        } }"
         },
         {
-            "code": "func countCompleteSubstrings(word string, k int) int {      }"
+            "golang": "func countCompleteSubstrings(word string, k int) int {      }"
         },
         {
-            "code": "# @param {String} word # @param {Integer} k # @return {Integer} def count_complete_substrings(word, k)      end"
+            "ruby": "# @param {String} word # @param {Integer} k # @return {Integer} def count_complete_substrings(word, k)      end"
         },
         {
-            "code": "object Solution {     def countCompleteSubstrings(word: String, k: Int): Int = {              } }"
+            "scala": "object Solution {     def countCompleteSubstrings(word: String, k: Int): Int = {              } }"
         },
         {
-            "code": "impl Solution {     pub fn count_complete_substrings(word: String, k: i32) -> i32 {              } }"
+            "rust": "impl Solution {     pub fn count_complete_substrings(word: String, k: i32) -> i32 {              } }"
         },
         {
-            "code": "(define/contract (count-complete-substrings word k)   (-> string? exact-integer? exact-integer?)   )"
+            "racket": "(define/contract (count-complete-substrings word k)   (-> string? exact-integer? exact-integer?)   )"
         },
         {
-            "code": "-spec count_complete_substrings(Word :: unicode:unicode_binary(), K :: integer()) -> integer(). count_complete_substrings(Word, K) ->   ."
+            "erlang": "-spec count_complete_substrings(Word :: unicode:unicode_binary(), K :: integer()) -> integer(). count_complete_substrings(Word, K) ->   ."
         },
         {
-            "code": "defmodule Solution do   @spec count_complete_substrings(word :: String.t, k :: integer) :: integer   def count_complete_substrings(word, k) do        end end"
+            "elixir": "defmodule Solution do   @spec count_complete_substrings(word :: String.t, k :: integer) :: integer   def count_complete_substrings(word, k) do        end end"
         }
     ],
     "content": "You are given a string word and an integer k. A substring s of word is complete if:  Each character in s occurs exactly k times. The difference between two adjacent characters is at most 2. That is, for any two adjacent characters c1 and c2 in s, the absolute difference in their positions in the alphabet is at most 2.  Return the number of complete substrings of word. A substring is a non-empty contiguous sequence of characters in a string.  Example 1:  Input: word = \"igigee\", k = 2 Output: 3 Explanation: The complete substrings where each character appears exactly twice and the difference between adjacent characters is at most 2 are: igigee, igigee, igigee.  Example 2:  Input: word = \"aaabbbccc\", k = 3 Output: 6 Explanation: The complete substrings where each character appears exactly three times and the difference between adjacent characters is at most 2 are: aaabbbccc, aaabbbccc, aaabbbccc, aaabbbccc, aaabbbccc, aaabbbccc.   Constraints:  1 <= word.length <= 105 word consists only of lowercase English letters. 1 <= k <= word.length  "

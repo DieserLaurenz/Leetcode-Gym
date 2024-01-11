@@ -1,5 +1,5 @@
 {
-    "acRate": 31.802258705427167,
+    "acRate": 31.805112656176487,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2982",
@@ -39,61 +39,61 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "code": "class Solution { public:     int maximumLength(string s) {              } };"
+            "cpp": "class Solution { public:     int maximumLength(string s) {              } };"
         },
         {
-            "code": "class Solution {     public int maximumLength(String s) {              } }"
+            "java": "class Solution {     public int maximumLength(String s) {              } }"
         },
         {
-            "code": "class Solution(object):     def maximumLength(self, s):         \"\"\"         :type s: str         :rtype: int         \"\"\"         "
+            "python": "class Solution(object):     def maximumLength(self, s):         \"\"\"         :type s: str         :rtype: int         \"\"\"         "
         },
         {
-            "code": "class Solution:     def maximumLength(self, s: str) -> int:         "
+            "python3": "class Solution:     def maximumLength(self, s: str) -> int:         "
         },
         {
-            "code": "int maximumLength(char* s) {      }"
+            "c": "int maximumLength(char* s) {      }"
         },
         {
-            "code": "public class Solution {     public int MaximumLength(string s) {              } }"
+            "csharp": "public class Solution {     public int MaximumLength(string s) {              } }"
         },
         {
-            "code": "/**  * @param {string} s  * @return {number}  */ var maximumLength = function(s) {      };"
+            "javascript": "/**  * @param {string} s  * @return {number}  */ var maximumLength = function(s) {      };"
         },
         {
-            "code": "function maximumLength(s: string): number {      };"
+            "typescript": "function maximumLength(s: string): number {      };"
         },
         {
-            "code": "class Solution {      /**      * @param String $s      * @return Integer      */     function maximumLength($s) {              } }"
+            "php": "class Solution {      /**      * @param String $s      * @return Integer      */     function maximumLength($s) {              } }"
         },
         {
-            "code": "class Solution {     func maximumLength(_ s: String) -> Int {              } }"
+            "swift": "class Solution {     func maximumLength(_ s: String) -> Int {              } }"
         },
         {
-            "code": "class Solution {     fun maximumLength(s: String): Int {              } }"
+            "kotlin": "class Solution {     fun maximumLength(s: String): Int {              } }"
         },
         {
-            "code": "class Solution {   int maximumLength(String s) {        } }"
+            "dart": "class Solution {   int maximumLength(String s) {        } }"
         },
         {
-            "code": "func maximumLength(s string) int {      }"
+            "golang": "func maximumLength(s string) int {      }"
         },
         {
-            "code": "# @param {String} s # @return {Integer} def maximum_length(s)      end"
+            "ruby": "# @param {String} s # @return {Integer} def maximum_length(s)      end"
         },
         {
-            "code": "object Solution {     def maximumLength(s: String): Int = {              } }"
+            "scala": "object Solution {     def maximumLength(s: String): Int = {              } }"
         },
         {
-            "code": "impl Solution {     pub fn maximum_length(s: String) -> i32 {              } }"
+            "rust": "impl Solution {     pub fn maximum_length(s: String) -> i32 {              } }"
         },
         {
-            "code": "(define/contract (maximum-length s)   (-> string? exact-integer?)   )"
+            "racket": "(define/contract (maximum-length s)   (-> string? exact-integer?)   )"
         },
         {
-            "code": "-spec maximum_length(S :: unicode:unicode_binary()) -> integer(). maximum_length(S) ->   ."
+            "erlang": "-spec maximum_length(S :: unicode:unicode_binary()) -> integer(). maximum_length(S) ->   ."
         },
         {
-            "code": "defmodule Solution do   @spec maximum_length(s :: String.t) :: integer   def maximum_length(s) do        end end"
+            "elixir": "defmodule Solution do   @spec maximum_length(s :: String.t) :: integer   def maximum_length(s) do        end end"
         }
     ],
     "content": "You are given a string s that consists of lowercase English letters. A string is called special if it is made up of only a single character. For example, the string \"abc\" is not special, whereas the strings \"ddd\", \"zz\", and \"f\" are special. Return the length of the longest special substring of s which occurs at least thrice, or -1 if no special substring occurs at least thrice. A substring is a contiguous non-empty sequence of characters within a string.  Example 1:  Input: s = \"aaaa\" Output: 2 Explanation: The longest special substring which occurs thrice is \"aa\": substrings \"aaaa\", \"aaaa\", and \"aaaa\". It can be shown that the maximum length achievable is 2.  Example 2:  Input: s = \"abcdef\" Output: -1 Explanation: There exists no special substring which occurs at least thrice. Hence return -1.  Example 3:  Input: s = \"abcaba\" Output: 1 Explanation: The longest special substring which occurs thrice is \"a\": substrings \"abcaba\", \"abcaba\", and \"abcaba\". It can be shown that the maximum length achievable is 1.   Constraints:  3 <= s.length <= 5 * 105 s consists of only lowercase English letters.  "

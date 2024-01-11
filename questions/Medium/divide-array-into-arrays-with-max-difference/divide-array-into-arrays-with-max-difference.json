@@ -1,5 +1,5 @@
 {
-    "acRate": 57.651759247325685,
+    "acRate": 57.64978739853112,
     "difficulty": "Medium",
     "freqBar": null,
     "frontendQuestionId": "2966",
@@ -29,61 +29,61 @@
     "hasVideoSolution": false,
     "codeSnippets": [
         {
-            "code": "class Solution { public:     vector<vector<int>> divideArray(vector<int>& nums, int k) {              } };"
+            "cpp": "class Solution { public:     vector<vector<int>> divideArray(vector<int>& nums, int k) {              } };"
         },
         {
-            "code": "class Solution {     public int[][] divideArray(int[] nums, int k) {              } }"
+            "java": "class Solution {     public int[][] divideArray(int[] nums, int k) {              } }"
         },
         {
-            "code": "class Solution(object):     def divideArray(self, nums, k):         \"\"\"         :type nums: List[int]         :type k: int         :rtype: List[List[int]]         \"\"\"         "
+            "python": "class Solution(object):     def divideArray(self, nums, k):         \"\"\"         :type nums: List[int]         :type k: int         :rtype: List[List[int]]         \"\"\"         "
         },
         {
-            "code": "class Solution:     def divideArray(self, nums: List[int], k: int) -> List[List[int]]:         "
+            "python3": "class Solution:     def divideArray(self, nums: List[int], k: int) -> List[List[int]]:         "
         },
         {
-            "code": "/**  * Return an array of arrays of size *returnSize.  * The sizes of the arrays are returned as *returnColumnSizes array.  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().  */ int** divideArray(int* nums, int numsSize, int k, int* returnSize, int** returnColumnSizes) {      }"
+            "c": "/**  * Return an array of arrays of size *returnSize.  * The sizes of the arrays are returned as *returnColumnSizes array.  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().  */ int** divideArray(int* nums, int numsSize, int k, int* returnSize, int** returnColumnSizes) {      }"
         },
         {
-            "code": "public class Solution {     public int[][] DivideArray(int[] nums, int k) {              } }"
+            "csharp": "public class Solution {     public int[][] DivideArray(int[] nums, int k) {              } }"
         },
         {
-            "code": "/**  * @param {number[]} nums  * @param {number} k  * @return {number[][]}  */ var divideArray = function(nums, k) {      };"
+            "javascript": "/**  * @param {number[]} nums  * @param {number} k  * @return {number[][]}  */ var divideArray = function(nums, k) {      };"
         },
         {
-            "code": "function divideArray(nums: number[], k: number): number[][] {      };"
+            "typescript": "function divideArray(nums: number[], k: number): number[][] {      };"
         },
         {
-            "code": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $k      * @return Integer[][]      */     function divideArray($nums, $k) {              } }"
+            "php": "class Solution {      /**      * @param Integer[] $nums      * @param Integer $k      * @return Integer[][]      */     function divideArray($nums, $k) {              } }"
         },
         {
-            "code": "class Solution {     func divideArray(_ nums: [Int], _ k: Int) -> [[Int]] {              } }"
+            "swift": "class Solution {     func divideArray(_ nums: [Int], _ k: Int) -> [[Int]] {              } }"
         },
         {
-            "code": "class Solution {     fun divideArray(nums: IntArray, k: Int): Array<IntArray> {              } }"
+            "kotlin": "class Solution {     fun divideArray(nums: IntArray, k: Int): Array<IntArray> {              } }"
         },
         {
-            "code": "class Solution {   List<List<int>> divideArray(List<int> nums, int k) {        } }"
+            "dart": "class Solution {   List<List<int>> divideArray(List<int> nums, int k) {        } }"
         },
         {
-            "code": "func divideArray(nums []int, k int) [][]int {      }"
+            "golang": "func divideArray(nums []int, k int) [][]int {      }"
         },
         {
-            "code": "# @param {Integer[]} nums # @param {Integer} k # @return {Integer[][]} def divide_array(nums, k)      end"
+            "ruby": "# @param {Integer[]} nums # @param {Integer} k # @return {Integer[][]} def divide_array(nums, k)      end"
         },
         {
-            "code": "object Solution {     def divideArray(nums: Array[Int], k: Int): Array[Array[Int]] = {              } }"
+            "scala": "object Solution {     def divideArray(nums: Array[Int], k: Int): Array[Array[Int]] = {              } }"
         },
         {
-            "code": "impl Solution {     pub fn divide_array(nums: Vec<i32>, k: i32) -> Vec<Vec<i32>> {              } }"
+            "rust": "impl Solution {     pub fn divide_array(nums: Vec<i32>, k: i32) -> Vec<Vec<i32>> {              } }"
         },
         {
-            "code": "(define/contract (divide-array nums k)   (-> (listof exact-integer?) exact-integer? (listof (listof exact-integer?)))   )"
+            "racket": "(define/contract (divide-array nums k)   (-> (listof exact-integer?) exact-integer? (listof (listof exact-integer?)))   )"
         },
         {
-            "code": "-spec divide_array(Nums :: [integer()], K :: integer()) -> [[integer()]]. divide_array(Nums, K) ->   ."
+            "erlang": "-spec divide_array(Nums :: [integer()], K :: integer()) -> [[integer()]]. divide_array(Nums, K) ->   ."
         },
         {
-            "code": "defmodule Solution do   @spec divide_array(nums :: [integer], k :: integer) :: [[integer]]   def divide_array(nums, k) do        end end"
+            "elixir": "defmodule Solution do   @spec divide_array(nums :: [integer], k :: integer) :: [[integer]]   def divide_array(nums, k) do        end end"
         }
     ],
     "content": "You are given an integer array nums of size n and a positive integer k. Divide the array into one or more arrays of size 3 satisfying the following conditions:  Each element of nums should be in exactly one array. The difference between any two elements in one array is less than or equal to k.  Return a 2D array containing all the arrays. If it is impossible to satisfy the conditions, return an empty array. And if there are multiple answers, return any of them.  Example 1:  Input: nums = [1,3,4,8,7,9,3,5,1], k = 2 Output: [[1,1,3],[3,4,5],[7,8,9]] Explanation: We can divide the array into the following arrays: [1,1,3], [3,4,5] and [7,8,9]. The difference between any two elements in each array is less than or equal to 2. Note that the order of elements is not important.  Example 2:  Input: nums = [1,3,3,2,7,3], k = 3 Output: [] Explanation: It is not possible to divide the array satisfying all the conditions.   Constraints:  n == nums.length 1 <= n <= 105 n is a multiple of 3. 1 <= nums[i] <= 105 1 <= k <= 105  "
