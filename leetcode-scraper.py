@@ -281,8 +281,7 @@ def fetch_question_content(title):
 
 def clean_content(html_text):
     """
-    Cleans the provided content, removing tags, newlines, tab characters,
-    unicode characters, and formats the text by correcting quotation marks.
+    Cleans the provided content by removing tags, unicode characters, and formats the text by correcting quotation marks.
 
     Parameters:
     - html_text: The HTML content to be cleaned
@@ -302,10 +301,10 @@ def clean_content(html_text):
         text = soup.get_text()
 
         # Replace newline and tab characters with a space
-        cleaned_text = text.replace('\n', ' ').replace('\t', ' ')
+        #cleaned_text = text.replace('\n', ' ').replace('\t', ' ')
 
         # Remove unicode characters like \u00a0
-        cleaned_text = str(cleaned_text.encode('ascii', 'ignore').decode('ascii'))
+        cleaned_text = str(text.encode('ascii', 'ignore').decode('ascii'))
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -402,7 +401,7 @@ def add_question_content_and_save_to_file(filtered_questions):
                     continue
 
             try:
-                code_snippets = clean_code_snippets(question_content["data"]["question"]["codeSnippets"])
+                code_snippets = question_content["data"]["question"]["codeSnippets"]
                 content = clean_content(question_content["data"]["question"]["content"])
             except Exception as e:
                 print(Fore.LIGHTRED_EX + f"Error cleaning content for {title}:", e)
