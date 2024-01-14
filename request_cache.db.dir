@@ -298,3 +298,7 @@
 'make-k-subarray-sums-equal', (152064, 17)
 'find-the-substring-with-maximum-cost', (152576, 17)
 'form-smallest-number-from-two-digit-arrays', (153088, 17)
+'find-beautiful-indices-in-the-given-array-ii', (153600, 17)
+'maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k', (154112, 17)
+'find-beautiful-indices-in-the-given-array-i', (154624, 17)
+'count-elements-with-maximum-frequency', (155136, 17)

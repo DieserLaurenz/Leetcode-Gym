@@ -3,6 +3,7 @@ import re
 import time
 from openai import OpenAI
 from dotenv import load_dotenv
+import pyperclip
 
 def load_config():
     load_dotenv(".env")
@@ -49,10 +50,12 @@ def main():
 
         if extracted_code:
             print("Extrahierter Code:\n", extracted_code)
+            pyperclip.copy(extracted_code)
+            print("Code zur Zwischenablage hinzugefügt")
         else:
             print("Kein Code gefunden")
 
-        print(answer)
+
 
         messages.append({'role': 'assistant', 'content': answer})
 
