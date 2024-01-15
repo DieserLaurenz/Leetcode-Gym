@@ -1,3 +1,9 @@
 Remove Pandas Problems
 Remove Problems with only javascript and typescript
 ADD Memory Limit Exceeded Error message
+Check if the language slugs are all handled correctly
+Add that it doesn't test the same Problem and Lang twice.
+Save the responses correctly in their different lang directories
+Add ChatGPT Plus support
+Check if context window is long enough??? Maybe Model with more context tokens or something?
+Manchmal fügt der eine redecleration hinzu bei manchen sprachen das checken und vorher filtern oder so
