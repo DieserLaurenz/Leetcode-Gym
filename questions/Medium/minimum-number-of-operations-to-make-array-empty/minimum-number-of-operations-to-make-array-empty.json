@@ -1,0 +1,134 @@
+{
+    "acRate": 61.76022301896925,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "3094",
+    "frontendQuestionId": "2870",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Minimum Number of Operations to Make Array Empty",
+    "titleSlug": "minimum-number-of-operations-to-make-array-empty",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        },
+        {
+            "name": "Counting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDYy",
+            "slug": "counting"
+        }
+    ],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int minOperations(vector<int>& nums) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int minOperations(int[] nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def minOperations(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def minOperations(self, nums: List[int]) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int minOperations(int* nums, int numsSize){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int MinOperations(int[] nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar minOperations = function(nums) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function minOperations(nums: number[]): number {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return Integer\n     */\n    function minOperations($nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func minOperations(_ nums: [Int]) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun minOperations(nums: IntArray): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int minOperations(List<int> nums) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func minOperations(nums []int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums\n# @return {Integer}\ndef min_operations(nums)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def minOperations(nums: Array[Int]): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn min_operations(nums: Vec<i32>) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (min-operations nums)\n  (-> (listof exact-integer?) exact-integer?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec min_operations(Nums :: [integer()]) -> integer().\nmin_operations(Nums) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec min_operations(nums :: [integer]) :: integer\n  def min_operations(nums) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed array nums consisting of positive integers.\nThere are two types of operations that you can apply on the array any number of times:\n\nChoose two elements with equal values and delete them from the array.\nChoose three elements with equal values and delete them from the array.\n\nReturn the minimum number of operations required to make the array empty, or -1 if it is not possible.\n\nExample 1:\n\nInput: nums = [2,3,3,2,2,4,2,3,4]\nOutput: 4\nExplanation: We can apply the following operations to make the array empty:\n- Apply the first operation on the elements at indices 0 and 3. The resulting array is nums = [3,3,2,4,2,3,4].\n- Apply the first operation on the elements at indices 2 and 4. The resulting array is nums = [3,3,4,3,4].\n- Apply the second operation on the elements at indices 0, 1, and 3. The resulting array is nums = [4,4].\n- Apply the first operation on the elements at indices 0 and 1. The resulting array is nums = [].\nIt can be shown that we cannot make the array empty in less than 4 operations.\n\nExample 2:\n\nInput: nums = [2,1,2,2,3,3]\nOutput: -1\nExplanation: It is impossible to empty the array.\n\n\nConstraints:\n\n2 <= nums.length <= 105\n1 <= nums[i] <= 106\n\n"
+}

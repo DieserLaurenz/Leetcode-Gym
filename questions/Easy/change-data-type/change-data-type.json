@@ -1,0 +1,23 @@
+{
+    "acRate": 85.07910368758455,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "questionId": "3069",
+    "frontendQuestionId": "2886",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Change Data Type",
+    "titleSlug": "change-data-type",
+    "topicTags": [],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "Pandas",
+            "langSlug": "pythondata",
+            "code": "import pandas as pd\n\ndef changeDatatype(students: pd.DataFrame) -> pd.DataFrame:\n    "
+        }
+    ],
+    "content": "\nDataFrame students\n+-------------+--------+\n| Column Name | Type   |\n+-------------+--------+\n| student_id  | int    |\n| name        | object |\n| age         | int    |\n| grade       | float  |\n+-------------+--------+\n\nWrite a solution to correct the errors:\nThe grade column is stored as floats,convert it to integers.\nThe result format is in the following example.\n\n\nExample 1:\nInput:\nDataFrame students:\n+------------+------+-----+-------+\n| student_id | name | age | grade |\n+------------+------+-----+-------+\n| 1          | Ava  | 6   | 73.0  |\n| 2          | Kate | 15  | 87.0  |\n+------------+------+-----+-------+\nOutput:\n+------------+------+-----+-------+\n| student_id | name | age | grade |\n+------------+------+-----+-------+\n| 1          | Ava  | 6   | 73    |\n| 2          | Kate | 15  | 87    |\n+------------+------+-----+-------+\nExplanation: \nThe data types of the column grade is converted to int.\n"
+}

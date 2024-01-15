@@ -1,0 +1,129 @@
+{
+    "acRate": 50.31112056586715,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "3104",
+    "frontendQuestionId": "2860",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Happy Students",
+    "titleSlug": "happy-students",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Sorting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDQ5",
+            "slug": "sorting"
+        },
+        {
+            "name": "Enumeration",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY2",
+            "slug": "enumeration"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int countWays(vector<int>& nums) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int countWays(List<Integer> nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def countWays(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def countWays(self, nums: List[int]) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int countWays(int* nums, int numsSize){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int CountWays(IList<int> nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar countWays = function(nums) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countWays(nums: number[]): number {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return Integer\n     */\n    function countWays($nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func countWays(_ nums: [Int]) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun countWays(nums: List<Int>): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int countWays(List<int> nums) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countWays(nums []int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums\n# @return {Integer}\ndef count_ways(nums)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def countWays(nums: List[Int]): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn count_ways(nums: Vec<i32>) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-ways nums)\n  (-> (listof exact-integer?) exact-integer?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_ways(Nums :: [integer()]) -> integer().\ncount_ways(Nums) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec count_ways(nums :: [integer]) :: integer\n  def count_ways(nums) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed integer array nums of length n where n is the total number of students in the class. The class teacher tries to select a group of students so that all the students remain happy.\nThe ith student will become happy if one of these two conditions is met:\n\nThe student is selected and the total number of selected students is strictly greater than nums[i].\nThe student is not selected and the total number of selected students is strictly less than nums[i].\n\nReturn the number of ways to select a group of students so that everyone remains happy.\n\nExample 1:\n\nInput: nums = [1,1]\nOutput: 2\nExplanation: \nThe two possible ways are:\nThe class teacher selects no student.\nThe class teacher selects both students to form the group. \nIf the class teacher selects just one student to form a group then the both students will not be happy. Therefore, there are only two possible ways.\n\nExample 2:\n\nInput: nums = [6,0,3,3,6,7,2,7]\nOutput: 3\nExplanation: \nThe three possible ways are:\nThe class teacher selects the student with index = 1 to form the group.\nThe class teacher selects the students with index = 1, 2, 3, 6 to form the group.\nThe class teacher selects all the students to form the group.\n\n\nConstraints:\n\n1 <= nums.length <= 105\n0 <= nums[i] < nums.length\n\n"
+}

@@ -1,0 +1,124 @@
+{
+    "acRate": 82.43896788393037,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "questionId": "2886",
+    "frontendQuestionId": "2810",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Faulty Keyboard",
+    "titleSlug": "faulty-keyboard",
+    "topicTags": [
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Simulation",
+            "id": "VG9waWNUYWdOb2RlOjYxMDU1",
+            "slug": "simulation"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    string finalString(string s) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public String finalString(String s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def finalString(self, s):\n        \"\"\"\n        :type s: str\n        :rtype: str\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def finalString(self, s: str) -> str:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "char* finalString(char* s) {\n    \n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public string FinalString(string s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar finalString = function(s) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function finalString(s: string): string {\n    \n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param String $s\n     * @return String\n     */\n    function finalString($s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func finalString(_ s: String) -> String {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun finalString(s: String): String {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  String finalString(String s) {\n    \n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func finalString(s string) string {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} s\n# @return {String}\ndef final_string(s)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def finalString(s: String): String = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn final_string(s: String) -> String {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (final-string s)\n  (-> string? string?)\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec final_string(S :: unicode:unicode_binary()) -> unicode:unicode_binary().\nfinal_string(S) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec final_string(s :: String.t) :: String.t\n  def final_string(s) do\n    \n  end\nend"
+        }
+    ],
+    "content": "Your laptop keyboard is faulty, and whenever you type a character 'i' on it, it reverses the string that you have written. Typing other characters works as expected.\nYou are given a 0-indexed string s, and you type each character of s using your faulty keyboard.\nReturn the final string that will be present on your laptop screen.\n\nExample 1:\n\nInput: s = \"string\"\nOutput: \"rtsng\"\nExplanation: \nAfter typing first character, the text on the screen is \"s\".\nAfter the second character, the text is \"st\". \nAfter the third character, the text is \"str\".\nSince the fourth character is an 'i', the text gets reversed and becomes \"rts\".\nAfter the fifth character, the text is \"rtsn\". \nAfter the sixth character, the text is \"rtsng\". \nTherefore, we return \"rtsng\".\n\nExample 2:\n\nInput: s = \"poiinter\"\nOutput: \"ponter\"\nExplanation: \nAfter the first character, the text on the screen is \"p\".\nAfter the second character, the text is \"po\". \nSince the third character you type is an 'i', the text gets reversed and becomes \"op\". \nSince the fourth character you type is an 'i', the text gets reversed and becomes \"po\".\nAfter the fifth character, the text is \"pon\".\nAfter the sixth character, the text is \"pont\". \nAfter the seventh character, the text is \"ponte\". \nAfter the eighth character, the text is \"ponter\". \nTherefore, we return \"ponter\".\n\nConstraints:\n\n1 <= s.length <= 100\ns consists of lowercase English letters.\ns[0] != 'i'\n\n"
+}

@@ -1,0 +1,129 @@
+{
+    "acRate": 53.666794429538776,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "2817",
+    "frontendQuestionId": "2712",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Minimum Cost to Make All Characters Equal",
+    "titleSlug": "minimum-cost-to-make-all-characters-equal",
+    "topicTags": [
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    long long minimumCost(string s) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public long minimumCost(String s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def minimumCost(self, s):\n        \"\"\"\n        :type s: str\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def minimumCost(self, s: str) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "long long minimumCost(char * s){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public long MinimumCost(string s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {string} s\n * @return {number}\n */\nvar minimumCost = function(s) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function minimumCost(s: string): number {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param String $s\n     * @return Integer\n     */\n    function minimumCost($s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func minimumCost(_ s: String) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun minimumCost(s: String): Long {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int minimumCost(String s) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func minimumCost(s string) int64 {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} s\n# @return {Integer}\ndef minimum_cost(s)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def minimumCost(s: String): Long = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn minimum_cost(s: String) -> i64 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (minimum-cost s)\n  (-> string? exact-integer?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec minimum_cost(S :: unicode:unicode_binary()) -> integer().\nminimum_cost(S) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec minimum_cost(s :: String.t) :: integer\n  def minimum_cost(s) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed binary string s of length n on which you can apply two types of operations:\n\nChoose an index i and invert all characters fromindex 0 to index i(both inclusive), with a cost of i + 1\nChoose an index i and invert all charactersfromindex i to index n - 1(both inclusive), with a cost of n - i\n\nReturn the minimum cost to make all characters of the string equal.\nInvert a character meansif its value is '0' it becomes '1' and vice-versa.\n\nExample 1:\n\nInput: s = \"0011\"\nOutput: 2\nExplanation: Apply the second operation with i = 2 to obtain s = \"0000\" for a cost of 2. It can be shown that 2 is the minimum cost to make all characters equal.\n\nExample 2:\n\nInput: s = \"010101\"\nOutput: 9\nExplanation: Apply the first operation with i = 2 to obtain s = \"101101\" for a cost of 3.\nApply the first operation with i = 1 to obtain s = \"011101\" for a cost of 2. \nApply the first operation with i = 0 to obtain s = \"111101\" for a cost of 1. \nApply the second operation with i = 4 to obtain s = \"111110\" for a cost of 2.\nApply the second operation with i = 5 to obtain s = \"111111\" for a cost of 1. \nThe total cost to make all characters equal is 9. It can be shown that 9 is the minimum cost to make all characters equal.\n\n\nConstraints:\n\n1 <= s.length == n <= 105\ns[i] is either '0' or '1'\n\n"
+}

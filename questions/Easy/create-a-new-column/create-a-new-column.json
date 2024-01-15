@@ -1,0 +1,23 @@
+{
+    "acRate": 88.75680580762251,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "questionId": "3066",
+    "frontendQuestionId": "2881",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Create a New Column",
+    "titleSlug": "create-a-new-column",
+    "topicTags": [],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "Pandas",
+            "langSlug": "pythondata",
+            "code": "import pandas as pd\n\ndef createBonusColumn(employees: pd.DataFrame) -> pd.DataFrame:\n    "
+        }
+    ],
+    "content": "\nDataFrame employees\n+-------------+--------+\n| Column Name | Type.  |\n+-------------+--------+\n| name        | object |\n| salary      | int.   |\n+-------------+--------+\n\nAcompany plans to provide its employees with a bonus.\nWrite a solution to create a new column name bonus that contains the doubled values of the salary column.\nThe result format is in the following example.\n\nExample 1:\n\nInput:\nDataFrame employees\n+---------+--------+\n| name    | salary |\n+---------+--------+\n| Piper   | 4548   |\n| Grace   | 28150  |\n| Georgia | 1103   |\n| Willow  | 6593   |\n| Finn    | 74576  |\n| Thomas  | 24433  |\n+---------+--------+\nOutput:\n+---------+--------+--------+\n| name    | salary | bonus  |\n+---------+--------+--------+\n| Piper   | 4548   | 9096   |\n| Grace   | 28150  | 56300  |\n| Georgia | 1103   | 2206   |\n| Willow  | 6593   | 13186  |\n| Finn    | 74576  | 149152 |\n| Thomas  | 24433  | 48866  |\n+---------+--------+--------+\nExplanation: \nA new column bonus is created by doubling the value in the column salary.\n"
+}

@@ -1,0 +1,134 @@
+{
+    "acRate": 33.01220957189223,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "2873",
+    "frontendQuestionId": "2761",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Prime Pairs With Target Sum",
+    "titleSlug": "prime-pairs-with-target-sum",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "Enumeration",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY2",
+            "slug": "enumeration"
+        },
+        {
+            "name": "Number Theory",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY3",
+            "slug": "number-theory"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    vector<vector<int>> findPrimePairs(int n) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public List<List<Integer>> findPrimePairs(int n) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def findPrimePairs(self, n):\n        \"\"\"\n        :type n: int\n        :rtype: List[List[int]]\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def findPrimePairs(self, n: int) -> List[List[int]]:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**\n * Return an array of arrays of size *returnSize.\n * The sizes of the arrays are returned as *returnColumnSizes array.\n * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().\n */\nint** findPrimePairs(int n, int* returnSize, int** returnColumnSizes){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public IList<IList<int>> FindPrimePairs(int n) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number} n\n * @return {number[][]}\n */\nvar findPrimePairs = function(n) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function findPrimePairs(n: number): number[][] {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer $n\n     * @return Integer[][]\n     */\n    function findPrimePairs($n) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func findPrimePairs(_ n: Int) -> [[Int]] {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun findPrimePairs(n: Int): List<List<Int>> {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  List<List<int>> findPrimePairs(int n) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func findPrimePairs(n int) [][]int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer} n\n# @return {Integer[][]}\ndef find_prime_pairs(n)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def findPrimePairs(n: Int): List[List[Int]] = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn find_prime_pairs(n: i32) -> Vec<Vec<i32>> {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (find-prime-pairs n)\n  (-> exact-integer? (listof (listof exact-integer?)))\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec find_prime_pairs(N :: integer()) -> [[integer()]].\nfind_prime_pairs(N) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec find_prime_pairs(n :: integer) :: [[integer]]\n  def find_prime_pairs(n) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given an integer n. We say that two integers x and y form a prime number pair if:\n\n1 <= x <= y <= n\nx + y == n\nx and y are prime numbers\n\nReturn the 2D sorted list of prime number pairs [xi, yi]. The list should be sorted in increasing order of xi. If there are no prime number pairs at all, return an empty array.\nNote: A prime number is a natural number greater than 1 with only two factors, itself and 1.\n\nExample 1:\n\nInput: n = 10\nOutput: [[3,7],[5,5]]\nExplanation: In this example, there are two prime pairs that satisfy the criteria. \nThese pairs are [3,7] and [5,5], and we return them in the sorted order as described in the problem statement.\n\nExample 2:\n\nInput: n = 2\nOutput: []\nExplanation: We can show that there is no prime number pair that gives a sum of 2, so we return an empty array. \n\n\nConstraints:\n\n1 <= n <= 106\n\n"
+}

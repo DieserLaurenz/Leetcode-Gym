@@ -1,0 +1,28 @@
+{
+    "acRate": 63.87752846247374,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "2804",
+    "frontendQuestionId": "2705",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Compact Object",
+    "titleSlug": "compact-object",
+    "topicTags": [],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {Object|Array} obj\n * @return {Object|Array}\n */\nvar compactObject = function(obj) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };\ntype Obj = Record<string, JSONValue> | Array<JSONValue>;\n\nfunction compactObject(obj: Obj): Obj {\n    \n};"
+        }
+    ],
+    "content": "Given an object or arrayobj, return a compact object. A compact objectis the same as the original object, except with keys containing falsy values removed. This operation applies to the object and any nested objects. Arrays are considered objects wherethe indices arekeys. A value isconsidered falsywhen Boolean(value) returns false.\nYou may assume theobj isthe output ofJSON.parse. In other words, it is valid JSON.\n\nExample 1:\n\nInput: obj = [null, 0, false, 1]\nOutput: [1]\nExplanation: All falsy values have been removed from the array.\n\nExample 2:\n\nInput: obj = {\"a\": null, \"b\": [false, 1]}\nOutput: {\"b\": [1]}\nExplanation: obj[\"a\"] and obj[\"b\"][0] had falsy values and were removed.\nExample 3:\n\nInput: obj = [null, 0, 5, [0], [false, 16]]\nOutput: [5, [], [16]]\nExplanation: obj[0], obj[1], obj[3][0], and obj[4][0] were falsy and removed.\n\n\nConstraints:\n\nobj is a valid JSON object\n2 <= JSON.stringify(obj).length <= 106\n\n"
+}

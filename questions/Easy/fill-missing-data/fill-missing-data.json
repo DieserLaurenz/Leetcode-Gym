@@ -1,0 +1,23 @@
+{
+    "acRate": 70.92284417549169,
+    "difficulty": "Easy",
+    "freqBar": null,
+    "questionId": "3070",
+    "frontendQuestionId": "2887",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Fill Missing Data",
+    "titleSlug": "fill-missing-data",
+    "topicTags": [],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "Pandas",
+            "langSlug": "pythondata",
+            "code": "import pandas as pd\n\ndef fillMissingValues(products: pd.DataFrame) -> pd.DataFrame:\n    "
+        }
+    ],
+    "content": "\nDataFrame products\n+-------------+--------+\n| Column Name | Type   |\n+-------------+--------+\n| name        | object |\n| quantity    | int    |\n| price       | int    |\n+-------------+--------+\n\nWrite a solution to fill in the missing value as 0 in the quantity column.\nThe result format is in the following example.\n\n\nExample 1:\nInput:+-----------------+----------+-------+\n| name            | quantity | price |\n+-----------------+----------+-------+\n| Wristwatch      | None     | 135   |\n| WirelessEarbuds | None     | 821   |\n| GolfClubs       | 779      | 9319  |\n| Printer         | 849      | 3051  |\n+-----------------+----------+-------+\nOutput:\n+-----------------+----------+-------+\n| name            | quantity | price |\n+-----------------+----------+-------+\n| Wristwatch      | 0        | 135   |\n| WirelessEarbuds | 0        | 821   |\n| GolfClubs       | 779      | 9319  |\n| Printer         | 849      | 3051  |\n+-----------------+----------+-------+\nExplanation: \nThe quantity for Wristwatch and WirelessEarbuds are filled by 0.\n"
+}
