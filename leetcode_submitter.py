@@ -210,5 +210,3 @@ def main(problem_url, question_id, lang_slug):
         print("The error prompt has been copied to clipboard")
 
 
-if __name__ == "__main__":
-    main()
