@@ -1,0 +1,129 @@
+{
+    "acRate": 25.314235603624667,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "questionId": "3223",
+    "frontendQuestionId": "2953",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Count Complete Substrings",
+    "titleSlug": "count-complete-substrings",
+    "topicTags": [
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Sliding Window",
+            "id": "VG9waWNUYWdOb2RlOjU1ODIx",
+            "slug": "sliding-window"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int countCompleteSubstrings(string word, int k) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int countCompleteSubstrings(String word, int k) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def countCompleteSubstrings(self, word, k):\n        \"\"\"\n        :type word: str\n        :type k: int\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def countCompleteSubstrings(self, word: str, k: int) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int countCompleteSubstrings(char* word, int k) {\n    \n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int CountCompleteSubstrings(string word, int k) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {string} word\n * @param {number} k\n * @return {number}\n */\nvar countCompleteSubstrings = function(word, k) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function countCompleteSubstrings(word: string, k: number): number {\n    \n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param String $word\n     * @param Integer $k\n     * @return Integer\n     */\n    function countCompleteSubstrings($word, $k) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func countCompleteSubstrings(_ word: String, _ k: Int) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun countCompleteSubstrings(word: String, k: Int): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int countCompleteSubstrings(String word, int k) {\n    \n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func countCompleteSubstrings(word string, k int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} word\n# @param {Integer} k\n# @return {Integer}\ndef count_complete_substrings(word, k)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def countCompleteSubstrings(word: String, k: Int): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn count_complete_substrings(word: String, k: i32) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (count-complete-substrings word k)\n  (-> string? exact-integer? exact-integer?)\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec count_complete_substrings(Word :: unicode:unicode_binary(), K :: integer()) -> integer().\ncount_complete_substrings(Word, K) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec count_complete_substrings(word :: String.t, k :: integer) :: integer\n  def count_complete_substrings(word, k) do\n    \n  end\nend"
+        }
+    ],
+    "content": "You are given a string word and an integer k.\nA substring s of word is complete if:\n\nEach character in s occurs exactly k times.\nThe difference between two adjacent characters is at most 2. That is, for any two adjacent characters c1 and c2 in s, the absolute difference in their positions in the alphabet is at most 2.\n\nReturn the number of complete substrings of word.\nA substring is a non-empty contiguous sequence of characters in a string.\n\nExample 1:\n\nInput: word = \"igigee\", k = 2\nOutput: 3\nExplanation: The complete substrings where each character appears exactly twice and the difference between adjacent characters is at most 2 are: igigee, igigee, igigee.\n\nExample 2:\n\nInput: word = \"aaabbbccc\", k = 3\nOutput: 6\nExplanation: The complete substrings where each character appears exactly three times and the difference between adjacent characters is at most 2 are: aaabbbccc, aaabbbccc, aaabbbccc, aaabbbccc, aaabbbccc, aaabbbccc.\n\n\nConstraints:\n\n1 <= word.length <= 105\nword consists only of lowercase English letters.\n1 <= k <= word.length\n\n"
+}

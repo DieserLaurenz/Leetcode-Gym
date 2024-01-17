@@ -1,0 +1,129 @@
+{
+    "acRate": 41.63019301140848,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "2904",
+    "frontendQuestionId": "2826",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Sorting Three Groups",
+    "titleSlug": "sorting-three-groups",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Binary Search",
+            "id": "VG9waWNUYWdOb2RlOjEx",
+            "slug": "binary-search"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int minimumOperations(vector<int>& nums) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int minimumOperations(List<Integer> nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def minimumOperations(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def minimumOperations(self, nums: List[int]) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int minimumOperations(int* nums, int numsSize){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int MinimumOperations(IList<int> nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar minimumOperations = function(nums) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function minimumOperations(nums: number[]): number {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return Integer\n     */\n    function minimumOperations($nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func minimumOperations(_ nums: [Int]) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun minimumOperations(nums: List<Int>): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int minimumOperations(List<int> nums) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func minimumOperations(nums []int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums\n# @return {Integer}\ndef minimum_operations(nums)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def minimumOperations(nums: List[Int]): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn minimum_operations(nums: Vec<i32>) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (minimum-operations nums)\n  (-> (listof exact-integer?) exact-integer?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec minimum_operations(Nums :: [integer()]) -> integer().\nminimum_operations(Nums) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec minimum_operations(nums :: [integer]) :: integer\n  def minimum_operations(nums) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed integer array nums of length n.\n\nThe numbers from 0 to n - 1 are divided into three groups numbered from 1 to 3, where number i belongs to group nums[i]. Notice that some groups may be empty.\n\nYou are allowed to perform this operation any number of times:\n\nPick number x and change its group. More formally, change nums[x] to any number from 1 to 3.\n\nA new array res is constructed using the following procedure:\n\nSort the numbers in each group independently.\nAppend the elements of groups 1, 2, and 3 to res in this order.\n\nArray nums is called a beautiful array if the constructed array res is sorted in non-decreasing order.\nReturn the minimum number of operations to make nums a beautiful array.\n\nExample 1:\n\nInput: nums = [2,1,3,2,1]\nOutput: 3\nExplanation: It's optimal to perform three operations:\n1. change nums[0] to 1.\n2. change nums[2] to 1.\n3. change nums[3] to 1.\nAfter performing the operations and sorting the numbers in each group, group 1 becomes equal to [0,1,2,3,4] and group 2 and group 3 become empty. Hence, res is equal to [0,1,2,3,4] which is sorted in non-decreasing order.\nIt can be proven that there is no valid sequence of less than three operations.\n\nExample 2:\n\nInput: nums = [1,3,2,1,3,3]\nOutput: 2\nExplanation: It's optimal to perform two operations:\n1. change nums[1] to 1.\n2. change nums[2] to 1.\nAfter performing the operations and sorting the numbers in each group, group 1 becomes equal to [0,1,2,3], group 2 becomes empty, and group 3 becomes equal to [4,5]. Hence, res is equal to [0,1,2,3,4,5] which is sorted in non-decreasing order.\nIt can be proven that there is no valid sequence of less than two operations.\n\nExample 3:\n\nInput: nums = [2,2,2,2,3,3]\nOutput: 0\nExplanation: It's optimal to not perform operations.\nAfter sorting the numbers in each group, group 1 becomes empty, group 2 becomes equal to [0,1,2,3] and group 3 becomes equal to [4,5]. Hence, res is equal to [0,1,2,3,4,5] which is sorted in non-decreasing order.\n\n\nConstraints:\n\n1 <= nums.length <= 100\n1 <= nums[i] <= 3\n\n"
+}

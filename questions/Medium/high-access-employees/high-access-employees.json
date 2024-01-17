@@ -1,0 +1,134 @@
+{
+    "acRate": 43.03120842183889,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "3202",
+    "frontendQuestionId": "2933",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "High-Access Employees",
+    "titleSlug": "high-access-employees",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Sorting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDQ5",
+            "slug": "sorting"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    vector<string> findHighAccessEmployees(vector<vector<string>>& access_times) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public List<String> findHighAccessEmployees(List<List<String>> access_times) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def findHighAccessEmployees(self, access_times):\n        \"\"\"\n        :type access_times: List[List[str]]\n        :rtype: List[str]\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def findHighAccessEmployees(self, access_times: List[List[str]]) -> List[str]:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nchar** findHighAccessEmployees(char*** access_times, int access_timesSize, int* access_timesColSize, int* returnSize) {\n    \n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public IList<string> FindHighAccessEmployees(IList<IList<string>> access_times) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {string[][]} access_times\n * @return {string[]}\n */\nvar findHighAccessEmployees = function(access_times) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function findHighAccessEmployees(access_times: string[][]): string[] {\n    \n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param String[][] $access_times\n     * @return String[]\n     */\n    function findHighAccessEmployees($access_times) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func findHighAccessEmployees(_ access_times: [[String]]) -> [String] {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun findHighAccessEmployees(access_times: List<List<String>>): List<String> {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  List<String> findHighAccessEmployees(List<List<String>> access_times) {\n    \n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func findHighAccessEmployees(access_times [][]string) []string {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String[][]} access_times\n# @return {String[]}\ndef find_high_access_employees(access_times)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def findHighAccessEmployees(access_times: List[List[String]]): List[String] = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn find_high_access_employees(access_times: Vec<Vec<String>>) -> Vec<String> {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (find-high-access-employees access_times)\n  (-> (listof (listof string?)) (listof string?))\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec find_high_access_employees(Access_times :: [[unicode:unicode_binary()]]) -> [unicode:unicode_binary()].\nfind_high_access_employees(Access_times) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec find_high_access_employees(access_times :: [[String.t]]) :: [String.t]\n  def find_high_access_employees(access_times) do\n    \n  end\nend"
+        }
+    ],
+    "content": "You are given a 2D 0-indexed array of strings, access_times, with size n. For each i where 0 <= i <= n - 1, access_times[i][0] represents the name of an employee, and access_times[i][1] represents the access time of that employee. All entries in access_times are within the same day.\nThe access time is represented as four digits using a 24-hour time format, for example, \"0800\" or \"2250\".\nAn employee is said to be high-access if he has accessed the system three or more times within a one-hour period.\nTimes with exactly one hour of difference are not considered part of the same one-hour period. For example, \"0815\" and \"0915\" are not part of the same one-hour period.\nAccess times at the start and end of the day are not counted within the same one-hour period. For example, \"0005\" and \"2350\" are not part of the same one-hour period.\nReturn a list that contains the names of high-access employees with any order you want.\n\nExample 1:\n\nInput: access_times = [[\"a\",\"0549\"],[\"b\",\"0457\"],[\"a\",\"0532\"],[\"a\",\"0621\"],[\"b\",\"0540\"]]\nOutput: [\"a\"]\nExplanation: \"a\" has three access times in the one-hour period of [05:32, 06:31] which are 05:32, 05:49, and 06:21.\nBut \"b\" does not have more than two access times at all.\nSo the answer is [\"a\"].\nExample 2:\n\nInput: access_times = [[\"d\",\"0002\"],[\"c\",\"0808\"],[\"c\",\"0829\"],[\"e\",\"0215\"],[\"d\",\"1508\"],[\"d\",\"1444\"],[\"d\",\"1410\"],[\"c\",\"0809\"]]\nOutput: [\"c\",\"d\"]\nExplanation: \"c\" has three access times in the one-hour period of [08:08, 09:07] which are 08:08, 08:09, and 08:29.\n\"d\" has also three access times in the one-hour period of [14:10, 15:09] which are 14:10, 14:44, and 15:08.\nHowever, \"e\" has just one access time, so it can not be in the answer and the final answer is [\"c\",\"d\"].\nExample 3:\n\nInput: access_times = [[\"cd\",\"1025\"],[\"ab\",\"1025\"],[\"cd\",\"1046\"],[\"cd\",\"1055\"],[\"ab\",\"1124\"],[\"ab\",\"1120\"]]\nOutput: [\"ab\",\"cd\"]\nExplanation: \"ab\" has three access times in the one-hour period of [10:25, 11:24] which are 10:25, 11:20, and 11:24.\n\"cd\" has also three access times in the one-hour period of [10:25, 11:24] which are 10:25, 10:46, and 10:55.\nSo the answer is [\"ab\",\"cd\"].\n\nConstraints:\n\n1 <= access_times.length <= 100\naccess_times[i].length == 2\n1 <= access_times[i][0].length <= 10\naccess_times[i][0] consists only of English small letters.\naccess_times[i][1].length == 4\naccess_times[i][1] is in 24-hour time format.\naccess_times[i][1] consists only of '0' to '9'.\n\n"
+}
