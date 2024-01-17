@@ -1,3 +1,4 @@
 ChatGPT API scheint widersprüchliche Antworten zu geben,
 Meint es wäre bis März 2023 trainiert und verweigert zu bestätigen,
 dass es sich um GPT-4 handelt.
+Not using the normal ChatGPT API might be violating the terms and conditions

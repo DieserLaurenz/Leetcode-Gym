@@ -4,6 +4,7 @@ import re
 
 import leetcode_submitter
 import chatgptapi
+import chatgptapi_new
 import pyperclip
 
 def read_json_file(file_path):
@@ -79,6 +80,7 @@ def process_subfolder(base_path, subfolder):
 
     for snippet in question["codeSnippets"]:
         messages = []
+        conversation_id = None
         response_counter = 1  # Initialize a counter for responses
 
         lang = snippet['lang']
@@ -91,10 +93,11 @@ def process_subfolder(base_path, subfolder):
 
         print(f"Initial prompt: {prompt_content}")
 
-        messages.append({'role': 'user', 'content': prompt_content})
+        #messages.append({'role': 'user', 'content': prompt_content})
 
         for i in range(3):
-            answer = chatgptapi.main(messages)
+            #answer = chatgptapi.main(messages)
+            answer, conversation_id = chatgptapi_new.send_message(prompt_content, conversation_id)
 
             print(f"ChatGPT Antwort: {answer}")
 
@@ -105,7 +108,7 @@ def process_subfolder(base_path, subfolder):
             else:
                 print("Kein Code gefunden")
 
-            messages.append({'role': 'assistant', 'content': answer})
+            #messages.append({'role': 'assistant', 'content': answer})
 
             submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
 
@@ -134,7 +137,8 @@ def process_subfolder(base_path, subfolder):
 
             print("ChatGPT produced a wrong answer...")
             print(f"Error prompt: {error_prompt}")
-            messages.append({'role': 'user', 'content': error_prompt})
+
+            prompt_content = error_prompt
 
 
 
