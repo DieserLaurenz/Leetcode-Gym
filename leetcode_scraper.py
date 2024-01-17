@@ -4,7 +4,6 @@ import shelve
 import time
 from datetime import datetime
 
-import question_builder
 import requests
 from bs4 import BeautifulSoup
 from colorama import Fore
@@ -15,6 +14,7 @@ QUESTIONS_TO_FETCH = 400  # Number of questions to fetch in ascending order
 FILTER_OUT_PAID_QUESTIONS = True  # Flag to filter out paid questions
 PROBLEM_FETCH_START_DATE = "14-05-2023"  # Start date for fetching problems (DD-MM-YYYY)
 REMOVE_QUESTIONS_WITH_IMAGE = True
+LANGUAGES = ["C++","Java","JavaScript"]
 
 
 def send_request(url, cookies=None, headers=None, json_data=None):
@@ -408,6 +408,14 @@ def add_question_content_and_save_to_file(filtered_questions):
                 print(Fore.LIGHTRED_EX + f"Error cleaning content for {title}:", e)
                 continue
 
+            available_languages_for_question = [code_snippet["lang"] for code_snippet in code_snippets]
+
+            is_languages_available = all(language in available_languages_for_question for language in LANGUAGES)
+
+            if not is_languages_available:
+                print(Fore.LIGHTRED_EX + f"Not all languages available for {title}")
+                continue
+
             question["codeSnippets"] = code_snippets
             question["content"] = content
 
@@ -474,7 +482,5 @@ if __name__ == '__main__':
     filtered_questions = filter_questions(questions)
 
     add_question_content_and_save_to_file(filtered_questions)
-
-    question_builder.add_prompts_and_url_shortcut()
 
 

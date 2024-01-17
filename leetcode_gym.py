@@ -138,8 +138,6 @@ def process_subfolder(base_path, subfolder):
 
 
 
-
-
 def process_folders(base_path, folders):
     for folder in folders:
         folder_path = os.path.join(base_path, folder)
