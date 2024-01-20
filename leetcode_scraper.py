@@ -14,7 +14,7 @@ QUESTIONS_TO_FETCH = 400  # Number of questions to fetch in ascending order
 FILTER_OUT_PAID_QUESTIONS = True  # Flag to filter out paid questions
 PROBLEM_FETCH_START_DATE = "14-05-2023"  # Start date for fetching problems (DD-MM-YYYY)
 REMOVE_QUESTIONS_WITH_IMAGE = True
-LANGUAGES = ["C++","Java","JavaScript"]
+LANGUAGES = ["C++","Java","JavaScript"] # Languages that must be included in the question
 
 
 def send_request(url, cookies=None, headers=None, json_data=None):
@@ -40,7 +40,7 @@ def send_request(url, cookies=None, headers=None, json_data=None):
             headers=headers,
             cookies=cookies,
             json=json_data,
-            timeout=5
+            timeout=10
         )
         response.raise_for_status()  # Raises HTTPError for bad responses
         return response

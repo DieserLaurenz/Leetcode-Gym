@@ -5,3 +5,5 @@ Save the responses correctly in their different lang directories
 Add ChatGPT Plus support
 Check if context window is long enough??? Maybe Model with more context tokens or something?
 Manchmal fügt der eine redecleration hinzu bei manchen sprachen das checken und vorher filtern oder so
+Retry logik einführen für leetcode scraper und sowas
+Irgendwie beim content fetch wird nicht zuerst der cache gecheckt kp wieso
