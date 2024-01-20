@@ -3,19 +3,20 @@ import os
 import re
 import shelve
 
+import pyperclip
+
 import chatgptapi_new
 import leetcode_submitter
 
+CHATGPT_API_MODE = True
 
 def read_json_file(file_path):
     with open(file_path, 'r') as json_file:
         return json.load(json_file)
 
-
 def save_response(response_directory, response_filename, submission_response):
     with open(os.path.join(response_directory, response_filename), 'w') as file:
         json.dump(submission_response, file, indent=4)
-
 
 def extract_code(answer):
     lang_slugs = ['cpp', 'java', 'python', 'python3', 'c', 'csharp', 'javascript', 'typescript', 'php', 'swift',
@@ -28,6 +29,23 @@ def extract_code(answer):
             return match.group(1)
     return None
 
+def collect_code_input():
+    print("Please paste your code. After pasting, hit Enter twice to finish.")
+    code_lines = []
+    while True:
+        try:
+            line = input()
+            if line == '':
+                # Check if the previous line was also empty (i.e., two consecutive Enters)
+                if code_lines and code_lines[-1] == '':
+                    code_lines.pop()  # Remove the last empty line
+                    break
+            code_lines.append(line)
+        except EOFError:
+            # Handle the case where the end of input is signaled by EOF (Ctrl+D)
+            break
+
+    return '\n'.join(code_lines)
 
 def process_snippet(prompt, subfolder_path, question, snippet, attempt, conversation_id):
     lang_slug = snippet['langSlug']
@@ -47,13 +65,16 @@ def process_snippet(prompt, subfolder_path, question, snippet, attempt, conversa
     else:
         print(f"Processing: {title_slug} in {lang_slug}.")
 
-    answer, conversation_id = chatgptapi_new.send_message_with_SyncChatGPT(prompt, conversation_id)
-    extracted_code = extract_code(answer)
-    print(extracted_code)
+    if CHATGPT_API_MODE:
+        answer, conversation_id = chatgptapi_new.send_message_with_SyncChatGPT(prompt, conversation_id)
+        extracted_code = extract_code(answer)
+        print(extracted_code)
 
-    if not extracted_code:
-        print("Kein Code gefunden")
-        return False, "", ""
+        if not extracted_code:
+            print("Kein Code gefunden")
+            return False, "", ""
+    else:
+        extracted_code = collect_code_input()
 
     submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
 
@@ -65,14 +86,16 @@ def process_snippet(prompt, subfolder_path, question, snippet, attempt, conversa
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
         save_response(response_directory, response_filename, submission_response)
+        print(f"Korrekte Antwort")
         return True, "", ""
     elif attempt == 3:
+        print(f"Versuche überschritten")
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
             cache[cache_key] = submission_response
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
-        print(f"Fehler-Prompt für Versuch {attempt + 1}: {error_prompt}")
+        print(f"Fehler-Antwort für Versuch {attempt + 1}")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
         save_response(response_directory, response_filename, submission_response)
@@ -138,6 +161,11 @@ def process_question(json_file_path, subfolder_path):
         attempt = 0
         conversation_id = None
         prompt = generate_prompt_content(question, snippet)
+
+        if not CHATGPT_API_MODE:
+            pyperclip.copy(prompt)
+            print("Copied initial prompt to clipboard")
+
         while attempt < 3:
             is_success, error_prompt, conversation_id = process_snippet(prompt, subfolder_path, question, snippet,
                                                                         attempt, conversation_id)
@@ -145,6 +173,11 @@ def process_question(json_file_path, subfolder_path):
                 break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
             attempt += 1
             prompt = error_prompt
+
+            if not CHATGPT_API_MODE:
+
+                pyperclip.copy(prompt)
+                print("Copied error prompt to clipboard")
 
 
 def process_subfolder(base_path, subfolder):

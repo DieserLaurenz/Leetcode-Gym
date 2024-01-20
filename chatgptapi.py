@@ -15,7 +15,7 @@ def get_response(client, messages):
         messages=messages,
         model="gpt-4-1106-preview",  # Verify the model name
         temperature=0,
-        max_tokens=1024,
+        max_tokens=500,
         n=1,
         stop=None
     )

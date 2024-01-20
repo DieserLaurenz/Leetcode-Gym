@@ -8,45 +8,47 @@ session_token = "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..n_nyr6igvLpysoc6.LaSsR
 
 def send_message_with_SyncChatGPT(prompt, conversation_id=None):
     with SyncChatGPT(session_token=session_token) as chatgpt:
+        auth_token = chatgpt.auth_token
 
-        if conversation_id:
-            conversation = chatgpt.get_conversation(conversation_id)
-        else:
-            conversation = chatgpt.create_new_conversation()
+        with SyncChatGPT(auth_token=auth_token) as chatgpt:
 
-        response = ""
+            if conversation_id:
+                conversation = chatgpt.get_conversation(conversation_id)
+            else:
+                conversation = chatgpt.create_new_conversation()
 
-        while (True):
-            try:
-                for message_chunk in conversation.chat(prompt):
-                    response += message_chunk["content"]
-            except Exception as e:
-                print(e)
+            response = ""
 
-                exception = str(e)
+            while (True):
+                try:
+                    for message_chunk in conversation.chat(prompt):
+                        response += message_chunk["content"]
+                except Exception as e:
+                    print(e)
 
-                # Finde den Start des JSON-Strings
-                start = exception.find('{')
-                # Finde das Ende des JSON-Strings
-                end = exception.rfind('}') + 1
+                    exception = str(e)
 
-                # Extrahiere den JSON-Teil des Strings
-                json_part = exception[start:end]
+                    # Finde den Start des JSON-Strings
+                    start = exception.find('{')
+                    # Finde das Ende des JSON-Strings
+                    end = exception.rfind('}') + 1
 
-                # Parse den JSON-String
-                data = json.loads(json_part)
+                    # Extrahiere den JSON-Teil des Strings
+                    json_part = exception[start:end]
 
-                # Extrahiere die gewünschten Werte
-                message = data["detail"]["message"]
-                clears_in = data["detail"]["clears_in"]
+                    # Parse den JSON-String
+                    data = json.loads(json_part)
 
-                print(message)
-                print("Sleeping for: ", clears_in)
+                    # Extrahiere die gewünschten Werte
+                    message = data["detail"]["message"]
+                    clears_in = data["detail"]["clears_in"]
 
-                time.sleep(clears_in)
-                continue
+                    print(message)
+                    print("Sleeping for: ", clears_in)
 
-            break
+                    time.sleep(clears_in)
+                    continue
 
-        return response, conversation.conversation_id
+                break
 
+            return response, conversation.conversation_id
