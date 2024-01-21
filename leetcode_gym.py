@@ -6,6 +6,7 @@ import shelve
 import time
 
 import pyperclip
+from selenium.common import WebDriverException
 
 import chatgpt_selenium_automation
 import chatgptapi_new
@@ -427,17 +428,36 @@ def access_questions(chatgpt_mode, driver):
     base_folders = ['Easy', 'Medium', 'Hard']
     process_folders('questions/', base_folders, chatgpt_mode, driver)
 
+def is_driver_alive(driver):
+    try:
+        # A simple operation to check if the driver is still responsive
+        driver.current_url
+        return True
+    except Exception:
+        return False
 
 def main():
-    # It's better to limit the use of global variables. Instead, pass them as arguments to functions where needed.
     chatgpt_mode = int(input("Bitte gewünschten Modus eingeben: "))
     # 0: Copy to Clipboard, 1: Selenium Method, 2: ChatGPT Plus WEB Api Method, 3: ChatGPT API Method
 
     driver = None
-    if chatgpt_mode == 1:
-        driver = chatgpt_selenium_automation.init_driver()
 
-    access_questions(chatgpt_mode, driver)
+    while True:
+        try:
+
+            if chatgpt_mode == 1:
+                if not is_driver_alive(driver):
+                    driver = chatgpt_selenium_automation.init_driver()
+
+            access_questions(chatgpt_mode, driver)
+            break  # Break the loop if everything went well
+
+        except Exception as e:
+            print(f"Ein Fehler ist aufgetreten: {e}")
+            # Here, you can decide whether to retry or not
+            print("Restarting the programm...")
+            time.sleep(5)
+            continue
 
 
 main()
