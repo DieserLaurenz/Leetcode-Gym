@@ -7,3 +7,5 @@ Retry logik einführen für leetcode scraper und sowas
 Irgendwie beim content fetch wird nicht zuerst der cache gecheckt kp wieso
 
 Der pastet nicht immer die vollständige Lösung
+
+Wenn der beim 2. Versuch gar keinen Code generiert dann nimmt er den ersten, fixen
