@@ -1,0 +1,129 @@
+{
+    "acRate": 24.416831834121055,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "questionId": "2952",
+    "frontendQuestionId": "2809",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Minimum Time to Make Array Sum At Most x",
+    "titleSlug": "minimum-time-to-make-array-sum-at-most-x",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        },
+        {
+            "name": "Sorting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDQ5",
+            "slug": "sorting"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int minimumTime(vector<int>& nums1, vector<int>& nums2, int x) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int minimumTime(List<Integer> nums1, List<Integer> nums2, int x) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def minimumTime(self, nums1, nums2, x):\n        \"\"\"\n        :type nums1: List[int]\n        :type nums2: List[int]\n        :type x: int\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def minimumTime(self, nums1: List[int], nums2: List[int], x: int) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int minimumTime(int* nums1, int nums1Size, int* nums2, int nums2Size, int x){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int MinimumTime(IList<int> nums1, IList<int> nums2, int x) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums1\n * @param {number[]} nums2\n * @param {number} x\n * @return {number}\n */\nvar minimumTime = function(nums1, nums2, x) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function minimumTime(nums1: number[], nums2: number[], x: number): number {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums1\n     * @param Integer[] $nums2\n     * @param Integer $x\n     * @return Integer\n     */\n    function minimumTime($nums1, $nums2, $x) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func minimumTime(_ nums1: [Int], _ nums2: [Int], _ x: Int) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun minimumTime(nums1: List<Int>, nums2: List<Int>, x: Int): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int minimumTime(List<int> nums1, List<int> nums2, int x) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func minimumTime(nums1 []int, nums2 []int, x int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums1\n# @param {Integer[]} nums2\n# @param {Integer} x\n# @return {Integer}\ndef minimum_time(nums1, nums2, x)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def minimumTime(nums1: List[Int], nums2: List[Int], x: Int): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn minimum_time(nums1: Vec<i32>, nums2: Vec<i32>, x: i32) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (minimum-time nums1 nums2 x)\n  (-> (listof exact-integer?) (listof exact-integer?) exact-integer? exact-integer?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec minimum_time(Nums1 :: [integer()], Nums2 :: [integer()], X :: integer()) -> integer().\nminimum_time(Nums1, Nums2, X) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec minimum_time(nums1 :: [integer], nums2 :: [integer], x :: integer) :: integer\n  def minimum_time(nums1, nums2, x) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given two 0-indexed integer arrays nums1 and nums2 of equal length. Every second, for all indices 0 <= i < nums1.length, value of nums1[i] is incremented by nums2[i]. After this is done, you can do the following operation:\n\nChoose an index 0 <= i < nums1.length and make nums1[i] = 0.\n\nYou are also given an integer x.\nReturn the minimum time in which you can make the sum of all elements of nums1 to be less than or equal to x, or -1 if this is not possible.\n\nExample 1:\n\nInput: nums1 = [1,2,3], nums2 = [1,2,3], x = 4\nOutput: 3\nExplanation: \nFor the 1st second, we apply the operation on i = 0. Therefore nums1 = [0,2+2,3+3] = [0,4,6]. \nFor the 2nd second, we apply the operation on i = 1. Therefore nums1 = [0+1,0,6+3] = [1,0,9]. \nFor the 3rd second, we apply the operation on i = 2. Therefore nums1 = [1+1,0+2,0] = [2,2,0]. \nNow sum of nums1 = 4. It can be shown that these operations are optimal, so we return 3.\n\n\nExample 2:\n\nInput: nums1 = [1,2,3], nums2 = [3,3,3], x = 4\nOutput: -1\nExplanation: It can be shown that the sum of nums1 will always be greater than x, no matter which operations are performed.\n\n\nConstraints:\n\n1 <= nums1.length <= 103\n1 <= nums1[i] <= 103\n0 <= nums2[i] <= 103\nnums1.length == nums2.length\n0 <= x <= 106\n\n"
+}

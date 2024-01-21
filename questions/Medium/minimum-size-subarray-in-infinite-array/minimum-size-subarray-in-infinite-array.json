@@ -1,0 +1,134 @@
+{
+    "acRate": 30.287632701206785,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "3141",
+    "frontendQuestionId": "2875",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Minimum Size Subarray in Infinite Array",
+    "titleSlug": "minimum-size-subarray-in-infinite-array",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Hash Table",
+            "id": "VG9waWNUYWdOb2RlOjY=",
+            "slug": "hash-table"
+        },
+        {
+            "name": "Sliding Window",
+            "id": "VG9waWNUYWdOb2RlOjU1ODIx",
+            "slug": "sliding-window"
+        },
+        {
+            "name": "Prefix Sum",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY4",
+            "slug": "prefix-sum"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int minSizeSubarray(vector<int>& nums, int target) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int minSizeSubarray(int[] nums, int target) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def minSizeSubarray(self, nums, target):\n        \"\"\"\n        :type nums: List[int]\n        :type target: int\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def minSizeSubarray(self, nums: List[int], target: int) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int minSizeSubarray(int* nums, int numsSize, int target) {\n    \n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int MinSizeSubarray(int[] nums, int target) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar minSizeSubarray = function(nums, target) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function minSizeSubarray(nums: number[], target: number): number {\n    \n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @param Integer $target\n     * @return Integer\n     */\n    function minSizeSubarray($nums, $target) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func minSizeSubarray(_ nums: [Int], _ target: Int) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun minSizeSubarray(nums: IntArray, target: Int): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int minSizeSubarray(List<int> nums, int target) {\n    \n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func minSizeSubarray(nums []int, target int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums\n# @param {Integer} target\n# @return {Integer}\ndef min_size_subarray(nums, target)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def minSizeSubarray(nums: Array[Int], target: Int): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn min_size_subarray(nums: Vec<i32>, target: i32) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (min-size-subarray nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec min_size_subarray(Nums :: [integer()], Target :: integer()) -> integer().\nmin_size_subarray(Nums, Target) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec min_size_subarray(nums :: [integer], target :: integer) :: integer\n  def min_size_subarray(nums, target) do\n    \n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed array nums and an integer target.\nA 0-indexed array infinite_nums is generated by infinitely appending the elements of nums to itself.\nReturn the length of the shortest subarray of the array infinite_nums with a sum equal to target. If there is no such subarray return -1.\n\nExample 1:\n\nInput: nums = [1,2,3], target = 5\nOutput: 2\nExplanation: In this example infinite_nums = [1,2,3,1,2,3,1,2,...].\nThe subarray in the range [1,2], has the sum equal to target = 5 and length = 2.\nIt can be proven that 2 is the shortest length of a subarray with sum equal to target = 5.\n\nExample 2:\n\nInput: nums = [1,1,1,2,3], target = 4\nOutput: 2\nExplanation: In this example infinite_nums = [1,1,1,2,3,1,1,1,2,3,1,1,...].\nThe subarray in the range [4,5], has the sum equal to target = 4 and length = 2.\nIt can be proven that 2 is the shortest length of a subarray with sum equal to target = 4.\n\nExample 3:\n\nInput: nums = [2,4,6,8], target = 3\nOutput: -1\nExplanation: In this example infinite_nums = [2,4,6,8,2,4,6,8,...].\nIt can be proven that there is no subarray with sum equal to target = 3.\n\n\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 105\n1 <= target <= 109\n\n"
+}

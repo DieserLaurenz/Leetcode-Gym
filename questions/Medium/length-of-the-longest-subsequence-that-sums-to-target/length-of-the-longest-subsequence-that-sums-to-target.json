@@ -1,0 +1,124 @@
+{
+    "acRate": 33.964887884581955,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "3106",
+    "frontendQuestionId": "2915",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Length of the Longest Subsequence That Sums to Target",
+    "titleSlug": "length-of-the-longest-subsequence-that-sums-to-target",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Dynamic Programming",
+            "id": "VG9waWNUYWdOb2RlOjEz",
+            "slug": "dynamic-programming"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int lengthOfLongestSubsequence(vector<int>& nums, int target) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int lengthOfLongestSubsequence(List<Integer> nums, int target) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def lengthOfLongestSubsequence(self, nums, target):\n        \"\"\"\n        :type nums: List[int]\n        :type target: int\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def lengthOfLongestSubsequence(self, nums: List[int], target: int) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int lengthOfLongestSubsequence(int* nums, int numsSize, int target){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int LengthOfLongestSubsequence(IList<int> nums, int target) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar lengthOfLongestSubsequence = function(nums, target) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function lengthOfLongestSubsequence(nums: number[], target: number): number {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @param Integer $target\n     * @return Integer\n     */\n    function lengthOfLongestSubsequence($nums, $target) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func lengthOfLongestSubsequence(_ nums: [Int], _ target: Int) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun lengthOfLongestSubsequence(nums: List<Int>, target: Int): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int lengthOfLongestSubsequence(List<int> nums, int target) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func lengthOfLongestSubsequence(nums []int, target int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums\n# @param {Integer} target\n# @return {Integer}\ndef length_of_longest_subsequence(nums, target)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def lengthOfLongestSubsequence(nums: List[Int], target: Int): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn length_of_longest_subsequence(nums: Vec<i32>, target: i32) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (length-of-longest-subsequence nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec length_of_longest_subsequence(Nums :: [integer()], Target :: integer()) -> integer().\nlength_of_longest_subsequence(Nums, Target) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec length_of_longest_subsequence(nums :: [integer], target :: integer) :: integer\n  def length_of_longest_subsequence(nums, target) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed array of integers nums, and an integer target.\nReturn the length of the longest subsequence of nums that sums up to target. If no such subsequence exists, return -1.\nA subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.\n\nExample 1:\n\nInput: nums = [1,2,3,4,5], target = 9\nOutput: 3\nExplanation: There are 3 subsequences with a sum equal to 9: [4,5], [1,3,5], and [2,3,4]. The longest subsequences are [1,3,5], and [2,3,4]. Hence, the answer is 3.\n\nExample 2:\n\nInput: nums = [4,1,3,2,1,5], target = 7\nOutput: 4\nExplanation: There are 5 subsequences with a sum equal to 7: [4,3], [4,1,2], [4,2,1], [1,1,5], and [1,3,2,1]. The longest subsequence is [1,3,2,1]. Hence, the answer is 4.\n\nExample 3:\n\nInput: nums = [1,1,5,4,5], target = 3\nOutput: -1\nExplanation: It can be shown that nums has no subsequence that sums up to 3.\n\n\nConstraints:\n\n1 <= nums.length <= 1000\n1 <= nums[i] <= 1000\n1 <= target <= 1000\n\n"
+}

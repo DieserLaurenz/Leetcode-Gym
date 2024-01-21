@@ -1,7 +1,9 @@
+import datetime
 import json
 import os
 import re
 import shelve
+import time
 
 import pyperclip
 
@@ -92,6 +94,44 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
         save_response(response_directory, response_filename, submission_response)
         return False, error_prompt, conversation_id
 
+def extract_time(text):
+    # Regular expression pattern to find time in the format HH:MM AM/PM
+    time_pattern = re.compile(r'\b\d{1,2}:\d{2}\s*(AM|PM)\b')
+
+    # Search for the pattern in the text
+    time_match = time_pattern.search(text)
+
+    if time_match:
+        extracted_time = time_match.group()
+        print(f"Extracted time: {extracted_time}")
+        return extracted_time
+    else:
+        print("Time not found in the text.")
+        return None
+
+
+def calculate_sleep(time_str):
+    # Parse the specified time
+    time_format = "%I:%M %p"  # Format like '2:51 PM'
+    specified_time = datetime.datetime.strptime(time_str, time_format)
+
+    # Get the current time
+    now = datetime.datetime.now()
+
+    # Replace the year, month, and day of specified_time with current year, month, and day
+    specified_time = specified_time.replace(year=now.year, month=now.month, day=now.day)
+
+    # Check if the specified time is already passed for today
+    if specified_time < now:
+        # If so, set it to the next day
+        specified_time += datetime.timedelta(days=1)
+
+    # Calculate the sleep duration in seconds
+    sleep_duration = (specified_time - now).total_seconds()
+
+    # Return the sleep_duration
+    return sleep_duration
+
 
 def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, attempt, conversation_id):
     lang_slug = snippet['langSlug']
@@ -163,7 +203,25 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
     else:
         print(f"Processing: {title_slug} in {lang_slug}.")
 
-    answer, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver, prompt, conversation_id)
+    response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver, prompt, conversation_id)
+
+    if response_message == "message_cap_error":
+        extracted_time = extract_time(response_text)
+        time_to_sleep = calculate_sleep(extracted_time)
+        print(response_message)
+        print(f"Time to sleep: {time_to_sleep}")
+        time.sleep(time_to_sleep + 60)
+        return False, "", conversation_id
+    elif response_message == "unusual_activity_error":
+        # TO DO
+        print(response_message)
+        time.sleep(5)
+        return False, "", conversation_id
+    elif response_message == "network_error":
+        # TO DO
+        print(response_message)
+        time.sleep(5)
+        return False, "", conversation_id
 
     submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
 
@@ -283,8 +341,14 @@ def process_question_with_selenium_method(json_file_path, subfolder_path, driver
                                                                                              driver)
             if is_success:
                 break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
-            attempt += 1
-            prompt = error_prompt
+            else:
+                if error_prompt == "":
+                    attempt = 0
+                    conversation_id = None
+                    continue
+                else:
+                    attempt += 1
+                    prompt = error_prompt
 
 
 def process_question_with_web_api(json_file_path, subfolder_path):

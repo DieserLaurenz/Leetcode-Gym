@@ -1,0 +1,134 @@
+{
+    "acRate": 50.46205909150071,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "3262",
+    "frontendQuestionId": "2971",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Find Polygon With the Largest Perimeter",
+    "titleSlug": "find-polygon-with-the-largest-perimeter",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        },
+        {
+            "name": "Sorting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDQ5",
+            "slug": "sorting"
+        },
+        {
+            "name": "Prefix Sum",
+            "id": "VG9waWNUYWdOb2RlOjYxMDY4",
+            "slug": "prefix-sum"
+        }
+    ],
+    "hasSolution": true,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    long long largestPerimeter(vector<int>& nums) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public long largestPerimeter(int[] nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def largestPerimeter(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def largestPerimeter(self, nums: List[int]) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "long long largestPerimeter(int* nums, int numsSize) {\n    \n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public long LargestPerimeter(int[] nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar largestPerimeter = function(nums) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function largestPerimeter(nums: number[]): number {\n    \n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return Integer\n     */\n    function largestPerimeter($nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func largestPerimeter(_ nums: [Int]) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun largestPerimeter(nums: IntArray): Long {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int largestPerimeter(List<int> nums) {\n    \n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func largestPerimeter(nums []int) int64 {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums\n# @return {Integer}\ndef largest_perimeter(nums)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def largestPerimeter(nums: Array[Int]): Long = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn largest_perimeter(nums: Vec<i32>) -> i64 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (largest-perimeter nums)\n  (-> (listof exact-integer?) exact-integer?)\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec largest_perimeter(Nums :: [integer()]) -> integer().\nlargest_perimeter(Nums) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec largest_perimeter(nums :: [integer]) :: integer\n  def largest_perimeter(nums) do\n    \n  end\nend"
+        }
+    ],
+    "content": "You are given an array of positive integers nums of length n.\nA polygon is a closed plane figure that has at least 3 sides. The longest side of a polygon is smaller than the sum of its other sides.\nConversely, if you have k (k >= 3) positive real numbers a1, a2, a3, ..., ak where a1 <= a2 <= a3 <= ... <= ak and a1 + a2 + a3 + ... + ak-1 > ak, then there always exists a polygon with k sides whose lengths are a1, a2, a3, ..., ak.\nThe perimeter of a polygon is the sum of lengths of its sides.\nReturn the largest possible perimeter of a polygon whose sides can be formed from nums, or -1 if it is not possible to create a polygon.\n\nExample 1:\n\nInput: nums = [5,5,5]\nOutput: 15\nExplanation: The only possible polygon that can be made from nums has 3 sides: 5, 5, and 5. The perimeter is 5 + 5 + 5 = 15.\n\nExample 2:\n\nInput: nums = [1,12,1,2,5,50,3]\nOutput: 12\nExplanation: The polygon with the largest perimeter which can be made from nums has 5 sides: 1, 1, 2, 3, and 5. The perimeter is 1 + 1 + 2 + 3 + 5 = 12.\nWe cannot have a polygon with either 12 or 50 as the longest side because it is not possible to include 2 or more smaller sides that have a greater sum than either of them.\nIt can be shown that the largest possible perimeter is 12.\n\nExample 3:\n\nInput: nums = [5,5,50]\nOutput: -1\nExplanation: There is no possible way to form a polygon from nums, as a polygon has at least 3 sides and 50 > 5 + 5.\n\n\nConstraints:\n\n3 <= n <= 105\n1 <= nums[i] <= 109\n\n"
+}
