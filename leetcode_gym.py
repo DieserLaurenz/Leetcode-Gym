@@ -194,7 +194,7 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
 def generate_prompt_content(question, snippet):
     return (
         f'Solve the following problem in {snippet["lang"]}. '
-        'Use the provided template as a starting point.\n\n'
+        'Solely fill in the provided function template with the code and return it\n\n' ## Hence common redecleration of the main function.
         f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
     )
 
