@@ -87,7 +87,7 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
         save_response(response_directory, response_filename, submission_response)
         print(f"Korrekte Antwort")
         return True, "", ""
-    elif attempt == 3:
+    elif attempt == 2:
         print(f"Versuche überschritten")
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
@@ -178,8 +178,8 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
         save_response(response_directory, response_filename, submission_response)
         print(f"Korrekte Antwort")
         return True, "", ""
-    elif attempt == 3:
-        print(f"Versuche überschritten")
+    elif attempt == 2:
+        print(f"Fehlerhafte Antwort und Versuche überschritten")
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
             cache[cache_key] = submission_response
