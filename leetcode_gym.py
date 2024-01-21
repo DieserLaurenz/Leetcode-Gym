@@ -17,8 +17,13 @@ def read_json_file(file_path):
         return json.load(json_file)
 
 
-def save_response(response_directory, response_filename, submission_response):
-    with open(os.path.join(response_directory, response_filename), 'w') as file:
+def save_response(response_directory, response_filename, submission_response, lang):
+    lang_response_directory = os.path.join(response_directory, lang)
+
+    if not os.path.exists(lang_response_directory):
+        os.makedirs(lang_response_directory)
+
+    with open(os.path.join(lang_response_directory, response_filename), 'w') as file:
         json.dump(submission_response, file, indent=4)
 
 
@@ -93,6 +98,7 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
         save_response(response_directory, response_filename, submission_response)
         return False, error_prompt, conversation_id
+
 
 def extract_time(text):
     # Regular expression pattern to find time in the format HH:MM AM/PM
@@ -187,6 +193,7 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
 
 def process_snippet_with_selenium_method(prompt, subfolder_path, question, snippet, attempt, conversation_id, driver):
     lang_slug = snippet['langSlug']
+    lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
     cache_path = 'snippet_cache.db'
@@ -201,9 +208,11 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
         return True, "", ""
     else:
-        print(f"Processing: {title_slug} in {lang_slug}.")
+        print(f"Processing: {title_slug} in {lang_slug}.\nAttempt: {attempt}")
 
-    response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver, prompt, conversation_id)
+    response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver,
+                                                                                                                prompt,
+                                                                                                                conversation_id)
 
     if response_message == "message_cap_error":
         extracted_time = extract_time(response_text)
@@ -213,15 +222,31 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         time.sleep(time_to_sleep + 60)
         return False, "", conversation_id
     elif response_message == "unusual_activity_error":
-        # TO DO
+
         print(response_message)
         time.sleep(5)
         return False, "", conversation_id
     elif response_message == "network_error":
-        # TO DO
+
         print(response_message)
         time.sleep(5)
         return False, "", conversation_id
+    elif response_message == "network_error":
+
+        print(response_message)
+        time.sleep(5)
+        return False, "", conversation_id
+    elif response_message == "unknown_error":
+
+        print(response_message)
+        time.sleep(5)
+        return False, "", conversation_id
+    elif extracted_code == "":
+
+        print("No code found")
+        time.sleep(5)
+        return False, "", conversation_id
+
 
     submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
 
@@ -232,8 +257,8 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
             cache[cache_key] = submission_response
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response)
-        print(f"Korrekte Antwort")
+        save_response(response_directory, response_filename, submission_response, lang)
+        print(f"Korrekte Antwort in Versuch: {attempt}")
         return True, "", ""
     elif attempt == 3:
         print(f"Versuche überschritten")
@@ -242,17 +267,17 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
             cache[cache_key] = submission_response
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
-        print(f"Fehler-Antwort für Versuch {attempt + 1}")
+        print(f"Fehlerhafte Antwort in Versuch: {attempt}")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response)
+        save_response(response_directory, response_filename, submission_response, lang)
         return False, error_prompt, conversation_id
 
 
 def generate_prompt_content(question, snippet):
     return (
         f'Solve the following problem in {snippet["lang"]}. '
-        'Solely fill in the provided function template with the code and return it\n\n' ## Hence common redecleration of the main function.
+        'Solely fill in the provided function template with the code and return it\n\n'  ## Hence common redecleration of the main function.
         f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
     )
 
@@ -280,6 +305,8 @@ def extract_info_and_generate_prompt(response):
         error_detail = f"Execution time of the code exceeded the time limit. \n\nTest cases passed: {testcases_passed}/{total_testcases}"
     elif error_type == "Wrong Answer":
         error_detail = f"Solution produced a wrong answer. Test cases passed: {testcases_passed}/{total_testcases}"
+    elif error_type == "Memory Limit Exceeded":
+        error_detail = f"Execution of the code exceeded the memory limit. \n\nTest cases passed: {testcases_passed}/{total_testcases}"
     else:
         error_detail = error_type
 
@@ -343,6 +370,7 @@ def process_question_with_selenium_method(json_file_path, subfolder_path, driver
                 break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
             else:
                 if error_prompt == "":
+                    print("Retrying to fetch the answer from ChatGPT...")
                     attempt = 0
                     conversation_id = None
                     continue
@@ -410,5 +438,6 @@ def main():
         driver = chatgpt_selenium_automation.init_driver()
 
     access_questions(chatgpt_mode, driver)
+
 
 main()

@@ -94,6 +94,8 @@ def get_response(driver):
             return "successful", last_response, last_extracted_code
 
         return "successful", last_response, ""
+    else:
+        return "unknown_error", "", ""
 
 
 def send_message(driver, prompt, conversation_id=None):

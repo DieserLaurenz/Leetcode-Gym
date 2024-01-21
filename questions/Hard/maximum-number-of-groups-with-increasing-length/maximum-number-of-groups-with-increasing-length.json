@@ -1,0 +1,139 @@
+{
+    "acRate": 19.111467824937446,
+    "difficulty": "Hard",
+    "freqBar": null,
+    "questionId": "2919",
+    "frontendQuestionId": "2790",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Maximum Number of Groups With Increasing Length",
+    "titleSlug": "maximum-number-of-groups-with-increasing-length",
+    "topicTags": [
+        {
+            "name": "Array",
+            "id": "VG9waWNUYWdOb2RlOjU=",
+            "slug": "array"
+        },
+        {
+            "name": "Math",
+            "id": "VG9waWNUYWdOb2RlOjg=",
+            "slug": "math"
+        },
+        {
+            "name": "Binary Search",
+            "id": "VG9waWNUYWdOb2RlOjEx",
+            "slug": "binary-search"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        },
+        {
+            "name": "Sorting",
+            "id": "VG9waWNUYWdOb2RlOjYxMDQ5",
+            "slug": "sorting"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    int maxIncreasingGroups(vector<int>& usageLimits) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public int maxIncreasingGroups(List<Integer> usageLimits) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def maxIncreasingGroups(self, usageLimits):\n        \"\"\"\n        :type usageLimits: List[int]\n        :rtype: int\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def maxIncreasingGroups(self, usageLimits: List[int]) -> int:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "int maxIncreasingGroups(int* usageLimits, int usageLimitsSize){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public int MaxIncreasingGroups(IList<int> usageLimits) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} usageLimits\n * @return {number}\n */\nvar maxIncreasingGroups = function(usageLimits) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function maxIncreasingGroups(usageLimits: number[]): number {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $usageLimits\n     * @return Integer\n     */\n    function maxIncreasingGroups($usageLimits) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func maxIncreasingGroups(_ usageLimits: [Int]) -> Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun maxIncreasingGroups(usageLimits: List<Int>): Int {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  int maxIncreasingGroups(List<int> usageLimits) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func maxIncreasingGroups(usageLimits []int) int {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} usage_limits\n# @return {Integer}\ndef max_increasing_groups(usage_limits)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def maxIncreasingGroups(usageLimits: List[Int]): Int = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn max_increasing_groups(usage_limits: Vec<i32>) -> i32 {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (max-increasing-groups usageLimits)\n  (-> (listof exact-integer?) exact-integer?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec max_increasing_groups(UsageLimits :: [integer()]) -> integer().\nmax_increasing_groups(UsageLimits) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec max_increasing_groups(usage_limits :: [integer]) :: integer\n  def max_increasing_groups(usage_limits) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed array usageLimits of length n.\nYour task is to create groups using numbers from 0 to n - 1, ensuring that each number, i, is used no more than usageLimits[i] times in total across all groups. You must also satisfy the following conditions:\n\nEach group must consist of distinct numbers, meaning that no duplicate numbers are allowed within a single group.\nEach group (except the first one) must have a length strictly greater than the previous group.\n\nReturn an integer denoting the maximum number of groups you can create while satisfying these conditions.\n\nExample 1:\n\nInput: usageLimits = [1,2,5]\nOutput: 3\nExplanation: In this example, we can use 0 at most once, 1 at most twice, and 2 at most five times.\nOne way of creating the maximum number of groups while satisfying the conditions is: \nGroup 1 contains the number [2].\nGroup 2 contains the numbers [1,2].\nGroup 3 contains the numbers [0,1,2]. \nIt can be shown that the maximum number of groups is 3. \nSo, the output is 3. \nExample 2:\n\nInput: usageLimits = [2,1,2]\nOutput: 2\nExplanation: In this example, we can use 0 at most twice, 1 at most once, and 2 at most twice.\nOne way of creating the maximum number of groups while satisfying the conditions is:\nGroup 1 contains the number [0].\nGroup 2 contains the numbers [1,2].\nIt can be shown that the maximum number of groups is 2.\nSo, the output is 2. \n\nExample 3:\n\nInput: usageLimits = [1,1]\nOutput: 1\nExplanation: In this example, we can use both 0 and 1 at most once.\nOne way of creating the maximum number of groups while satisfying the conditions is:\nGroup 1 contains the number [0].\nIt can be shown that the maximum number of groups is 1.\nSo, the output is 1. \n\n\nConstraints:\n\n1 <= usageLimits.length <= 105\n1 <= usageLimits[i] <= 109\n\n"
+}

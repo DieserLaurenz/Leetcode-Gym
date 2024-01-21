@@ -1,0 +1,124 @@
+{
+    "acRate": 29.976001656738415,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "2828",
+    "frontendQuestionId": "2734",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Lexicographically Smallest String After Substring Operation",
+    "titleSlug": "lexicographically-smallest-string-after-substring-operation",
+    "topicTags": [
+        {
+            "name": "String",
+            "id": "VG9waWNUYWdOb2RlOjEw",
+            "slug": "string"
+        },
+        {
+            "name": "Greedy",
+            "id": "VG9waWNUYWdOb2RlOjE3",
+            "slug": "greedy"
+        }
+    ],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    string smallestString(string s) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public String smallestString(String s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def smallestString(self, s):\n        \"\"\"\n        :type s: str\n        :rtype: str\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def smallestString(self, s: str) -> str:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "char * smallestString(char * s){\n\n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public string SmallestString(string s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {string} s\n * @return {string}\n */\nvar smallestString = function(s) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function smallestString(s: string): string {\n\n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param String $s\n     * @return String\n     */\n    function smallestString($s) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func smallestString(_ s: String) -> String {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun smallestString(s: String): String {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  String smallestString(String s) {\n\n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func smallestString(s string) string {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {String} s\n# @return {String}\ndef smallest_string(s)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def smallestString(s: String): String = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn smallest_string(s: String) -> String {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (smallest-string s)\n  (-> string? string?)\n\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec smallest_string(S :: unicode:unicode_binary()) -> unicode:unicode_binary().\nsmallest_string(S) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec smallest_string(s :: String.t) :: String.t\n  def smallest_string(s) do\n\n  end\nend"
+        }
+    ],
+    "content": "You are given a string s consisting of only lowercase English letters. In one operation, you can do the following:\n\nSelect any non-empty substring of s, possibly the entire string, then replace each one of its characters with the previous character of the English alphabet. For example, 'b' is converted to 'a', and 'a' is converted to 'z'.\n\nReturn the lexicographically smallest string you can obtain after performing the above operation exactly once.\nA substring is a contiguous sequence of characters in a string.\nA string x is lexicographically smaller than a string y of the same length if x[i] comes before y[i] in alphabetic order for the first position i such that x[i] != y[i].\n\nExample 1:\n\nInput: s = \"cbabc\"\nOutput: \"baabc\"\nExplanation: We apply the operation on the substring starting at index 0, and ending at index 1 inclusive. \nIt can be proven that the resulting string is the lexicographically smallest. \n\nExample 2:\n\nInput: s = \"acbbc\"\nOutput: \"abaab\"\nExplanation: We apply the operation on the substring starting at index 1, and ending at index 4 inclusive. \nIt can be proven that the resulting string is the lexicographically smallest. \n\nExample 3:\n\nInput: s = \"leetcode\"\nOutput: \"kddsbncd\"\nExplanation: We apply the operation on the entire string. \nIt can be proven that the resulting string is the lexicographically smallest. \n\n\nConstraints:\n\n1 <= s.length <= 3 * 105\ns consists of lowercase English letters\n\n"
+}
