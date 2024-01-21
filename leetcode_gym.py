@@ -89,9 +89,13 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
         return True, "", ""
     elif attempt == 2:
         print(f"Versuche überschritten")
+        error_prompt = extract_info_and_generate_prompt(submission_response)
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
             cache[cache_key] = submission_response
+            print("Answer saved to cache")
+        return False, error_prompt, conversation_id
+
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
         print(f"Fehler-Antwort für Versuch {attempt + 1}")
@@ -180,9 +184,12 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
         return True, "", ""
     elif attempt == 2:
         print(f"Fehlerhafte Antwort und Versuche überschritten")
+        error_prompt = extract_info_and_generate_prompt(submission_response)
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
             cache[cache_key] = submission_response
+            print("Answer saved to cache")
+        return False, error_prompt, conversation_id
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
         print(f"Fehler-Antwort für Versuch {attempt + 1}")
@@ -258,10 +265,12 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         return True, "", ""
     elif attempt == 2:
         print(f"Fehlerhafte Antwort und Versuche überschritten")
+        error_prompt = extract_info_and_generate_prompt(submission_response)
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
             cache[cache_key] = submission_response
             print("Answer saved to cache")
+        return False, error_prompt, conversation_id
     else:
         print(f"Fehlerhafte Antwort in Versuch: {attempt}")
         error_prompt = extract_info_and_generate_prompt(submission_response)
