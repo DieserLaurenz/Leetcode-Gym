@@ -61,6 +61,7 @@ def collect_code_input():
 
 def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, attempt, conversation_id):
     lang_slug = snippet['langSlug']
+    lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
     cache_path = 'snippet_cache.db'
@@ -84,24 +85,22 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
             cache[cache_key] = submission_response
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response)
+        save_response(response_directory, response_filename, submission_response, lang)
         print(f"Korrekte Antwort")
         return True, "", ""
-    elif attempt == 2:
-        print(f"Versuche überschritten")
-        error_prompt = extract_info_and_generate_prompt(submission_response)
-        with shelve.open(cache_path) as cache:
-            cache_key = f"{question_id}_{lang_slug}"
-            cache[cache_key] = submission_response
-            print("Answer saved to cache")
-        return False, error_prompt, conversation_id
-
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
-        print(f"Fehler-Antwort für Versuch {attempt + 1}")
+        print(f"Fehlerhafte Antwort für Versuch {attempt}")
+
+        if attempt == 2:
+            print(f"Versuche überschritten")
+            with shelve.open(cache_path) as cache:
+                cache_key = f"{question_id}_{lang_slug}"
+                cache[cache_key] = submission_response
+                print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response)
+        save_response(response_directory, response_filename, submission_response, lang)
         return False, error_prompt, conversation_id
 
 
@@ -146,6 +145,7 @@ def calculate_sleep(time_str):
 
 def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, attempt, conversation_id):
     lang_slug = snippet['langSlug']
+    lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
     cache_path = 'snippet_cache.db'
@@ -179,23 +179,22 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
             cache[cache_key] = submission_response
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response)
+        save_response(response_directory, response_filename, submission_response, lang)
         print(f"Korrekte Antwort")
         return True, "", ""
-    elif attempt == 2:
-        print(f"Fehlerhafte Antwort und Versuche überschritten")
-        error_prompt = extract_info_and_generate_prompt(submission_response)
-        with shelve.open(cache_path) as cache:
-            cache_key = f"{question_id}_{lang_slug}"
-            cache[cache_key] = submission_response
-            print("Answer saved to cache")
-        return False, error_prompt, conversation_id
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
-        print(f"Fehler-Antwort für Versuch {attempt + 1}")
+        print(f"Fehlerhafte Antwort für Versuch {attempt}")
+
+        if attempt == 2:
+            print(f"Versuche überschritten")
+            with shelve.open(cache_path) as cache:
+                cache_key = f"{question_id}_{lang_slug}"
+                cache[cache_key] = submission_response
+                print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response)
+        save_response(response_directory, response_filename, submission_response, lang)
         return False, error_prompt, conversation_id
 
 
@@ -263,17 +262,16 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
         save_response(response_directory, response_filename, submission_response, lang)
         return True, "", ""
-    elif attempt == 2:
-        print(f"Fehlerhafte Antwort und Versuche überschritten")
-        error_prompt = extract_info_and_generate_prompt(submission_response)
-        with shelve.open(cache_path) as cache:
-            cache_key = f"{question_id}_{lang_slug}"
-            cache[cache_key] = submission_response
-            print("Answer saved to cache")
-        return False, error_prompt, conversation_id
     else:
-        print(f"Fehlerhafte Antwort in Versuch: {attempt}")
         error_prompt = extract_info_and_generate_prompt(submission_response)
+        print(f"Fehlerhafte Antwort für Versuch {attempt}")
+
+        if attempt == 2:
+            print(f"Versuche überschritten")
+            with shelve.open(cache_path) as cache:
+                cache_key = f"{question_id}_{lang_slug}"
+                cache[cache_key] = submission_response
+                print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
         save_response(response_directory, response_filename, submission_response, lang)
