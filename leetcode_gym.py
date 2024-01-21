@@ -247,22 +247,24 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
 
     # Überprüfe, ob die Lösung akzeptiert wurde
     if submission_response.get("status_msg") == 'Accepted':
+        print(f"Korrekte Antwort in Versuch: {attempt}")
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
             cache[cache_key] = submission_response
+            print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
         save_response(response_directory, response_filename, submission_response, lang)
-        print(f"Korrekte Antwort in Versuch: {attempt}")
         return True, "", ""
-    elif attempt == 3:
-        print(f"Versuche überschritten")
+    elif attempt == 2:
+        print(f"Fehlerhafte Antwort und Versuche überschritten")
         with shelve.open(cache_path) as cache:
             cache_key = f"{question_id}_{lang_slug}"
             cache[cache_key] = submission_response
+            print("Answer saved to cache")
     else:
-        error_prompt = extract_info_and_generate_prompt(submission_response)
         print(f"Fehlerhafte Antwort in Versuch: {attempt}")
+        error_prompt = extract_info_and_generate_prompt(submission_response)
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
         save_response(response_directory, response_filename, submission_response, lang)
@@ -368,6 +370,7 @@ def process_question_with_selenium_method(json_file_path, subfolder_path, driver
                     print("Retrying to fetch the answer from ChatGPT...")
                     attempt = 0
                     conversation_id = None
+                    prompt = generate_prompt_content(question, snippet)
                     continue
                 else:
                     attempt += 1
