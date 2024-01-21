@@ -1,5 +1,6 @@
 Check if the language slugs are all handled correctly -- sollte eigentlich
 
+Startet möglicherweise nicht bei der Korrekten Aufgabe erneut. Schauen was das Problem hier ist
 
 Retry logik einführen für leetcode scraper und sowas
 
