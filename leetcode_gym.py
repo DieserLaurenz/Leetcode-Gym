@@ -232,11 +232,6 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         print(response_message)
         time.sleep(5)
         return False, "", conversation_id
-    elif response_message == "network_error":
-
-        print(response_message)
-        time.sleep(5)
-        return False, "", conversation_id
     elif response_message == "unknown_error":
 
         print(response_message)
@@ -247,7 +242,6 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         print("No code found")
         time.sleep(5)
         return False, "", conversation_id
-
 
     submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
 
@@ -428,6 +422,7 @@ def access_questions(chatgpt_mode, driver):
     base_folders = ['Easy', 'Medium', 'Hard']
     process_folders('questions/', base_folders, chatgpt_mode, driver)
 
+
 def is_driver_alive(driver):
     try:
         # A simple operation to check if the driver is still responsive
@@ -435,6 +430,7 @@ def is_driver_alive(driver):
         return True
     except Exception:
         return False
+
 
 def main():
     chatgpt_mode = int(input("Bitte gewünschten Modus eingeben: "))
