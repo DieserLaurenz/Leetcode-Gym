@@ -87,6 +87,9 @@ def get_response(driver):
     elif message_cap_errors:
         return "message_cap_error", message_cap_errors[-1].text, ""
     elif successful_responses:
+        if len(extracted_codes) != len(successful_responses):
+            return "codes_responses_unequal_error", "", ""
+
         last_response = successful_responses[-1].text
 
         if extracted_codes:

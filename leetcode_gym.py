@@ -18,15 +18,13 @@ def read_json_file(file_path):
         return json.load(json_file)
 
 
-def save_response(response_directory, response_filename, submission_response, lang, extracted_code):
+def save_response(lang_response_directory, response_filename, submission_response, extracted_code):
     # Ensure extracted_code is a string
     if not isinstance(extracted_code, str):
         extracted_code = str(extracted_code)
 
     # Create a new key in submission_response for the extracted code
     submission_response['code'] = extracted_code
-
-    lang_response_directory = os.path.join(response_directory, lang)
 
     if not os.path.exists(lang_response_directory):
         os.makedirs(lang_response_directory)
@@ -157,6 +155,7 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
     question_id = question['questionId']
     cache_path = 'snippet_cache.db'
     response_directory = os.path.join(subfolder_path, 'responses')
+    lang_response_directory = os.path.join(response_directory, lang)
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
     if lang_slug in ('python', 'python3'):
@@ -186,7 +185,7 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
             cache[cache_key] = submission_response
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
+        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         print(f"Korrekte Antwort")
         return True, "", ""
     else:
@@ -201,17 +200,33 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
                 print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
+        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         return False, error_prompt, conversation_id
 
 
-def process_snippet_with_selenium_method(prompt, subfolder_path, question, snippet, attempt, conversation_id, driver):
+def check_for_files(dir):
+    if os.path.exists(dir):
+        return any(os.scandir(dir))
+    else:
+        return False
+
+
+def delete_all_files_in_directory(dir):
+    for filename in os.listdir(dir):
+        file_path = os.path.join(dir, filename)
+        # Sicherstellen, dass es eine Datei ist und kein Verzeichnis
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+
+def process_snippet_with_selenium_method(prompt, response_directory, question, snippet, attempt, conversation_id,
+                                         driver):
     lang_slug = snippet['langSlug']
     lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
     cache_path = 'snippet_cache.db'
-    response_directory = os.path.join(subfolder_path, 'responses')
+    lang_response_directory = os.path.join(response_directory, lang)
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
     if lang_slug in ('python', 'python3'):
@@ -223,6 +238,9 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         return True, "", ""
     else:
         print(f"Processing: {title_slug} in {lang_slug}.\nAttempt: {attempt}")
+        if check_for_files(lang_response_directory) and attempt == 0:
+            print(f"Files found but attempt 0: {title_slug} in {lang_slug}. Deleting...")
+            delete_all_files_in_directory(lang_response_directory)
 
     response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver,
                                                                                                                 prompt,
@@ -250,6 +268,11 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
         print(response_message)
         time.sleep(5)
         return False, "", conversation_id
+    elif response_message == "codes_responses_unequal_error":
+
+        print("Amount of codes and responses not equal")
+        time.sleep(5)
+        return False, "", conversation_id
     elif extracted_code == "":
 
         print("No code found")
@@ -267,7 +290,7 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
             print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
+        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         return True, "", ""
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
@@ -281,7 +304,7 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
                 print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
+        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         return False, error_prompt, conversation_id
 
 
@@ -365,6 +388,7 @@ def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
 
 def process_question_with_selenium_method(json_file_path, subfolder_path, driver):
     question = read_json_file(json_file_path)
+    response_directory = os.path.join(subfolder_path, 'responses')
 
     for snippet in question["codeSnippets"]:
         attempt = 0
@@ -372,7 +396,7 @@ def process_question_with_selenium_method(json_file_path, subfolder_path, driver
         prompt = generate_prompt_content(question, snippet)
 
         while attempt < 3:
-            is_success, error_prompt, conversation_id = process_snippet_with_selenium_method(prompt, subfolder_path,
+            is_success, error_prompt, conversation_id = process_snippet_with_selenium_method(prompt, response_directory,
                                                                                              question,
                                                                                              snippet,
                                                                                              attempt, conversation_id,
