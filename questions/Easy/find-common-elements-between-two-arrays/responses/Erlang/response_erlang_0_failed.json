@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 8: illegal guard expression",
+    "full_compile_error": "Line 11: Char 8: illegal guard expression\n%   11|     if lists:member(H, List) ->\n%     |        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3206",
+    "task_finish_time": 1706241890043,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1157040052",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec find_intersection_values(Nums1 :: [integer()], Nums2 :: [integer()]) -> [integer()].\nfind_intersection_values(Nums1, Nums2) ->\n    UniqueNums1 = lists:usort(Nums1),\n    UniqueNums2 = lists:usort(Nums2),\n    Count1 = count_intersection(UniqueNums1, Nums2),\n    Count2 = count_intersection(UniqueNums2, Nums1),\n    [Count1, Count2].\n\ncount_intersection([], _) -> 0;\ncount_intersection([H|T], List) ->\n    if lists:member(H, List) ->\n        1 + count_intersection(T, List);\n    true ->\n        count_intersection(T, List)\n    end."
+}

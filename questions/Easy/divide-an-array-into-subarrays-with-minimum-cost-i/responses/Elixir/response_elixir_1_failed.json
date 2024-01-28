@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "** (ArgumentError) cannot pipe nums |> (Enum.at(i - 1) + nums) into Enum.at(j - 1) + nums, the :+ operator can only take one argument\n    (elixir 1.15.7) lib/macro.ex:371: Macro.pipe/3\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 12:     Solution.minimum_cost/1\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 12:     Solution.minimum_cost/1",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3263",
+    "task_finish_time": 1706191493402,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1156519203",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_cost(nums :: [integer]) :: integer\n  def minimum_cost(nums) do\n    n = length(nums)\n    min_cost = 1_000_000\n\n    # Iterate to find the first split point\n    for i <- 1..(n - 2) do\n      # Iterate to find the second split point\n      for j <- (i + 1)..(n - 1) do\n        # Correctly calculate the cost\n        cost = nums |> Enum.at(i - 1) + nums |> Enum.at(j - 1) + nums |> Enum.at(n - 1)\n\n        # Update the minimum cost\n        if cost < min_cost do\n          min_cost = cost\n        end\n      end\n    end\n\n    min_cost\n  end\nend"
+}

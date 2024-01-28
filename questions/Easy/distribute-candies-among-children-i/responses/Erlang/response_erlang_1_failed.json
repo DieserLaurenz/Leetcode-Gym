@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 7: Char 1: head mismatch",
+    "full_compile_error": "Line 7: Char 1: head mismatch\n%    7| distribute_candies(N, Limit, Child, Count) when N > 0, Child < 3 ->\n%     | ^\nLine 3: Char 5: function distribute_candies/4 undefined\n%    3|     distribute_candies(N, Limit, 0, 0).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3199",
+    "task_finish_time": 1706175711639,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1156361893",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec distribute_candies(N :: integer(), Limit :: integer()) -> integer().\ndistribute_candies(N, Limit) ->\n    distribute_candies(N, Limit, 0, 0).\n\ndistribute_candies(0, _, Count) ->\n    Count + 1;\ndistribute_candies(N, Limit, Child, Count) when N > 0, Child < 3 ->\n    % Count ways for each possible candy number for the current child\n    NewCount = lists:foldl(fun(Candies, Acc) ->\n                               distribute_candies(N - Candies, Limit, Child + 1, Acc)\n                           end, Count, lists:seq(0, min(N, Limit))),\n    NewCount;\ndistribute_candies(_, _, 3, Count) ->\n    % If all children have been considered, return the current count\n    Count."
+}

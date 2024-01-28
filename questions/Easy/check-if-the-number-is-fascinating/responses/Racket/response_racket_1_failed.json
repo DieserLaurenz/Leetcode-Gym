@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 13: Char 17: string-index: unbound identifier",
+    "full_compile_error": "Line 13: Char 17: string-index: unbound identifier\n  in: string-index\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:24:16",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2824",
+    "task_finish_time": 1706119610362,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1155793029",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (is-fascinating n)\n  (-> exact-integer? boolean?)\n\n  (let ([concatenated (string-append (number->string n) \n                                     (number->string (* 2 n)) \n                                     (number->string (* 3 n)))])\n    (and (= (string-length concatenated) 9)\n         (not (string-contains-char? concatenated #\\0))\n         (for/and ([digit (in-range 1 10)])\n           (string-contains-char? concatenated (integer->char (+ digit 48)))))))\n\n(define (string-contains-char? str char)\n  (not (equal? (string-index str char) #f)))"
+}

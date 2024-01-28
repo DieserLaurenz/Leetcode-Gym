@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 5: head mismatch",
+    "full_compile_error": "Line 10: Char 5: head mismatch\n%   10|     FindLongestSubarray(_, [], _, MaxLength, _) ->\n%     |     ^\nLine 1: Char 2: spec for undefined function longest_alternating_subarray/2\n%    1| -spec longest_alternating_subarray(Nums :: [integer()], Threshold :: integer()) -> integer().\n%     |  ^\nLine 34: Char 13: function longest_alternating_subarray/2 undefined\n%   34|       Ret = longest_alternating_subarray(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2866",
+    "task_finish_time": 1706420982119,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1158922446",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec longest_alternating_subarray(Nums :: [integer()], Threshold :: integer()) -> integer().\nlongest_alternating_subarray(Nums, Threshold) ->\n    FindLongestSubarray = fun(FindLongestSubarray, [H | T], CurrentLength, MaxLength, LastMod) ->\n        if\n            H =< Threshold, H rem 2 /= LastMod ->\n                FindLongestSubarray(FindLongestSubarray, T, CurrentLength + 1, max(CurrentLength + 1, MaxLength), H rem 2);\n            true ->\n                FindLongestSubarray(FindLongestSubarray, T, 0, MaxLength, 2) % 2 is never a valid mod, so it resets the search\n        end;\n    FindLongestSubarray(_, [], _, MaxLength, _) ->\n        MaxLength\n    end,\n    FilteredNums = [N || N <- Nums, N =< Threshold, N rem 2 == 0],\n    lists:foldl(fun(N, Acc) -> \n                    max(Acc, FindLongestSubarray(FindLongestSubarray, Nums -- [N], 1, 1, N rem 2))\n                end, 0, FilteredNums)."
+}

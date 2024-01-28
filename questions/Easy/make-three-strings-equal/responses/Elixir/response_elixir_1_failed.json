@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "** (ArgumentError) cannot invoke defp/2 inside function/macro\n    (elixir 1.15.7) lib/kernel.ex:6593: Kernel.assert_no_function_scope/3\n    (elixir 1.15.7) lib/kernel.ex:5202: Kernel.define/4\n    (elixir 1.15.7) expanding macro: Kernel.defp/2\nLine 5:     Solution.find_minimum_operations/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3207",
+    "task_finish_time": 1706441816439,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1159137013",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_minimum_operations(s1 :: String.t, s2 :: String.t, s3 :: String.t) :: integer\n  def find_minimum_operations(s1, s2, s3) do\n    # Function to recursively check if strings can be made equal and count operations\n    defp find_min_ops([h | t], acc) when is_list(h) do\n      case Enum.all?(t, fn x -> List.first(x) == List.first(h) end) do\n        true -> find_min_ops(Enum.map([h | t], &List.delete_at(&1, 0)), acc + 1)\n        false -> find_min_ops(Enum.map([h | t], fn x -> if length(x) > length(h), do: List.delete_at(x, -1), else: x end), acc + 1)\n      end\n    end\n    defp find_min_ops(lists, acc) do\n      lengths = Enum.map(lists, &length(&1))\n      if Enum.uniq(lengths) == [1], do: acc, else: -1\n    end\n\n    # Convert strings to lists of characters for easier manipulation\n    lists_of_chars = [s1, s2, s3] |> Enum.map(&String.graphemes/1)\n\n    # Initial check for equal lengths, if so, check if they are already equal\n    if Enum.uniq(Enum.map(lists_of_chars, &length(&1))) == [1] and Enum.uniq(lists_of_chars) == [Enum.at(lists_of_chars, 0)] do\n      0\n    else\n      find_min_ops(lists_of_chars, 0)\n    end\n  end\nend"
+}

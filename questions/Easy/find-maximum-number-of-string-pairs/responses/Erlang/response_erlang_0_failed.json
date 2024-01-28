@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 5: Char 1: syntax error before: CountPairs",
+    "full_compile_error": "Line 5: Char 1: syntax error before: CountPairs\n%    5| CountPairs([], Count) ->\n%     | ^\nLine 3: Char 5: variable 'CountPairs' is unbound\n%    3|     CountPairs(Words, 0).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2847",
+    "task_finish_time": 1706264752864,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1157295660",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_number_of_string_pairs(Words :: [unicode:unicode_binary()]) -> integer().\nmaximum_number_of_string_pairs(Words) ->\n    CountPairs(Words, 0).\n\nCountPairs([], Count) -> \n    Count;\nCountPairs([Word|Rest], Count) ->\n    ReversedWord = lists:reverse(binary_to_list(Word)),\n    case lists:member(ReversedWord, Rest) of\n        true ->\n            FilteredRest = lists:delete(ReversedWord, Rest),\n            CountPairs(FilteredRest, Count + 1);\n        false ->\n            CountPairs(Rest, Count)\n    end."
+}

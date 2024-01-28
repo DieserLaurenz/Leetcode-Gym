@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 20: error: missing parameter type (in solution.scala)",
+    "full_compile_error": "Line 20: error: missing parameter type (in solution.scala)\n        default =>\n        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3207",
+    "task_finish_time": 1706435937019,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1159078048",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n  def findMinimumOperations(s1: String, s2: String, s3: String): Int = {\n    // Convert strings to lists for easier manipulation from the end\n    val l1 = s1.toList\n    val l2 = s2.toList\n    val l3 = s3.toList\n\n    def trimEnds(l1: List[Char], l2: List[Char], l3: List[Char], acc: Int): Int = {\n      (l1, l2, l3) match {\n        // Case when all three lists are non-empty and their last elements are equal\n        case (h1 :: t1, h2 :: t2, h3 :: t3) if h1 == h2 && h2 == h3 =>\n          trimEnds(t1, t2, t3, acc)\n        // Case when any two lists are empty and the third is non-empty\n        case (Nil, Nil, _ :: _) | (Nil, _ :: _, Nil) | (_ :: _, Nil, Nil) =>\n          acc + l1.length + l2.length + l3.length // Sum the lengths of all non-empty lists\n        // Case when all lists are empty, meaning they have been made equal\n        case (Nil, Nil, Nil) =>\n          acc\n        // Default case when it's not possible to equalize the lists\n        default =>\n          -1\n      }\n    }\n\n    trimEnds(l1, l2, l3, 0)\n  }\n}"
+}

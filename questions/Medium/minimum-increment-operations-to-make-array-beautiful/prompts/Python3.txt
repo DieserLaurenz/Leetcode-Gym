@@ -1,4 +1,4 @@
-Solve the following problem in Python3. Use the provided template as a starting point.
+Solve the following problem in Python3. Solely use the provided template to implement the function. Do not redeclare the main function
 
 Template:
 

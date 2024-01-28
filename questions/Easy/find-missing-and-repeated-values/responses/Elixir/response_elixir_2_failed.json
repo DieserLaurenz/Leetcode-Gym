@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 22: Char 74: ** (SyntaxError) syntax error before: 'div'\n    |\n 22 |     missing = (sum_squares_difference - sum_difference * sum_difference) div (2 * sum_difference)\n    |                                                                          ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3227",
+    "task_finish_time": 1706277046533,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1157426910",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_missing_and_repeated_values(grid :: [[integer]]) :: [integer]\n  def find_missing_and_repeated_values(grid) do\n    # Determine the size of the grid\n    n = length(grid)\n    total_elements = n * n\n\n    # Calculate the expected sum and sum of squares\n    expected_sum = Enum.sum(1..total_elements)\n    expected_sum_squares = Enum.sum(Enum.map(1..total_elements, fn x -> x * x end))\n\n    # Flatten the grid and calculate the actual sum and sum of squares\n    flattened_grid = for row <- grid, elem <- row, do: elem\n    actual_sum = Enum.sum(flattened_grid)\n    actual_sum_squares = Enum.sum(Enum.map(flattened_grid, fn x -> x * x end))\n\n    # Calculate the differences\n    sum_difference = actual_sum - expected_sum\n    sum_squares_difference = actual_sum_squares - expected_sum_squares\n\n    # Solve for the missing and repeated numbers\n    missing = (sum_squares_difference - sum_difference * sum_difference) div (2 * sum_difference)\n    repeated = missing + sum_difference\n\n    [repeated, missing]\n  end\nend"
+}

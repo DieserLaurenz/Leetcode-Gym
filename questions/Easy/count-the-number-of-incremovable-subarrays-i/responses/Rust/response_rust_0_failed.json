@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 1, Char 6: expected one of `!` or `::`, found `incremovableSubarrayCount` (solution.rs)",
+    "full_compile_error": "Line 1, Char 6: expected one of `!` or `::`, found `incremovableSubarrayCount` (solution.rs)\n  |\n1 | func incremovableSubarrayCount(nums []int) int {\n  | ---- ^^^^^^^^^^^^^^^^^^^^^^^^^ expected one of `!` or `::`\n  | |\n  | help: write `fn` instead of `func` to declare a function\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3252",
+    "task_finish_time": 1706165330721,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1156251256",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func incremovableSubarrayCount(nums []int) int {\n    n := len(nums)\n    count := 0\n\n    for start := 0; start < n; start++ {\n        for end := start; end < n; end++ {\n            // Check if removing subarray [start, end] makes the remaining array strictly increasing\n            if isStrictlyIncreasing(nums, start, end) {\n                count++\n            }\n        }\n    }\n\n    return count\n}\n\n// Helper function to check if the array is strictly increasing\n// after removing the subarray from start to end (inclusive).\nfunc isStrictlyIncreasing(nums []int, start int, end int) bool {\n    prev := -1 // Start with a number smaller than any element (as nums[i] >= 1)\n\n    // Check the part of the array before the subarray\n    for i := 0; i < start; i++ {\n        if nums[i] <= prev {\n            return false\n        }\n        prev = nums[i]\n    }\n\n    // Check the part of the array after the subarray\n    for i := end + 1; i < len(nums); i++ {\n        if nums[i] <= prev {\n            return false\n        }\n        prev = nums[i]\n    }\n\n    return true\n}"
+}

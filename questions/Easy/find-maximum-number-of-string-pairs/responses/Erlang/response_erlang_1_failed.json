@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 21: variable 'CountPairs' is unbound",
+    "full_compile_error": "Line 11: Char 21: variable 'CountPairs' is unbound\n%   11|                     CountPairs(Rest, Count + 1);\n%     |                     ^\nLine 13: Char 21: variable 'CountPairs' is unbound\n%   13|                     CountPairs(Rest, Count)\n%     |                     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2847",
+    "task_finish_time": 1706265350779,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1157301838",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_number_of_string_pairs(Words :: [unicode:unicode_binary()]) -> integer().\nmaximum_number_of_string_pairs(Words) ->\n    CountPairs = fun\n        ([], Count) -> \n            Count;\n        ([Word|Rest], Count) ->\n            ReversedWord = lists:reverse(binary_to_list(Word)),\n            case lists:member(ReversedWord, Rest) of\n                true ->\n                    FilteredRest = lists:delete(ReversedWord, Rest),\n                    CountPairs(Rest, Count + 1);\n                false ->\n                    CountPairs(Rest, Count)\n            end\n    end,\n    CountPairs(Words, 0)."
+}

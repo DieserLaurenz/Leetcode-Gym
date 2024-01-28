@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.",
+    "full_compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.\nThis error happens when you have function calls without parentheses inside keywords. For example:\n    function(arg, one: nested_call a, b, c)\n    function(arg, one: if expr, do: :this, else: :that)\nIn the examples above, we don't know if the arguments \"b\" and \"c\" apply to the function \"function\" or \"nested_call\". Or if the keywords \"do\" and \"else\" apply to the function \"function\" or \"if\". You can solve this by explicitly adding parentheses:\n    function(arg, one: if(expr, do: :this, else: :that))\n    function(arg, one: nested_call(a, b, c))\nAmbiguity found at:\n  solution.ex:13\nwarning: variable \"num\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 12:   Solution.find_k_or/2\nerror: undefined function <<</2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 12:   Solution.find_k_or/2\nerror: undefined function band/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 12:   Solution.find_k_or/2\nerror: undefined function num/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 12:   Solution.find_k_or/2\nerror: undefined function <<</2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 13:   Solution.find_k_or/2\nerror: undefined function acc/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 13:   Solution.find_k_or/2\nerror: undefined function bor/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 13:   Solution.find_k_or/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3183",
+    "task_finish_time": 1706289472118,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1157593328",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_k_or(nums :: [integer], k :: integer) :: integer\n  def find_k_or(nums, k) do\n    max_bit_length = nums\n                     |> Enum.max()\n                     |> :math.log2()\n                     |> Float.ceil()\n                     |> trunc()\n\n    0..(max_bit_length - 1)\n    |> Enum.reduce(0, fn bit, acc ->\n      count = Enum.count(nums, fn num -> num band (1 <<< bit) != 0 end)\n      if count >= k, do: acc bor (1 <<< bit), else: acc\n    end)\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"count\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"count\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 15:   Solution.incremovable_subarray_count/1\nwarning: variable \"subarray\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 10:   Solution.incremovable_subarray_count/1\n** (ArgumentError) cannot pipe nums into Enum.slice(0..(start - 1)) ++ Enum.slice(nums, (finish + 1)..-1), the :++ operator can only take two arguments\n    (elixir 1.15.7) lib/macro.ex:376: Macro.pipe/3\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 24:     Solution.remove_subarray/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3252",
+    "task_finish_time": 1706165840615,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1156257809",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec incremovable_subarray_count(nums :: [integer]) :: integer\n  def incremovable_subarray_count(nums) do\n    length = length(nums)\n    count = 0\n\n    for start_index <- 0..(length - 1) do\n      for end_index <- start_index..(length - 1) do\n        # Extract the subarray\n        subarray = Enum.slice(nums, start_index..end_index)\n        # Remove the subarray from original array\n        remaining_nums = remove_subarray(nums, start_index, end_index)\n        # Check if the remaining array is strictly increasing\n        if is_strictly_increasing(remaining_nums) do\n          count = count + 1\n        end\n      end\n    end\n\n    count\n  end\n\n  defp remove_subarray(nums, start, finish) do\n    nums |> Enum.slice(0..(start - 1)) ++ Enum.slice(nums, (finish + 1)..-1)\n  end\n\n  defp is_strictly_increasing(nums) when length(nums) <= 1, do: true\n  defp is_strictly_increasing([head | tail]) do\n    Enum.reduce_while(tail, {true, head}, fn x, {is_increasing, last_element} ->\n      if x > last_element do\n        {:cont, {true, x}}\n      else\n        {:halt, false}\n      end\n    end) |> elem(0)\n  end\nend"
+}

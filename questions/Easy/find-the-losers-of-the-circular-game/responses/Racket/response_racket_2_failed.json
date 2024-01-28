@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 22\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2791",
+    "task_finish_time": 1706309752756,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1157811776",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (circular-game-losers n k)\n  (-> exact-integer? exact-integer? (listof exact-integer?))\n\n  (define (next-player current k n)\n    (modulo (+ current k) n))\n\n  (define (play-game n k)\n    (let ([players-received (make-vector n #f)])\n      (let loop ([current-player 0] [step 1])\n        (let ([next (next-player current-player (* step k) n)])\n          (if (vector-ref players-received next)\n              (let ([losers '()])\n                (for ([i n])\n                  (unless (vector-ref players-received i)\n                    (set! losers (cons (+ i 1) losers))))\n                (reverse losers))\n              (begin\n                (vector-set! players-received next #t)\n                (loop next (+ step 1)))))))\n\n  (play-game n k))"
+}

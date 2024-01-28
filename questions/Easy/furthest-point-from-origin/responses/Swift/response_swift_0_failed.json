@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 12: Char 18: error: single-quoted string literal found, use '\"' in solution.swift",
+    "full_compile_error": "Line 12: Char 18: error: single-quoted string literal found, use '\"' in solution.swift\n            case 'L':\n                 ^~~\nLine 14: Char 18: error: single-quoted string literal found, use '\"' in solution.swift\n            case 'R':\n                 ^~~\nLine 16: Char 18: error: single-quoted string literal found, use '\"' in solution.swift\n            case '_':\n                 ^~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3019",
+    "task_finish_time": 1706367506341,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1158335153",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func furthestDistanceFromOrigin(_ moves: String) -> Int {\n        // Count of '_' characters which can be used as either 'L' or 'R'\n        var underscoreCount = 0\n        // Current position from the origin\n        var currentPosition = 0\n        // Maximum distance from the origin\n        var maxDistance = 0\n        \n        for move in moves {\n            switch move {\n            case 'L':\n                currentPosition -= 1\n            case 'R':\n                currentPosition += 1\n            case '_':\n                underscoreCount += 1\n            default:\n                break\n            }\n            \n            // Update maxDistance based on the absolute current position\n            maxDistance = max(maxDistance, abs(currentPosition))\n        }\n        \n        // The furthest distance can be achieved by using all '_' as the move that maximizes the distance from the origin\n        // Either all to the left or all to the right, depending on where we are relative to the origin\n        return maxDistance + underscoreCount\n    }\n}"
+}

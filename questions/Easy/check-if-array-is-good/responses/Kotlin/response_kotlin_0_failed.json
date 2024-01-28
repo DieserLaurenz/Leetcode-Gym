@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 6: Char 33: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: ",
+    "full_compile_error": "Line 6: Char 33: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: \npublic inline fun <T, K> Array<out TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections\npublic inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> TypeVariable(K)): Grouping<Char, TypeVariable(K)> defined in kotlin.text\npublic inline fun <T, K> Iterable<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections\npublic inline fun <T, K> Sequence<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.sequences\n        val frequencyMap = nums.groupingBy { it }.eachCount()\n                                ^\nLine 6: Char 46: error: unresolved reference: it\n        val frequencyMap = nums.groupingBy { it }.eachCount()\n                                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2892",
+    "task_finish_time": 1706069932516,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1155199555",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun isGood(nums: IntArray): Boolean {\n        val n = nums.maxOrNull() ?: return false\n        if (nums.size != n + 1) return false\n\n        val frequencyMap = nums.groupingBy { it }.eachCount()\n\n        if (frequencyMap[n] != 2) return false\n        for (i in 1 until n) {\n            if (frequencyMap[i] != 1) return false\n        }\n        \n        return true\n    }\n}"
+}

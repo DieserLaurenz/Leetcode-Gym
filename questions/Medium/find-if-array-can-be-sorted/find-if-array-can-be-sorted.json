@@ -1,0 +1,113 @@
+{
+    "acRate": 47.88298206983328,
+    "difficulty": "Medium",
+    "freqBar": null,
+    "questionId": "3291",
+    "frontendQuestionId": "3011",
+    "isFavor": false,
+    "paidOnly": false,
+    "status": null,
+    "title": "Find if Array Can Be Sorted",
+    "titleSlug": "find-if-array-can-be-sorted",
+    "topicTags": [],
+    "hasSolution": false,
+    "hasVideoSolution": false,
+    "codeSnippets": [
+        {
+            "lang": "C++",
+            "langSlug": "cpp",
+            "code": "class Solution {\npublic:\n    bool canSortArray(vector<int>& nums) {\n        \n    }\n};"
+        },
+        {
+            "lang": "Java",
+            "langSlug": "java",
+            "code": "class Solution {\n    public boolean canSortArray(int[] nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Python",
+            "langSlug": "python",
+            "code": "class Solution(object):\n    def canSortArray(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: bool\n        \"\"\"\n        "
+        },
+        {
+            "lang": "Python3",
+            "langSlug": "python3",
+            "code": "class Solution:\n    def canSortArray(self, nums: List[int]) -> bool:\n        "
+        },
+        {
+            "lang": "C",
+            "langSlug": "c",
+            "code": "bool canSortArray(int* nums, int numsSize) {\n    \n}"
+        },
+        {
+            "lang": "C#",
+            "langSlug": "csharp",
+            "code": "public class Solution {\n    public bool CanSortArray(int[] nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "JavaScript",
+            "langSlug": "javascript",
+            "code": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nvar canSortArray = function(nums) {\n    \n};"
+        },
+        {
+            "lang": "TypeScript",
+            "langSlug": "typescript",
+            "code": "function canSortArray(nums: number[]): boolean {\n    \n};"
+        },
+        {
+            "lang": "PHP",
+            "langSlug": "php",
+            "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return Boolean\n     */\n    function canSortArray($nums) {\n        \n    }\n}"
+        },
+        {
+            "lang": "Swift",
+            "langSlug": "swift",
+            "code": "class Solution {\n    func canSortArray(_ nums: [Int]) -> Bool {\n        \n    }\n}"
+        },
+        {
+            "lang": "Kotlin",
+            "langSlug": "kotlin",
+            "code": "class Solution {\n    fun canSortArray(nums: IntArray): Boolean {\n        \n    }\n}"
+        },
+        {
+            "lang": "Dart",
+            "langSlug": "dart",
+            "code": "class Solution {\n  bool canSortArray(List<int> nums) {\n    \n  }\n}"
+        },
+        {
+            "lang": "Go",
+            "langSlug": "golang",
+            "code": "func canSortArray(nums []int) bool {\n    \n}"
+        },
+        {
+            "lang": "Ruby",
+            "langSlug": "ruby",
+            "code": "# @param {Integer[]} nums\n# @return {Boolean}\ndef can_sort_array(nums)\n    \nend"
+        },
+        {
+            "lang": "Scala",
+            "langSlug": "scala",
+            "code": "object Solution {\n    def canSortArray(nums: Array[Int]): Boolean = {\n        \n    }\n}"
+        },
+        {
+            "lang": "Rust",
+            "langSlug": "rust",
+            "code": "impl Solution {\n    pub fn can_sort_array(nums: Vec<i32>) -> bool {\n        \n    }\n}"
+        },
+        {
+            "lang": "Racket",
+            "langSlug": "racket",
+            "code": "(define/contract (can-sort-array nums)\n  (-> (listof exact-integer?) boolean?)\n  )"
+        },
+        {
+            "lang": "Erlang",
+            "langSlug": "erlang",
+            "code": "-spec can_sort_array(Nums :: [integer()]) -> boolean().\ncan_sort_array(Nums) ->\n  ."
+        },
+        {
+            "lang": "Elixir",
+            "langSlug": "elixir",
+            "code": "defmodule Solution do\n  @spec can_sort_array(nums :: [integer]) :: boolean\n  def can_sort_array(nums) do\n    \n  end\nend"
+        }
+    ],
+    "content": "You are given a 0-indexed array of positive integers nums.\nIn one operation, you can swap any two adjacent elements if they have the same number of set bits. You are allowed to do this operation any number of times (including zero).\nReturn true if you can sort the array, else return false.\n\nExample 1:\n\nInput: nums = [8,4,2,30,15]\nOutput: true\nExplanation: Let's look at the binary representation of every element. The numbers 2, 4, and 8 have one set bit each with binary representation \"10\", \"100\", and \"1000\" respectively. The numbers 15 and 30 have four set bits each with binary representation \"1111\" and \"11110\".\nWe can sort the array using 4 operations:\n- Swap nums[0] with nums[1]. This operation is valid because 8 and 4 have one set bit each. The array becomes [4,8,2,30,15].\n- Swap nums[1] with nums[2]. This operation is valid because 8 and 2 have one set bit each. The array becomes [4,2,8,30,15].\n- Swap nums[0] with nums[1]. This operation is valid because 4 and 2 have one set bit each. The array becomes [2,4,8,30,15].\n- Swap nums[3] with nums[4]. This operation is valid because 30 and 15 have four set bits each. The array becomes [2,4,8,15,30].\nThe array has become sorted, hence we return true.\nNote that there may be other sequences of operations which also sort the array.\n\nExample 2:\n\nInput: nums = [1,2,3,4,5]\nOutput: true\nExplanation: The array is already sorted, hence we return true.\n\nExample 3:\n\nInput: nums = [3,16,8,4,2]\nOutput: false\nExplanation: It can be shown that it is not possible to sort the input array using any number of operations.\n\n\nConstraints:\n\n1 <= nums.length <= 100\n1 <= nums[i] <= 28\n\n"
+}

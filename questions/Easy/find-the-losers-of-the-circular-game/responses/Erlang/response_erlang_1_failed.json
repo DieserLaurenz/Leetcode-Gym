@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 12: syntax error before: 'rem'",
+    "full_compile_error": "Line 6: Char 12: syntax error before: 'rem'\n%    6|     Next = rem(Current + K * Multiplier - 1, N) + 1,\n%     |            ^\nLine 3: Char 5: function circular_game_losers/5 undefined\n%    3|     circular_game_losers(N, K, 1, 0, []).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2791",
+    "task_finish_time": 1706310889112,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1157819691",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec circular_game_losers(N :: integer(), K :: integer()) -> [integer()].\ncircular_game_losers(N, K) ->\n    circular_game_losers(N, K, 1, 0, []).\n\ncircular_game_losers(N, K, Current, Multiplier, Received) ->\n    Next = rem(Current + K * Multiplier - 1, N) + 1,\n    if \n        lists:member(Next, Received) ->\n            % Find friends who never received the ball\n            [X || X <- lists:seq(1, N), not lists:member(X, Received)];\n        true ->\n            % Continue the game\n            circular_game_losers(N, K, Next, Multiplier + 1, [Next | Received])\n    end."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 64: syntax error before: '|'",
+    "full_compile_error": "Line 4: Char 64: syntax error before: '|'\n%    4|                             [unicode:characters_to_list(Word)] |> hd() |> hd()\n%     |                                                                ^\nLine 1: Char 2: spec for undefined function is_acronym/2\n%    1| -spec is_acronym(Words :: [unicode:unicode_binary()], S :: unicode:unicode_binary()) -> boolean().\n%     |  ^\nLine 24: Char 13: function is_acronym/2 undefined\n%   24|       Ret = is_acronym(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2977",
+    "task_finish_time": 1706065132046,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1155150631",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec is_acronym(Words :: [unicode:unicode_binary()], S :: unicode:unicode_binary()) -> boolean().\nis_acronym(Words, S) ->\n    Acronym = lists:map(fun(Word) -> \n                            [unicode:characters_to_list(Word)] |> hd() |> hd()\n                        end, Words),\n    string:equal(lists:flatten(Acronym), unicode:characters_to_list(S))."
+}

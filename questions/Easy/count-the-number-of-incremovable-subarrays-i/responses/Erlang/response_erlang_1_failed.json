@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 30: Char 13: call to local/imported function is_strictly_increasing/1 is illegal in guard",
+    "full_compile_error": "Line 30: Char 13: call to local/imported function is_strictly_increasing/1 is illegal in guard\n%   30|         not is_strictly_increasing(RemovedArray) ->\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3252",
+    "task_finish_time": 1706165680161,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1156255793",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec is_strictly_increasing(Nums :: [integer()]) -> boolean().\nis_strictly_increasing([]) -> true;\nis_strictly_increasing([_]) -> true;\nis_strictly_increasing([First, Second | Rest]) ->\n    First < Second andalso is_strictly_increasing([Second | Rest]).\n\n-spec remove_subarray(Start :: integer(), End :: integer(), Nums :: [integer()]) -> [integer()].\nremove_subarray(Start, End, Nums) ->\n    {Left, Right} = lists:split(End, Nums),\n    {L, _} = lists:split(Start, Left),\n    L ++ tl(Right).\n\n-spec incremovable_subarray_count(Nums :: [integer()]) -> integer().\nincremovable_subarray_count(Nums) ->\n    Length = length(Nums),\n    incremovable_subarray_count(Nums, Length, 0).\n\n-spec incremovable_subarray_count(Nums :: [integer()], Length :: integer(), Count :: integer()) -> integer().\nincremovable_subarray_count(Nums, Length, Count) ->\n    incremovable_subarray_count(Nums, Length, Count, 0, 0).\n\n-spec incremovable_subarray_count(Nums :: [integer()], Length :: integer(), Count :: integer(), Start :: integer(), End :: integer()) -> integer().\nincremovable_subarray_count(_, Length, Count, Start, _) when Start =:= Length ->\n    Count;\nincremovable_subarray_count(Nums, Length, Count, Start, End) when End =:= Length ->\n    incremovable_subarray_count(Nums, Length, Count, Start + 1, Start + 1);\nincremovable_subarray_count(Nums, Length, Count, Start, End) ->\n    RemovedArray = remove_subarray(Start, End, Nums),\n    NewCount = if\n        not is_strictly_increasing(RemovedArray) ->\n            Count + 1;\n        true ->\n            Count\n    end,\n    incremovable_subarray_count(Nums, Length, NewCount, Start, End + 1)."
+}

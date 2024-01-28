@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 16: Char 27: error: immutable value 'roundedAmount' may only be initialized once in solution.swift",
+    "full_compile_error": "Line 16: Char 27: error: immutable value 'roundedAmount' may only be initialized once in solution.swift\n            roundedAmount = purchaseAmount + 5\n                          ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2955",
+    "task_finish_time": 1706036245419,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1154892112",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func accountBalanceAfterPurchase(_ purchaseAmount: Int) -> Int {\n        // Find the nearest multiple of 10, choosing the larger one in case of a tie\n        let remainder = purchaseAmount % 10\n        let roundedAmount: Int\n        if remainder == 0 {\n            roundedAmount = purchaseAmount\n        } else if remainder <= 5 {\n            roundedAmount = purchaseAmount - remainder\n        } else {\n            roundedAmount = purchaseAmount + (10 - remainder)\n        }\n\n        // If exactly halfway, choose the larger multiple\n        if remainder == 5 {\n            roundedAmount = purchaseAmount + 5\n        }\n\n        // Subtract the rounded amount from the initial balance\n        return 100 - roundedAmount\n    }\n}"
+}

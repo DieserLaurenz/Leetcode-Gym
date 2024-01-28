@@ -1,4 +1,4 @@
-import datetime
+﻿import datetime
 import json
 import os
 import re
@@ -18,7 +18,14 @@ def read_json_file(file_path):
         return json.load(json_file)
 
 
-def save_response(response_directory, response_filename, submission_response, lang):
+def save_response(response_directory, response_filename, submission_response, lang, extracted_code):
+    # Ensure extracted_code is a string
+    if not isinstance(extracted_code, str):
+        extracted_code = str(extracted_code)
+
+    # Create a new key in submission_response for the extracted code
+    submission_response['code'] = extracted_code
+
     lang_response_directory = os.path.join(response_directory, lang)
 
     if not os.path.exists(lang_response_directory):
@@ -85,7 +92,7 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
             cache[cache_key] = submission_response
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response, lang)
+        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
         print(f"Korrekte Antwort")
         return True, "", ""
     else:
@@ -100,7 +107,7 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
                 print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response, lang)
+        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
         return False, error_prompt, conversation_id
 
 
@@ -179,7 +186,7 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
             cache[cache_key] = submission_response
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response, lang)
+        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
         print(f"Korrekte Antwort")
         return True, "", ""
     else:
@@ -194,7 +201,7 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
                 print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response, lang)
+        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
         return False, error_prompt, conversation_id
 
 
@@ -260,7 +267,7 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
             print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response, lang)
+        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
         return True, "", ""
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
@@ -274,7 +281,7 @@ def process_snippet_with_selenium_method(prompt, subfolder_path, question, snipp
                 print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response, lang)
+        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
         return False, error_prompt, conversation_id
 
 

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 11: error: expected class or object definition (in solution.scala)",
+    "full_compile_error": "Line 11: error: expected class or object definition (in solution.scala)\nprintln(Solution.accountBalanceAfterPurchase(9))   // Output: 90\n^\nLine 12: error: expected class or object definition (in solution.scala)\nprintln(Solution.accountBalanceAfterPurchase(15))  // Output: 80\n^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2955",
+    "task_finish_time": 1706039153075,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1154929015",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def accountBalanceAfterPurchase(purchaseAmount: Int): Int = {\n        // Calculate the nearest higher or equal multiple of 10\n        val roundedAmount = ((purchaseAmount + 9) / 10) * 10\n        // Subtract the rounded amount from the initial balance\n        100 - roundedAmount\n    }\n}\n\n// Example usage\nprintln(Solution.accountBalanceAfterPurchase(9))   // Output: 90\nprintln(Solution.accountBalanceAfterPurchase(15))  // Output: 80"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 9: call to local/imported function is_symmetric/1 is illegal in guard",
+    "full_compile_error": "Line 9: Char 9: call to local/imported function is_symmetric/1 is illegal in guard\n%    9|         is_symmetric(Current) ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2998",
+    "task_finish_time": 1706139710831,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1155998858",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_symmetric_integers(Low :: integer(), High :: integer()) -> integer().\ncount_symmetric_integers(Low, High) ->\n    count_symmetric_integers(Low, High, 0).\n\ncount_symmetric_integers(Current, High, Count) when Current > High ->\n    Count;\ncount_symmetric_integers(Current, High, Count) ->\n    if\n        is_symmetric(Current) ->\n            count_symmetric_integers(Current + 1, High, Count + 1);\n        true ->\n            count_symmetric_integers(Current + 1, High, Count)\n    end.\n\nis_symmetric(Number) ->\n    Digits = integer_to_list(Number),\n    Length = length(Digits),\n    if\n        Length rem 2 =/= 0 ->\n            false;\n        true ->\n            {FirstHalf, SecondHalf} = lists:split(Length div 2, Digits),\n            sum_digits(FirstHalf) =:= sum_digits(SecondHalf)\n    end.\n\nsum_digits(Digits) ->\n    lists:foldl(fun(Digit, Acc) -> Acc + digit_to_int(Digit) end, 0, Digits).\n\ndigit_to_int(DigitChar) ->\n    erlang:byte(DigitChar) - 48."
+}

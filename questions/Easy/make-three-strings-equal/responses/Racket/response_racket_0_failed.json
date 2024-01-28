@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 17: Char 29: add: unbound identifier",
+    "full_compile_error": "Line 17: Char 29: add: unbound identifier\n  in: add\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:28:28",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3207",
+    "task_finish_time": 1706437975686,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1159098791",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (find-minimum-operations s1 s2 s3)\n  (-> string? string? string? exact-integer?)\n  (let ([min-len (apply min (map string-length (list s1 s2 s3)))])\n    (define (all-equal? pos)\n      (and (< (- min-len pos) (string-length s1))\n           (< (- min-len pos) (string-length s2))\n           (< (- min-len pos) (string-length s3))\n           (char=? (string-ref s1 (- (string-length s1) pos))\n                   (string-ref s2 (- (string-length s2) pos))\n                   (string-ref s3 (- (string-length s3) pos)))))\n    (let loop ([pos 1] [ops 0])\n      (if (or (= pos (add1 min-len))\n              (not (all-equal? pos)))\n          (if (all-equal? pos)\n              ops\n              -1)\n          (loop (add1 pos) (add ops\n                                (- (string-length s1) min-len pos)\n                                (- (string-length s2) min-len pos)\n                                (- (string-length s3) min-len pos)))))))"
+}

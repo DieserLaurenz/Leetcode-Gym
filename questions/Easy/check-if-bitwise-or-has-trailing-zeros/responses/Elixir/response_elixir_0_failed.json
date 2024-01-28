@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined function &&&/2 (expected Solution to define such a function or for it to be imported, but none are available)",
+    "full_compile_error": "error: undefined function &&&/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 15:   Solution.has_trailing_zero?/1\nerror: undefined function >>>/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 15:   Solution.has_trailing_zero?/1\nerror: undefined function |||/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 8:   Solution.has_trailing_zeros/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3246",
+    "task_finish_time": 1706094049089,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1155467567",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec has_trailing_zeros(nums :: [integer]) :: boolean\n  def has_trailing_zeros(nums) do\n    # Generate all combinations of the array elements, starting from combinations of 2 elements\n    for n <- 2..length(nums), combination <- Enum.combination(nums, n), do: combination\n    # Reduce each combination with bitwise OR and check for trailing zeros\n    |> Enum.any?(fn combination -> \n      or_result = Enum.reduce(combination, &(&1 ||| &2))\n      has_trailing_zero?(or_result)\n    end)\n  end\n\n  defp has_trailing_zero?(0), do: false\n  defp has_trailing_zero?(n) do\n    if n &&& 1 == 0, do: true, else: has_trailing_zero?(n >>> 1)\n  end\nend"
+}

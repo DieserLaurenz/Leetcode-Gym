@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 20\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3207",
+    "task_finish_time": 1706438576852,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1159104618",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (find-minimum-operations s1 s2 s3)\n  (-> string? string? string? exact-integer?)\n  (let ([len1 (string-length s1)]\n        [len2 (string-length s2)]\n        [len3 (string-length s3)])\n    (let loop ([i 0] [ops 0])\n      (let ([min-len (apply min (list (- len1 i) (- len2 i) (- len3 i)))])\n        (if (< min-len 1)\n            (if (and (equal? s1 s2) (equal? s2 s3)) ops -1)\n            (let ([c1 (if (>= i len1) #f (string-ref s1 (- len1 i 1)))]\n                  [c2 (if (>= i len2) #f (string-ref s2 (- len2 i 1)))]\n                  [c3 (if (>= i len3) #f (string-ref s3 (- len3 i 1)))])\n              (if (and (or (equal? c1 c2) (not c1) (not c2))\n                       (or (equal? c2 c3) (not c2) (not c3))\n                       (or (equal? c1 c3) (not c1) (not c3)))\n                  (loop (add1 i) (add1 ops))\n                  (if (and (= i 0) (or (not (equal? c1 c2)) (not (equal? c2 c3))))\n                      -1\n                      (loop (add1 i) (add1 ops)))))))))"
+}

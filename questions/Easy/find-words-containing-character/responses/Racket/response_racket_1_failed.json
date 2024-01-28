@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 3: Char 23: string->char: unbound identifier",
+    "full_compile_error": "Line 3: Char 23: string->char: unbound identifier\n  in: string->char\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:14:22",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3194",
+    "task_finish_time": 1706353483471,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1158185611",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (find-words-containing words x)\n  (-> (listof string?) char? (listof exact-integer?))\n  (let ([target-char (string->char (string x))]) ; Convert single-character string to character\n    (for/list ([word words]\n               [index (in-naturals)]\n               #:when (string-contains? word target-char)) ; Pass the character\n      index)))\n\n; Adjusted to accept a character directly\n(define (string-contains? str target-char)\n  (ormap (lambda (c) (char=? c target-char)) (string->list str)))"
+}

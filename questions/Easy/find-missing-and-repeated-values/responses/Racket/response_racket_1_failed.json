@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 10: Char 17: row: unbound identifier",
+    "full_compile_error": "Line 10: Char 17: row: unbound identifier\n  in: row\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:21:16",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3227",
+    "task_finish_time": 1706276728372,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1157422798",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (find-missing-and-repeated-values grid)\n  (-> (listof (listof exact-integer?)) (listof exact-integer?))\n  (let ([n (length grid)]\n        [freq (make-hash)])\n    ;; Initialize the frequency hash map\n    (for ([i (in-range 1 (+ 1 (* n n)))])\n      (hash-set! freq i 0))\n    ;; Count the frequency of each number in the grid\n    (for ([row grid]\n          [elem row])\n      (hash-update! freq elem add1))\n    ;; Find the repeated and missing numbers\n    (let ([repeated #f]\n          [missing #f])\n      (for ([i (in-range 1 (+ 1 (* n n)))]\n            #:break (and repeated missing))\n        (case (hash-ref freq i)\n          [(2) (set! repeated i)]\n          [(0) (set! missing i)]))\n      (list repeated missing))))"
+}

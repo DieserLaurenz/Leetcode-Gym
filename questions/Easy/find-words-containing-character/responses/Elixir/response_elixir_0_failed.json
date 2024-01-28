@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: bitstring specifier \"char\" does not exist and is being expanded to \"char()\", please use parentheses to remove the ambiguity",
+    "full_compile_error": "warning: bitstring specifier \"char\" does not exist and is being expanded to \"char()\", please use parentheses to remove the ambiguity\nLine 6:   Solution.find_words_containing/2\nerror: unknown bitstring specifier: char\nLine 6:   Solution.find_words_containing/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3194",
+    "task_finish_time": 1706353636148,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1158187145",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_words_containing(words :: [String.t], x :: char) :: [integer]\n  def find_words_containing(words, x) do\n    words\n    |> Enum.with_index()\n    |> Enum.filter(fn {word, _index} -> String.contains?(word, <<x::char>>) end)\n    |> Enum.map(fn {_word, index} -> index end)\n  end\nend"
+}

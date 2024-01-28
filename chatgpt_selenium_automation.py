@@ -109,10 +109,22 @@ def send_message(driver, prompt, conversation_id=None):
 
     text_area = driver.find_element(By.ID, "prompt-textarea")
 
+    pyperclip.copy(prompt)
+
+    text_area.click()
+
+    time.sleep(2)
+
+    action_chain = ActionChains(driver)
+    action_chain.key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()  # Use Keys.COMMAND if you're on macOS
+
+
+    """
     for part in prompt.split('\n'):
         text_area.send_keys(part)
         ActionChains(driver).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.SHIFT).key_up(Keys.ENTER).perform()
-
+    """
+    
     time.sleep(2)
 
     text_area.send_keys(Keys.ENTER)

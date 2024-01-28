@@ -1,4 +1,4 @@
-Solve the following problem in Kotlin. Use the provided template as a starting point.
+Solve the following problem in Kotlin. Solely use the provided template to implement the function. Do not redeclare the main function
 
 Template:
 

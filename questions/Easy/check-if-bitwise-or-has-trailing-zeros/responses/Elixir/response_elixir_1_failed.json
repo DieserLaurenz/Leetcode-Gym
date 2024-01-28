@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 8: Char 52: ** (SyntaxError) syntax error before: 'bor'\n    |\n  8 |       or_result = Enum.reduce(combination, 0, &(&1 bor &2))\n    |                                                    ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3246",
+    "task_finish_time": 1706094652787,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1155473395",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec has_trailing_zeros(nums :: [integer]) :: boolean\n  def has_trailing_zeros(nums) do\n    # Generate all combinations of the array elements, starting from combinations of 2 elements\n    for n <- 2..length(nums), combination <- Enum.combination(nums, n), do: combination\n    # Reduce each combination with bitwise OR and check for trailing zeros\n    |> Enum.any?(fn combination -> \n      or_result = Enum.reduce(combination, 0, &(&1 bor &2))\n      has_trailing_zero?(or_result)\n    end)\n  end\n\n  defp has_trailing_zero?(0), do: false\n  defp has_trailing_zero?(n) do\n    if n band 1 == 0, do: true, else: has_trailing_zero?(n bsr 1)\n  end\nend"
+}
