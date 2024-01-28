@@ -18,6 +18,10 @@ def init_driver():
     chatgpt_session_token = os.getenv('CHATGPT_SESSION_TOKEN')
     # Initialize the undetected Chrome driver
     options = uc.ChromeOptions()
+
+    # Optional: Setzen Sie die Fenstergröße, dies kann bei manchen Seiten nützlich sein
+    options.add_argument('--window-size=1920,1080')
+    
     # You can add additional Chrome options here if needed
     driver = uc.Chrome(options=options)
 
