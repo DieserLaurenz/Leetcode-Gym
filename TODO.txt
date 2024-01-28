@@ -1,4 +1,4 @@
-Check if the language slugs are all handled correctly -- sollte eigentlich
+﻿Check if the language slugs are all handled correctly -- sollte eigentlich
 
 Startet möglicherweise nicht bei der Korrekten Aufgabe erneut. Schauen was das Problem hier ist
 
@@ -9,3 +9,5 @@ Irgendwie beim content fetch wird nicht zuerst der cache gecheckt kp wieso
 Der pastet nicht immer die vollständige Lösung
 
 Wenn der beim 2. Versuch gar keinen Code generiert dann nimmt er den ersten, fixen
+
+Vlt noch gucken ob nicht die selbe prompt doppelt verwendet wird
