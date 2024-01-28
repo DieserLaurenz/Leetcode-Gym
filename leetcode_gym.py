@@ -6,7 +6,6 @@ import shelve
 import time
 
 import pyperclip
-from selenium.common import WebDriverException
 
 import chatgpt_selenium_automation
 import chatgptapi_new
@@ -244,6 +243,7 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
 
     response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver,
                                                                                                                 prompt,
+                                                                                                                attempt,
                                                                                                                 conversation_id)
 
     if response_message == "message_cap_error":
@@ -271,6 +271,11 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
     elif response_message == "codes_responses_unequal_error":
 
         print("Amount of codes and responses not equal")
+        time.sleep(5)
+        return False, "", conversation_id
+    elif response_message == "attempt_responses_unequal_error":
+
+        print("Amount of attempts and responses not equal")
         time.sleep(5)
         return False, "", conversation_id
     elif extracted_code == "":

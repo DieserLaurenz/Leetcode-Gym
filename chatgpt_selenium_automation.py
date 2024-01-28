@@ -1,6 +1,4 @@
-import datetime
 import os
-import re
 import time
 
 import pyperclip
@@ -21,7 +19,7 @@ def init_driver():
 
     # Optional: Setzen Sie die Fenstergröße, dies kann bei manchen Seiten nützlich sein
     options.add_argument('--window-size=1920,1080')
-    
+
     # You can add additional Chrome options here if needed
     driver = uc.Chrome(options=options)
 
@@ -60,10 +58,7 @@ def load_conversation(driver, conversation_id):
     WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
 
 
-
-
-
-def get_response(driver):
+def get_response(driver, attempt):
     message_stream = driver.find_elements(By.CSS_SELECTOR,
                                           '.result-streaming.markdown.prose.w-full.break-words.dark\\:prose-invert.light')
 
@@ -94,6 +89,9 @@ def get_response(driver):
         if len(extracted_codes) != len(successful_responses):
             return "codes_responses_unequal_error", "", ""
 
+        if attempt + 1 != len(extracted_codes):
+            return "attempt_responses_unequal_error", "", ""
+
         last_response = successful_responses[-1].text
 
         if extracted_codes:
@@ -105,8 +103,7 @@ def get_response(driver):
         return "unknown_error", "", ""
 
 
-def send_message(driver, prompt, conversation_id=None):
-
+def send_message(driver, prompt, attempt, conversation_id=None):
     if conversation_id is None:
         create_new_conversation(driver)
     else:
@@ -123,15 +120,15 @@ def send_message(driver, prompt, conversation_id=None):
     time.sleep(2)
 
     action_chain = ActionChains(driver)
-    action_chain.key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()  # Use Keys.COMMAND if you're on macOS
-
+    action_chain.key_down(Keys.CONTROL).send_keys('v').key_up(
+        Keys.CONTROL).perform()  # Use Keys.COMMAND if you're on macOS
 
     """
     for part in prompt.split('\n'):
         text_area.send_keys(part)
         ActionChains(driver).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.SHIFT).key_up(Keys.ENTER).perform()
     """
-    
+
     time.sleep(2)
 
     text_area.send_keys(Keys.ENTER)
@@ -140,7 +137,7 @@ def send_message(driver, prompt, conversation_id=None):
 
     while True:
 
-        response_message, response_text, extracted_code = get_response(driver)
+        response_message, response_text, extracted_code = get_response(driver, attempt)
 
         if response_message == "generating":
             print("Generating response...")
