@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 16: Char 19: syntax error before: 'bxor'",
+    "full_compile_error": "Line 16: Char 19: syntax error before: 'bxor'\n%   16|             XOR = bxor(H, H1),\n%     |                   ^\nLine 23: Char 1: syntax error before: 'bxor'\n%   23| bxor(X, Y) -> X bxor Y.\n%     | ^\nLine 8: Char 14: function find_max_xor_for_head/4 undefined\n%    8|     NewMax = find_max_xor_for_head(H, T, H, Max),\n%     |              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3193",
+    "task_finish_time": 1706488084135,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1159621753",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_strong_pair_xor(Nums :: [integer()]) -> integer().\nmaximum_strong_pair_xor(Nums) ->\n    MaxXor = find_max_xor(Nums, 0),\n    MaxXor.\n\nfind_max_xor([], Max) -> Max;\nfind_max_xor([H|T], Max) ->\n    NewMax = find_max_xor_for_head(H, T, H, Max),\n    find_max_xor(T, NewMax).\n\nfind_max_xor_for_head(_, [], _, Max) -> Max;\nfind_max_xor_for_head(H, [H1|T1], Head, Max) ->\n    % Check if it's a strong pair\n    if\n        abs(H - H1) =< min(H, H1) ->\n            XOR = bxor(H, H1),\n            NewMax = max(XOR, Max),\n            find_max_xor_for_head(H, T1, Head, NewMax);\n        true ->\n            find_max_xor_for_head(H, T1, Head, Max)\n    end.\n\nbxor(X, Y) -> X bxor Y."
+}
