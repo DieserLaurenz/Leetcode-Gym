@@ -14,7 +14,7 @@ QUESTIONS_TO_FETCH = 400  # Number of questions to fetch in ascending order
 FILTER_OUT_PAID_QUESTIONS = True  # Flag to filter out paid questions
 PROBLEM_FETCH_START_DATE = "14-05-2023"  # Start date for fetching problems (DD-MM-YYYY)
 REMOVE_QUESTIONS_WITH_IMAGE = True
-LANGUAGES = ["C++","Java","JavaScript"] # Languages that must be included in the question
+LANGUAGES = ["C++", "Java", "JavaScript"]  # Languages that must be included in the question
 
 
 def send_request(url, cookies=None, headers=None, json_data=None):
@@ -302,7 +302,7 @@ def clean_content(html_text):
         text = soup.get_text()
 
         # Replace newline and tab characters with a space
-        #cleaned_text = text.replace('\n', ' ').replace('\t', ' ')
+        # cleaned_text = text.replace('\n', ' ').replace('\t', ' ')
 
         # Remove unicode characters like \u00a0
         cleaned_text = str(text.encode('ascii', 'ignore').decode('ascii'))
@@ -482,5 +482,3 @@ if __name__ == '__main__':
     filtered_questions = filter_questions(questions)
 
     add_question_content_and_save_to_file(filtered_questions)
-
-

@@ -1,12 +1,11 @@
-import json
+import logging
 import os
 import time
+
 import requests
-import logging
+from colorama import Fore
 from dotenv import load_dotenv
 from requests.exceptions import RequestException, HTTPError
-from colorama import Fore
-import pyperclip
 
 RETRY_DELAY = 2
 
@@ -123,9 +122,6 @@ def submit_question(session, problem_url, question_id, lang, code):
                 return submission_status
 
 
-
-
-
 def collect_code_input():
     print("Please paste your code. After pasting, hit Enter twice to finish.")
     code_lines = []
@@ -152,9 +148,4 @@ def main(problem_url, question_id, lang_slug, code):
                                           question_id, lang_slug,
                                           code)
 
-
-
     return submission_response
-
-
-
