@@ -315,10 +315,10 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
 
 def generate_prompt_content(question, snippet):
     return (
-        f'Solve the following problem in {snippet["lang"]}. '
-        'Solely fill in the provided function template with the code and return it\n\n'  ## Hence common redecleration of the main function.
-        f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
-    )
+            f'Implement a solution for the specified problem in {snippet["lang"]}. '
+            'Adhere strictly to the provided function template for code development and return.\n\n'
+            f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
+        )
 
 
 def extract_info_and_generate_prompt(response):
@@ -351,7 +351,7 @@ def extract_info_and_generate_prompt(response):
 
     # Construct the prompt with conditional inclusions
     prompt_parts = [
-        f"This solution is not correct. See the following error details to improve on the code.\n\nError type:\n\n{error_type}\n\nError details:\n\n{error_detail}"]
+        f"This solution is incorrect. Revise your implementation, referring to the outlined error details for enhancements.\n\nError type:\n\n{error_type}\n\nError details:\n\n{error_detail}"]
     if test_input is not None:
         prompt_parts.append(f"\n\nLast executed input: {test_input}")
     if output is not None:

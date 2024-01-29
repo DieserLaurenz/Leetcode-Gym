@@ -29,8 +29,8 @@ def process_subfolder(base_path, subfolder):
 
     for snippet in question["codeSnippets"]:
         prompt_content = (
-            f'Solve the following problem in {snippet["lang"]}. '
-            'Solely use the provided template to implement the function. Do not redeclare the main function\n\n'
+            f'Implement a solution for the specified problem in {snippet["lang"]}. '
+            'Adhere strictly to the provided function template for code development and return.\n\n'
             f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
         )
         write_to_file(prompt_content, os.path.join(prompt_directory, f'{snippet["lang"]}.txt'))
