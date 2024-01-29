@@ -8,20 +8,15 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from seleniumbase import Driver
 
 load_dotenv()
 
 
 def init_driver():
     chatgpt_session_token = os.getenv('CHATGPT_SESSION_TOKEN')
-    # Initialize the undetected Chrome driver
-    options = uc.ChromeOptions()
 
-    # Optional: Setzen Sie die Fenstergröße, dies kann bei manchen Seiten nützlich sein
-    options.add_argument('--window-size=1920,1080')
-
-    # You can add additional Chrome options here if needed
-    driver = uc.Chrome(options=options)
+    driver = Driver(uc=True)
 
     driver.get("https://chat.openai.com/?model=gpt-4")
 
@@ -111,6 +106,8 @@ def send_message(driver, prompt, attempt, conversation_id=None):
 
     time.sleep(2)
 
+    driver.get_screenshot_as_file("screenshot.png")
+
     text_area = driver.find_element(By.ID, "prompt-textarea")
 
     pyperclip.copy(prompt)
@@ -158,4 +155,4 @@ if __name__ == '__main__':
 
     time.sleep(5)
 
-    conversation_id = send_message(driver, "Test")
+    conversation_id = send_message(driver, "Test", 0)
