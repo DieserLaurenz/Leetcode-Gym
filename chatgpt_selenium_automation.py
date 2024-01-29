@@ -1,10 +1,7 @@
 import os
 import time
 
-import pyperclip
-import undetected_chromedriver as uc
 from dotenv import load_dotenv
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -16,7 +13,7 @@ load_dotenv()
 def init_driver():
     chatgpt_session_token = os.getenv('CHATGPT_SESSION_TOKEN')
 
-    driver = Driver(uc=True)
+    driver = Driver(uc=True, headless=True)
 
     driver.get("https://chat.openai.com/?model=gpt-4")
 
@@ -106,31 +103,23 @@ def send_message(driver, prompt, attempt, conversation_id=None):
 
     time.sleep(2)
 
-    driver.get_screenshot_as_file("screenshot.png")
-
     text_area = driver.find_element(By.ID, "prompt-textarea")
-
-    pyperclip.copy(prompt)
 
     text_area.click()
 
     time.sleep(2)
 
-    action_chain = ActionChains(driver)
-    action_chain.key_down(Keys.CONTROL).send_keys('v').key_up(
-        Keys.CONTROL).perform()  # Use Keys.COMMAND if you're on macOS
+    driver.execute_script("arguments[0].value = arguments[1];", text_area, prompt)
 
-    """
-    for part in prompt.split('\n'):
-        text_area.send_keys(part)
-        ActionChains(driver).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.SHIFT).key_up(Keys.ENTER).perform()
-    """
-
-    time.sleep(2)
+    time.sleep(1)
 
     text_area.send_keys(Keys.ENTER)
 
-    time.sleep(2)
+    time.sleep(1)
+
+    text_area.send_keys(Keys.ENTER)
+
+    time.sleep(3)
 
     while True:
 
@@ -155,4 +144,4 @@ if __name__ == '__main__':
 
     time.sleep(5)
 
-    conversation_id = send_message(driver, "Test", 0)
+    conversation_id = send_message(driver, "Test\nauf lock", 0)
