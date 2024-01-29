@@ -315,8 +315,8 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
 
 def generate_prompt_content(question, snippet):
     return (
-            f'Implement a solution for the specified problem in {snippet["lang"]}. '
-            'Adhere strictly to the provided function template for code development and return.\n\n'
+            f'Develop a solution within the provided {snippet["lang"]} function template only'
+            ', ensuring no external code definitions are made outside of this template.\n\n'
             f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
         )
 
