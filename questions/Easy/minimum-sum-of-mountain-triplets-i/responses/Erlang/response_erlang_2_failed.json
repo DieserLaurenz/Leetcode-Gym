@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 61: illegal guard expression",
+    "full_compile_error": "Line 15: Char 61: illegal guard expression\n%   15|     {LeftMin, _} = lists:foldl(fun(X, {Min, Flag}) when X < lists:nth(Index, Nums) -> {min(X, Min), true};\n%     |                                                             ^\nLine 18: Char 70: illegal guard expression\n%   18|     {RightMin, RightFlag} = lists:foldl(fun(X, {Min, Flag}) when X < lists:nth(Index, Nums) -> {min(X, Min), true};\n%     |                                                                      ^\nLine 21: Char 79: illegal guard expression\n%   21|     NewMin = if LeftMin =/= 999999, RightMin =/= 999999, RightFlag, LeftMin < lists:nth(Index, Nums), RightMin < lists:nth(Index, Nums) ->\n%     |                                                                               ^\nLine 21: Char 114: illegal guard expression\n%   21|     NewMin = if LeftMin =/= 999999, RightMin =/= 999999, RightFlag, LeftMin < lists:nth(Index, Nums), RightMin < lists:nth(Index, Nums) ->\n%     |                                                                                                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3176",
+    "task_finish_time": 1706597413376,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160790464",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_sum(Nums :: [integer()]) -> integer().\nminimum_sum(Nums) ->\n    MinimumSum = find_minimum_sum(Nums, -1),\n    case MinimumSum of\n        999999 -> -1; % Indicates no valid mountain was found\n        _ -> MinimumSum\n    end.\n\nfind_minimum_sum(Nums, CurrentMin) ->\n    find_minimum_sum(Nums, CurrentMin, 2, length(Nums) - 1).\n\nfind_minimum_sum(_Nums, CurrentMin, _, 1) ->\n    CurrentMin;\nfind_minimum_sum(Nums, CurrentMin, Index, Length) when Index =< Length ->\n    {LeftMin, _} = lists:foldl(fun(X, {Min, Flag}) when X < lists:nth(Index, Nums) -> {min(X, Min), true}; \n                                      (_, Acc) -> Acc \n                               end, {999999, false}, lists:sublist(Nums, Index - 1)),\n    {RightMin, RightFlag} = lists:foldl(fun(X, {Min, Flag}) when X < lists:nth(Index, Nums) -> {min(X, Min), true}; \n                                        (_, Acc) -> Acc \n                                end, {999999, false}, lists:sublist(Nums, Index + 1, Length - Index)),\n    NewMin = if LeftMin =/= 999999, RightMin =/= 999999, RightFlag, LeftMin < lists:nth(Index, Nums), RightMin < lists:nth(Index, Nums) -> \n                  min(CurrentMin, LeftMin + lists:nth(Index, Nums) + RightMin);\n              true -> \n                  CurrentMin\n             end,\n    find_minimum_sum(Nums, NewMin, Index + 1, Length);\nfind_minimum_sum(_Nums, CurrentMin, _, _) ->\n    CurrentMin."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 21: Char 46: syntax error before: '::'",
+    "full_compile_error": "Line 21: Char 46: syntax error before: '::'\n%   21|             find_shifts(lists:last(Original) :: lists:droplast(Original), Sorted, N - 1, Shifts + 1, true)\n%     |                                              ^\nLine 4: Char 14: function find_shifts/5 undefined\n%    4|     Shifts = find_shifts(Nums, Sorted, length(Nums), 0, false),\n%     |              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3045",
+    "task_finish_time": 1706563749708,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160463913",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_right_shifts(Nums :: [integer()]) -> integer().\nminimum_right_shifts(Nums) ->\n    Sorted = lists:sort(Nums),\n    Shifts = find_shifts(Nums, Sorted, length(Nums), 0, false),\n    case Shifts of\n        false -> -1; % More than one descending order, cannot sort\n        _ -> Shifts\n    end.\n\nfind_shifts(_, _, 0, Shifts, _) ->\n    Shifts; % Base case, return accumulated shifts\nfind_shifts(Original, Sorted, N, Shifts, Descending) ->\n    OHead = hd(Original),\n    SHead = hd(Sorted),\n    if\n        OHead == SHead ->\n            find_shifts(tl(Original), tl(Sorted), N - 1, Shifts, Descending);\n        Descending ->\n            false; % Found another descending order, cannot sort\n        true ->\n            find_shifts(lists:last(Original) :: lists:droplast(Original), Sorted, N - 1, Shifts + 1, true)\n    end."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 47: Char 5: error: redefinition of \u2018main\u2019 [solution.c]",
+    "full_compile_error": "Line 47: Char 5: error: redefinition of \u2018main\u2019 [solution.c]\n   50 | int main(int argc, char *argv[]) {\n      |     ^~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2831",
+    "task_finish_time": 1706606575389,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1160890771",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n\nint gcd(int a, int b) {\n    while (b != 0) {\n        int temp = b;\n        b = a % b;\n        a = temp;\n    }\n    return a;\n}\n\nint firstDigit(int num) {\n    while (num >= 10) {\n        num /= 10;\n    }\n    return num;\n}\n\nint countBeautifulPairs(int* nums, int numsSize) {\n    int count = 0;\n    for (int i = 0; i < numsSize; ++i) {\n        for (int j = i + 1; j < numsSize; ++j) {\n            int firstDigitNum = firstDigit(nums[i]);\n            int lastDigitNum = nums[j] % 10;\n            if (gcd(firstDigitNum, lastDigitNum) == 1) {\n                ++count;\n            }\n        }\n    }\n    return count;\n}\n\n// Example usage\nint main() {\n    int nums1[] = {2, 5, 1, 4};\n    int size1 = sizeof(nums1) / sizeof(nums1[0]);\n    printf(\"Example 1: %d\\n\", countBeautifulPairs(nums1, size1));\n\n    int nums2[] = {11, 21, 12};\n    int size2 = sizeof(nums2) / sizeof(nums2[0]);\n    printf(\"Example 2: %d\\n\", countBeautifulPairs(nums2, size2));\n\n    return 0;\n}"
+}

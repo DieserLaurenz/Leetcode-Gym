@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: unsupported option :else given to for",
+    "full_compile_error": "error: unsupported option :else given to for\nLine 4:   Solution.minimum_sum/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3176",
+    "task_finish_time": 1706597509069,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1160791650",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_sum(nums :: [integer]) :: integer\n  def minimum_sum(nums) do\n    left_mins = for j <- 1..(length(nums) - 2), into: %{}, do: {j, Enum.min(for i <- 0..(j-1), nums[i] < nums[j], do: nums[i], else: [])}\n    right_mins = for j <- 1..(length(nums) - 2), into: %{}, do: {j, Enum.min(for k <- (j+1)..(length(nums)-1), nums[k] < nums[j], do: nums[k], else: [])}\n\n    nums\n    |> Enum.with_index()\n    |> Enum.reduce_while({:infinity, nil}, fn {num, j}, {min_sum, _} ->\n      if Map.has_key?(left_mins, j) and Map.has_key?(right_mins, j) and left_mins[j] != [] and right_mins[j] != [],\n      do: {:halt, {left_mins[j] + num + right_mins[j], j}},\n      else: {:cont, {min_sum, nil}}\n    end)\n    |> case do\n      {:infinity, _} -> -1\n      {min_sum, _} -> min_sum\n    end\n  end\nend"
+}

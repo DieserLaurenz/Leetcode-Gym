@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: cannot invoke remote function MapSet.member?/2 inside guards",
+    "full_compile_error": "error: cannot invoke remote function MapSet.member?/2 inside guards\nLine 9:   Solution.min_operations/4\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) expanding macro: Kernel.and/2\nLine 9:     Solution.min_operations/4",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3044",
+    "task_finish_time": 1706554476159,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1160362705",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations([integer], integer) :: integer\n  def min_operations(nums, k) do\n    min_operations(Enum.reverse(nums), k, MapSet.new(), 0)\n  end\n\n  defp min_operations([], _k, _collected, ops), do: ops\n\n  defp min_operations([num | rest], k, collected, ops) when num <= k and not MapSet.member?(collected, num) do\n    if MapSet.size(collected) + 1 == k do\n      ops + 1\n    else\n      min_operations(rest, k, MapSet.put(collected, num), ops + 1)\n    end\n  end\n\n  defp min_operations([_num | rest], k, collected, ops) do\n    min_operations(rest, k, collected, ops + 1)\n  end\nend"
+}

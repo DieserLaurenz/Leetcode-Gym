@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 23: Char 44: illegal guard expression",
+    "full_compile_error": "Line 23: Char 44: illegal guard expression\n%   23| find_left_min(Nums, J, I, Min) when I > 0, lists:nth(I, Nums) < lists:nth(J, Nums) ->\n%     |                                            ^\nLine 23: Char 65: illegal guard expression\n%   23| find_left_min(Nums, J, I, Min) when I > 0, lists:nth(I, Nums) < lists:nth(J, Nums) ->\n%     |                                                                 ^\nLine 30: Char 38: illegal guard expression\n%   30| find_right_min(Nums, J, K, Min) when lists:nth(K, Nums) < lists:nth(J, Nums) ->\n%     |                                      ^\nLine 30: Char 59: illegal guard expression\n%   30| find_right_min(Nums, J, K, Min) when lists:nth(K, Nums) < lists:nth(J, Nums) ->\n%     |                                                           ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3176",
+    "task_finish_time": 1706597357104,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160789719",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_sum(Nums :: [integer()]) -> integer().\nminimum_sum(Nums) ->\n    MinSum = find_min_sum(Nums, length(Nums), -1),\n    MinSum.\n\nfind_min_sum(_Nums, 2, MinSum) ->\n    MinSum;\nfind_min_sum(Nums, N, MinSum) ->\n    J = N - 1,\n    LeftMin = find_left_min(Nums, J, J - 1, hd(Nums)),\n    RightMin = find_right_min(Nums, J, J + 1, hd(Nums)),\n    CurrentMin = if LeftMin /= -1, RightMin /= -1 -> LeftMin + lists:nth(J, Nums) + RightMin;\n                     true -> -1\n                 end,\n    NewMinSum = if MinSum == -1 -> CurrentMin;\n                    CurrentMin == -1 -> MinSum;\n                    true -> min(MinSum, CurrentMin)\n                end,\n    find_min_sum(Nums, J, NewMinSum).\n\nfind_left_min(_Nums, _J, 1, Min) ->\n    Min;\nfind_left_min(Nums, J, I, Min) when I > 0, lists:nth(I, Nums) < lists:nth(J, Nums) ->\n    find_left_min(Nums, J, I - 1, lists:nth(I, Nums));\nfind_left_min(Nums, J, I, _Min) ->\n    find_left_min(Nums, J, I - 1, -1).\n\nfind_right_min(Nums, J, K, Min) when K > length(Nums) ->\n    Min;\nfind_right_min(Nums, J, K, Min) when lists:nth(K, Nums) < lists:nth(J, Nums) ->\n    find_right_min(Nums, J, K + 1, lists:nth(K, Nums));\nfind_right_min(Nums, J, K, _Min) ->\n    find_right_min(Nums, J, K + 1, -1)."
+}

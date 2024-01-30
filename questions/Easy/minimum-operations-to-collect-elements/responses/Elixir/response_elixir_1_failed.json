@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"break\"",
+    "full_compile_error": "error: undefined variable \"break\"\nLine 20:   Solution.min_operations/2\nwarning: variable \"ops\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 14:   Solution.min_operations/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3044",
+    "task_finish_time": 1706554409503,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1160361818",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations(nums :: [integer], k :: integer) :: integer\n  def min_operations(nums, k) do\n    # Reverse the list to start processing from the end.\n    reversed_nums = Enum.reverse(nums)\n\n    # Initialize variables for the loop: operations count and a set for collected numbers.\n    ops = 0\n    collected = MapSet.new()\n\n    # Loop through the list until we've collected all numbers from 1 to k.\n    for num <- reversed_nums do\n      # Increment operations count.\n      ops = ops + 1\n\n      # Add the number to the set of collected numbers if it's within the range [1, k].\n      collected = if num <= k, do: MapSet.put(collected, num), else: collected\n\n      # Stop if we've collected all numbers from 1 to k.\n      if MapSet.size(collected) == k, do: break, else: nil\n    end\n\n    # Return the operations count.\n    ops\n  end\nend"
+}

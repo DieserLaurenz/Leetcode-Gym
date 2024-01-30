@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 20\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3045",
+    "task_finish_time": 1706563653031,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1160463086",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-right-shifts nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([n (length nums)])\n    (define (is-sorted? lst)\n      (or (null? lst) (null? (cdr lst))\n          (and (<= (car lst) (cadr lst)) (is-sorted? (cdr lst)))))\n    (if (is-sorted? nums)\n        0\n        (let loop ([i 0] [desc-count 0] [last (car nums)] [found-idx -1])\n          (if (= i n)\n              (if (= desc-count 1)\n                  (modulo (- n found-idx) n)\n                  -1)\n              (let ([current (list-ref nums i)])\n                (if (and (< last current) (> desc-count 0))\n                    (loop (add1 i) (add1 desc-count) current found-idx)\n                    (if (< current last)\n                        (loop (add1 i) (add1 desc-count) current i)\n                        (loop (add1 i) desc-count current found-idx))))))))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 24: illegal guard expression",
+    "full_compile_error": "Line 15: Char 24: illegal guard expression\n%   15|         Head =< K, not maps:is_key(Head, Collected) ->\n%     |                        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3044",
+    "task_finish_time": 1706554296507,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160360263",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_operations(Nums :: [integer()], K :: integer()) -> integer().\nmin_operations(Nums, K) ->\n    % Reverse the list to simulate removing elements from the end\n    ReverseNums = lists:reverse(Nums),\n    % Initialize the loop with the reversed list, target K, an empty set for collected numbers, and 0 operations\n    loop(ReverseNums, K, #{}, 0).\n\n% Helper function to loop through the numbers\nloop([], _K, Collected, Count) ->\n    % If we've iterated through all numbers, return the count\n    Count;\nloop([Head | Tail], K, Collected, Count) ->\n    % Check if the head is within our target range and not already collected\n    if\n        Head =< K, not maps:is_key(Head, Collected) ->\n            % If not collected and within range, add to collected and increment count\n            loop(Tail, K, Collected#{Head => true}, Count + 1);\n        true ->\n            % If already collected or not within range, just increment count\n            loop(Tail, K, Collected, Count + 1)\n    end,\n    % Once we have collected all numbers from 1 to K, we can stop and return the count\n    % This check is outside the loop to ensure we iterate the minimum necessary times\n    case maps:size(Collected) of\n        Size when Size >= K -> Count;\n        _ -> loop(Tail, K, Collected, Count + 1)\n    end."
+}

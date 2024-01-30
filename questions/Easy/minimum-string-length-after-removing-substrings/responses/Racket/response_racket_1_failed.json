@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 19: Char 19: string-search: unbound identifier",
+    "full_compile_error": "Line 19: Char 19: string-search: unbound identifier\n  in: string-search\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:30:18",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2800",
+    "task_finish_time": 1706564737854,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1160472499",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-length s)\n  (-> string? exact-integer?)\n  \n  ;; Helper function to remove \"AB\" and \"CD\" from the string\n  (define (remove-AB-CD s)\n    (letrec ((recur (lambda (str)\n                      (cond\n                        ;; Check for \"AB\" or \"CD\" and remove them\n                        ((string-contains str \"AB\")\n                         (recur (string-replace str \"AB\" \"\")))\n                        ((string-contains str \"CD\")\n                         (recur (string-replace str \"CD\" \"\")))\n                        ;; No more \"AB\" or \"CD\", return the string\n                        (else str)))))\n      (recur s)))\n  \n  ;; Function to check if a substring is in the string\n  (define (string-contains str sub)\n    (not (equal? (string-search sub str) #f)))\n  \n  ;; Function to replace a substring in the string with another string\n  (define (string-replace str find replace)\n    (let ((pos (string-search find str)))\n      (if pos\n          (string-append (substring str 0 pos)\n                         replace\n                         (substring str (+ pos (string-length find))))\n          str)))\n  \n  ;; Calculate the length of the string after removing \"AB\" and \"CD\"\n  (string-length (remove-AB-CD s)))"
+}

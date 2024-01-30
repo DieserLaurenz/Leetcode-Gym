@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 20: Char 33: syntax error before: '('",
+    "full_compile_error": "Line 20: Char 33: syntax error before: '('\n%   20|             NewS = <<binary:part(S, 0, Position), binary:part(S, Position + Length)>>,\n%     |                                 ^\nLine 12: Char 5: function reduce_string/3 undefined\n%   12|     reduce_string(S, Patterns, Changed).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2800",
+    "task_finish_time": 1706564873780,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160473631",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_length(S :: unicode:unicode_binary()) -> integer().\nmin_length(S) ->\n    case reduce_string(S, false) of\n        {Reduced, true} ->\n            min_length(Reduced); % Continue reducing if a replacement was made\n        {Reduced, false} ->\n            byte_size(Reduced) % No more replacements, return size\n    end.\n\nreduce_string(S, Changed) ->\n    Patterns = [<<\"AB\">>, <<\"CD\">>], % Patterns to search for and remove\n    reduce_string(S, Patterns, Changed).\n\nreduce_string(S, [], Changed) ->\n    {S, Changed}; % No patterns left, return current state\nreduce_string(S, [Pattern | Rest], Changed) ->\n    case binary:match(S, Pattern) of\n        {Position, Length} ->\n            % Remove the found pattern and mark that we've made a change\n            NewS = <<binary:part(S, 0, Position), binary:part(S, Position + Length)>>,\n            reduce_string(NewS, [Pattern | Rest], true); % Check again for the same pattern\n        nomatch ->\n            % Pattern not found, move to the next pattern\n            reduce_string(S, Rest, Changed)\n    end."
+}

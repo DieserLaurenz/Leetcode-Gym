@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 22: error: expected class or object definition (in solution.scala)",
+    "full_compile_error": "Line 22: error: expected class or object definition (in solution.scala)\nprintln(Solution.minLength(\"ABFCACDB\"))  // Expected output: 2\n^\nLine 23: error: expected class or object definition (in solution.scala)\nprintln(Solution.minLength(\"ACBBD\"))     // Expected output: 5\n^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2800",
+    "task_finish_time": 1706564554459,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1160470872",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def minLength(s: String): Int = {\n        // Stack to keep track of characters\n        val stack = scala.collection.mutable.Stack[Char]()\n\n        s.foreach { c =>\n            if (stack.nonEmpty && ((stack.top == 'A' && c == 'B') || (stack.top == 'C' && c == 'D'))) {\n                // If the current character with the top of the stack forms \"AB\" or \"CD\", remove the top\n                stack.pop()\n            } else {\n                // Otherwise, push the current character onto the stack\n                stack.push(c)\n            }\n        }\n\n        // The size of the stack is the minimum length of the string we can obtain\n        stack.size\n    }\n}\n\n// Testing the solution\nprintln(Solution.minLength(\"ABFCACDB\"))  // Expected output: 2\nprintln(Solution.minLength(\"ACBBD\"))     // Expected output: 5"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 23: error: expected class or object definition (in solution.scala)",
+    "full_compile_error": "Line 23: error: expected class or object definition (in solution.scala)\nval numsExample1 = Array(5, 4, 2, 3)\n^\nLine 24: error: expected class or object definition (in solution.scala)\nval resultExample1 = Solution.numberGame(numsExample1)\n^\nLine 25: error: expected class or object definition (in solution.scala)\nprintln(resultExample1.mkString(\"[\", \", \", \"]\"))\n^\nLine 27: error: expected class or object definition (in solution.scala)\nval numsExample2 = Array(2, 5)\n^\nLine 28: error: expected class or object definition (in solution.scala)\nval resultExample2 = Solution.numberGame(numsExample2)\n^\nLine 29: error: expected class or object definition (in solution.scala)\nprintln(resultExample2.mkString(\"[\", \", \", \"]\"))\n^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3226",
+    "task_finish_time": 1706543564405,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1160188853",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n  def numberGame(nums: Array[Int]): Array[Int] = {\n    // Step 1: Sort the input array to simplify the removal of minimum elements\n    val sortedNums = nums.sorted\n    \n    // Step 2: Initialize an empty array to store the results\n    val arr = new Array[Int](nums.length)\n    \n    // Step 3: Use a loop to process elements according to the game's rules\n    for (i <- sortedNums.indices by 2) {\n      // Bob's choice (the second minimum in each round) goes first\n      arr(i) = sortedNums(i + 1)\n      // Alice's choice (the first minimum in each round) goes second\n      arr(i + 1) = sortedNums(i)\n    }\n    \n    // Return the resulting array\n    arr\n  }\n}\n\n// Example usage:\nval numsExample1 = Array(5, 4, 2, 3)\nval resultExample1 = Solution.numberGame(numsExample1)\nprintln(resultExample1.mkString(\"[\", \", \", \"]\"))\n\nval numsExample2 = Array(2, 5)\nval resultExample2 = Solution.numberGame(numsExample2)\nprintln(resultExample2.mkString(\"[\", \", \", \"]\"))"
+}

@@ -13,7 +13,7 @@ load_dotenv()
 def init_driver():
     chatgpt_session_token = os.getenv('CHATGPT_SESSION_TOKEN')
 
-    driver = Driver(uc=True, headless=True)
+    driver = Driver(uc=True)
 
     driver.get("https://chat.openai.com/?model=gpt-4")
 

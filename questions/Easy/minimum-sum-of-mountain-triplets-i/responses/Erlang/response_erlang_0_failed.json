@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 7: Char 59: syntax error before: J",
+    "full_compile_error": "Line 7: Char 59: syntax error before: J\n%    7|                                   TripletSums = [X + Nums#J + Y || X <- lists:seq(1, J-1), Y <- lists:seq(J+1, length(Nums)),\n%     |                                                           ^\nLine 1: Char 2: spec for undefined function minimum_sum/1\n%    1| -spec minimum_sum(Nums :: [integer()]) -> integer().\n%     |  ^\nLine 34: Char 13: function minimum_sum/1 undefined\n%   34|       Ret = minimum_sum(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3176",
+    "task_finish_time": 1706597312533,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160789133",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_sum(Nums :: [integer()]) -> integer().\nminimum_sum(Nums) ->\n    {MinSum, _} = lists:foldl(fun(J, {Acc, LeftMin}) ->\n                                  {NewLeftMin, RightMin} = lists:foldl(fun(X, {LM, RM}) -> \n                                                                            {min(LM, X), min(X, RM)}\n                                                                        end, {LeftMin, 50}, lists:sublist(Nums, J)),\n                                  TripletSums = [X + Nums#J + Y || X <- lists:seq(1, J-1), Y <- lists:seq(J+1, length(Nums)), \n                                                  X < Nums#J, Y < Nums#J, Nums#X < Nums#J, Nums#Y < Nums#J, X < Y],\n                                  MinTripletSum = case TripletSums of\n                                                      [] -> Acc;\n                                                      _ -> min(Acc, lists:min(TripletSums))\n                                                  end,\n                                  {MinTripletSum, NewLeftMin}\n                              end, {50, 50}, lists:seq(2, length(Nums) - 1)),\n    if\n        MinSum == 50 -> -1;\n        true -> MinSum\n    end."
+}

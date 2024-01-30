@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 8: Char 51: syntax error before: '>'",
+    "full_compile_error": "Line 8: Char 51: syntax error before: '>'\n%    8|             NewS = binary:part(S, {0, Position}) <> binary:part(S, Position + 2),\n%     |                                                   ^\nLine 3: Char 5: function min_length/2 undefined\n%    3|     min_length(S, 0).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2800",
+    "task_finish_time": 1706564827630,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160473243",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_length(S :: unicode:unicode_binary()) -> integer().\nmin_length(S) ->\n    min_length(S, 0).\n\nmin_length(S, Acc) ->\n    case erlang:binary_match(S, <<\"AB\">>) of\n        {Position, _Length} ->\n            NewS = binary:part(S, {0, Position}) <> binary:part(S, Position + 2),\n            min_length(NewS, Acc);\n        nomatch ->\n            case erlang:binary_match(S, <<\"CD\">>) of\n                {Position, _Length} ->\n                    NewS = binary:part(S, {0, Position}) <> binary:part(S, Position + 2),\n                    min_length(NewS, Acc);\n                nomatch ->\n                    byte_size(S)\n            end\n    end."
+}

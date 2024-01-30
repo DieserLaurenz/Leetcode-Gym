@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 7: Char 33: illegal guard expression",
+    "full_compile_error": "Line 7: Char 33: illegal guard expression\n%    7|                       Num =< K, lists:member(Num, Collected) -> {Count + 1, Collected};\n%     |                                 ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3044",
+    "task_finish_time": 1706554178114,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160358579",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_operations(Nums :: [integer()], K :: integer()) -> integer().\nmin_operations(Nums, K) ->\n    ReverseNums = lists:reverse(Nums),\n    Collect = fun(Collector, {Count, Collected}) ->\n                  [Num|_] = Collector,\n                  if\n                      Num =< K, lists:member(Num, Collected) -> {Count + 1, Collected};\n                      Num =< K -> {Count + 1, [Num|Collected]};\n                      true -> {Count + 1, Collected}\n                  end\n              end,\n    {Ops, _} = lists:foldl(Collect, {0, []}, ReverseNums),\n    % Find the operation count when all needed elements are collected\n    FindOps = fun(_, {OpsCount, Collected}) when length(Collected) == K -> {OpsCount, done};\n                 (Op, {OpsCount, _}) when Op > Ops -> {Ops, done};\n                 (Op, Acc) -> Collect(lists:nth(Op, ReverseNums), Acc)\n              end,\n    {FinalOps, _} = lists:foldl(FindOps, {0, []}, lists:seq(1, length(ReverseNums))),\n    FinalOps."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 61: variable 'K' is unbound",
+    "full_compile_error": "Line 6: Char 61: variable 'K' is unbound\n%    6| min_ops([], _K, Collected, Count) when length(Collected) == K ->\n%     |                                                             ^\nLine 10: Char 31: illegal guard expression\n%   10|         Head =< K andalso not lists:member(Head, Collected) ->\n%     |                               ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3044",
+    "task_finish_time": 1706554230448,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160359352",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_operations(Nums :: [integer()], K :: integer()) -> integer().\nmin_operations(Nums, K) ->\n    ReverseNums = lists:reverse(Nums),\n    min_ops(ReverseNums, K, [], 0).\n\nmin_ops([], _K, Collected, Count) when length(Collected) == K ->\n    Count;\nmin_ops([Head|Tail], K, Collected, Count) ->\n    if\n        Head =< K andalso not lists:member(Head, Collected) ->\n            min_ops(Tail, K, [Head|Collected], Count + 1);\n        true ->\n            min_ops(Tail, K, Collected, Count + 1)\n    end."
+}

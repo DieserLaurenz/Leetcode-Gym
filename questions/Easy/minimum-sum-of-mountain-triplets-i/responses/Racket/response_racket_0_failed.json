@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 17\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3176",
+    "task_finish_time": 1706597137215,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1160786866",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-sum nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([n (length nums)])\n    (let loop ([i 0] [min-sum +inf.0])\n      (if (< i (- n 2))\n          (let loop-j ([j (+ i 1)] [min-sum-j min-sum])\n            (if (< j (- n 1))\n                (let loop-k ([k (+ j 1)] [min-sum-k min-sum-j])\n                  (if (< k n)\n                      (if (and (< (list-ref nums i) (list-ref nums j))\n                               (> (list-ref nums j) (list-ref nums k)))\n                          (loop-k (+ k 1) (min min-sum-k (+ (list-ref nums i) (list-ref nums j) (list-ref nums k))))\n                          (loop-k (+ k 1) min-sum-k))\n                      (loop-j (+ j 1) min-sum-k)))\n                (loop (+ i 1) min-sum-j)))\n          (if (= min-sum +inf.0) -1 min-sum))))"
+}

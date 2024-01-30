@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"left\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"left\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 11:   Solution.minimum_sum/1\nerror: undefined variable \"left\"\nLine 13:   Solution.minimum_sum/1\nerror: undefined variable \"left\"\nLine 14:   Solution.minimum_sum/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3176",
+    "task_finish_time": 1706597554581,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1160792278",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_sum(nums :: [integer]) :: integer\n  def minimum_sum(nums) do\n    left_min = Enum.scan(nums, fn x, acc -> if acc == nil, do: x, else: min(x, acc) end)\n    right_min = Enum.scan(Enum.reverse(nums), fn x, acc -> if acc == nil, do: x, else: min(x, acc) end)\n               |> Enum.reverse()\n\n    Enum.with_index(nums)\n    |> Enum.reduce(-1, fn {num, idx}, acc ->\n      if idx == 0 or idx == length(nums) - 1, do: acc, else:\n        left = Enum.at(left_min, idx - 1)\n        right = Enum.at(right_min, idx + 1)\n        if num > left and num > right do\n          sum = left + num + right\n          if acc == -1, do: sum, else: min(acc, sum)\n        else\n          acc\n        end\n    end)\n  end\nend"
+}

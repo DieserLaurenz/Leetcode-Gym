@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 10: Char 11: string-contains: unbound identifier",
+    "full_compile_error": "Line 10: Char 11: string-contains: unbound identifier\n  in: string-contains\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:21:10",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2800",
+    "task_finish_time": 1706564693114,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1160472095",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-length s)\n  (-> string? exact-integer?)\n  \n  ;; Define a helper function to remove occurrences of \"AB\" and \"CD\".\n  (define (remove-substr s)\n    (let loop ((s s)\n               (found #f)) ; Indicates whether a substring was found and removed.\n      (cond\n        ;; If \"AB\" is found, remove it and set found to #t.\n        ((string-contains s \"AB\")\n         (loop (string-replace s \"AB\" \"\") #t))\n        ;; If \"CD\" is found, remove it and set found to #t.\n        ((string-contains s \"CD\")\n         (loop (string-replace s \"CD\" \"\") #t))\n        ;; If neither \"AB\" nor \"CD\" was found, return the current state.\n        (else\n         (values s found)))))\n\n  ;; Use the helper function to iteratively remove substrings until none are left.\n  (let iter ((s s))\n    (let-values (((s found) (remove-substr s)))\n      (if found\n          (iter s) ; If a substring was removed, continue with the new string.\n          (string-length s))))) ; Return the length of the final string."
+}

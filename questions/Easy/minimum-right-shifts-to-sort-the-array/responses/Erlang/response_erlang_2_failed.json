@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 19: Char 29: syntax error before: mod",
+    "full_compile_error": "Line 19: Char 29: syntax error before: mod\n%   19|     Next = lists:nth((Index mod Len) + 1, Nums),\n%     |                             ^\nLine 10: Char 13: function check_for_break/3 undefined\n%   10|             check_for_break(Nums, 1, length(Nums))\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3045",
+    "task_finish_time": 1706563867227,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160464981",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_right_shifts(Nums :: [integer()]) -> integer().\nminimum_right_shifts(Nums) ->\n    %% Check if the list is already sorted\n    Sorted = lists:sort(Nums),\n    if \n        Nums == Sorted ->\n            0; % Already sorted, no shifts needed\n        true ->\n            %% Check for the index where the list \"breaks\"\n            check_for_break(Nums, 1, length(Nums))\n    end.\n\n%% Helper function to find the \"break\" point in the list\ncheck_for_break(_Nums, Index, Len) when Index == Len ->\n    -1; % Reached the end, meaning more than one break or not sortable\ncheck_for_break(Nums, Index, Len) ->\n    %% Find the point where a number is smaller than its predecessor\n    Prev = lists:nth(Index, Nums),\n    Next = lists:nth((Index mod Len) + 1, Nums),\n    if\n        Prev > Next ->\n            %% Found the break, calculate shifts needed to sort\n            %% The break index indicates how many shifts are needed to make the list sorted\n            if is_sorted_after_shift(Nums, Index, Len) ->\n                Len - Index;\n            true ->\n                -1 % Not sortable with shifts\n        true ->\n            check_for_break(Nums, Index + 1, Len)\n    end.\n\n%% Helper function to check if the list can be sorted after the found break\nis_sorted_after_shift(Nums, BreakIndex, Len) ->\n    Shifted = rotate_list(Nums, Len - BreakIndex),\n    lists:sort(Nums) == Shifted.\n\n%% Rotate the list to simulate the right shifts\nrotate_list(List, Shifts) ->\n    {Left, Right} = lists:split(length(List) - Shifts, List),\n    Right ++ Left."
+}

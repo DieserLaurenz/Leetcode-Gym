@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 11: error: not found: type i (in solution.scala)",
+    "full_compile_error": "Line 11: error: not found: type i (in solution.scala)\n                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]\n                         ^\nLine 11: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)\n                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]\n                        ^\nLine 11: error: not found: type j (in solution.scala)\n                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]\n                                   ^\nLine 11: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)\n                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]\n                                  ^\nLine 11: error: not found: type i (in solution.scala)\n                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]\n                                                                  ^\nLine 11: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)\n                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]\n                                                                 ^\nLine 16: error: not found: type k (in solution.scala)\n                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]\n                         ^\nLine 16: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)\n                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]\n                        ^\nLine 16: error: not found: type j (in solution.scala)\n                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]\n                                   ^\nLine 16: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)\n                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]\n                                  ^\nLine 16: error: not found: type k (in solution.scala)\n                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]\n                                                                    ^\nLine 16: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)\n                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]\n                                                                   ^\nLine 21: error: not found: type j (in solution.scala)\n                minSum = minSum min (leftMin + nums[j] + rightMin)\n                                                    ^\nLine 21: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)\n                minSum = minSum min (leftMin + nums[j] + rightMin)\n                                                   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3176",
+    "task_finish_time": 1706596831683,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1160782921",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def minimumSum(nums: Array[Int]): Int = {\n        var minSum = Int.MaxValue // Use MaxValue as an initial value\n        \n        for (j <- 1 until nums.length - 1) {\n            var leftMin = Int.MaxValue\n            var rightMin = Int.MaxValue\n            \n            // Find the smallest value to the left of j\n            for (i <- 0 until j) {\n                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]\n            }\n            \n            // Find the smallest value to the right of j\n            for (k <- j + 1 until nums.length) {\n                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]\n            }\n            \n            // If valid mountain triplet found, update minSum\n            if (leftMin != Int.MaxValue && rightMin != Int.MaxValue) {\n                minSum = minSum min (leftMin + nums[j] + rightMin)\n            }\n        }\n        \n        if (minSum == Int.MaxValue) -1 else minSum // Return result\n    }\n}"
+}
