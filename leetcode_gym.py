@@ -351,7 +351,7 @@ def extract_info_and_generate_prompt(response):
 
     # Construct the prompt with conditional inclusions
     prompt_parts = [
-        f"This solution is incorrect. Revise your implementation, referring to the outlined error details for enhancements.\n\nError type:\n\n{error_type}\n\nError details:\n\n{error_detail}"]
+        f"This solution is incorrect. Please provide a corrected code implementation, considering the outlined error details for enhancements.\n\nError type:\n\n{error_type}\n\nError details:\n\n{error_detail}"]
     if test_input is not None:
         prompt_parts.append(f"\n\nLast executed input: {test_input}")
     if output is not None:
