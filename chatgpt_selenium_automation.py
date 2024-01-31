@@ -1,4 +1,5 @@
 import os
+import threading
 import time
 
 from dotenv import load_dotenv
@@ -56,13 +57,13 @@ def get_response(driver, attempt):
     container = driver.find_element(By.CSS_SELECTOR, 'div[role="presentation"].flex.h-full.flex-col')
 
     # Suche innerhalb dieses Containers nach den spezifischen Elementen
-    message_stream = container.find_elements(By.CSS_SELECTOR, '.result-streaming')
-    thinking_dots = container.find_elements(By.CSS_SELECTOR, '.result-thinking')
-    successful_responses = container.find_elements(By.CSS_SELECTOR, '.markdown.prose')
+    message_stream = container.find_elements(By.CSS_SELECTOR, '.result-streaming.markdown.prose.w-full.break-words.dark\\:prose-invert.light')
+    thinking_dots = container.find_elements(By.CSS_SELECTOR, '.result-thinking.relative')
+    successful_responses = container.find_elements(By.CSS_SELECTOR, '.markdown.prose.w-full.break-words.dark\\:prose-invert.light')
     extracted_codes = container.find_elements(By.CSS_SELECTOR, '.p-4.overflow-y-auto')
     message_cap_errors = container.find_elements(By.CSS_SELECTOR, '.flex.items-center.gap-6')
-    network_error_responses = container.find_elements(By.CSS_SELECTOR, '.text-red-500')
-    unusual_activity_responses = container.find_elements(By.CSS_SELECTOR, '.mb-2.py-2.px-3')
+    network_error_responses = container.find_elements(By.CSS_SELECTOR, '.text-red-500.markdown.prose.w-full.break-words.dark\\:prose-invert.light')
+    unusual_activity_responses = container.find_elements(By.CSS_SELECTOR, '.mb-2.py-2.px-3.border.text-gray-600.rounded-md.text-sm.dark\\:text-gray-100.border-red-500.bg-red-500\\:10')
 
 
     # Der Rest der Logik bleibt unverändert
@@ -93,6 +94,7 @@ def get_response(driver, attempt):
 
 
 def send_message(driver, prompt, attempt, conversation_id=None):
+
     if conversation_id is None:
         create_new_conversation(driver)
     else:
@@ -116,7 +118,7 @@ def send_message(driver, prompt, attempt, conversation_id=None):
     text_area.send_keys(Keys.ENTER)
 
     while True:
-        time.sleep(5)
+        time.sleep(7.5)
 
         response_message, response_text, extracted_code = get_response(driver, attempt)
 
