@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from seleniumbase import Driver
 
 load_dotenv()
@@ -53,6 +54,15 @@ def load_conversation(driver, conversation_id):
 
 
 def get_response(driver, attempt):
+    driver.get("google.com")
+
+    try:
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'div[role="presentation"].flex.h-full.flex-col'))
+        )
+    except TimeoutException:
+        return "timeout_error", "", ""
+
     # Finde den übergeordneten Container
     container = driver.find_element(By.CSS_SELECTOR, 'div[role="presentation"].flex.h-full.flex-col')
 
@@ -125,6 +135,9 @@ def send_message(driver, prompt, attempt, conversation_id=None):
         if response_message == "generating":
             print("Generating response...")
             continue
+        elif response_message == "timeout_error":
+            print("Elements are not present... Reloading")
+            driver.refresh()
         else:
             break
 
