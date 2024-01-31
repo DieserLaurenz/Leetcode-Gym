@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from seleniumbase import Driver
 
 load_dotenv()
@@ -51,23 +52,25 @@ def load_conversation(driver, conversation_id):
 
 
 def get_response(driver, attempt):
-    message_stream = driver.find_elements(By.CSS_SELECTOR,
-                                          '.result-streaming.markdown.prose.w-full.break-words.dark\\:prose-invert.light')
+    # Um DOM Abfragen zu reduzieren und somit Speicher effizienter zu nutzen
+    all_elements = driver.find_elements(By.CSS_SELECTOR,
+                                        '.result-streaming.markdown.prose.w-full.break-words.dark\\:prose-invert.light, ' +
+                                        '.result-thinking.relative, ' +
+                                        '.markdown.prose.w-full.break-words.dark\\:prose-invert.light, ' +
+                                        '.flex.items-center.gap-6, ' +
+                                        '.text-red-500.markdown.prose.w-full.break-words.dark\\:prose-invert.light, ' +
+                                        '.mb-2.py-2.px-3.border.text-gray-600.rounded-md.text-sm.dark\\:text-gray-100.border-red-500.bg-red-500\\:10' +
+                                        '.p-4.overflow-y-auto')
 
-    thinking_dots = driver.find_elements(By.CSS_SELECTOR, '.result-thinking.relative')
+    message_stream = [el for el in all_elements if 'result-streaming' in el.get_attribute('class')]
+    thinking_dots = [el for el in all_elements if 'result-thinking' in el.get_attribute('class')]
+    successful_responses = [el for el in all_elements if
+                            el.get_attribute('class') == 'markdown prose w-full break-words dark\\:prose-invert light']
+    message_cap_errors = [el for el in all_elements if 'flex items-center gap-6' in el.get_attribute('class')]
+    network_error_responses = [el for el in all_elements if 'text-red-500' in el.get_attribute('class')]
+    unusual_activity_responses = [el for el in all_elements if 'mb-2 py-2 px-3 border' in el.get_attribute('class')]
+    extracted_codes = [el for el in all_elements if '.p-4.overflow-y-auto' in el.get_attribute('class')]
 
-    successful_responses = driver.find_elements(By.CSS_SELECTOR,
-                                                '.markdown.prose.w-full.break-words.dark\\:prose-invert.light')
-
-    extracted_codes = driver.find_elements(By.CSS_SELECTOR, '.p-4.overflow-y-auto')
-
-    message_cap_errors = driver.find_elements(By.CSS_SELECTOR, '.flex.items-center.gap-6')
-
-    network_error_responses = driver.find_elements(By.CSS_SELECTOR,
-                                                   '.text-red-500.markdown.prose.w-full.break-words.dark\\:prose-invert.light')
-
-    unusual_activity_responses = driver.find_elements(By.CSS_SELECTOR,
-                                                      '.mb-2.py-2.px-3.border.text-gray-600.rounded-md.text-sm.dark\\:text-gray-100.border-red-500.bg-red-500\\:10')
 
     if thinking_dots or message_stream:
         return "generating", "", ""
@@ -101,33 +104,30 @@ def send_message(driver, prompt, attempt, conversation_id=None):
     else:
         load_conversation(driver, conversation_id)
 
-    time.sleep(2)
-
-    text_area = driver.find_element(By.ID, "prompt-textarea")
-
+    text_area = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "prompt-textarea"))
+    )
     text_area.click()
 
-    time.sleep(2)
+    time.sleep(0.7)
 
     driver.execute_script("arguments[0].value = arguments[1];", text_area, prompt)
 
-    time.sleep(1)
+    time.sleep(0.7)
 
     text_area.send_keys(Keys.ENTER)
 
-    time.sleep(1)
+    time.sleep(0.7)
 
     text_area.send_keys(Keys.ENTER)
-
-    time.sleep(3)
 
     while True:
+        time.sleep(5)
 
         response_message, response_text, extracted_code = get_response(driver, attempt)
 
         if response_message == "generating":
             print("Generating response...")
-            time.sleep(5)
             continue
         else:
             break
