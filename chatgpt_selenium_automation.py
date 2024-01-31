@@ -54,8 +54,6 @@ def load_conversation(driver, conversation_id):
 
 
 def get_response(driver, attempt):
-    driver.get("https://google.com")
-
     try:
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, 'div[role="presentation"].flex.h-full.flex-col'))
