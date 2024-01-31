@@ -52,18 +52,18 @@ def load_conversation(driver, conversation_id):
 
 
 def get_response(driver, attempt):
-    # Finde alle relevanten Elemente innerhalb des spezifizierten Containers
-    all_elements = driver.find_elements(By.CSS_SELECTOR,
-                                       'div[role="presentation"].flex.h-full.flex-col *')
+    # Finde den übergeordneten Container
+    container = driver.find_element(By.CSS_SELECTOR, 'div[role="presentation"].flex.h-full.flex-col')
 
-    # Filtere die Elemente nach ihren spezifischen Klassen
-    message_stream = [el for el in all_elements if 'result-streaming' in el.get_attribute('class')]
-    thinking_dots = [el for el in all_elements if 'result-thinking' in el.get_attribute('class')]
-    successful_responses = [el for el in all_elements if 'successful-response-class' in el.get_attribute('class')]
-    extracted_codes = [el for el in all_elements if 'extracted-code-class' in el.get_attribute('class')]
-    message_cap_errors = [el for el in all_elements if 'message-cap-error-class' in el.get_attribute('class')]
-    network_error_responses = [el for el in all_elements if 'network-error-class' in el.get_attribute('class')]
-    unusual_activity_responses = [el for el in all_elements if 'unusual-activity-class' in el.get_attribute('class')]
+    # Suche innerhalb dieses Containers nach den spezifischen Elementen
+    message_stream = container.find_elements(By.CSS_SELECTOR, '.result-streaming')
+    thinking_dots = container.find_elements(By.CSS_SELECTOR, '.result-thinking')
+    successful_responses = container.find_elements(By.CSS_SELECTOR, '.markdown.prose')
+    extracted_codes = container.find_elements(By.CSS_SELECTOR, '.p-4.overflow-y-auto')
+    message_cap_errors = container.find_elements(By.CSS_SELECTOR, '.flex.items-center.gap-6')
+    network_error_responses = container.find_elements(By.CSS_SELECTOR, '.text-red-500')
+    unusual_activity_responses = container.find_elements(By.CSS_SELECTOR, '.mb-2.py-2.px-3')
+
 
     # Der Rest der Logik bleibt unverändert
     if thinking_dots or message_stream:
