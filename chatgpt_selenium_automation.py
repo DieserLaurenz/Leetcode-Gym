@@ -54,7 +54,7 @@ def load_conversation(driver, conversation_id):
 
 
 def get_response(driver, attempt):
-    driver.get("google.com")
+    driver.get("https://google.com")
 
     try:
         WebDriverWait(driver, 10).until(
