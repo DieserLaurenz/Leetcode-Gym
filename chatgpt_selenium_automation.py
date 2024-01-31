@@ -52,26 +52,20 @@ def load_conversation(driver, conversation_id):
 
 
 def get_response(driver, attempt):
-    # Um DOM Abfragen zu reduzieren und somit Speicher effizienter zu nutzen
+    # Finde alle relevanten Elemente innerhalb des spezifizierten Containers
     all_elements = driver.find_elements(By.CSS_SELECTOR,
-                                        '.result-streaming.markdown.prose.w-full.break-words.dark\\:prose-invert.light, ' +
-                                        '.result-thinking.relative, ' +
-                                        '.markdown.prose.w-full.break-words.dark\\:prose-invert.light, ' +
-                                        '.flex.items-center.gap-6, ' +
-                                        '.text-red-500.markdown.prose.w-full.break-words.dark\\:prose-invert.light, ' +
-                                        '.mb-2.py-2.px-3.border.text-gray-600.rounded-md.text-sm.dark\\:text-gray-100.border-red-500.bg-red-500\\:10' +
-                                        '.p-4.overflow-y-auto')
+                                       'div[role="presentation"].flex.h-full.flex-col *')
 
+    # Filtere die Elemente nach ihren spezifischen Klassen
     message_stream = [el for el in all_elements if 'result-streaming' in el.get_attribute('class')]
     thinking_dots = [el for el in all_elements if 'result-thinking' in el.get_attribute('class')]
-    successful_responses = [el for el in all_elements if
-                            el.get_attribute('class') == 'markdown prose w-full break-words dark\\:prose-invert light']
-    message_cap_errors = [el for el in all_elements if 'flex items-center gap-6' in el.get_attribute('class')]
-    network_error_responses = [el for el in all_elements if 'text-red-500' in el.get_attribute('class')]
-    unusual_activity_responses = [el for el in all_elements if 'mb-2 py-2 px-3 border' in el.get_attribute('class')]
-    extracted_codes = [el for el in all_elements if '.p-4.overflow-y-auto' in el.get_attribute('class')]
+    successful_responses = [el for el in all_elements if 'successful-response-class' in el.get_attribute('class')]
+    extracted_codes = [el for el in all_elements if 'extracted-code-class' in el.get_attribute('class')]
+    message_cap_errors = [el for el in all_elements if 'message-cap-error-class' in el.get_attribute('class')]
+    network_error_responses = [el for el in all_elements if 'network-error-class' in el.get_attribute('class')]
+    unusual_activity_responses = [el for el in all_elements if 'unusual-activity-class' in el.get_attribute('class')]
 
-
+    # Der Rest der Logik bleibt unverändert
     if thinking_dots or message_stream:
         return "generating", "", ""
     elif unusual_activity_responses:
