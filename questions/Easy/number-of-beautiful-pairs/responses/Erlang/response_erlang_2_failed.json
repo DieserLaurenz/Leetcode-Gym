@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 5: Char 27: variable 'Gcd' is unbound",
+    "full_compile_error": "Line 5: Char 27: variable 'Gcd' is unbound\n%    5|                 (A, B) -> Gcd(B, A rem B)\n%     |                           ^\nLine 10: Char 30: variable 'FirstDigit' is unbound\n%   10|                         _ -> FirstDigit(N div 10)\n%     |                              ^\nLine 22: Char 36: illegal guard expression\n%   22|                                 if Coprime(First, Last) -> Acc + 1;\n%     |                                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2831",
+    "task_finish_time": 1706607567150,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160901459",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_beautiful_pairs(Nums :: [integer()]) -> integer().\ncount_beautiful_pairs(Nums) ->\n    Gcd = fun(A, B) when A == 0 -> B;\n                (A, B) when B == 0 -> A;\n                (A, B) -> Gcd(B, A rem B)\n          end,\n    FirstDigit = fun(N) ->\n                    case N of\n                        _ when N < 10 -> N;\n                        _ -> FirstDigit(N div 10)\n                    end\n                 end,\n    Coprime = fun(A, B) -> Gcd(A, B) == 1 end,\n    CountPairs = 0,\n    Lists = lists:map(fun(N) -> {FirstDigit(N), N rem 10} end, Nums),\n    count_beautiful_pairs(Lists, Lists, Coprime, CountPairs).\n\ncount_beautiful_pairs([], _, _, Count) -> Count;\ncount_beautiful_pairs([_], _, _, Count) -> Count;\ncount_beautiful_pairs([{First, _} = H | T], AllNums, Coprime, Count) ->\n    NewCount = lists:foldl(fun({_, Last}, Acc) ->\n                                if Coprime(First, Last) -> Acc + 1;\n                                   true -> Acc\n                                end\n                           end, Count, T),\n    count_beautiful_pairs(T, AllNums, Coprime, NewCount)."
+}

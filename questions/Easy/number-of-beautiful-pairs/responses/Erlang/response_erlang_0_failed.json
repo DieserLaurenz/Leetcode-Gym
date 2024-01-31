@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 25: variable 'Gcd' is unbound",
+    "full_compile_error": "Line 4: Char 25: variable 'Gcd' is unbound\n%    4|               (G, H) -> Gcd(H, G rem H)\n%     |                         ^\nLine 7: Char 29: variable 'FirstDigit' is unbound\n%    7|                      (N) -> FirstDigit(N div 10)\n%     |                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2831",
+    "task_finish_time": 1706607449135,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160900130",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_beautiful_pairs(Nums :: [integer()]) -> integer().\ncount_beautiful_pairs(Nums) ->\n    Gcd = fun(G, 0) -> G;\n              (G, H) -> Gcd(H, G rem H)\n          end,\n    FirstDigit = fun(N) when N < 10 -> N;\n                     (N) -> FirstDigit(N div 10)\n                 end,\n    Coprime = fun(A, B) -> Gcd(A, B) == 1 end,\n    CountPairs = fun CountPairs(Left, [_|Right], Acc) when Left =/= [] ->\n                        [{I, J} || I <- Left, J <- Right, Coprime(FirstDigit(I), J rem 10)];\n                     CountPairs([], _, Acc) ->\n                        Acc\n                 end,\n    lists:flatten([CountPairs(lists:sublist(Nums, 1, I), lists:sublist(Nums, I + 1), []) || I <- lists:seq(1, length(Nums) - 1)]),\n    length(lists:flatten([CountPairs(lists:sublist(Nums, 1, I), lists:sublist(Nums, I + 1), []) || I <- lists:seq(1, length(Nums) - 1)]))."
+}

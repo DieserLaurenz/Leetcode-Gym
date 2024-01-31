@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 11: Char 5: ** (SyntaxError) syntax error before: rescue. \"rescue\" is a reserved word in Elixir and therefore its usage is limited. For instance, it can't be used as a variable or be defined nor invoked as a regular function\n    |\n 11 |     rescue\n    |     ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3236",
+    "task_finish_time": 1706668501941,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1161590009",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec missing_integer(nums :: [integer]) :: integer\n  def missing_integer(nums) do\n    # Find the longest sequential prefix and its sum\n    {longest_seq_sum, _} = Enum.reduce(nums, {0, nums |> hd() - 1}, fn x, {sum, last} ->\n      if x == last + 1 do\n        {sum + x, x}\n      else\n        throw :break\n      end\n    rescue\n      _ -> {sum, last}\n    end)\n\n    # Find the smallest missing integer\n    missing_integer = Enum.find(longest_seq_sum + 1..50, fn x ->\n      not Enum.member?(nums, x)\n    end)\n\n    missing_integer\n  end\nend"
+}

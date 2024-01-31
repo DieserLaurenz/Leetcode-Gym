@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 9: Char 11: if: missing an \"else\" expression",
+    "full_compile_error": "Line 9: Char 11: if: missing an \"else\" expression\n  in: (if (> num (add1 max-seq-end)) (break))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:20:10",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3236",
+    "task_finish_time": 1706659300544,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1161513843",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (missing-integer nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let* ([sorted-nums (sort nums <)]\n         [max-seq-start (first sorted-nums)]\n         [max-seq-end max-seq-start])\n    (for ([num (rest sorted-nums)])\n      (if (= num (add1 max-seq-end))\n          (set! max-seq-end num)\n          (if (> num (add1 max-seq-end)) ; Break the sequence, no need to continue\n              (break))))\n    (let ([sum-of-seq (+ (* (- max-seq-end max-seq-start) \n                            (+ max-seq-start max-seq-end)) \n                         (/ 2))]) ; Calculate the sum of the sequential prefix\n      (let find-missing ([x (add1 sum-of-seq)])\n        (if (member x sorted-nums) (find-missing (add1 x)) x)))))"
+}

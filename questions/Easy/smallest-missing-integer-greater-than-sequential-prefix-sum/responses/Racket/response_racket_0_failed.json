@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 9: Char 34: seq-length: unbound identifier",
+    "full_compile_error": "Line 9: Char 34: seq-length: unbound identifier\n  in: seq-length\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:20:33",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3236",
+    "task_finish_time": 1706659232596,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1161513317",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (missing-integer nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let loop ([i 1] [prev (first nums)] [seq-length 1])\n    (if (< i (length nums))\n        (if (= (list-ref nums i) (+ prev 1))\n            (loop (+ i 1) (list-ref nums i) (+ seq-length 1))\n            (if (> seq-length 1) seq-length (loop (+ i 1) (list-ref nums i) 1)))\n        seq-length))\n  (let ([sum-seq-prefix (+ (* (- seq-length 1) seq-length) (/ 2))]) ; Calculate sum of longest sequential prefix\n    (let find-missing ([x (+ sum-seq-prefix 1)])\n      (if (member x nums) (find-missing (+ x 1)) x))))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 4: Char 4: string-trim-right: unbound identifier",
+    "full_compile_error": "Line 4: Char 4: string-trim-right: unbound identifier\n  in: string-trim-right\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:15:3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2819",
+    "task_finish_time": 1706637596575,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1161286496",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (remove-trailing-zeros num)\n  (-> string? string?)\n  ;; Use string-trim-right to remove trailing zeros\n  (string-trim-right num \"0\"))"
+}

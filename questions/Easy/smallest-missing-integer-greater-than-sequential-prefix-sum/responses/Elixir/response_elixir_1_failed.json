@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"longest_seq\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"longest_seq\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 12:   Solution.missing_integer/1\nwarning: variable \"sum\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 11:   Solution.missing_integer/1\nerror: undefined function while/3 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 31:   Solution.while/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3236",
+    "task_finish_time": 1706668456902,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1161589603",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec missing_integer(nums :: [integer]) :: integer\n  def missing_integer(nums) do\n    # Initialize variables for the longest sequence and its sum\n    longest_seq = 0\n    sum = 0\n\n    # Calculate the sum of the longest sequential prefix\n    Enum.reduce(nums, 0, fn x, prev ->\n      if prev == 0 or x == prev + 1 do\n        sum = sum + x\n        longest_seq = longest_seq + 1\n        x\n      else\n        sum\n      end\n    end)\n\n    # Adjust the sum if the entire sequence is sequential\n    sum = if longest_seq == length(nums), do: Enum.sum(Enum.slice(nums, 0, longest_seq)), else: Enum.sum(Enum.slice(nums, 0, longest_seq - 1))\n\n    # Find the smallest missing integer greater than or equal to the sum\n    missing_integer = sum + 1\n    while Enum.member?(nums, missing_integer) do\n      missing_integer = missing_integer + 1\n    end\n    missing_integer\n  end\n\n  defp while(condition, do: block) do\n    if condition, do: block.() |> while(condition, do: block)\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 12: Char 99: read-syntax: missing `)` to close `(` on line 20, found instead `]`",
+    "full_compile_error": "Line 12: Char 99: read-syntax: missing `)` to close `(` on line 20, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3034",
+    "task_finish_time": 1706627534812,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1161129954",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (number-of-points nums)\n  (-> (listof (listof exact-integer?)) exact-integer?)\n  (let ([intervals (sort nums (lambda (a b) (< (car a) (car b))))])\n    (let loop ([intervals intervals] [current (if (null? intervals) (list 0 0) (car intervals))] [total 0])\n      (cond\n        [(null? intervals) \n         (+ total (- (cadr current) (car current) 1))]\n        [else\n         (let ([next (car intervals)])\n           (if (<= (cadr current) (car next))\n               (loop (cdr intervals) next (+ total (- (cadr current) (car current) + 1)))\n               (loop (cdr intervals) (list (car current) (max (cadr current) (cadr next))) total))]))))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 72: Char 5: error: redefinition of \u2018main\u2019 [solution.c]",
+    "full_compile_error": "Line 72: Char 5: error: redefinition of \u2018main\u2019 [solution.c]\n   75 | int main(int argc, char *argv[]) {\n      |     ^~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2881",
+    "task_finish_time": 1706668719383,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1161592020",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\n/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nchar ** splitWordsBySeparator(char ** words, int wordsSize, char separator, int* returnSize) {\n    // Initially, we don't know how many strings we'll have after the split\n    int totalStrings = 0;\n    char **result = NULL;\n    *returnSize = 0;\n\n    for (int i = 0; i < wordsSize; ++i) {\n        char *word = words[i];\n        int length = strlen(word);\n        int start = 0; // Start of the next string to copy\n\n        for (int j = 0; j <= length; ++j) {\n            if (word[j] == separator || word[j] == '\\0') {\n                if (j > start) {\n                    // We have a non-empty string to copy\n                    int newSize = j - start;\n                    char *newString = (char *)malloc(newSize + 1);\n                    strncpy(newString, word + start, newSize);\n                    newString[newSize] = '\\0'; // Null-terminate the new string\n\n                    // Add the new string to the result array\n                    result = (char **)realloc(result, sizeof(char *) * (++totalStrings));\n                    result[totalStrings - 1] = newString;\n\n                    *returnSize = totalStrings;\n                }\n                start = j + 1; // Update start for the next string\n            }\n        }\n    }\n\n    return result;\n}\n\n// Function to print the result, for demonstration purposes\nvoid printResult(char **result, int size) {\n    printf(\"[\");\n    for (int i = 0; i < size; i++) {\n        printf(\"\\\"%s\\\"\", result[i]);\n        if (i < size - 1) printf(\", \");\n    }\n    printf(\"]\\n\");\n}\n\n// Example usage\nint main() {\n    char *words[] = {\"one.two.three\", \"four.five\", \"six\"};\n    int wordsSize = sizeof(words) / sizeof(words[0]);\n    char separator = '.';\n    int returnSize;\n\n    char **result = splitWordsBySeparator(words, wordsSize, separator, &returnSize);\n    printResult(result, returnSize);\n\n    // Free allocated memory\n    for (int i = 0; i < returnSize; i++) {\n        free(result[i]);\n    }\n    free(result);\n\n    return 0;\n}"
+}
