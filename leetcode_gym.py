@@ -396,6 +396,7 @@ def should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_p
 def process_question_with_selenium_method(json_file_path, subfolder_path):
     question = read_json_file(json_file_path)
     response_directory = os.path.join(subfolder_path, 'responses')
+    driver = None
 
     for snippet in question["codeSnippets"]:
         lang_slug = snippet['langSlug']
@@ -410,7 +411,6 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
         attempt = 0
         conversation_id = None
         prompt = generate_prompt_content(question, snippet)
-        driver = None
 
         while attempt < 3:
             if attempt == 0:
@@ -424,7 +424,6 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
                                                                                              attempt, conversation_id,
                                                                                              driver)
             if is_success:
-                driver.quit()
                 break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
             else:
                 if error_prompt == "":
