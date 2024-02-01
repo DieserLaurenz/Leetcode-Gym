@@ -228,19 +228,6 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
     lang_response_directory = os.path.join(response_directory, lang)
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
-    if lang_slug in ('python', 'python3'):
-        print(f"Python. Skipping.")
-        return True, "", ""
-
-    if check_cache(cache_path, question_id, lang_slug):
-        print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
-        return True, "", ""
-    else:
-        print(f"Processing: {title_slug} in {lang_slug}.\nAttempt: {attempt}")
-        if check_for_files(lang_response_directory) and attempt == 0:
-            print(f"Files found but attempt 0: {title_slug} in {lang_slug}. Deleting...")
-            delete_all_files_in_directory(lang_response_directory)
-
     response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver,
                                                                                                                 prompt,
                                                                                                                 attempt,
@@ -367,6 +354,7 @@ def check_cache(cache_path, question_id, lang_slug):
         return cache.get(f"{question_id}_{lang_slug}") is not None
 
 
+
 def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
     question = read_json_file(json_file_path)
 
@@ -390,12 +378,35 @@ def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
             pyperclip.copy(prompt)
             print("Copied error prompt to clipboard")
 
+def should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_path, title_slug):
+    if lang_slug in ('python', 'python3'):
+        print(f"Python. Skipping.")
+        return True
+
+    if check_cache(cache_path, question_id, lang_slug):
+        print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
+        return True
+    else:
+        print(f"Processing: {title_slug} in {lang_slug}.\n")
+        if check_for_files(lang_response_directory):
+            print(f"Files found: {title_slug} in {lang_slug}. Deleting...")
+            delete_all_files_in_directory(lang_response_directory)
+        return False
 
 def process_question_with_selenium_method(json_file_path, subfolder_path):
     question = read_json_file(json_file_path)
     response_directory = os.path.join(subfolder_path, 'responses')
 
     for snippet in question["codeSnippets"]:
+        lang_slug = snippet['langSlug']
+        question_id = question['questionId']
+        cache_path = 'snippet_cache.db'
+        lang_response_directory = os.path.join(response_directory, snippet['lang'])
+
+        # Check if we should skip processing based on language or cache before initiating driver
+        if should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_path, snippet['titleSlug']):
+            continue  # Skip this snippet and move to the next
+
         attempt = 0
         conversation_id = None
         prompt = generate_prompt_content(question, snippet)
