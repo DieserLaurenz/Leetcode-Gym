@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"cost\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"cost\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 23:   Solution.min_operations/3\nwarning: variable \"i\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 24:   Solution.min_operations/3\nwarning: variable \"cost\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 15:   Solution.min_operations/3\nwarning: variable \"i\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 16:   Solution.min_operations/3\nerror: undefined function while/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 9:   Solution.min_operations/3\nerror: undefined function return/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 20:   Solution.min_operations/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3033",
+    "task_finish_time": 1706740837364,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162428962",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations(s1 :: String.t, s2 :: String.t, x :: integer) :: integer\n  def min_operations(s1, s2, x) do\n    diff_pairs = Enum.zip(s1 |> String.graphemes, s2 |> String.graphemes)\n                  |> Enum.filter(fn {a, b} -> a != b end)\n\n    cost = 0\n    i = 0\n    while i < length(diff_pairs) do\n      {a, _} = Enum.at(diff_pairs, i)\n      {b, _} = Enum.at(diff_pairs, i + 1, {\"\", \"\"})\n\n      if a != b and i < length(diff_pairs) - 1 do\n        # Perform the second operation\n        cost = cost + 1\n        i = i + 2\n      else\n        if x > 1 do\n          # If cost of first operation is more effective\n          return -1\n        else\n          # Perform the first operation\n          cost = cost + x\n          i = i + 1\n        end\n      end\n    end\n\n    cost\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 18: needed: unbound identifier",
+    "full_compile_error": "Line 8: Char 18: needed: unbound identifier\n  in: needed\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:17",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2878",
+    "task_finish_time": 1706721781366,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1162207310",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (check-array nums k)\n  (-> (listof exact-integer?) exact-integer? boolean?)\n  ;; Initialize a 'changes' list to track the cumulative changes needed at each step\n  (let ([changes (make-vector (+ (length nums) 1) 0)])\n    (let loop ([i 0] [acc 0]) ;; 'i' is the current index, 'acc' accumulates the changes applied\n      (if (< i (length nums))\n          (let* ([change (+ acc (vector-ref changes i))]) ;; Calculate total change up to 'i'\n                [needed (- (list-ref nums i) change)]) ;; Determine what change is needed at 'i'\n            (if (< needed 0) ;; If needed change is negative, it's not possible to make all elements 0\n                #f\n                (begin\n                  (when (< (+ i k) (length nums)) ;; Only apply if within bounds\n                    (vector-set! changes (+ i k) (+ (vector-ref changes (+ i k)) needed))) ;; Update future change\n                  (loop (+ i 1) (+ acc needed))))) ;; Move to the next index with updated 'acc'\n          #t))) ;; If we've checked all elements without issues, return true"
+}

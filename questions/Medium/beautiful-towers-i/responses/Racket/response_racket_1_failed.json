@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 19\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3114",
+    "task_finish_time": 1706750562434,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1162502319",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-sum-of-heights maxHeights)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([n (length maxHeights)])\n    (let ([left (make-vector n 0)]\n          [right (make-vector n 0)])\n      ;; Initialize left and right vectors with the first and last values of maxHeights, respectively\n      (vector-set! left 0 (list-ref maxHeights 0))\n      (vector-set! right (- n 1) (list-ref maxHeights (- n 1)))\n      ;; Fill left vector\n      (for ([i (in-range 1 n)])\n        (vector-set! left i (min (list-ref maxHeights i) (+ 1 (vector-ref left (- i 1))))))\n      ;; Fill right vector\n      (for ([i (in-range (- n 2) -1 -1)])\n        (vector-set! right i (min (list-ref maxHeights i) (+ 1 (vector-ref right (+ i 1))))))\n      ;; Calculate the maximum possible sum of heights\n      (let ([sum (foldl + 0 (for/list ([i (in-range n)])\n                                      (min (vector-ref left i) (vector-ref right i))))])\n        sum)))"
+}

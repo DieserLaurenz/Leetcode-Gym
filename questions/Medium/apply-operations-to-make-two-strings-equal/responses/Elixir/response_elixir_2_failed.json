@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"acc\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"acc\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 7:   Solution.min_operations/5\nerror: cannot invoke remote function String.length/1 inside guards\nLine 8:   Solution.min_operations/5\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3033",
+    "task_finish_time": 1706740965279,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162429960",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations(s1 :: String.t, s2 :: String.t, x :: integer) :: integer\n  def min_operations(s1, s2, x) do\n    min_operations(s1, s2, x, 0, 0)\n  end\n\n  defp min_operations(_s1, _s2, _x, -1, acc), do: -1\n  defp min_operations(s1, s2, x, i, acc) when i >= String.length(s1), do: acc\n  defp min_operations(s1, s2, x, i, acc) do\n    if String.at(s1, i) != String.at(s2, i) do\n      if i < String.length(s1) - 1 and String.at(s1, i+1) != String.at(s2, i+1) do\n        # Flip adjacent if it leads towards the solution and is cheaper or necessary\n        min_operations(flip(s1, i, i+1), s2, x, i+2, acc + 1)\n      else\n        if x > 1 do\n          # If flipping two non-adjacent bits is not possible or costlier than flipping adjacent\n          -1\n        else\n          # When x is 1, flipping any two bits or adjacent bits costs the same\n          min_operations(flip(s1, i, i), s2, x, i+1, acc + x)\n        end\n      end\n    else\n      min_operations(s1, s2, x, i+1, acc)\n    end\n  end\n\n  defp flip(s, i, j) do\n    pre = String.slice(s, 0, i)\n    a = flip_char(String.at(s, i))\n    middle = if i == j, do: \"\", else: String.slice(s, i+1, j-i-1)\n    b = flip_char(String.at(s, j))\n    post = String.slice(s, j+1, String.length(s)-j-1)\n    pre <> a <> middle <> b <> post\n  end\n\n  defp flip_char(\"0\"), do: \"1\"\n  defp flip_char(\"1\"), do: \"0\"\nend"
+}

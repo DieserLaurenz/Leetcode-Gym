@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"operations\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"operations\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 19:   Solution.check_array/2\nerror: invalid use of _. _ can only be used inside patterns to ignore values and cannot be used in expressions. Make sure you are inside a pattern or change it accordingly\nLine 27:   Solution.check_array/2\nerror: undefined function return/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 16:   Solution.check_array/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2878",
+    "task_finish_time": 1706722144617,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162213217",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec check_array(nums :: [integer], k :: integer) :: boolean\n  def check_array(nums, k) do\n    # Initialize a map to keep track of the decrement operations needed\n    operations = Map.new()\n\n    nums\n    |> Enum.with_index()\n    |> Enum.reduce(0, fn {num, idx}, acc ->\n      # Calculate the total decrement up to this point\n      total_decrement = Map.get(operations, idx, 0) + acc\n      actual_num = num - total_decrement\n\n      # If actual_num is greater than 0, schedule future decrements\n      if actual_num > 0 do\n        if idx + k > length(nums), do: return false\n        # Update operations for future elements\n        for j <- idx..idx+k-1 do\n          operations = Map.update(operations, j, actual_num, &(&1 + actual_num))\n        end\n        acc + actual_num\n      else\n        acc\n      end\n    end)\n    |> case do\n      _ when _ > 0 -> true\n      _ -> false\n    end\n  end\nend"
+}

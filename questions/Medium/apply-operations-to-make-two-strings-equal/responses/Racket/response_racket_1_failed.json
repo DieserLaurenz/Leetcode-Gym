@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 23: Char 67: read-syntax: missing `)` to close `(` on line 17, found instead `]`",
+    "full_compile_error": "Line 23: Char 67: read-syntax: missing `)` to close `(` on line 17, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3033",
+    "task_finish_time": 1706733236228,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1162362162",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-operations s1 s2 x)\n  (-> string? string? exact-integer? exact-integer?)\n  (letrec ([n (string-length s1)]\n           [cost 0]\n           [process-mismatches\n            (lambda (i)\n              (if (= i n)\n                  cost\n                  (let ([current (string-ref s1 i)]\n                        [target (string-ref s2 i)])\n                    (if (char=? current target)\n                        (process-mismatches (+ i 1))\n                        (begin\n                          ;; Check if next character is also a mismatch and can be flipped together\n                          (if (and (< (+ i 1) n)\n                                   (not (char=? (string-ref s1 (+ i 1)) (string-ref s2 (+ i 1)))))\n                              (begin\n                                (set! cost (+ cost 1))\n                                (process-mismatches (+ i 2)))\n                              (begin\n                                ;; If x is less than the cost of individual flips or it's the last character\n                                (set! cost (+ cost x))\n                                (process-mismatches (+ i 1))))))))])\n    (process-mismatches 0)))"
+}

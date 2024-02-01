@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.",
+    "full_compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.\nThis error happens when you have function calls without parentheses inside keywords. For example:\n    function(arg, one: nested_call a, b, c)\n    function(arg, one: if expr, do: :this, else: :that)\nIn the examples above, we don't know if the arguments \"b\" and \"c\" apply to the function \"function\" or \"nested_call\". Or if the keywords \"do\" and \"else\" apply to the function \"function\" or \"if\". You can solve this by explicitly adding parentheses:\n    function(arg, one: if(expr, do: :this, else: :that))\n    function(arg, one: nested_call(a, b, c))\nAmbiguity found at:\n  solution.ex:21\nwarning: variable \"t\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 6:   Solution.maximum_sum_of_heights/1\nwarning: variable \"t\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 10:   Solution.maximum_sum_of_heights/1\nwarning: variable \"n\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 4:   Solution.maximum_sum_of_heights/1\nwarning: function min/2 is unused\nLine 21:   Solution (module)\nerror: imported Kernel.min/2 conflicts with local function\nLine 21:   Solution (module)\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3114",
+    "task_finish_time": 1706750844514,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162504612",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_sum_of_heights(max_heights :: [integer]) :: integer\n  def maximum_sum_of_heights(max_heights) do\n    n = length(max_heights)\n\n    left_max = Enum.reduce(max_heights, [hd(max_heights)], fn x, [h | t] = acc ->\n      [min(x, h + 1) | acc]\n    end) |> Enum.reverse()\n\n    right_max = Enum.reduce(Enum.reverse(max_heights), [hd(max_heights)], fn x, [h | t] = acc ->\n      [min(x, h + 1) | acc]\n    end) |> Enum.reverse()\n\n    combined = Enum.zip(left_max, right_max)\n              |> Enum.map(fn {l, r} -> min(l, r) end)\n              |> Enum.sum()\n\n    combined\n  end\n\n  defp min(a, b), do: if a < b, do: a, else: b\nend"
+}

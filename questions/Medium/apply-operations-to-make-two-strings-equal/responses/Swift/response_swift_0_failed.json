@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 17: Char 23: error: left side of mutating operator isn't mutable: 'i' is a 'let' constant in solution.swift",
+    "full_compile_error": "Line 17: Char 23: error: left side of mutating operator isn't mutable: 'i' is a 'let' constant in solution.swift\n                    i += 1 // Skip the next index as it's part of a handled pair\n                    ~ ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3033",
+    "task_finish_time": 1706731722442,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1162346779",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func minOperations(_ s1: String, _ s2: String, _ x: Int) -> Int {\n        let n = s1.count\n        var mismatches = 0\n        var mismatchedPairs = 0 // Count of adjacent mismatched pairs\n        \n        // Convert strings to arrays for easier access\n        let arr1 = Array(s1)\n        let arr2 = Array(s2)\n        \n        // Count mismatches and adjacent mismatched pairs\n        for i in 0..<n-1 {\n            if arr1[i] != arr2[i] {\n                mismatches += 1\n                if arr1[i+1] != arr2[i+1] && arr1[i] != arr1[i+1] {\n                    mismatchedPairs += 1\n                    i += 1 // Skip the next index as it's part of a handled pair\n                }\n            }\n        }\n        // Handle the last character separately if not already compared\n        if arr1[n-1] != arr2[n-1] && n % 2 == 1 {\n            mismatches += 1\n        }\n        \n        // If mismatches are odd, return -1\n        if mismatches % 2 != 0 {\n            return -1\n        }\n        \n        // Calculate the cost\n        var cost = 0\n        // Cost for flipping adjacent mismatched pairs\n        cost += mismatchedPairs\n        // Remaining mismatches to be handled by the first operation\n        let remainingMismatches = (mismatches - 2*mismatchedPairs) / 2\n        // Cost for flipping non-adjacent pairs or single mismatches\n        cost += remainingMismatches * x\n        \n        return cost\n    }\n}"
+}

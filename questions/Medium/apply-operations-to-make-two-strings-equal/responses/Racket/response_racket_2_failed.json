@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 20\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3033",
+    "task_finish_time": 1706733299246,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1162362749",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-operations s1 s2 x)\n  (-> string? string? exact-integer? exact-integer?)\n  (let ([n (string-length s1)])\n    (let loop ([i 0] [cost 0])\n      (cond\n       [(>= i n) cost]\n       [(equal? (string-ref s1 i) (string-ref s2 i))\n        (loop (add1 i) cost)]\n       [else\n        (if (and (< (add1 i) n) (not (equal? (string-ref s1 (add1 i)) (string-ref s2 (add1 i)))))\n            ;; If the next characters are also different, flip both for cost 1\n            (loop (+ i 2) (+ cost 1))\n            (if (or (>= (+ i 1) n) (> x 1))\n                ;; If we are at the end or if x is more efficient, use the x cost operation\n                (loop (+ i 1) (+ cost x))\n                ;; If flipping next pair is not an option, check if using x is viable\n                (if (and (< (+ i 2) n) (equal? (string-ref s1 (+ i 2)) (string-ref s2 (+ i 2))))\n                    (loop (+ i 1) (+ cost x))\n                    -1)))])))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: function min/2 is unused",
+    "full_compile_error": "warning: function min/2 is unused\nLine 16:   Solution (module)\nerror: imported Kernel.min/2 conflicts with local function\nLine 16:   Solution (module)\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3114",
+    "task_finish_time": 1706750888480,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162504987",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_sum_of_heights(max_heights :: [integer]) :: integer\n  def maximum_sum_of_heights(max_heights) do\n    left_max = max_heights |> scan_left |> Enum.reverse()\n    right_max = max_heights |> Enum.reverse() |> scan_left() |> Enum.reverse()\n\n    Enum.zip(left_max, right_max)\n    |> Enum.map(fn {l, r} -> min(l, r) end)\n    |> Enum.sum()\n  end\n\n  defp scan_left([h | t]) do\n    Enum.reduce(t, [h], fn x, [h | _] = acc -> [Enum.min(x, h + 1) | acc] end)\n  end\n\n  defp min(a, b), do: Kernel.min(a, b)\nend"
+}

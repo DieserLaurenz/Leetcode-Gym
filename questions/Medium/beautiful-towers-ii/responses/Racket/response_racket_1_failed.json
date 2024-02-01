@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 31\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3113",
+    "task_finish_time": 1706771682596,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1162732036",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-sum-of-heights maxHeights)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ((n (length maxHeights)))\n    (define (max-sum-at-peak peak)\n      (let ((left-max (make-vector n))\n            (right-max (make-vector n)))\n        ;; Calculate maximum heights towards the peak from the left\n        (vector-set! left-max 0 (list-ref maxHeights 0))\n        (for ((i (in-range 1 (+ peak 1))))\n          (vector-set! left-max i (min (vector-ref left-max (- i 1))\n                                       (list-ref maxHeights i))))\n        ;; Calculate maximum heights away from the peak to the right\n        (vector-set! right-max (- n 1) (list-ref maxHeights (- n 1)))\n        (for ((i (in-range (- n 2) peak -1)))\n          (vector-set! right-max i (min (vector-ref right-max (+ i 1))\n                                        (list-ref maxHeights i))))\n        ;; Sum heights for current configuration\n        (let ((sum 0))\n          (for ((i (in-range n)))\n            (set! sum (+ sum (if (<= i peak)\n                                  (vector-ref left-max i)\n                                  (vector-ref right-max i)))))\n          sum))\n    ;; Find maximum sum among all possible peaks\n    (let ((max-sum 0))\n      (for ((peak (in-range n)))\n        (let ((current-sum (max-sum-at-peak peak)))\n          (when (> current-sum max-sum)\n            (set! max-sum current-sum))))\n      max-sum)))"
+}

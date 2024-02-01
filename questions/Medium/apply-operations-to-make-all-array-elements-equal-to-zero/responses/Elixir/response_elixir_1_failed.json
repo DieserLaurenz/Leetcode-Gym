@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 21: Char 27: ** (SyntaxError) syntax error before: '='\n    |\n 21 |         total_decrements += actual_num\n    |                           ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2878",
+    "task_finish_time": 1706722092882,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162212371",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec check_array(nums :: [integer], k :: integer) :: boolean\n  def check_array(nums, k) do\n    # Initialize the decrements array with zeros\n    decrements = Enum.map(nums, fn _ -> 0 end)\n    total_decrements = 0\n\n    # Iterate through nums with index\n    for {num, idx} <- Enum.with_index(nums) do\n      # Calculate the actual number based on previous decrements\n      actual_num = num - total_decrements\n\n      # If the actual_num requires decrements\n      if actual_num > 0 do\n        if idx + k > length(nums) do\n          # If the subarray would go beyond the array bounds, return false\n          return false\n        end\n\n        # Apply the decrement to the range in the decrements array\n        total_decrements += actual_num\n        if idx + k < length(nums) do\n          decrements = List.replace_at(decrements, idx + k, Enum.at(decrements, idx + k) + actual_num)\n        end\n      end\n\n      # Subtract the increment at the current position for future iterations\n      if idx < length(nums) do\n        total_decrements -= Enum.at(decrements, idx)\n      end\n    end\n\n    # If we've gone through the entire array without returning false, return true\n    true\n  end\nend"
+}
