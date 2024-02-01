@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 18: error: not found: value break (in solution.scala)",
+    "full_compile_error": "Line 18: error: not found: value break (in solution.scala)\n        break\n        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3236",
+    "task_finish_time": 1706659005119,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1161511595",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n  def missingInteger(nums: Array[Int]): Int = {\n    // Ensure the array is sorted to find sequential numbers easily\n    val sortedNums = nums.sorted\n\n    var longestPrefixSum = 0\n    var currentNum = 0\n\n    // Iterate through the array to find the longest sequential prefix\n    for (num <- sortedNums) {\n      // Check if the current number continues the sequence\n      if (num == currentNum + 1) {\n        longestPrefixSum += num\n        currentNum = num\n      } else if (num > currentNum + 1) {\n        // If we find a number that breaks the sequence, we don't need to continue\n        // as we are looking for the longest sequential prefix\n        break\n      }\n    }\n\n    // Start checking from the sum of the longest sequential prefix + 1\n    var missingInt = longestPrefixSum + 1\n    while (nums.contains(missingInt)) {\n      missingInt += 1\n    }\n\n    missingInt\n  }\n}"
+}

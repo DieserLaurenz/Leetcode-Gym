@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 6, Char 13: type annotations needed for `Vec<T>` (solution.rs)",
+    "full_compile_error": "Line 6, Char 13: type annotations needed for `Vec<T>` (solution.rs)\n   |\n6  |         let mut merged = Vec::new();\n   |             ^^^^^^^^^^\n...\n9 |             if merged.is_empty() || car[0] > merged.last().unwrap()[1] {\n   |                                              ---------------------- type must be known at this point\n   |\nhelp: consider giving `merged` an explicit type, where the type for type parameter `T` is specified\n   |\n6  |         let mut merged: Vec<T> = Vec::new();\n   |                       ++++++++\nFor more information about this error, try `rustc --explain E0282`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3034",
+    "task_finish_time": 1706627372034,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1161127748",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn number_of_points(nums: Vec<Vec<i32>>) -> i32 {\n        let mut cars = nums;\n        cars.sort_by(|a, b| a[0].cmp(&b[0])); // Sort by starting point\n        \n        let mut merged = Vec::new();\n        \n        for car in cars {\n            if merged.is_empty() || car[0] > merged.last().unwrap()[1] {\n                // No overlap, add the car as a new interval\n                merged.push(car);\n            } else {\n                // Overlap, merge the current car with the last one in `merged`\n                let last = merged.last_mut().unwrap();\n                last[1] = last[1].max(car[1]);\n            }\n        }\n        \n        // Count the points covered by the merged intervals\n        merged.into_iter().fold(0, |acc, interval| acc + interval[1] - interval[0] + 1)\n    }\n}"
+}

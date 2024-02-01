@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 12\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2819",
+    "task_finish_time": 1706637678415,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1161287858",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (remove-trailing-zeros num)\n  (-> string? string?)\n  (let loop ((chars (string->list num)) ; Convert the string to a list of characters\n             (result '())) ; Accumulator for non-zero characters\n    (if (or (null? chars) ; If the list of characters is empty,\n            (and (null? (cdr chars)) ; or it has one element which is not '0',\n                 (not (char=? (car chars) #\\0))))\n        (list->string (reverse (cons (car chars) result))) ; return the string.\n        (if (char=? (car (reverse chars)) #\\0) ; If the last character is '0',\n            (loop (reverse (cdr (reverse chars))) result) ; remove it and continue.\n            (list->string (reverse chars))))) ; Else, return the string as it is."
+}

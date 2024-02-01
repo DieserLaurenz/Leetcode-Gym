@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 46: Char 6: main redeclared in this block (solution.go)",
+    "full_compile_error": "Line 46: Char 6: main redeclared in this block (solution.go)\nLine 33: Char 6: other declaration of main (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2831",
+    "task_finish_time": 1706607182485,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1160897315",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "package main\n\nimport \"fmt\"\n\nfunc countBeautifulPairs(nums []int) int {\n    count := 0\n    for i := 0; i < len(nums)-1; i++ {\n        firstDigitI := firstDigit(nums[i])\n        for j := i + 1; j < len(nums); j++ {\n            lastDigitJ := nums[j] % 10\n            if gcd(firstDigitI, lastDigitJ) == 1 {\n                count++\n            }\n        }\n    }\n    return count\n}\n\nfunc firstDigit(n int) int {\n    for n >= 10 {\n        n /= 10\n    }\n    return n\n}\n\nfunc gcd(x, y int) int {\n    for y != 0 {\n        x, y = y, x%y\n    }\n    return x\n}\n\nfunc main() {\n    fmt.Println(countBeautifulPairs([]int{2, 5, 1, 4})) // Example 1\n    fmt.Println(countBeautifulPairs([]int{11, 21, 12})) // Example 2\n}"
+}

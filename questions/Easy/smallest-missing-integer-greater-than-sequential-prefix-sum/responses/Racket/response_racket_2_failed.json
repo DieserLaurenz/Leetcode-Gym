@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 10: Char 33: loop: unbound identifier",
+    "full_compile_error": "Line 10: Char 33: loop: unbound identifier\n  in: loop\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:21:32",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3236",
+    "task_finish_time": 1706659353543,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1161514257",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (missing-integer nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([sorted-nums (sort nums <)])\n    (let loop ([i 1] [current (first sorted-nums)] [sum (first sorted-nums)])\n      (if (< i (length sorted-nums))\n          (if (= (list-ref sorted-nums i) (+ current 1))\n              (loop (+ i 1) (+ current 1) (+ sum (list-ref sorted-nums i)))\n              sum)\n          sum))\n    (let find-missing ([x (+ 1 (loop 1 (first sorted-nums) (first sorted-nums)))])\n      (if (member x sorted-nums) (find-missing (+ x 1)) x))))"
+}

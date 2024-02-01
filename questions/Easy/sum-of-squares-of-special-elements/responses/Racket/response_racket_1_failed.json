@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 12\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2844",
+    "task_finish_time": 1706689579957,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1161829505",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (sum-of-squares nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([n (length nums)])\n    (define (is-special idx) (zero? (modulo n idx)))\n    (define (square x) (* x x))\n    (let loop ([i 1] [sum 0])\n      (if (> i n)\n          sum\n          (loop (+ i 1) (if (is-special i)\n                            (+ sum (square (list-ref nums (- i 1))))\n                            sum)))))"
+}

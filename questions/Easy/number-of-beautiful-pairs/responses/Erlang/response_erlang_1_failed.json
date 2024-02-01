@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 18: Char 64: illegal guard expression",
+    "full_compile_error": "Line 18: Char 64: illegal guard expression\n%   18|                                                             if Coprime(FirstD, LastDigit) -> CountAcc + 1;\n%     |                                                                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2831",
+    "task_finish_time": 1706607515098,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1160900858",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_beautiful_pairs(Nums :: [integer()]) -> integer().\ncount_beautiful_pairs(Nums) ->\n    Gcd = fun Gcd(A, 0) -> A;\n                Gcd(A, B) -> Gcd(B, A rem B)\n          end,\n    FirstDigit = fun(N) -> \n                    FirstDigitInner = fun FirstDigitInner(M) when M < 10 -> M;\n                                       FirstDigitInner(M) -> FirstDigitInner(M div 10)\n                                     end,\n                    FirstDigitInner(N)\n                 end,\n    Coprime = fun(A, B) -> Gcd(A, B) == 1 end,\n    CountBeautifulPairs = fun CountBeautifulPairs([], Acc) -> Acc;\n                                CountBeautifulPairs([H|T], Acc) ->\n                                    LastDigit = H rem 10,\n                                    Count = lists:foldl(fun(X, CountAcc) ->\n                                                            FirstD = FirstDigit(X),\n                                                            if Coprime(FirstD, LastDigit) -> CountAcc + 1;\n                                                               true -> CountAcc\n                                                            end\n                                                        end, 0, T),\n                                    CountBeautifulPairs(T, Acc + Count)\n                          end,\n    CountBeautifulPairs(Nums, 0)."
+}

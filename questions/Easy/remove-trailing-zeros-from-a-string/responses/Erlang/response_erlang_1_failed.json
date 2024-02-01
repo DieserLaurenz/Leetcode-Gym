@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 13: syntax error before: '>'",
+    "full_compile_error": "Line 10: Char 13: syntax error before: '>'\n%   10|     <<48>> <> remove_trailing_zeros(Rest, true);\n%     |             ^\nLine 3: Char 5: function remove_trailing_zeros/2 undefined\n%    3|     remove_trailing_zeros(Num, false).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2819",
+    "task_finish_time": 1706637827852,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1161290400",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec remove_trailing_zeros(Num :: unicode:unicode_binary()) -> unicode:unicode_binary().\nremove_trailing_zeros(Num) ->\n    remove_trailing_zeros(Num, false).\n\nremove_trailing_zeros(<<>>, _HasNonZero) ->\n    <<>>;\nremove_trailing_zeros(<<48, Rest/binary>>, false) -> % '0' with no non-zero found yet\n    remove_trailing_zeros(Rest, false);\nremove_trailing_zeros(<<48, Rest/binary>>, true) -> % '0' but a non-zero has been found\n    <<48>> <> remove_trailing_zeros(Rest, true);\nremove_trailing_zeros(<<Char, Rest/binary>>, _) when Char =/= 48 -> % non-zero\n    <<Char>> <> remove_trailing_zeros(Rest, true)."
+}
