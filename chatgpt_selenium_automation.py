@@ -54,12 +54,16 @@ def load_conversation(driver, conversation_id):
 
 
 def get_response(driver, attempt):
+
+    # Warte bis das Chatfenster offen ist
+    """
     try:
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, 'div[role="presentation"].flex.h-full.flex-col'))
         )
     except TimeoutException:
         return "timeout_error", "", ""
+    """
 
     # Finde den übergeordneten Container
     container = driver.find_element(By.CSS_SELECTOR, 'div[role="presentation"].flex.h-full.flex-col')
