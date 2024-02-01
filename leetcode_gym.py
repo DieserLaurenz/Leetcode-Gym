@@ -489,8 +489,6 @@ def main():
     chatgpt_mode = int(input("Bitte gewünschten Modus eingeben: "))
     # 0: Copy to Clipboard, 1: Selenium Method, 2: ChatGPT Plus WEB Api Method, 3: ChatGPT API Method
 
-    driver = None
-
     while True:
         try:
             access_questions(chatgpt_mode)
