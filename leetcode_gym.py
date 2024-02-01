@@ -424,10 +424,12 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
                                                                                              attempt, conversation_id,
                                                                                              driver)
             if is_success:
+                driver.quit()
                 break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
             else:
                 if error_prompt == "":
                     print("Retrying to fetch the answer from ChatGPT...")
+                    driver.quit()
                     attempt = 0
                     conversation_id = None
                     prompt = generate_prompt_content(question, snippet)
