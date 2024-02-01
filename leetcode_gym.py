@@ -404,7 +404,7 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
         lang_response_directory = os.path.join(response_directory, snippet['lang'])
 
         # Check if we should skip processing based on language or cache before initiating driver
-        if should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_path, snippet['titleSlug']):
+        if should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_path, question['titleSlug']):
             continue  # Skip this snippet and move to the next
 
         attempt = 0
