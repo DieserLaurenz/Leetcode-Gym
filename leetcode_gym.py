@@ -391,7 +391,7 @@ def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
             print("Copied error prompt to clipboard")
 
 
-def process_question_with_selenium_method(json_file_path, subfolder_path, driver):
+def process_question_with_selenium_method(json_file_path, subfolder_path):
     question = read_json_file(json_file_path)
     response_directory = os.path.join(subfolder_path, 'responses')
 
@@ -399,14 +399,21 @@ def process_question_with_selenium_method(json_file_path, subfolder_path, driver
         attempt = 0
         conversation_id = None
         prompt = generate_prompt_content(question, snippet)
+        driver = None
 
         while attempt < 3:
+            if attempt == 0:
+                if is_driver_alive(driver):
+                    driver.quit()
+                driver = chatgpt_selenium_automation.init_driver()
+
             is_success, error_prompt, conversation_id = process_snippet_with_selenium_method(prompt, response_directory,
                                                                                              question,
                                                                                              snippet,
                                                                                              attempt, conversation_id,
                                                                                              driver)
             if is_success:
+                driver.quit()
                 break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
             else:
                 if error_prompt == "":
@@ -438,7 +445,7 @@ def process_question_with_web_api(json_file_path, subfolder_path):
             prompt = error_prompt
 
 
-def process_subfolder(base_path, subfolder, chatgpt_mode, driver):
+def process_subfolder(base_path, subfolder, chatgpt_mode):
     subfolder_path = os.path.join(base_path, subfolder)
     json_file_path = os.path.join(subfolder_path, f'{subfolder}.json')
     response_directory = os.path.join(subfolder_path, 'responses')
@@ -451,22 +458,22 @@ def process_subfolder(base_path, subfolder, chatgpt_mode, driver):
     if chatgpt_mode == 0:
         process_question_with_copy_to_clipboard(json_file_path, subfolder_path)
     if chatgpt_mode == 1:
-        process_question_with_selenium_method(json_file_path, subfolder_path, driver)
+        process_question_with_selenium_method(json_file_path, subfolder_path)
     if chatgpt_mode == 2:
         process_question_with_web_api(json_file_path, subfolder_path)
 
 
-def process_folders(base_path, folders, chatgpt_mode, driver):
+def process_folders(base_path, folders, chatgpt_mode):
     for folder in folders:
         folder_path = os.path.join(base_path, folder)
         subfolders = [d for d in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, d))]
         for subfolder in subfolders:
-            process_subfolder(folder_path, subfolder, chatgpt_mode, driver)
+            process_subfolder(folder_path, subfolder, chatgpt_mode)
 
 
-def access_questions(chatgpt_mode, driver):
+def access_questions(chatgpt_mode):
     base_folders = ['Easy', 'Medium', 'Hard']
-    process_folders('questions/', base_folders, chatgpt_mode, driver)
+    process_folders('questions/', base_folders, chatgpt_mode)
 
 
 def is_driver_alive(driver):
@@ -486,12 +493,7 @@ def main():
 
     while True:
         try:
-
-            if chatgpt_mode == 1:
-                if not is_driver_alive(driver):
-                    driver = chatgpt_selenium_automation.init_driver()
-
-            access_questions(chatgpt_mode, driver)
+            access_questions(chatgpt_mode)
             break  # Break the loop if everything went well
 
         except Exception as e:
