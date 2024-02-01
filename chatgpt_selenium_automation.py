@@ -18,7 +18,7 @@ def init_driver():
 
     driver = Driver(uc=True)
 
-    driver.get("https://chat.openai.com/?model=gpt-3.5")
+    driver.get("https://chat.openai.com/?model=gpt-4")
 
     # Add the cookie
     driver.add_cookie({
@@ -31,7 +31,7 @@ def init_driver():
 
     time.sleep(1)
 
-    driver.get("https://chat.openai.com/?model=gpt-3.5")
+    driver.get("https://chat.openai.com/?model=gpt-4")
 
     # Wait for the document.readyState to be complete
     WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
