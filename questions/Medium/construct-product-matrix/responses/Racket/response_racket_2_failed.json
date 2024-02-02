@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 15: Char 64: read-syntax: missing `]` to close `[` on line 17, found instead `)`",
+    "full_compile_error": "Line 15: Char 64: read-syntax: missing `]` to close `[` on line 17, found instead `)`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3031",
+    "task_finish_time": 1706855996249,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1163667422",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (construct-product-matrix grid)\n  (-> (listof (listof exact-integer?)) (listof (listof exact-integer?)))\n  (let ([n (length grid)] [m (length (first grid))])\n    (map (lambda (i) ; Iterate over rows\n           (map (lambda (j) ; Iterate over columns\n                  (let ([product (foldl (lambda (row acc)\n                                          ; Multiply all elements except grid[i][j]\n                                          (foldl (lambda (elem k acc-inner)\n                                                   (if (and (= i k) (= j (second elem))) acc-inner\n                                                       (modulo (* acc-inner (first elem)) 12345)))\n                                                 acc\n                                                 (map-indexed cons row) ; Element with its column index\n                                                 (build-list m values)))) ; Initial product is 1\n                                        1 ; Start with 1 for multiplication\n                                        (map-indexed cons grid)))) ; Row with its row index\n                (build-list m values))) ; List of column indices\n         (build-list n values)))) ; List of row indices"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: the underscored variable \"_index\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore",
+    "full_compile_error": "warning: the underscored variable \"_index\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 9:   Solution.dfs/5\nwarning: the underscored variable \"_nums\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 9:   Solution.dfs/5\nwarning: the underscored variable \"_subarrays\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 11:   Solution.dfs/5\nwarning: the underscored variable \"_nums\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 11:   Solution.dfs/5\nwarning: the underscored variable \"_current_sum\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 11:   Solution.dfs/5\nerror: undefined variable \"m\"\nLine 11:   Solution.dfs/5\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2916",
+    "task_finish_time": 1706792894210,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162955689",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec can_split_array(nums :: [integer], m :: integer) :: boolean\n  def can_split_array(nums, m) do\n    # Starting with the entire array, attempt to split it down to individual elements\n    # or subarrays that meet the sum condition.\n    dfs(nums, m, 0, 0, 0)\n  end\n\n  defp dfs(_nums, _m, _index, _subarrays, _current_sum) when _index == length(_nums) do\n    # If we've reached the end of the array, check if we've met the conditions.\n    _subarrays == length(_nums) or _current_sum >= m\n  end\n\n  defp dfs(nums, m, index, subarrays, current_sum) do\n    # Check if adding the current element to the current sum still allows for a valid split.\n    if current_sum + Enum.at(nums, index) < m and subarrays + 1 < length(nums) do\n      # Continue adding to the current sum/subarray.\n      dfs(nums, m, index + 1, subarrays, current_sum + Enum.at(nums, index))\n    else\n      # Try to split here by considering this element as the start of a new subarray\n      # or including it in the current sum if it doesn't exceed the condition.\n      split_here = if current_sum + Enum.at(nums, index) >= m, do: 1, else: 0\n\n      # Option 1: Split and start a new subarray with the current element\n      split_and_start_new = dfs(nums, m, index + 1, subarrays + split_here, Enum.at(nums, index))\n\n      # Option 2: Include the current element in the current sum/subarray if not splitting\n      include_in_current = if split_here == 0, do: dfs(nums, m, index + 1, subarrays, current_sum + Enum.at(nums, index)), else: false\n\n      split_and_start_new or include_in_current\n    end\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 21: Char 13: effectiveIndex declared and not used (solution.go)",
+    "full_compile_error": "Line 21: Char 13: effectiveIndex declared and not used (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2810",
+    "task_finish_time": 1706813861467,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1163264034",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func minCost(nums []int, x int) int64 {\n    n := len(nums)\n    // Convert nums to int64 slice for easier handling of large numbers\n    costs := make([]int64, n)\n    for i, cost := range nums {\n        costs[i] = int64(cost)\n    }\n\n    // Calculate the cost of buying chocolates directly without any operation\n    minCost := int64(0)\n    for _, cost := range costs {\n        minCost += cost\n    }\n\n    // Try to find a cheaper cost by rotating the chocolate types\n    for i := 0; i < n; i++ {\n        // For each starting point, calculate the cost considering operations\n        rotateCost := int64(0)\n        for j := 0; j < n; j++ {\n            // The effective index after i rotations\n            effectiveIndex := (i + j) % n\n            // The cost of making this rotation and buying the chocolate\n            currentCost := costs[j] + int64(i)*int64(x)\n            rotateCost += currentCost\n\n            // If rotateCost already exceeds minCost, no need to continue\n            if rotateCost >= minCost {\n                break\n            }\n        }\n        if rotateCost < minCost {\n            minCost = rotateCost\n        }\n    }\n\n    return minCost\n}"
+}

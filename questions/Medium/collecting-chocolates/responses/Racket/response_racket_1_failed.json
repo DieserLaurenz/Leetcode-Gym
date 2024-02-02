@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 7: Char 93: read-syntax: missing `)` to close `(` on line 17, found instead `]`",
+    "full_compile_error": "Line 7: Char 93: read-syntax: missing `)` to close `(` on line 17, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2810",
+    "task_finish_time": 1706814539987,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1163273272",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-cost nums x)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  \n  (let ([n (length nums)])\n    (letrec ([calc-min-cost (lambda (ops)\n                              (let ([rotated (for/list ([i (in-range n)])\n                                                        (list-ref nums (modulo (- i ops) n))])])\n                                (apply + rotated (+ (* ops x) (apply min rotated)))))])\n\n      (let ([direct-buy (apply + nums)])\n        (let ([min-op-cost (for/fold ([min-cost direct-buy]) ([ops (in-range 1 n)])\n                             (let ([cost (calc-min-cost ops)])\n                               (if (< cost min-cost) cost min-cost)))])\n          (min direct-buy min-op-cost))))))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 55: syntax error before: '=='",
+    "full_compile_error": "Line 15: Char 55: syntax error before: '=='\n%   15|                 (lists:sum(Left) >= M or length(Left) == 1) andalso\n%     |                                                       ^\nLine 1: Char 2: spec for undefined function can_split_array/2\n%    1| -spec can_split_array(Nums :: [integer()], M :: integer()) -> boolean().\n%     |  ^\nLine 38: Char 13: function can_split_array/2 undefined\n%   38|       Ret = can_split_array(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2916",
+    "task_finish_time": 1706792612578,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1162952622",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec can_split_array(Nums :: [integer()], M :: integer()) -> boolean().\ncan_split_array(Nums, M) ->\n    % Helper function to check if we can form a valid split with sums >= M\n    % Operates by attempting to split the array at every possible position\n    % and checking if both resulting subarrays satisfy the conditions.\n    CheckSplit = fun\n        (_Check, [], _M) ->\n            false; % Cannot split an empty array\n        (_Check, [_], _M) ->\n            true; % A single element array is always a valid split\n        (Check, Lst, M) when length(Lst) > 1 ->\n            % Try splitting the list at each possible index and check both parts\n            lists:any(fun(I) ->\n                {Left, Right} = lists:split(I, Lst),\n                (lists:sum(Left) >= M or length(Left) == 1) andalso\n                (lists:sum(Right) >= M or length(Right) == 1) andalso\n                Check(Check, Left, M) andalso Check(Check, Right, M)\n            end, lists:seq(1, length(Lst) - 1))\n    end,\n    CheckSplit(CheckSplit, Nums, M)."
+}

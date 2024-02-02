@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 50: Char 11: error: conflicting types for \u2018powMod\u2019; have \u2018long long int(int,  int,  int)\u2019 [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018constructProductMatrix\u2019\nLine 39: Char 74: warning: implicit declaration of function \u2018powMod\u2019 [-Wimplicit-function-declaration] [solution.c]\n   42 |                     productExcludingCurrent = (productExcludingCurrent * powMod(grid[i][j], 12344, 12345)) % 12345; // This line is conceptual and needs proper function for modular inverse or adjustment for cases with zeros.\n      |                                                                          ^~~~~~\nsolution.c: At top level\nLine 50: Char 11: error: conflicting types for \u2018powMod\u2019; have \u2018long long int(int,  int,  int)\u2019 [solution.c]\n   53 | long long powMod(int base, int exponent, int modulus) {\n      |           ^~~~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3031",
+    "task_finish_time": 1706834139501,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1163450386",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdlib.h>\n\nint** constructProductMatrix(int** grid, int gridSize, int* gridColSize, int* returnSize, int** returnColumnSizes) {\n    // Allocate memory for the product matrix and column sizes.\n    int **productMatrix = (int**)malloc(gridSize * sizeof(int*));\n    *returnColumnSizes = (int*)malloc(gridSize * sizeof(int));\n    *returnSize = gridSize;\n\n    for (int i = 0; i < gridSize; i++) {\n        productMatrix[i] = (int*)malloc(gridColSize[i] * sizeof(int));\n        (*returnColumnSizes)[i] = gridColSize[i];\n    }\n\n    // Calculate product of all elements modulo 12345, handling zeros separately.\n    long long totalProduct = 1;\n    int zeroCount = 0;\n    for (int i = 0; i < gridSize; i++) {\n        for (int j = 0; j < gridColSize[i]; j++) {\n            if (grid[i][j] != 0) {\n                totalProduct = (totalProduct * grid[i][j]) % 12345;\n            } else {\n                zeroCount++;\n            }\n        }\n    }\n\n    for (int i = 0; i < gridSize; i++) {\n        for (int j = 0; j < gridColSize[i]; j++) {\n            if (zeroCount > 1 || (zeroCount == 1 && grid[i][j] != 0)) {\n                productMatrix[i][j] = 0; // If more than one zero exists or current element is not zero in a grid with one zero.\n            } else if (zeroCount == 1 && grid[i][j] == 0) {\n                productMatrix[i][j] = totalProduct; // If this is the only zero element.\n            } else {\n                // Calculate the product excluding the current element by dividing the total product by the current element.\n                long long productExcludingCurrent = totalProduct;\n                if (grid[i][j] != 0) {\n                    // Since direct division will not work in modular arithmetic, an alternative approach should be used.\n                    // However, for simplicity, this part will assume division is directly possible, which may need adjustment in actual implementation.\n                    productExcludingCurrent = (productExcludingCurrent * powMod(grid[i][j], 12344, 12345)) % 12345; // This line is conceptual and needs proper function for modular inverse or adjustment for cases with zeros.\n                }\n                productMatrix[i][j] = productExcludingCurrent;\n            }\n        }\n    }\n\n    return productMatrix;\n}\n\n// Function to calculate (base^exponent) % modulus using modular exponentiation, assuming it's defined elsewhere.\nlong long powMod(int base, int exponent, int modulus) {\n    long long result = 1;\n    base = base % modulus;\n    while (exponent > 0) {\n        if (exponent % 2 == 1) {\n            result = (result * base) % modulus;\n        }\n        exponent = exponent >> 1;\n        base = (base * base) % modulus;\n    }\n    return result;\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 12: Char 47: read-syntax: unexpected `)`",
+    "full_compile_error": "Line 12: Char 47: read-syntax: unexpected `)`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2810",
+    "task_finish_time": 1706814584954,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1163273847",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-cost nums x)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([n (length nums)])\n    (let ([direct-cost (apply + nums)]) ; Direct cost of buying all chocolates without operations\n      (let loop ([i 0] [min-cost direct-cost]) ; Initial min-cost is the direct-cost\n        (if (= i n)\n            min-cost\n            (let* ([cost-with-ops (+ (* i x) ; Cost of performing 'i' operations\n                                     (for/sum ([j (in-range n)]) ; Cost of buying chocolates considering 'i' operations\n                                       (list-ref nums (modulo (+ j i) n))))])\n                   [new-min-cost (min min-cost cost-with-ops)]) ; Compare previous min cost with new scenario\n              (loop (+ i 1) new-min-cost))))))) ; Recurse for next number of operations"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 50: Char 95: not enough arguments in call to pow (solution.go)",
+    "full_compile_error": "Line 50: Char 95: not enough arguments in call to pow (solution.go)\n\thave (int, int)\n\twant (int, int, int)\nLine 53: Char 95: not enough arguments in call to pow (solution.go)\n\thave (int, int)\n\twant (int, int, int)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3031",
+    "task_finish_time": 1706846565203,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1163555967",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func constructProductMatrix(grid [][]int) [][]int {\n    n, m := len(grid), len(grid[0])\n    mod := 12345\n\n    // Initialize matrices to store prefix products\n    rowPrefixProduct := make([][]int, n)\n    colPrefixProduct := make([][]int, m)\n    for i := range rowPrefixProduct {\n        rowPrefixProduct[i] = make([]int, m)\n    }\n    for i := range colPrefixProduct {\n        colPrefixProduct[i] = make([]int, n)\n    }\n\n    // Compute prefix products for rows\n    for i := 0; i < n; i++ {\n        rowPrefixProduct[i][0] = grid[i][0]\n        for j := 1; j < m; j++ {\n            rowPrefixProduct[i][j] = (rowPrefixProduct[i][j-1] * grid[i][j]) % mod\n        }\n    }\n\n    // Compute prefix products for columns\n    for j := 0; j < m; j++ {\n        colPrefixProduct[j][0] = grid[0][j]\n        for i := 1; i < n; i++ {\n            colPrefixProduct[j][i] = (colPrefixProduct[j][i-1] * grid[i][j]) % mod\n        }\n    }\n\n    // Initialize the product matrix\n    productMatrix := make([][]int, n)\n    for i := range productMatrix {\n        productMatrix[i] = make([]int, m)\n    }\n\n    // Calculate the product matrix\n    for i := 0; i < n; i++ {\n        for j := 0; j < m; j++ {\n            product := 1\n            // Multiply by prefix products from the left and above\n            if j > 0 {\n                product = (product * rowPrefixProduct[i][j-1]) % mod\n            }\n            if i > 0 {\n                product = (product * colPrefixProduct[j][i-1]) % mod\n            }\n            // Multiply by suffix products from the right and below\n            if j < m-1 {\n                product = (product * ((rowPrefixProduct[i][m-1] * pow(rowPrefixProduct[i][j], mod-2)) % mod)) % mod\n            }\n            if i < n-1 {\n                product = (product * ((colPrefixProduct[j][n-1] * pow(colPrefixProduct[j][i], mod-2)) % mod)) % mod\n            }\n            productMatrix[i][j] = product\n        }\n    }\n\n    return productMatrix\n}\n\n// pow calculates the power of a number under modulo using fast exponentiation\nfunc pow(a, b, mod int) int {\n    result := 1\n    a = a % mod\n    for b > 0 {\n        if b&1 != 0 {\n            result = (result * a) % mod\n        }\n        a = (a * a) % mod\n        b >>= 1\n    }\n    return result\n}"
+}

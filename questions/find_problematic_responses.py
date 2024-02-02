@@ -34,7 +34,23 @@ def find_failed_after_success(base_directory):
 
                     if problem_detected:
                         print(f"Problem in Ordner: {root}/{lang_dir}")
+                        # Cache-Schlüssel von irgendeiner Datei im Verzeichnis extrahieren
+                        sample_file_path = os.path.join(lang_path, files_in_lang[0])
+                        # Cache löschen, wenn vorhanden
+                        try:
+                            with open(os.path.join(lang_path, sample_file_path), 'r') as file:
+                                data = json.load(file)
+                                question_id = data.get('question_id')
+                                lang_slug = data.get('lang')
+                                cache_key = f"{question_id}_{lang_slug}"
+                                with shelve.open(cache_path) as cache:
+                                    if cache_key in cache:
+                                        del cache[cache_key]
+                                        print(f"Cache für {cache_key} entfernt.")
+                        except Exception as e:
+                            print(f"Fehler beim Lesen von {problem_file} oder beim Zugriff auf den Cache: {e}")
                         break  # Brechen Sie die Schleife ab, wenn ein Problem gefunden wurde
+
 
 def find_problematic_responses(base_directory, cache_path):
     for root, dirs, files in os.walk(base_directory):

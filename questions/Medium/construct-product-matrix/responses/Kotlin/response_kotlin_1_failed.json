@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 37: Char 39: error: type mismatch: inferred type is Long but Int was expected",
+    "full_compile_error": "Line 37: Char 39: error: type mismatch: inferred type is Long but Int was expected\n                productMatrix[i][j] = (excludeCurrent * modInverse(currentVal, mod)) % mod\n                                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3031",
+    "task_finish_time": 1706845339056,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1163543770",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun constructProductMatrix(grid: Array<IntArray>): Array<IntArray> {\n        val n = grid.size\n        val m = grid[0].size\n        val mod = 12345\n\n        // Initialize the product matrix with 1s\n        val productMatrix = Array(n) { IntArray(m) { 1 } }\n        \n        // Calculate row and column products excluding the current element\n        val rowProducts = Array(n) { 1 }\n        val colProducts = IntArray(m) { 1 }\n\n        // Calculate row products\n        for (i in 0 until n) {\n            var product = 1\n            for (j in 0 until m) {\n                product = (product * grid[i][j]) % mod\n            }\n            rowProducts[i] = product\n        }\n\n        // Calculate column products\n        for (j in 0 until m) {\n            var product = 1\n            for (i in 0 until n) {\n                product = (product * grid[i][j]) % mod\n            }\n            colProducts[j] = product\n        }\n\n        // Fill the productMatrix\n        for (i in 0 until n) {\n            for (j in 0 until m) {\n                val excludeCurrent = (rowProducts[i] * colProducts[j]) % mod\n                val currentVal = grid[i][j]\n                productMatrix[i][j] = (excludeCurrent * modInverse(currentVal, mod)) % mod\n            }\n        }\n\n        return productMatrix\n    }\n\n    private fun modInverse(a: Int, mod: Int): Long {\n        // Assuming 'a' and 'mod' are coprime, we can use Fermat's Little Theorem\n        // a^(mod-2) % mod is the modular inverse when mod is a prime\n        return power(a.toLong(), mod - 2, mod.toLong())\n    }\n\n    private fun power(x: Long, y: Int, p: Long): Long {\n        var x = x % p\n        var y = y\n        var res: Long = 1\n        while (y > 0) {\n            if (y and 1 != 0) res = (res * x) % p\n            y = y shr 1 // y = y/2\n            x = (x * x) % p\n        }\n        return res\n    }\n}"
+}

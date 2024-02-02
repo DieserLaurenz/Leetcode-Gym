@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 39: slice: unbound identifier",
+    "full_compile_error": "Line 8: Char 39: slice: unbound identifier\n  in: slice\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:38",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2916",
+    "task_finish_time": 1706783002577,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1162855573",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (can-split-array nums m)\n  (-> (listof exact-integer?) exact-integer? boolean?)\n  \n  ; Define a helper function to check if a subarray can be split according to the problem's conditions\n  (define (subarray-can-split? start end)\n    (if (= (- end start) 1) ; If the subarray length is 1, it meets the condition\n        #t\n        (let ([subarray-sum (apply + (slice nums start (+ end 1)))]) ; Calculate sum of the subarray\n          (>= subarray-sum m))))\n  \n  ; Define a recursive function to attempt splitting the array\n  (define (try-split start end splits)\n    (if (= splits (length nums)) ; If the number of splits equals the length of nums, we've met our condition\n        #t\n        (and (subarray-can-split? start end) ; Check if the current subarray can be split according to the conditions\n             (or (try-split (+ start 1) end (+ splits 1)) ; Try splitting by moving the start up\n                 (try-split start (- end 1) (+ splits 1)))))) ; Try splitting by moving the end down\n  \n  ; Attempt to split the array starting from 0 to the length of the array minus one\n  (try-split 0 (- (length nums) 1) 1))"
+}

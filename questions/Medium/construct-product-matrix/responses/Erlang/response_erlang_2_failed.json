@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 12: Char 41: illegal guard expression",
+    "full_compile_error": "Line 12: Char 41: illegal guard expression\n%   12|                 RowIndex =< length(Grid -- [lists:nth(RowIndex, Grid)]) ->\n%     |                                         ^\nLine 12: Char 45: illegal guard expression\n%   12|                 RowIndex =< length(Grid -- [lists:nth(RowIndex, Grid)]) ->\n%     |                                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3031",
+    "task_finish_time": 1706856157276,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1163669412",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec construct_product_matrix(Grid :: [[integer()]]) -> [[integer()]].\nconstruct_product_matrix(Grid) ->\n    Rows = length(Grid),\n    Cols = length(hd(Grid)),\n    lists:map(fun(RowIndex) ->\n        lists:map(fun(ColIndex) ->\n            Product = lists:foldl(fun(Row, Acc) ->\n                Elem = lists:nth(ColIndex, Row),\n                (Acc * Elem) rem 12345\n            end, 1, Grid -- [lists:nth(RowIndex, Grid)]),\n            if\n                RowIndex =< length(Grid -- [lists:nth(RowIndex, Grid)]) ->\n                    lists:foldl(fun(X, Acc) -> (Acc * X) rem 12345 end, Product, tl(lists:nth(RowIndex, Grid)));\n                true -> Product\n            end\n        end, lists:seq(1, Cols))\n    end, lists:seq(1, Rows))."
+}

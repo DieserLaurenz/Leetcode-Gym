@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"nums\"",
+    "full_compile_error": "error: undefined variable \"nums\"\nLine 13:   Solution.can_split_array_helper/4\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2916",
+    "task_finish_time": 1706792832889,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1162955022",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec can_split_array(nums :: [integer], m :: integer) :: boolean\n  def can_split_array(nums, m) do\n    can_split_array_helper(nums, m, [], 0)\n  end\n\n  defp can_split_array_helper([], _m, _current_splits, _current_sum), do: true\n\n  defp can_split_array_helper([head | tail], m, current_splits, current_sum) do\n    new_sum = current_sum + head\n\n    # Case 1: Add current element to the ongoing sum/subarray\n    if new_sum >= m or Enum.count(current_splits) + Enum.count(tail) + 1 == length(nums) do\n      can_split_array_helper(tail, m, [new_sum | current_splits], 0)\n    else\n      # Case 2: Try to split here if possible and move to the next element\n      split_here = can_split_array_helper(tail, m, [new_sum | current_splits], 0)\n\n      # Case 3: Continue adding elements to the current subarray\n      continue_adding = can_split_array_helper(tail, m, current_splits, new_sum)\n\n      split_here or continue_adding\n    end\n  end\nend"
+}
