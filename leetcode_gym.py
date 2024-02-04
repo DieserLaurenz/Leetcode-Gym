@@ -339,12 +339,13 @@ def extract_info_and_generate_prompt(response):
     # Construct the prompt with conditional inclusions
     prompt_parts = [
         f"This solution is incorrect. Please provide a corrected code implementation, considering the outlined error details for enhancements. Provide the code without explanation\n\nError type:\n\n{error_type}\n\nError details:\n\n{error_detail}"]
-    if test_input is not None:
-        prompt_parts.append(f"\n\nLast executed input: {test_input}")
-    if output is not None:
-        prompt_parts.append(f"\n\nReceived output: {output}")
-    if expected_output is not None:
-        prompt_parts.append(f"\n\nExpected output: {expected_output}")
+    if error_type not in ("Time Limit Exceeded", "Memory Limit Exceeded"):
+        if test_input is not None:
+            prompt_parts.append(f"\n\nLast executed input: {test_input}")
+        if output is not None:
+            prompt_parts.append(f"\n\nReceived output: {output}")
+        if expected_output is not None:
+            prompt_parts.append(f"\n\nExpected output: {expected_output}")
 
     return " ".join(prompt_parts)
 
