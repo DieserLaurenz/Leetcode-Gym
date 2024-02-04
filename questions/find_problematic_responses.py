@@ -38,7 +38,7 @@ def find_failed_after_success(base_directory):
                         sample_file_path = os.path.join(lang_path, files_in_lang[0])
                         # Cache löschen, wenn vorhanden
                         try:
-                            with open(os.path.join(lang_path, sample_file_path), 'r') as file:
+                            with open(sample_file_path, 'r') as file:
                                 data = json.load(file)
                                 question_id = data.get('question_id')
                                 lang_slug = data.get('lang')
@@ -48,7 +48,7 @@ def find_failed_after_success(base_directory):
                                         del cache[cache_key]
                                         print(f"Cache für {cache_key} entfernt.")
                         except Exception as e:
-                            print(f"Fehler beim Lesen von {problem_file} oder beim Zugriff auf den Cache: {e}")
+                            print(f"Fehler beim Lesen von {sample_file_path} oder beim Zugriff auf den Cache: {e}")
                         break  # Brechen Sie die Schleife ab, wenn ein Problem gefunden wurde
 
 

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 14\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2850",
+    "task_finish_time": 1706876867605,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1163879254",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (longest-string x y z)\n  (-> exact-integer? exact-integer? exact-integer? exact-integer?)\n  (let ([max-aa (if (> x 2) (+ (* 2 2) (- x 2)) (* x 2))]\n        [max-bb (if (> y 2) (+ (* 2 2) (- y 2)) (* y 2))]\n        [used-ab (* z 2)]\n        [min-xy (min x y)])\n    (if (>= z (+ min-xy 1))\n        (+ max-aa max-bb used-ab)\n        (let ([extra-ab (if (> z 0) (- z min-xy 1) 0)])\n          (cond\n            [(and (> x 2) (> y 2)) (+ max-aa max-bb used-ab)]\n            [(or (= x 0) (= y 0)) (+ (if (> x 0) max-aa 0) (if (> y 0) max-bb 0) used-ab)]\n            [else (+ (* 2 (min x y)) (* 2 z) (* 2 (abs (- x y 1))))]))))"
+}

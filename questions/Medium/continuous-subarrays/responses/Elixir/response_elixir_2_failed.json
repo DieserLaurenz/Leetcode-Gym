@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 9: Char 37: ** (SyntaxError) unexpected reserved word: end\n    HINT: the \"(\" on line 9 is missing terminator \")\"\n    |\n  9 |   defp count_subarrays(nums, start, end, min, max, len) do\n    |                                     ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2868",
+    "task_finish_time": 1707054439909,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1165872188",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec continuous_subarrays(nums :: [integer]) :: integer\n  def continuous_subarrays(nums) do\n    count_subarrays(nums, 0, 0, 0, 0, length(nums))\n  end\n\n  defp count_subarrays(_nums, _start, _end, _min, _max, len) when _end == len, do: 0\n  defp count_subarrays(nums, start, _end, _min, _max, len) when _end < start, do: count_subarrays(nums, start, start, hd(nums), hd(nums), len)\n  defp count_subarrays(nums, start, end, min, max, len) do\n    current = Enum.at(nums, end)\n    new_min = min(min, current)\n    new_max = max(max, current)\n\n    if new_max - new_min <= 2 do\n      # Current subarray is continuous, count it and try to extend it\n      1 + count_subarrays(nums, start, end + 1, new_min, new_max, len)\n    else\n      # Current subarray is not continuous, move start forward\n      count_subarrays(nums, start + 1, end, min, max, len)\n    end\n  end\n\n  defp hd([h | _]), do: h\nend"
+}

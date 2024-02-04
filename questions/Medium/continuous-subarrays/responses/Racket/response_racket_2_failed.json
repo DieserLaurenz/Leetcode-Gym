@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 20: Char 53: read-syntax: unexpected `)`",
+    "full_compile_error": "Line 20: Char 53: read-syntax: unexpected `)`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2868",
+    "task_finish_time": 1707054114692,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1165868345",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (continuous-subarrays nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([n (length nums)])\n    (let loop ([i 0] [total 0])\n      (if (= i n)\n          total\n          (loop (+ i 1) (+ total (count-continuous-subarrays nums i n))))))\n\n  (define (count-continuous-subarrays nums start n)\n    (let loop ([j start] [max-val (list-ref nums start)] [min-val (list-ref nums start)] [count 0])\n      (if (= j n)\n          count\n          (let* ([val (list-ref nums j)]\n                 [new-max (max max-val val)]\n                 [new-min (min min-val val)])\n            (if (<= (- new-max new-min) 2)\n                (loop (+ j 1) new-max new-min (+ count 1))\n                count)))))\n\n  (count-continuous-subarrays nums 0 (length nums))))"
+}

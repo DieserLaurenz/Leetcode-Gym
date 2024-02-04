@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 44: Char 5: error: redefinition of \u2018main\u2019 [solution.c]",
+    "full_compile_error": "Line 44: Char 5: error: redefinition of \u2018main\u2019 [solution.c]\n   47 | int main(int argc, char *argv[]) {\n      |     ^~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2868",
+    "task_finish_time": 1706907556616,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1164260113",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n\nlong long continuousSubarrays(int* nums, int numsSize){\n    long long count = 0; // To store the total number of continuous subarrays\n    int start = 0, end = 0; // Start and end pointers for the current window\n\n    while (end < numsSize) {\n        // Find the maximum and minimum in the current window to check the condition\n        int windowMax = nums[start];\n        int windowMin = nums[start];\n\n        for (int i = start; i <= end; i++) {\n            if (nums[i] > windowMax) windowMax = nums[i];\n            if (nums[i] < windowMin) windowMin = nums[i];\n        }\n\n        if (windowMax - windowMin <= 2) {\n            // If the window is valid, calculate the number of subarrays\n            // Increment end to expand the window\n            end++;\n        } else {\n            // If the condition is violated, move start to shrink the window\n            start++;\n        }\n\n        // Calculate the number of continuous subarrays for the current window\n        // This is done for every valid window when either end is incremented or start is moved forward\n        count += end - start; // Adding the number of new subarrays formed by adding a new element\n    }\n\n    return count;\n}\n\nint main() {\n    int nums[] = {5, 4, 2, 4};\n    int numsSize = 4;\n    long long result = continuousSubarrays(nums, numsSize);\n    printf(\"Total continuous subarrays: %lld\\n\", result);\n\n    return 0;\n}"
+}

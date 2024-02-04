@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"total_subarrays\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"total_subarrays\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 15:   Solution.continuous_subarrays/1\nerror: undefined function while/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 10:   Solution.continuous_subarrays/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2868",
+    "task_finish_time": 1707054394887,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1165871652",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec continuous_subarrays(nums :: [integer]) :: integer\n  def continuous_subarrays(nums) do\n    total_subarrays = 0\n    start_index = 0\n\n    for end_index <- 0..(length(nums) - 1) do\n      # Ensure the subarray [start_index, end_index] is continuous.\n      # If not, increment start_index until the subarray becomes continuous.\n      while start_index < end_index and not is_continuous?(nums, start_index, end_index) do\n        start_index = start_index + 1\n      end\n\n      # Add the number of continuous subarrays ending at end_index.\n      total_subarrays = total_subarrays + end_index - start_index + 1\n    end\n\n    total_subarrays\n  end\n\n  defp is_continuous?(nums, start_index, end_index) do\n    subarray = Enum.slice(nums, start_index..end_index)\n    max_val = Enum.max(subarray)\n    min_val = Enum.min(subarray)\n    max_val - min_val <= 2\n  end\nend"
+}

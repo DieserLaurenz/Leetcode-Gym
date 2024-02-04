@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 13: Char 3: begin (possibly implicit): the last form is not an expression",
+    "full_compile_error": "Line 13: Char 3: begin (possibly implicit): the last form is not an expression\n  at: (define (continuous? nums start end) (let loop ((k start) (max (list-ref nums start)) (min (list-ref nums start))) (if (> k end) (<= (- max min) 2) (let ((val (list-ref nums k))) (loop (+ k 1) (if (> val max) val max) (if (< val min) val min))))))\n  in: (begin (let loop ((i 0) (count 0)) (if (= i (length nums)) count (let inner-loop ((j i) (subarray-count 0)) (if (= j (length nums)) (loop (+ i 1) (+ count subarray-count)) (if (continuous? nums i j) (inner-loop (+ j 1) (+ subarray-count 1)) (loop (+ i 1...\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:24:2",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2868",
+    "task_finish_time": 1707054034172,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1165867382",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (continuous-subarrays nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let loop ((i 0) (count 0))\n    (if (= i (length nums))\n        count\n        (let inner-loop ((j i) (subarray-count 0))\n          (if (= j (length nums))\n              (loop (+ i 1) (+ count subarray-count))\n              (if (continuous? nums i j)\n                  (inner-loop (+ j 1) (+ subarray-count 1))\n                  (loop (+ i 1) (+ count subarray-count)))))))\n\n  (define (continuous? nums start end)\n    (let loop ((k start) (max (list-ref nums start)) (min (list-ref nums start)))\n      (if (> k end)\n          (<= (- max min) 2)\n          (let ((val (list-ref nums k)))\n            (loop (+ k 1)\n                  (if (> val max) val max)\n                  (if (< val min) val min))))))\n)"
+}

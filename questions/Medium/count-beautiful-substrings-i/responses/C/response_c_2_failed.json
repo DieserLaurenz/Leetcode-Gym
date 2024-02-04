@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 47: Char 5: error: redefinition of \u2018main\u2019 [solution.c]",
+    "full_compile_error": "Line 47: Char 5: error: redefinition of \u2018main\u2019 [solution.c]\n   50 | int main(int argc, char *argv[]) {\n      |     ^~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3210",
+    "task_finish_time": 1707064279735,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1165991586",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint beautifulSubstrings(char* s, int k) {\n    int count = 0;\n    int length = strlen(s);\n\n    // Iterate over all possible substrings\n    for (int start = 0; start < length; ++start) {\n        int vowels = 0, consonants = 0;\n        for (int end = start; end < length; ++end) {\n            // Check if the current character is a vowel or a consonant\n            if (s[end] == 'a' || s[end] == 'e' || s[end] == 'i' || s[end] == 'o' || s[end] == 'u') {\n                vowels++;\n            } else {\n                consonants++;\n            }\n            // Check if the substring is beautiful\n            if (vowels == consonants && (vowels * consonants) % k == 0) {\n                count++;\n            }\n        }\n    }\n    \n    return count;\n}\n\n// Example usage\nint main() {\n    char example1[] = \"baeyh\";\n    int k1 = 2;\n    printf(\"Example 1: %d\\n\", beautifulSubstrings(example1, k1));\n\n    char example2[] = \"abba\";\n    int k2 = 1;\n    printf(\"Example 2: %d\\n\", beautifulSubstrings(example2, k2));\n\n    char example3[] = \"bcdf\";\n    int k3 = 1;\n    printf(\"Example 3: %d\\n\", beautifulSubstrings(example3, k3));\n\n    return 0;\n}"
+}

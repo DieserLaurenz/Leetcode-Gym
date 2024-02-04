@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 53: Char 5: error: redefinition of \u2018main\u2019 [solution.c]",
+    "full_compile_error": "Line 53: Char 5: error: redefinition of \u2018main\u2019 [solution.c]\n   56 | int main(int argc, char *argv[]) {\n      |     ^~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3210",
+    "task_finish_time": 1707064228174,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1165990877",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n#include <string.h>\n#include <stdbool.h>\n\nbool isVowel(char c) {\n    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';\n}\n\nint beautifulSubstrings(char* s, int k) {\n    int beautifulCount = 0;\n    int length = strlen(s);\n    int vowelCount = 0, consonantCount = 0;\n\n    // To avoid directly dealing with squares and large numbers modulo k,\n    // we use an array to count occurrences of products meeting the conditions.\n    int count[1001] = {0}; // Adjust size based on constraints\n    count[0] = 1; // Base case, no characters considered yet\n\n    for (int i = 0; i < length; ++i) {\n        if (isVowel(s[i])) {\n            ++vowelCount;\n        } else {\n            ++consonantCount;\n        }\n\n        // The product we're interested in is (vowels * consonants),\n        // but we need to find substrings where vowels == consonants.\n        // Thus, we only need to find where (vowelCount - consonantCount) % k == 0\n        // However, to ensure a positive modulo result, we adjust the index.\n        for (int j = 0; j < k; ++j) {\n            int diff = (vowelCount - consonantCount) - j;\n            if (diff % k == 0) {\n                beautifulCount += count[j];\n            }\n        }\n\n        // Update the count of the current difference modulo k\n        int modDiff = abs((vowelCount - consonantCount) % k);\n        count[modDiff]++;\n    }\n\n    return beautifulCount;\n}\n\nint main() {\n    char s[] = \"your_test_string_here\";\n    int k = 112;\n    printf(\"Beautiful Substrings: %d\\n\", beautifulSubstrings(s, k));\n    return 0;\n}"
+}

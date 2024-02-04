@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 17: undefined: abs (solution.go)",
+    "full_compile_error": "Line 9: Char 17: undefined: abs (solution.go)\nLine 16: Char 5: min declared and not used (solution.go)\nLine 23: Char 5: max declared and not used (solution.go)\nLine 30: Char 5: abs declared and not used (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2850",
+    "task_finish_time": 1706867446738,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1163787412",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func longestString(x int, y int, z int) int {\n    // Function to calculate the maximum string length\n    maxLen := func(a, b, c int) int {\n        // If either a or b is 0, the maximum length is the sum of the other plus min(2, c) * 2\n        if a == 0 || b == 0 {\n            return 2*(min(a, b)+min(2, c)) + max(a, b)\n        }\n        // If there are more AB strings than the difference between a and b\n        if c >= abs(a-b)-1 {\n            return 2 * (a + b + min(c, (a+b+c)/3))\n        }\n        // Otherwise, use AB strings to balance out a and b\n        return 2 * (min(a, b) + min(c+1, max(a, b)))\n    }\n    // Helper function to find the minimum of two integers\n    min := func(a, b int) int {\n        if a < b {\n            return a\n        }\n        return b\n    }\n    // Helper function to find the maximum of two integers\n    max := func(a, b int) int {\n        if a > b {\n            return a\n        }\n        return b\n    }\n    // Helper function to find the absolute value\n    abs := func(x int) int {\n        if x < 0 {\n            return -x\n        }\n        return x\n    }\n\n    return maxLen(x, y, z)\n}"
+}
