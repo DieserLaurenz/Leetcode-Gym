@@ -28,6 +28,11 @@ def find_failed_after_success(base_directory):
                         if file_ends_with(files_in_lang, success_suffix):
                             success_found = True
 
+                        if file_ends_with(files_in_lang, success_suffix) and file_ends_with(files_in_lang, failed_suffix):
+                            # No success and failure in same attempt
+                            problem_detected = True
+                            break
+                        
                         if success_found and file_ends_with(files_in_lang, failed_suffix):
                             problem_detected = True
                             break
@@ -49,7 +54,6 @@ def find_failed_after_success(base_directory):
                                         print(f"Cache für {cache_key} entfernt.")
                         except Exception as e:
                             print(f"Fehler beim Lesen von {sample_file_path} oder beim Zugriff auf den Cache: {e}")
-                        break  # Brechen Sie die Schleife ab, wenn ein Problem gefunden wurde
 
 
 def find_problematic_responses(base_directory, cache_path):
