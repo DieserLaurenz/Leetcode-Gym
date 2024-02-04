@@ -437,6 +437,9 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
                     continue
                 else:
                     attempt += 1
+                    if attempt == 3:
+                        driver.quit()
+                        break
                     prompt = error_prompt
 
 
