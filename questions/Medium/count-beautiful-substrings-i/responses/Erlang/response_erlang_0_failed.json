@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 16: illegal guard expression",
+    "full_compile_error": "Line 9: Char 16: illegal guard expression\n%    9|             if lists:member(Char, Vowels) -> {Vow + 1, Con};\n%     |                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3210",
+    "task_finish_time": 1707074132286,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1166131450",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec beautiful_substrings(S :: unicode:unicode_binary(), K :: integer()) -> integer().\nbeautiful_substrings(S, K) ->\n    Vowels = \"aeiou\",\n    Len = byte_size(S),\n    Substrs = [binary:part(S, Start, Length) || Start <- lists:seq(0, Len - 1),\n                                                Length <- lists:seq(1, Len - Start)],\n    BeautifulSubstrs = lists:filter(fun(Substr) ->\n        {V, C} = lists:foldl(fun(Char, {Vow, Con}) ->\n            if lists:member(Char, Vowels) -> {Vow + 1, Con};\n               true -> {Vow, Con + 1}\n            end\n        end, {0, 0}, binary_to_list(Substr)),\n        V =:= C andalso (V * C) rem K =:= 0\n    end, Substrs),\n    length(BeautifulSubstrs)."
+}

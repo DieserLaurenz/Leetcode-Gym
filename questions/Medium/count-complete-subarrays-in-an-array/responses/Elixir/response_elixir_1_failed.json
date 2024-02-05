@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"break\"",
+    "full_compile_error": "error: undefined variable \"break\"\nLine 16:   Solution.count_complete_subarrays/1\nwarning: variable \"count\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 15:   Solution.count_complete_subarrays/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2856",
+    "task_finish_time": 1707075641084,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1166149664",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count_complete_subarrays(nums :: [integer]) :: integer\n  def count_complete_subarrays(nums) do\n    distinct_count = Enum.uniq(nums) |> length\n    nums_length = length(nums)\n\n    0..(nums_length-1)\n    |> Enum.reduce(0, fn left, acc ->\n      elements = Map.new()\n      count = acc\n\n      for right <- left..(nums_length-1) do\n        elements = Map.update(elements, Enum.at(nums, right), 1, &(&1 + 1))\n        if map_size(elements) == distinct_count do\n          count = count + (nums_length - right)\n          break\n        end\n      end\n\n      count\n    end)\n  end\nend"
+}

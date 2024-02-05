@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 15: syntax error: unexpected freq at end of statement (solution.go)",
+    "full_compile_error": "Line 15: Char 15: syntax error: unexpected freq at end of statement (solution.go)\nLine 23: Char 5: syntax error: non-declaration statement outside function body (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3213",
+    "task_finish_time": 1707107115886,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1166435205",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func countSubarrays(nums []int, k int) int64 {\n    n := len(nums)\n    maxVal := 0\n    for _, num := range nums {\n        if num > maxVal {\n            maxVal = num\n        }\n    }\n\n    count, left, freq := int64(0), 0, 0\n    for right := 0; right < n; right++ {\n        if nums[right] == maxVal {\n            freq++\n        }\n        while freq >= k {\n            count += int64(n - right)\n            if nums[left] == maxVal {\n                freq--\n            }\n            left++\n        }\n    }\n    return count\n}"
+}

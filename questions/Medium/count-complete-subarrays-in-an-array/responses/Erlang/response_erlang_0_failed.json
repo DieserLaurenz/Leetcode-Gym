@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 19: illegal guard expression",
+    "full_compile_error": "Line 10: Char 19: illegal guard expression\n%   10|     NewCount = if maps:size(UpdatedMap) == DistinctCount -> Count + CurrentLength + 1; true -> Count end,\n%     |                   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2856",
+    "task_finish_time": 1707075470019,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1166147630",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_complete_subarrays(Nums :: [integer()]) -> integer().\ncount_complete_subarrays(Nums) ->\n    DistinctCount = length(lists:usort(Nums)),\n    count_complete_subarrays(Nums, DistinctCount, 0, {0, maps:new()}).\n\ncount_complete_subarrays([], _, Count, _) ->\n    Count;\ncount_complete_subarrays([H|T], DistinctCount, Count, {CurrentLength, CurrentMap}) ->\n    UpdatedMap = maps:update_with(H, fun(Val) -> Val + 1 end, 1, CurrentMap),\n    NewCount = if maps:size(UpdatedMap) == DistinctCount -> Count + CurrentLength + 1; true -> Count end,\n    {NewLength, PrunedMap} = prune_map(T, UpdatedMap, DistinctCount, CurrentLength + 1),\n    count_complete_subarrays(T, DistinctCount, NewCount, {NewLength, PrunedMap}).\n\nprune_map(Nums, Map, DistinctCount, Length) ->\n    case maps:size(Map) == DistinctCount of\n        true ->\n            {Key, 1} = maps:find(min_value(Map), Map),\n            {Length - 1, maps:remove(Key, Map)};\n        false ->\n            {Length, Map}\n    end.\n\nmin_value(Map) ->\n    MinValue = lists:min(maps:values(Map)),\n    lists:keyfind(MinValue, 2, maps:to_list(Map))."
+}

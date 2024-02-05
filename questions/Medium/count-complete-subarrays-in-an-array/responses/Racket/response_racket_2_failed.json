@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 16: Char 13: if: missing an \"else\" expression",
+    "full_compile_error": "Line 16: Char 13: if: missing an \"else\" expression\n  in: (if (= current-count 0) (set! unique-count (add1 unique-count)))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:27:12",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2856",
+    "task_finish_time": 1707075404368,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1166146864",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-complete-subarrays nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define (unique-elements lst)\n    (length (foldl (lambda (item acc) (if (member item acc) acc (cons item acc))) '() lst)))\n  \n  (define total-unique (unique-elements nums))\n  (define n (length nums))\n  \n  (define (count-complete-from start)\n    (let loop ([end start] [unique-count 0] [seen (make-hash)] [count 0])\n      (if (= end n) count\n          (let* ([current (list-ref nums end)]\n                 [current-count (hash-ref seen current 0)])\n            (hash-set! seen current (add1 current-count))\n            (if (= current-count 0) (set! unique-count (add1 unique-count)))\n            (if (= unique-count total-unique)\n                (loop (add1 end) unique-count seen (add1 count))\n                (loop (add1 end) unique-count seen count)))))\n    0)\n  \n  (let loop ([i 0] [total 0])\n    (if (< i n)\n        (loop (add1 i) (+ total (count-complete-from i)))\n        total)))"
+}

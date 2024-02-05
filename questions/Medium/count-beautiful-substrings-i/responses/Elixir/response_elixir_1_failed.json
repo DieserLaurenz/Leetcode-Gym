@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: invalid expression in guards, anonymous call is not allowed in guards. To learn more about guards, visit: https://hexdocs.pm/elixir/patterns-and-guards.html",
+    "full_compile_error": "error: invalid expression in guards, anonymous call is not allowed in guards. To learn more about guards, visit: https://hexdocs.pm/elixir/patterns-and-guards.html\n  solution.ex:14\n** (CompileError) solution.ex: cannot compile file (errors have been logged)\n    (elixir 1.15.7) src/elixir_fn.erl:17: anonymous fn/4 in :elixir_fn.expand/4",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3210",
+    "task_finish_time": 1707074274647,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1166133203",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec beautiful_substrings(s :: String.t, k :: integer) :: integer\n  def beautiful_substrings(s, k) do\n    is_vowel = fn char -> \"aeiou\" |> String.contains?(char) end\n    len = String.length(s)\n    count = 0\n\n    for i <- 0..(len-1), reduce: 0 do\n      count ->\n        for j <- i..(len-1), reduce: count do\n          count ->\n            substring = String.slice(s, i, j-i+1)\n            {vowel_count, consonant_count} = Enum.reduce(substring, {0, 0}, fn\n              char, {v, c} when is_vowel.(String.at(char, 0)) -> {v + 1, c}\n              char, {v, c} -> {v, c + 1}\n            end)\n\n            if vowel_count == consonant_count && rem(vowel_count * consonant_count, k) == 0 do\n              count + 1\n            else\n              count\n            end\n        end\n    end\n  end\nend"
+}

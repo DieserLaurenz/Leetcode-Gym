@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "** (ArgumentError) invalid right argument for operator \"in\", it expects a compile-time proper list or compile-time range on the right side when used in guard expressions, got: vowels\n    (elixir 1.15.7) lib/kernel.ex:4465: Kernel.raise_on_invalid_args_in_2/1\n    (elixir 1.15.7) expanding macro: Kernel.in/2\nLine 14:     Solution.beautiful_substrings/2",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3210",
+    "task_finish_time": 1707074304229,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1166133538",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec beautiful_substrings(s :: String.t, k :: integer) :: integer\n  def beautiful_substrings(s, k) do\n    len = String.length(s)\n    vowels = \"aeiou\"\n    count = 0\n\n    for i <- 0..(len - 1), reduce: 0 do\n      acc ->\n        for j <- i..(len - 1), reduce: acc do\n          acc_inner ->\n            substring = String.slice(s, i, j - i + 1)\n            {vowel_count, consonant_count} = Enum.reduce(substring, {0, 0}, fn\n              char, {v, c} when char in vowels -> {v + 1, c}\n              _, {v, c} -> {v, c + 1}\n            end)\n\n            if vowel_count == consonant_count and rem(vowel_count * consonant_count, k) == 0 do\n              acc_inner + 1\n            else\n              acc_inner\n            end\n        end\n    end\n  end\nend"
+}

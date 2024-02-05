@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 21: Char 9: syntax error before: 'after'",
+    "full_compile_error": "Line 21: Char 9: syntax error before: 'after'\n%   21|     end after\n%     |         ^\nLine 9: Char 5: function count_sub/8 undefined\n%    9|     count_sub(Nums, Unique, Map, Acc, Start, Start, Len, 0).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2856",
+    "task_finish_time": 1707075552306,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1166148606",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_complete_subarrays(Nums :: [integer()]) -> integer().\ncount_complete_subarrays(Nums) ->\n    Unique = length(lists:usort(Nums)),\n    count(Nums, Unique, maps:new(), 0, 1, length(Nums)).\n\ncount(_, _, _, Acc, Start, Len) when Start > Len ->\n    Acc;\ncount(Nums, Unique, Map, Acc, Start, Len) ->\n    count_sub(Nums, Unique, Map, Acc, Start, Start, Len, 0).\n\ncount_sub(_, _, _, Acc, _, _, Len, SubAcc) when SubAcc > Len ->\n    Acc;\ncount_sub(Nums, Unique, Map, Acc, Start, End, Len, SubAcc) ->\n    {NewMap, NewUnique} = update_map(maps:get(element(End, Nums), Map, 0), Map, element(End, Nums)),\n    if\n        NewUnique =:= Unique ->\n            NextAcc = Acc + 1,\n            count_sub(Nums, Unique, NewMap, NextAcc, Start, End + 1, Len, SubAcc + 1);\n        true ->\n            count_sub(Nums, Unique, NewMap, Acc, Start, End + 1, Len, SubAcc + 1)\n    end after\n    if\n        End - Start + 1 =:= Len ->\n            count(Nums, Unique, maps:new(), Acc, Start + 1, Len);\n        true ->\n            ok\n    end.\n\nupdate_map(Count, Map, Key) ->\n    case Count of\n        0 ->\n            {maps:put(Key, 1, Map), 1};\n        _ ->\n            {Map, 0}\n    end."
+}

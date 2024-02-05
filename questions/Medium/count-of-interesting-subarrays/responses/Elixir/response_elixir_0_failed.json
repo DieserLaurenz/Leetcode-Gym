@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"acc_inner\"",
+    "full_compile_error": "error: undefined variable \"acc_inner\"\nLine 10:   Solution.count_interesting_subarrays/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2915",
+    "task_finish_time": 1707085363779,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1166243255",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count_interesting_subarrays(nums :: [integer], modulo :: integer, k :: integer) :: integer\n  def count_interesting_subarrays(nums, modulo, k) do\n    Enum.reduce(0..length(nums) - 1, 0, fn start, acc ->\n      acc + Enum.reduce(start..length(nums) - 1, {0, acc}, fn end_, {cnt, acc_inner} ->\n        if rem(Enum.at(nums, end_), modulo) == k, do: {cnt + 1, acc_inner}, else: {cnt, acc_inner}\n      end)\n      |> case do\n        {cnt, acc_inner} when rem(cnt, modulo) == k -> acc_inner + 1\n        _ -> acc_inner\n      end\n    end)\n  end\nend"
+}

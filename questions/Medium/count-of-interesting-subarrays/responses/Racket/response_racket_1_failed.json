@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 15: Char 39: read-syntax: missing `]` to close `[` on line 15, found instead `)`",
+    "full_compile_error": "Line 15: Char 39: read-syntax: missing `]` to close `[` on line 15, found instead `)`\n  possible cause: indentation suggests a missing `]` before line 9\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2915",
+    "task_finish_time": 1707085147372,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1166241477",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-interesting-subarrays nums modulo k)\n  (-> (listof exact-integer?) exact-integer? exact-integer? exact-integer?)\n  \n  (letrec ([count-interesting (lambda (start)\n                                (if (< start (length nums))\n                                    (+ (count-from start 0 0)\n                                       (count-interesting (+ start 1)))\n                                    0))\n            [count-from (lambda (start cnt match)\n                          (if (< start (length nums))\n                              (let ([val (list-ref nums start)])\n                                (if (= (modulo val modulo) k)\n                                    (count-from (+ start 1) (+ cnt 1) (+ match (if (= (modulo (+ cnt 1) modulo) k) 1 0)))\n                                    (count-from (+ start 1) cnt match)))\n                              match))])\n    (count-interesting 0)))"
+}
