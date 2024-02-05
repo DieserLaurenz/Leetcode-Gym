@@ -228,6 +228,11 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
     lang_response_directory = os.path.join(response_directory, lang)
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
+    print(f"Processing: {title_slug} in {lang_slug}.\n")
+    if attempt == 0 and check_for_files(lang_response_directory):
+        print(f"Files found: {title_slug} in {lang_slug} but attempt 0. Deleting...")
+        delete_all_files_in_directory(lang_response_directory)
+
     response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver,
                                                                                                                 prompt,
                                                                                                                 attempt,
@@ -388,10 +393,6 @@ def should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_p
         print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
         return True
     else:
-        print(f"Processing: {title_slug} in {lang_slug}.\n")
-        if check_for_files(lang_response_directory):
-            print(f"Files found: {title_slug} in {lang_slug}. Deleting...")
-            delete_all_files_in_directory(lang_response_directory)
         return False
 
 def process_question_with_selenium_method(json_file_path, subfolder_path):
