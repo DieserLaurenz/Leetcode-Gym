@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 19: syntax error before: 'div'",
+    "full_compile_error": "Line 4: Char 19: syntax error before: 'div'\n%    4|     Base = erlang:div(Target, 2),\n%     |                   ^\nLine 1: Char 2: spec for undefined function minimum_possible_sum/2\n%    1| -spec minimum_possible_sum(N :: integer(), Target :: integer()) -> integer().\n%     |  ^\nLine 30: Char 13: function minimum_possible_sum/2 undefined\n%   30|       Ret = minimum_possible_sum(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3026",
+    "task_finish_time": 1707355311150,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1169283996",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_possible_sum(N :: integer(), Target :: integer()) -> integer().\nminimum_possible_sum(N, Target) ->\n    Mod = 1000000007,\n    Base = erlang:div(Target, 2),\n    Extra = case Target rem 2 of\n                0 -> Base;\n                1 -> Base + 1\n            end,\n    if\n        N > Base -> (((2 * Extra + N - 1) * N div 2) rem Mod);\n        true -> (((N * (N + 1)) div 2) rem Mod)\n    end."
+}

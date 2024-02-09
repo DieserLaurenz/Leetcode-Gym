@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined function div/1 (expected Solution to define such a function or for it to be imported, but none are available)",
+    "full_compile_error": "error: undefined function div/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 4:   Solution.minimum_possible_sum/2\nerror: undefined function target/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 4:   Solution.minimum_possible_sum/2\nerror: undefined function if/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 6:   Solution.minimum_possible_sum/2\nerror: undefined function target/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 6:   Solution.minimum_possible_sum/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3026",
+    "task_finish_time": 1707355431009,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1169284938",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_possible_sum(n :: integer, target :: integer) :: integer\n  def minimum_possible_sum(n, target) do\n    if rem(target, 2) == 0 and n >= target div 2 do\n      (1..n)\n      |> Enum.map(fn x -> if x == target div 2, do: x + 1, else: x end)\n      |> Enum.sum()\n      |> rem(1_000_000_007)\n    else\n      Enum.sum(1..n)\n      |> rem(1_000_000_007)\n    end\n  end\nend"
+}

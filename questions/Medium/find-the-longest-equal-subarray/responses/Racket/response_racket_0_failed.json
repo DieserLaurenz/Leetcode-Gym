@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 15\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2832",
+    "task_finish_time": 1707326017394,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1168978341",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (longest-equal-subarray nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let loop ((i 0) (max-len 0))\n    (if (>= i (length nums))\n        max-len\n        (let loop-inner ((j i) (deletes 0) (current-max 0) (last-val (list-ref nums i)) (count 0))\n          (if (or (>= j (length nums)) (> deletes k))\n              (loop (add1 i) (max max-len current-max))\n              (let ((val (list-ref nums j)))\n                (if (= val last-val)\n                    (loop-inner (add1 j) deletes (add1 current-max) last-val (add1 count))\n                    (if (< deletes k)\n                        (loop-inner (add1 j) (add1 deletes) (add1 current-max) last-val (add1 count))\n                        (loop-inner (add1 i) (add1 deletes) current-max last-val count))))))))"
+}

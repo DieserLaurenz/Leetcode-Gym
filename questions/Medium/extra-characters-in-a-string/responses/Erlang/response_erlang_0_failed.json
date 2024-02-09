@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 14: Char 51: syntax error before: '('",
+    "full_compile_error": "Line 14: Char 51: syntax error before: '('\n%   14|     Memo = fun(M) -> fun(I) -> maps:get(I, M, F(M)(I, F(M))) end end,\n%     |                                                   ^\nLine 1: Char 2: spec for undefined function min_extra_char/2\n%    1| -spec min_extra_char(S :: unicode:unicode_binary(), Dictionary :: [unicode:unicode_binary()]) -> integer().\n%     |  ^\nLine 34: Char 13: function min_extra_char/2 undefined\n%   34|       Ret = min_extra_char(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2755",
+    "task_finish_time": 1707221257742,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1167753794",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_extra_char(S :: unicode:unicode_binary(), Dictionary :: [unicode:unicode_binary()]) -> integer().\nmin_extra_char(S, Dictionary) ->\n    DP = fun DP(0, _) -> 0;\n             DP(I, F) ->\n                 Min = lists:foldl(fun(D, Acc) ->\n                                           case binary:part(S, {I - size(D), size(D)}) of\n                                               D -> min(F(I - size(D)), Acc);\n                                               _ -> Acc\n                                           end\n                                   end, I, Dictionary),\n                 min(Min, F(I - 1) + 1)\n         end,\n    Fun = fun(F) -> DP end,\n    Memo = fun(M) -> fun(I) -> maps:get(I, M, F(M)(I, F(M))) end end,\n    F = Memo(lib:fix(Fun)),\n    F(binary:size(S))."
+}

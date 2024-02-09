@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 15\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2802",
+    "task_finish_time": 1707366085067,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1169379793",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (punishment-number n)\n  (-> exact-integer? exact-integer?)\n  (let loop ((i 1) (sum 0))\n    (if (> i n)\n        sum\n        (let ((sq (sqr i)))\n          (if (let check ((num (number->string sq)) (acc 0))\n                (if (string=? num \"\")\n                    (= acc i)\n                    (or (check (substring num 1) (+ acc (string->number (substring num 0 1))))\n                        (and (> (string-length num) 1)\n                             (check (substring num 2) (+ acc (string->number (substring num 0 2))))))))\n              (loop (+ i 1) (+ sum sq))\n              (loop (+ i 1) sum)))))"
+}

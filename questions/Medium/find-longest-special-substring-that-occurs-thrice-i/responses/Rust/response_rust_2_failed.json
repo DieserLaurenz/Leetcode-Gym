@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 25, Char 35: borrow of moved value: `counts` (solution.rs)",
+    "full_compile_error": "Line 25, Char 35: borrow of moved value: `counts` (solution.rs)\n   |\n6  |         let mut counts = vec![];\n   |             ---------- move occurs because `counts` has type `Vec<(char, i32)>`, which does not implement the `Copy` trait\n...\n21 |         for (char, count) in counts {\n   |                              ------ `counts` moved due to this implicit call to `.into_iter()`\n...\n25 |                     for (_, c) in &counts {\n   |                                   ^^^^^^^ value borrowed here after move\n   |\nnote: `into_iter` takes ownership of the receiver `self`, which moves `counts`\n  --> /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/core/src/iter/traits/collect.rs:267:18\nhelp: consider iterating over a slice of the `Vec<(char, i32)>`'s content to avoid moving into the `for` loop\n   |\n21 |         for (char, count) in &counts {\n   |                              +\nFor more information about this error, try `rustc --explain E0382`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3267",
+    "task_finish_time": 1707275116158,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1168375648",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn maximum_length(s: String) -> i32 {\n        let mut result = -1;\n        let mut last_char = ' ';\n        let mut last_char_count = 0;\n        let mut counts = vec![];\n\n        for c in s.chars() {\n            if c == last_char {\n                last_char_count += 1;\n            } else {\n                if last_char_count > 0 {\n                    counts.push((last_char, last_char_count));\n                }\n                last_char = c;\n                last_char_count = 1;\n            }\n        }\n        counts.push((last_char, last_char_count));\n\n        for (char, count) in counts {\n            if count >= 3 {\n                for i in 1..=count {\n                    let mut temp_count = 0;\n                    for (_, c) in &counts {\n                        if *c >= i {\n                            temp_count += 1;\n                        }\n                    }\n                    if temp_count >= 3 {\n                        result = result.max(i);\n                    }\n                }\n            }\n        }\n\n        result\n    }\n}"
+}

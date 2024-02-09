@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 13: error: not found: value break (in solution.scala)",
+    "full_compile_error": "Line 13: error: not found: value break (in solution.scala)\n                        break\n                        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2786",
+    "task_finish_time": 1707344687547,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1169204339",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def longestSemiRepetitiveSubstring(s: String): Int = {\n        var maxLen = 0\n        for (i <- s.indices) {\n            var repeat = false\n            var len = 1\n            for (j <- i + 1 until s.length) {\n                if (s(j) == s(j - 1)) {\n                    if (repeat) {\n                        len = j - i\n                        maxLen = maxLen max len\n                        len = 0\n                        break\n                    }\n                    repeat = true\n                }\n                len += 1\n            }\n            maxLen = maxLen max len\n        }\n        maxLen\n    }\n}"
+}

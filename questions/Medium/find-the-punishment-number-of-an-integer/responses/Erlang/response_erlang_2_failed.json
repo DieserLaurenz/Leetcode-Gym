@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 9: call to local/imported function check_partition/2 is illegal in guard",
+    "full_compile_error": "Line 10: Char 9: call to local/imported function check_partition/2 is illegal in guard\n%   10|         check_partition(integer_to_list(Squared), Current) ->\n%     |         ^\nLine 10: Char 25: call to local/imported function integer_to_list/1 is illegal in guard\n%   10|         check_partition(integer_to_list(Squared), Current) ->\n%     |                         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2802",
+    "task_finish_time": 1707366276254,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1169381926",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec punishment_number(N :: integer()) -> integer().\npunishment_number(N) ->\n    punishment_number(N, 1, 0).\n\npunishment_number(N, Current, Acc) when Current > N ->\n    Acc;\npunishment_number(N, Current, Acc) ->\n    Squared = Current * Current,\n    if\n        check_partition(integer_to_list(Squared), Current) ->\n            punishment_number(N, Current + 1, Acc + Squared);\n        true ->\n            punishment_number(N, Current + 1, Acc)\n    end.\n\ncheck_partition(SquaredList, Target) ->\n    check_partition(SquaredList, Target, 0).\n\ncheck_partition([], 0, 0) ->\n    true;\ncheck_partition([], _, _) ->\n    false;\ncheck_partition([H|T], Target, CurrentSum) ->\n    Digit = H - 48, % Convert char to integer\n    NewSum = CurrentSum * 10 + Digit,\n    if\n        NewSum =:= Target ->\n            check_partition(T, Target, 0);\n        NewSum < Target ->\n            check_partition(T, Target, NewSum);\n        true ->\n            false\n    end.\n\ninteger_to_list(Number) ->\n    lists:reverse(integer_to_list(Number, [])).\n    \ninteger_to_list(0, Acc) when Acc =/= [] ->\n    Acc;\ninteger_to_list(N, Acc) ->\n    Digit = (N rem 10) + 48, % ASCII offset\n    integer_to_list(N div 10, [Digit|Acc])."
+}

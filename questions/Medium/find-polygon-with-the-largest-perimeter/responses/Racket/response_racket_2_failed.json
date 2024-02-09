@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 11: Char 7: for/or: missing body form after #:final clause",
+    "full_compile_error": "Line 11: Char 7: for/or: missing body form after #:final clause\n  at: #:final\n  in: (for/or ((i (in-range 0 (- (length sorted-nums) 2)))) (let ((a (list-ref sorted-nums i)) (b (list-ref sorted-nums (+ i 1))) (c (list-ref sorted-nums (+ i 2)))) (if (> (+ b c) a) (values (+ a b c)) #f)) #:final (lambda () -1))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:22:6",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3262",
+    "task_finish_time": 1707314570448,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1168819798",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (largest-perimeter nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([sorted-nums (sort nums >)])\n    (for/or ([i (in-range 0 (- (length sorted-nums) 2))])\n      (let ([a (list-ref sorted-nums i)]\n            [b (list-ref sorted-nums (+ i 1))]\n            [c (list-ref sorted-nums (+ i 2))])\n        (if (> (+ b c) a)\n            (values (+ a b c))\n            #f))\n      #:final (lambda () -1))))"
+}

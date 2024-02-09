@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 19: Char 21: illegal guard expression",
+    "full_compile_error": "Line 19: Char 21: illegal guard expression\n%   19|                 abs(lists:nth(I + 1, Nums) - lists:nth(J + 1, Nums)) >= ValueDifference ->\n%     |                     ^\nLine 19: Char 46: illegal guard expression\n%   19|                 abs(lists:nth(I + 1, Nums) - lists:nth(J + 1, Nums)) >= ValueDifference ->\n%     |                                              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3170",
+    "task_finish_time": 1707264169881,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1168281267",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec find_indices(Nums :: [integer()], IndexDifference :: integer(), ValueDifference :: integer()) -> [integer()].\nfind_indices(Nums, IndexDifference, ValueDifference) ->\n    Length = length(Nums),\n    find_indices_loop(Nums, IndexDifference, ValueDifference, 0, Length).\n\nfind_indices_loop(Nums, IndexDifference, ValueDifference, StartIndex, Length) ->\n    case find_valid_pair(Nums, IndexDifference, ValueDifference, StartIndex, Length) of\n        {I, J} when I =/= -1, J =/= -1 -> [I, J];\n        _ -> [-1, -1]\n    end.\n\nfind_valid_pair(Nums, IndexDifference, ValueDifference, StartIndex, Length) ->\n    find_valid_pair_helper(Nums, IndexDifference, ValueDifference, StartIndex, StartIndex + IndexDifference, Length).\n\nfind_valid_pair_helper(Nums, IndexDifference, ValueDifference, I, J, Length) ->\n    if\n        I < Length, J < Length ->\n            if\n                abs(lists:nth(I + 1, Nums) - lists:nth(J + 1, Nums)) >= ValueDifference ->\n                    {I, J};\n                true ->\n                    NextJ = J + 1,\n                    if\n                        NextJ - I >= IndexDifference ->\n                            find_valid_pair_helper(Nums, IndexDifference, ValueDifference, I, NextJ, Length);\n                        true ->\n                            NextI = I + 1,\n                            if NextI < Length - IndexDifference ->\n                                find_valid_pair_helper(Nums, IndexDifference, ValueDifference, NextI, NextI + IndexDifference, Length);\n                            true ->\n                                {-1, -1}\n                            end\n                    end\n            end;\n        true -> {-1, -1}\n    end."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "java",
+    "run_success": false,
+    "compile_error": "Line 10: error: local variables referenced from a lambda expression must be final or effectively final",
+    "full_compile_error": "Line 10: error: local variables referenced from a lambda expression must be final or effectively final\n                    if (sub.chars().allMatch(ch -> ch == c)) {\n                                                         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3267",
+    "task_finish_time": 1707264493620,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Java",
+    "submission_id": "1168283762",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    public int maximumLength(String s) {\n        int maxLen = -1;\n        for (char c = 'a'; c <= 'z'; c++) {\n            int firstIndex = s.indexOf(c);\n            int lastIndex = s.lastIndexOf(c);\n            if (firstIndex != -1 && lastIndex - firstIndex >= 2) {\n                for (int len = lastIndex - firstIndex + 1; len > 0; len--) {\n                    String sub = s.substring(firstIndex, firstIndex + len);\n                    if (sub.chars().allMatch(ch -> ch == c)) {\n                        int count = 0;\n                        for (int i = 0; i <= s.length() - len; i++) {\n                            String currentSub = s.substring(i, i + len);\n                            if (currentSub.equals(sub)) {\n                                count++;\n                                if (count == 3) {\n                                    maxLen = Math.max(maxLen, len);\n                                    break;\n                                }\n                            }\n                        }\n                        if (count == 3) break;\n                    }\n                }\n            }\n        }\n        return maxLen;\n    }\n}"
+}

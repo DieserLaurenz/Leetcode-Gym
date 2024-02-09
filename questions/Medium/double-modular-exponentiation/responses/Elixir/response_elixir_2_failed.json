@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined function round/2 (expected Solution to define such a function or for it to be imported, but none are available)",
+    "full_compile_error": "error: undefined function round/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 6:   Solution.get_good_indices/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3234",
+    "task_finish_time": 1707210640369,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1167640868",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec get_good_indices(variables :: [[integer]], target :: integer) :: [integer]\n  def get_good_indices(variables, target) do\n    Enum.reduce(0..Enum.count(variables)-1, [], fn i, acc ->\n      [a, b, c, m] = Enum.at(variables, i)\n      if rem(rem(a * b, 10) |> round(:math.pow(c)), m) == target, do: [i | acc], else: acc\n    end)\n    |> Enum.reverse()\n  end\nend"
+}

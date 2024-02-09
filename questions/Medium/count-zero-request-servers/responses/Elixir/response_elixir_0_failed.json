@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"queries\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"queries\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 3:   Solution.count_servers/4\nerror: undefined function queries/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 21:   Solution.count_servers/4\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2833",
+    "task_finish_time": 1707137247935,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1166770377",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count_servers(n :: integer, logs :: [[integer]], x :: integer, queries :: [integer]) :: [integer]\n  def count_servers(n, logs, x, queries) do\n    logs\n    |> Enum.reduce(%{}, fn [server_id, time], acc ->\n      Map.update(acc, server_id, [time], fn times -> [time | times] end)\n    end)\n    |> Enum.map(fn {k, v} -> {k, Enum.sort(v)} end)\n    |> Enum.reduce(%{}, fn {server_id, times}, acc ->\n      List.foldl(times, acc, fn time, acc ->\n        Map.update(acc, time, [server_id], fn servers -> [server_id | servers] end)\n      end)\n    end)\n    |> Enum.group_by(fn {time, _} -> time end, fn {_, servers} -> servers end)\n    |> Map.to_list()\n    |> Enum.sort()\n    |> Enum.reduce(%{}, fn {time, servers_lists}, acc ->\n      servers = Enum.flat_map(servers_lists, fn servers -> servers end)\n      Map.put(acc, time, Enum.uniq(servers))\n    end)\n    |> queries |> Enum.map(fn query ->\n      active_servers = Enum.flat_map(\n        Enum.filter(\n          Map.to_list(),\n          fn {time, _} -> time > query - x and time <= query end\n        ),\n        fn {_, servers} -> servers end\n      )\n      |> Enum.uniq()\n      n - Enum.count(active_servers)\n    end)\n  end\nend"
+}

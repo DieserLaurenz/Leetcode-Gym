@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 9: call to local/imported function can_partition/3 is illegal in guard",
+    "full_compile_error": "Line 10: Char 9: call to local/imported function can_partition/3 is illegal in guard\n%   10|         can_partition(Squared, Current, []) ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2802",
+    "task_finish_time": 1707366211198,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1169381186",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec punishment_number(N :: integer()) -> integer().\npunishment_number(N) ->\n    punishment_number(N, 1, 0).\n\npunishment_number(0, _, Acc) ->\n    Acc;\npunishment_number(N, Current, Acc) when Current =< N ->\n    Squared = Current * Current,\n    if\n        can_partition(Squared, Current, []) ->\n            punishment_number(N, Current + 1, Acc + Squared);\n        true ->\n            punishment_number(N, Current + 1, Acc)\n    end.\n\ncan_partition(0, 0, _) ->\n    true;\ncan_partition(Number, Target, Acc) when Number > 0, Target >= 0 ->\n    Digit = Number rem 10,\n    NewNumber = Number div 10,\n    NewTarget = Target - Digit,\n    if\n        NewTarget >= 0 ->\n            can_partition(NewNumber, NewTarget, [Digit|Acc]);\n        true ->\n            false\n    end;\ncan_partition(_, _, _) ->\n    false."
+}

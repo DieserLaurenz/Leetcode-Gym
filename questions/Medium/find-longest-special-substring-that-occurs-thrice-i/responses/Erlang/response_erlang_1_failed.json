@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 21: Char 9: illegal guard expression",
+    "full_compile_error": "Line 21: Char 9: illegal guard expression\n%   21|         binary:part(S, {Len, byte_size(S) - Len}) =:= Sub ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3267",
+    "task_finish_time": 1707275301940,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1168377577",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_length(S :: unicode:unicode_binary()) -> integer().\nmaximum_length(S) ->\n    MaxLen = byte_size(S),\n    find_max(S, MaxLen, 1, -1).\n\nfind_max(_S, 0, _CurLen, Max) ->\n    Max;\nfind_max(S, MaxLen, CurLen, Max) ->\n    Count = count_occurrences(S, MaxLen, CurLen, 0),\n    if\n        Count >= 3 ->\n            find_max(S, MaxLen - 1, CurLen + 1, CurLen);\n        true ->\n            find_max(S, MaxLen - 1, CurLen + 1, Max)\n    end.\n\ncount_occurrences(S, MaxLen, Len, Acc) when MaxLen >= Len ->\n    Sub = binary:part(S, {0, Len}),\n    Rest = binary:part(S, {1, byte_size(S) - 1}),\n    if\n        binary:part(S, {Len, byte_size(S) - Len}) =:= Sub ->\n            count_occurrences(Rest, MaxLen - 1, Len, Acc + 1);\n        true ->\n            count_occurrences(Rest, MaxLen - 1, Len, Acc)\n    end;\ncount_occurrences(_S, _MaxLen, _Len, Acc) ->\n    Acc."
+}

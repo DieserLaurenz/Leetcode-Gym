@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 18: Char 15: read-syntax: unexpected `)`",
+    "full_compile_error": "Line 18: Char 15: read-syntax: unexpected `)`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2755",
+    "task_finish_time": 1707221193360,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1167753094",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-extra-char s dictionary)\n  (-> string? (listof string?) exact-integer?)\n  (letrec ([dp (make-vector (+ 1 (string-length s)) #f)]\n           [solve (lambda (pos)\n                     (if (= pos (string-length s))\n                         0\n                         (if (vector-ref dp pos)\n                             (vector-ref dp pos)\n                             (let ([min-extra (+ 1 (solve (+ pos 1)))])\n                               (for ([word dictionary])\n                                 (when (and (<= (+ pos (string-length word)) (string-length s))\n                                            (string=? word (substring s pos (+ pos (string-length word)))))\n                                   (let ([new-extra (solve (+ pos (string-length word)))])\n                                     (set! min-extra (min min-extra (+ new-extra (- pos (+ pos (string-length word)) (string-length s))))))))\n                               (vector-set! dp pos min-extra)\n                               min-extra))))]))\n    (vector-set! dp (string-length s) 0)\n    (solve 0)))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 18: Char 61: variable 'Idxs' is unbound",
+    "full_compile_error": "Line 18: Char 61: variable 'Idxs' is unbound\n%   18|                                     _ -> lists:nth(Pos - 1, Idxs)\n%     |                                                             ^\nLine 20: Char 80: variable 'Idxs' is unbound\n%   20|                                             X when X =< Length -> lists:nth(X, Idxs);\n%     |                                                                                ^\nLine 21: Char 61: variable 'Idxs' is unbound\n%   21|                                             _ -> lists:last(Idxs) + 1\n%     |                                                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3213",
+    "task_finish_time": 1707118481914,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1166572619",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_subarrays(Nums :: [integer()], K :: integer()) -> integer().\ncount_subarrays(Nums, K) ->\n    Max = lists:max(Nums),\n    Idxs = [Idx || {N, Idx} <- lists:zip(Nums, lists:seq(1, length(Nums))), N == Max],\n    count_valid_subarrays(Idxs, K).\n\ncount_valid_subarrays(Idxs, K) ->\n    count_valid_subarrays(Idxs, K, 0, length(Idxs)).\n\ncount_valid_subarrays(_Idxs, K, Count, Length) when K > Length ->\n    Count;\ncount_valid_subarrays(Idxs, K, Count, Length) ->\n    count_valid_subarrays(Idxs, K, 1 + Count, Length, 1).\n\ncount_valid_subarrays([H|T], K, Count, Length, Pos) when Pos =< Length - K + 1 ->\n    NextCount = Count + (H - (case Pos of\n                                    1 -> 0;\n                                    _ -> lists:nth(Pos - 1, Idxs)\n                                end)) * ((case Pos + K - 1 of\n                                            X when X =< Length -> lists:nth(X, Idxs);\n                                            _ -> lists:last(Idxs) + 1\n                                        end) - H),\n    count_valid_subarrays(T, K, NextCount, Length, Pos + 1);\ncount_valid_subarrays(_, _, Count, _, _) ->\n    Count."
+}

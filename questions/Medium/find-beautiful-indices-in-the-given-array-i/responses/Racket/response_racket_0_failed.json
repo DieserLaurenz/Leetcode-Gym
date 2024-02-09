@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 23: string-search: unbound identifier",
+    "full_compile_error": "Line 8: Char 23: string-search: unbound identifier\n  in: string-search\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:22",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3245",
+    "task_finish_time": 1707232529773,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1167894464",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (beautiful-indices s a b k)\n  (-> string? string? string? exact-integer? (listof exact-integer?))\n  (let ([a-len (string-length a)]\n        [b-len (string-length b)]\n        [s-len (string-length s)])\n    (define (find-all-indices sub)\n      (let loop ([idx 0] [found-indices '()])\n        (let ([found (string-search sub s idx)])\n          (if found\n              (loop (+ found 1) (cons found found-indices))\n              (reverse found-indices)))))\n    (define a-indices (find-all-indices a))\n    (define b-indices (find-all-indices b))\n    (define (is-beautiful idx)\n      (define (within-k idx2) (<= (abs (- idx2 idx)) k))\n      (ormap within-k b-indices))\n    (filter is-beautiful a-indices)))"
+}

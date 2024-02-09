@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 50: Char 5: error: redefinition of \u2018main\u2019 [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018dfs\u2019\nLine 27: Char 86: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   30 |     dp[left][right] = joinCost(words[left], wordsRev[wordsSize - 1 - right]) + ans - max(strlen(words[left]), strlen(wordsRev[wordsSize - 1 - right]));\n      |                                                                                      ^~~\n      |                                                                                      fmax\nsolution.c: At top level\nLine 50: Char 5: error: redefinition of \u2018main\u2019 [solution.c]\n   53 | int main(int argc, char *argv[]) {\n      |     ^~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2854",
+    "task_finish_time": 1707137721961,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1166775856",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint dp[1001][1001];\n\nint joinCost(char *a, char *b) {\n    int lenA = strlen(a), lenB = strlen(b);\n    if (a[lenA - 1] == b[0]) return lenA + lenB - 1;\n    else return lenA + lenB;\n}\n\nint min(int a, int b) {\n    return a < b ? a : b;\n}\n\nint dfs(char **words, int left, int right, char **wordsRev, int wordsSize) {\n    if (left == right) return strlen(words[left]);\n    if (dp[left][right] != -1) return dp[left][right];\n    \n    int ans = INT_MAX;\n    for (int i = left; i < right; ++i) {\n        int cost = dfs(words, left, i, wordsRev, wordsSize) + dfs(wordsRev, wordsSize - 1 - right, wordsSize - 1 - (i + 1), words, wordsSize) - 1;\n        ans = min(ans, cost);\n    }\n\n    dp[left][right] = joinCost(words[left], wordsRev[wordsSize - 1 - right]) + ans - max(strlen(words[left]), strlen(wordsRev[wordsSize - 1 - right]));\n    return dp[left][right];\n}\n\nint minimizeConcatenatedLength(char **words, int wordsSize) {\n    char **wordsRev = (char**)malloc(wordsSize * sizeof(char*));\n    for (int i = 0; i < wordsSize; ++i) {\n        wordsRev[i] = words[wordsSize - 1 - i];\n    }\n\n    memset(dp, -1, sizeof(dp));\n    return dfs(words, 0, wordsSize - 1, wordsRev, wordsSize);\n}\n\n// Example usage\nint main() {\n    char *words[] = {\"aaa\", \"c\", \"aba\"};\n    int wordsSize = sizeof(words) / sizeof(words[0]);\n    printf(\"Minimum possible length: %d\\n\", minimizeConcatenatedLength(words, wordsSize));\n    return 0;\n}"
+}

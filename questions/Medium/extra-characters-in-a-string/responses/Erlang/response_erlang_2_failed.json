@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 12: Char 36: illegal guard expression",
+    "full_compile_error": "Line 12: Char 36: illegal guard expression\n%   12|                                    binary:part(S, {Pos - size(D), size(D)}) == D ->\n%     |                                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2755",
+    "task_finish_time": 1707221313982,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1167754382",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_extra_char(S :: unicode:unicode_binary(), Dictionary :: [unicode:unicode_binary()]) -> integer().\nmin_extra_char(S, Dictionary) ->\n    DP = fun DP(_, 0, _) -> 0;\n             DP(Memo, Pos, F) ->\n                 case maps:find(Pos, Memo) of\n                     {ok, Val} -> Val;\n                     error ->\n                         Min = lists:foldl(\n                           fun(D, Acc) ->\n                               if\n                                   Pos >= size(D),\n                                   binary:part(S, {Pos - size(D), size(D)}) == D ->\n                                       Min0 = F(Memo, Pos - size(D), F),\n                                       erlang:min(Min0, Acc);\n                                   true ->\n                                       Acc\n                               end\n                           end, Pos, Dictionary),\n                         Memo1 = maps:put(Pos, erlang:min(Min, F(Memo, Pos - 1, F) + 1), Memo),\n                         maps:get(Pos, Memo1)\n                 end\n         end,\n    Fun = fun(F) -> fun(Memo, Pos) -> DP(Memo, Pos, F) end end,\n    F = lib:fix(Fun),\n    F(maps:new(), size(S), F)."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 16\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3266",
+    "task_finish_time": 1707294515479,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1168605310",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-length s)\n  (-> string? exact-integer?)\n  (let loop ((i 0) (max-len -1))\n    (if (>= i (string-length s))\n        max-len\n        (let loop2 ((j (+ i 1)) (count 1))\n          (if (>= j (string-length s))\n              (loop (+ i 1) max-len)\n              (if (char=? (string-ref s i) (string-ref s j))\n                  (let ((new-len (+ 1 (- j i))))\n                    (loop2 (+ j 1) (if (= j (+ i new-len)) (+ count 1) count))\n                    (if (and (>= count 3) (> new-len max-len))\n                        (loop (+ i 1) new-len)\n                        (loop (+ i 1) max-len)))\n                  (loop2 (+ j 1) count))))))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 13: error: type mismatch; (in solution.scala)",
+    "full_compile_error": "Line 13: error: type mismatch; (in solution.scala)\n found   : (Int, Int) => Boolean\n required: Int => Boolean\n        (1 to n).filter(canPartition(_, _)).map(i => i * i).sum\n                                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2802",
+    "task_finish_time": 1707365873782,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1169377464",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def punishmentNumber(n: Int): Int = {\n        def canPartition(num: Int, i: Int): Boolean = {\n            val sqrStr = (i * i).toString\n            def helper(s: String, target: Int): Boolean = {\n                if (target == 0) return true\n                if (s.isEmpty) return false\n                (1 to s.length).exists(j => s.substring(0, j).toInt <= target && helper(s.substring(j), target - s.substring(0, j).toInt))\n            }\n            helper(sqrStr, i)\n        }\n\n        (1 to n).filter(canPartition(_, _)).map(i => i * i).sum\n    }\n}"
+}

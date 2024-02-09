@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 13: if: missing an \"else\" expression",
+    "full_compile_error": "Line 8: Char 13: if: missing an \"else\" expression\n  in: (if (= (list-ref nums end) max-num) (set! current-count (+ current-count 1)))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:12",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3213",
+    "task_finish_time": 1707118301911,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1166570604",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-subarrays nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([max-num (apply max nums)])\n    (define (count max-counts current-count start end)\n      (if (= end (length nums))\n          max-counts\n          (begin\n            (if (= (list-ref nums end) max-num)\n                (set! current-count (+ current-count 1)))\n            (if (>= current-count k)\n                (count (+ max-counts (- end start)) current-count start (+ end 1))\n                (count max-counts current-count start (+ end 1)))))\n    )\n    (define (outer count start)\n      (if (= start (length nums))\n          count\n          (outer (+ count (count 0 0 start start)) (+ start 1))))\n    (outer 0 0)\n  )\n)"
+}

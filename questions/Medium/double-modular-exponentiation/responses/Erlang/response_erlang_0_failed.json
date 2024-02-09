@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 36: syntax error before: '^'",
+    "full_compile_error": "Line 6: Char 36: syntax error before: '^'\n%    6|             Result = (((A*B rem 10)^C) rem M),\n%     |                                    ^\nLine 1: Char 2: spec for undefined function get_good_indices/2\n%    1| -spec get_good_indices(Variables :: [[integer()]], Target :: integer()) -> [integer()].\n%     |  ^\nLine 30: Char 13: function get_good_indices/2 undefined\n%   30|       Ret = get_good_indices(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3234",
+    "task_finish_time": 1707210474036,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1167638923",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec get_good_indices(Variables :: [[integer()]], Target :: integer()) -> [integer()].\nget_good_indices(Variables, Target) ->\n    lists:foldl(\n        fun(Var, {Idx, Acc}) ->\n            [A, B, C, M] = Var,\n            Result = (((A*B rem 10)^C) rem M),\n            if\n                Result == Target -> {Idx + 1, [Idx | Acc]};\n                true -> {Idx + 1, Acc}\n            end\n        end, {0, []}, Variables)\n    |> element(2)."
+}

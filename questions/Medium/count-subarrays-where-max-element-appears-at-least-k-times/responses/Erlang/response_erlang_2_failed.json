@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 40: variable 'Idxs' is unbound",
+    "full_compile_error": "Line 15: Char 40: variable 'Idxs' is unbound\n%   15|                _ -> lists:nth(Pos - 1, Idxs) + 1\n%     |                                        ^\nLine 18: Char 51: variable 'Idxs' unsafe in 'case' (line 17, column 12)\n%   18|                X when X =< Length -> lists:nth(X, Idxs);\n%     |                                                   ^\nLine 19: Char 28: variable 'Idxs' unsafe in 'case' (line 17, column 12)\n%   19|                _ -> length(Idxs)\n%     |                            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3213",
+    "task_finish_time": 1707118526605,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1166573094",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_subarrays(Nums :: [integer()], K :: integer()) -> integer().\ncount_subarrays(Nums, K) ->\n    Max = lists:max(Nums),\n    Idxs = [Idx || {N, Idx} <- lists:zip(Nums, lists:seq(1, length(Nums))), N == Max],\n    count_subarrays(Idxs, K, 0, length(Idxs), Max).\n\ncount_subarrays(_, K, Count, Length, _) when K > Length ->\n    Count;\ncount_subarrays(Idxs, K, Count, Length, Max) ->\n    count_subarrays(Idxs, K, Count, Length, Max, 1, 0).\n\ncount_subarrays([H|T], K, Count, Length, Max, Pos, Acc) when Pos =< Length - K + 1 ->\n    Prev = case Pos of\n               1 -> 1;\n               _ -> lists:nth(Pos - 1, Idxs) + 1\n           end,\n    Next = case Pos + K - 1 of\n               X when X =< Length -> lists:nth(X, Idxs);\n               _ -> length(Idxs)\n           end,\n    NewAcc = Acc + (H - Prev + 1) * (Next - H + 1),\n    count_subarrays(T, K, Count + NewAcc - Acc, Length, Max, Pos + 1, NewAcc);\ncount_subarrays(_, _, Count, _, _, _, _) ->\n    Count."
+}

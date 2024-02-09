@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 65: illegal guard expression",
+    "full_compile_error": "Line 9: Char 65: illegal guard expression\n%    9|                                                      Start > 0, binary:part(S, {Start - 1, byte_size(DictWord)}) == DictWord ->\n%     |                                                                 ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2755",
+    "task_finish_time": 1707221286229,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1167754093",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_extra_char(S :: unicode:unicode_binary(), Dictionary :: [unicode:unicode_binary()]) -> integer().\nmin_extra_char(S, Dictionary) ->\n    Len = byte_size(S),\n    DP = lists:foldl(fun(_, Acc) -> [0 | Acc] end, [], lists:seq(0, Len)),\n    Memo = lists:foldl(fun(Pos, Acc) ->\n                           Min = lists:foldl(fun(DictWord, MinAcc) ->\n                                                 Start = Pos - byte_size(DictWord) + 1,\n                                                 if\n                                                     Start > 0, binary:part(S, {Start - 1, byte_size(DictWord)}) == DictWord ->\n                                                         MinSoFar = lists:nth(Start, Acc),\n                                                         Min0 = erlang:min(MinSoFar, MinAcc),\n                                                         Min0;\n                                                     true ->\n                                                         MinAcc\n                                                 end\n                                             end, Pos, Dictionary),\n                           [Min | Acc]\n                       end, [0], lists:seq(1, Len)),\n    hd(Memo) - 1."
+}

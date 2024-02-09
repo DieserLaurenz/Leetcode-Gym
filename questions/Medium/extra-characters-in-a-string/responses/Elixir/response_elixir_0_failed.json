@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: spec for undefined function min_extra_char/2",
+    "full_compile_error": "error: spec for undefined function min_extra_char/2\n  solution.ex:2\n** (CompileError) solution.ex: cannot compile file (errors have been logged)\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2755",
+    "task_finish_time": 1707221370394,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1167754963",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_extra_char(s :: String.t(), dictionary :: [String.t()]) :: integer() do\n    def min_extra_char(s, dictionary) do\n      dp = :array.new(byte_size(s) + 1, {:default, length(s) + 1})\n      dp = :array.set(0, 0, dp)\n\n      for i <- 0..byte_size(s) do\n        min_val = :array.get(i, dp) + 1\n        for word <- dictionary do\n          if String.starts_with?(String.slice(s, i..-1), word) do\n            j = i + byte_size(word)\n            min_val = min(min_val, :array.get(j, dp))\n            dp = :array.set(j, min_val, dp)\n          end\n        end\n        dp = :array.set(i + 1, min(min_val, :array.get(i + 1, dp)), dp)\n      end\n\n      :array.get(byte_size(s), dp) - 1\n    end\n  end\nend"
+}

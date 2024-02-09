@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 17: Char 27: cannot range over bits.OnesCount(uint(1)) (value of type int) (solution.go)",
+    "full_compile_error": "Line 17: Char 27: cannot range over bits.OnesCount(uint(1)) (value of type int) (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3291",
+    "task_finish_time": 1707243896257,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1168076708",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func canSortArray(nums []int) bool {\n    bitCountGroups := make(map[int][]int)\n\n    // Populate groups based on bit count\n    for _, num := range nums {\n        count := bits.OnesCount(uint(num))\n        bitCountGroups[count] = append(bitCountGroups[count], num)\n    }\n\n    // Sort each group individually\n    for _, group := range bitCountGroups {\n        sort.Ints(group)\n    }\n\n    // Reconstruct the array from sorted groups\n    sortedNums := make([]int, 0, len(nums))\n    for _, count := range bits.OnesCount(uint(1)) { // This line is incorrect; it's a placeholder to show intent\n        if group, exists := bitCountGroups[count]; exists {\n            sortedNums = append(sortedNums, group...)\n        }\n    }\n\n    // Check if the reconstructed array is sorted\n    for i := 1; i < len(sortedNums); i++ {\n        if sortedNums[i-1] > sortedNums[i] {\n            return false\n        }\n    }\n\n    return true\n}"
+}

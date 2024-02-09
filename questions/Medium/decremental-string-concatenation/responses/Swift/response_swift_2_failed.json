@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 11: Char 83: error: expected ',' separator in solution.swift",
+    "full_compile_error": "Line 11: Char 83: error: expected ',' separator in solution.swift\n        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)\n                                                                                  ^\nLine 11: Char 83: error: expected expression in list of expressions in solution.swift\n        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)\n                                                                                  ^\nLine 11: Char 81: error: '_' can only appear in a pattern or on the left side of an assignment in solution.swift\n        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)\n                                                                                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2854",
+    "task_finish_time": 1707148482384,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1166922532",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func minimizeConcatenatedLength(_ words: [String]) -> Int {\n        // Helper function to calculate the cost of joining two words considering the overlap rule\n        func joinCost(_ a: String, _ b: String) -> Int {\n            let aLast = a.last!\n            let bFirst = b.first!\n            return aLast == bFirst ? 1 : 0\n        }\n\n        let n = words.count\n        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)\n        \n        // Initialize the DP table with the lengths of individual words\n        for i in 0..<n {\n            dp[i][i] = words[i].count\n        }\n        \n        // Fill DP table\n        for len in 2...n {\n            for i in 0...n-len {\n                let j = i + len - 1\n                for k in i..<j {\n                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] - joinCost(words[k], words[k + 1]))\n                }\n            }\n        }\n        \n        return dp[0][n - 1]\n    }\n}"
+}

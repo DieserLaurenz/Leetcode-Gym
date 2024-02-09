@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 19: syntax error before: '<='",
+    "full_compile_error": "Line 11: Char 19: syntax error before: '<='\n%   11|         Count - 1 <= K -> Max + 1;\n%     |                   ^\nLine 4: Char 5: function longest_equal_subarray/6 undefined\n%    4|     longest_equal_subarray(Nums, K, Maps, 0, 0, 0).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2832",
+    "task_finish_time": 1707334257476,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1169103089",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec longest_equal_subarray(Nums :: [integer()], K :: integer()) -> integer().\nlongest_equal_subarray(Nums, K) ->\n    Maps = lists:foldl(fun(X, Acc) -> maps:update_with(X, fun(Val) -> Val + 1 end, 1, Acc) end, #{}, Nums),\n    longest_equal_subarray(Nums, K, Maps, 0, 0, 0).\n\nlongest_equal_subarray([], _, _, Max, _, _) ->\n    Max;\nlongest_equal_subarray([H|T], K, Maps, Max, CurrentMax, CurrentElem) ->\n    Count = maps:get(H, Maps),\n    NewMax = if\n        Count - 1 <= K -> Max + 1;\n        true -> Max\n    end,\n    if\n        H =:= CurrentElem ->\n            longest_equal_subarray(T, K, maps:update_with(H, fun(Val) -> Val - 1 end, Maps), NewMax, CurrentMax + 1, CurrentElem);\n        true ->\n            NewCurrentMax = max(CurrentMax, NewMax),\n            longest_equal_subarray(T, K, maps:update_with(H, fun(Val) -> Val - 1 end, Maps), 1, NewCurrentMax, H)\n    end."
+}

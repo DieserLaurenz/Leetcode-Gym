@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 12\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2832",
+    "task_finish_time": 1707326111548,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1168979811",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (longest-equal-subarray nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([n (length nums)])\n    (let loop ([left 0] [right 0] [maxLen 0] [kUsed 0] [currentNum (list-ref nums 0)])\n      (if (= right n)\n          maxLen\n          (if (or (= (list-ref nums right) currentNum) (< kUsed k))\n              (let ([newKUsed (if (= (list-ref nums right) currentNum) kUsed (+ kUsed 1))])\n                (loop left (+ right 1) (max maxLen (- (+ right 1) left)) newKUsed currentNum))\n              (let ([newLeft (+ left 1)])\n                (loop newLeft (+ right 1) maxLen (if (= (list-ref nums left) currentNum) kUsed (- kUsed 1)) (list-ref nums newLeft)))))))"
+}

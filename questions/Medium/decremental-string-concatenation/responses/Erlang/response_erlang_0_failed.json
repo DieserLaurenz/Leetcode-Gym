@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 16: Char 75: syntax error before: '>'",
+    "full_compile_error": "Line 16: Char 75: syntax error before: '>'\n%   16|     if LastCharX =:= FirstCharY -> binary:part(X, {0, byte_size(X) - 1}) <> binary:part(Y, {1, byte_size(Y) - 1});\n%     |                                                                           ^\nLine 5: Char 31: function join/2 undefined\n%    5|                       Join1 = join(Prev, H),\n%     |                               ^\nLine 6: Char 31: function join/2 undefined\n%    6|                       Join2 = join(H, Prev),\n%     |                               ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2854",
+    "task_finish_time": 1707159739723,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1167109229",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimize_concatenated_length(Words :: [unicode:unicode_binary()]) -> integer().\nminimize_concatenated_length(Words) ->\n    Minimize = fun Minimize(Prev, [], MinLen) -> MinLen;\n                  Minimize(Prev, [H|T], MinLen) ->\n                      Join1 = join(Prev, H),\n                      Join2 = join(H, Prev),\n                      MinLen1 = Minimize(Join1, T, MinLen + byte_size(Join1) - byte_size(Prev)),\n                      MinLen2 = Minimize(Join2, T, MinLen + byte_size(Join2) - byte_size(Prev)),\n                      min(MinLen1, MinLen2)\n               end,\n    Minimize(hd(Words), tl(Words), byte_size(hd(Words))).\n\njoin(X, Y) ->\n    LastCharX = binary:last(X),\n    FirstCharY = binary:at(Y, 0),\n    if LastCharX =:= FirstCharY -> binary:part(X, {0, byte_size(X) - 1}) <> binary:part(Y, {1, byte_size(Y) - 1});\n       true -> X <> Y\n    end."
+}

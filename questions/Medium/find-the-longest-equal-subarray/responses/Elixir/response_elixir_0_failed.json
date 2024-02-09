@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"current_k\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"current_k\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 24:   Solution.longest_equal_subarray/2\nwarning: variable \"current_length\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 27:   Solution.longest_equal_subarray/2\nwarning: variable \"left\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 28:   Solution.longest_equal_subarray/2\nwarning: variable \"current_k\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 17:   Solution.longest_equal_subarray/2\nwarning: variable \"current_length\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 20:   Solution.longest_equal_subarray/2\nwarning: variable \"right\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 21:   Solution.longest_equal_subarray/2\nwarning: variable \"max_freq\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 10:   Solution.longest_equal_subarray/2\nerror: undefined function while/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 14:   Solution.longest_equal_subarray/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2832",
+    "task_finish_time": 1707334330525,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1169103963",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec longest_equal_subarray(nums :: [integer], k :: integer) :: integer\n  def longest_equal_subarray(nums, k) do\n    nums\n    |> Enum.reduce({%{}, 0}, fn x, ({freq_map, max_freq}) ->\n      new_freq_map = Map.update(freq_map, x, 1, &(&1 + 1))\n      new_max_freq = Enum.max([max_freq | Map.values(new_freq_map)])\n      {new_freq_map, new_max_freq}\n    end)\n    |> (fn {freq_map, max_freq} ->\n      Enum.reduce(Enum.keys(freq_map), 0, fn x, acc ->\n        {left, right, current_k, current_length} = {0, 0, k, 0}\n\n        while right < length(nums) do\n          if nums |> Enum.at(right) == x or current_k > 0 do\n            if nums |> Enum.at(right) != x do\n              current_k = current_k - 1\n            end\n\n            current_length = current_length + 1\n            right = right + 1\n          else\n            if nums |> Enum.at(left) != x do\n              current_k = current_k + 1\n            end\n\n            current_length = current_length - 1\n            left = left + 1\n          end\n\n          acc = max(acc, current_length)\n        end\n\n        acc\n      end)\n    end).()\n  end\nend"
+}

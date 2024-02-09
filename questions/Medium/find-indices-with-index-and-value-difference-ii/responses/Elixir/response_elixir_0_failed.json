@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: unsupported option :limit given to for",
+    "full_compile_error": "error: unsupported option :limit given to for\nLine 4:   Solution.find_indices/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\nLine 3:     (module)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3170",
+    "task_finish_time": 1707264264954,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1168281942",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_indices(nums :: [integer], index_difference :: integer, value_difference :: integer) :: [integer]\n  def find_indices(nums, index_difference, value_difference) do\n    for i <- 0..(length(nums) - 1),\n        j <- 0..(length(nums) - 1),\n        abs(i - j) >= index_difference,\n        abs(Enum.at(nums, i) - Enum.at(nums, j)) >= value_difference,\n        do: [i, j],\n        limit: 1\n    |> case do\n      [] -> [-1, -1]\n      [a] -> a\n    end\n  end\nend"
+}

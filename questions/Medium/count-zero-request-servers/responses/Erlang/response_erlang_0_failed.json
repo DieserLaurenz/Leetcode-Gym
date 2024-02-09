@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 95: syntax error before: '<='",
+    "full_compile_error": "Line 11: Char 95: syntax error before: '<='\n%   11|                     ActiveDuringQuery = lists:any(fun(Time) -> Time >= Query - X andalso Time <= Query end, Times),\n%     |                                                                                               ^\nLine 1: Char 2: spec for undefined function count_servers/4\n%    1| -spec count_servers(N :: integer(), Logs :: [[integer()]], X :: integer(), Queries :: [integer()]) -> [integer()].\n%     |  ^\nLine 36: Char 13: function count_servers/4 undefined\n%   36|       Ret = count_servers(Param_1, Param_2, Param_3, Param_4),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2833",
+    "task_finish_time": 1707137117847,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1166768920",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_servers(N :: integer(), Logs :: [[integer()]], X :: integer(), Queries :: [integer()]) -> [integer()].\ncount_servers(N, Logs, X, Queries) ->\n    ActiveTimes = lists:foldl(\n        fun([Server, Time], Acc) ->\n            maps:update_with(Server, fun(Times) -> [Time | Times] end, [Time], Acc)\n        end, #{}, Logs),\n    lists:map(\n        fun(Query) ->\n            maps:fold(\n                fun(Server, Times, Count) ->\n                    ActiveDuringQuery = lists:any(fun(Time) -> Time >= Query - X andalso Time <= Query end, Times),\n                    if ActiveDuringQuery -> Count; true -> Count + 1 end\n                end, 0, ActiveTimes)\n        end, Queries)."
+}

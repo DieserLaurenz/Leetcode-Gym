@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 51: syntax error before: '('",
+    "full_compile_error": "Line 3: Char 51: syntax error before: '('\n%    3|     MaxLen = fun MaxLen(_, _, _, Max, _, byte_size(S)) -> Max;\n%     |                                                   ^\nLine 1: Char 2: spec for undefined function longest_semi_repetitive_substring/1\n%    1| -spec longest_semi_repetitive_substring(S :: unicode:unicode_binary()) -> integer().\n%     |  ^\nLine 34: Char 13: function longest_semi_repetitive_substring/1 undefined\n%   34|       Ret = longest_semi_repetitive_substring(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2786",
+    "task_finish_time": 1707345003796,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1169206827",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec longest_semi_repetitive_substring(S :: unicode:unicode_binary()) -> integer().\nlongest_semi_repetitive_substring(S) ->\n    MaxLen = fun MaxLen(_, _, _, Max, _, byte_size(S)) -> Max;\n                 MaxLen(F, Prev, PrevPrev, Max, Start, I) ->\n                    C = binary:at(S, I),\n                    NewMax = if C =:= Prev andalso Prev =:= PrevPrev -> \n                                max(Max, I - Start);\n                             true -> \n                                Max\n                             end,\n                    NewStart = if C =:= Prev andalso Prev =:= PrevPrev -> \n                                  I - 1;\n                               true -> \n                                  Start\n                               end,\n                    F(F, C, Prev, NewMax, NewStart, I + 1)\n             end,\n    MaxLen(MaxLen, <<0>>, <<0>>, 0, 0, 0)."
+}

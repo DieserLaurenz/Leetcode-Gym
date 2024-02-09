@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 7: Char 111: variable 'Start' is unbound",
+    "full_compile_error": "Line 7: Char 111: variable 'Start' is unbound\n%    7|             length([Ok || Ok <- [binary:part(S, Other, Len) || Other <- lists:seq(0, MaxLen - Len), Other =/= Start], Ok == SubStr]) >= 2])\n%     |                                                                                                               ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3266",
+    "task_finish_time": 1707294659004,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1168606793",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_length(S :: unicode:unicode_binary()) -> integer().\nmaximum_length(S) ->\n    MaxLen = byte_size(S),\n    try\n        lists:max([Len || Len <- lists:seq(1, MaxLen), \n            SubStr <- [binary:part(S, Start, Len) || Start <- lists:seq(0, MaxLen - Len)],\n            length([Ok || Ok <- [binary:part(S, Other, Len) || Other <- lists:seq(0, MaxLen - Len), Other =/= Start], Ok == SubStr]) >= 2]) \n    catch\n        _:_ -> -1\n    end."
+}

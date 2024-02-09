@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "cpp",
+    "run_success": false,
+    "compile_error": "Line 11: Char 58: error: invalid operands to binary expression ('typename __gnu_cxx::__promote_2<long long, long long>::__type' (aka 'double') and 'long long')",
+    "full_compile_error": "Line 11: Char 58: error: invalid operands to binary expression ('typename __gnu_cxx::__promote_2<long long, long long>::__type' (aka 'double') and 'long long')\n   11 |             if (pow(static_cast<long long>(a*b % 10), c) % m == target) {\n      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~\n1 error generated.",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3234",
+    "task_finish_time": 1707191229287,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C++",
+    "submission_id": "1167408709",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <vector>\nusing namespace std;\n\nclass Solution {\npublic:\n    vector<int> getGoodIndices(vector<vector<int>>& variables, int target) {\n        vector<int> goodIndices;\n        for (int i = 0; i < variables.size(); ++i) {\n            auto& v = variables[i];\n            long long a = v[0], b = v[1], c = v[2], m = v[3];\n            if (pow(static_cast<long long>(a*b % 10), c) % m == target) {\n                goodIndices.push_back(i);\n            }\n        }\n        return goodIndices;\n    }\n};"
+}

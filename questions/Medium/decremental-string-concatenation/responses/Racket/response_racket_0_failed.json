@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 32\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2854",
+    "task_finish_time": 1707159578445,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1167107042",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimize-concatenated-length words)\n  (-> (listof string?) exact-integer?)\n  \n  (define (join x y)\n    (if (and (not (string=? x \"\")) (not (string=? y \"\"))\n             (char=? (string-ref x (sub1 (string-length x))) (string-ref y 0)))\n        (string-append (substring x 0 (sub1 (string-length x))) y)\n        (string-append x y)))\n  \n  (define (dp i left)\n    (if (= i 0)\n        (string-length (list-ref words 0))\n        (let ((word (list-ref words i)))\n          (min (+ (dp (sub1 i) #t) (if left (if (and (not (string=? word \"\")) (not (string=? (list-ref words (sub1 i)) \"\"))\n                                                    (char=? (string-ref word 0) (string-ref (list-ref words (sub1 i)) (sub1 (string-length (list-ref words (sub1 i)))))))\n                                               (sub1 (string-length word))\n                                               (string-length word))\n                                (if (and (not (string=? word \"\")) (not (string=? (list-ref words (sub1 i)) \"\"))\n                                         (char=? (string-ref (list-ref words (sub1 i)) (sub1 (string-length (list-ref words (sub1 i))))) (string-ref word 0)))\n                                    (sub1 (string-length (list-ref words (sub1 i))))\n                                    (string-length (list-ref words (sub1 i))))))\n              (+ (dp (sub1 i) #f) (if (not left) (if (and (not (string=? word \"\")) (not (string=? (list-ref words (sub1 i)) \"\"))\n                                                         (char=? (string-ref (list-ref words (sub1 i)) 0) (string-ref word (sub1 (string-length word)))))\n                                                    (sub1 (string-length (list-ref words (sub1 i))))\n                                                    (string-length (list-ref words (sub1 i))))\n                                     (if (and (not (string=? word \"\")) (not (string=? (list-ref words (sub1 i)) \"\"))\n                                              (char=? (string-ref word (sub1 (string-length word))) (string-ref (list-ref words (sub1 i)) 0)))\n                                         (sub1 (string-length word))\n                                         (string-length word)))))))\n  \n  (dp (sub1 (length words)) #t))"
+}

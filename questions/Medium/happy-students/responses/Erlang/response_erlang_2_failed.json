@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 19: Char 35: syntax error before: '<='",
+    "full_compile_error": "Line 19: Char 35: syntax error before: '<='\n%   19|     Count < H andalso NotSelected <= H ->\n%     |                                   ^\nLine 5: Char 3: function count_ways_helper/4 undefined\n%    5|   count_ways_helper(Sorted, Total, 0, 0).\n%     |   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3104",
+    "task_finish_time": 1707386492881,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1169607469",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_ways(Nums :: [integer()]) -> integer().\ncount_ways(Nums) ->\n  Sorted = lists:sort(Nums),\n  Total = length(Nums),\n  count_ways_helper(Sorted, Total, 0, 0).\n\ncount_ways_helper([], Total, Count, Acc) ->\n  if \n    Count == 0 ->\n      Acc + 1;\n    true ->\n      Acc\n  end;\ncount_ways_helper([H|T], Total, Count, Acc) ->\n  NotSelected = Total - Count,\n  if \n    Count >= H andalso NotSelected > H ->\n      count_ways_helper(T, Total, Count + 1, Acc);\n    Count < H andalso NotSelected <= H ->\n      count_ways_helper(T, Total, Count, Acc + 1);\n    true ->\n      Acc\n  end."
+}

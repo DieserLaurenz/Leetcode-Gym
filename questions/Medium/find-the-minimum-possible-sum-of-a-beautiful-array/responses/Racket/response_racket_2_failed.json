@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 9: Char 43: div: unbound identifier",
+    "full_compile_error": "Line 9: Char 43: div: unbound identifier\n  in: div\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:20:42",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3026",
+    "task_finish_time": 1707355265110,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1169283611",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-possible-sum n target)\n  (-> exact-integer? exact-integer? exact-integer?)\n  (define mod 1000000007)\n  (define (sum-up-to-n x)\n    (modulo (* x (modulo (+ x 1) mod) (modulo (/ 2) mod)) mod))\n  (if (<= (* 2 n) target)\n      (modulo (sum-up-to-n n) mod)\n      (let* ((base (if (odd? target) (- n 1) n))\n             (adjust (if (odd? target) 0 (div target 2)))\n             (total (modulo (+ (sum-up-to-n base) adjust) mod)))\n        (if (> adjust 0)\n            (modulo (- total adjust) mod)\n            total))))"
+}

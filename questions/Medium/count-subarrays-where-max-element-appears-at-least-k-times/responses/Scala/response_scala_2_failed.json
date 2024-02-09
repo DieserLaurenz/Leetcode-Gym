@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 28: error: reassignment to val (in solution.scala)",
+    "full_compile_error": "Line 28: error: reassignment to val (in solution.scala)\n                i = j - 1 // Skip processed part\n                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3213",
+    "task_finish_time": 1707117740597,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1166564432",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def countSubarrays(nums: Array[Int], k: Int): Long = {\n        val n = nums.length\n        val maxVal = nums.max\n        var answer = 0L\n\n        for (i <- nums.indices) {\n            if (nums(i) == maxVal) {\n                var count = 0\n                var j = i\n                while (j < n && nums(j) == maxVal) {\n                    count += 1\n                    j += 1\n                }\n\n                if (count >= k) {\n                    val left = i\n                    var right = j\n\n                    while (right < n && nums(right) != maxVal) right += 1\n\n                    val totalLeft = if (left > 0) left else 1\n                    val totalRight = if (right < n) (n - right) else 1\n\n                    answer += totalLeft.toLong * totalRight.toLong\n                }\n\n                i = j - 1 // Skip processed part\n            }\n        }\n\n        answer\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 6: error: postfix operator toInt needs to be enabled (in solution.scala)",
+    "full_compile_error": "Line 6: error: postfix operator toInt needs to be enabled (in solution.scala)\nby making the implicit value scala.language.postfixOps visible.\nThis can be achieved by adding the import clause 'import scala.language.postfixOps'\nor by setting the compiler option -language:postfixOps.\nSee the Scaladoc for value scala.language.postfixOps for a discussion\nwhy the feature needs to be explicitly enabled.\n            (((1L + mid) * mid / 2) + ((mid + 2).toLong + (mid + n)) * (n - mid) / 2) % mod toInt\n                                                                                            ^\nLine 8: error: postfix operator toInt needs to be enabled (in solution.scala)\nby making the implicit value scala.language.postfixOps visible.\n            ((1L + n) * n / 2) % mod toInt\n                                     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3026",
+    "task_finish_time": 1707355018779,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1169281764",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def minimumPossibleSum(n: Int, target: Int): Int = {\n        val mod = 1000000007\n        val mid = target / 2\n        if (target % 2 == 0 && n > mid) {\n            (((1L + mid) * mid / 2) + ((mid + 2).toLong + (mid + n)) * (n - mid) / 2) % mod toInt\n        } else {\n            ((1L + n) * n / 2) % mod toInt\n        }\n    }\n}"
+}

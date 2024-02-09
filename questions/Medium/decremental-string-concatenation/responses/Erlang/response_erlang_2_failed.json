@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 5: syntax error before: '|'",
+    "full_compile_error": "Line 11: Char 5: syntax error before: '|'\n%   11|     |> snd()\n%     |     ^\nLine 16: Char 54: syntax error before: '>'\n%   16|         true -> binary:part(X, 0, byte_size(X) - 1) <> binary:part(Y, 1, byte_size(Y) - 1);\n%     |                                                      ^\nLine 1: Char 2: spec for undefined function minimize_concatenated_length/1\n%    1| -spec minimize_concatenated_length([binary()]) -> integer().\n%     |  ^\nLine 34: Char 13: function minimize_concatenated_length/1 undefined\n%   34|       Ret = minimize_concatenated_length(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2854",
+    "task_finish_time": 1707159819942,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1167110339",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimize_concatenated_length([binary()]) -> integer().\nminimize_concatenated_length(Words) ->\n    lists:foldl(fun(Word, {_, Acc}) ->\n                        case Acc of\n                            [] -> {Word, byte_size(Word)};\n                            _ ->\n                                [{join(Word, X), byte_size(join(Word, X))} || X <- Acc] ++\n                                [{join(X, Word), byte_size(join(X, Word))} || X <- Acc]\n                        end\n                end, {[], []}, Words)\n    |> snd()\n    |> lists:min().\n\njoin(X, Y) ->\n    case binary:last(X) =:= binary:at(Y, 0) of\n        true -> binary:part(X, 0, byte_size(X) - 1) <> binary:part(Y, 1, byte_size(Y) - 1);\n        false -> X <> Y\n    end."
+}

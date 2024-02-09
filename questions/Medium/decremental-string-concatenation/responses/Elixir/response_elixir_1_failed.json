@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "** (ArgumentError) cannot invoke defp/2 inside function/macro\n    (elixir 1.15.7) lib/kernel.ex:6593: Kernel.assert_no_function_scope/3\n    (elixir 1.15.7) lib/kernel.ex:5202: Kernel.define/4\n    (elixir 1.15.7) expanding macro: Kernel.defp/2\nLine 4:     Solution.minimize_concatenated_length/1",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2854",
+    "task_finish_time": 1707159924644,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1167111817",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimize_concatenated_length(words :: [String.t]) :: integer\n  def minimize_concatenated_length(words) do\n    defp join(a, b) do\n      if String.ends_with?(a, String.first(b)), do: a <> String.slice(b, 1..-1), else: a <> b\n    end\n\n    defp find_min_length([word], acc), do: acc + String.length(word)\n    defp find_min_length([h | t], acc) do\n      [next | _] = t\n      join1 = join(h, next)\n      join2 = join(next, h)\n      if String.length(join1) <= String.length(join2) do\n        find_min_length(t, acc + String.length(h) - (if String.ends_with?(h, String.first(next)), do: 1, else: 0))\n      else\n        find_min_length([h | Enum.slice(t, 1..-1)], acc + String.length(next) - (if String.ends_with?(next, String.first(h)), do: 1, else: 0))\n      end\n    end\n\n    find_min_length(words, 0)\n  end\nend"
+}

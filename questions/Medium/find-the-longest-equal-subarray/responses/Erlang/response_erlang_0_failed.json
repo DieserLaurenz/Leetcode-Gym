@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 66: variable 'F' is unbound",
+    "full_compile_error": "Line 4: Char 66: variable 'F' is unbound\n%    4|             (Count, Max, Current, [H | T]) when H =:= Current -> F(Count + 1, max(Count + 1, Max), Current, T);\n%     |                                                                  ^\nLine 10: Char 17: variable 'F' is unbound\n%   10|                 F(maps:put(H, NextCount, Count), max(NextCount, Max), H, T)\n%     |                 ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2832",
+    "task_finish_time": 1707334194988,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1169102373",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec longest_equal_subarray(Nums :: [integer()], K :: integer()) -> integer().\nlongest_equal_subarray(Nums, K) ->\n    F = fun(Count, Max, _, []) -> Max;\n            (Count, Max, Current, [H | T]) when H =:= Current -> F(Count + 1, max(Count + 1, Max), Current, T);\n            (Count, Max, Current, [H | T]) ->\n                NextCount = case maps:get(H, Count, 0) of\n                                C when C + K >= length(T) + 1 -> length(T) + 1;\n                                C -> C + 1\n                            end,\n                F(maps:put(H, NextCount, Count), max(NextCount, Max), H, T)\n        end,\n    F(maps:new(), 0, hd(Nums), Nums)."
+}

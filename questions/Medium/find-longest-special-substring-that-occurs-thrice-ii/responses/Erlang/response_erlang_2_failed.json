@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 8: call to local/imported function check_length/2 is illegal in guard",
+    "full_compile_error": "Line 9: Char 8: call to local/imported function check_length/2 is illegal in guard\n%    9|     if check_length(S, Mid) ->\n%     |        ^\nLine 21: Char 33: illegal guard expression\n%   21|                                 maps:is_key(SubStr, Acc) ->\n%     |                                 ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3266",
+    "task_finish_time": 1707294738087,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1168607600",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_length(S :: unicode:unicode_binary()) -> integer().\nmaximum_length(S) ->\n    find_max_length(S, 1, byte_size(S), -1).\n\nfind_max_length(_S, _Min, Max, Result) when Max < _Min ->\n    Result;\nfind_max_length(S, Min, Max, Result) ->\n    Mid = (Min + Max) div 2,\n    if check_length(S, Mid) ->\n        find_max_length(S, Mid + 1, Max, Mid);\n       true ->\n        find_max_length(S, Min, Mid - 1, Result)\n    end.\n\ncheck_length(S, Len) ->\n    MaxStart = byte_size(S) - Len + 1,\n    Count = lists:foldl(fun(Start, Acc) ->\n                            SubStr = binary:part(S, Start, Len),\n                            if \n                                Acc == undefined -> maps:put(SubStr, 1, Acc);\n                                maps:is_key(SubStr, Acc) -> \n                                    C = maps:get(SubStr, Acc),\n                                    if C == 2 -> throw(found); true -> maps:update(SubStr, C + 1, Acc) end;\n                                true -> maps:put(SubStr, 1, Acc)\n                            end\n                        end, #{}, lists:seq(0, MaxStart - 1)),\n    catch Count,\n    false."
+}
