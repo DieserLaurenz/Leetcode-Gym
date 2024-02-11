@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: cannot invoke remote function Access.get/2 inside guards",
+    "full_compile_error": "error: cannot invoke remote function Access.get/2 inside guards\nLine 6:   Solution.get_words_in_longest_subsequence/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3143",
+    "task_finish_time": 1707526957429,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171039713",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec get_words_in_longest_subsequence(n :: integer, words :: [String.t], groups :: [integer]) :: [String.t]\n  def get_words_in_longest_subsequence(n, words, groups) do\n    {_, indices} = Enum.reduce(0..n-1, {nil, []}, fn\n      i, {nil, acc} -> {groups[i], [i | acc]}\n      i, {prev_group, acc} when groups[i] != prev_group -> {groups[i], [i | acc]}\n      _, acc -> acc\n    end)\n\n    indices\n    |> Enum.reverse()\n    |> Enum.map(&Enum.at(words, &1))\n  end\nend"
+}

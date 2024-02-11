@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 37\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3142",
+    "task_finish_time": 1707537292327,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1171098835",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (get-words-in-longest-subsequence n words groups)\n  (-> exact-integer? (listof string?) (listof exact-integer?) (listof string?))\n  \n  (define (hamming-distance s1 s2)\n    (count (lambda (p) (not (equal? (car p) (cdr p))))\n           (map cons s1 s2)))\n\n  (define (valid-next i j)\n    (and (not (= (list-ref groups i) (list-ref groups j)))\n         (= (string-length (list-ref words i)) (string-length (list-ref words j)))\n         (= 1 (hamming-distance (string->list (list-ref words i)) (string->list (list-ref words j))))))\n\n  (define (dfs current-path)\n    (let ((last-index (if (null? current-path) -1 (car (reverse current-path)))))\n      (define (iter next-index)\n        (if (= next-index n)\n            (list current-path)\n            (if (or (negative? last-index)\n                    (valid-next last-index next-index))\n                (append (iter (+ next-index 1))\n                        (dfs (append current-path (list next-index))))\n                (iter (+ next-index 1)))))\n      (iter (if (negative? last-index) 0 (+ last-index 1))))\n\n  (define (find-longest-paths)\n    (let ((all-paths (dfs '())))\n      (let ((max-length (apply max (map length all-paths))))\n        (filter (lambda (path) (= (length path) max-length)) all-paths))))\n\n  (define (get-words-by-indices indices)\n    (map (lambda (index) (list-ref words index)) indices))\n\n  (let ((longest-paths (find-longest-paths)))\n    (if (null? longest-paths)\n        '()\n        (get-words-by-indices (car longest-paths)))))"
+}

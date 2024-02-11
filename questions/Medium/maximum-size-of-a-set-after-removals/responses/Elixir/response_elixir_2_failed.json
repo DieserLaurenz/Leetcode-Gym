@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 6: Char 35: ** (SyntaxError) syntax error before: 'div'\n    |\n  6 |     removal_count = length(nums1) div 2\n    |                                   ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3228",
+    "task_finish_time": 1707639202761,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1172130345",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_set_size(nums1 :: [integer], nums2 :: [integer]) :: integer\n  def maximum_set_size(nums1, nums2) do\n    combined = nums1 ++ nums2\n    combined_freq = Enum.frequencies(combined)\n    removal_count = length(nums1) div 2\n\n    combined_freq\n    |> Enum.map(fn {_num, freq} -> div(freq, 2) end)\n    |> Enum.sum()\n    |> (&(&1 - removal_count)).()\n    |> Kernel.max(0)\n    |> (&(length(Map.keys(combined_freq)) + &1)).()\n  end\nend"
+}

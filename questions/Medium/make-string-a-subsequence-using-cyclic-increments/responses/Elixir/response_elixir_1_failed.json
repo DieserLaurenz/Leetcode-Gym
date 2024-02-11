@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"str2\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"str2\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 11:   Solution.check_subsequence/3\nerror: undefined variable \"str2\"\nLine 17:   Solution.check_subsequence/3\nwarning: the underscored variable \"_str2\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 21:   Solution.check_subsequence/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3018",
+    "task_finish_time": 1707566939942,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171377741",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec can_make_subsequence(str1 :: String.t, str2 :: String.t) :: boolean\n  def can_make_subsequence(str1, str2) do\n    check_subsequence(str1, str2, false)\n  end\n\n  defp check_subsequence(_str1, \"\", _changed), do: true\n\n  defp check_subsequence(\"\", _str2, _changed), do: false\n\n  defp check_subsequence([h1 | t1], [h2 | t2] = str2, changed) when h1 == h2 do\n    check_subsequence(t1, t2, changed)\n  end\n\n  defp check_subsequence([h1 | t1], [h2 | t2], false) do\n    next_char = if h1 === 'z', do: 'a', else: <<h1 + 1>>\n    if next_char === h2, do: check_subsequence(t1, t2, true), else: check_subsequence(t1, str2, false)\n  end\n\n  defp check_subsequence([_h1 | t1], _str2, true) do\n    check_subsequence(t1, _str2, true)\n  end\nend"
+}

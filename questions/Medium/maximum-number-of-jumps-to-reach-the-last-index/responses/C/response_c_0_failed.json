@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018maximumJumps\u2019\nLine 13: Char 34: warning: implicit declaration of function \u2018min\u2019; did you mean \u2018fmin\u2019? [-Wimplicit-function-declaration] [solution.c]\n   16 |                     else dp[j] = min(dp[j], dp[i] + 1);\n      |                                  ^~~\n      |                                  fmin\n/tmp/ccZ4yHJL.o:prog_joined.c:function maximumJumps: error: undefined reference to 'min'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2855",
+    "task_finish_time": 1707608086513,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1171803003",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "int maximumJumps(int* nums, int numsSize, int target) {\n    int dp[numsSize];\n    for (int i = 0; i < numsSize; ++i) {\n        dp[i] = -1;\n    }\n    dp[0] = 0; // start from the first index\n\n    for (int i = 0; i < numsSize; ++i) {\n        for (int j = i + 1; j < numsSize; ++j) {\n            if (abs(nums[j] - nums[i]) <= target) {\n                if (dp[i] != -1) {\n                    if (dp[j] == -1) dp[j] = dp[i] + 1;\n                    else dp[j] = min(dp[j], dp[i] + 1);\n                }\n            }\n        }\n    }\n\n    return dp[numsSize - 1];\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: invalid args for &, expected one of:",
+    "full_compile_error": "error: invalid args for &, expected one of:\n  * &Mod.fun/arity to capture a remote function, such as &Enum.map/2\n  * &fun/arity to capture a local or imported function, such as &is_atom/1\n  * &some_code(&1, ...) containing at least one argument as &1, such as &List.flatten(&1)\nGot: [j | acc[i] || []]\nLine 7:   Solution.get_words_in_longest_subsequence/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) src/elixir_fn.erl:17: anonymous fn/4 in :elixir_fn.expand/4\n    (stdlib 5.1.1) lists.erl:1706: :lists.mapfoldl_1/3\n    (elixir 1.15.7) expanding macro: Kernel.|>/2",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3142",
+    "task_finish_time": 1707537547327,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171100688",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec get_words_in_longest_subsequence(n :: integer, words :: [String.t], groups :: [integer]) :: [String.t]\n  def get_words_in_longest_subsequence(n, words, groups) do\n    paths = for i <- 0..n-1, j <- 0..n-1, i != j, do: {i, j}\n    |> Enum.filter(fn {i, j} -> groups[i] != groups[j] and String.length(words[i]) == String.length(words[j]) and hamming_distance(words[i], words[j]) == 1 end)\n    |> Enum.reduce(%{}, fn {i, j}, acc ->\n      Map.update(acc, i, [j], &[j | acc[i] || []])\n    end)\n    |> Enum.map(fn {k, v} -> Enum.uniq([k | v]) end)\n    |> Enum.max_by(&length/1, [])\n    |> Enum.map(&Enum.at(words, &1))\n\n    if paths == [], do: [], else: paths\n  end\n\n  defp hamming_distance(s1, s2) do\n    s1 |> String.codepoints()\n    |> Enum.zip(String.codepoints(s2))\n    |> Enum.count(fn {a, b} -> a != b end)\n  end\nend"
+}

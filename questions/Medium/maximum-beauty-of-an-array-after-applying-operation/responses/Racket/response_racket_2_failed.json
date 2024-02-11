@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 9: Char 97: read-syntax: missing `)` to close `(` on line 15, found instead `]`",
+    "full_compile_error": "Line 9: Char 97: read-syntax: missing `)` to close `(` on line 15, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2891",
+    "task_finish_time": 1707588000081,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1171617770",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-beauty nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([expanded (map (lambda (num) (cons (- num k) (+ num k))) nums)])\n    (letrec ([find-max-beauty (lambda (ranges)\n                                (if (null? ranges)\n                                    0\n                                    (let ([first (car ranges)]\n                                          [rest (cdr ranges)])\n                                      (max (count-in-range first rest) (find-max-beauty rest))))]\n             [count-in-range (lambda (range ranges)\n                               (foldl (lambda (r acc)\n                                        (if (or (and (<= (car range) (car r)) (<= (car r) (cdr range)))\n                                                (and (<= (car range) (cdr r)) (<= (cdr r) (cdr range))))\n                                            (+ acc 1)\n                                            acc))\n                                      1\n                                      ranges))])\n      (find-max-beauty expanded))))"
+}

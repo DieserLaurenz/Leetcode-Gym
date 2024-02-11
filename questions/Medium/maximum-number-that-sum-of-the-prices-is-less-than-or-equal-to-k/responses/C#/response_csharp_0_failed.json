@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "csharp",
+    "run_success": false,
+    "compile_error": "Line 8: Char 25: error CS0019: Operator '>>' cannot be applied to operands of type 'long' and 'long' (in Solution.cs)",
+    "full_compile_error": "Line 8: Char 25: error CS0019: Operator '>>' cannot be applied to operands of type 'long' and 'long' (in Solution.cs)\nLine 8: Char 47: error CS0019: Operator '<<' cannot be applied to operands of type 'long' and 'long' (in Solution.cs)\nLine 8: Char 66: error CS0019: Operator '<<' cannot be applied to operands of type 'long' and 'long' (in Solution.cs)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3240",
+    "task_finish_time": 1707618481099,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C#",
+    "submission_id": "1171864835",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "public class Solution {\n    public long FindMaximumNumber(long k, int x) {\n        long low = 1, high = k;\n        while (low < high) {\n            long mid = (low + high + 1) / 2;\n            long sum = 0;\n            for (long i = 1; i <= x; i++) {\n                sum += (mid >> i) + ((mid & ((1L << i) - 1)) >= (1L << (i - 1)) ? 1 : 0);\n            }\n            if (sum <= k) low = mid;\n            else high = mid - 1;\n        }\n        return low;\n    }\n}"
+}

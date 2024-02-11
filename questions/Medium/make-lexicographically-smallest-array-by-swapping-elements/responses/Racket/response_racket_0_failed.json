@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 15: Char 40: list-set!: unbound identifier",
+    "full_compile_error": "Line 15: Char 40: list-set!: unbound identifier\n  in: list-set!\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:26:39",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3219",
+    "task_finish_time": 1707556612107,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1171279762",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (lexicographically-smallest-array nums limit)\n  (-> (listof exact-integer?) exact-integer? (listof exact-integer?))\n  (let loop ([nums nums] [changed #t])\n    (if (not changed)\n        nums\n        (let iter ([i 0] [changed #f] [nums nums])\n          (if (= i (sub1 (length nums)))\n              (loop nums changed)\n              (let find-swap ([j (add1 i)])\n                (if (= j (length nums))\n                    (iter (add1 i) changed nums)\n                    (if (and (<= (abs (- (list-ref nums i) (list-ref nums j))) limit)\n                             (> (list-ref nums i) (list-ref nums j)))\n                        (let ([nums (let ([temp (list-ref nums i)])\n                                      (list-set! (list-set! nums i (list-ref nums j)) j temp))])\n                          (iter (add1 i) #t nums))\n                        (find-swap (add1 j))))))))))"
+}

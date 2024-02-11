@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 18\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2869",
+    "task_finish_time": 1707525482573,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1171031849",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-non-decreasing-length nums1 nums2)\n  (-> (listof exact-integer?) (listof exact-integer?) exact-integer?)\n  (letrec ((n (length nums1))\n           (dp (make-vector (+ n 1) 0))\n           (update (lambda (i x)\n                     (vector-set! dp i (max (vector-ref dp i) x))))\n           (max-len (lambda (i a b prev-a prev-b)\n                      (cond\n                        [(= i n) 0]\n                        [else\n                         (let* ((val-a (list-ref nums1 i))\n                                (val-b (list-ref nums2 i))\n                                (extend-a (if (and (<= val-a a) (<= val-a b)) (+ 1 (max-len (+ i 1) val-a val-b val-a val-b)) 0))\n                                (extend-b (if (and (<= val-b a) (<= val-b b)) (+ 1 (max-len (+ i 1) val-a val-b val-a val-b)) 0))\n                                (skip (max-len (+ i 1) a b prev-a prev-b)))\n                           (max extend-a extend-b skip))])))\n    (max-len 0 (list-ref nums1 0) (list-ref nums2 0) (list-ref nums1 0) (list-ref nums2 0))))"
+}

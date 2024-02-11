@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "cpp",
+    "run_success": false,
+    "compile_error": "Line 11: Char 33: error: variable 'prev' declared with deduced type 'auto' cannot appear in its own initializer",
+    "full_compile_error": "Line 11: Char 33: error: variable 'prev' declared with deduced type 'auto' cannot appear in its own initializer\n   11 |                     auto prev = prev(it);\n      |                                 ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3219",
+    "task_finish_time": 1707545758999,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C++",
+    "submission_id": "1171173685",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\npublic:\n    vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {\n        int n = nums.size();\n        multiset<int> window;\n        for (int i = 0; i < n; ++i) {\n            window.insert(nums[i]);\n            if (i > 0) {\n                auto it = window.lower_bound(nums[i]);\n                if (it != window.begin()) {\n                    auto prev = prev(it);\n                    if (*it - *prev <= limit) {\n                        nums[i] = *prev;\n                        nums[i - 1] = *it;\n                        window.erase(window.find(*prev));\n                        window.insert(nums[i - 1]);\n                    }\n                }\n            }\n        }\n        for (int i = 0; i < n - 1; ++i) {\n            auto it = window.lower_bound(nums[i]);\n            auto next = next(it);\n            if (next != window.end() && *next - nums[i] <= limit) {\n                for (int j = i + 1; j < n; ++j) {\n                    if (nums[j] == *next) {\n                        swap(nums[i], nums[j]);\n                        break;\n                    }\n                }\n            }\n        }\n        return nums;\n    }\n};"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined function tuple_elem/2 (expected Solution to define such a function or for it to be imported, but none are available)",
+    "full_compile_error": "error: undefined function tuple_elem/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 12:   Solution.get_words_in_longest_subsequence/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3142",
+    "task_finish_time": 1707537575839,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171100893",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec get_words_in_longest_subsequence(n :: integer, words :: [String.t], groups :: [integer]) :: [String.t]\n  def get_words_in_longest_subsequence(n, words, groups) do\n    {max_seq, _} =\n      0..n-1\n      |> Enum.reduce({[], %{}}, fn i, {max_seq, dp} ->\n        Enum.reduce(0..i-1, {max_seq, dp}, fn j, {max_inner, dp_inner} ->\n          if groups[i] != groups[j] and String.length(words[i]) == String.length(words[j]) and hamming_distance(words[i], words[j]) == 1 do\n            {j_seq, _} = Map.get(dp_inner, j, {[], 0})\n            i_seq = [i | j_seq]\n            i_len = length(i_seq)\n            if i_len > tuple_elem(max_inner, 1) do\n              {i_seq, Map.put(dp_inner, i, {i_seq, i_len})}\n            else\n              {max_inner, Map.put(dp_inner, i, {i_seq, i_len})}\n            end\n          else\n            {max_inner, dp_inner}\n          end\n        end)\n      end)\n    Enum.map(max_seq, &Enum.at(words, &1))\n  end\n\n  defp hamming_distance(s1, s2) do\n    s1 |> String.graphemes()\n    |> Enum.zip(String.graphemes(s2))\n    |> Enum.count(fn {a, b} -> a != b end)\n  end\nend"
+}

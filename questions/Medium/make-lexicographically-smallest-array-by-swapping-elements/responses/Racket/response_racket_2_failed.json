@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 26: Char 70: read-syntax: missing `)` to close `(` on line 26, found instead `]`",
+    "full_compile_error": "Line 26: Char 70: read-syntax: missing `)` to close `(` on line 26, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3219",
+    "task_finish_time": 1707556677962,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1171280358",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (lexicographically-smallest-array nums limit)\n  (-> (listof exact-integer?) exact-integer? (listof exact-integer?))\n  (letrec ([swap (lambda (lst i j)\n                   (let ([temp (list-ref lst i)])\n                     (append (take lst i)\n                             (list (list-ref lst j))\n                             (take (drop lst (+ 1 i)) (- j i 1))\n                             (list temp)\n                             (drop lst (+ 1 j)))))]\n           [sorted? (lambda (lst)\n                      (or (null? lst)\n                          (null? (cdr lst))\n                          (and (<= (car lst) (cadr lst))\n                               (sorted? (cdr lst)))))]\n           [try-swap (lambda (lst)\n                       (if (sorted? lst)\n                           lst\n                           (let loop ([i 0])\n                             (if (= i (length lst)) lst\n                                 (let inner-loop ([j (+ i 1)])\n                                   (if (= j (length lst))\n                                       (loop (+ i 1))\n                                       (if (and (<= (abs (- (list-ref lst i) (list-ref lst j))) limit)\n                                                (> (list-ref lst i) (list-ref lst j)))\n                                           (try-swap (swap lst i j))\n                                           (inner-loop (+ j 1))))))))])\n    (try-swap nums)))"
+}

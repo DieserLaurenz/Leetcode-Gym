@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018maxNumberOfAlloys\u2019\nLine 16: Char 33: warning: implicit declaration of function \u2018min\u2019; did you mean \u2018fmin\u2019? [-Wimplicit-function-declaration] [solution.c]\n   19 |             minAlloysPossible = min(minAlloysPossible, alloysPossibleWithThisMetal);\n      |                                 ^~~\n      |                                 fmin\nLine 18: Char 21: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   21 |         maxAlloys = max(maxAlloys, minAlloysPossible);\n      |                     ^~~\n      |                     fmax\n/tmp/ccs18HzK.o:prog_joined.c:function maxNumberOfAlloys: error: undefined reference to 'min'\n/tmp/ccs18HzK.o:prog_joined.c:function maxNumberOfAlloys: error: undefined reference to 'max'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3095",
+    "task_finish_time": 1707588595572,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1171625809",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "int maxNumberOfAlloys(int n, int k, int budget, int** composition, int compositionSize, int* compositionColSize, int* stock, int stockSize, int* cost, int costSize){\n    int maxAlloys = 0;\n    for (int i = 0; i < k; i++) { // Iterate over each machine\n        int minAlloysPossible = INT_MAX;\n        for (int j = 0; j < n; j++) { // Iterate over each metal type\n            int totalMetalNeeded = 0;\n            if (composition[i][j] > stock[j]) { // If more metal is needed than in stock\n                totalMetalNeeded = (composition[i][j] - stock[j]) * cost[j];\n            }\n            int alloysPossibleWithThisMetal = (budget - totalMetalNeeded) / (composition[i][j] * cost[j]);\n            if (composition[i][j] > 0) { // Avoid division by zero\n                alloysPossibleWithThisMetal = (stock[j] / composition[i][j]) + ((budget - totalMetalNeeded) / (composition[i][j] * cost[j]));\n            } else {\n                alloysPossibleWithThisMetal = INT_MAX; // If no metal is required, theoretically infinite alloys could be made\n            }\n            minAlloysPossible = min(minAlloysPossible, alloysPossibleWithThisMetal);\n        }\n        maxAlloys = max(maxAlloys, minAlloysPossible);\n    }\n    return maxAlloys;\n}"
+}

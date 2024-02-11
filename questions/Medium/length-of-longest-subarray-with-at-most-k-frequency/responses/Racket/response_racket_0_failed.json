@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 12: while: unbound identifier",
+    "full_compile_error": "Line 8: Char 12: while: unbound identifier\n  in: while\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:11",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3225",
+    "task_finish_time": 1707494387074,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1170726666",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-subarray-length nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let loop ((left 0) (right 0) (max-len 0) (freq (make-hash)))\n    (if (>= right (length nums))\n        max-len\n        (begin\n          (hash-update! freq (list-ref nums right) add1 0)\n          (while (> (hash-ref freq (list-ref nums right) 0) k)\n            (hash-update! freq (list-ref nums left) sub1)\n            (set! left (add1 left)))\n          (set! max-len (max max-len (- right left 1)))\n          (loop left (add1 right) max-len freq)))))"
+}

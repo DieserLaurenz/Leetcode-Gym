@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018maxSubarrayLength\u2019\nLine 9: Char 22: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   12 |             maxLen = max(maxLen, end - start + 1);\n      |                      ^~~\n      |                      fmax\n/tmp/ccNYnOWf.o:prog_joined.c:function maxSubarrayLength: error: undefined reference to 'max'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3225",
+    "task_finish_time": 1707484144175,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1170610561",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "int maxSubarrayLength(int* nums, int numsSize, int k) {\n    int maxLen = 0;\n    for (int start = 0; start < numsSize; ++start) {\n        int freq[1001] = {0};\n        int uniqueCount = 0;\n        for (int end = start; end < numsSize; ++end) {\n            if (freq[nums[end] % 1000]++ == 0) uniqueCount++;\n            if (uniqueCount > k) break;\n            maxLen = max(maxLen, end - start + 1);\n        }\n    }\n    return maxLen;\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 18, Char 44: mismatched types (solution.rs)",
+    "full_compile_error": "Line 18, Char 44: mismatched types (solution.rs)\n   |\n18 |             sum += (n >> i) + if i <= (n % x) { 1 } else { 0 };\n   |                                            ^ expected `i64`, found `i32`\nLine 18, Char 39: mismatched types (solution.rs)\n   |\n18 |             sum += (n >> i) + if i <= (n % x) { 1 } else { 0 };\n   |                                  -    ^^^^^^^ expected `i32`, found `i64`\n   |                                  |\n   |                                  expected because this is `i32`\n   |\nhelp: you can convert `i` from `i32` to `i64`, matching the type of `(n % x)`\n   |\n18 |             sum += (n >> i) + if i64::from(i) <= (n % x) { 1 } else { 0 };\n   |                                  ++++++++++ +\nLine 18, Char 42: cannot calculate the remainder of `i64` divided by `i32` (solution.rs)\n   |\n18 |             sum += (n >> i) + if i <= (n % x) { 1 } else { 0 };\n   |                                          ^ no implementation for `i64 % i32`\n   |\n   = help: the trait `Rem<i32>` is not implemented for `i64`\n   = help: the following other types implement trait `Rem<Rhs>`:\n             <i64 as Rem>\n             <i64 as Rem<&i64>>\n             <&'a i64 as Rem<i64>>\n             <&i64 as Rem<&i64>>\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to 3 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3240",
+    "task_finish_time": 1707628241557,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1172015049",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn find_maximum_number(k: i64, x: i32) -> i64 {\n        let (mut low, mut high) = (1, k);\n        while low < high {\n            let mid = high - (high - low) / 2;\n            if Solution::price(mid, x) <= k {\n                low = mid;\n            } else {\n                high = mid - 1;\n            }\n        }\n        low\n    }\n\n    fn price(n: i64, x: i32) -> i64 {\n        let mut sum = 0;\n        for i in 1..=x {\n            sum += (n >> i) + if i <= (n % x) { 1 } else { 0 };\n        }\n        sum\n    }\n}"
+}

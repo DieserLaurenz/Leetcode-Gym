@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018maxStrength\u2019\nLine 10: Char 27: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   13 |             minNegative = max(minNegative, nums[i]);\n      |                           ^~~\n      |                           fmax\n/tmp/cc0nxRIY.o:prog_joined.c:function maxStrength: error: undefined reference to 'max'\n/tmp/cc0nxRIY.o:prog_joined.c:function maxStrength: error: undefined reference to 'max'\n/tmp/cc0nxRIY.o:prog_joined.c:function maxStrength: error: undefined reference to 'max'\n/tmp/cc0nxRIY.o:prog_joined.c:function maxStrength: error: undefined reference to 'max'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2754",
+    "task_finish_time": 1707639477988,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1172132994",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "long long maxStrength(int* nums, int numsSize) {\n    long long maxProduct = nums[0];\n    int negativeCount = 0, minNegative = INT_MIN, maxPositive = 0, product = 1;\n    for (int i = 0; i < numsSize; ++i) {\n        if (nums[i] > 0) {\n            product *= nums[i];\n            maxPositive = 1;\n        } else if (nums[i] < 0) {\n            ++negativeCount;\n            minNegative = max(minNegative, nums[i]);\n        }\n        if (nums[i] != 0) maxProduct = max(maxProduct, (long long)nums[i]);\n    }\n    if (negativeCount % 2 == 1) {\n        if (negativeCount == 1 && !maxPositive) return maxProduct;\n        product *= minNegative;\n    }\n    for (int i = 0; i < numsSize; ++i) {\n        if (nums[i] < 0 && nums[i] == minNegative) {\n            minNegative = INT_MAX; // Ensure only one instance of minNegative is considered\n        } else if (nums[i] != 0) {\n            product /= nums[i];\n            maxProduct = max(maxProduct, (long long)product);\n            product *= nums[i];\n        }\n    }\n    return max(maxProduct, (long long)product);\n}"
+}

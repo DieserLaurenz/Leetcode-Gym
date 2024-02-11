@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 28: Char 19: function snd/1 undefined",
+    "full_compile_error": "Line 28: Char 19: function snd/1 undefined\n%   28|     end, {0, []}, snd(Seq)),\n%     |                   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3143",
+    "task_finish_time": 1707526673731,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171038186",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec get_words_in_longest_subsequence(N :: integer(), Words :: [unicode:unicode_binary()], Groups :: [integer()]) -> [unicode:unicode_binary()].\nget_words_in_longest_subsequence(N, Words, Groups) ->\n    Seq = lists:foldl(\n        fun(Group, {PrevGroup, Acc}) ->\n            case Acc of\n                [] ->\n                    if PrevGroup =:= undefined -> {Group, [[Group]]};\n                       true -> {Group, [[Group]]}\n                    end;\n                [H | _T] = L ->\n                    if PrevGroup =/= Group ->\n                        {Group, [[Group] | L]};\n                       true ->\n                        NewH = [Group | H],\n                        {Group, [NewH | tl(L)]}\n                    end\n            end\n        end,\n        {undefined, []},\n        Groups\n    ),\n    {_, Longest} = lists:foldl(fun(L, {Max, Acc}) ->\n        Len = length(L),\n        case Len > Max of\n            true -> {Len, [L]};\n            false -> {Max, Acc}\n        end\n    end, {0, []}, snd(Seq)),\n    lists:map(fun(Index) -> lists:nth(Index, Words) end, hd(Longest))."
+}

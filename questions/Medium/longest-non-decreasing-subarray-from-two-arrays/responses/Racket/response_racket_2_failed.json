@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 19: Char 49: vector-subvector: unbound identifier",
+    "full_compile_error": "Line 19: Char 49: vector-subvector: unbound identifier\n  in: vector-subvector\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:30:48",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2869",
+    "task_finish_time": 1707525511842,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1171031984",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-non-decreasing-length nums1 nums2)\n  (-> (listof exact-integer?) (listof exact-integer?) exact-integer?)\n  (let* ((n (length nums1))\n         (dp (make-vector (+ 1 n n) 0))) ; DP table for max length ending at index i, choosing from nums1 or nums2\n    (for ([i (in-range 1 n)])\n      (let* ((a (list-ref nums1 (- i 1))) ; Current elements in nums1 and nums2\n             (b (list-ref nums2 (- i 1)))\n             (max-len 1)) ; Initialize max length for current position\n        (for ([j (in-range i)]) ; Compare with previous elements to find non-decreasing sequence\n          (let* ((prev-a (list-ref nums1 j))\n                 (prev-b (list-ref nums2 j))\n                 (len1 (if (<= prev-a a) (+ 1 (vector-ref dp j)) 1)) ; Length if choosing from nums1\n                 (len2 (if (<= prev-b a) (+ 1 (vector-ref dp (+ j n))) 1)) ; Length if choosing from nums2 for a\n                 (len3 (if (<= prev-a b) (+ 1 (vector-ref dp j)) 1)) ; Length if choosing from nums1 for b\n                 (len4 (if (<= prev-b b) (+ 1 (vector-ref dp (+ j n))) 1))) ; Length if choosing from nums2\n            (set! max-len (max max-len len1 len2 len3 len4))))\n        (vector-set! dp i max-len) ; Update DP for choosing a\n        (vector-set! dp (+ i n) max-len))) ; Update DP for choosing b\n    (let ((max-length (apply max (vector->list (vector-subvector dp 0 n)))))\n      max-length)))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: the underscored variable \"_end\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore",
+    "full_compile_error": "warning: the underscored variable \"_end\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 17:   Solution.max_subarray_length/6\nerror: undefined variable \"nums\"\nLine 13:   Solution.max_subarray_length/6\nerror: cannot invoke remote function Access.get/2 inside guards\nLine 21:   Solution.remove_until_valid/4\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3225",
+    "task_finish_time": 1707494678188,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1170730220",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_subarray_length(nums :: [integer], k :: integer) :: integer\n  def max_subarray_length(nums, k) do\n    max_subarray_length(nums, k, %{}, 0, 0, 0)\n  end\n\n  defp max_subarray_length([], _k, _freq, max_len, _start, _end), do: max_len\n  defp max_subarray_length([head | tail], k, freq, max_len, start, _end) do\n    new_freq = Map.update(freq, head, 1, &(&1 + 1))\n    if new_freq[head] > k do\n      new_start = start + 1\n      new_end = start + 1\n      {new_freq, new_start} = remove_until_valid(new_freq, nums, new_start, k)\n      max_subarray_length(tail, k, new_freq, max_len, new_start, new_end)\n    else\n      max_len = max(max_len, Enum.count(Map.keys(new_freq)))\n      max_subarray_length(tail, k, new_freq, max_len, start, _end + 1)\n    end\n  end\n\n  defp remove_until_valid(freq, [h | t], start, k) when freq[h] > k do\n    new_freq = update_in(freq[h], &(&1 - 1))\n    remove_until_valid(new_freq, t, start + 1, k)\n  end\n  defp remove_until_valid(freq, _, start, _k), do: {freq, start}\nend"
+}

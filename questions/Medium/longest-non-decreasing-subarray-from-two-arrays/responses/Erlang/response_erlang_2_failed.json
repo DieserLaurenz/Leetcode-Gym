@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 28: Char 44: syntax error before: ')'",
+    "full_compile_error": "Line 28: Char 44: syntax error before: ')'\n%   28|         end, [{0, 0}], lists:seq(1, Length)),\n%     |                                            ^\nLine 1: Char 2: spec for undefined function max_non_decreasing_length/2\n%    1| -spec max_non_decreasing_length(Nums1 :: [integer()], Nums2 :: [integer()]) -> integer().\n%     |  ^\nLine 47: Char 13: function max_non_decreasing_length/2 undefined\n%   47|       Ret = max_non_decreasing_length(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2869",
+    "task_finish_time": 1707525621632,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171032523",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_non_decreasing_length(Nums1 :: [integer()], Nums2 :: [integer()]) -> integer().\nmax_non_decreasing_length(Nums1, Nums2) ->\n    Length = length(Nums1),\n    DP = lists:foldl(\n        fun(Index, Acc) ->\n            {MaxLen1, MaxLen2} = lists:nth(Index, Acc),\n            {Val1, Val2} = {lists:nth(Index, Nums1), lists:nth(Index, Nums2)},\n            NewMaxLen1 = case Index of\n                             1 ->\n                                 1;\n                             _ ->\n                                 if\n                                     Val1 >= lists:nth(Index - 1, Nums1) -> lists:nth(Index - 1, Acc) + 1;\n                                     Val1 >= lists:nth(Index - 1, Nums2) -> MaxLen2 + 1;\n                                     true -> 1\n                                 end,\n            NewMaxLen2 = case Index of\n                             1 ->\n                                 1;\n                             _ ->\n                                 if\n                                     Val2 >= lists:nth(Index - 1, Nums2) -> lists:nth(Index, Acc) + 1;\n                                     Val2 >= lists:nth(Index - 1, Nums1) -> MaxLen1 + 1;\n                                     true -> 1\n                                 end\n            end,\n            Acc ++ [{max(NewMaxLen1, NewMaxLen2)}]\n        end, [{0, 0}], lists:seq(1, Length)),\n    lists:max([MaxLen || {MaxLen} <- DP])."
+}

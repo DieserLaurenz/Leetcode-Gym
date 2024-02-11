@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 13: Char 75: read-syntax: unexpected `)`",
+    "full_compile_error": "Line 13: Char 75: read-syntax: unexpected `)`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3095",
+    "task_finish_time": 1707598560492,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1171733025",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-number-of-alloys n k budget composition stock cost)\n  (-> exact-integer? exact-integer? exact-integer? (listof (listof exact-integer?)) (listof exact-integer?) (listof exact-integer?) exact-integer?)\n  (let loop ((i 0) (max-alloys 0))\n    (if (= i k)\n        max-alloys\n        (let ((total-cost (foldl (lambda (comp stock-cost acc)\n                                   (let ((required-comp (first comp))\n                                         (remaining-stock (first (first stock-cost)))\n                                         (unit-cost (first (second stock-cost)))))\n                                     (+ acc (max 0 (* (- required-comp remaining-stock) unit-cost)))))\n                                 0\n                                 (map list composition (list stock cost)))))\n          (loop (+ i 1) (max max-alloys (floor (/ budget total-cost))))))))"
+}

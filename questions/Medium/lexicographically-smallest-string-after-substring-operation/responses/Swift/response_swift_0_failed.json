@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 8: Char 42: error: value of optional type 'UnicodeScalar?' (aka 'Optional<Unicode.Scalar>') must be unwrapped to a value of type 'UnicodeScalar' (aka 'Unicode.Scalar') in solution.swift",
+    "full_compile_error": "Line 8: Char 42: error: value of optional type 'UnicodeScalar?' (aka 'Optional<Unicode.Scalar>') must be unwrapped to a value of type 'UnicodeScalar' (aka 'Unicode.Scalar') in solution.swift\n                    chars[j] = Character(UnicodeScalar(chars[j].unicodeScalars.first!.value - 1))\n                                         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2828",
+    "task_finish_time": 1707505389336,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1170877585",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func smallestString(_ s: String) -> String {\n        var chars = Array(s)\n        for i in 0..<chars.count {\n            if chars[i] != \"a\" {\n                for j in i..<chars.count {\n                    if chars[j] == \"a\" { break }\n                    chars[j] = Character(UnicodeScalar(chars[j].unicodeScalars.first!.value - 1))\n                }\n                break\n            }\n        }\n        return String(chars)\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 38: illegal guard expression",
+    "full_compile_error": "Line 11: Char 38: illegal guard expression\n%   11|                     if I < J andalso CanFollow(I, J) ->\n%     |                                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3142",
+    "task_finish_time": 1707537467822,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171100101",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec get_words_in_longest_subsequence(N :: integer(), Words :: [unicode:unicode_binary()], Groups :: [integer()]) -> [unicode:unicode_binary()].\nget_words_in_longest_subsequence(N, Words, Groups) ->\n    Hamming1 = fun(A, B) -> \n        lists:sum([if X =/= Y -> 1; true -> 0 end || {X, Y} <- lists:zip(binary:bin_to_list(A), binary:bin_to_list(B))]) end,\n    CanFollow = fun(I, J) -> \n        lists:nth(I + 1, Groups) =/= lists:nth(J + 1, Groups) andalso Hamming1(lists:nth(I + 1, Words), lists:nth(J + 1, Words)) =:= 1 end,\n    Paths = lists:foldl(\n        fun(I, Acc) -> \n            lists:foldl(\n                fun(J, AccIn) -> \n                    if I < J andalso CanFollow(I, J) -> \n                        SeqI = proplists:get_value(I, AccIn, []),\n                        SeqJ = proplists:get_value(J, AccIn, []),\n                        if length(SeqI) + 1 > length(SeqJ) -> \n                            proplists:replace({J, [I|SeqI]}, AccIn);\n                           true -> AccIn end;\n                       true -> AccIn end end, Acc, lists:seq(0, N - 1)) end, [{-1, []}], lists:seq(-1, N - 1)),\n    {MaxIndex, _} = lists:max([ {length(Seq), I} || {I, Seq} <- Paths, I >= 0 ]),\n    [lists:nth(I + 1, Words) || I <- lists:reverse(proplists:get_value(MaxIndex, Paths))]."
+}

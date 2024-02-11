@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "csharp",
+    "run_success": false,
+    "compile_error": "Line 4: Char 18: error CS0136: A local or parameter named 'i' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter (in Solution.cs)",
+    "full_compile_error": "Line 4: Char 18: error CS0136: A local or parameter named 'i' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter (in Solution.cs)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3228",
+    "task_finish_time": 1707628915744,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C#",
+    "submission_id": "1172021783",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "public class Solution {\n    public int MaximumSetSize(int[] nums1, int[] nums2) {\n        Dictionary<int, int> freq = new Dictionary<int, int>();\n        for (int i = 0; i < nums1.Length; i++) {\n            if (!freq.ContainsKey(nums1[i])) freq[nums1[i]] = 0;\n            freq[nums1[i]]++;\n            if (!freq.ContainsKey(nums2[i])) freq[nums2[i]] = 0;\n            freq[nums2[i]]++;\n        }\n\n        List<int> values = new List<int>(freq.Values);\n        values.Sort((a, b) => b.CompareTo(a));\n\n        int n = nums1.Length / 2, setSize = 0, i = 0;\n        while (n > 0 && i < values.Count) {\n            int remove = Math.Min(values[i++] / 2, n);\n            n -= remove;\n            setSize++;\n        }\n\n        return setSize + values.Count - i;\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 19: Char 9: variable 'Start' unsafe in 'case' (line 16, column 17)",
+    "full_compile_error": "Line 19: Char 9: variable 'Start' unsafe in 'case' (line 16, column 17)\n%   19|         Start ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2828",
+    "task_finish_time": 1707515131614,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1170967860",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec smallest_string(S :: unicode:unicode_binary()) -> unicode:unicode_binary().\nsmallest_string(S) ->\n    SmallestString = fun(Str, Acc, SSFun) when length(Str) =:= 0 -> Acc;\n                         (Str, Acc, SSFun) ->\n                             [H|T] = Str,\n                             NewChar = case H of\n                                           $a -> $z;\n                                           _ -> H - 1\n                                       end,\n                             SSFun(T, Acc ++ [NewChar], SSFun)\n                     end,\n    FirstNonA = case re:run(S, \"[b-z]\", [{capture, first, list}]) of\n                    {match, [{Start, _}]} -> Start;\n                    nomatch -> -1\n                end,\n    case FirstNonA of\n        -1 -> SmallestString(binary_to_list(S), [], SmallestString);\n        0 -> S;\n        Start ->\n            Before = binary_part(S, {0, Start}),\n            ToChange = binary_part(S, {Start, byte_size(S) - Start}),\n            Before ++ SmallestString(binary_to_list(ToChange), [], SmallestString)\n    end."
+}

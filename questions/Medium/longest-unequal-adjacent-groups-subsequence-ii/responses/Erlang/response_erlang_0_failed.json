@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 16: syntax error before: I",
+    "full_compile_error": "Line 6: Char 16: syntax error before: I\n%    6|         Groups#I =/= Groups#J andalso Hamming1(lists:nth(I + 1, Words), lists:nth(J + 1, Words)) =:= 1 end,\n%     |                ^\nLine 1: Char 2: spec for undefined function get_words_in_longest_subsequence/3\n%    1| -spec get_words_in_longest_subsequence(N :: integer(), Words :: [unicode:unicode_binary()], Groups :: [integer()]) -> [unicode:unicode_binary()].\n%     |  ^\nLine 38: Char 13: function get_words_in_longest_subsequence/3 undefined\n%   38|       Ret = get_words_in_longest_subsequence(Param_1, Param_2, Param_3),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3142",
+    "task_finish_time": 1707537410589,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171099693",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec get_words_in_longest_subsequence(N :: integer(), Words :: [unicode:unicode_binary()], Groups :: [integer()]) -> [unicode:unicode_binary()].\nget_words_in_longest_subsequence(N, Words, Groups) ->\n    Hamming1 = fun(A, B) -> \n        lists:sum([if X =/= Y -> 1; true -> 0 end || {X, Y} <- lists:zip(binary:bin_to_list(A), binary:bin_to_list(B))]) end,\n    CanFollow = fun(I, J) -> \n        Groups#I =/= Groups#J andalso Hamming1(lists:nth(I + 1, Words), lists:nth(J + 1, Words)) =:= 1 end,\n    Paths = lists:foldl(\n        fun(I, Acc) -> \n            lists:foldl(\n                fun(J, AccIn) when I < J, CanFollow(I, J) -> \n                    SeqI = proplists:get_value(I, AccIn, []),\n                    SeqJ = proplists:get_value(J, AccIn, []),\n                    if length(SeqI) + 1 > length(SeqJ) -> \n                        proplists:replace({J, [I|SeqI]}, AccIn);\n                       true -> AccIn end;\n                   (_, AccIn) -> AccIn end, Acc, lists:seq(0, N - 1)) end, [{-1, []}], lists:seq(-1, N - 1)),\n    {MaxIndex, _} = lists:max([ {length(Seq), I} || {I, Seq} <- Paths ]),\n    [lists:nth(I + 1, Words) || I <- lists:reverse(proplists:get_value(MaxIndex, Paths))]."
+}

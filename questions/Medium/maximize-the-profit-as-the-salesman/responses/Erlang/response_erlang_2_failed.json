@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 5: Char 68: syntax error before: 'end'",
+    "full_compile_error": "Line 5: Char 68: syntax error before: 'end'\n%    5|                              MaxTillNow = lists:max([0 | [Val || #{end := PrevEnd, val := Val} <- Acc, PrevEnd < S]]),\n%     |                                                                    ^\nLine 1: Char 2: spec for undefined function maximize_the_profit/2\n%    1| -spec maximize_the_profit(N :: integer(), Offers :: [[integer()]]) -> integer().\n%     |  ^\nLine 29: Char 13: function maximize_the_profit/2 undefined\n%   29|       Ret = maximize_the_profit(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2979",
+    "task_finish_time": 1707577448485,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171484983",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximize_the_profit(N :: integer(), Offers :: [[integer()]]) -> integer().\nmaximize_the_profit(N, Offers) ->\n    SortedOffers = lists:sort(fun([_, E1, G1], [_, E2, G2]) -> E1 < E2 orelse (E1 == E2 andalso G1 > G2) end, Offers),\n    DP = lists:foldl(fun([S, E, G], Acc) ->\n                             MaxTillNow = lists:max([0 | [Val || #{end := PrevEnd, val := Val} <- Acc, PrevEnd < S]]),\n                             [#{end => E, val => max(G + MaxTillNow, case Acc of [] -> 0; [H|_] -> H#{}{val} end)} | Acc]\n                     end, [], SortedOffers),\n    case DP of\n        [] -> 0;\n        [H|_] -> H#{}{val}\n    end."
+}

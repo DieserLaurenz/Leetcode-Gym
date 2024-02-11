@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 22: Char 65: take-while: unbound identifier",
+    "full_compile_error": "Line 22: Char 65: take-while: unbound identifier\n  in: take-while\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:33:64",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3202",
+    "task_finish_time": 1707463565962,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1170421034",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (find-high-access-employees access_times)\n  (-> (listof (listof string?)) (listof string?))\n  (let ([access-dict (make-hash)])\n    ;; Populate the dictionary with employee names as keys and lists of access times as values\n    (for ([access (in-list access_times)])\n      (let ([name (first access)]\n            [time (second access)])\n        (hash-update! access-dict name (lambda (old) (cons time old)) '())))\n    ;; Convert each list of times into a sorted list for easier comparison\n    (hash-for-each access-dict (lambda (key value)\n                                 (hash-set! access-dict key (sort value string<?))))\n    ;; Filter employees who accessed three or more times within any one-hour period\n    (let ([result '()])\n      (hash-for-each access-dict (lambda (name times)\n                                   (let loop ([times times] [count 0])\n                                     (when (and (> (length times) 2) (not (null? (cdr times))))\n                                       (let ([first-time (string->number (car times))]\n                                             [next-time (string->number (cadr times))]\n                                             [third-time (string->number (if (null? (cddr times)) \"9999\" (caddr times)))])\n                                         (if (or (> (- next-time first-time) 100) (> (- third-time first-time) 100))\n                                             (loop (cdr times) count)\n                                             (when (>= (length (take-while (lambda (t)\n                                                                             (<= (- (string->number t) first-time) 100))\n                                                                           times))\n                                                       3)\n                                               (set! result (cons name result))\n                                               (loop '() (+ count 1)))))))))\n      (remove-duplicates result))))"
+}

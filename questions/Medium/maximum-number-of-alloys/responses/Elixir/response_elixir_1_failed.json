@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"comp\"",
+    "full_compile_error": "error: undefined variable \"comp\"\nLine 15:   Solution.max_number_of_alloys/6\nwarning: variable \"machine\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 5:   Solution.max_number_of_alloys/6\nwarning: variable \"total_cost\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 6:   Solution.max_number_of_alloys/6\nwarning: variable \"n\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 3:   Solution.max_number_of_alloys/6\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3095",
+    "task_finish_time": 1707598824311,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171735276",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_number_of_alloys(n :: integer, k :: integer, budget :: integer, composition :: [[integer]], stock :: [integer], cost :: [integer]) :: integer\n  def max_number_of_alloys(n, k, budget, composition, stock, cost) do\n    1..k\n    |> Enum.map(fn machine ->\n      total_cost = Enum.with_index(composition)\n      |> Enum.map(fn {comp, _index} ->\n        Enum.with_index(comp)\n        |> Enum.reduce(0, fn {amount, i}, acc ->\n          extra_needed = max(0, amount - Enum.at(stock, i))\n          acc + extra_needed * Enum.at(cost, i)\n        end)\n      end)\n      |> Enum.map(fn cost_for_machine ->\n        if cost_for_machine > budget, do: 0, else: div(budget - cost_for_machine, Enum.sum(Enum.with_index(comp, fn {amount, i} -> Enum.at(cost, i) * amount end)))\n      end)\n    end)\n    |> List.flatten()\n    |> Enum.max()\n  end\nend"
+}

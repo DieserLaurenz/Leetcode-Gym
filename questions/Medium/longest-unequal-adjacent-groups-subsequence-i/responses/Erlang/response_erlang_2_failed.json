@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 21: Char 66: function snd/1 undefined",
+    "full_compile_error": "Line 21: Char 66: function snd/1 undefined\n%   21|     SelectedIndices = [Index || {Index, _Group} <- lists:reverse(snd(FilteredIndices))],\n%     |                                                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3143",
+    "task_finish_time": 1707526703582,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171038353",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec get_words_in_longest_subsequence(N :: integer(), Words :: [unicode:unicode_binary()], Groups :: [integer()]) -> [unicode:unicode_binary()].\nget_words_in_longest_subsequence(N, Words, Groups) ->\n    FilteredIndices = lists:foldl(\n        fun(Group, {PrevGroup, Acc}) ->\n            case Acc of\n                [] ->\n                    [{1, Group}];\n                [_|_] = L ->\n                    [{Index, G} | _] = L,\n                    if\n                        PrevGroup =/= Group ->\n                            [{Index + 1, Group} | L];\n                        true ->\n                            L\n                    end\n            end\n        end,\n        {undefined, []},\n        [{Index, Group} || {Index, Group} <- lists:zip(lists:seq(1, N), Groups)]\n    ),\n    SelectedIndices = [Index || {Index, _Group} <- lists:reverse(snd(FilteredIndices))],\n    [lists:nth(Index, Words) || Index <- SelectedIndices]."
+}

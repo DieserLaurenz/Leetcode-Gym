@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 21: Char 17: error: operator '==' cannot be applied to 'Long' and 'Int'",
+    "full_compile_error": "Line 21: Char 17: error: operator '==' cannot be applied to 'Long' and 'Int'\n            if (fullCycles % 2 == 1 && bit % x == 0) sum += (1L shl (bit - 1))\n                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3240",
+    "task_finish_time": 1707619097103,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1171875571",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun findMaximumNumber(k: Long, x: Int): Long {\n        var left = 1L\n        var right = 1L\n        while (getSum(right, x) <= k) right *= 2\n        while (left < right) {\n            val mid = left + (right - left) / 2\n            if (getSum(mid, x) <= k) left = mid + 1\n            else right = mid\n        }\n        return left - 1\n    }\n\n    private fun getSum(n: Long, x: Int): Long {\n        var sum = 0L\n        var bit = 1\n        while (bit <= 64) {\n            val fullCycles = n / (1L shl bit)\n            val partialCycle = n % (1L shl bit) - (1L shl (bit - 1)) + 1\n            sum += (fullCycles / 2) * (1L shl (bit - 1))\n            if (fullCycles % 2 == 1 && bit % x == 0) sum += (1L shl (bit - 1))\n            if (partialCycle > 0 && bit % x == 0) sum += partialCycle\n            bit++\n        }\n        return sum\n    }\n}"
+}

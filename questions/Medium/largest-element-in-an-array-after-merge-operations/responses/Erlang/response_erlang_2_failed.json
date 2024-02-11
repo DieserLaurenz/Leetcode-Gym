@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 52: syntax error before: '<='",
+    "full_compile_error": "Line 3: Char 52: syntax error before: '<='\n%    3|     lists:max(lists:foldl(fun(X, [H|T]=Acc) when X <= H -> [X+H|T]; (X, Acc) -> [X|Acc] end, [hd(Nums)], tl(Nums))).\n%     |                                                    ^\nLine 1: Char 2: spec for undefined function max_array_value/1\n%    1| -spec max_array_value(Nums :: [integer()]) -> integer().\n%     |  ^\nLine 19: Char 13: function max_array_value/1 undefined\n%   19|       Ret = max_array_value(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2872",
+    "task_finish_time": 1707474250109,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1170521761",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_array_value(Nums :: [integer()]) -> integer().\nmax_array_value(Nums) ->\n    lists:max(lists:foldl(fun(X, [H|T]=Acc) when X <= H -> [X+H|T]; (X, Acc) -> [X|Acc] end, [hd(Nums)], tl(Nums)))."
+}

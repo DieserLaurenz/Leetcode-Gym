@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 14: Char 12: syntax error before: '.'",
+    "full_compile_error": "Line 14: Char 12: syntax error before: '.'\n%   14|     Low - 1.\n%     |            ^\nLine 3: Char 5: function binary_search/4 undefined\n%    3|     binary_search(0, K * X, K, X).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3240",
+    "task_finish_time": 1707628451491,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1172017243",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec find_maximum_number(K :: integer(), X :: integer()) -> integer().\nfind_maximum_number(K, X) ->\n    binary_search(0, K * X, K, X).\n\nbinary_search(Low, High, K, X) ->\n    if Low < High ->\n        Mid = (Low + High) div 2,\n        if price(Mid, X) > K ->\n            binary_search(Low, Mid, K, X);\n        true ->\n            binary_search(Mid + 1, High, K, X)\n    end;\nbinary_search(Low, _, _, _) ->\n    Low - 1.\n\nprice(N, X) ->\n    price(N, X, 1, 0).\n\nprice(0, _, _, Acc) ->\n    Acc;\nprice(N, X, I, Acc) when I =< N ->\n    Increment = if\n                    (I rem X) == 0 ->\n                        1;\n                    true ->\n                        0\n                end,\n    NewAcc = Acc + count_set_bits(I) * Increment,\n    price(N, X, I + 1, NewAcc).\n\ncount_set_bits(0) ->\n    0;\ncount_set_bits(N) ->\n    count_set_bits(N band (N - 1)) + 1."
+}

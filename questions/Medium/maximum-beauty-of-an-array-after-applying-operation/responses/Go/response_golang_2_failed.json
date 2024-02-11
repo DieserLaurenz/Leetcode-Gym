@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 15: syntax error: unexpected left at end of statement (solution.go)",
+    "full_compile_error": "Line 10: Char 15: syntax error: unexpected left at end of statement (solution.go)\nLine 20: Char 5: syntax error: non-declaration statement outside function body (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2891",
+    "task_finish_time": 1707587576972,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1171611865",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func maximumBeauty(nums []int, k int) int {\n    n := len(nums)\n    if n == 1 {\n        return 1\n    }\n    sort.Ints(nums)\n    maxLen := 1\n    for i := 0; i < n; i++ {\n        left, right := i, n-1\n        while left <= right {\n            mid := left + (right-left)/2\n            if nums[mid] <= nums[i]+k {\n                maxLen = max(maxLen, mid-i+1)\n                left = mid + 1\n            } else {\n                right = mid - 1\n            }\n        }\n    }\n    return maxLen\n}\n\nfunc max(a, b int) int {\n    if a > b {\n        return a\n    }\n    return b\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"x\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"x\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 7:   Solution.max_num/4\nwarning: function bit_size/1 is unused\nLine 18:   Solution (module)\nerror: imported Kernel.bit_size/1 conflicts with local function\nLine 18:   Solution (module)\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3240",
+    "task_finish_time": 1707628517328,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1172017876",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_maximum_number(k :: integer, x :: integer) :: integer\n  def find_maximum_number(k, x) do\n    max_num(1, k, x, 0)\n  end\n\n  defp max_num(num, k, x, sum) when sum > k, do: num - 2\n\n  defp max_num(num, k, x, sum) do\n    new_sum = sum + Enum.count(1..num, fn n -> set_bit_in_position?(n, x) end)\n    max_num(num + 1, k, x, new_sum)\n  end\n\n  defp set_bit_in_position?(n, x) do\n    Enum.any?(0..(bit_size(n) - 1), fn i -> rem(i + 1, x) == 0 && Bitwise.band(n, Bitwise.bsl(1, i)) != 0 end)\n  end\n\n  defp bit_size(n) do\n    :math.log2(n |> Kernel.abs() |> Kernel.max(1)) |> Float.ceil() |> Kernel.trunc()\n  end\nend"
+}

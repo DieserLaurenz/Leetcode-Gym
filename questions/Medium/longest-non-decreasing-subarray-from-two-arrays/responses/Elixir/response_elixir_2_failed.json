@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 12: ** (SyntaxError) unexpected comma. Parentheses are required to solve ambiguity in nested calls.\nThis error happens when you have nested function calls without parentheses. For example:\n    parent_call a, nested_call b, c, d\nIn the example above, we don't know if the parameters \"c\" and \"d\" apply to the function \"parent_call\" or \"nested_call\". You can solve this by explicitly adding parentheses:\n    parent_call a, nested_call(b, c, d)\nOr by adding commas (in case a nested call is not intended):\n    parent_call a, nested_call, b, c, d\nElixir cannot compile otherwise. Syntax error before: ','\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2869",
+    "task_finish_time": 1707525736581,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171033096",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_non_decreasing_length(nums1 :: [integer], nums2 :: [integer]) :: integer\n  def max_non_decreasing_length(nums1, nums2) do\n    n = length(nums1)\n    dp1 = List.duplicate(0, n)\n    dp2 = List.duplicate(0, n)\n\n    dp1 = List.replace_at(dp1, 0, 1)\n    dp2 = List.replace_at(dp2, 0, 1)\n\n    for i <- 1..n-1 do\n      dp1 = List.replace_at(dp1, i, if nums1[i] >= nums1[i-1], do: dp1 |> Enum.at(i-1) + 1, else: 1)\n      dp1 = List.replace_at(dp1, i, if nums1[i] >= nums2[i-1], do: max(dp1 |> Enum.at(i), dp2 |> Enum.at(i-1) + 1), else: dp1 |> Enum.at(i))\n\n      dp2 = List.replace_at(dp2, i, if nums2[i] >= nums2[i-1], do: dp2 |> Enum.at(i-1) + 1, else: 1)\n      dp2 = List.replace_at(dp2, i, if nums2[i] >= nums1[i-1], do: max(dp2 |> Enum.at(i), dp1 |> Enum.at(i-1) + 1), else: dp2 |> Enum.at(i))\n    end\n\n    max(Enum.max(dp1), Enum.max(dp2))\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 18: set-difference: unbound identifier",
+    "full_compile_error": "Line 8: Char 18: set-difference: unbound identifier\n  in: set-difference\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:17",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3228",
+    "task_finish_time": 1707638872491,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1172127140",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-set-size nums1 nums2)\n  (-> (listof exact-integer?) (listof exact-integer?) exact-integer?)\n  (let* ([len (/ (length nums1) 2)]\n         [set1 (list->set nums1)]\n         [set2 (list->set nums2)]\n         [union-set (set-union set1 set2)]\n         [intersect-set (set-intersect set1 set2)]\n         [diff1 (set-difference set1 intersect-set)]\n         [diff2 (set-difference set2 intersect-set)]\n         [max-possible (+ (set-count intersect-set) (min len (set-count diff1) (set-count diff2)))])\n    (if (> (set-count union-set) max-possible)\n        max-possible\n        (set-count union-set))))"
+}

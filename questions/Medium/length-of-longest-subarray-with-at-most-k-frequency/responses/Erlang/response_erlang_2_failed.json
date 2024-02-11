@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 8: Char 15: variable 'NewCounts' unsafe in 'if' (line 12, column 44)",
+    "full_compile_error": "Line 8: Char 15: variable 'NewCounts' unsafe in 'if' (line 12, column 44)\n%    8|     {NewNums, NewCounts, NewEnd, NewLen} = if\n%     |               ^\nLine 17: Char 6: variable 'NewMaxLen' unsafe in 'if' (line 21, column 42)\n%   17|     {NewMaxLen, NewStart, CleanCounts} = if\n%     |      ^\nLine 17: Char 17: variable 'NewStart' unsafe in 'if' (line 21, column 42)\n%   17|     {NewMaxLen, NewStart, CleanCounts} = if\n%     |                 ^\nLine 17: Char 27: variable 'CleanCounts' unsafe in 'if' (line 21, column 42)\n%   17|     {NewMaxLen, NewStart, CleanCounts} = if\n%     |                           ^\nLine 18: Char 18: variable 'NewCounts' unsafe in 'if' (line 12, column 44)\n%   18|         map_size(NewCounts) =< K ->\n%     |                  ^\nLine 24: Char 42: variable 'NewCounts' unsafe in 'if' (line 12, column 44)\n%   24|             CleanCount = maps:get(First, NewCounts) - 1,\n%     |                                          ^\nLine 31: Char 42: variable 'CleanCounts' unsafe in 'if' (line 21, column 42)\n%   31|     find_max_subarray_length(NewNums, K, CleanCounts, NewMaxLen, NewStart, NewEnd, NewLen).\n%     |                                          ^\nLine 31: Char 55: variable 'NewMaxLen' unsafe in 'if' (line 21, column 42)\n%   31|     find_max_subarray_length(NewNums, K, CleanCounts, NewMaxLen, NewStart, NewEnd, NewLen).\n%     |                                                       ^\nLine 31: Char 66: variable 'NewStart' unsafe in 'if' (line 21, column 42)\n%   31|     find_max_subarray_length(NewNums, K, CleanCounts, NewMaxLen, NewStart, NewEnd, NewLen).\n%     |                                                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3225",
+    "task_finish_time": 1707494606432,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1170729357",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_subarray_length(Nums :: [integer()], K :: integer()) -> integer().\nmax_subarray_length(Nums, K) ->\n    find_max_subarray_length(Nums, K, maps:new(), 0, 1, 1, 0).\n\nfind_max_subarray_length(_Nums, _K, _Counts, MaxLen, _Start, End, Len) when End > Len ->\n    MaxLen;\nfind_max_subarray_length(Nums, K, Counts, MaxLen, Start, End, Len) ->\n    {NewNums, NewCounts, NewEnd, NewLen} = if \n        End =< Len ->\n            [H|T] = Nums,\n            NewCount = maps:get(H, Counts, 0) + 1,\n            NewCounts = Counts#{H => NewCount},\n            {T, NewCounts, End + 1, Len};\n        true ->\n            {Nums, Counts, End, Len}\n    end,\n    {NewMaxLen, NewStart, CleanCounts} = if \n        map_size(NewCounts) =< K ->\n            {max(MaxLen, NewEnd - Start), Start, NewCounts};\n        true ->\n            First = hd(lists:nthtail(Start - 1, Nums)),\n            NewStart = Start + 1,\n            NewMaxLen = MaxLen,\n            CleanCount = maps:get(First, NewCounts) - 1,\n            CleanCounts = if\n                CleanCount =:= 0 -> maps:remove(First, NewCounts);\n                true -> NewCounts#{First => CleanCount}\n            end,\n            {NewMaxLen, NewStart, CleanCounts}\n    end,\n    find_max_subarray_length(NewNums, K, CleanCounts, NewMaxLen, NewStart, NewEnd, NewLen)."
+}

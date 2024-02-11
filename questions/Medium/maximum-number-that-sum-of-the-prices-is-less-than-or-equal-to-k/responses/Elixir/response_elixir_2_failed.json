@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: the underscored variable \"_sum\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore",
+    "full_compile_error": "warning: the underscored variable \"_sum\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 7:   Solution.search/5\nwarning: the underscored variable \"_target\" is used after being set. A leading underscore indicates that the value of the variable should be ignored. If this is intended please rename the variable to remove the underscore\nLine 7:   Solution.search/5\nwarning: function bit_size/1 is unused\nLine 33:   Solution (module)\nerror: imported Kernel.bit_size/1 conflicts with local function\nLine 33:   Solution (module)\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3240",
+    "task_finish_time": 1707628548092,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1172018145",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_maximum_number(k :: integer, x :: integer) :: integer\n  def find_maximum_number(k, x) do\n    search(1, k, x, 0, 1_000_000_000_000_000) # Adjust upper limit as necessary\n  end\n\n  defp search(_low, _high, _x, _sum, _target) when _sum > _target, do: -1 # Base case if sum exceeds target\n\n  defp search(low, high, x, k, target) do\n    mid = div(low + high, 2)\n    sum = Enum.reduce(1..mid, 0, fn n, acc -> acc + count_set_bits(n, x) end)\n    if low < high do\n      if sum <= k do\n        search(mid + 1, high, x, k, target)\n      else\n        search(low, mid, x, k, target)\n      end\n    else\n      if sum <= k, do: mid, else: mid - 1\n    end\n  end\n\n  defp count_set_bits(n, x) do\n    Enum.reduce(0..(bit_size(n) - 1), 0, fn index, acc ->\n      if rem(index + 1, x) == 0 and Bitwise.band(n, Bitwise.bsl(1, index)) != 0 do\n        acc + 1\n      else\n        acc\n      end\n    end)\n  end\n\n  defp bit_size(n) do\n    :math.log2(n |> Kernel.abs() |> Kernel.max(1)) |> Float.ceil() |> Kernel.trunc()\n  end\nend"
+}

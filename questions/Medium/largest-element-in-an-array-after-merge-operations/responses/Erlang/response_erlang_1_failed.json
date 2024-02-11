@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 5: function foldl/3 undefined",
+    "full_compile_error": "Line 3: Char 5: function foldl/3 undefined\n%    3|     foldl(fun(A, Acc) when A >= hd(Acc) -> [A + hd(Acc) | tl(Acc)]; (A, Acc) -> [A | Acc] end, [0], lists:reverse(Nums)) -- [0].\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2872",
+    "task_finish_time": 1707474221771,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1170521480",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_array_value(Nums :: [integer()]) -> integer().\nmax_array_value(Nums) ->\n    foldl(fun(A, Acc) when A >= hd(Acc) -> [A + hd(Acc) | tl(Acc)]; (A, Acc) -> [A | Acc] end, [0], lists:reverse(Nums)) -- [0]."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"nums\"",
+    "full_compile_error": "error: undefined variable \"nums\"\nLine 15:   Solution.do_max_subarray_length/7\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3225",
+    "task_finish_time": 1707494776951,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1170731420",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_subarray_length(nums :: [integer], k :: integer) :: integer\n  def max_subarray_length(nums, k) do\n    do_max_subarray_length(nums, k, %{}, 0, 0, 0, 0)\n  end\n\n  defp do_max_subarray_length([], _k, _freq, max_len, _left, _right, _current_max), do: max_len\n\n  defp do_max_subarray_length([head | tail], k, freq, max_len, left, right, current_max) do\n    updated_freq = Map.update(freq, head, 1, &(&1 + 1))\n    if updated_freq[head] <= k do\n      new_max = max(current_max + 1, max_len)\n      do_max_subarray_length(tail, k, updated_freq, new_max, left, right + 1, current_max + 1)\n    else\n      {new_freq, new_left} = update_left(freq, nums, left, k)\n      do_max_subarray_length(tail, k, new_freq, max_len, new_left, right + 1, right - new_left + 1)\n    end\n  end\n\n  defp update_left(freq, [h | t], left, k) do\n    new_freq = Map.update!(freq, h, &(&1 - 1))\n    if new_freq[h] == k do\n      {new_freq, left + 1}\n    else\n      update_left(new_freq, t, left + 1, k)\n    end\n  end\nend"
+}

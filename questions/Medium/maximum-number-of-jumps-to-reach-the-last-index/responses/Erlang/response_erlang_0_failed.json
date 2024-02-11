@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 24: Char 28: syntax error before: '['",
+    "full_compile_error": "Line 24: Char 28: syntax error before: '['\n%   24|             Diff = abs(Nums[I] - Nums[Index]),\n%     |                            ^\nLine 9: Char 51: illegal guard expression\n%    9| loop(N, Nums, Target, Q, Visited) when N > 0, not queue:is_empty(Q) ->\n%     |                                                   ^\nLine 15: Char 30: function fold/8 undefined\n%   15|             {Q2, Visited1} = fold(N, Nums, Target, Index, Jumps, Q1, Visited, Index + 1),\n%     |                              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2855",
+    "task_finish_time": 1707609303471,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171810394",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_jumps(Nums :: [integer()], Target :: integer()) -> integer().\nmaximum_jumps(Nums, Target) ->\n    N = length(Nums),\n    Q = queue:new(),\n    Q1 = queue:in({0, 0}, Q), % {Index, Jumps}\n    Visited = array:set(array:new(N, {default, false}), 0, true),\n    loop(N, Nums, Target, Q1, Visited).\n\nloop(N, Nums, Target, Q, Visited) when N > 0, not queue:is_empty(Q) ->\n    {{Index, Jumps}, Q1} = queue:out(Q),\n    if\n        Index == N - 1 ->\n            Jumps;\n        true ->\n            {Q2, Visited1} = fold(N, Nums, Target, Index, Jumps, Q1, Visited, Index + 1),\n            loop(N, Nums, Target, Q2, Visited1)\n    end;\nloop(_, _, _, _, _) ->\n    -1.\n\nfold(N, Nums, Target, Index, Jumps, Q, Visited, I) when I < N ->\n    case array:get(I, Visited) of\n        false ->\n            Diff = abs(Nums[I] - Nums[Index]),\n            if\n                Diff =< Target ->\n                    Visited1 = array:set(Visited, I, true),\n                    Q1 = queue:in({I, Jumps + 1}, Q),\n                    fold(N, Nums, Target, Index, Jumps, Q1, Visited1, I + 1);\n                true ->\n                    fold(N, Nums, Target, Index, Jumps, Q, Visited, I + 1)\n            end;\n        true ->\n            fold(N, Nums, Target, Index, Jumps, Q, Visited, I + 1)\n    end;\nfold(_, _, _, _, _, Q, Visited, _) ->\n    {Q, Visited}."
+}

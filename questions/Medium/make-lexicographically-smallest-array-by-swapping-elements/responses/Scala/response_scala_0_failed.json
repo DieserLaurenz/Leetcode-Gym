@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 21: error: value update is not a member of IndexedSeq[Int] (in solution.scala)",
+    "full_compile_error": "Line 21: error: value update is not a member of IndexedSeq[Int] (in solution.scala)\ndid you mean updated?\n                sortedIndices(minPos) = i\n                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3219",
+    "task_finish_time": 1707547139446,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1171188679",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def lexicographicallySmallestArray(nums: Array[Int], limit: Int): Array[Int] = {\n        val n = nums.length\n        val sortedIndices = nums.indices.sortBy(nums)\n        val pos = Array.ofDim[Int](n)\n        sortedIndices.zipWithIndex.foreach { case (index, sortedIndex) => pos(index) = sortedIndex }\n\n        def canSwap(i: Int, j: Int): Boolean = math.abs(nums(i) - nums(j)) <= limit\n\n        for (i <- 0 until n) {\n            var minPos = pos(i)\n            for (j <- i until n if pos(j) < minPos && canSwap(i, j)) {\n                minPos = pos(j)\n            }\n            if (minPos != pos(i)) {\n                val temp = nums(i)\n                nums(i) = nums(sortedIndices(minPos))\n                nums(sortedIndices(minPos)) = temp\n\n                pos(sortedIndices(minPos)) = pos(i)\n                sortedIndices(minPos) = i\n            }\n        }\n        nums\n    }\n}"
+}

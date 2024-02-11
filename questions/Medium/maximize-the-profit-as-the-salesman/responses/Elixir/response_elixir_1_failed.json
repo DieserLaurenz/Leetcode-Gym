@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"prev_max\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"prev_max\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 9:   Solution.maximize_the_profit/2\nerror: undefined variable \"prev_max\"\nLine 10:   Solution.maximize_the_profit/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2979",
+    "task_finish_time": 1707577531622,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171485892",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximize_the_profit(n :: integer, offers :: [[integer]]) :: integer\n  def maximize_the_profit(n, offers) do\n    sorted_offers = Enum.sort_by(offers, fn [_, e, _] -> e end)\n    dp = Enum.reduce(0..n, %{0 => 0}, fn i, acc ->\n      max_gold = Map.get(acc, i - 1, 0)\n      Enum.reduce(sorted_offers, acc, fn [s, e, g], acc_inner ->\n        if e < i, do: acc_inner, else:\n          prev_max = Map.get(acc, s - 1, 0)\n          new_max = max(Map.get(acc_inner, e, 0), prev_max + g)\n          Map.put(acc_inner, e, new_max)\n      end)\n      |> Map.put(i, max(max_gold, Map.get(acc, i, 0)))\n    end)\n    Map.values(dp) |> Enum.max()\n  end\nend"
+}

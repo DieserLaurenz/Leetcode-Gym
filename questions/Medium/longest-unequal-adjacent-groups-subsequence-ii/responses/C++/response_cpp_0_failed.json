@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "cpp",
+    "run_success": false,
+    "compile_error": "Line 11: Char 34: error: expected ';' after return statement",
+    "full_compile_error": "Line 11: Char 34: error: expected ';' after return statement\n   11 |                 return {words[i]} + getWordsInLongestSubsequence(n, words, dp, parent[i], groups[parent[i]], groups, parent);\n      |                                  ^\n      |                                  ;",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3142",
+    "task_finish_time": 1707535924027,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C++",
+    "submission_id": "1171089491",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <vector>\n#include <string>\nusing namespace std;\n\nclass Solution {\npublic:\n    vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<vector<int>>& dp, int i, int prevGroup, vector<int>& groups, vector<int>& parent) {\n        if (i == n) return {};\n        if (dp[i][prevGroup + 1] != -1) {\n            if (parent[i] != -1)\n                return {words[i]} + getWordsInLongestSubsequence(n, words, dp, parent[i], groups[parent[i]], groups, parent);\n            else\n                return {};\n        }\n\n        // Not taking the current word\n        vector<string> res1 = getWordsInLongestSubsequence(n, words, dp, i + 1, prevGroup, groups, parent);\n        vector<string> res2 = {};\n\n        // Taking the current word if it satisfies the conditions\n        if (prevGroup != groups[i]) {\n            for (int j = 0; j < i; ++j) {\n                if (words[j].length() == words[i].length() && hammingDistance(words[j], words[i]) == 1 && groups[j] != groups[i]) {\n                    vector<string> tmp = getWordsInLongestSubsequence(n, words, dp, j, groups[j], groups, parent);\n                    if (tmp.size() + 1 > res2.size()) {\n                        res2 = tmp;\n                        res2.push_back(words[i]);\n                        parent[i] = j;\n                    }\n                }\n            }\n        }\n\n        // Choose the longer subsequence\n        if (res1.size() > res2.size()) {\n            dp[i][prevGroup + 1] = res1.size();\n            return res1;\n        } else {\n            dp[i][prevGroup + 1] = res2.size();\n            return res2;\n        }\n    }\n\n    int hammingDistance(const string& a, const string& b) {\n        int count = 0;\n        for (int i = 0; i < a.length(); ++i) {\n            if (a[i] != b[i]) ++count;\n        }\n        return count;\n    }\n\n    vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups) {\n        vector<vector<int>> dp(n, vector<int>(n + 1, -1));\n        vector<int> parent(n, -1);\n        return getWordsInLongestSubsequence(n, words, dp, 0, -1, groups, parent);\n    }\n};"
+}

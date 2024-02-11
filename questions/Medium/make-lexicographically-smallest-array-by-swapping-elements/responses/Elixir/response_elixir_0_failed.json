@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"nums\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"nums\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 13:   Solution.lexicographically_smallest_array/2\nwarning: variable \"sorted\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 13:   Solution.lexicographically_smallest_array/2\nerror: cannot invoke remote function Enum.at/3 inside guards\nLine 8:   Solution.lexicographically_smallest_array/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 8:     Solution.lexicographically_smallest_array/2\n    (elixir 1.15.7) expanding macro: Kernel.and/2\nLine 8:     Solution.lexicographically_smallest_array/2\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 7:     Solution.lexicographically_smallest_array/2\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 13:     Solution.lexicographically_smallest_array/2",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3219",
+    "task_finish_time": 1707556846587,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1171281884",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec lexicographically_smallest_array(nums :: [integer], limit :: integer) :: [integer]\n  def lexicographically_smallest_array(nums, limit) do\n    nums\n    |> Enum.with_index()\n    |> Enum.sort_by(fn {num, _} -> num end)\n    |> Enum.reduce({[], 0, []}, fn\n      ({num, idx}, {sorted, last_sorted_idx, acc}) when idx >= last_sorted_idx and abs(num - (nums |> Enum.at(last_sorted_idx, 0))) <= limit ->\n        {[num | sorted], idx, [idx | acc]}\n      ({num, idx}, {sorted, last_sorted_idx, acc}) ->\n        {sorted, last_sorted_idx, acc}\n    end)\n    |> (fn {sorted, _, acc} -> Enum.reverse(acc) |> Enum.each(fn idx -> nums = List.replace_at(nums, idx, List.first(sorted)); sorted = List.delete_at(sorted, 0) end) end).()\n    |> (fn -> nums end).()\n  end\nend"
+}

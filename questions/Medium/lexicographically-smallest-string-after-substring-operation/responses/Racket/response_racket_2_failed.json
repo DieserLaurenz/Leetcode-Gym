@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 3: Char 19: string-index: unbound identifier",
+    "full_compile_error": "Line 3: Char 19: string-index: unbound identifier\n  in: string-index\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:14:18",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2828",
+    "task_finish_time": 1707514983930,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1170966781",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (smallest-string s)\n  (-> string? string?)\n  (let ([first-a (string-index s #\\a)])\n    (if first-a\n        (string-append (substring s 0 first-a)\n                       (apply string\n                              (map (lambda (c) (if (char=? c #\\a) #\\z (integer->char (- (char->integer c) 1))))\n                                   (string->list (substring s first-a)))))\n        (string-append\n         (apply string\n                (map (lambda (c) (if (char=? c #\\a) #\\z (integer->char (- (char->integer c) 1))))\n                     (string->list (substring s 0 1))))\n         (substring s 1)))))"
+}

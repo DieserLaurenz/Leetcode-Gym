@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 15: function foldl/3 undefined",
+    "full_compile_error": "Line 3: Char 15: function foldl/3 undefined\n%    3|     lists:max(foldl(fun({A, B}, {PrevA, PrevB, Len}) ->\n%     |               ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2869",
+    "task_finish_time": 1707525559376,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1171032225",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_non_decreasing_length(Nums1 :: [integer()], Nums2 :: [integer()]) -> integer().\nmax_non_decreasing_length(Nums1, Nums2) ->\n    lists:max(foldl(fun({A, B}, {PrevA, PrevB, Len}) ->\n                        {MaxA, MaxB} = {max(PrevA, A), max(PrevB, B)},\n                        {NewA, NewB, NewLen} = if\n                                                   A >= MaxA andalso B >= MaxB -> {A, B, Len + 1};\n                                                   A >= MaxA -> {A, max(A, PrevB), Len + 1};\n                                                   B >= MaxB -> {max(B, PrevA), B, Len + 1};\n                                                   true -> {A, B, 1}\n                                               end,\n                        {NewA, NewB, max(Len, NewLen)}\n                    end, {hd(Nums1), hd(Nums2), 1}, tl(lists:zip(Nums1, Nums2)))). "
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: cannot invoke remote function :maps.values/1 inside guards",
+    "full_compile_error": "error: cannot invoke remote function :maps.values/1 inside guards\nLine 20:   Solution.trim_freq/5\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 20:     Solution.trim_freq/5",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3225",
+    "task_finish_time": 1707494739697,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1170730975",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_subarray_length(nums :: [integer], k :: integer) :: integer\n  def max_subarray_length(nums, k) do\n    {max_len, _, _} = Enum.reduce(nums, {0, %{}, 0}, fn x, {max_len, freq, start} ->\n      freq = Map.update(freq, x, 1, &(&1 + 1))\n      if Map.values(freq) |> Enum.any?(&(&1 > k)) do\n        {new_start, new_freq} = trim_freq(freq, nums, start, k)\n        {max_len, new_freq, new_start + 1}\n      else\n        {max(max_len, Enum.count(freq)), freq, start}\n      end\n    end)\n    max_len\n  end\n\n  defp trim_freq(freq, nums, start, k) do\n    trim_freq(freq, nums, start, k, start)\n  end\n\n  defp trim_freq(freq, _nums, _start, _k, index) when Map.values(freq) |> Enum.all?(&(&1 <= k)), do: {index, freq}\n\n  defp trim_freq(freq, nums, start, k, index) do\n    current_element = Enum.at(nums, start)\n    updated_freq = Map.update!(freq, current_element, &(&1 - 1))\n    if updated_freq[current_element] == 0 do\n      updated_freq = Map.delete(updated_freq, current_element)\n    end\n    if Map.values(updated_freq) |> Enum.any?(&(&1 > k)) do\n      trim_freq(updated_freq, nums, start + 1, k, index)\n    else\n      {start, updated_freq}\n    end\n  end\nend"
+}

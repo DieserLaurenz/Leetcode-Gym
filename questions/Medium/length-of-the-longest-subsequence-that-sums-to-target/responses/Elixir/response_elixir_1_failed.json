@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"dp\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"dp\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 8:   Solution.length_of_longest_subsequence/2\nwarning: function max/2 is unused\nLine 20:   Solution (module)\nerror: imported Kernel.max/2 conflicts with local function\nLine 20:   Solution (module)\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3106",
+    "task_finish_time": 1707504512801,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1170867008",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec length_of_longest_subsequence(nums :: [integer], target :: integer) :: integer\n  def length_of_longest_subsequence(nums, target) do\n    dp = :maps.from_list(Enum.map(0..target, fn x -> {x, -1} end))\n    dp = Map.put(dp, 0, 0)\n\n    for num <- nums do\n      dp = Enum.reduce(Map.keys(dp), dp, fn key, acc ->\n        if key + num <= target and acc[key] != -1 do\n          Map.update(acc, key + num, acc[key] + 1, &max(&1, acc[key] + 1))\n        else\n          acc\n        end\n      end)\n    end\n\n    dp[target]\n  end\n\n  defp max(a, b) do\n    if a > b, do: a, else: b\n  end\nend"
+}

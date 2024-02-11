@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 19: error: recursive value cost needs type (in solution.scala)",
+    "full_compile_error": "Line 19: error: recursive value cost needs type (in solution.scala)\n                    if (needed > 0) needed * cost(metal) else 0\n                                             ^\nLine 20: error: ambiguous implicit values: (in solution.scala)\n both object BigIntIsIntegral in object Numeric of type scala.math.Numeric.BigIntIsIntegral.type\n and object IntIsIntegral in object Numeric of type scala.math.Numeric.IntIsIntegral.type\n match expected type scala.math.Numeric[B]\n                }.sum\n                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3095",
+    "task_finish_time": 1707598217966,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1171730140",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def maxNumberOfAlloys(n: Int, k: Int, budget: Int, composition: List[List[Int]], stock: List[Int], cost: List[Int]): Int = {\n        (0 until k).map { machine =>\n            var maxPossible = Int.MaxValue\n            (0 until n).foreach { metal =>\n                val neededPerAlloy = composition(machine)(metal)\n                val totalNeeded = neededPerAlloy - stock(metal)\n                if (totalNeeded > 0) {\n                    maxPossible = math.min(maxPossible, budget / (totalNeeded * cost(metal)))\n                }\n            }\n            if (maxPossible == Int.MaxValue) maxPossible = 0\n            var low = 0\n            var high = maxPossible\n            while (low < high) {\n                val mid = (low + high + 1) / 2\n                val cost = (0 until n).map { metal =>\n                    val needed = mid * composition(machine)(metal) - stock(metal)\n                    if (needed > 0) needed * cost(metal) else 0\n                }.sum\n                if (cost <= budget) low = mid else high = mid - 1\n            }\n            low\n        }.max\n    }\n}"
+}

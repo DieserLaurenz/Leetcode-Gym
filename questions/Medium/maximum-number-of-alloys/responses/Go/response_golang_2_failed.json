@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 13: alloysPossibleForMetal declared and not used (solution.go)",
+    "full_compile_error": "Line 11: Char 13: alloysPossibleForMetal declared and not used (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3095",
+    "task_finish_time": 1707598013853,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1171728316",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func maxNumberOfAlloys(n int, k int, budget int, composition [][]int, stock []int, cost []int) int {\n    maxAlloys := 0\n    for machine := 0; machine < k; machine++ {\n        minAlloys := budget // Start with a high number of alloys and find the minimum possible\n        for metalType := 0; metalType < n; metalType++ {\n            requiredUnits := composition[machine][metalType]\n            totalCostForMetal := 0\n            if stock[metalType] < requiredUnits {\n                totalCostForMetal = (requiredUnits - stock[metalType]) * cost[metalType]\n            }\n            alloysPossibleForMetal := budget / totalCostForMetal\n            if requiredUnits > 0 { // Avoid division by zero\n                totalAlloysPossible := (stock[metalType] + (budget / cost[metalType])) / requiredUnits\n                if totalAlloysPossible < minAlloys {\n                    minAlloys = totalAlloysPossible\n                }\n            }\n        }\n        if minAlloys > maxAlloys {\n            maxAlloys = minAlloys\n        }\n    }\n    return maxAlloys\n}"
+}
