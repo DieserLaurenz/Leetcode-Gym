@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 27: undefined: abs (solution.go)",
+    "full_compile_error": "Line 15: Char 27: undefined: abs (solution.go)\nLine 20: Char 5: abs declared and not used (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3229",
+    "task_finish_time": 1707775388596,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1173590276",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func minimumCost(nums []int) int64 {\n    isPalindromic := func(x int) bool {\n        s := fmt.Sprint(x)\n        for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {\n            if s[i] != s[j] {\n                return false\n            }\n        }\n        return true\n    }\n\n    minCost := func(target int) int64 {\n        var cost int64 = 0\n        for _, num := range nums {\n            cost += int64(abs(num - target))\n        }\n        return cost\n    }\n\n    abs := func(x int) int {\n        if x < 0 {\n            return -x\n        }\n        return x\n    }\n\n    totalCost := int64(1<<63 - 1)\n    for _, num := range nums {\n        if isPalindromic(num) {\n            cost := minCost(num)\n            if cost < totalCost {\n                totalCost = cost\n            }\n        }\n    }\n\n    // Check for palindromic numbers close to the median if not found in nums\n    median := nums[len(nums)/2]\n    for i := 0; i <= 9; i++ {\n        if median-i > 0 && isPalindromic(median-i) {\n            cost := minCost(median - i)\n            if cost < totalCost {\n                totalCost = cost\n            }\n        }\n        if isPalindromic(median + i) {\n            cost := minCost(median + i)\n            if cost < totalCost {\n                totalCost = cost\n            }\n        }\n    }\n\n    return totalCost\n}"
+}

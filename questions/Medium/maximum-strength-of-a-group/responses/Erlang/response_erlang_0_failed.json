@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 24: variable 'Neg' is unbound",
+    "full_compile_error": "Line 10: Char 24: variable 'Neg' is unbound\n%   10|     case {lists:length(Neg) rem 2, Zero} of\n%     |                        ^\nLine 10: Char 36: variable 'Zero' is unbound\n%   10|     case {lists:length(Neg) rem 2, Zero} of\n%     |                                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2754",
+    "task_finish_time": 1707658974235,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1172318928",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_strength(Nums :: [integer()]) -> integer().\nmax_strength(Nums) ->\n    {Max, _, _} = lists:foldl(fun (X, {Max, Neg, Zero}) ->\n                                  case X of\n                                      0 -> {Max, Neg, true};\n                                      N when N < 0 -> {Max, [N|Neg], Zero};\n                                      P -> {max(Max, P), Neg, Zero}\n                                  end\n                              end, {0, [], false}, Nums),\n    case {lists:length(Neg) rem 2, Zero} of\n        {1, true} -> Max;\n        {1, false} -> lists:foldl(fun (X, Acc) -> X * Acc end, 1, lists:delete(lists:min(Neg), Neg));\n        _ -> lists:foldl(fun (X, Acc) -> X * Acc end, 1, Nums)\n    end."
+}

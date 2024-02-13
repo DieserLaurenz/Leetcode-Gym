@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 3: Char 40: error: \u2018cmp\u2019 undeclared (first use in this function); did you mean \u2018bcmp\u2019? [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018minAbsoluteDifference\u2019\nLine 3: Char 40: error: \u2018cmp\u2019 undeclared (first use in this function); did you mean \u2018bcmp\u2019? [solution.c]\n    6 |     qsort(nums, numsSize, sizeof(int), cmp);\n      |                                        ^~~\n      |                                        bcmp",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3000",
+    "task_finish_time": 1707720988988,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1172938081",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "int minAbsoluteDifference(int* nums, int numsSize, int x) {\n    // Sort the array to ensure the differences are calculated in a non-decreasing order\n    qsort(nums, numsSize, sizeof(int), cmp);\n\n    int minDiff = INT_MAX;\n    for (int i = 0; i < numsSize - x; ++i) {\n        int diff = abs(nums[i] - nums[i + x]);\n        if (diff < minDiff) {\n            minDiff = diff;\n        }\n    }\n    return minDiff;\n}\n\n// Comparator function for qsort\nint cmp(const void *a, const void *b) {\n    return (*(int*)a - *(int*)b);\n}"
+}

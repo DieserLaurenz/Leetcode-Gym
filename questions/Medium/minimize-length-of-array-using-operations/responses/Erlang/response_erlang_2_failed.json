@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 9: call to local/imported function gcd_list/1 is illegal in guard",
+    "full_compile_error": "Line 4: Char 9: call to local/imported function gcd_list/1 is illegal in guard\n%    4|         gcd_list(Nums) =:= 1 -> 1;\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3244",
+    "task_finish_time": 1707711197954,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1172820553",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_array_length([integer()]) -> integer().\nminimum_array_length(Nums) ->\n    if\n        gcd_list(Nums) =:= 1 -> 1;\n        true -> 2\n    end.\n\ngcd_list([H|T]) ->\n    lists:foldl(fun(X, Acc) -> gcd(X, Acc) end, H, T).\n\ngcd(A, 0) -> A;\ngcd(A, B) -> gcd(B, A rem B)."
+}

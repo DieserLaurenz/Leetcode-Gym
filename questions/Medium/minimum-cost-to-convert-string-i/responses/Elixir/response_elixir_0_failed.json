@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"changed\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"changed\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 3:   Solution.minimum_cost/5\nerror: undefined function return/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 21:   Solution.minimum_cost/5\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3235",
+    "task_finish_time": 1707753834270,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1173307685",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_cost(source :: String.t, target :: String.t, original :: [char], changed :: [char], cost :: [integer]) :: integer\n  def minimum_cost(source, target, original, changed, cost) do\n    source\n    |> String.to_charlist()\n    |> Enum.with_index()\n    |> Enum.reduce(0, fn {source_char, idx}, acc ->\n      target_char = String.at(target, idx) |> String.to_charlist() |> hd()\n\n      if source_char == target_char do\n        acc\n      else\n        change_cost = \n          Enum.with_index(original)\n          |> Enum.filter(fn {{o, _}, _} -> o == source_char end)\n          |> Enum.map(fn {{_, c}, i} -> {c, cost |> Enum.at(i)} end)\n          |> Enum.filter(fn {c, _} -> c == target_char end)\n          |> Enum.map(fn {_, c} -> c end)\n          |> Enum.min()\n\n        if is_nil(change_cost), do: return(-1), else: acc + change_cost\n      end\n    end)\n  end\nend"
+}

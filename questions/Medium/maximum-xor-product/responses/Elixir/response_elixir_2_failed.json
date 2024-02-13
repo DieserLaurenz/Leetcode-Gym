@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined function <<</2 (expected Solution to define such a function or for it to be imported, but none are available)",
+    "full_compile_error": "error: undefined function <<</2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 5:   Solution.maximum_xor_product/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3192",
+    "task_finish_time": 1707700768677,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1172737469",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_xor_product(a :: integer, b :: integer, n :: integer) :: integer\n  def maximum_xor_product(a, b, n) do\n    mod = 1_000_000_007\n    x = (1 <<< n) - 1\n    rem(((a |> Bitwise.bxor(x)) * (b |> Bitwise.bxor(x))), mod)\n  end\nend"
+}

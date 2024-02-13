@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 13: Char 69: ** (SyntaxError) syntax error before: 'div'\n    |\n 13 |       (Enum.at(sorted, len div 2 - 1) + Enum.at(sorted, len div 2)) div 2\n    |                                                                     ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3229",
+    "task_finish_time": 1707783969923,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1173655458",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_cost(nums :: [integer]) :: integer\n  def minimum_cost(nums) do\n    median = find_median(nums)\n    Enum.reduce(nums, 0, fn x, acc -> acc + abs(x - median) end)\n  end\n\n  defp find_median(list) do\n    sorted = Enum.sort(list)\n    len = length(list)\n\n    if rem(len, 2) == 0 do\n      (Enum.at(sorted, len div 2 - 1) + Enum.at(sorted, len div 2)) div 2\n    else\n      Enum.at(sorted, len div 2)\n    end\n  end\nend"
+}

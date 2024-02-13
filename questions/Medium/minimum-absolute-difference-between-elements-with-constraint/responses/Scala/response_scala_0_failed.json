@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 11: error: not found: value break (in solution.scala)",
+    "full_compile_error": "Line 11: error: not found: value break (in solution.scala)\n                    break\n                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3000",
+    "task_finish_time": 1707722192582,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1172951875",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def minAbsoluteDifference(nums: List[Int], x: Int): Int = {\n        val sortedWithIndex = nums.zipWithIndex.sortBy(_._1)\n        var minDiff = Int.MaxValue\n        for (i <- 0 until sortedWithIndex.length - 1) {\n            for (j <- i + 1 until sortedWithIndex.length) {\n                if (math.abs(sortedWithIndex(i)._2 - sortedWithIndex(j)._2) >= x) {\n                    minDiff = math.min(minDiff, math.abs(sortedWithIndex(i)._1 - sortedWithIndex(j)._1))\n                    // Once a pair meeting the index distance requirement is found, all subsequent pairs will also meet it.\n                    // Break the inner loop to avoid unnecessary comparisons.\n                    break\n                }\n            }\n        }\n        minDiff\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "typescript",
+    "run_success": false,
+    "compile_error": "Line 2: Char 5: error TS2322: Type '{ num: number; index: number; }[]' is not assignable to type 'number[]'.",
+    "full_compile_error": "Line 2: Char 5: error TS2322: Type '{ num: number; index: number; }[]' is not assignable to type 'number[]'.\nLine 7: Char 42: error TS2339: Property 'num' does not exist on type 'number'.\nLine 7: Char 60: error TS2339: Property 'num' does not exist on type 'number'.\nLine 8: Char 33: error TS2339: Property 'index' does not exist on type 'number'.\nLine 8: Char 53: error TS2339: Property 'index' does not exist on type 'number'.",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3000",
+    "task_finish_time": 1707721304433,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "TypeScript",
+    "submission_id": "1172941805",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "function minAbsoluteDifference(nums: number[], x: number): number {\n    nums = nums.map((num, index) => ({ num, index })).sort((a, b) => a.num - b.num);\n    let minDiff = Infinity;\n    let left = 0, right = 1;\n\n    while (right < nums.length) {\n        const diff = Math.abs(nums[left].num - nums[right].num);\n        if (Math.abs(nums[left].index - nums[right].index) >= x) {\n            minDiff = Math.min(minDiff, diff);\n            if (minDiff === 0) break; // Early exit if minimum possible difference found\n            left++; // Move left pointer to try and find a smaller difference\n        } else {\n            right++; // Move right pointer to maintain the minimum distance condition\n        }\n        if (left === right) right++; // Ensure right is always ahead of left\n    }\n\n    return minDiff;\n};"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 23: Char 100: read-syntax: missing `)` to close `(` on line 26, found instead `]`",
+    "full_compile_error": "Line 23: Char 100: read-syntax: missing `)` to close `(` on line 26, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3235",
+    "task_finish_time": 1707753544000,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1173303246",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-cost source target original changed cost)\n  (-> string? string? (listof char?) (listof char?) (listof exact-integer?) exact-integer?)\n  (letrec ([n (string-length source)]\n           [cost-map (make-hash)]\n           [update-cost-map (lambda (i)\n                              (let ([o (list-ref original i)]\n                                    [c (list-ref changed i)]\n                                    [co (list-ref cost i)])\n                                (hash-update! cost-map (cons o c) (lambda (old) (min old co)) co)))]\n           [fill-cost-map (lambda ()\n                            (for ([i (in-range (length original))])\n                              (update-cost-map i)))]\n           [get-cost (lambda (from to)\n                       (hash-ref cost-map (cons from to) #f))]\n           [transform (lambda (i acc)\n                        (if (= i n)\n                            acc\n                            (let* ([s (string-ref source i)]\n                                   [t (string-ref target i)]\n                                   [operation-cost (if (char=? s t) 0 (get-cost s t))])\n                              (if (or (not operation-cost) (< operation-cost 0))\n                                  -1\n                                  (transform (+ i 1) (+ acc (if (char=? s t) 0 operation-cost))))))])\n    (begin\n      (fill-cost-map)\n      (transform 0 0))))"
+}

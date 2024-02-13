@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 17: Char 13: if: bad syntax",
+    "full_compile_error": "Line 17: Char 13: if: bad syntax\n  in: (if co (set! transformation-cost (+ transformation-cost co)) (set! transformation-cost -1) (break))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:28:12",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3235",
+    "task_finish_time": 1707753611001,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1173304253",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-cost source target original changed cost)\n  (-> string? string? (listof char?) (listof char?) (listof exact-integer?) exact-integer?)\n  (let ([cost-map (make-hash)]\n        [source-list (string->list source)]\n        [target-list (string->list target)]\n        [transformation-cost 0])\n    (for ([i (in-range (length original))])\n      (let ([o (list-ref original i)]\n            [c (list-ref changed i)]\n            [co (list-ref cost i)])\n        (hash-update cost-map (cons o c) (lambda (old) (if old (min old co) co)) co)))\n    (for ([i (in-range (length source-list))])\n      (let ([s (list-ref source-list i)]\n            [t (list-ref target-list i)])\n        (unless (char=? s t)\n          (let ([co (hash-ref cost-map (cons s t) #f)])\n            (if co\n                (set! transformation-cost (+ transformation-cost co))\n                (set! transformation-cost -1)\n                (break))))))\n    (if (< transformation-cost 0) -1 transformation-cost)))"
+}

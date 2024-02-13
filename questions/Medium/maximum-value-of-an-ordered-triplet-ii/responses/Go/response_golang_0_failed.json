@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 16: Char 22: cannot use max(maxVal, int64(minVal1 - minVal2) * int64(maxProduct[j])) (value of type int) as int64 value in assignment (solution.go)",
+    "full_compile_error": "Line 16: Char 22: cannot use max(maxVal, int64(minVal1 - minVal2) * int64(maxProduct[j])) (value of type int) as int64 value in assignment (solution.go)\nLine 16: Char 26: cannot use maxVal (variable of type int64) as int value in argument to max (solution.go)\nLine 16: Char 34: cannot use int64(minVal1 - minVal2) * int64(maxProduct[j]) (value of type int64) as int value in argument to max (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3152",
+    "task_finish_time": 1707680955945,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1172586790",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func maximumTripletValue(nums []int) int64 {\n    maxVal := int64(0)\n    minVal1, minVal2 := int(1e6+1), int(1e6+1)\n    maxProduct := make([]int, len(nums))\n    \n    for i := len(nums) - 1; i >= 0; i-- {\n        if i < len(nums)-1 {\n            maxProduct[i] = max(maxProduct[i+1], nums[i])\n        } else {\n            maxProduct[i] = nums[i]\n        }\n    }\n    \n    for j := 0; j < len(nums); j++ {\n        if nums[j] > minVal1 {\n            maxVal = max(maxVal, int64(minVal1-minVal2)*int64(maxProduct[j]))\n        }\n        if nums[j] < minVal1 {\n            minVal2 = minVal1\n            minVal1 = nums[j]\n        } else if nums[j] < minVal2 {\n            minVal2 = nums[j]\n        }\n    }\n    \n    return maxVal\n}\n\nfunc max(a, b int) int {\n    if a > b {\n        return a\n    }\n    return b\n}"
+}

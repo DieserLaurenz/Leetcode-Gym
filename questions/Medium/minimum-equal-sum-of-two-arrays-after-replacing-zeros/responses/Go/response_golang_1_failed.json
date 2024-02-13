@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 32: Char 5: targetSum declared and not used (solution.go)",
+    "full_compile_error": "Line 32: Char 5: targetSum declared and not used (solution.go)\nLine 35: Char 5: sumDiff declared and not used (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3171",
+    "task_finish_time": 1707794091629,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1173744269",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func minSum(nums1 []int, nums2 []int) int64 {\n    sum1, sum2 := 0, 0\n    zeroCount1, zeroCount2 := 0, 0\n\n    // Calculate the initial sum of nums1 and nums2, and count zeros in each\n    for _, n := range nums1 {\n        sum1 += n\n        if n == 0 {\n            zeroCount1++\n        }\n    }\n    for _, n := range nums2 {\n        sum2 += n\n        if n == 0 {\n            zeroCount2++\n        }\n    }\n\n    // If both arrays have no zeros and their sums are not equal, return -1\n    if zeroCount1 == 0 && zeroCount2 == 0 && sum1 != sum2 {\n        return -1\n    }\n\n    // Calculate the total number of replacements needed to make sums equal\n    totalReplacements := zeroCount1 + zeroCount2\n    if totalReplacements == 0 {\n        // If no zeros, the arrays already have equal sums\n        return int64(sum1)\n    }\n\n    // The target sum each array needs to reach\n    targetSum := max(sum1, sum2) + max(zeroCount1, zeroCount2)\n\n    // The difference in sums that needs to be balanced by replacing zeros\n    sumDiff := abs(sum1 - sum2)\n\n    // The minimum sum we aim for is the higher sum plus the minimum number of increments needed\n    // to make up for the sum difference across the zeros, ensuring both arrays can reach the same sum\n    if sum1 > sum2 {\n        return int64(sum1 + zeroCount1)\n    } else if sum2 > sum1 {\n        return int64(sum2 + zeroCount2)\n    }\n    // If sums are equal but there are zeros, distribute 1 to each zero\n    return int64(max(sum1, sum2) + totalReplacements)\n}\n\nfunc abs(x int) int {\n    if x < 0 {\n        return -x\n    }\n    return x\n}\n\nfunc max(x, y int) int {\n    if x > y {\n        return x\n    }\n    return y\n}"
+}

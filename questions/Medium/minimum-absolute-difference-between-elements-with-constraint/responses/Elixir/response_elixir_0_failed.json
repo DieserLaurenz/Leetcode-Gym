@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 20: Char 42: ** (SyntaxError) syntax error before: '_'\n    |\n 20 |     |> (fn diff -> case diff do nil -> 0 _ -> diff end end).()\n    |                                          ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3000",
+    "task_finish_time": 1707731126231,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1173044409",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_absolute_difference(nums :: [integer], x :: integer) :: integer\n  def min_absolute_difference(nums, x) do\n    nums\n    |> Enum.with_index()\n    |> Enum.sort_by(fn {num, _index} -> num end)\n    |> Enum.reduce({nil, nil, nil}, fn ({num, index}, {min_diff, prev_num, prev_index}) ->\n      cond do\n        prev_index != nil and abs(prev_index - index) >= x ->\n          new_diff = abs(prev_num - num)\n          case min_diff do\n            nil -> {new_diff, num, index}\n            _ -> {min(new_diff, min_diff), num, index}\n          end\n        true ->\n          {min_diff, num, index}\n      end\n    end)\n    |> elem(0)\n    |> (fn diff -> case diff do nil -> 0 _ -> diff end end).()\n  end\nend"
+}

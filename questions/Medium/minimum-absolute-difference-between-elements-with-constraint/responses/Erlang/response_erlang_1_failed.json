@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 5: Char 98: syntax error before: E",
+    "full_compile_error": "Line 5: Char 98: syntax error before: E\n%    5|                                                     if abs(E - F) >= X -> min(AccInner, abs(Nums#E - Nums#F));\n%     |                                                                                                  ^\nLine 1: Char 2: spec for undefined function min_absolute_difference/2\n%    1| -spec min_absolute_difference(Nums :: [integer()], X :: integer()) -> integer().\n%     |  ^\nLine 29: Char 13: function min_absolute_difference/2 undefined\n%   29|       Ret = min_absolute_difference(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3000",
+    "task_finish_time": 1707731042074,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1173043763",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_absolute_difference(Nums :: [integer()], X :: integer()) -> integer().\nmin_absolute_difference(Nums, X) ->\n    MinDiff = lists:foldl(fun(E, Acc) ->\n                              Min = lists:foldl(fun(F, AccInner) ->\n                                                    if abs(E - F) >= X -> min(AccInner, abs(Nums#E - Nums#F));\n                                                       true -> AccInner\n                                                    end\n                                                end, Acc, lists:seq(0, length(Nums) - 1)),\n                              min(Acc, Min)\n                          end, hd(Nums), lists:seq(0, length(Nums) - X - 1)),\n    MinDiff."
+}

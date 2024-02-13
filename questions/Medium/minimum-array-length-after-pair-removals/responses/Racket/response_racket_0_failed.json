@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 7: Char 8: match: syntax error in pattern",
+    "full_compile_error": "Line 7: Char 8: match: syntax error in pattern\n  in: (list a b . rest)\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:18:7",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3081",
+    "task_finish_time": 1707742180986,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1173156321",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-length-after-removals nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let loop ([nums nums] [pairs 0])\n    (match nums\n      [(list) (modulo (length nums) 2)]\n      [(list a) 1]\n      [(list a b . rest)\n       (if (< a b)\n           (loop rest (+ pairs 1))\n           (loop (cons b rest) pairs))]\n      [else (modulo (length nums) 2)])))"
+}

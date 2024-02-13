@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 34: variable 'X' is unbound",
+    "full_compile_error": "Line 3: Char 34: variable 'X' is unbound\n%    3|     Count = lists:foldl(fun(X, #{X := C}=Map) -> Map#{X => C+1};\n%     |                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3081",
+    "task_finish_time": 1707742320500,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1173157760",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_length_after_removals(Nums :: [integer()]) -> integer().\nmin_length_after_removals(Nums) ->\n    Count = lists:foldl(fun(X, #{X := C}=Map) -> Map#{X => C+1};\n                           (X, Map) -> Map#{X => 1}\n                        end, #{}, Nums),\n    2 * (lists:foldl(fun(_, Acc) -> Acc+1 end, 0, Count) rem 2)."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 6, Char 13: mismatched types (solution.rs)",
+    "full_compile_error": "Line 6, Char 13: mismatched types (solution.rs)\n  |\n6 |         for (o, c, &co) in original.iter().zip(changed.iter()).zip(cost.iter()) {\n  |             ^^^^^^^^^^^    ---------------------------------------------------- this is an iterator with items of type `((&char, &char), &i32)`\n  |             |\n  |             expected a tuple with 2 elements, found one with 3 elements\n  |\n  = note: expected tuple `((&char, &char), &i32)`\n             found tuple `(_, _, _)`\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3235",
+    "task_finish_time": 1707753406131,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1173301244",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn minimum_cost(source: String, target: String, original: Vec<char>, changed: Vec<char>, cost: Vec<i32>) -> i64 {\n        use std::collections::HashMap;\n\n        let mut cost_map: HashMap<(char, char), i32> = HashMap::new();\n        for (o, c, &co) in original.iter().zip(changed.iter()).zip(cost.iter()) {\n            let entry = cost_map.entry((*o, *c)).or_insert(i32::MAX);\n            *entry = (*entry).min(co);\n        }\n\n        let mut total_cost: i64 = 0;\n        for (s, t) in source.chars().zip(target.chars()) {\n            if s == t {\n                continue;\n            }\n            match cost_map.get(&(s, t)) {\n                Some(&c) => total_cost += c as i64,\n                None => return -1,\n            }\n        }\n\n        total_cost\n    }\n}"
+}

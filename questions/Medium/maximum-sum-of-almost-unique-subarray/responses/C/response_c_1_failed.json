@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018maxSum\u2019\nLine 12: Char 38: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   15 |         if (distinct >= m) max_sum = max(max_sum, current_sum);\n      |                                      ^~~\n      |                                      fmax\n/tmp/cc9kmvOG.o:prog_joined.c:function maxSum: error: undefined reference to 'max'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2954",
+    "task_finish_time": 1707659663251,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1172326392",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "long long maxSum(int* nums, int numsSize, int m, int k){\n    long long max_sum = 0;\n    for (int i = 0; i <= numsSize - k; ++i) {\n        int distinct = 0;\n        long long current_sum = 0;\n        int freq[20001] = {0}; // Adjusted for a practical approach, using a map-like structure is ideal but not allowed per instructions\n        for (int j = i; j < i + k; ++j) {\n            if (freq[(nums[j] % 20000) + 1] == 0) distinct++; // Using modulo to simulate hashing for uniqueness check\n            freq[(nums[j] % 20000) + 1]++;\n            current_sum += nums[j];\n        }\n        if (distinct >= m) max_sum = max(max_sum, current_sum);\n    }\n    return max_sum;\n}"
+}

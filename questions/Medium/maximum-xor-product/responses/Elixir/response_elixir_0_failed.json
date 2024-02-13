@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "** (ArgumentError) cannot pipe :math.pow(2, n) into trunc() - 1, the :- operator can only take one argument\n    (elixir 1.15.7) lib/macro.ex:371: Macro.pipe/3\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 4:     Solution.maximum_xor_product/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3192",
+    "task_finish_time": 1707700724701,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1172737172",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_xor_product(a :: integer, b :: integer, n :: integer) :: integer\n  def maximum_xor_product(a, b, n) do\n    max_x = :math.pow(2, n) |> trunc() - 1\n    0..max_x\n    |> Enum.map(fn x -> rem((a |> Bitwise.bxor(x)) * (b |> Bitwise.bxor(x)), 1_000_000_007) end)\n    |> Enum.max()\n  end\nend"
+}

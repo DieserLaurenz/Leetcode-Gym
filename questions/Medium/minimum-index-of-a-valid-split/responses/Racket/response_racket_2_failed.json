@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 22\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2888",
+    "task_finish_time": 1707815560081,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1174003877",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-index nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (define (dominant-element lst)\n    (let ([freq (make-hash)])\n      (for ([num lst])\n        (hash-update! freq num add1 0))\n      (let loop ([remaining (hash->list freq)])\n        (if (null? remaining) #f\n            (let* ([pair (car remaining)]\n                   [key (car pair)]\n                   [value (cdr pair)])\n              (if (> (* value 2) (length lst)) key (loop (cdr remaining)))))))\n  (define dominant (dominant-element nums))\n  (define (is-dominant? part dom count)\n    (> (* 2 (count dom part)) (length part)))\n  (let loop ([i 1] [left (take nums i)] [right (drop nums i)])\n    (if (null? right) -1\n        (if (and (is-dominant? left dominant (count dominant left))\n                 (is-dominant? right dominant (count dominant right)))\n            i\n            (loop (+ i 1) (take nums (+ i 1)) (drop nums (+ i 1)))))))"
+}

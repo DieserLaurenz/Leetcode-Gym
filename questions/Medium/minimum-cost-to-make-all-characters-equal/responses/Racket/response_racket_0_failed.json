@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 6: Char 61: subtract: unbound identifier",
+    "full_compile_error": "Line 6: Char 61: subtract: unbound identifier\n  in: subtract\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:17:60",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2817",
+    "task_finish_time": 1707764492819,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1173478299",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-cost s)\n  (-> string? exact-integer?)\n  (let loop ((i 0) (cost 0) (zeros (count (lambda (c) (equal? c #\\0)) (string->list s))) (ones 0))\n    (if (= i (string-length s))\n        (+ cost (min zeros ones))\n        (let ((new-zeros (if (char=? (string-ref s i) #\\0) (subtract zeros 1) zeros))\n              (new-ones (if (char=? (string-ref s i) #\\1) (+ ones 1) ones)))\n          (loop (+ i 1) (+ cost (min zeros ones)) new-zeros new-ones)))))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018minSum\u2019\nLine 25: Char 27: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   28 |     long long targetSum = max(sum1, sum2) + totalZeroCount * max(zeroCount1, zeroCount2);\n      |                           ^~~\n      |                           fmax\n/tmp/cc01guMS.o:prog_joined.c:function minSum: error: undefined reference to 'max'\n/tmp/cc01guMS.o:prog_joined.c:function minSum: error: undefined reference to 'max'\n/tmp/cc01guMS.o:prog_joined.c:function minSum: error: undefined reference to 'max'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3171",
+    "task_finish_time": 1707784353075,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1173658616",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "long long minSum(int* nums1, int nums1Size, int* nums2, int nums2Size) {\n    long long sum1 = 0, sum2 = 0;\n    int zeroCount1 = 0, zeroCount2 = 0;\n\n    // Sum up all elements in nums1 and count zeros\n    for (int i = 0; i < nums1Size; ++i) {\n        sum1 += nums1[i];\n        if (nums1[i] == 0) ++zeroCount1;\n    }\n\n    // Sum up all elements in nums2 and count zeros\n    for (int i = 0; i < nums2Size; ++i) {\n        sum2 += nums2[i];\n        if (nums2[i] == 0) ++zeroCount2;\n    }\n\n    // If the total number of zeros is 0 and sums are not equal, return -1\n    if (zeroCount1 == 0 && zeroCount2 == 0 && sum1 != sum2) return -1;\n\n    // Calculate the adjustment needed to make sums equal\n    long long totalZeroCount = zeroCount1 + zeroCount2;\n    if (sum1 == sum2) return sum1; // If sums are already equal, no need to add\n\n    // The strategy is to balance the sums by adding the minimum amount where needed\n    long long targetSum = max(sum1, sum2) + totalZeroCount * max(zeroCount1, zeroCount2);\n\n    // If after balancing one sum, the other cannot be made equal due to insufficient zeros, return -1\n    if (sum1 < sum2) {\n        if ((targetSum - sum1) < zeroCount1 || (targetSum - sum2) < zeroCount2) return -1;\n    } else {\n        if ((targetSum - sum2) < zeroCount2 || (targetSum - sum1) < zeroCount1) return -1;\n    }\n\n    long long diff = abs(sum1 - sum2);\n    long long minAddition = (diff / totalZeroCount) * totalZeroCount + ((diff % totalZeroCount) ? totalZeroCount : 0);\n\n    return max(sum1, sum2) + minAddition;\n}"
+}
