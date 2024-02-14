@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 53: Char 1: ** (TokenMissingError) missing terminator: end (for \"do\" starting at line 18)\n    HINT: it looks like the \"do\" on line 18 does not have a matching \"end\"\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2837",
+    "task_finish_time": 1707928359353,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1175270595",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec make_the_integer_zero(num1 :: integer, num2 :: integer) :: integer\n  def make_the_integer_zero(num1, num2) do\n    operations(0, num1, num2)\n  end\n\n  defp operations(61, _, _), do: -1\n  defp operations(count, 0, _), do: count\n  defp operations(count, num1, num2) do\n    with {:ok, i} <- find_i(num1, num2),\n         new_num1 <- num1 - (2 |> :math.pow(i) |> round + num2) do\n      operations(count + 1, new_num1, num2)\n    else\n      _ -> -1\n    end\n  end\n\n  defp find_i(num1, num2) do\n    Enum.reduce_while"
+}
