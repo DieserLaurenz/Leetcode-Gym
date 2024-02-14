@@ -308,10 +308,9 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
 
 def generate_prompt_content(question, snippet):
     return (
-            f'Within the provided {snippet["lang"]} function template, solve the specified problem. '
-            f'Do not declare the main function. Only include libraries from the standard library. '
-            f'Provide the code without explanation.\n\n'
-            f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
+        f'Solve the specified problem within the provided {snippet["lang"]} function template, without declaring the '
+        f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
+        f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
         )
 
 
