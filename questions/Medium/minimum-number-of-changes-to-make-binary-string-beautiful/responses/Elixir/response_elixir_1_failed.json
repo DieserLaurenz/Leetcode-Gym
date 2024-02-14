@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 6: Char 55: ** (SyntaxError) unexpected expression after keyword list. Keyword lists must always come as the last argument. Therefore, this is not allowed:\n    function_call(1, some: :option, 2)\nInstead, wrap the keyword in brackets:\n    function_call(1, [some: :option], 2)\nSyntax error after: ','\n    |\n  6 |         {zero_changes + if char == '1', do: 1, else: 0, one_changes + if char == '0', do: 1, else: 0}\n    |                                                       ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3174",
+    "task_finish_time": 1707834882372,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1174218017",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_changes(s :: String.t) :: integer\n  def min_changes(s) do\n    Enum.reduce(Enum.with_index(s), {0, 0}, fn {char, idx}, {zero_changes, one_changes} ->\n      if rem(idx, 2) == 0 do\n        {zero_changes + if char == '1', do: 1, else: 0, one_changes + if char == '0', do: 1, else: 0}\n      else\n        {zero_changes + if char == '0', do: 1, else: 0, one_changes + if char == '1', do: 1, else: 0}\n      end\n    end)\n    |> Tuple.to_list()\n    |> Enum.min()\n  end\nend"
+}

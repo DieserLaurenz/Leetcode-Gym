@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 14: Char 52: variable 'Acc' is unbound",
+    "full_compile_error": "Line 14: Char 52: variable 'Acc' is unbound\n%   14|                               {$5, $0} when length(Acc) > 1 -> CheckSpecial(T, H, Ops + 1, min(Min, Ops + 1));\n%     |                                                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3046",
+    "task_finish_time": 1707908572521,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1175046353",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_operations(Num :: unicode:unicode_binary()) -> integer().\nminimum_operations(Num) ->\n    Str = unicode:characters_to_list(Num),\n    MinOps = fun(MinOps, [], _Acc) -> MinOps;\n                (MinOps, [H | T], Acc) when H =:= $0; H =:= $2; H =:= $5; H =:= $7 -> MinOps(T, [H | Acc]);\n                (MinOps, [_ | T], Acc) -> MinOps(T, Acc) + 1\n             end,\n    CheckSpecial = fun(CheckSpecial, [], _Last, _Ops, Min) -> Min;\n                      (CheckSpecial, [H | T], Last, Ops, Min) when H =:= $0; H =:= $2; H =:= $5; H =:= $7 ->\n                          case {H, Last} of\n                              {$2, $5} -> CheckSpecial(T, H, Ops + 1, min(Min, Ops + 1));\n                              {$7, $5} -> CheckSpecial(T, H, Ops + 1, min(Min, Ops + 1));\n                              {$0, $0} -> CheckSpecial(T, H, Ops + 1, Min);\n                              {$5, $0} when length(Acc) > 1 -> CheckSpecial(T, H, Ops + 1, min(Min, Ops + 1));\n                              _ -> CheckSpecial(T, H, Ops + 1, Min)\n                          end;\n                      (CheckSpecial, [_ | T], Last, Ops, Min) -> CheckSpecial(T, Last, Ops, Min)\n                   end,\n    MinOpsInitial = MinOps(length(Str), Str, []),\n    CheckSpecial(length(Str), lists:reverse(Str), $1, 0, MinOpsInitial)."
+}

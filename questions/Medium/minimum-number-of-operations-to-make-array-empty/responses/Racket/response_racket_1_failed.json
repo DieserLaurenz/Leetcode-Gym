@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 19: Char 56: new-counts: unbound identifier",
+    "full_compile_error": "Line 19: Char 56: new-counts: unbound identifier\n  in: new-counts\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:30:55",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3094",
+    "task_finish_time": 1707876515081,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1174686294",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-operations nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([counts (make-hash)])\n    (for ([num nums])\n      (hash-update! counts num add1 0))\n    (let loop ([ops 0] [counts counts])\n      (define values (hash-values counts))\n      (define threes (count (lambda (x) (>= x 3)) values))\n      (define ones-and-twos (count (lambda (x) (< x 3)) values))\n      (if (and (= threes 0) (= ones-and-twos 0))\n          ops\n          (let ([new-ops (+ ops threes)])\n            (if (or (> ones-and-twos 0) (> threes 0))\n                (let ([new-counts (hash-map counts\n                                             (lambda (k v)\n                                               (cond\n                                                 [(>= v 3) (- v 3)]\n                                                 [else v])))]\n                      [remaining (apply + (hash-values new-counts))])\n                  (if (= remaining 0)\n                      new-ops\n                      (if (= (% remaining 3) 0)\n                          (+ new-ops (/ remaining 3))\n                          -1)))\n                -1))))))"
+}

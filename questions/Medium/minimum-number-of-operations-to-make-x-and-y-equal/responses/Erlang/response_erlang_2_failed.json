@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 24: illegal guard expression",
+    "full_compile_error": "Line 10: Char 24: illegal guard expression\n%   10| queue(_, _, Q, _) when queue:is_empty(Q) ->\n%     |                        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3239",
+    "task_finish_time": 1707898061777,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1174937250",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_operations_to_make_equal(X :: integer(), Y :: integer()) -> integer().\nminimum_operations_to_make_equal(X, Y) ->\n    queue(X, Y, queue:new()).\n\nqueue(X, Y, Q) when X == Y ->\n    0;\nqueue(X, Y, Q) ->\n    queue(X, Y, queue:in({X, 0}, Q), #{X => true}).\n\nqueue(_, _, Q, _) when queue:is_empty(Q) ->\n    -1; % Should never happen\nqueue(X, Y, Q, Visited) ->\n    {value, {{CX, Ops}, Q1}} = queue:out(Q),\n    NewOps = Ops + 1,\n    NextStates = [{CX + 1, NewOps}, {CX - 1, NewOps}] ++\n        (case CX rem 11 == 0 of true -> [{CX div 11, NewOps}]; false -> [] end) ++\n        (case CX rem 5 == 0 of true -> [{CX div 5, NewOps}]; false -> [] end),\n    FoldFun = fun({NextX, Ops}, {QAcc, VisitedAcc}) ->\n                  case maps:is_key(NextX, VisitedAcc) of\n                      false when NextX == Y -> throw(Ops);\n                      false -> {queue:in({NextX, Ops}, QAcc), maps:put(NextX, true, VisitedAcc)};\n                      true -> {QAcc, VisitedAcc}\n                  end\n              end,\n    try lists:foldl(FoldFun, {Q1, Visited}, NextStates)\n    catch\n        C:Ops -> Ops\n    end."
+}

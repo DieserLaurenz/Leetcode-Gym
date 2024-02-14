@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 8: Char 14: variable '_' is unbound",
+    "full_compile_error": "Line 8: Char 14: variable '_' is unbound\n%    8|             {_, Changes + 1}\n%     |              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3174",
+    "task_finish_time": 1707834788304,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1174216800",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_changes(S :: unicode:unicode_binary()) -> integer().\nmin_changes(S) ->\n    B = binary:bin_to_list(S),\n    CountChanges = fun\n        (Char, {Prev, Changes}) when Char =:= Prev ->\n            {Char, Changes};\n        (_, {_, Changes}) ->\n            {_, Changes + 1}\n    end,\n    {_, MinChanges} = lists:foldl(CountChanges, {hd(B), 0}, tl(B)),\n    MinChanges div 2."
+}

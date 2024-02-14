@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.",
+    "full_compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.\nThis error happens when you have function calls without parentheses inside keywords. For example:\n    function(arg, one: nested_call a, b, c)\n    function(arg, one: if expr, do: :this, else: :that)\nIn the examples above, we don't know if the arguments \"b\" and \"c\" apply to the function \"function\" or \"nested_call\". Or if the keywords \"do\" and \"else\" apply to the function \"function\" or \"if\". You can solve this by explicitly adding parentheses:\n    function(arg, one: if(expr, do: :this, else: :that))\n    function(arg, one: nested_call(a, b, c))\nAmbiguity found at:\n  solution.ex:18\nLine 18: ** (SyntaxError) unexpected comma. Parentheses are required to solve ambiguity inside containers.\nThis error may happen when you forget a comma in a list or other container:\n    [a, b c, d]\nOr when you have ambiguous calls:\n    [function a, b, c]\nIn the example above, we don't know if the values \"b\" and \"c\" belongs to the list or the function \"function\". You can solve this by explicitly adding parentheses:\n    [one, function(a, b, c)]\nElixir cannot compile otherwise. Syntax error before: ','\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3239",
+    "task_finish_time": 1707898164262,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1174938322",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_operations_to_make_equal(x :: integer, y :: integer) :: integer\n  def minimum_operations_to_make_equal(x, y) do\n    explore(x, y, Map.new(), 0)\n  end\n\n  defp explore(x, y, visited, steps) when x == y, do: steps\n\n  defp explore(x, y, visited, steps) do\n    if Map.has_key?(visited, {x, y}) do\n      :infinity\n    else\n      visited = Map.put(visited, {x, y}, true)\n\n      ops = [\n        {:inc, x + 1},\n        {:dec, x - 1},\n        {:div5, if rem(x, 5) == 0, do: x div 5, else: nil},\n        {:div11, if rem(x, 11) == 0, do: x div 11, else: nil}\n      ]\n      |> Enum.filter(fn {_op, val} -> not is_nil(val) end)\n      |> Enum.map(fn {_op, val} -> explore(val, y, visited, steps + 1) end)\n\n      case ops do\n        [] -> :infinity\n        _ -> Enum.min(ops)\n      end\n    end\n  end\nend"
+}

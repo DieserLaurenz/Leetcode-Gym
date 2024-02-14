@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 8: Char 55: ** (SyntaxError) syntax error before: ')'\n    |\n  8 |     |> Enum.reduce({0, 0}, fn x, (max_groups, prev_max) ->\n    |                                                       ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3166",
+    "task_finish_time": 1707865899505,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1174603379",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_groups_for_valid_assignment(nums :: [integer]) :: integer\n  def min_groups_for_valid_assignment(nums) do\n    nums\n    |> Enum.frequencies()\n    |> Map.values()\n    |> Enum.sort()\n    |> Enum.reduce({0, 0}, fn x, (max_groups, prev_max) ->\n      new_max = max(prev_max + 1, x)\n      {max(max_groups, new_max), new_max}\n    end)\n    |> elem(0)\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 17: Char 13: variable 'FindSplit' is unbound",
+    "full_compile_error": "Line 17: Char 13: variable 'FindSplit' is unbound\n%   17|             FindSplit(I + 1, {NewLeft, NewRight}, Acc);\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2888",
+    "task_finish_time": 1707816177181,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1174010766",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_index(Nums :: [integer()]) -> integer().\nminimum_index(Nums) ->\n    Freqs = lists:foldl(fun(X, Acc) -> maps:update_with(X, fun(Y) -> Y + 1 end, 1, Acc) end, #{}, Nums),\n    {DomElem, DomCount} = lists:max_by(fun({_, Count}) -> Count end, maps:to_list(Freqs)),\n    Total = length(Nums),\n    FindSplit = fun\n        (I, {Left, Right}, Acc) when I < Total - 1 ->\n            NewLeft = maps:update_with(DomElem, fun(C) -> C + 1 end, 1, Left),\n            NewRight = maps:update_with(DomElem, fun(C) -> C - 1 end, 0, Right),\n            LeftCount = maps:get(DomElem, NewLeft, 0),\n            RightCount = maps:get(DomElem, NewRight, 0),\n            if LeftCount * 2 > I + 1 andalso RightCount * 2 > Total - I - 1 ->\n                [I|Acc];\n               true ->\n                Acc\n            end,\n            FindSplit(I + 1, {NewLeft, NewRight}, Acc);\n        (_, _, Acc) ->\n            Acc\n    end,\n    case FindSplit(0, {#{DomElem => 0}, Freqs#{DomElem := DomCount - 1}}, []) of\n        [] -> -1;\n        L -> lists:min(L)\n    end."
+}

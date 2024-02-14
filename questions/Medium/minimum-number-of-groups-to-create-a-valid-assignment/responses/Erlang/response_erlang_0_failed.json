@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 5: function fst/1 undefined",
+    "full_compile_error": "Line 11: Char 5: function fst/1 undefined\n%   11|     fst(GroupCount).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3166",
+    "task_finish_time": 1707865773054,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1174602447",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_groups_for_valid_assignment(Nums :: [integer()]) -> integer().\nmin_groups_for_valid_assignment(Nums) ->\n    Counts = lists:foldl(fun(X, Acc) -> maps:update_with(X, fun(C) -> C + 1 end, 1, Acc) end, #{}, Nums),\n    SortedCounts = lists:sort(maps:values(Counts)),\n    GroupCount = lists:foldl(fun(C, {Groups, PrevCount}) ->\n                                 if\n                                     C == PrevCount -> {Groups, C};\n                                     true -> {Groups + 1, C}\n                                 end\n                             end, {0, -1}, SortedCounts),\n    fst(GroupCount)."
+}

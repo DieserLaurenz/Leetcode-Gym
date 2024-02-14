@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 7: Char 42: error: \u2018compare\u2019 undeclared (first use in this function) [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018minimumAddedCoins\u2019\nLine 7: Char 42: error: \u2018compare\u2019 undeclared (first use in this function) [solution.c]\n   10 |     qsort(coins, coinsSize, sizeof(int), compare);\n      |                                          ^~~~~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3231",
+    "task_finish_time": 1707845247173,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1174370401",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "int minimumAddedCoins(int* coins, int coinsSize, int target) {\n    long long maxReachable = 0; // Use long long to avoid integer overflow\n    int addedCoins = 0;\n    int i = 0; // Index to iterate through the coins array\n    \n    // Sort the coins array to ensure we process coins in ascending order\n    qsort(coins, coinsSize, sizeof(int), compare);\n\n    while (maxReachable < target) {\n        // If current coin is within reach or we have exhausted all available coins,\n        // then we need to add a new coin\n        if (i >= coinsSize || coins[i] > maxReachable + 1) {\n            maxReachable = 2 * maxReachable + 1; // Adding a coin that doubles the reach\n            addedCoins++;\n        } else {\n            // Use the current coin to extend the maximum reachable value\n            maxReachable += coins[i];\n            i++;\n        }\n    }\n\n    return addedCoins;\n}\n\n// Comparator function for qsort\nint compare(const void *a, const void *b) {\n    return (*(int*)a - *(int*)b);\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018minimumOperations\u2019\nLine 14: Char 41: warning: implicit declaration of function \u2018min\u2019; did you mean \u2018fmin\u2019? [-Wimplicit-function-declaration] [solution.c]\n   17 |                     ops = len - 2 + i - min(i, lastPos[j]); // Calculate operations needed\n      |                                         ^~~\n      |                                         fmin\n/tmp/cc23Zd5L.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3046",
+    "task_finish_time": 1707898561985,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1174942417",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "int minimumOperations(char* num) {\n    int len = strlen(num), i, j, ops, minOps = len; // Initialize to maximum possible operations.\n    int lastPos[10];\n    for (i = 0; i < 10; ++i) lastPos[i] = -1; // Initialize last positions of digits 0-9 to -1.\n\n    for (i = len - 1; i >= 0; --i) {\n        int digit = num[i] - '0';\n        lastPos[digit] = i;\n\n        // Check for patterns ending in 00, 25, 50, 75\n        if (digit == 0 || digit == 5) {\n            for (j = 0; j < 10; ++j) {\n                if (lastPos[j] != -1 && ((digit == 0 && (j == 0 || j == 5)) || (digit == 5 && (j == 2 || j == 7)))) {\n                    ops = len - 2 + i - min(i, lastPos[j]); // Calculate operations needed\n                    if (ops < minOps) minOps = ops;\n                }\n            }\n        }\n    }\n\n    // Special case: if minOps wasn't updated, return len - 1; else return minOps.\n    return minOps == len ? len - 1 : minOps;\n}"
+}

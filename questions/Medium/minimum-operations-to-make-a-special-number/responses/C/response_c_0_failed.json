@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "solution.c: In function \u2018minimumOperations\u2019\nLine 13: Char 69: warning: implicit declaration of function \u2018min\u2019; did you mean \u2018fmin\u2019? [-Wimplicit-function-declaration] [solution.c]\n   16 |                 if (lastPos[2] != -1 && lastPos[2] < i) ops = len - min(i, lastPos[2]) - 2;\n      |                                                                     ^~~\n      |                                                                     fmin\n/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'\n/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'\n/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'\n/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'\ncollect2: error: ld returned 1 exit status",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3046",
+    "task_finish_time": 1707898519801,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1174941995",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "int minimumOperations(char* num) {\n    int len = strlen(num);\n    int minOps = len; // Initialize to maximum possible operations.\n    int lastPos[10] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}; // Last positions of digits 0-9.\n\n    for (int i = len - 1; i >= 0; --i) {\n        int digit = num[i] - '0';\n        lastPos[digit] = i;\n        // Check for 00, 25, 50, 75 patterns.\n        if ((digit == 0 || digit == 5) && lastPos[0] != -1) {\n            int ops = len - i - 1; // Operations to move to end.\n            if (digit == 5) {\n                if (lastPos[2] != -1 && lastPos[2] < i) ops = len - min(i, lastPos[2]) - 2;\n                if (lastPos[7] != -1 && lastPos[7] < i) ops = min(ops, len - min(i, lastPos[7]) - 2);\n            } else if (digit == 0) {\n                if (lastPos[0] != -1 && lastPos[0] < i) ops = len - min(i, lastPos[0]) - 2;\n                if (lastPos[5] != -1 && lastPos[5] < i) ops = min(ops, len - min(i, lastPos[5]) - 2);\n            }\n            minOps = min(minOps, ops);\n        }\n    }\n\n    return minOps == len ? len - 1 : minOps; // Special case handling when num is already special.\n}"
+}

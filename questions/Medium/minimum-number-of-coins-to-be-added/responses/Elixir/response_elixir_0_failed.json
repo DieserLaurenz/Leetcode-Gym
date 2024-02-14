@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"added_coins\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"added_coins\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 11:   Solution.minimum_added_coins/2\nwarning: variable \"current_sum\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 14:   Solution.minimum_added_coins/2\nwarning: variable \"current_sum\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 18:   Solution.minimum_added_coins/2\nerror: undefined function while/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 9:   Solution.minimum_added_coins/2\nerror: undefined function break/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 13:   Solution.minimum_added_coins/2\nerror: undefined function if/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 13:   Solution.minimum_added_coins/2\nerror: undefined function while/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 17:   Solution.minimum_added_coins/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3231",
+    "task_finish_time": 1707855135995,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1174508739",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_added_coins(coins :: [integer], target :: integer) :: integer\n  def minimum_added_coins(coins, target) do\n    coins = Enum.sort(coins)\n    current_sum = 0\n    added_coins = 0\n\n    for coin <- coins do\n      while current_sum < target and current_sum + 1 < coin do\n        current_sum = current_sum * 2 + 1\n        added_coins = added_coins + 1\n      end\n      break if current_sum >= target\n      current_sum = current_sum + coin\n    end\n\n    while current_sum < target do\n      current_sum = current_sum * 2 + 1\n      added_coins = added_coins + 1\n    end\n\n    added_coins\n  end\nend"
+}

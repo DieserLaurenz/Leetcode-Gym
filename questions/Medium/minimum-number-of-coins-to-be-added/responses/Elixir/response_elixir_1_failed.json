@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: the function \"if\" cannot handle clauses with the -> operator because it is not a macro. Please make sure you are invoking the proper name and that it is a macro",
+    "full_compile_error": "error: the function \"if\" cannot handle clauses with the -> operator because it is not a macro. Please make sure you are invoking the proper name and that it is a macro\nLine 9:   Solution.minimum_added_coins/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) src/elixir_fn.erl:17: anonymous fn/4 in :elixir_fn.expand/4\n    (stdlib 5.1.1) lists.erl:1706: :lists.mapfoldl_1/3\n    (elixir 1.15.7) src/elixir_fn.erl:23: :elixir_fn.expand/4",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3231",
+    "task_finish_time": 1707855171898,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1174509118",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_added_coins(coins :: [integer], target :: integer) :: integer\n  def minimum_added_coins(coins, target) do\n    coins = Enum.sort(coins)\n    added_coins = 0\n    current = 1\n\n    Enum.reduce_while(coins, 0, fn coin, acc ->\n      if acc >= target, do: {:halt, added_coins}, else: {:cont, acc}\n      |> case do\n        {:halt, _} -> {:halt, added_coins}\n        _ ->\n          while acc < coin and acc < target do\n            added_coins = added_coins + 1\n            acc = acc + current\n            current = acc + 1\n          end\n          if acc >= target, do: {:halt, added_coins}, else: {:cont, acc + coin}\n      end\n    end)\n\n    while current <= target do\n      added_coins = added_coins + 1\n      current = current * 2\n    end\n\n    added_coins\n  end\n\n  defp while(condition, do: block) do\n    if condition, do: [block |> block.(), while(condition, do: block)], else: []\n  end\nend"
+}

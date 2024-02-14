@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 3: Char 29: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: ",
+    "full_compile_error": "Line 3: Char 29: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: \npublic inline fun <T, K> Array<out TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections\npublic inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> TypeVariable(K)): Grouping<Char, TypeVariable(K)> defined in kotlin.text\npublic inline fun <T, K> Iterable<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections\npublic inline fun <T, K> Sequence<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.sequences\n        val countMap = nums.groupingBy { it }.eachCount()\n                            ^\nLine 3: Char 42: error: unresolved reference: it\n        val countMap = nums.groupingBy { it }.eachCount()\n                                         ^\nLine 4: Char 41: error: unresolved reference: it\n        val maxCount = countMap.maxOf { it.value }\n                                        ^\nLine 7: Char 43: error: overload resolution ambiguity: \npublic final operator fun plus(other: Byte): Int defined in kotlin.Int\npublic final operator fun plus(other: Double): Double defined in kotlin.Int\npublic final operator fun plus(other: Float): Float defined in kotlin.Int\npublic final operator fun plus(other: Int): Int defined in kotlin.Int\npublic final operator fun plus(other: Long): Long defined in kotlin.Int\npublic final operator fun plus(other: Short): Int defined in kotlin.Int\n        return maxOf(maxCount, (nums.size + uniqueValuesCount - 1) / uniqueValuesCount)\n                                          ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3166",
+    "task_finish_time": 1707856140853,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1174519109",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun minGroupsForValidAssignment(nums: IntArray): Int {\n        val countMap = nums.groupingBy { it }.eachCount()\n        val maxCount = countMap.maxOf { it.value }\n        val uniqueValuesCount = countMap.keys.size\n\n        return maxOf(maxCount, (nums.size + uniqueValuesCount - 1) / uniqueValuesCount)\n    }\n}"
+}

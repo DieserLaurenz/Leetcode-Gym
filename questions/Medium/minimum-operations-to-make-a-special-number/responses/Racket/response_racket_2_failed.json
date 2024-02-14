@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 19\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3046",
+    "task_finish_time": 1707908428653,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1175044934",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-operations num)\n  (-> string? exact-integer?)\n  (let ([len (string-length num)])\n    (define (remove-and-check suffix)\n      (let loop ([i 0] [removed 0])\n        (cond\n          [(= i len) (if (string=? suffix \"\") 0 #f)]\n          [else\n           (let ([digit (string-ref num i)])\n             (if (string=? (string digit) suffix)\n                 (if (string=? suffix \"\") removed (loop (+ i 1) removed))\n                 (loop (+ i 1) (+ removed 1))))]))\n    (let ([result (or (remove-and-check \"00\")\n                      (remove-and-check \"25\")\n                      (remove-and-check \"50\")\n                      (remove-and-check \"75\")\n                      len)])\n      (if (eq? result #f) len result))))"
+}

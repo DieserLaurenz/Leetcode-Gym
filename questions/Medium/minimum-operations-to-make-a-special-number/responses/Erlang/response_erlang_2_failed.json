@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 27: syntax error before: 0",
+    "full_compile_error": "Line 4: Char 27: syntax error before: 0\n%    4|     RequiredEndings = [[${0}, ${0}], [${2}, ${5}], [${5}, ${0}], [${7}, ${5}]],\n%     |                           ^\nLine 1: Char 2: spec for undefined function minimum_operations/1\n%    1| -spec minimum_operations(Num :: unicode:unicode_binary()) -> integer().\n%     |  ^\nLine 35: Char 13: function minimum_operations/1 undefined\n%   35|       Ret = minimum_operations(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3046",
+    "task_finish_time": 1707908661009,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1175047156",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_operations(Num :: unicode:unicode_binary()) -> integer().\nminimum_operations(Num) ->\n    Str = unicode:characters_to_list(Num),\n    RequiredEndings = [[${0}, ${0}], [${2}, ${5}], [${5}, ${0}], [${7}, ${5}]],\n    MinOperations = lists:foldl(\n        fun(Ending, Acc) ->\n            Ops = find_min_operations(Str, Ending, length(Str), 0),\n            min(Ops, Acc)\n        end,\n        length(Str),\n        RequiredEndings),\n    MinOperations.\n\nfind_min_operations(_, [], Ops, Found) -> Ops - Found;\nfind_min_operations([], _, Ops, _) -> Ops;\nfind_min_operations([H|T], [E|Es], Ops, Found) when H == E ->\n    find_min_operations(T, Es, Ops, Found + 1);\nfind_min_operations([_|T], Ending, Ops, Found) ->\n    find_min_operations(T, Ending, Ops - 1, Found)."
+}

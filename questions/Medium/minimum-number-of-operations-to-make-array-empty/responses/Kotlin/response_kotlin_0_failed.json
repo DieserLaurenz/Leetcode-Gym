@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 3: Char 28: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: ",
+    "full_compile_error": "Line 3: Char 28: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: \npublic inline fun <T, K> Array<out TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections\npublic inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> TypeVariable(K)): Grouping<Char, TypeVariable(K)> defined in kotlin.text\npublic inline fun <T, K> Iterable<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections\npublic inline fun <T, K> Sequence<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.sequences\n        val freqMap = nums.groupingBy { it }.eachCount()\n                           ^\nLine 3: Char 41: error: unresolved reference: it\n        val freqMap = nums.groupingBy { it }.eachCount()\n                                        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3094",
+    "task_finish_time": 1707875808760,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1174680236",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun minOperations(nums: IntArray): Int {\n        val freqMap = nums.groupingBy { it }.eachCount()\n        var operations = 0\n        var leftovers = 0\n\n        for (count in freqMap.values) {\n            operations += count / 3\n            leftovers += count % 3\n        }\n\n        return if (leftovers % 2 == 0) operations + leftovers / 2 else -1\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 13, Char 32: mismatched types (solution.rs)",
+    "full_compile_error": "Line 13, Char 32: mismatched types (solution.rs)\n   |\n13 |                 if counts[i] > 0 {\n   |                                ^ expected `&_`, found integer\n   |\n   = note: expected reference `&_`\n                   found type `{integer}`\nhelp: consider borrowing here\n   |\n13 |                 if counts[i] > &0 {\n   |                                +\nLine 14, Char 21: binary assignment operation `-=` cannot be applied to type `&{integer}` (solution.rs)\n   |\n14 |                     counts[i] -= 1;\n   |                     ---------^^^^^\n   |                     |\n   |                     cannot use `-=` on type `&{integer}`\nLine 18, Char 36: mismatched types (solution.rs)\n   |\n18 |             counts.retain(|&x| x > 0);\n   |                                    ^ expected `&_`, found integer\n   |\n   = note: expected reference `&_`\n                   found type `{integer}`\nhelp: consider borrowing here\n   |\n18 |             counts.retain(|&x| x > &0);\n   |                                    +\nSome errors have detailed explanations: E0308, E0368.\nFor more information about an error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to 3 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3166",
+    "task_finish_time": 1707865566688,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1174600979",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn min_groups_for_valid_assignment(nums: Vec<i32>) -> i32 {\n        let mut freq = std::collections::HashMap::new();\n        for &num in &nums {\n            *freq.entry(num).or_insert(0) += 1;\n        }\n        let mut counts: Vec<_> = freq.values().collect();\n        counts.sort_unstable_by(|a, b| b.cmp(a));\n        let mut groups = 0;\n        while !counts.is_empty() {\n            let mut i = 0;\n            while i < counts.len() {\n                if counts[i] > 0 {\n                    counts[i] -= 1;\n                }\n                i += 2;\n            }\n            counts.retain(|&x| x > 0);\n            groups += 1;\n        }\n        groups\n    }\n}"
+}

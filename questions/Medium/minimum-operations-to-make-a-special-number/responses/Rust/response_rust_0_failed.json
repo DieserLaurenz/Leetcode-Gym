@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 18, Char 31: mismatched types (solution.rs)",
+    "full_compile_error": "Line 18, Char 31: mismatched types (solution.rs)\n   |\n8  |             let mut ops = 0;\n   |                           - expected due to this value\n...\n18 |                         ops = i32::MAX;\n   |                               ^^^^^^^^ expected `usize`, found `i32`\nLine 24, Char 41: mismatched types (solution.rs)\n   |\n24 |             min_ops = min_ops.min(ops + (bytes.len() - j) as i32);\n   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^ expected `usize`, found `i32`\nLine 24, Char 39: cannot add `i32` to `usize` (solution.rs)\n   |\n24 |             min_ops = min_ops.min(ops + (bytes.len() - j) as i32);\n   |                                       ^ no implementation for `usize + i32`\n   |\n   = help: the trait `Add<i32>` is not implemented for `usize`\n   = help: the following other types implement trait `Add<Rhs>`:\n             <usize as Add>\n             <usize as Add<&usize>>\n             <&'a usize as Add<usize>>\n             <&usize as Add<&usize>>\nLine 24, Char 35: mismatched types (solution.rs)\n   |\n24 |             min_ops = min_ops.min(ops + (bytes.len() - j) as i32);\n   |                               --- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `i32`, found `usize`\n   |                               |\n   |                               arguments to this method are incorrect\n   |\nhelp: the return type of this call is `usize` due to the type of the argument passed\n  --> src/main.rs:25:23\n   |\n24 |             min_ops = min_ops.min(ops + (bytes.len() - j) as i32);\n   |                       ^^^^^^^^^^^^------------------------------^\n   |                                   |\n   |                                   this argument influences the return type of `min`\nnote: method defined here\n  --> /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/core/src/cmp.rs:828:8\nhelp: you can convert a `usize` to an `i32` and panic if the converted value doesn't fit\n   |\n24 |             min_ops = min_ops.min((ops + (bytes.len() - j) as i32).try_into().unwrap());\n   |                                   +                              +++++++++++++++++++++\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to 4 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3046",
+    "task_finish_time": 1707908203322,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1175042607",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn minimum_operations(num: String) -> i32 {\n        let mut min_ops = i32::MAX;\n        let targets = vec![\"00\", \"25\", \"50\", \"75\"];\n        let bytes = num.as_bytes();\n\n        for &target in &targets {\n            let mut ops = 0;\n            let mut j = bytes.len();\n\n            for &digit in target.as_bytes().iter().rev() {\n                j = match bytes[..j].iter().rposition(|&x| x == digit) {\n                    Some(pos) => {\n                        ops += bytes[..j].len() - 1 - pos;\n                        pos\n                    }\n                    None => {\n                        ops = i32::MAX;\n                        break;\n                    }\n                };\n            }\n\n            min_ops = min_ops.min(ops + (bytes.len() - j) as i32);\n        }\n\n        if min_ops == i32::MAX { num.len() as i32 - 1 } else { min_ops }\n    }\n}"
+}

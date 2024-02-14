@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 23\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3166",
+    "task_finish_time": 1707865684589,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1174601812",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-groups-for-valid-assignment nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let* ((freq (make-hash))\n         (max-count 0))\n    (for-each (lambda (num)\n                (hash-update! freq num add1 0))\n              nums)\n    (let* ((counts (hash-map freq (lambda (k v) v)))\n           (sorted-counts (sort counts >)))\n      (if (null? sorted-counts)\n          0\n          (let loop ((counts sorted-counts) (groups 1) (current-max (car sorted-counts)))\n            (if (null? counts)\n                groups\n                (let ((next-counts (cdr counts)))\n                  (if (null? next-counts)\n                      groups\n                      (let* ((next-max (car next-counts))\n                             (diff (- current-max next-max)))\n                        (if (> diff 1)\n                            (loop next-counts (+ groups 1) next-max)\n                            (loop next-counts groups next-max))))))))))"
+}
