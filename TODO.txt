@@ -1,19 +1,5 @@
-﻿Check if the language slugs are all handled correctly -- sollte eigentlich
-
-Startet möglicherweise nicht bei der Korrekten Aufgabe erneut. Schauen was das Problem hier ist
+﻿Startet möglicherweise nicht bei der Korrekten Aufgabe erneut. Schauen was das Problem hier ist
 
 Retry logik einführen für leetcode scraper und sowas
 
 Irgendwie beim content fetch wird nicht zuerst der cache gecheckt kp wieso
-
-Der pastet nicht immer die vollständige Lösung
-
-Wenn der beim 2. Versuch gar keinen Code generiert dann nimmt er den ersten, fixen
-
-Vlt noch gucken ob nicht die selbe prompt doppelt verwendet wird
-
-ChatGPT generiert manchmal keinen code im dritten versuch, überlegen was dann zutun ist
-
-Der hätte auch 3 verschiedene Codes in einer Antwort generiert haben können das ist das Problem
-
-Vielleicht nach redecleration von main function gucken? Oder einfach so lassen, da die Anforderungen ordnungsgemäß gestellt waren?
