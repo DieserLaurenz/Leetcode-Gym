@@ -117,15 +117,15 @@ def send_message(driver, prompt, attempt, conversation_id=None):
     )
     text_area.click()
 
-    time.sleep(0.7)
+    time.sleep(2)
 
     driver.execute_script("arguments[0].value = arguments[1];", text_area, prompt)
 
-    time.sleep(0.7)
+    time.sleep(2)
 
     text_area.send_keys(Keys.ENTER)
 
-    time.sleep(0.7)
+    time.sleep(2)
 
     text_area.send_keys(Keys.ENTER)
 
