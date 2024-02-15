@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 14: Char 66: ** (SyntaxError) unexpected reserved word: end\n    HINT: the \"{\" on line 14 is missing terminator \"}\"\n    |\n 14 |       |> Enum.filter(fn {({a, b}, _i) -> a != max1 and b != max2 end)\n    |                                                                  ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3190",
+    "task_finish_time": 1707941389799,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1175446717",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations(nums1 :: [integer], nums2 :: [integer]) :: integer\n  def min_operations(nums1, nums2) do\n    max1 = Enum.max(nums1)\n    max2 = Enum.max(nums2)\n\n    if max1 == nums1 |> Enum.at(-1) and max2 == nums2 |> Enum.at(-1), do: 0, else: count_swaps(nums1, nums2, max1, max2)\n  end\n\n  defp count_swaps(nums1, nums2, max1, max2) do\n    swaps =\n      Enum.zip(nums1, nums2)\n      |> Enum.with_index()\n      |> Enum.filter(fn {({a, b}, _i) -> a != max1 and b != max2 end)\n      |> Enum.map(fn {({a, b}, i) -> {Enum.abs(max1 - a) + Enum.abs(max2 - b), i} end)\n      |> Enum.sort()\n      |> Enum.reduce_while({0, max1, max2}, fn {dist, i}, {acc, cur_max1, cur_max2} ->\n        if cur_max1 == nums1 |> Enum.at(-1) and cur_max2 == nums2 |> Enum.at(-1), do: {:halt, acc},\n        else\n          {new_max1, new_max2} = swap_elements(nums1, nums2, i)\n          if new_max1 == nums1 |> Enum.at(-1) and new_max2 == nums2 |> Enum.at(-1), do: {:halt, acc + 1},\n          else {:cont, {acc + 1, new_max1, new_max2}}\n        end\n      end)\n\n    case swaps do\n      {:halt, acc} -> acc\n      _ -> -1\n    end\n  end\n\n  defp swap_elements(nums1, nums2, i) do\n    {List.update_at(nums1, i, &Enum.at(nums2, i)), List.update_at(nums2, i, &Enum.at(nums1, i))}\n    |> Tuple.to_list()\n    |> then(fn [new_nums1, new_nums2] -> {Enum.max(new_nums1), Enum.max(new_nums2)} end)\n  end\nend"
+}

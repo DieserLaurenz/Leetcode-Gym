@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 21: Char 116: read-syntax: missing `)` to close `(` on line 23, found instead `]`",
+    "full_compile_error": "Line 21: Char 116: read-syntax: missing `)` to close `(` on line 23, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3141",
+    "task_finish_time": 1707982193722,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1175815984",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-size-subarray nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (define (sum-up-to-k k)\n    (let loop ([i 0] [sum 0] [counts (make-hash)])\n      (if (>= i k) counts\n          (begin\n            (hash-update! counts (modulo i (length nums)) (lambda (x) (+ x (list-ref nums (modulo i (length nums))))) 0)\n            (loop (+ i 1) (+ sum (list-ref nums (modulo i (length nums)))) counts)))))\n  (let* ([total (apply + nums)]\n         [k (if (> total 0) (ceiling (/ target total)) (length nums))]\n         [prefix-sums (sum-up-to-k (* k (length nums)))]\n         [result (let loop ([i 0] [min-len +inf.0])\n                   (if (>= i (length nums)) (if (= min-len +inf.0) -1 min-len)\n                       (let* ([sum (hash-ref prefix-sums i 0)]\n                              [j (let find-j ([j i] [current-sum sum])\n                                   (if (and (< j (+ i (length nums))) (>= current-sum target))\n                                       j\n                                       (if (< j (+ i (length nums)))\n                                           (find-j (+ j 1) (- current-sum (list-ref nums (modulo j (length nums)))))\n                                           j)))]\n                         (loop (+ i 1) (if (and (< j (+ i (length nums))) (< (- j i) min-len)) (- j i) min-len)))))]\n    result))"
+}

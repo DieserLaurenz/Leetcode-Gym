@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"min_length\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)",
+    "full_compile_error": "warning: variable \"min_length\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 24:   Solution.min_size_subarray/2\nwarning: variable \"start\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 26:   Solution.min_size_subarray/2\nwarning: variable \"sum\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 25:   Solution.min_size_subarray/2\nerror: undefined function while/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 23:   Solution.min_size_subarray/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3141",
+    "task_finish_time": 1707982441651,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1175818670",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_size_subarray(nums :: [integer], target :: integer) :: integer\n  def min_size_subarray(nums, target) do\n    min_length = :infinity\n    total_sum = Enum.sum(nums)\n    n = length(nums)\n\n    cond do\n      total_sum < target ->\n        -1\n\n      total_sum == target ->\n        n\n\n      true ->\n        extended_nums = nums ++ nums\n        start = 0\n        sum = 0\n\n        for {num, index} <- Enum.with_index(extended_nums) do\n          sum = sum + num\n\n          while sum >= target do\n            min_length = Enum.min([min_length, index - start + 1])\n            sum = sum - Enum.at(extended_nums, start)\n            start = start + 1\n          end\n        end\n\n        if min_length == :infinity, do: -1, else: min_length\n    end\n  end\nend"
+}

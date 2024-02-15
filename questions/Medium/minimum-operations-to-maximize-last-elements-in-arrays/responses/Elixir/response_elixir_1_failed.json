@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 20: Char 76: ** (SyntaxError) unexpected reserved word: end\n    HINT: the \"{\" on line 20 is missing terminator \"}\"\n    |\n 20 |           |> Enum.filter(fn {({a, b}, _i) -> not (a == max1 and b == max2) end)\n    |                                                                            ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3190",
+    "task_finish_time": 1707941430157,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1175447110",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations(nums1 :: [integer], nums2 :: [integer]) :: integer\n  def min_operations(nums1, nums2) do\n    max1 = Enum.max(nums1)\n    max2 = Enum.max(nums2)\n\n    if max1 == List.last(nums1) and max2 == List.last(nums2), do: 0, else: count_swaps(nums1, nums2, max1, max2)\n  end\n\n  defp count_swaps(nums1, nums2, max1, max2) do\n    nums1_end = List.last(nums1)\n    nums2_end = List.last(nums2)\n\n    cond do\n      max1 == nums1_end and max2 == nums2_end -> 0\n      true ->\n        swaps = \n          Enum.zip(nums1, nums2)\n          |> Enum.with_index()\n          |> Enum.filter(fn {({a, b}, _i) -> not (a == max1 and b == max2) end)\n          |> Enum.count(fn {({a, b}, _i) -> a == max2 and b == max1 end)\n\n        if Enum.any?(nums1, fn x -> x == max2 end) and Enum.any?(nums2, fn x -> x == max1 end), do: swaps, else: -1\n    end\n  end\nend"
+}

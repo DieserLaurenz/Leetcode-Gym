@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 57: syntax error before: '|'",
+    "full_compile_error": "Line 15: Char 57: syntax error before: '|'\n%   15|     lists:reverse(foldl(fun(Elem, [H|T]) -> [F(Elem,H)|H|T] end, [Acc0], List)).\n%     |                                                         ^\nLine 3: Char 12: function scanl/3 undefined\n%    3|     Sums = scanl(fun(X, Acc) -> X + Acc end, 0, Nums),\n%     |            ^\nLine 10: Char 22: function foldl/3 undefined\n%   10|             MinLen = foldl(fun(Elem, Acc) -> min(Acc, check(Sums, Elem, Target, TotalSum, N)) end, N+1, Sums),\n%     |                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3141",
+    "task_finish_time": 1707982299586,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1175817144",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_size_subarray(Nums :: [integer()], Target :: integer()) -> integer().\nmin_size_subarray(Nums, Target) ->\n    Sums = scanl(fun(X, Acc) -> X + Acc end, 0, Nums),\n    TotalSum = hd(lists:reverse(Sums)),\n    N = length(Nums),\n    if\n        TotalSum < Target -> -1; % If total sum is less than target, impossible to find such subarray\n        TotalSum == Target -> N; % If total sum is exactly target, return length of the array\n        true ->\n            MinLen = foldl(fun(Elem, Acc) -> min(Acc, check(Sums, Elem, Target, TotalSum, N)) end, N+1, Sums),\n            if MinLen == N + 1 -> -1; true -> MinLen end\n    end.\n\nscanl(F, Acc0, List) -> \n    lists:reverse(foldl(fun(Elem, [H|T]) -> [F(Elem,H)|H|T] end, [Acc0], List)).\n\ncheck(Sums, Elem, Target, TotalSum, N) ->\n    Needed = Elem + Target,\n    case lists:dropwhile(fun(X) -> X < Needed end, Sums) of\n        [Head|_] ->\n            Idx = case TotalSum >= Target of\n                true -> (N - 1) rem length(Sums);\n                false -> 0\n            end,\n            Min1 = ((N * ((Head - Elem - Target) div TotalSum)) + Idx + 1),\n            Min2 = length(Sums) - 1 - (lists:keyfind(Needed, 1, lists:zip(Sums, lists:seq(1, length(Sums))))),\n            min(Min1, Min2);\n        [] -> N + 1\n    end."
+}

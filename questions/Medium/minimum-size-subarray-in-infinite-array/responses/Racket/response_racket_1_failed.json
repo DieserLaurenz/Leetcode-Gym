@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 16\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3141",
+    "task_finish_time": 1707982160910,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1175815637",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-size-subarray nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([n (length nums)])\n    (let loop ([i 0] [sum 0] [min-len +inf.0] [start 0])\n      (if (and (= i (* 2 n)) (= min-len +inf.0))\n          -1\n          (if (= i (* 2 n))\n              min-len\n              (let ([cur (list-ref nums (modulo i n))])\n                (set! sum (+ sum cur))\n                (while (and (not (= start i)) (>= sum target))\n                  (set! min-len (min min-len (- i start +1)))\n                  (set! sum (- sum (list-ref nums (modulo start n))))\n                  (set! start (+ start 1)))\n                (loop (+ i 1) sum min-len start))))))"
+}

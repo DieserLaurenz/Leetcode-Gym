@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 6: Char 32: ** (SyntaxError) syntax error before: 'div'\n    |\n  6 |     if min_len <= length(nums) div 2, do: min_len, else: -1\n    |                                ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3141",
+    "task_finish_time": 1707982474890,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1175819055",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_size_subarray(nums :: [integer], target :: integer) :: integer\n  def min_size_subarray(nums, target) do\n    nums = nums ++ nums\n    min_len = ref_min_length(nums, target)\n    if min_len <= length(nums) div 2, do: min_len, else: -1\n  end\n\n  defp ref_min_length(nums, target) do\n    sum = 0\n    start = 0\n    min_len = length(nums) + 1\n\n    for {num, i} <- Enum.with_index(nums), reduce: min_len do\n      min_len ->\n        sum = sum + num\n        while sum >= target and start <= i do\n          min_len = Enum.min([min_len, i - start + 1])\n          sum = sum - Enum.at(nums, start)\n          start = start + 1\n        end\n        min_len\n    end\n  end\n\n  defp while(true, do: block), do: block.()\n  defp while(false, do: _block), do: nil\nend"
+}

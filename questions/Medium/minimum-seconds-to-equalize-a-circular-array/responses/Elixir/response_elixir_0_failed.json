@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "** (ArgumentError) cannot pipe nums\n|> Enum.with_index()\n|> Enum.group_by(fn {num, _} -> num end, fn {_, index} -> index end)\n|> Enum.map(fn {_, indexes} -> max_distance(indexes, Enum.count(nums)) end)\n|> Enum.max()\n|> Kernel.+(1) into Kernel./() / 2, the :/ operator can only take two arguments\n    (elixir 1.15.7) lib/macro.ex:376: Macro.pipe/3\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 10:     Solution.minimum_seconds/1",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2920",
+    "task_finish_time": 1707971036128,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1175680181",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_seconds(nums :: [integer]) :: integer\n  def minimum_seconds(nums) do\n    nums\n    |> Enum.with_index()\n    |> Enum.group_by(fn {num, _} -> num end, fn {_, index} -> index end)\n    |> Enum.map(fn {_, indexes} -> max_distance(indexes, Enum.count(nums)) end)\n    |> Enum.max()\n    |> Kernel.+(1)\n    |> Kernel.//2\n  end\n\n  defp max_distance(indexes, count) do\n    indexes\n    |> Enum.sort()\n    |> Enum.concat([List.first(indexes) + count])\n    |> Enum.chunk_every(2, 1, :discard)\n    |> Enum.map(fn [a, b] -> b - a end)\n    |> Enum.max()\n    |> Kernel.-(1)\n  end\nend"
+}

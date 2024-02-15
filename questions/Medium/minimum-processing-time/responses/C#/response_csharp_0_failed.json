@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "csharp",
+    "run_success": false,
+    "compile_error": "Line 3: Char 20: error CS1503: Argument 1: cannot convert from 'System.Collections.Generic.IList<int>' to 'System.Array' (in Solution.cs)",
+    "full_compile_error": "Line 3: Char 20: error CS1503: Argument 1: cannot convert from 'System.Collections.Generic.IList<int>' to 'System.Array' (in Solution.cs)\nLine 4: Char 20: error CS1503: Argument 1: cannot convert from 'System.Collections.Generic.IList<int>' to 'System.Array' (in Solution.cs)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3151",
+    "task_finish_time": 1707949847814,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C#",
+    "submission_id": "1175515944",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "public class Solution {\n    public int MinProcessingTime(IList<int> processorTime, IList<int> tasks) {\n        Array.Sort(processorTime);\n        Array.Sort(tasks);\n        int n = processorTime.Count;\n        int maxTime = 0;\n        for (int i = 0; i < n; i++) {\n            int processorEndTime = processorTime[i] + tasks[4 * i] + tasks[4 * i + 1] + tasks[4 * i + 2] + tasks[4 * i + 3];\n            maxTime = Math.Max(maxTime, processorEndTime);\n        }\n        return maxTime;\n    }\n}"
+}

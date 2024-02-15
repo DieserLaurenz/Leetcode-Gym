@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "java",
+    "run_success": false,
+    "compile_error": "Line 9: error: bad operand types for binary operator '||'",
+    "full_compile_error": "Line 9: error: bad operand types for binary operator '||'\n        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0] || a[1] - b[1]);\n                                                                            ^\n  first type:  int\n  second type: int",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3151",
+    "task_finish_time": 1707941928205,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Java",
+    "submission_id": "1175451698",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "import java.util.Collections;\nimport java.util.List;\nimport java.util.PriorityQueue;\n\nclass Solution {\n    public int minProcessingTime(List<Integer> processorTime, List<Integer> tasks) {\n        Collections.sort(processorTime);\n        Collections.sort(tasks, Collections.reverseOrder());\n        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0] || a[1] - b[1]);\n        for (int i = 0; i < processorTime.size(); i++) {\n            pq.offer(new int[]{processorTime.get(i), i});\n        }\n        int[] endTime = new int[processorTime.size()];\n        for (int task : tasks) {\n            int[] cur = pq.poll();\n            cur[0] += task;\n            endTime[cur[1]] = cur[0];\n            pq.offer(cur);\n        }\n        int maxTime = 0;\n        for (int time : endTime) {\n            maxTime = Math.max(maxTime, time);\n        }\n        return maxTime;\n    }\n}"
+}

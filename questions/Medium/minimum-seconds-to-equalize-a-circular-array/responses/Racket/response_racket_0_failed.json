@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 5: Char 24: group: unbound identifier",
+    "full_compile_error": "Line 5: Char 24: group: unbound identifier\n  in: group\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:16:23",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2920",
+    "task_finish_time": 1707962054298,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1175600197",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-seconds nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define (all-equal? lst)\n    (apply = (map car (group lst))))\n  \n  (define (transform lst)\n    (map (lambda (i)\n           (let* ((n (length lst))\n                  (prev (list-ref lst (modulo (- i 1) n)))\n                  (curr (list-ref lst i))\n                  (next (list-ref lst (modulo (+ i 1) n))))\n             (minimum (list prev curr next))))\n         (range (length lst))))\n  \n  (define (find-min-seconds lst steps)\n    (if (all-equal? lst)\n        steps\n        (find-min-seconds (transform lst) (+ steps 1))))\n  \n  (if (all-equal? nums)\n      0\n      (find-min-seconds nums 0)))"
+}

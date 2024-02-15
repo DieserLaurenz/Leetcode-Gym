@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 18: illegal guard expression",
+    "full_compile_error": "Line 6: Char 18: illegal guard expression\n%    6|         Max1 =:= lists:last(Nums1) andalso Max2 =:= lists:last(Nums2) -> 0;\n%     |                  ^\nLine 6: Char 53: illegal guard expression\n%    6|         Max1 =:= lists:last(Nums1) andalso Max2 =:= lists:last(Nums2) -> 0;\n%     |                                                     ^\nLine 10: Char 67: illegal guard expression\n%   10|             NeededSwaps1 = if SwapMax1 > Max2 orelse SwapMax1 =:= lists:last(Nums2) -> true; true -> false end,\n%     |                                                                   ^\nLine 11: Char 67: illegal guard expression\n%   11|             NeededSwaps2 = if SwapMax2 > Max1 orelse SwapMax2 =:= lists:last(Nums1) -> true; true -> false end,\n%     |                                                                   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3190",
+    "task_finish_time": 1707941269435,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1175445614",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_operations(Nums1 :: [integer()], Nums2 :: [integer()]) -> integer().\nmin_operations(Nums1, Nums2) ->\n    Max1 = lists:max(Nums1),\n    Max2 = lists:max(Nums2),\n    if \n        Max1 =:= lists:last(Nums1) andalso Max2 =:= lists:last(Nums2) -> 0;\n        true ->\n            SwapMax1 = lists:max([lists:nth(Index, Nums2) || Index <- lists:seq(1, length(Nums1)), lists:nth(Index, Nums1) =:= Max1]),\n            SwapMax2 = lists:max([lists:nth(Index, Nums1) || Index <- lists:seq(1, length(Nums2)), lists:nth(Index, Nums2) =:= Max2]),\n            NeededSwaps1 = if SwapMax1 > Max2 orelse SwapMax1 =:= lists:last(Nums2) -> true; true -> false end,\n            NeededSwaps2 = if SwapMax2 > Max1 orelse SwapMax2 =:= lists:last(Nums1) -> true; true -> false end,\n            case {NeededSwaps1, NeededSwaps2} of\n                {true, true} -> 1;\n                _ -> -1\n            end\n    end."
+}

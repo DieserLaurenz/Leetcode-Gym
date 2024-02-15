@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 23\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3141",
+    "task_finish_time": 1707982128629,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1175815288",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-size-subarray nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  \n  (define (subarray-sum-helper prefix-sums target start-index min-length)\n    (let loop ((i start-index) (min-len min-length))\n      (if (>= i (length prefix-sums))\n          min-len\n          (let ((new-target (+ target (list-ref prefix-sums (modulo (- i 1) (length nums))))))\n            (let find-start ((j 0))\n              (if (>= j i)\n                  (loop (+ i 1) min-len)\n                  (if (>= (list-ref prefix-sums i) new-target)\n                      (let ((current-length (- i j)))\n                        (find-start (+ j 1))\n                        (loop (+ i 1) (if (< current-length min-len) current-length min-len)))\n                      (find-start (+ j 1))))))))\n  \n  (let ((prefix-sums (make-vector (+ (length nums) 1) 0)))\n    (for ([i (in-range 1 (+ (length nums) 1))])\n      (vector-set! prefix-sums i (+ (vector-ref prefix-sums (- i 1)) (list-ref nums (- i 1)))))\n    (let ((result (subarray-sum-helper (vector->list prefix-sums) target 1 +inf.0)))\n      (if (= result +inf.0) -1 result))))"
+}
