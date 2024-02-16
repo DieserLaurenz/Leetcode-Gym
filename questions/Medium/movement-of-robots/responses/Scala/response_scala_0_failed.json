@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 14: error: type mismatch; (in solution.scala)",
+    "full_compile_error": "Line 14: error: type mismatch; (in solution.scala)\n found   : Long\n required: Int\n        ((sum % mod) + mod) % mod.toInt\n                            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2787",
+    "task_finish_time": 1708002561923,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1176023538",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def sumDistance(nums: Array[Int], s: String, d: Int): Int = {\n        val mod = 1000000007\n        val n = nums.length\n        val positions = Array.ofDim[Int](n)\n        for (i <- nums.indices) {\n            positions(i) = nums(i) + (if (s(i) == 'R') d else -d)\n        }\n        scala.util.Sorting.quickSort(positions)\n        var sum: Long = 0\n        for (i <- positions.indices) {\n            sum = (sum + (positions(i).toLong * i - positions(i).toLong * (n - i - 1))) % mod\n        }\n        ((sum % mod) + mod) % mod.toInt\n    }\n}"
+}

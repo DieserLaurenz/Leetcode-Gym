@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 19\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3186",
+    "task_finish_time": 1707991953912,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1175917743",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-sum nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let* ([n (length nums)]\n         [left-min (make-vector n (first nums))]\n         [right-max (make-vector n 0)])\n    (for ([i (in-range 1 n)])\n      (vector-set! left-min i (min (vector-ref left-min (- i 1)) (list-ref nums i))))\n    (for ([i (in-range (- n 2) -1 -1)])\n      (vector-set! right-max i (max (vector-ref right-max (+ i 1)) (list-ref nums i))))\n    (let loop ([i 1] [result +inf.0])\n      (if (< i (- n 1))\n          (let* ([left (vector-ref left-min (- i 1))]\n                 [mid (list-ref nums i)]\n                 [right (vector-ref right-max i)])\n            (if (and (> mid left) (> mid right))\n                (loop (+ i 1) (min result (+ left mid right)))\n                (loop (+ i 1) result)))\n          (if (= result +inf.0) -1 result))))"
+}

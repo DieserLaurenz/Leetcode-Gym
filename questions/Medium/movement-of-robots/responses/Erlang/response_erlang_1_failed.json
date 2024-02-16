@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 26: Char 36: variable '_' is unbound",
+    "full_compile_error": "Line 26: Char 36: variable '_' is unbound\n%   26|     calculate_sum_distance([{Pos2, _} | Tail], (Acc + NewDist) rem Mod, Mod).\n%     |                                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2787",
+    "task_finish_time": 1708003041370,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1176029048",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec sum_distance(Nums :: [integer()], S :: unicode:unicode_binary(), D :: integer()) -> integer().\nsum_distance(Nums, S, D) ->\n    Positions = lists:zip(Nums, binary_to_list(S)),\n    SortedPositions = lists:sort(fun({Pos1, _}, {Pos2, _}) -> Pos1 < Pos2 end, Positions),\n    FinalPositions = calculate_positions(SortedPositions, D),\n    calculate_sum_distance(FinalPositions, 0, 1000000007).\n\ncalculate_positions(Positions, 0) -> Positions;\ncalculate_positions(Positions, D) ->\n    calculate_positions(move_robots(Positions, []), D - 1).\n\nmove_robots([], Acc) -> lists:reverse(Acc);\nmove_robots([{Pos, Dir}], Acc) -> lists:reverse([{Pos + direction(Dir), Dir} | Acc]);\nmove_robots([{Pos1, $L}, {Pos2, $R} | Tail], Acc) when Pos1 + 1 == Pos2 ->\n    move_robots([{Pos2 - 1, $L}, {Pos1 + 1, $R} | Tail], Acc);\nmove_robots([{Pos, Dir} | Tail], Acc) ->\n    move_robots(Tail, [{Pos + direction(Dir), Dir} | Acc]).\n\ndirection($L) -> -1;\ndirection($R) -> 1.\n\ncalculate_sum_distance([], _, _) -> 0;\ncalculate_sum_distance([_], _, _) -> 0;\ncalculate_sum_distance([{Pos1, _}, {Pos2, _} | Tail], Acc, Mod) ->\n    NewDist = (Pos2 - Pos1) rem Mod,\n    calculate_sum_distance([{Pos2, _} | Tail], (Acc + NewDist) rem Mod, Mod)."
+}

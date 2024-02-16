@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Unknown preprocess compile error",
+    "full_compile_error": "Unknown preprocess compile error",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2787",
+    "task_finish_time": 1707993387340,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1175933084",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func sumDistance(_ nums: [Int], _ s: String, _ d: Int) -> Int {\n        let mod = 1_000_000_007\n        var distances = [Int]()\n        for i in 0..<nums.count {\n            for j in i+1..<nums.count {\n                let distance = abs((nums[i] + (s[i] == \"L\" ? -d : d)) - (nums[j] + (s[j] == \"L\" ? -d : d)))\n                distances.append(distance)\n            }\n        }\n        let sum = distances.reduce(0) { ($0 + $1) % mod }\n        return sum\n    }\n}"
+}

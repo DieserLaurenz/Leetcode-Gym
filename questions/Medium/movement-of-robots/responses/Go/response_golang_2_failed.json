@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 17: Char 22: assignment mismatch: 3 variables but 2 values (solution.go)",
+    "full_compile_error": "Line 17: Char 22: assignment mismatch: 3 variables but 2 values (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2787",
+    "task_finish_time": 1708002373137,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1176021450",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func sumDistance(nums []int, s string, d int) int {\n    mod := 1000000007\n    n := len(nums)\n    events := make([][2]int, 2*n)\n    for i := 0; i < n; i++ {\n        if s[i] == 'L' {\n            events[2*i] = [2]int{nums[i] - d, -1}\n            events[2*i+1] = [2]int{nums[i], 1}\n        } else {\n            events[2*i] = [2]int{nums[i], -1}\n            events[2*i+1] = [2]int{nums[i] + d, 1}\n        }\n    }\n    sort.Slice(events, func(i, j int) bool {\n        return events[i][0] < events[j][0]\n    })\n    sum, cnt, ans := 0, 0\n    for _, event := range events {\n        if event[1] == 1 {\n            ans = (ans + event[0]*cnt - sum) % mod\n        } else {\n            sum = (sum + event[0]) % mod\n            cnt++\n        }\n    }\n    return (ans + mod) % mod\n}"
+}

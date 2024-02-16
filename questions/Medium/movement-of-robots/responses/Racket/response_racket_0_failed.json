@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 5: Char 58: move: unbound identifier",
+    "full_compile_error": "Line 5: Char 58: move: unbound identifier\n  in: move\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:16:57",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2787",
+    "task_finish_time": 1708002824050,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1176026532",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (sum-distance nums s d)\n  (-> (listof exact-integer?) string? exact-integer? exact-integer?)\n  (let ([mod 1000000007]\n        [move (map (lambda (dir) (if (equal? dir #\\R) 1 -1)) (string->list s))]\n        [positions (map + nums (map (lambda (m) (* m d)) move))])\n    (define (mod-sum x y) (modulo (+ x y) mod))\n    (define (calc-distances lst)\n      (if (null? lst)\n          0\n          (let loop ([rest (cdr lst)] [acc 0])\n            (if (null? rest)\n                acc\n                (loop (cdr rest) (mod-sum acc (abs (- (car lst) (car rest)))))))))\n    (let loop ([lst positions] [acc 0])\n      (if (null? lst)\n          acc\n          (loop (cdr lst) (mod-sum acc (calc-distances lst)))))))"
+}

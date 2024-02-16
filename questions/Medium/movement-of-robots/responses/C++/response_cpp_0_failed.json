@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "cpp",
+    "run_success": false,
+    "compile_error": "Line 26: Char 53: error: no matching function for call to 'min'",
+    "full_compile_error": "Line 26: Char 53: error: no matching function for call to 'min'\n   26 |                         dist = max(0LL, dist - 2 * (min(d, meetTime) - meetTime));\n      |                                                     ^~~\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:420:5: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('int' vs. 'long long')\n  411 |     min(const _Tp&, const _Tp&);\n      |     ^\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3455:5: note: candidate template ignored: could not match 'initializer_list<_Tp>' against 'int'\n 3446 |     min(initializer_list<_Tp> __l, _Compare __comp)\n      |     ^\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3449:5: note: candidate function template not viable: requires single argument '__l', but 2 arguments were provided\n 3440 |     min(initializer_list<_Tp> __l)\n      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:425:5: note: candidate function template not viable: requires 3 arguments, but 2 were provided\n  416 |     min(const _Tp&, const _Tp&, _Compare);\n      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2787",
+    "task_finish_time": 1707992235494,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C++",
+    "submission_id": "1175920966",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int sumDistance(vector<int>& nums, string s, int d) {\n        const int mod = 1e9 + 7;\n        vector<pair<int, char>> robots;\n        for (int i = 0; i < nums.size(); ++i) {\n            robots.emplace_back(nums[i], s[i]);\n        }\n        // Sort the robots based on their initial positions\n        sort(robots.begin(), robots.end());\n\n        long long totalDistance = 0;\n        for (int i = 0; i < robots.size(); ++i) {\n            for (int j = i + 1; j < robots.size(); ++j) {\n                long long dist = robots[j].first - robots[i].first;\n                // If robots are moving towards each other\n                if (robots[i].second == 'R' && robots[j].second == 'L') {\n                    long long meetTime = dist / 2; // Time when they meet and change directions\n                    if (d >= meetTime) {\n                        dist = max(0LL, dist - 2 * (min(d, meetTime) - meetTime));\n                    }\n                }\n                totalDistance = (totalDistance + dist) % mod;\n            }\n        }\n        return totalDistance;\n    }\n};"
+}
