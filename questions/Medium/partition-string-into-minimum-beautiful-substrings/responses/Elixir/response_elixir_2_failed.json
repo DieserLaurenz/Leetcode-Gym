@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: cannot invoke remote function String.length/1 inside guards",
+    "full_compile_error": "error: cannot invoke remote function String.length/1 inside guards\nLine 8:   Solution.dp/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2883",
+    "task_finish_time": 1708094190471,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1177012811",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_beautiful_substrings(s :: String.t) :: integer\n  def minimum_beautiful_substrings(s) do\n    memo = :maps.from_list(Enum.map(0..String.length(s) - 1, &{&1, -1}))\n    dp(s, 0, Map.put(memo, String.length(s), 0))\n  end\n\n  defp dp(_, pos, memo) when pos == String.length(memo) - 1, do: Map.get(memo, pos)\n  defp dp(s, pos, memo) do\n    case Map.get(memo, pos) do\n      -1 ->\n        len = String.length(s)\n        {min, new_memo} =\n          Enum.reduce_while(1..(len - pos), {nil, memo}, fn i, {min, memo_acc} ->\n            substring = String.slice(s, pos, i)\n            if valid_and_power_of_5?(substring) do\n              next_pos = pos + i\n              next_min = dp(s, next_pos, memo_acc)\n              cond do\n                next_min == -1 -> {:cont, {min, memo_acc}}\n                min == nil or next_min + 1 < min -> {:cont, {next_min + 1, Map.put(memo_acc, pos, next_min + 1)}}\n                true -> {:cont, {min, memo_acc}}\n              end\n            else\n              {:cont, {min, memo_acc}}\n            end\n          end)\n\n        case min do\n          nil -> Map.put(new_memo, pos, -1)\n          _ -> new_memo\n        end\n\n      min -> memo\n    end\n    |> Map.get(pos)\n  end\n\n  defp valid_and_power_of_5?(s) do\n    with false <- String.starts_with?(s, \"0\"),\n         {:ok, num} <- Integer.parse(s, 2),\n         true <- is_power_of_5?(num) do\n      true\n    else\n      _ -> false\n    end\n  end\n\n  defp is_power_of_5?(1), do: true\n  defp is_power_of_5?(n) when n > 1 and rem(n, 5) == 0, do: is_power_of_5?(div(n, 5))\n  defp is_power_of_5?(_), do: false\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 33: error: type mismatch; (in solution.scala)",
+    "full_compile_error": "Line 33: error: type mismatch; (in solution.scala)\n found   : Long\n required: Int\n        (totalCount * modPow(25, n - 4, mod)) % mod\n                                              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3200",
+    "task_finish_time": 1708083386850,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1176901099",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    val mod = 1000000007\n\n    def modPow(base: Long, exponent: Long, modulus: Long): Long = {\n        var result = 1L\n        var b = base % modulus\n        var e = exponent\n        while (e > 0) {\n            if ((e & 1) == 1) result = (result * b) % modulus\n            e >>= 1\n            b = (b * b) % modulus\n        }\n        result\n    }\n\n    def stringCount(n: Int): Int = {\n        if (n < 4) return 0\n\n        val factorial = new Array[Long](n + 1)\n        factorial(0) = 1\n        for (i <- 1 to n) {\n            factorial(i) = factorial(i - 1) * i % mod\n        }\n\n        def inverse(x: Long): Long = modPow(x, mod - 2, mod)\n\n        def choose(n: Int, k: Int): Long = {\n            if (n < k) 0\n            else factorial(n) * inverse(factorial(k)) % mod * inverse(factorial(n - k)) % mod\n        }\n\n        val totalCount = choose(26, 4) * choose(n - 1, 3) % mod * factorial(n - 4) % mod\n        (totalCount * modPow(25, n - 4, mod)) % mod\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "java",
+    "run_success": false,
+    "compile_error": "Line 9: error: ';' expected",
+    "full_compile_error": "Line 9: error: ';' expected\n        boolean isPrime(int number) {\n                       ^\nLine 9: error: ';' expected\n        boolean isPrime(int number) {\n                                  ^\n2 errors",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2873",
+    "task_finish_time": 1708102600475,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Java",
+    "submission_id": "1177121701",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "import java.util.ArrayList;\nimport java.util.List;\n\nclass Solution {\n    public List<List<Integer>> findPrimePairs(int n) {\n        List<List<Integer>> result = new ArrayList<>();\n\n        // Function to check if a number is prime\n        boolean isPrime(int number) {\n            if (number <= 1) return false;\n            for (int i = 2; i * i <= number; i++) {\n                if (number % i == 0) return false;\n            }\n            return true;\n        }\n\n        // Correcting the placement of isPrime method\n        for (int x = 2; x <= n / 2; x++) {\n            int y = n - x;\n            if (isPrime(x) && isPrime(y)) {\n                List<Integer> pair = new ArrayList<>();\n                pair.add(x);\n                pair.add(y);\n                result.add(pair);\n            }\n        }\n        \n        return result;\n    }\n\n    // Corrected method placement\n    private boolean isPrime(int number) {\n        if (number <= 1) return false;\n        for (int i = 2; i * i <= number; i++) {\n            if (number % i == 0) return false;\n        }\n        return true;\n    }\n}"
+}

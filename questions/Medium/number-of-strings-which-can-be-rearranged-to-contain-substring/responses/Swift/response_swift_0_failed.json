@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 32: Char 13: error: cannot assign to value: 'm' is a 'let' constant in solution.swift",
+    "full_compile_error": "Line 32: Char 13: error: cannot assign to value: 'm' is a 'let' constant in solution.swift\n            m = a % m\n            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3200",
+    "task_finish_time": 1708082473087,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1176892375",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func stringCount(_ n: Int) -> Int {\n        let mod = 1000000007\n        if n < 4 { return 0 }\n        var factorial = [Int](repeating: 1, count: n + 1)\n        for i in 1...n {\n            factorial[i] = (factorial[i - 1] * i) % mod\n        }\n        var total = 0\n        for i in 4...n {\n            let combinations = factorial[i] * modInverse(a: (factorial[4] * factorial[i - 4]) % mod, m: mod) % mod\n            total = (total + combinations * power(a: 25, b: i - 4, m: mod)) % mod\n        }\n        return total\n    }\n\n    private func power(a: Int, b: Int, m: Int) -> Int {\n        if b == 0 { return 1 }\n        var temp = power(a: a, b: b / 2, m: m)\n        temp = (temp * temp) % m\n        if b % 2 == 0 { return temp }\n        return (temp * a) % m\n    }\n\n    private func modInverse(a: Int, m: Int) -> Int {\n        var m0 = m, y = 0, x = 1\n        if m == 1 { return 0 }\n        var a = a\n        while a > 1 {\n            let q = a / m\n            var t = m\n            m = a % m\n            a = t\n            t = y\n            y = x - q * y\n            x = t\n        }\n        if x < 0 { x += m0 }\n        return x\n    }\n}"
+}

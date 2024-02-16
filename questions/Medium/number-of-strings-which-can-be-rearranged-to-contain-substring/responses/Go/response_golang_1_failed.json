@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 16: Char 20: undefined: gcdExtended (solution.go)",
+    "full_compile_error": "Line 16: Char 20: undefined: gcdExtended (solution.go)\nLine 26: Char 5: gcdExtended declared and not used (solution.go)\nLine 30: Char 24: undefined: gcdExtended (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3200",
+    "task_finish_time": 1708083088018,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1176898268",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func stringCount(n int) int {\n    const mod = 1000000007\n    if n < 4 {\n        return 0\n    }\n\n    // Function to calculate factorial modulo mod\n    factorial := make([]int, n+1)\n    factorial[0] = 1\n    for i := 1; i <= n; i++ {\n        factorial[i] = (factorial[i-1] * i) % mod\n    }\n\n    // Function to calculate modular inverse\n    modInverse := func(a, mod int) int {\n        g, x, _ := gcdExtended(a, mod)\n        if g != 1 {\n            return 0 // Inverse doesn't exist\n        } else {\n            // m is added to handle negative x\n            return (x%mod + mod) % mod\n        }\n    }\n\n    // Extended Euclidean Algorithm\n    gcdExtended := func(a, b int) (int, int, int) {\n        if a == 0 {\n            return b, 0, 1\n        }\n        gcd, x1, y1 := gcdExtended(b%a, a)\n        x := y1 - (b/a)*x1\n        y := x1\n        return gcd, x, y\n    }\n\n    // Function to calculate nCr % mod\n    nCrMod := func(n, r, mod int) int {\n        if r == 0 {\n            return 1\n        }\n        num := factorial[n]\n        den := (factorial[r] * factorial[n-r]) % mod\n        return (num * modInverse(den, mod)) % mod\n    }\n\n    // Calculate the number of good strings\n    goodStrings := 0\n    for i := 4; i <= n; i++ {\n        c := nCrMod(n-1, i-1, mod) // Choose positions for \"leet\"\n        rest := i - 4               // Rest of the positions after placing \"leet\"\n        permutations := 1\n        for j := 0; j < rest; j++ {\n            permutations = (permutations * 26) % mod // Each position can be any of the 26 letters\n        }\n        goodStrings = (goodStrings + c*permutations) % mod\n    }\n\n    return goodStrings\n}"
+}

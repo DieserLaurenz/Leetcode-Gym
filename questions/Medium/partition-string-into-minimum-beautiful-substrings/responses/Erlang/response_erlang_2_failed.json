@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 24: syntax error before: '->'",
+    "full_compile_error": "Line 3: Char 24: syntax error before: '->'\n%    3|     is_beautiful(<<>>) -> false;\n%     |                        ^\nLine 1: Char 2: spec for undefined function minimum_beautiful_substrings/1\n%    1| -spec minimum_beautiful_substrings(S :: unicode:unicode_binary()) -> integer().\n%     |  ^\nLine 38: Char 13: function minimum_beautiful_substrings/1 undefined\n%   38|       Ret = minimum_beautiful_substrings(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2883",
+    "task_finish_time": 1708093977508,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177010165",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_beautiful_substrings(S :: unicode:unicode_binary()) -> integer().\nminimum_beautiful_substrings(S) ->\n    is_beautiful(<<>>) -> false;\n    is_beautiful(Bin) ->\n        {ok, N} = string:to_integer(binary_to_list(Bin), 2),\n        lists:any(fun(X) -> X == N end, [1 | [5 bsl X || X <- lists:seq(0, 20)]]),\n\n    min_splits(S, 1, byte_size(S), is_beautiful).\n\nmin_splits(_, _, 0, _) -> -1;\nmin_splits(S, Start, Len, CheckFun) when Len >= Start ->\n    Sub = binary:part(S, {0, Start}),\n    case CheckFun(Sub) of\n        true ->\n            Rest = binary:part(S, {Start, byte_size(S) - Start}),\n            case min_splits(Rest, 1, byte_size(Rest), CheckFun) of\n                -1 -> min_splits(S, Start + 1, Len, CheckFun);\n                RestSplits -> 1 + RestSplits\n            end;\n        false -> min_splits(S, Start + 1, Len, CheckFun)\n    end;\nmin_splits(_, _, _, _) -> -1."
+}

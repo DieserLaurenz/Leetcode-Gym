@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 22: ** (SyntaxError) unexpected comma. Parentheses are required to solve ambiguity in nested calls.\nThis error happens when you have nested function calls without parentheses. For example:\n    parent_call a, nested_call b, c, d\nIn the example above, we don't know if the parameters \"c\" and \"d\" apply to the function \"parent_call\" or \"nested_call\". You can solve this by explicitly adding parentheses:\n    parent_call a, nested_call(b, c, d)\nOr by adding commas (in case a nested call is not intended):\n    parent_call a, nested_call, b, c, d\nElixir cannot compile otherwise. Syntax error before: ','\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2883",
+    "task_finish_time": 1708094124930,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1177012010",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_beautiful_substrings(s :: String.t) :: integer\n  def minimum_beautiful_substrings(s) do\n    memo = :maps.from_list(Enum.map(0..15, fn i -> {i, -1} end))\n    dp(0, s, memo)\n  end\n\n  defp dp(pos, s, memo) when pos == String.length(s), do: 0\n  defp dp(pos, s, memo) do\n    case :maps.get(pos, memo) do\n      -1 ->\n        len = String.length(s)\n        min = Enum.reduce(1..(len-pos), {:infinity, memo}, fn i, {min, memo} ->\n          substring = String.slice(s, pos, i)\n          if valid_and_power_of_5?(substring) do\n            {next_min, next_memo} = dp(pos + i, s, memo)\n            if next_min != -1, do: {Enum.min([min, 1 + next_min]), next_memo}, else: {min, memo}\n          else\n            {min, memo}\n          end\n        end)\n        memo = Map.put(min |> elem(1), pos, if (min |> elem(0)) == :infinity, do: -1, else: (min |> elem(0)))\n        memo |> Map.get(pos)\n      min -> min\n    end\n  end\n\n  defp valid_and_power_of_5?(s) do\n    case s do\n      \"0\" -> false\n      _ -> \n        num = String.to_integer(s, 2)\n        is_power_of_5?(num)\n    end\n  end\n\n  defp is_power_of_5?(1), do: true\n  defp is_power_of_5?(n) when n <= 0 or rem(n, 5) != 0, do: false\n  defp is_power_of_5?(n), do: is_power_of_5?(div(n, 5))\nend"
+}

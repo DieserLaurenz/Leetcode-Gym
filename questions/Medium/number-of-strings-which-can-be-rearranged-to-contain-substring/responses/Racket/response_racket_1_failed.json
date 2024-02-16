@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 17\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3200",
+    "task_finish_time": 1708083648681,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1176903555",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (string-count n)\n  (-> exact-integer? exact-integer?)\n  (let ([mod 1000000007])\n    (if (< n 4)\n        0\n        (let ([fact (make-vector (+ n 1) 1)])\n          (for ([i 1 (<= i n)])\n            (vector-set! fact i (modulo (* (vector-ref fact (- i 1)) i) mod)))\n          (let ([inv (make-vector (+ n 1) 1)])\n            (vector-set! inv n (expt (vector-ref fact n) (- mod 2) mod))\n            (for ([i (- n 1) (>= i 0)])\n              (vector-set! inv i (modulo (* (vector-ref inv (+ i 1)) (+ i 1)) mod)))\n            (let ([res (modulo (* (* (vector-ref fact n) \n                                      (vector-ref inv 4)) \n                                      (vector-ref inv (- n 4))) mod)])\n              (modulo (* res (expt 25 (- n 4) mod)) mod))))))"
+}

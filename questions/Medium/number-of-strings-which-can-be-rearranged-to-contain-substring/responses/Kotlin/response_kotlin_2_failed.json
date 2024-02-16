@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 11: Char 56: error: type mismatch: inferred type is Int but Long was expected",
+    "full_compile_error": "Line 11: Char 56: error: type mismatch: inferred type is Int but Long was expected\n        for (i in 1..n) inverse[i] = pow(factorial[i], mod - 2, mod)\n                                                       ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3200",
+    "task_finish_time": 1708082846722,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1176895998",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun stringCount(n: Int): Int {\n        val mod = 1000000007\n        if (n < 4) return 0\n        val factorial = LongArray(n + 1)\n        factorial[0] = 1\n        for (i in 1..n) factorial[i] = factorial[i - 1] * i % mod\n\n        val inverse = LongArray(n + 1)\n        inverse[0] = 1\n        for (i in 1..n) inverse[i] = pow(factorial[i], mod - 2, mod)\n\n        fun binomial(n: Int, k: Int) = factorial[n] * inverse[k] % mod * inverse[n - k] % mod\n\n        var result = 0L\n        for (i in 4..n) {\n            val arrangements = binomial(26, 4) * binomial(i - 1, 3) % mod\n            val remainingPositions = pow(25L, (n - i).toLong(), mod)\n            result = (result + arrangements * remainingPositions % mod) % mod\n        }\n        return result.toInt()\n    }\n\n    private fun pow(base: Long, exponent: Long, mod: Int): Long {\n        var result = 1L\n        var b = base % mod\n        var e = exponent\n        while (e > 0) {\n            if (e and 1L != 0L) result = result * b % mod\n            e = e shr 1\n            b = b * b % mod\n        }\n        return result\n    }\n}"
+}

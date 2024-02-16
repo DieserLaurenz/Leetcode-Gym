@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 5: call to local/imported function is_prime/2 is illegal in guard",
+    "full_compile_error": "Line 11: Char 5: call to local/imported function is_prime/2 is illegal in guard\n%   11|     is_prime(2, X) andalso is_prime(2, Y) -> prime_pairs(N, X + 1, Acc ++ [[X, Y]]);\n%     |     ^\nLine 11: Char 28: call to local/imported function is_prime/2 is illegal in guard\n%   11|     is_prime(2, X) andalso is_prime(2, Y) -> prime_pairs(N, X + 1, Acc ++ [[X, Y]]);\n%     |                            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2873",
+    "task_finish_time": 1708104013832,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177142356",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec is_prime(I :: integer(), N :: integer()) -> boolean().\nis_prime(I, N) when I * I > N -> true;\nis_prime(I, N) when N rem I == 0 -> false;\nis_prime(I, N) -> is_prime(I + 1, N).\n\n-spec prime_pairs(N :: integer(), X :: integer(), Acc :: [[integer()]]) -> [[integer()]].\nprime_pairs(N, X, Acc) when X > N div 2 -> Acc;\nprime_pairs(N, X, Acc) ->\n  Y = N - X,\n  if\n    is_prime(2, X) andalso is_prime(2, Y) -> prime_pairs(N, X + 1, Acc ++ [[X, Y]]);\n    true -> prime_pairs(N, X + 1, Acc)\n  end.\n\n-spec find_prime_pairs(N :: integer()) -> [[integer()]].\nfind_prime_pairs(N) ->\n  prime_pairs(N, 2, [])."
+}

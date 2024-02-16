@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 22: syntax error before: 'when'",
+    "full_compile_error": "Line 3: Char 22: syntax error before: 'when'\n%    3|     is_power_of_5(N) when N > 0 ->\n%     |                      ^\nLine 1: Char 2: spec for undefined function minimum_beautiful_substrings/1\n%    1| -spec minimum_beautiful_substrings(S :: unicode:unicode_binary()) -> integer().\n%     |  ^\nLine 20: Char 25: illegal guard expression\n%   20|                         IsPowerOf5(BinaryToInt(Sub)) ->\n%     |                         ^\nLine 47: Char 13: function minimum_beautiful_substrings/1 undefined\n%   47|       Ret = minimum_beautiful_substrings(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2883",
+    "task_finish_time": 1708093897510,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177009208",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_beautiful_substrings(S :: unicode:unicode_binary()) -> integer().\nminimum_beautiful_substrings(S) ->\n    is_power_of_5(N) when N > 0 ->\n        lists:member(N, [1, 5, 25, 125, 625, 3125, 15625, 78125, 390625, 1953125, 9765625, 48828125, 244140625, 1220703125, 6103515625, 30517578125]),\n    is_power_of_5(_) -> false,\n    \n    binary_to_int(B) -> \n        list_to_integer(binary_to_list(B), 2),\n\n    dp(S, is_power_of_5, binary_to_int, fun(X) -> X end, 16#FFFFFFFF).\n\ndp(<<>>, _, _, _, _) -> 0;\ndp(S, IsPowerOf5, BinaryToInt, Min, Cache) ->\n    case Cache of\n        16#FFFFFFFF ->\n            MinResult = lists:foldl(\n                fun (I, Acc) ->\n                    Sub = binary:part(S, {0, I}),\n                    if \n                        IsPowerOf5(BinaryToInt(Sub)) ->\n                            Result = dp(binary:part(S, {I, byte_size(S) - I}), IsPowerOf5, BinaryToInt, Min, 16#FFFFFFFF),\n                            if \n                                Result >= 0 -> Min(Acc, Result + 1);\n                                true -> Acc\n                            end;\n                        true -> Acc\n                    end\n                end, Cache, lists:seq(1, byte_size(S))),\n            if MinResult == Cache -> -1; true -> MinResult end;\n        _ -> Cache\n    end."
+}

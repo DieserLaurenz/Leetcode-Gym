@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 3: Char 27: syntax error before: 'bxor'",
+    "full_compile_error": "Line 3: Char 27: syntax error before: 'bxor'\n%    3|     Fold = fun(X, Acc) -> bxor(X, Acc) end,\n%     |                           ^\nLine 1: Char 2: spec for undefined function does_valid_array_exist/1\n%    1| -spec does_valid_array_exist([integer()]) -> boolean().\n%     |  ^\nLine 20: Char 13: function does_valid_array_exist/1 undefined\n%   20|       Ret = does_valid_array_exist(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2792",
+    "task_finish_time": 1708072247863,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1176786558",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec does_valid_array_exist([integer()]) -> boolean().\ndoes_valid_array_exist(Derived) ->\n    Fold = fun(X, Acc) -> bxor(X, Acc) end,\n    lists:foldl(Fold, 0, Derived) =:= hd(Derived)."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 8: Char 21: illegal guard expression",
+    "full_compile_error": "Line 8: Char 21: illegal guard expression\n%    8|         NewAcc = if lists:member(0, NewPow) -> Acc + 1; true -> Acc end,\n%     |                     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2883",
+    "task_finish_time": 1708093937814,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177009676",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_beautiful_substrings(S :: unicode:unicode_binary()) -> integer().\nminimum_beautiful_substrings(S) ->\n    {_, Result} = lists:foldl(fun(X, {Pow, Acc}) ->\n        NewPow = case X of\n            $0 -> [0 | Pow];\n            $1 -> [1 | lists:map(fun(Y) -> (Y*2) rem 5 end, Pow)] ++ [1]\n        end,\n        NewAcc = if lists:member(0, NewPow) -> Acc + 1; true -> Acc end,\n        {lists:usort(NewPow), NewAcc}\n    end, {[], 0}, binary_to_list(S)),\n    case lists:member(0, lists:foldl(fun(X, Acc) -> [X+1 | Acc] end, [], Result)) of\n        true -> lists:min(Result);\n        false -> -1\n    end."
+}

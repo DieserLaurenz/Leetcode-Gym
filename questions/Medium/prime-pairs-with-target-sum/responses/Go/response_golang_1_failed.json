@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 49: invalid operation: primes[i] <= n / 2 (mismatched types bool and int) (solution.go)",
+    "full_compile_error": "Line 4: Char 49: invalid operation: primes[i] <= n / 2 (mismatched types bool and int) (solution.go)\nLine 5: Char 19: invalid operation: n - primes[i] (mismatched types int and bool) (solution.go)\nLine 6: Char 41: cannot use primes[i] (map index expression of type bool) as int value in array or slice literal (solution.go)\nLine 6: Char 52: invalid operation: n - primes[i] (mismatched types int and bool) (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2873",
+    "task_finish_time": 1708103417942,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1177133588",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func findPrimePairs(n int) [][]int {\n    primes := sieveOfEratosthenes(n)\n    var pairs [][]int\n    for i := 0; i < len(primes) && primes[i] <= n/2; i++ {\n        if primes[n-primes[i]] {\n            pairs = append(pairs, []int{primes[i], n - primes[i]})\n        }\n    }\n    return pairs\n}\n\nfunc sieveOfEratosthenes(n int) map[int]bool {\n    prime := make([]bool, n+1)\n    for i := 2; i <= n; i++ {\n        prime[i] = true\n    }\n    for p := 2; p*p <= n; p++ {\n        if prime[p] {\n            for i := p * p; i <= n; i += p {\n                prime[i] = false\n            }\n        }\n    }\n    primes := make(map[int]bool)\n    for p := 2; p <= n; p++ {\n        if prime[p] {\n            primes[p] = true\n        }\n    }\n    return primes\n}"
+}

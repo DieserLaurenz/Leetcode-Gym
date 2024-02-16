@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 16: type variable 'N' is only used once (is unbound)",
+    "full_compile_error": "Line 6: Char 16: type variable 'N' is only used once (is unbound)\n%    6| -spec is_prime(N, Divisor) -> boolean().\n%     |                ^\nLine 6: Char 19: type variable 'Divisor' is only used once (is unbound)\n%    6| -spec is_prime(N, Divisor) -> boolean().\n%     |                   ^\nLine 22: Char 9: call to local/imported function is_prime/1 is illegal in guard\n%   22|         is_prime(Current) andalso is_prime(Y) -> find_pairs(Current + 1, N, [[Current, Y] | Acc]);\n%     |         ^\nLine 22: Char 35: call to local/imported function is_prime/1 is illegal in guard\n%   22|         is_prime(Current) andalso is_prime(Y) -> find_pairs(Current + 1, N, [[Current, Y] | Acc]);\n%     |                                   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2873",
+    "task_finish_time": 1708104087204,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177143473",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec is_prime(N :: integer()) -> boolean().\nis_prime(2) -> true;\nis_prime(N) when N < 2; N rem 2 == 0 -> false;\nis_prime(N) -> is_prime(N, 3).\n\n-spec is_prime(N, Divisor) -> boolean().\nis_prime(N, Divisor) when Divisor * Divisor > N -> true;\nis_prime(N, Divisor) ->\n    if N rem Divisor == 0 -> false;\n       true -> is_prime(N, Divisor + 2)\n    end.\n\n-spec find_prime_pairs(N :: integer()) -> [[integer()]].\nfind_prime_pairs(N) ->\n    find_pairs(1, N, []).\n\n-spec find_pairs(Current :: integer(), N :: integer(), Acc :: [[integer()]]) -> [[integer()]].\nfind_pairs(Current, N, Acc) when Current > N div 2 -> lists:reverse(Acc);\nfind_pairs(Current, N, Acc) ->\n    Y = N - Current,\n    if\n        is_prime(Current) andalso is_prime(Y) -> find_pairs(Current + 1, N, [[Current, Y] | Acc]);\n        true -> find_pairs(Current + 1, N, Acc)\n    end."
+}
