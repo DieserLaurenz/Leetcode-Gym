@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 19: syntax error: unexpected onesCount at end of statement (solution.go)",
+    "full_compile_error": "Line 11: Char 19: syntax error: unexpected onesCount at end of statement (solution.go)\nLine 28: Char 5: syntax error: non-declaration statement outside function body (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3150",
+    "task_finish_time": 1708144695478,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1177482965",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func shortestBeautifulSubstring(s string, k int) string {\n    n := len(s)\n    onesCount, start := 0, 0\n    minLength, minSubstr := n+1, \"\"\n\n    for end := 0; end < n; end++ {\n        if s[end] == '1' {\n            onesCount++\n        }\n        if onesCount == k {\n            while onesCount == k {\n                if s[start] == '1' {\n                    onesCount--\n                }\n                start++\n            }\n            if end-start+2 < minLength {\n                minLength = end - start + 2\n                minSubstr = s[start-1 : end+1]\n            } else if end-start+2 == minLength {\n                candidate := s[start-1 : end+1]\n                if candidate < minSubstr {\n                    minSubstr = candidate\n                }\n            }\n        }\n    }\n    return minSubstr\n}"
+}

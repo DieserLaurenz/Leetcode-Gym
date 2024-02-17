@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 26: Char 85: syntax error before: ')'",
+    "full_compile_error": "Line 26: Char 85: syntax error before: ')'\n%   26|             {NewMinSub, {NewCount - (if C =:= 1 andalso NewCount > K -> 1; true -> 0), NewStartIdx}}\n%     |                                                                                     ^\nLine 1: Char 2: spec for undefined function shortest_beautiful_substring/2\n%    1| -spec shortest_beautiful_substring(S :: unicode:unicode_binary(), K :: integer()) -> unicode:unicode_binary().\n%     |  ^\nLine 46: Char 13: function shortest_beautiful_substring/2 undefined\n%   46|       Ret = shortest_beautiful_substring(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3150",
+    "task_finish_time": 1708145227548,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177488252",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec shortest_beautiful_substring(S :: unicode:unicode_binary(), K :: integer()) -> unicode:unicode_binary().\nshortest_beautiful_substring(S, K) ->\n    Len = byte_size(S),\n    {Result, _} = lists:foldl(\n        fun (Idx, {MinSub, {Count, StartIdx}}) when Idx < Len ->\n            C = binary:at(S, Idx),\n            NewCount = Count + if C =:= 1 -> 1; true -> 0 end,\n            {NewStartIdx, NewMinSub} = if NewCount < K ->\n                {StartIdx, MinSub};\n            NewCount == K ->\n                Sub = binary:part(S, StartIdx, Idx - StartIdx + 1),\n                case MinSub of\n                    <<>> -> {Idx + 1 - K, Sub};\n                    _ -> \n                        MinLen = byte_size(MinSub),\n                        SubLen = byte_size(Sub),\n                        if SubLen < MinLen; (SubLen == MinLen andalso Sub < MinSub) ->\n                            {Idx + 1 - K, Sub};\n                        true ->\n                            {StartIdx + 1, MinSub}\n                        end\n                end;\n            true ->\n                {StartIdx + 1, MinSub}\n            end,\n            {NewMinSub, {NewCount - (if C =:= 1 andalso NewCount > K -> 1; true -> 0), NewStartIdx}}\n        end, {<<>>, {0, 0}}, lists:seq(0, Len - 1)),\n    Result."
+}

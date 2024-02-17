@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: cannot invoke remote function String.contains?/2 inside guards",
+    "full_compile_error": "error: cannot invoke remote function String.contains?/2 inside guards\nLine 8:   Solution.sort_vowels/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) src/elixir_fn.erl:17: anonymous fn/4 in :elixir_fn.expand/4\n    (stdlib 5.1.1) lists.erl:1706: :lists.mapfoldl_1/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2887",
+    "task_finish_time": 1708165895843,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1177707325",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec sort_vowels(s :: String.t) :: String.t\n  def sort_vowels(s) do\n    vowels = Enum.filter(s, &String.contains?(\"aeiouAEIOU\", &1))\n    sorted_vowels = Enum.sort_by(vowels, &(&1))\n\n    Enum.map_join(s, \"\", fn\n      <<char>> when String.contains?(\"aeiouAEIOU\", <<char>>) ->\n        {vowel, _} = Enum.split(sorted_vowels, 1)\n        hd(vowel)\n      char ->\n        char\n    end)\n  end\nend"
+}

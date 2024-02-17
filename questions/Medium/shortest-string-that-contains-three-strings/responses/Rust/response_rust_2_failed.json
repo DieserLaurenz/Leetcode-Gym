@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 22, Char 40: expected a `Fn<(char,)>` closure, found `std::string::String` (solution.rs)",
+    "full_compile_error": "Line 22, Char 40: expected a `Fn<(char,)>` closure, found `std::string::String` (solution.rs)\n   |\n22 |                 if !candidate.contains(end) {\n   |                               -------- ^^^ expected an `Fn<(char,)>` closure, found `std::string::String`\n   |                               |\n   |                               required by a bound introduced by this call\n   |\n   = help: the trait `Fn<(char,)>` is not implemented for `std::string::String`\n   = help: the trait `Pattern<'a>` is implemented for `&'b std::string::String`\n   = note: required for `&std::string::String` to implement `FnOnce<(char,)>`\n   = note: required for `&&std::string::String` to implement `Pattern<'_>`\nnote: required by a bound in `core::str::<impl str>::contains`\n  --> /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/core/src/str/mod.rs:1049:5\nLine 23, Char 35: expected a `Fn<(char,)>` closure, found `std::string::String` (solution.rs)\n   |\n23 |                     if !candidate.ends_with(end) {\n   |                                   ^^^^^^^^^ expected an `Fn<(char,)>` closure, found `std::string::String`\n   |\n   = help: the trait `Fn<(char,)>` is not implemented for `std::string::String`\n   = help: the trait `Pattern<'a>` is implemented for `&'b std::string::String`\n   = note: required for `&std::string::String` to implement `FnOnce<(char,)>`\n   = note: required for `&&std::string::String` to implement `Pattern<'_>`\nFor more information about this error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to 2 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2877",
+    "task_finish_time": 1708155017398,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1177598198",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn minimum_string(a: String, b: String, c: String) -> String {\n        let mut all_strings = vec![a, b, c];\n        all_strings.sort();\n        let (a, b, c) = (&all_strings[0], &all_strings[1], &all_strings[2]);\n\n        let mut best = a.clone() + b;\n        if !best.contains(c) {\n            best = best + c;\n        }\n\n        for &start in [a, b, c].iter() {\n            for &mid in [a, b, c].iter() {\n                if start == mid {\n                    continue;\n                }\n                let end = [a, b, c].iter().find(|&&x| x != start && x != mid).unwrap();\n                let mut candidate = start.to_string();\n                if !candidate.ends_with(mid) {\n                    candidate += mid;\n                }\n                if !candidate.contains(end) {\n                    if !candidate.ends_with(end) {\n                        candidate += end;\n                    }\n                }\n                if candidate.len() < best.len() || (candidate.len() == best.len() && candidate < best) {\n                    best = candidate;\n                }\n            }\n        }\n\n        best\n    }\n}"
+}

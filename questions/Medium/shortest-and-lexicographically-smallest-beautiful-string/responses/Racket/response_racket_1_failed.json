@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 28\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3150",
+    "task_finish_time": 1708145103654,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1177487028",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (shortest-beautiful-substring s k)\n  (-> string? exact-integer? string?)\n  (let ([n (string-length s)])\n    (let loop ([start 0] [end 0] [count 0] [min-len +inf.0] [result \"\"])\n      (cond\n       [(= end n)\n        (if (< count k) result\n            (if (= count k)\n                (let ([substr (substring s start end)])\n                  (if (or (< (string-length substr) min-len)\n                          (and (= (string-length substr) min-len) (string<? substr result)))\n                      substr\n                      result))\n                result))]\n       [else\n        (let ([new-count (if (char=? (string-ref s end) #\\1) (+ count 1) count)])\n          (if (>= new-count k)\n              (let loop-inner ([inner-start start] [inner-count new-count])\n                (if (> inner-count k)\n                    (let ([next-count (if (char=? (string-ref s inner-start) #\\1) (- inner-count 1) inner-count)])\n                      (loop-inner (+ inner-start 1) next-count))\n                    (let ([substr (substring s inner-start (+ end 1))])\n                      (if (or (< (string-length substr) min-len)\n                              (and (= (string-length substr) min-len) (string<? substr result)))\n                          (loop (+ inner-start 1) (+ end 1) new-count (string-length substr) substr)\n                          (loop (+ inner-start 1) (+ end 1) new-count min-len result)))))\n              (loop start (+ end 1) new-count min-len result)))])))"
+}

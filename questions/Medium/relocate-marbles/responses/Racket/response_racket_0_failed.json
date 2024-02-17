@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 18: Char 22: updated-pos-count: unbound identifier",
+    "full_compile_error": "Line 18: Char 22: updated-pos-count: unbound identifier\n  in: updated-pos-count\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:29:21",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2834",
+    "task_finish_time": 1708113982113,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1177267764",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (relocate-marbles nums moveFrom moveTo)\n  (-> (listof exact-integer?) (listof exact-integer?) (listof exact-integer?) (listof exact-integer?))\n  (let ([pos-count (foldl (lambda (num acc)\n                            (dict-update acc num add1 0))\n                          (make-immutable-hash)\n                          nums)])\n    (for/fold ([updated-pos-count pos-count])\n              ([from (in-list moveFrom)]\n               [to (in-list moveTo)])\n      (let* ([from-count (dict-ref updated-pos-count from 0)]\n             [to-count (dict-ref updated-pos-count to 0)]\n             [new-from-count (- from-count 1)]\n             [new-to-count (+ to-count 1)])\n        (cond\n          [(= new-from-count 0) (dict-remove updated-pos-count from)]\n          [else (dict-set updated-pos-count from new-from-count)])\n        (dict-set updated-pos-count to new-to-count)))\n    (sort (hash-keys updated-pos-count) <)))"
+}

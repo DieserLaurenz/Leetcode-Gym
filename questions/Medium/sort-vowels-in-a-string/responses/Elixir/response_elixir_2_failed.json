@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"vowel\"",
+    "full_compile_error": "error: undefined variable \"vowel\"\nLine 10:   Solution.sort_vowels/1\nerror: undefined variable \"tail\"\nLine 10:   Solution.sort_vowels/1\nerror: undefined variable \"vowel\"\nLine 10:   Solution.sort_vowels/1\nwarning: variable \"vowels\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 9:   Solution.sort_vowels/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2887",
+    "task_finish_time": 1708165961933,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1177707982",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec sort_vowels(s :: String.t) :: String.t\n  def sort_vowels(s) do\n    vowels = String.graphemes(s)\n             |> Enum.filter(&(&1 in [\"a\", \"e\", \"i\", \"o\", \"u\", \"A\", \"E\", \"I\", \"O\", \"U\"]))\n    sorted_vowels = Enum.sort(vowels)\n\n    Enum.reduce(String.graphemes(s), {sorted_vowels, \"\"}, fn\n      char, {vowels, acc} when char in [\"a\", \"e\", \"i\", \"o\", \"u\", \"A\", \"E\", \"I\", \"O\", \"U\"] ->\n        {[vowel | tail], acc <> vowel}\n      char, {vowels, acc} ->\n        {vowels, acc <> char}\n    end)\n    |> elem(1)\n  end\nend"
+}

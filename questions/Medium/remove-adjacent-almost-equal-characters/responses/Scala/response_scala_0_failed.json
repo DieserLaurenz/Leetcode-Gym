@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 8: error: value += is not a member of Int (in solution.scala)",
+    "full_compile_error": "Line 8: error: value += is not a member of Int (in solution.scala)\n  Expression does not convert to assignment because receiver is not assignable.\n                    i += 1\n                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3230",
+    "task_finish_time": 1708124170787,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1177349050",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def removeAlmostEqualCharacters(word: String): Int = {\n        var ops = 0\n        for(i <- 1 until word.length) {\n            if(word(i) == word(i-1) || Math.abs(word(i) - word(i-1)) == 1) {\n                ops += 1\n                if(i+1 < word.length && (word(i+1) == word(i) || Math.abs(word(i+1) - word(i)) == 1))\n                    i += 1\n            }\n        }\n        ops\n    }\n}"
+}

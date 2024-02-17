@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 30: Char 6: variable 'NewMin' unsafe in 'case' (line 34, column 24)",
+    "full_compile_error": "Line 30: Char 6: variable 'NewMin' unsafe in 'case' (line 34, column 24)\n%   30|     {NewMin, NewLen} = case NewLength of\n%     |      ^\nLine 32: Char 9: variable 'L' unsafe in 'case' (line 27, column 17)\n%   32|         L when L =< byte_size(Window) + 1 ->\n%     |         ^\nLine 39: Char 46: variable 'NewMin' unsafe in 'case' (line 34, column 24)\n%   39|     find_shortest_beautiful(T, K, NewWindow, NewMin, NewLen).\n%     |                                              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3150",
+    "task_finish_time": 1708145260400,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177488579",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec shortest_beautiful_substring(S :: binary(), K :: integer()) -> binary().\nshortest_beautiful_substring(S, K) ->\n    {_, Result, _} = binary:foldl(\n        fun(Byte, {Count, Acc, Min}) when Byte =:= 1 ->\n                NewCount = Count + 1,\n                {NewCount, [Byte | Acc], case NewCount of K -> lists:reverse(Acc); _ -> Min end};\n           (Byte, {Count, Acc, Min}) ->\n                {Count, [Byte | Acc], Min}\n        end,\n        {0, [], <<>>},\n        S\n    ),\n    find_shortest_beautiful(binary:bin_to_list(S), K, Result, <<>>, undefined).\n\nfind_shortest_beautiful(_, _, Result, Min, undefined) when Result =/= <<>> -> Result;\nfind_shortest_beautiful(_, _, _, Min, _) -> Min;\nfind_shortest_beautiful([], _, _, Min, _) -> Min;\nfind_shortest_beautiful([H | T], K, Window, Min, Length) ->\n    NewWindow = case byte_size(Window) of\n        Len when Len < K -> Window;\n        _ -> binary:part(Window, 1, byte_size(Window) - 1)\n    end,\n    NewLength = case H of\n        1 -> case Length of\n                undefined -> K;\n                L -> L - 1\n             end;\n        _ -> Length\n    end,\n    {NewMin, NewLen} = case NewLength of\n        undefined -> {Min, NewLength};\n        L when L =< byte_size(Window) + 1 ->\n            NewMin = case Min of\n                <<>> -> binary:part([H | T], 0, L);\n                _ -> Min\n            end,\n            {NewMin, L}\n    end,\n    find_shortest_beautiful(T, K, NewWindow, NewMin, NewLen)."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 13: Char 8: match: syntax error in pattern",
+    "full_compile_error": "Line 13: Char 8: match: syntax error in pattern\n  in: (list x y . rest)\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:24:7",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2877",
+    "task_finish_time": 1708155212666,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1177600268",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-string a b c)\n  (-> string? string? string? string?)\n  (define (superimpose x y)\n    (for/or ([i (in-range (max 0 (- (string-length x) (string-length y))) (add1 (string-length x)))])\n      (and (equal? (substring x i (min (string-length x) (+ i (string-length y)))) (substring y 0 (min (string-length y) (- (string-length x) i))))\n           (string-append (substring x 0 i) y))))\n  (define (merge x y)\n    (or (superimpose x y) (superimpose y x) (string-append x y)))\n  (define (all-merges l)\n    (match l\n      ['() \"\"]\n      [(list x) x]\n      [(list x y . rest)\n       (all-merges (cons (merge x y) rest))]))\n  (let ([candidates (map all-merges (permutations (list a b c)))])\n    (apply string<? candidates)))"
+}

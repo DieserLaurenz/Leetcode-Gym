@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 16: illegal guard expression",
+    "full_compile_error": "Line 6: Char 16: illegal guard expression\n%    6|             if Vowels(C) -> {[C | Vs], Cs};\n%     |                ^\nLine 13: Char 16: illegal guard expression\n%   13|             if Vowels(hd(Acc)) -> [hd(SortedVowels) | tl(Acc)];\n%     |                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2887",
+    "task_finish_time": 1708165779906,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177706162",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec sort_vowels(S :: unicode:unicode_binary()) -> unicode:unicode_binary().\nsort_vowels(S) ->\n    Vowels = fun(C) -> lists:member(C, \"aeiouAEIOU\") end,\n    {VowelChars, ConsonantMap} = lists:foldl(\n        fun(C, {Vs, Cs}) ->\n            if Vowels(C) -> {[C | Vs], Cs};\n               true -> {Vs, [C | Cs]}\n            end\n        end, {[], []}, unicode:characters_to_list(S)),\n    SortedVowels = lists:sort(VowelChars),\n    lists:foldr(\n        fun(C, Acc) ->\n            if Vowels(hd(Acc)) -> [hd(SortedVowels) | tl(Acc)];\n               true -> [C | Acc]\n            end\n        end, ConsonantMap, unicode:characters_to_list(S))."
+}

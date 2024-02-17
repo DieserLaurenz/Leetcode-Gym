@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 16, Char 9: mismatched types (solution.rs)",
+    "full_compile_error": "Line 16, Char 9: mismatched types (solution.rs)\n   |\n2  |     pub fn remove_almost_equal_characters(word: String) -> i32 {\n   |                                                            --- expected `i32` because of return type\n...\n16 |         count\n   |         ^^^^^ expected `i32`, found `usize`\n   |\nhelp: you can convert a `usize` to an `i32` and panic if the converted value doesn't fit\n   |\n16 |         count.try_into().unwrap()\n   |              ++++++++++++++++++++\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3230",
+    "task_finish_time": 1708124254622,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1177349608",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn remove_almost_equal_characters(word: String) -> i32 {\n        let mut count = 0;\n        let bytes = word.as_bytes();\n        let mut i = 0;\n        while i < bytes.len() {\n            let mut j = i + 1;\n            while j < bytes.len() && (bytes[j] == bytes[i] || bytes[j] as i32 - bytes[i] as i32 == 1 || bytes[i] as i32 - bytes[j] as i32 == 1) {\n                j += 1;\n            }\n            if j > i + 1 {\n                count += (j - i) / 3 + if (j - i) % 3 > 0 { 1 } else { 0 };\n            }\n            i = j;\n        }\n        count\n    }\n}"
+}

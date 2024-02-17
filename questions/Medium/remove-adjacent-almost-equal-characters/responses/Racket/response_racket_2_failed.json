@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 21: Char 79: read-syntax: missing `)` to close `(` on line 24, found instead `]`",
+    "full_compile_error": "Line 21: Char 79: read-syntax: missing `)` to close `(` on line 24, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3230",
+    "task_finish_time": 1708124461233,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1177351019",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (remove-almost-equal-characters word)\n  (-> string? exact-integer?)\n  (letrec ([needs-change? (lambda (a b)\n                            (or (= a b) (= (abs (- (char->integer a) (char->integer b))) 1)))]\n           [count-ops (lambda (word)\n                        (let loop ([i 1] [ops 0] [last (string-ref word 0)])\n                          (if (< i (string-length word))\n                              (let* ([current (string-ref word i)]\n                                     [next-ops (if (needs-change? last current) (+ ops 1) ops)]\n                                     [next-last (if (needs-change? last current) (if (= (char->integer last) 122) #\\a (integer->char (+ 1 (char->integer last)))) last)])\n                                (loop (+ i 1) next-ops next-last))\n                              ops)))]\n           [alternate (lambda (word)\n                        (let loop ([i 2] [ops 1] [last (if (= (char->integer (string-ref word 0)) 122) #\\a (integer->char (+ 1 (char->integer (string-ref word 0)))))]\n                                    [second (string-ref word 1)])\n                          (if (< i (string-length word))\n                              (let* ([current (string-ref word i)]\n                                     [next-ops (if (needs-change? last current) (+ ops 1) ops)]\n                                     [next-last (if (needs-change? last current) (if (= (char->integer last) 122) #\\a (integer->char (+ 1 (char->integer last)))) last)])\n                                (loop (+ i 1) next-ops next-last second))\n                              (if (needs-change? second last) (+ ops 1) ops)))]\n           )]\n    (if (< (string-length word) 2)\n        0\n        (min (count-ops word) (alternate word)))))"
+}

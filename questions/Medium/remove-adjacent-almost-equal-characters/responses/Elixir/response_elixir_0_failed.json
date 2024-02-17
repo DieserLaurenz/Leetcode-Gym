@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: cannot find or invoke local prev_char/1 inside guards. Only macros can be invoked in a guards and they must be defined before their invocation. Called as: prev_char(x)",
+    "full_compile_error": "error: cannot find or invoke local prev_char/1 inside guards. Only macros can be invoked in a guards and they must be defined before their invocation. Called as: prev_char(x)\nLine 10:   Solution.remove_almost_equal_characters/1\nerror: cannot find or invoke local next_char/1 inside guards. Only macros can be invoked in a guards and they must be defined before their invocation. Called as: next_char(x)\nLine 10:   Solution.remove_almost_equal_characters/1\nwarning: function prev_char/1 is unused\nLine 17:   Solution (module)\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3230",
+    "task_finish_time": 1708124638795,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1177352171",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec remove_almost_equal_characters(word :: String.t) :: integer\n  def remove_almost_equal_characters(word) do\n    word\n    |> String.codepoints()\n    |> Enum.reduce({0, nil}, fn x, {acc, prev} -> \n      case prev do\n        nil -> {acc, x}\n        ^x -> {acc + 1, next_char(x)}\n        prev when prev in [prev_char(x), next_char(x)] -> {acc + 1, next_char(next_char(x))}\n        _ -> {acc, x}\n      end\n    end)\n    |> elem(0)\n  end\n\n  defp prev_char(char) do\n    [code] = char |> String.to_charlist()\n    if code > 97, do: <<code - 1 :: utf8>>, else: <<122 :: utf8>>\n  end\n\n  defp next_char(char) do\n    [code] = char |> String.to_charlist()\n    if code < 122, do: <<code + 1 :: utf8>>, else: <<97 :: utf8>>\n  end\nend"
+}

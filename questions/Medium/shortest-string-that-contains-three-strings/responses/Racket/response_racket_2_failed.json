@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 17: Char 12: min-string: unbound identifier",
+    "full_compile_error": "Line 17: Char 12: min-string: unbound identifier\n  in: min-string\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:28:11",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2877",
+    "task_finish_time": 1708155237688,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1177600562",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-string a b c)\n  (-> string? string? string? string?)\n  (define (combine-two s1 s2)\n    (if (string-contains? s1 s2)\n        s1\n        (let loop ((i (min (string-length s1) (string-length s2))))\n          (if (= i 0)\n              (string-append s1 s2)\n              (if (string-contains? s1 (substring s2 0 i))\n                  (string-append (substring s1 0 (- (string-length s1) i)) s2)\n                  (loop (- i 1)))))))\n  (define (string-contains? s sub)\n    (not (null? (regexp-match (regexp (string-append \".*\" (regexp-quote sub) \".*\")) s))))\n  (define (combine-all l)\n    (foldl (lambda (s1 s2) (if (string<? s1 s2) (combine-two s1 s2) (combine-two s2 s1))) \"\" l))\n  (let ([all-combinations (map combine-all (permutations (list a b c)))])\n    (apply min-string all-combinations)))"
+}

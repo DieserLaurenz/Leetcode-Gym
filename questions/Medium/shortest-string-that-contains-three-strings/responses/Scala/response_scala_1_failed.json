@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "/leetcode/user_code/1177596674/prog_joined.scala:25: warning: match may not be exhaustive.",
+    "full_compile_error": "/leetcode/user_code/1177596674/prog_joined.scala:25: warning: match may not be exhaustive.\nIt would fail on the following inputs: List(_), Nil\n        val merged = strings.permutations.map { case List(x, y, z) =>\n                                              ^\nwarning: 1 deprecation (since 2.13.3); re-run with -deprecation for details",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2877",
+    "task_finish_time": 1708154869404,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1177596674",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def minimumString(a: String, b: String, c: String): String = {\n        def overlap(s1: String, s2: String): Int = {\n            (0 to s1.length).find(i => s2.startsWith(s1.substring(i))) match {\n                case Some(index) => s1.length - index\n                case None => 0\n            }\n        }\n\n        def merge(s1: String, s2: String): String = {\n            val overlap1 = overlap(s1, s2)\n            val overlap2 = overlap(s2, s1)\n            if (overlap1 >= overlap2) s1 + s2.substring(overlap1)\n            else s2 + s1.substring(overlap2)\n        }\n\n        val strings = List(a, b, c)\n        val merged = strings.permutations.map { case List(x, y, z) =>\n            merge(merge(x, y), z)\n        }.minBy(s => (s.length, s))\n\n        merged\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: cannot invoke remote function String.contains?/2 inside guards",
+    "full_compile_error": "error: cannot invoke remote function String.contains?/2 inside guards\nLine 9:   Solution.sort_vowels/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 9:     Solution.sort_vowels/1",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2887",
+    "task_finish_time": 1708165928339,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1177707670",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec sort_vowels(s :: String.t) :: String.t\n  def sort_vowels(s) do\n    vowels = Enum.filter(s, fn x -> \"aeiouAEIOU\" |> String.contains?(<<x>>) end)\n    sorted_vowels = Enum.sort_by(vowels, &(&1))\n    vowels_idx = Stream.with_index(vowels) |> Enum.into(%{})\n\n    Enum.map_join(s, \"\", fn\n      <<char>> = c when \"aeiouAEIOU\" |> String.contains?(c) ->\n        {vowel, _rest} = List.pop_at(sorted_vowels, Map.fetch!(vowels_idx, {char, 0}))\n        vowels_idx = Map.update!(vowels_idx, {char, 0}, &(&1 + 1))\n        vowel\n      char ->\n        char\n    end)\n  end\nend"
+}

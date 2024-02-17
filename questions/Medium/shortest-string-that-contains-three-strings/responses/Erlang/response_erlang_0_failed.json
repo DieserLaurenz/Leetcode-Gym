@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 23: Char 51: syntax error before: '('",
+    "full_compile_error": "Line 23: Char 51: syntax error before: '('\n%   23|         [MaxPrefix|_] -> <<A/binary, B/binary-part(B, MaxPrefix, BLen-MaxPrefix)>>\n%     |                                                   ^\nLine 9: Char 10: function merge_two/2 undefined\n%    9|     AB = merge_two(A,B),\n%     |          ^\nLine 10: Char 11: function merge_two/2 undefined\n%   10|     ABC = merge_two(AB,C),\n%     |           ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2877",
+    "task_finish_time": 1708164416786,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177692029",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_string(A :: unicode:unicode_binary(), B :: unicode:unicode_binary(), C :: unicode:unicode_binary()) -> unicode:unicode_binary().\nminimum_string(A, B, C) ->\n    Permutations = [[A,B,C], [A,C,B], [B,A,C], [B,C,A], [C,A,B], [C,B,A]],\n    Lists = lists:map(fun(X) -> merge_strings(X) end, Permutations),\n    Sorted = lists:sort(fun(X,Y) -> {length(X), X} < {length(Y), Y} end, Lists),\n    hd(Sorted).\n\nmerge_strings([A,B,C]) ->\n    AB = merge_two(A,B),\n    ABC = merge_two(AB,C),\n    ABC.\n\nmerge_two(A, B) when A =:= B -> A;\nmerge_two(A, B) ->\n    {ALen, BLen} = {byte_size(A), byte_size(B)},\n    Prefix = lists:dropwhile(fun(I) -> \n                                SubA = binary_part(A, ALen-I, I),\n                                SubB = binary_part(B, 0, I),\n                                SubA =/= SubB\n                             end, lists:seq(1, min(ALen, BLen))),\n    case Prefix of\n        [] -> <<A/binary, B/binary>>;\n        [MaxPrefix|_] -> <<A/binary, B/binary-part(B, MaxPrefix, BLen-MaxPrefix)>>\n    end."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 5: Char 29: illegal guard expression",
+    "full_compile_error": "Line 5: Char 29: illegal guard expression\n%    5|         fun(C, {V, O}) when IsVowel(C) -> {[C | V], O};\n%     |                             ^\nLine 10: Char 26: illegal guard expression\n%   10|         fun(C, Acc) when IsVowel(C) -> [lists:nth(1, SortedVowels) | tl(SortedVowels)], Acc;\n%     |                          ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2887",
+    "task_finish_time": 1708165811448,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1177706477",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec sort_vowels(S :: unicode:unicode_binary()) -> unicode:unicode_binary().\nsort_vowels(S) ->\n    IsVowel = fun(C) -> lists:member(C, \"aeiouAEIOU\") end,\n    {Vowels, Others} = lists:foldl(\n        fun(C, {V, O}) when IsVowel(C) -> {[C | V], O};\n           (C, {V, O}) -> {V, [C | O]}\n        end, {[], []}, unicode:characters_to_list(S)),\n    SortedVowels = lists:reverse(lists:sort(Vowels)),\n    lists:reverse(lists:foldl(\n        fun(C, Acc) when IsVowel(C) -> [lists:nth(1, SortedVowels) | tl(SortedVowels)], Acc;\n           (C, Acc) -> [C | Acc]\n        end, SortedVowels, Others))."
+}

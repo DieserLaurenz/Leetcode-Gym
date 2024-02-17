@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 7: Char 67: error: cannot convert value of type 'UInt8' to expected argument type 'Int' in solution.swift",
+    "full_compile_error": "Line 7: Char 67: error: cannot convert value of type 'UInt8' to expected argument type 'Int' in solution.swift\n            if chars[i] == chars[i+1] || abs(chars[i].asciiValue! - chars[i+1].asciiValue!) == 1 {\n                                                                  ^\nLine 10: Char 113: error: cannot convert value of type 'UInt8' to expected argument type 'Int' in solution.swift\n                while nextChar < chars.count && (chars[nextChar] == chars[i] || abs(chars[nextChar].asciiValue! - chars[i].asciiValue!) == 1) {\n                                                                                                                ^\nLine 13: Char 17: error: cannot assign to value: 'i' is a 'let' constant in solution.swift\n                i = nextChar - 1\n                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3230",
+    "task_finish_time": 1708123684165,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1177345876",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func removeAlmostEqualCharacters(_ word: String) -> Int {\n        let chars = Array(word)\n        var operations = 0\n        \n        for i in 0..<chars.count-1 {\n            if chars[i] == chars[i+1] || abs(chars[i].asciiValue! - chars[i+1].asciiValue!) == 1 {\n                operations += 1\n                var nextChar = i + 2\n                while nextChar < chars.count && (chars[nextChar] == chars[i] || abs(chars[nextChar].asciiValue! - chars[i].asciiValue!) == 1) {\n                    nextChar += 1\n                }\n                i = nextChar - 1\n            }\n        }\n        \n        return operations\n    }\n}"
+}

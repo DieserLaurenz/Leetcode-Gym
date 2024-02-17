@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 19: Char 17: error: expected expression before \u2018[\u2019 token [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018relocateMarbles\u2019\nLine 19: Char 10: warning: type defaults to \u2018int\u2019 in declaration of \u2018hash\u2019 [-Wimplicit-int] [solution.c]\n   22 |     auto hash = [](int value) { return value % 100000; };\n      |          ^~~~\nLine 19: Char 17: error: expected expression before \u2018[\u2019 token [solution.c]\n   22 |     auto hash = [](int value) { return value % 100000; };\n      |                 ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2834",
+    "task_finish_time": 1708112714391,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1177254856",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdlib.h>\n\nint cmp(const void *a, const void *b) {\n    return (*(int*)a - *(int*)b);\n}\n\n/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nint* relocateMarbles(int* nums, int numsSize, int* moveFrom, int moveFromSize, int* moveTo, int moveToSize, int* returnSize) {\n    // Use a hash table with dynamic allocation due to the high range of possible values (up to 10^9).\n    int** hashTable = (int**)calloc(100000, sizeof(int*)); // Primary array\n    for (int i = 0; i < 100000; i++) {\n        hashTable[i] = (int*)calloc(2, sizeof(int)); // Secondary arrays for value and count\n    }\n    int hashTableSize = 100000;\n\n    // Helper function to hash values (simple modulo hash for demonstration)\n    auto hash = [](int value) { return value % 100000; };\n\n    // Function to insert or update the hash table\n    auto insertOrUpdate = [&](int value, int delta) {\n        int index = hash(value);\n        if (!hashTable[index][0]) { // If the slot is empty, insert the value and count\n            hashTable[index][0] = value;\n            hashTable[index][1] = delta;\n        } else if (hashTable[index][0] == value) { // If the value exists, update the count\n            hashTable[index][1] += delta;\n        } else { // Collision resolution: linear probing\n            int originalIndex = index;\n            do {\n                index = (index + 1) % hashTableSize; // Move to the next slot\n                if (!hashTable[index][0] || hashTable[index][0] == value) {\n                    hashTable[index][0] = value;\n                    hashTable[index][1] += delta;\n                    break;\n                }\n            } while (index != originalIndex); // Ensure we don't loop indefinitely\n        }\n    };\n\n    // Populate the hash table with initial positions\n    for (int i = 0; i < numsSize; i++) {\n        insertOrUpdate(nums[i], 1);\n    }\n\n    // Process moves\n    for (int i = 0; i < moveFromSize; i++) {\n        insertOrUpdate(moveFrom[i], -1);\n        insertOrUpdate(moveTo[i], 1);\n    }\n\n    // Count non-empty positions\n    int count = 0;\n    for (int i = 0; i < hashTableSize; i++) {\n        if (hashTable[i][0] && hashTable[i][1] > 0) {\n            count++;\n        }\n    }\n\n    // Allocate return array\n    *returnSize = count;\n    int* result = (int*)malloc(count * sizeof(int));\n    int j = 0;\n    for (int i = 0; i < hashTableSize; i++) {\n        if (hashTable[i][0] && hashTable[i][1] > 0) {\n            result[j++] = hashTable[i][0];\n        }\n    }\n\n    // Sort result array for the correct order\n    qsort(result, count, sizeof(int), cmp);\n\n    // Free allocated memory\n    for (int i = 0; i < 100000; i++) {\n        free(hashTable[i]);\n    }\n    free(hashTable);\n\n    return result;\n}"
+}

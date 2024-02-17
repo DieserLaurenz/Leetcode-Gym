@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 20: Char 78: read-syntax: missing `)` to close `(` on line 16, found instead `]`",
+    "full_compile_error": "Line 20: Char 78: read-syntax: missing `)` to close `(` on line 16, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3150",
+    "task_finish_time": 1708145136129,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1177487350",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (shortest-beautiful-substring s k)\n  (-> string? exact-integer? string?)\n  (let ([len (string-length s)])\n    (letrec ([find-substr\n              (lambda (start ones min-len min-substr)\n                (if (>= start len)\n                    min-substr\n                    (let loop ([i start] [ones-count ones] [substr \"\"])\n                      (if (>= i len)\n                          (find-substr (+ start 1) 0 min-len min-substr)\n                          (let* ([char (string-ref s i)]\n                                 [new-ones-count (if (char=? char #\\1) (+ ones-count 1) ones-count)]\n                                 [new-substr (string-append substr (string char))])\n                            (if (= new-ones-count k)\n                                (if (or (< (string-length new-substr) min-len)\n                                        (and (= (string-length new-substr) min-len)\n                                             (string<? new-substr min-substr)))\n                                    (find-substr (+ start 1) 0 (string-length new-substr) new-substr)\n                                    (find-substr (+ start 1) 0 min-len min-substr))\n                                (loop (+ i 1) new-ones-count new-substr))))))])\n      (find-substr 0 0 len \"\"))))"
+}
