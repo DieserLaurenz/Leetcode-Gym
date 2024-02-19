@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 9: Char 27: make-hashtable: unbound identifier",
+    "full_compile_error": "Line 9: Char 27: make-hashtable: unbound identifier\n  in: make-hashtable\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:20:26",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3223",
+    "task_finish_time": 1708308200251,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1179357617",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-complete-substrings word k)\n  (-> string? exact-integer? exact-integer?)\n  \n  (define (char-diff c1 c2)\n    (abs (- (char->integer c1) (char->integer c2))))\n\n  (define (valid-substring? s)\n    (define (all-chars-same-count? s count)\n      (let ([char-counts (make-hashtable)])\n        (for ([c (in-string s)])\n          (hash-update! char-counts c add1 0))\n        (andmap (lambda (c) (= (hash-ref char-counts c 0) count)) (string->list s))))\n    (and (all-chars-same-count? s k)\n         (let loop ([chars (string->list s)])\n           (cond\n             [(null? (cdr chars)) #t]\n             [else (and (<= (char-diff (car chars) (cadr chars)) 2)\n                        (loop (cdr chars)))]))))\n\n  (define (count-valid-substrings)\n    (let ([len (string-length word)])\n      (define (substring-valid? start end)\n        (valid-substring? (substring word start end)))\n      (let loop ([start 0] [end k] [count 0])\n        (cond\n          [(> end len) count]\n          [else\n           (let ([new-count (if (substring-valid? start end) (+ count 1) count)])\n             (loop (+ start 1) (+ end 1) new-count))]))))\n\n  (count-valid-substrings))"
+}

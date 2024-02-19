@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 30\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3001",
+    "task_finish_time": 1708278508753,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1179068346",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-score nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (define (prime-factors-count n)\n    (define (loop n i acc)\n      (cond [(> (* i i) n) (if (> n 1) (+ acc 1) acc)]\n            [(zero? (remainder n i))\n             (let loop2 ((n n))\n               (if (zero? (remainder n i))\n                   (loop2 (/ n i))\n                   (loop n (+ i 1) (+ acc 1))))]\n            [else (loop n (+ i 1) acc)]))\n    (loop n 2 0))\n  \n  (define (score x) (prime-factors-count x))\n  \n  (define (max-score lst k mod)\n    (if (= k 0) 1\n        (let loop ((lst lst) (max-score 1))\n          (cond\n            [(null? lst) max-score]\n            [else\n             (let ((current (car lst))\n                   (rest (cdr lst))\n                   (current-score (score current)))\n               (if (> current-score (score max-score))\n                   (loop rest k (modulo (* max-score current) mod))\n                   (loop rest k max-score)))])))\n  \n  (max-score nums k (expt 10 9 7)))"
+}

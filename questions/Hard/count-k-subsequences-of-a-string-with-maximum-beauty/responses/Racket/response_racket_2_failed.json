@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 18: div: unbound identifier",
+    "full_compile_error": "Line 8: Char 18: div: unbound identifier\n  in: div\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:17",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3057",
+    "task_finish_time": 1708319239815,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1179489876",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-k-subsequences-with-max-beauty s k)\n  (-> string? exact-integer? exact-integer?)\n  (define mod 1000000007)\n  (define (factorial n)\n    (if (= n 0) 1 (modulo (* n (factorial (- n 1))) mod)))\n  (define (nCr n r)\n    (if (or (< n r) (< n 0) (< r 0)) 0\n        (modulo (div (factorial n) (* (factorial r) (factorial (- n r)))) mod)))\n  (define freq (make-hash))\n  (for ([c (in-string s)])\n    (hash-update! freq c add1 0))\n  (define values (sort (hash-values freq) >))\n  (define max-beauty (apply + (take values k)))\n  (define (count-max-beauty-combinations values k)\n    (define filtered-values (filter (lambda (v) (> v 0)) values))\n    (if (< (length filtered-values) k) 0\n        (let ([max-value (first filtered-values)])\n          (if (= k 1) (length filtered-values)\n              (nCr (count (lambda (x) (= x max-value)) filtered-values) k)))))\n  (count-max-beauty-combinations values k))"
+}

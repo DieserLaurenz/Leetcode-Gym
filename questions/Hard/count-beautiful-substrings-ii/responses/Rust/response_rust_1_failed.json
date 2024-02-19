@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 19, Char 21: type `i64` cannot be dereferenced (solution.rs)",
+    "full_compile_error": "Line 19, Char 21: type `i64` cannot be dereferenced (solution.rs)\n   |\n19 |                     *count += map.get(&(v as i64, c as i64)).unwrap_or(&0);\n   |                     ^^^^^^\nFor more information about this error, try `rustc --explain E0614`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3208",
+    "task_finish_time": 1708289040909,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1179194376",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn beautiful_substrings(s: String, k: i32) -> i64 {\n        let k = k as i64; // Convert k to i64 to match the type of count\n        let mut count = 0i64;\n        let s = s.as_bytes();\n        let mut freq = vec![0; 2]; // Index 0 for vowels, 1 for consonants\n        let mut map = std::collections::HashMap::new();\n        map.insert((0, 0), 1); // Initialize map with base case\n\n        for &c in s.iter() {\n            let is_vowel = matches!(c, b'a' | b'e' | b'i' | b'o' | b'u');\n            freq[is_vowel as usize] += 1;\n            let diff = freq[1] - freq[0]; // Difference between consonants and vowels\n\n            // Iterate through all possible pairs of vowels and consonants that could make the substring beautiful\n            for v in 0..=freq[0] {\n                let c = v + diff; // Calculate consonants based on the current vowel count and the difference\n                if c >= 0 && (v * c) % k == 0 {\n                    *count += map.get(&(v as i64, c as i64)).unwrap_or(&0);\n                }\n            }\n\n            *map.entry((freq[0] as i64, freq[1] as i64)).or_insert(0) += 1;\n        }\n\n        count\n    }\n}"
+}

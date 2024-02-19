@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 13: Char 84: ** (SyntaxError) syntax error before: mod\n    |\n 13 |           dp = :array.set(dp, j, (:array.get(dp, j) + :array.get(dp, j - max_val)) mod @mod)\n    |                                                                                    ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2882",
+    "task_finish_time": 1708227660045,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178486537",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @mod 1000000007\n\n  @spec number_of_ways(n :: integer, x :: integer) :: integer\n  def number_of_ways(n, x) do\n    dp = :array.new(n + 1, default_value: 0)\n    dp = :array.set(dp, 0, 1)\n\n    for i <- 1..n do\n      max_val = :math.pow(i, x) |> round()\n      if max_val <= n do\n        for j <- n..max_val, -1 do\n          dp = :array.set(dp, j, (:array.get(dp, j) + :array.get(dp, j - max_val)) mod @mod)\n        end\n      end\n    end\n\n    :array.get(dp, n)\n  end\nend"
+}

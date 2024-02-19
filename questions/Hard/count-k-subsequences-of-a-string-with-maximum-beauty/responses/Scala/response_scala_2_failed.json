@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 42: error: type mismatch; (in solution.scala)",
+    "full_compile_error": "Line 42: error: type mismatch; (in solution.scala)\n found   : Long\n required: Int\n            t = y\n                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3057",
+    "task_finish_time": 1708318966233,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1179485622",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def countKSubsequencesWithMaxBeauty(s: String, k: Int): Int = {\n        val mod = 1000000007\n        val freq = s.groupBy(identity).mapValues(_.length).toMap\n        val sortedFreq = freq.values.toList.sortWith(_ > _)\n\n        if (k > sortedFreq.size) return 0\n\n        val maxBeautyFreqs = sortedFreq.take(k)\n        val freqCount = maxBeautyFreqs.groupBy(identity).mapValues(_.size)\n\n        freqCount.foldLeft(1L)((acc, fc) => {\n            val (value, count) = fc\n            val occurrences = freq.count(_._2 == value)\n            val combination = factorial(occurrences, mod) * modInverse(factorial(count, mod), mod) % mod * modInverse(factorial(occurrences - count, mod), mod) % mod\n            (acc * combination) % mod\n        }).toInt\n    }\n\n    def factorial(n: Int, mod: Int): Long = {\n        var result = 1L\n        for (i <- 1 to n) {\n            result = (result * i) % mod\n        }\n        result\n    }\n\n    def modInverse(a: Long, mod: Int): Long = {\n        var m = mod\n        var y = 0L\n        var x = 1L\n\n        if (mod == 1) return 0\n\n        var a1 = a\n        while (a1 > 1) {\n            val q = a1 / m\n            var t = m\n\n            m = (a1 % m).toInt\n            a1 = t\n            t = y\n\n            y = x - q * y\n            x = t\n        }\n\n        if (x < 0) x += mod\n\n        x\n    }\n}"
+}

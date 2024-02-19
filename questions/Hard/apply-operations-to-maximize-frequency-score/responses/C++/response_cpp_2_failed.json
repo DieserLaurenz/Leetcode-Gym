@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "cpp",
+    "run_success": false,
+    "compile_error": "Line 18: Char 23: error: no matching function for call to 'max'",
+    "full_compile_error": "Line 18: Char 23: error: no matching function for call to 'max'\n   18 |             maxFreq = max(maxFreq, right - left + 1);\n      |                       ^~~\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:407:5: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('long long' vs. 'int')\n  398 |     max(const _Tp&, const _Tp&);\n      |     ^\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3467:5: note: candidate template ignored: could not match 'initializer_list<_Tp>' against 'long long'\n 3458 |     max(initializer_list<_Tp> __l, _Compare __comp)\n      |     ^\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3461:5: note: candidate function template not viable: requires single argument '__l', but 2 arguments were provided\n 3452 |     max(initializer_list<_Tp> __l)\n      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:412:5: note: candidate function template not viable: requires 3 arguments, but 2 were provided\n  403 |     max(const _Tp&, const _Tp&, _Compare);\n      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3196",
+    "task_finish_time": 1708256974206,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C++",
+    "submission_id": "1178815362",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int maxFrequencyScore(vector<int>& nums, long long k) {\n        sort(nums.begin(), nums.end());\n        long long maxFreq = 1, windowSum = 0;\n        int left = 0;\n        for (int right = 0; right < nums.size(); ++right) {\n            windowSum += nums[right];\n            while ((right - left + 1) * nums[right] - windowSum > k) {\n                windowSum -= nums[left];\n                ++left;\n            }\n            maxFreq = max(maxFreq, right - left + 1);\n        }\n        return maxFreq;\n    }\n};"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 26: Char 26: ** (SyntaxError) unexpected token: ]\n    HINT: the \"(\" on line 26 is missing terminator \")\"\n    |\n 26 |           (sorted_nums|i|] % sorted_nums|index - 1|] == 0 or sorted_nums|index - 1|] % sorted_nums|i|] == 0) do\n    |                          ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2848",
+    "task_finish_time": 1708195700069,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178159592",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @mod 1_000_000_007\n\n  @spec special_perm(nums :: [integer]) :: integer\n  def special_perm(nums) do\n    nums\n    |> Enum.sort()\n    |> count_special_permutations(Map.new(), length(nums))\n  end\n\n  defp count_special_permutations(sorted_nums, len) do\n    count_special_permutations(sorted_nums, len, 0, 0, Map.new())\n  end\n\n  defp count_special_permutations(_sorted_nums, _len, _index, count, _dp) when _index == _len do\n    count\n  end\n\n  defp count_special_permutations(sorted_nums, len, index, count, dp) do\n    Enum.reduce(0..len-1, count, fn i, acc ->\n      if Map.get(dp, {index, i}) do\n        acc\n      else\n        new_dp = Map.put(dp, {index, i}, true)\n        if index == 0 or \n          (sorted_nums|i|] % sorted_nums|index - 1|] == 0 or sorted_nums|index - 1|] % sorted_nums|i|] == 0) do\n          acc + count_special_permutations(sorted_nums, len, index + 1, 1, new_dp)\n        else\n          acc\n        end\n      end\n    end)\n  end\nend"
+}

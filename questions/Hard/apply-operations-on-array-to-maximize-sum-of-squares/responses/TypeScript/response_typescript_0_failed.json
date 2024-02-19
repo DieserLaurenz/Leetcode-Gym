@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "typescript",
+    "run_success": false,
+    "compile_error": "Line 6: Char 5: error TS2322: Type 'bigint' is not assignable to type 'number'.",
+    "full_compile_error": "Line 6: Char 5: error TS2322: Type 'bigint' is not assignable to type 'number'.\nLine 6: Char 12: error TS2365: Operator '+' cannot be applied to types 'number' and 'bigint'.",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3153",
+    "task_finish_time": 1708247190585,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "TypeScript",
+    "submission_id": "1178716095",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "function maxSum(nums: number[], k: number): number {\n  const mod = 1e9 + 7;\n  nums.sort((a, b) => b - a); // Sort the array in descending order\n  let sum = 0;\n  for (let i = 0; i < k; i++) {\n    sum = (sum + BigInt(nums[i]) ** BigInt(2)) % BigInt(mod);\n  }\n  return Number(sum);\n};"
+}

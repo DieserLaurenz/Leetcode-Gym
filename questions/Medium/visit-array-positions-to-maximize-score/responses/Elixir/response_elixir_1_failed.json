@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"current_score\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"current_score\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 7:   Solution.max_score_helper/6\nerror: cannot invoke remote function MapSet.member?/2 inside guards\nLine 9:   Solution.max_score_helper/6\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (elixir 1.15.7) expanding macro: Kernel.and/2\nLine 9:     Solution.max_score_helper/6",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2893",
+    "task_finish_time": 1708217453886,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178348205",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_score(nums :: [integer], x :: integer) :: integer\n  def max_score(nums, x) do\n    max_score_helper(nums, x, 0, MapSet.new(), 0, nums |> hd())\n  end\n\n  defp max_score_helper(_nums, _x, _index, _visited, max_score, current_score), do: max_score\n\n  defp max_score_helper(nums, x, index, visited, max_score, current_score) when index < length(nums) and not MapSet.member?(visited, index) do\n    new_visited = MapSet.put(visited, index)\n    new_score = if index > 0 and rem(Enum.at(nums, index - 1), 2) != rem(Enum.at(nums, index), 2), do: current_score - x, else: current_score\n    new_max_score = max(max_score, new_score + Enum.at(nums, index))\n    Enum.reduce(index+1..length(nums)-1, new_max_score, fn i, acc ->\n      max_score_helper(nums, x, i, new_visited, acc, new_score + Enum.at(nums, i))\n    end)\n  end\n\n  defp max_score_helper(_nums, _x, _index, _visited, max_score, _current_score), do: max_score\nend"
+}

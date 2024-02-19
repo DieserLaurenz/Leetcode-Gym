@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 6: Char 73: ** (SyntaxError) syntax error before: 'rem'\n    |\n  6 |       0, {1, ways, total_ways} -> {1, ways + 1, (total_ways + ways + 1) rem 1_000_000_007}\n    |                                                                         ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2867",
+    "task_finish_time": 1708238182518,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178619364",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec number_of_good_subarray_splits(nums :: [integer]) :: integer do\n    nums\n    |> Enum.reduce({0, 0, 0}, fn\n      1, {_ones_before, _ways, _total_ways} -> {1, 0, _total_ways}\n      0, {1, ways, total_ways} -> {1, ways + 1, (total_ways + ways + 1) rem 1_000_000_007}\n      _, acc -> acc\n    end)\n    |> elem(2)\n  end\nend"
+}

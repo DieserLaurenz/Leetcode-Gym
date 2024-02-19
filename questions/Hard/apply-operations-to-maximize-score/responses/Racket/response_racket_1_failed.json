@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 9: Char 8: while: unbound identifier",
+    "full_compile_error": "Line 9: Char 8: while: unbound identifier\n  in: while\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:20:7",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3001",
+    "task_finish_time": 1708278550506,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1179068969",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-score nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (define mod 1000000007)\n\n  (define (prime-factors n)\n    (define primes '())\n    (when (even? n)\n      (set! primes (cons 2 primes))\n      (while (even? n) (set! n (/ n 2))))\n    (for ([i (in-range 3 (add1 (sqrt n)) 2)])\n      (when (zero? (remainder n i))\n        (set! primes (cons i primes))\n        (while (zero? (remainder n i))\n          (set! n (/ n i)))))\n    (when (> n 2) (set! primes (cons n primes)))\n    (length primes))\n\n  (define (score x) (prime-factors x))\n\n  (define (sorted-nums-by-score nums)\n    (sort nums (lambda (x y) \n                 (or (> (score x) (score y))\n                     (and (= (score x) (score y)) (< x y))))))\n\n  (define (calculate-maximum-score nums k)\n    (let loop ([nums nums] [k k] [score 1])\n      (if (= k 0) score\n          (loop (cdr nums) (- k 1) (modulo (* score (car nums)) mod)))))\n\n  (calculate-maximum-score (sorted-nums-by-score nums) k))"
+}

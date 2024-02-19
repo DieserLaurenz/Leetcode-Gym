@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 14: Char 69: ** (SyntaxError) syntax error before: mod\n    |\n 14 |         updated_value = (:array.get(dp, j - i) + :array.get(dp, j)) mod @mod\n    |                                                                     ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2882",
+    "task_finish_time": 1708227716209,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178487816",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @mod 1000000007\n\n  @spec number_of_ways(n :: integer, x :: integer) :: integer\n  def number_of_ways(n, x) do\n    dp = :array.new(n + 1, default_value: 0)\n    dp = :array.set(dp, 0, 1)\n\n    1..n\n    |> Enum.map(&(:math.pow(&1, x) |> round()))\n    |> Enum.filter(&(n >= &1))\n    |> Enum.each(fn i ->\n      for j <- i..n do\n        updated_value = (:array.get(dp, j - i) + :array.get(dp, j)) mod @mod\n        dp = :array.set(dp, j, updated_value)\n      end\n    end)\n\n    :array.get(dp, n)\n  end\nend"
+}

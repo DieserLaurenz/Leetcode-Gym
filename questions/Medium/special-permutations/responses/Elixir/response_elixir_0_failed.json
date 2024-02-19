@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 28: Char 39: ** (SyntaxError) unexpectedly reached end of line. The current expression is invalid or incomplete\n    |\n 28 |     h % next_h == 0 or next_h % h == 0\n    |                                       ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2848",
+    "task_finish_time": 1708195659756,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178159112",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @mod 1_000_000_007\n\n  @spec special_perm(nums :: [integer]) :: integer\n  def special_perm(nums) do\n    nums\n    |> Enum.sort()\n    |> permute([], length(nums), Map.new(), 0)\n    |> rem(@mod)\n  end\n\n  defp permute([], _len, _dp, count), do: count\n\n  defp permute([h | t], len, dp, count) do\n    new_count = Enum.reduce(0..len-1, count, fn i, acc ->\n      if Map.get(dp, {i, h}) != nil or can_place?(i, h, t) do\n        acc + permute(t -- [h], len, Map.put(dp, {i, h}, true), 1)\n      else\n        acc\n      end\n    end)\n    permute(t, len, dp, new_count)\n  end\n\n  defp can_place?(_i, _h, []), do: true\n\n  defp can_place?(i, h, [next_h | _t]) when i == 0 do\n    h % next_h == 0 or next_h % h == 0\n  end\n\n  defp can_place?(_i, _h, _), do: false\nend"
+}

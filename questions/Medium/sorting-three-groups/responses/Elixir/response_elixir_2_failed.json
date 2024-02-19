@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: nested captures are not allowed. You cannot define a function using  the capture operator & inside another function defined via &. Got invalid nested capture: & &1",
+    "full_compile_error": "error: nested captures are not allowed. You cannot define a function using  the capture operator & inside another function defined via &. Got invalid nested capture: & &1\nLine 5:   Solution.minimum_operations/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (stdlib 5.1.1) lists.erl:1706: :lists.mapfoldl_1/3\n    (stdlib 5.1.1) lists.erl:1707: :lists.mapfoldl_1/3\n    (elixir 1.15.7) src/elixir_fn.erl:140: :elixir_fn.escape/3\n    (elixir 1.15.7) src/elixir_fn.erl:112: :elixir_fn.capture_expr/6",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2904",
+    "task_finish_time": 1708186106129,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178017390",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_operations(nums :: [integer]) :: integer\n  def minimum_operations(nums) do\n    groups = for x <- 1..3, do: Enum.filter(nums, fn y -> y == x end)\n    sorted_groups = Enum.map(groups, &Enum.sort_by(&1, &(&1)))\n    len = Enum.count(nums)\n    max_correct = 0\n\n    for i <- 0..(len-1) do\n      correct = 0\n      for {group, index} <- Enum.with_index(sorted_groups) do\n        correct = correct + Enum.count(group, fn x -> x == i end)\n        if correct < index+1, do: break, else: max_correct = max(max_correct, correct)\n      end\n    end\n\n    len - max_correct\n  end\nend"
+}

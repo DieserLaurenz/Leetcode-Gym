@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 5: Char 38: syntax error before: 1",
+    "full_compile_error": "Line 5: Char 38: syntax error before: 1\n%    5|     max_freq(Sorted, K, 0, 1, Sorted#1, 1).\n%     |                                      ^\nLine 1: Char 2: spec for undefined function max_frequency_score/2\n%    1| -spec max_frequency_score(Nums :: [integer()], K :: integer()) -> integer().\n%     |  ^\nLine 31: Char 13: function max_frequency_score/2 undefined\n%   31|       Ret = max_frequency_score(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3196",
+    "task_finish_time": 1708267574862,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1178927491",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_frequency_score(Nums :: [integer()], K :: integer()) -> integer().\nmax_frequency_score(Nums, K) ->\n    Sorted = lists:sort(Nums),\n    Length = length(Sorted),\n    max_freq(Sorted, K, 0, 1, Sorted#1, 1).\n\nmax_freq([H|T], K, Left, Right, Current, Max) when Right =< length([H|T]) ->\n    case K >= (H - Current) * (Right - Left) of\n        true -> max_freq(T, K - (H - Current) * (Right - Left), Left, Right + 1, H, max(Right - Left + 1, Max));\n        false -> max_freq(T, K, Left + 1, Right, Current, Max)\n    end;\nmax_freq([], _K, _Left, _Right, _Current, Max) ->\n    Max."
+}

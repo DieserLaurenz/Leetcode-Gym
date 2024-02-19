@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: function comb/2 is unused",
+    "full_compile_error": "warning: function comb/2 is unused\nLine 14:   Solution (module)\nerror: spec for undefined function count_k_subsequences_with_max_beauty/2\n  solution.ex:2\n** (CompileError) solution.ex: cannot compile file (errors have been logged)\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3057",
+    "task_finish_time": 1708319498935,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1179493826",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count_k_subsequences_with_max_beauty(s :: String.t, k :: integer) :: integer do\n    s\n    |> String.graphemes()\n    |> Enum.frequencies()\n    |> Enum.map(fn {_char, freq} -> freq end)\n    |> Enum.sort(&>=/2)\n    |> Enum.take(k)\n    |> Enum.reduce(1, fn freq, acc -> \n      acc * comb(freq, 1) |> rem(1_000_000_007)\n    end)\n  end\n\n  defp comb(n, k) when n >= k, do: Enum.reduce(0..k-1, 1, fn i, acc -> acc * (n - i) |> rem(1_000_000_007) end)\n  defp comb(_, _), do: 0\nend"
+}

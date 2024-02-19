@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 52: Char 43: error: expected expression before \u2018[\u2019 token [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018maximumScore\u2019\nLine 52: Char 43: error: expected expression before \u2018[\u2019 token [solution.c]\n   55 |     qsort(indices, numsSize, sizeof(int), [&](const void* a, const void* b) {\n      |                                           ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3001",
+    "task_finish_time": 1708268117528,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1178933489",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\n\n#define MOD 1000000007\n\nint primeFactors(int n) {\n    int factors = 0;\n    int count;\n\n    // Count the number of 2s that divide n\n    if (n % 2 == 0) {\n        factors++;\n        while (n % 2 == 0) n = n / 2;\n    }\n\n    // n must be odd at this point. So we can skip one element (Note i = i +2)\n    for (int i = 3; i <= sqrt(n); i = i + 2) {\n        // While i divides n, print i and divide n\n        if (n % i == 0) {\n            factors++;\n            while (n % i == 0) n = n / i;\n        }\n    }\n\n    // This condition is to handle the case when n is a prime number\n    // greater than 2\n    if (n > 2) factors++;\n\n    return factors;\n}\n\n// Custom comparator for sorting\nint cmp(const void *a, const void *b) {\n    return (*(int*)b) - (*(int*)a);\n}\n\nint maximumScore(int* nums, int numsSize, int k) {\n    long long score = 1; // Use long long to avoid overflow\n\n    // Allocate memory to store prime factors\n    int* primeScores = (int*)malloc(numsSize * sizeof(int));\n    if (!primeScores) return -1; // Memory allocation failed\n\n    // Calculate prime scores for each element\n    for (int i = 0; i < numsSize; ++i) {\n        primeScores[i] = primeFactors(nums[i]);\n    }\n\n    // Sort nums based on their prime scores, and if equal, by their value\n    int* indices = (int*)malloc(numsSize * sizeof(int));\n    for (int i = 0; i < numsSize; ++i) indices[i] = i;\n    qsort(indices, numsSize, sizeof(int), [&](const void* a, const void* b) {\n        int idx1 = *(const int*)a;\n        int idx2 = *(const int*)b;\n        if (primeScores[idx1] == primeScores[idx2]) return nums[idx2] - nums[idx1];\n        return primeScores[idx2] - primeScores[idx1];\n    });\n\n    // Pick the first k elements based on sorted prime scores (and values)\n    for (int i = 0; i < k; ++i) {\n        score = (score * nums[indices[i]]) % MOD;\n    }\n\n    free(primeScores);\n    free(indices);\n\n    return (int)score;\n}"
+}

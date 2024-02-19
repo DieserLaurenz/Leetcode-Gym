@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 7: Char 31: take-while: unbound identifier",
+    "full_compile_error": "Line 7: Char 31: take-while: unbound identifier\n  in: take-while\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:18:30",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2867",
+    "task_finish_time": 1708237830306,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1178614932",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (number-of-good-subarray-splits nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define mod 1000000007)\n  \n  (define (count-zeroes-before-ones lst)\n    (map (lambda (x) (length (take-while zero? x))) (tails lst)))\n  \n  (define (zero? x) (= x 0))\n  (define (tails lst) (if (null? lst) '(()) (cons lst (tails (cdr lst)))))\n  \n  (define zeroes-before-ones (count-zeroes-before-ones nums))\n  \n  (define ones (filter (lambda (x) (= x 1)) nums))\n  \n  (define (compute-ways zeroes-before-ones ones)\n    (let loop ([zbo zeroes-before-ones] [o ones] [acc 0])\n      (if (or (null? zbo) (null? (cdr o)))\n          acc\n          (loop (cdr zbo) (cdr o) (modulo (+ acc (* (car zbo) (car (cdr zbo)))) mod)))))\n  \n  (compute-ways zeroes-before-ones ones))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 44: illegal guard expression",
+    "full_compile_error": "Line 9: Char 44: illegal guard expression\n%    9|                              Penalty = if (lists:nth(Pi, Nums) rem 2) /= (N rem 2) -> X;\n%     |                                            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2893",
+    "task_finish_time": 1708217332792,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1178347416",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_score(Nums :: [integer()], X :: integer()) -> integer().\nmax_score(Nums, X) ->\n    max_score_dp(Nums, X, [{0, hd(Nums)}], 1, hd(Nums)).\n\nmax_score_dp(_, _, Acc, _, MaxScore) when Acc == [] -> MaxScore;\nmax_score_dp(Nums, X, [{I, Score} | Rest], J, MaxScore) when J < length(Nums) ->\n    N = lists:nth(J, Nums),\n    NewAcc = lists:foldl(fun({Pi, PScore}, Acc) ->\n                             Penalty = if (lists:nth(Pi, Nums) rem 2) /= (N rem 2) -> X;\n                                       true -> 0\n                             end,\n                             [{J, PScore + N - Penalty} | Acc]\n                         end, Rest, [{I, Score}]),\n    {NewMax, PrunedAcc} = prune_and_find_max(NewAcc, MaxScore),\n    max_score_dp(Nums, X, PrunedAcc, J + 1, NewMax);\nmax_score_dp(_, _, _, _, MaxScore) -> MaxScore.\n\nprune_and_find_max(Acc, Max) ->\n    Sorted = lists:sort(fun({_, S1}, {_, S2}) -> S1 > S2 end, Acc),\n    Pruned = prune(Sorted, []),\n    MaxScore = case Pruned of\n                   [{_, S} | _] -> max(S, Max);\n                   [] -> Max\n               end,\n    {MaxScore, Pruned}.\n\nprune([], Acc) -> lists:reverse(Acc);\nprune([H = {_, S} | T], Acc) ->\n    case Acc of\n        [{_, LastS} | _] = _Acc when S =< LastS -> prune(T, Acc);\n        _ -> prune(T, [H | Acc])\n    end."
+}

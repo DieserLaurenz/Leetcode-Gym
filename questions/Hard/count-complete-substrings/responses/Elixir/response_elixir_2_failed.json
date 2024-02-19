@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 14: Char 90: ** (SyntaxError) syntax error before: ')'\n    |\n 14 |     char_counts = for <<c::utf8 <- substring>>, into: %{}, do: (c, Map.get(%{}, c, 0) + 1)\n    |                                                                                          ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3223",
+    "task_finish_time": 1708308571890,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1179361179",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count_complete_substrings(word :: String.t, k :: integer) :: integer\n  def count_complete_substrings(word, k) do\n    Enum.reduce(0..String.length(word)-1, 0, fn i, acc ->\n      acc + \n        Enum.reduce(i..String.length(word)-1, 0, fn j, acc2 ->\n          substring = String.slice(word, i, j-i+1)\n          if valid_substring?(substring, k), do: acc2+1, else: acc2\n        end)\n    end)\n  end\n\n  defp valid_substring?(substring, k) do\n    char_counts = for <<c::utf8 <- substring>>, into: %{}, do: (c, Map.get(%{}, c, 0) + 1)\n    all_k = Enum.all?(char_counts, fn {_char, count} -> count == k end)\n\n    if !all_k, do: false, else: valid_char_diff?(substring)\n  end\n\n  defp valid_char_diff?(substring) do\n    chars = String.graphemes(substring)\n    Enum.all?(chars, fn char ->\n      char_code = char |> String.to_charlist() |> hd()\n      Enum.all?(chars, fn other_char ->\n        other_char_code = other_char |> String.to_charlist() |> hd()\n        abs(char_code - other_char_code) <= 2\n      end)\n    end)\n  end\nend"
+}

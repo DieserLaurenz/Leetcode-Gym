@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 12: Char 34: keys: unbound identifier",
+    "full_compile_error": "Line 12: Char 34: keys: unbound identifier\n  in: keys\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:23:33",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3223",
+    "task_finish_time": 1708308287989,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1179358444",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-complete-substrings word k)\n  (-> string? exact-integer? exact-integer?)\n  \n  (define (abs-diff c1 c2)\n    (abs (- (char->integer c1) (char->integer c2))))\n  \n  (define (check-substring str)\n    (let ([counts (make-hash)])\n      (for ([c (in-string str)])\n        (hash-update! counts c add1 0))\n      (and (= (hash-count counts) (string-length str))\n           (for/and ([c (in-hash keys counts)])\n             (= (hash-ref counts c) k)))))\n  \n  (define (valid-substring start end)\n    (and (check-substring (substring word start end))\n         (let loop ([pos start])\n           (if (= pos (- end 1)) #t\n               (and (<= (abs-diff (string-ref word pos) (string-ref word (+ pos 1))) 2)\n                    (loop (+ pos 1)))))))\n  \n  (let ([len (string-length word)])\n    (define (count-valid-substrings start end count)\n      (if (> start (- len k)) count\n          (if (and (<= end len) (valid-substring start end))\n              (count-valid-substrings (+ start 1) (+ end 1) (+ count 1))\n              (count-valid-substrings (+ start 1) (+ end 1) count))))\n    (count-valid-substrings 0 k 0)))"
+}

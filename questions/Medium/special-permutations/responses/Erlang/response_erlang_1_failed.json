@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 8: Char 56: syntax error before: State",
+    "full_compile_error": "Line 8: Char 56: syntax error before: State\n%    8|     CalcDP = fun CalcDP(0, _) -> 1; (Pos, State) -> DP#State end,\n%     |                                                        ^\nLine 1: Char 2: spec for undefined function special_perm/1\n%    1| -spec special_perm(Nums :: [integer()]) -> integer().\n%     |  ^\nLine 52: Char 13: function special_perm/1 undefined\n%   52|       Ret = special_perm(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2848",
+    "task_finish_time": 1708195540229,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1178157671",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec special_perm(Nums :: [integer()]) -> integer().\nspecial_perm(Nums) ->\n    Sorted = lists:sort(Nums),\n    N = length(Sorted),\n    Mod = 1000000007,\n    DP = lists:duplicate(1 bsl N, -1),\n    \n    CalcDP = fun CalcDP(0, _) -> 1; (Pos, State) -> DP#State end,\n    \n    UpdateDP = fun UpdateDP(Pos, State, Value) ->\n        lists:update_at(State, Value, DP)\n    end,\n    \n    Solve = fun Solve(_, 0) -> 1;\n                 Solve(I, State) ->\n                     case CalcDP(I, State) of\n                         -1 -> \n                             Sum = lists:foldl(fun(J, Acc) ->\n                                                   if\n                                                       State band (1 bsl J) == 0 ->\n                                                           Prev = if I == 1 -> true;\n                                                                     true -> (element(J, Sorted) rem element(I - 1, Sorted) == 0) or (element(I - 1, Sorted) rem element(J, Sorted) == 0)\n                                                                   end,\n                                                           if Prev -> (Acc + Solve(I - 1, State bor (1 bsl J))) rem Mod;\n                                                              true -> Acc\n                                                           end;\n                                                       true -> Acc\n                                                   end\n                                               end, 0, lists:seq(0, N - 1)),\n                             UpdateDP(I, State, Sum),\n                             Sum;\n                         Res -> Res\n                     end\n             end,\n    \n    Solve(N, 0)."
+}

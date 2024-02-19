@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 21\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3196",
+    "task_finish_time": 1708267512454,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1178926797",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-frequency-score nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  \n  (define (helper sorted-nums k)\n    (let ([n (length sorted-nums)])\n      (if (zero? n) 0\n          (let* ([freqs (make-vector n 1)]\n                 [left 0]\n                 [total 0]\n                 [max-freq 1])\n            (for ([right (in-range 1 n)])\n              (set! total (+ total (- (vector-ref sorted-nums right) (vector-ref sorted-nums (- right 1))) (* (- right left) (vector-ref freqs (- right 1)))))\n              (while (> total k)\n                (set! total (- total (vector-ref freqs left)))\n                (set! left (+ left 1)))\n              (vector-set! freqs right (+ (vector-ref freqs (- right 1)) (- right left 1)))\n              (set! max-freq (max max-freq (vector-ref freqs right))))\n            max-freq)))\n  \n  (helper (sort nums <) k))"
+}

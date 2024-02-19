@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 18: error: type mismatch; (in solution.scala)",
+    "full_compile_error": "Line 18: error: type mismatch; (in solution.scala)\n found   : Long\n required: Int\n        }) % mod\n           ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3057",
+    "task_finish_time": 1708318883408,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1179484313",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def countKSubsequencesWithMaxBeauty(s: String, k: Int): Int = {\n        val mod = 1000000007\n        val freq = s.groupBy(identity).mapValues(_.length)\n        val sortedFreq = freq.values.toList.sortWith(_ > _)\n\n        if (k > sortedFreq.size) return 0\n\n        val maxBeautyFreqs = sortedFreq.take(k)\n        val maxBeauty = maxBeautyFreqs.sum\n        val freqCount = maxBeautyFreqs.groupBy(identity).mapValues(_.size)\n\n        freqCount.foldLeft(1L)((acc, fc) => {\n            val (value, count) = fc\n            val occurrences = freq.count(_._2 == value)\n            val combination = (1 to occurrences).map(BigInt(_)).product / ((1 to count).map(BigInt(_)).product * (1 to (occurrences - count)).map(BigInt(_)).product)\n            (acc * combination % mod).toInt\n        }) % mod\n    }\n}"
+}

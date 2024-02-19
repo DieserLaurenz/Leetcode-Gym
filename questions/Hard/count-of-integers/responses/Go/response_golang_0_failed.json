@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 28: Char 7: invalid operation: operator ! not defined on tight (variable of type int) (solution.go)",
+    "full_compile_error": "Line 28: Char 7: invalid operation: operator ! not defined on tight (variable of type int) (solution.go)\nLine 37: Char 22: invalid operation: tight & (i == up) (mismatched types int and untyped bool) (solution.go)\nLine 40: Char 7: invalid operation: operator ! not defined on tight (variable of type int) (solution.go)\nLine 46: Char 2: inc declared and not used (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2757",
+    "task_finish_time": 1708329454668,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1179637892",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "package main\n\nimport (\n \"strconv\"\n)\n\nfunc count(num1 string, num2 string, min_sum int, max_sum int) int {\n const mod = 1e9 + 7\n dp := make([][][]int, len(num2)+1)\n for i := range dp {\n  dp[i] = make([][]int, 2)\n  for j := range dp[i] {\n   dp[i][j] = make([]int, max_sum+1)\n   for k := range dp[i][j] {\n    dp[i][j][k] = -1\n   }\n  }\n }\n\n var dfs func(pos, tight, sum int, limit string) int\n dfs = func(pos, tight, sum int, limit string) int {\n  if pos == len(limit) {\n   if sum >= min_sum && sum <= max_sum {\n    return 1\n   }\n   return 0\n  }\n  if !tight && dp[pos][0][sum] != -1 {\n   return dp[pos][0][sum]\n  }\n  up := 9\n  if tight == 1 {\n   up, _ = strconv.Atoi(string(limit[pos]))\n  }\n  ans := 0\n  for i := 0; i <= up; i++ {\n   ans += dfs(pos+1, tight&(i==up), sum+i, limit)\n   ans %= mod\n  }\n  if !tight {\n   dp[pos][0][sum] = ans\n  }\n  return ans\n }\n\n inc := func(s string) string {\n  n := len(s)\n  bytes := make([]byte, n)\n  carry := 1\n  for i := n - 1; i >= 0; i-- {\n   sum := int(s[i]-'0') + carry\n   if sum == 10 {\n    bytes[i] = '0'\n   } else {\n    bytes[i] = byte(sum + '0')\n    carry = 0\n    break\n   }\n  }\n  if carry == 1 {\n   return \"1\" + string(bytes)\n  }\n  return string(bytes[:n])\n }\n\n num1Int, _ := strconv.Atoi(num1)\n num1Int--\n num1 = strconv.Itoa(num1Int)\n if num1Int == 0 {\n  num1 = \"0\"\n }\n\n total := dfs(0, 1, 0, num2) - dfs(0, 1, 0, num1)\n if total < 0 {\n  total += mod\n }\n return total\n}"
+}

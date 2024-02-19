@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 7: Char 46: bitwise-arithmetic-shift-right: unbound identifier",
+    "full_compile_error": "Line 7: Char 46: bitwise-arithmetic-shift-right: unbound identifier\n  in: bitwise-arithmetic-shift-right\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:18:45",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3153",
+    "task_finish_time": 1708256643021,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1178812110",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-sum nums k)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([mod 1000000007])\n    (define (power-of-2? n)\n      (= n (bitwise-and n (- n))))\n    (define (max-power-of-2 n)\n      (if (power-of-2? n) n (max-power-of-2 (bitwise-arithmetic-shift-right n 1))))\n    (define (process-nums nums)\n      (map max-power-of-2 nums))\n    (define sorted-nums (sort (process-nums nums) >))\n    (define (sum-of-squares lst k)\n      (if (= k 0)\n          0\n          (modulo (+ (sq (car lst)) (sum-of-squares (cdr lst) (- k 1))) mod)))\n    (define (sq x) (modulo (* x x) mod))\n    (sum-of-squares sorted-nums k)))"
+}

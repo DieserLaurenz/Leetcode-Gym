@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 50: Char 65: error: invalid operands to binary % (have \u2018double\u2019 and \u2018int\u2019) [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018countKSubsequencesWithMaxBeauty\u2019\nLine 50: Char 65: error: invalid operands to binary % (have \u2018double\u2019 and \u2018int\u2019) [solution.c]\n   53 |                 total = (numerator * pow(denominator, MOD - 2)) % MOD; // Fermat's little theorem for modular inverse\n      |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^\n      |                                    |\n      |                                    double",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3057",
+    "task_finish_time": 1708308921160,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1179364543",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdio.h>\n#include <string.h>\n\n#define MOD 1000000007\n\nint countKSubsequencesWithMaxBeauty(char* s, int k) {\n    int freq[26] = {0};\n    int n = strlen(s);\n    \n    // Count frequency of each character in s\n    for (int i = 0; i < n; i++) {\n        freq[s[i] - 'a']++;\n    }\n    \n    // Sort frequencies in decreasing order\n    for (int i = 0; i < 26; i++) {\n        for (int j = i + 1; j < 26; j++) {\n            if (freq[i] < freq[j]) {\n                int temp = freq[i];\n                freq[i] = freq[j];\n                freq[j] = temp;\n            }\n        }\n    }\n    \n    // Calculate the maximum beauty\n    int maxBeauty = 0;\n    for (int i = 0; i < k; i++) {\n        maxBeauty += freq[i];\n    }\n    \n    // Calculate the number of ways to choose k distinct characters\n    // with the maximum beauty. This involves combinatorial calculations,\n    // but since we only need the count of max beauty subsequences,\n    // we simplify by considering characters with equal frequencies together.\n    long long ways = 1;\n    int currentFreq = freq[0], count = 0, selected = 0;\n    for (int i = 0; i < 26 && selected < k; i++) {\n        if (freq[i] == currentFreq) {\n            count++; // Count characters with the current frequency\n        } else {\n            // When frequency changes, calculate combinations for the previous frequency set\n            if (count >= k - selected) {\n                // Calculate nCk for the count\n                long long total = 1, numerator = 1, denominator = 1;\n                for (int j = 0; j < k - selected; j++) {\n                    numerator = (numerator * (count - j)) % MOD;\n                    denominator = (denominator * (1 + j)) % MOD;\n                }\n                total = (numerator * pow(denominator, MOD - 2)) % MOD; // Fermat's little theorem for modular inverse\n                ways = (ways * total) % MOD;\n                selected = k; // All characters selected\n                break;\n            } else {\n                selected += count; // Select all characters of the current frequency\n                currentFreq = freq[i];\n                count = 1;\n            }\n        }\n    }\n    \n    return ways % MOD;\n}"
+}

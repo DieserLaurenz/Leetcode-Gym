@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 19: illegal guard expression",
+    "full_compile_error": "Line 9: Char 19: illegal guard expression\n%    9|     Penalty = if (lists:nth(I - 1, Nums) rem 2) /= (N rem 2) -> X; true -> 0 end,\n%     |                   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2893",
+    "task_finish_time": 1708217357063,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1178347569",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_score(Nums :: [integer()], X :: integer()) -> integer().\nmax_score(Nums, X) ->\n    find_max_score(Nums, X, 1, hd(Nums), hd(Nums)).\n\nfind_max_score(_Nums, _X, _I, MaxScore, _CurrentScore) when _I == length(_Nums) ->\n    MaxScore;\nfind_max_score(Nums, X, I, MaxScore, CurrentScore) ->\n    N = lists:nth(I, Nums),\n    Penalty = if (lists:nth(I - 1, Nums) rem 2) /= (N rem 2) -> X; true -> 0 end,\n    NewScore = CurrentScore + N - Penalty,\n    NewMaxScore = max(MaxScore, NewScore),\n    find_max_score(Nums, X, I + 1, NewMaxScore, NewScore)."
+}

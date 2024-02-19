@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 37: Char 8: call to local/imported function is_prime/1 is illegal in guard",
+    "full_compile_error": "Line 37: Char 8: call to local/imported function is_prime/1 is illegal in guard\n%   37|     if is_prime(Next) -> Next;\n%     |        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3001",
+    "task_finish_time": 1708278664042,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1179070579",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_score(Nums :: [integer()], K :: integer()) -> integer().\nmaximum_score(Nums, K) ->\n    PrimeScores = lists:map(fun(X) -> {prime_score(X), X} end, Nums),\n    Sorted = lists:sort(fun({PS1, X1}, {PS2, X2}) ->\n                            PS1 > PS2 or (PS1 == PS2 andalso X1 > X2)\n                        end, PrimeScores),\n    Modulo = 1000000007,\n    MaxScore = lists:foldl(fun({_, X}, Acc) -> (Acc * X) rem Modulo end, 1, lists:sublist(Sorted, 1, K)),\n    MaxScore.\n\nprime_score(1) -> 0;\nprime_score(N) -> prime_score(N, 2, 0).\n\nprime_score(1, _, Acc) -> Acc;\nprime_score(N, Factor, Acc) when N rem Factor == 0 ->\n    NewAcc = case is_prime(Factor) of\n                 true -> Acc + 1;\n                 false -> Acc\n             end,\n    prime_score(N div Factor, Factor, NewAcc);\nprime_score(N, Factor, Acc) ->\n    prime_score(N, next_prime(Factor), Acc).\n\nis_prime(2) -> true;\nis_prime(N) when N rem 2 == 0 -> false;\nis_prime(N) -> is_prime(N, 3).\n\nis_prime(N, Factor) when Factor * Factor > N -> true;\nis_prime(N, Factor) ->\n    if N rem Factor == 0 -> false;\n       true -> is_prime(N, Factor + 2)\n    end.\n\nnext_prime(2) -> 3;\nnext_prime(N) ->\n    Next = N + 1,\n    if is_prime(Next) -> Next;\n       true -> next_prime(Next + 1)\n    end."
+}

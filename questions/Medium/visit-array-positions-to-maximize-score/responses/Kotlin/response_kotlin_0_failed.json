@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 9: Char 51: error: no set method providing array access",
+    "full_compile_error": "Line 9: Char 51: error: no set method providing array access\n            if (nums[i] % 2 != nums[i - 1] % 2) dp[i] -= x\n                                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2893",
+    "task_finish_time": 1708216485273,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1178341863",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun maxScore(nums: IntArray, x: Int): Long {\n        val n = nums.size\n        val dp = LongArray(n) { 0 }\n        dp[0] = nums[0].toLong()\n\n        for (i in 1 until n) {\n            dp[i] = dp[i - 1] + nums[i]\n            if (nums[i] % 2 != nums[i - 1] % 2) dp[i] -= x\n        }\n\n        var maxScore = dp[0]\n        for (score in dp) {\n            maxScore = maxOf(maxScore, score)\n        }\n\n        return maxScore\n    }\n}"
+}

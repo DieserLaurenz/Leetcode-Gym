@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "java",
+    "run_success": false,
+    "compile_error": "Line 7: error: incompatible types: List<Integer> cannot be converted to int[] [in __Driver__.java]",
+    "full_compile_error": "Line 7: error: incompatible types: List<Integer> cannot be converted to int[] [in __Driver__.java]\n      int ret = new Solution().maxSum(param_1, param_2);\n                                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3153",
+    "task_finish_time": 1708246786458,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Java",
+    "submission_id": "1178712147",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    public int maxSum(int[] nums, int k) {\n        long mod = (long)1e9 + 7;\n        int[] bits = new int[32];\n        for (int num : nums) {\n            for (int i = 0; i < 32; i++) {\n                if ((num & (1 << i)) != 0) {\n                    bits[i]++;\n                }\n            }\n        }\n        Long[] values = new Long[32];\n        for (int i = 0; i < 32; i++) {\n            values[i] = ((long)bits[i] << i);\n        }\n        Arrays.sort(values, Collections.reverseOrder());\n        long result = 0;\n        for (int i = 0; i < k; i++) {\n            result = (result + values[i] * values[i]) % mod;\n        }\n        return (int) result;\n    }\n}"
+}

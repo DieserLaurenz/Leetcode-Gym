@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: spec for undefined function max_sum/2",
+    "full_compile_error": "error: spec for undefined function max_sum/2\n  solution.ex:2\n** (CompileError) solution.ex: cannot compile file (errors have been logged)\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3153",
+    "task_finish_time": 1708256819201,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178813804",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_sum(nums :: [integer], k :: integer) :: integer do\n    nums\n    |> Enum.map(&(&1 * &1))\n    |> Enum.sort(&>/2)\n    |> Enum.take(k)\n    |> Enum.sum()\n    |> rem(1_000_000_007)\n  end\nend"
+}

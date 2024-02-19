@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 18: Char 72: function init/1 undefined",
+    "full_compile_error": "Line 18: Char 72: function init/1 undefined\n%   18|                                        lists:map(fun(C) -> C - $a end, init(S))))\n%     |                                                                        ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3223",
+    "task_finish_time": 1708308356091,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1179359135",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count_complete_substrings(Word :: unicode:unicode_binary(), K :: integer()) -> integer().\ncount_complete_substrings(Word, K) ->\n    CountSubstrings = fun(S, Acc) ->\n        {Counts, Valid} = lists:foldl(fun(C, {Map, V}) ->\n            NewCount = maps:get(C, Map, 0) + 1,\n            NewMap = maps:put(C, NewCount, Map),\n            case NewCount == K of\n                true -> {NewMap, V andalso maps:size(NewMap) == 1 andalso maps:all(fun(_, Val) -> Val == K end, NewMap)};\n                false -> {NewMap, false}\n            end\n        end, {#{}, true}, S),\n        if Valid -> Acc + 1; true -> Acc end\n    end,\n    Substrs = [lists:sublist(Word, Start, Len) || Start <- lists:seq(1, length(Word)), Len <- lists:seq(1, length(Word) - Start + 1)],\n    FilteredSubstrs = lists:filter(fun(S) -> \n        AdjValid = lists:all(fun({A, B}) -> abs(A - B) =< 2 end, \n                             lists:zip(lists:map(fun(C) -> C - $a end, tl(S)), \n                                       lists:map(fun(C) -> C - $a end, init(S))))\n    end, Substrs),\n    lists:foldl(CountSubstrings, 0, FilteredSubstrs)."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 11: Char 12: ** (SyntaxError) syntax error before: '='\n    |\n 11 |       sum += nums[right - 1]\n    |            ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3196",
+    "task_finish_time": 1708267761731,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178929503",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_frequency_score(nums :: [integer], k :: integer) :: integer\n  def max_frequency_score(nums, k) do\n    nums = Enum.sort(nums)\n    len = length(nums)\n    max_freq = 0\n    sum = 0\n    left = 1\n\n    for right <- 1..len do\n      sum += nums[right - 1]\n      while sum + k < nums[right - 1] * (right - left + 1) do\n        sum -= nums[left - 1]\n        left += 1\n      end\n      max_freq = max(max_freq, right - left + 1)\n    end\n\n    max_freq\n  end\nend"
+}

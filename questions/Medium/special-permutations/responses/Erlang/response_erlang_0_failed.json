@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 25: Char 70: syntax error before: ')'",
+    "full_compile_error": "Line 25: Char 70: syntax error before: ')'\n%   25|                                           end, 0, lists:seq(0, N - 1)),\n%     |                                                                      ^\nLine 1: Char 2: spec for undefined function special_perm/1\n%    1| -spec special_perm(Nums :: [integer()]) -> integer().\n%     |  ^\nLine 47: Char 13: function special_perm/1 undefined\n%   47|       Ret = special_perm(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2848",
+    "task_finish_time": 1708195499709,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1178157194",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec special_perm(Nums :: [integer()]) -> integer().\nspecial_perm(Nums) ->\n    N = length(Nums),\n    SortedNums = lists:sort(Nums),\n    DP = lists:duplicate(1 bsl N, 0),\n    Mod = 1000000007,\n\n    F = fun(F, I, Mask, DP) ->\n            case I of\n                N -> 1;\n                _ ->\n                    Acc = lists:foldl(fun(J, Acc) ->\n                                          if\n                                              Mask band (1 bsl J) =/= 0 ->\n                                                  Acc;\n                                              true ->\n                                                  if\n                                                      (I == 0) orelse\n                                                      (element(J + 1, SortedNums) rem element(I, SortedNums) == 0) orelse\n                                                      (element(I, SortedNums) rem element(J + 1, SortedNums) == 0) ->\n                                                          (Acc + F(F, I + 1, Mask bor (1 bsl J), DP)) rem Mod;\n                                                      true ->\n                                                          Acc\n                                                  end\n                                          end, 0, lists:seq(0, N - 1)),\n                    DP#put({Mask, I}, Acc),\n                    Acc\n            end\n    end,\n\n    F(F, 0, 0, DP)."
+}

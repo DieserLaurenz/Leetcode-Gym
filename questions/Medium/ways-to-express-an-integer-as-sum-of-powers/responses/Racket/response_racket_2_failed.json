@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 18: mod: unbound identifier",
+    "full_compile_error": "Line 8: Char 18: mod: unbound identifier\n  in: mod\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:17",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2882",
+    "task_finish_time": 1708227470574,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1178482212",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (number-of-ways n x)\n  (-> exact-integer? exact-integer? exact-integer?)\n  (define MOD (+ 1e9 7))\n  (define (dp i j)\n    (cond [(= j 0) 1]\n          [(= i 0) 0]\n          [(< i (expt j x)) 0]\n          [else (mod (+ (dp (- i (expt j x)) (+ j 1)) (dp i (+ j 1))) MOD)]))\n  (dp n 1))"
+}

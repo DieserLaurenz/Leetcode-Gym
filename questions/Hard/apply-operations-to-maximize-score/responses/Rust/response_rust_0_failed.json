@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 26, Char 22: mismatched types (solution.rs)",
+    "full_compile_error": "Line 26, Char 22: mismatched types (solution.rs)\n   |\n26 |                 n /= primes[n as usize];\n   |                      ^^^^^^^^^^^^^^^^^^ expected `i32`, found `usize`\nLine 26, Char 19: cannot divide-assign `i32` by `usize` (solution.rs)\n   |\n26 |                 n /= primes[n as usize];\n   |                   ^^ no implementation for `i32 /= usize`\n   |\n   = help: the trait `DivAssign<usize>` is not implemented for `i32`\n   = help: the following other types implement trait `DivAssign<Rhs>`:\n             <i32 as DivAssign>\n             <i32 as DivAssign<&i32>>\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to 2 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3001",
+    "task_finish_time": 1708278400727,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1179066855",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "use std::collections::HashSet;\n\nimpl Solution {\n    pub fn maximum_score(nums: Vec<i32>, k: i32) -> i32 {\n        const MOD: i32 = 1_000_000_007;\n        let mut primes = vec![0; 100_001];\n        for i in 2..100_001 {\n            if primes[i] == 0 {\n                primes[i] = i;\n                let mut j = i * 2;\n                while j < 100_001 {\n                    if primes[j] == 0 {\n                        primes[j] = i;\n                    }\n                    j += i;\n                }\n            }\n        }\n\n        let mut prime_scores = vec![0; nums.len()];\n        for (i, &num) in nums.iter().enumerate() {\n            let mut n = num;\n            let mut factors = HashSet::new();\n            while n > 1 {\n                factors.insert(primes[n as usize]);\n                n /= primes[n as usize];\n            }\n            prime_scores[i] = factors.len() as i32;\n        }\n\n        let mut max_score = 1;\n        let mut dp = vec![1; nums.len()];\n        for _ in 0..k {\n            let mut new_dp = dp.clone();\n            for i in 0..nums.len() {\n                if prime_scores[i] > 0 {\n                    for j in i..nums.len() {\n                        let temp_score = dp[i] * nums[j] % MOD;\n                        new_dp[j] = new_dp[j].max(temp_score);\n                    }\n                }\n            }\n            dp = new_dp;\n            max_score = *dp.iter().max().unwrap_or(&1);\n        }\n\n        max_score % MOD\n    }\n}"
+}

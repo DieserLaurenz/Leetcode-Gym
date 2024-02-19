@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 35: Char 50: ** (SyntaxError) unexpectedly reached end of line. The current expression is invalid or incomplete\n    |\n 35 |         num % x == 0 or x % num == 0 or dp_x == 1\n    |                                                  ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2848",
+    "task_finish_time": 1708195733333,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1178159982",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @mod 1_000_000_007\n\n  @spec special_perm(nums :: [integer]) :: integer\n  def special_perm(nums) do\n    len = length(nums)\n    nums = Enum.sort(nums)\n    dp = :maps.from_list(for x <- nums, do: {x, 0})\n    special_perm_helper(nums, dp, len, 0, 1)\n  end\n\n  defp special_perm_helper(_nums, _dp, 0, _mask, _res), do: _res\n  defp special_perm_helper(nums, dp, len, mask, res) do\n    Enum.reduce_while(nums, res, fn num, acc ->\n      if (mask &&& (1 <<< Enum.find_index(nums, &(&1 == num)))) == 0 do\n        new_mask = mask ||| (1 <<< Enum.find_index(nums, &(&1 == num)))\n        if valid_perm?(nums, dp, num, mask) do\n          new_res = special_perm_helper(nums, dp, len - 1, new_mask, acc + 1)\n          {:cont, new_res}\n        else\n          {:cont, acc}\n        end\n      else\n        {:cont, acc}\n      end\n    end) |> rem(@mod)\n  end\n\n  defp valid_perm?(_nums, _dp, _num, 0), do: true\n  defp valid_perm?(nums, dp, num, mask) do\n    Enum.any?(nums, fn x ->\n      x_mask = 1 <<< Enum.find_index(nums, &(&1 == x))\n      if (mask &&& x_mask) != 0 do\n        dp_x = Map.get(dp, x)\n        num % x == 0 or x % num == 0 or dp_x == 1\n      else\n        false\n      end\n    end)\n  end\nend"
+}
