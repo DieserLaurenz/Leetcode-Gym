@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 14: Char 52: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: ",
+    "full_compile_error": "Line 14: Char 52: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: \nlocal final fun BigInteger.modInc(): Unit defined in Solution.countSteppingNumbers\n            if (n >= lowNum && n <= highNum) count.modInc()\n                                                   ^\nLine 22: Char 78: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: \nlocal final fun BigInteger.modInc(): Unit defined in Solution.countSteppingNumbers\n        if (lowNum <= 0.toBigInteger() && highNum >= 0.toBigInteger()) count.modInc()\n                                                                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2921",
+    "task_finish_time": 1708371805608,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1180236419",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun countSteppingNumbers(low: String, high: String): Int {\n        val mod = 1000000007\n        val lowNum = low.toBigInteger()\n        val highNum = high.toBigInteger()\n        var count = 0\n\n        fun BigInteger.modInc() {\n            count = (count + 1) % mod\n        }\n\n        fun dfs(n: BigInteger) {\n            if (n > highNum) return\n            if (n >= lowNum && n <= highNum) count.modInc()\n            val lastDigit = n % 10.toBigInteger()\n            if (n > 0.toBigInteger()) {\n                if (lastDigit > 0.toBigInteger()) dfs(n * 10.toBigInteger() + lastDigit - 1.toBigInteger())\n                if (lastDigit < 9.toBigInteger()) dfs(n * 10.toBigInteger() + lastDigit + 1.toBigInteger())\n            }\n        }\n\n        if (lowNum <= 0.toBigInteger() && highNum >= 0.toBigInteger()) count.modInc()\n        for (i in 1..9) dfs(i.toBigInteger())\n        return count\n    }\n}"
+}

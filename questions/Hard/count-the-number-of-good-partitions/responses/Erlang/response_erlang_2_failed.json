@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 6: syntax error before: '::'",
+    "full_compile_error": "Line 10: Char 6: syntax error before: '::'\n%   10|     )::{_, _, Result}.\n%     |      ^\nLine 1: Char 2: spec for undefined function number_of_good_partitions/1\n%    1| -spec number_of_good_partitions(Nums :: [integer()]) -> integer().\n%     |  ^\nLine 26: Char 13: function number_of_good_partitions/1 undefined\n%   26|       Ret = number_of_good_partitions(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3212",
+    "task_finish_time": 1708392140313,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1180439087",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec number_of_good_partitions(Nums :: [integer()]) -> integer().\nnumber_of_good_partitions(Nums) ->\n    Mod = 1000000007,\n    lists:foldr(\n        fun(X, {Prev, Map, Res}) ->\n            {X, [{X, 1} | Map], (Res + Prev) rem Mod}\n        end,\n        {none, [], 0},\n        Nums\n    )::{_, _, Result}."
+}

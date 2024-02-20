@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 11: Char 18: div: unbound identifier",
+    "full_compile_error": "Line 11: Char 18: div: unbound identifier\n  in: div\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:22:17",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3224",
+    "task_finish_time": 1708414060070,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1180713308",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (number-of-sequence n sick)\n  (-> exact-integer? (listof exact-integer?) exact-integer?)\n  \n  (define mod 1000000007)\n  \n  (define (factorial n)\n    (if (= n 0) 1 (modulo (* n (factorial (- n 1))) mod)))\n  \n  (define (nCr n r)\n    (if (> r n) 0\n        (modulo (div (factorial n) (* (factorial r) (factorial (- n r)))) mod)))\n  \n  (define (count-sequences n sick)\n    (let loop ((sick sick) (prev -1) (gap 0) (result 1))\n      (if (null? sick)\n          result\n          (let ((current (car sick)))\n            (if (= prev -1)\n                (loop (cdr sick) current gap result)\n                (let ((new-gap (- current prev 1)))\n                  (set! result (modulo (* result (nCr (+ gap new-gap) new-gap)) mod))\n                  (loop (cdr sick) current (+ gap new-gap) result)))))))\n  \n  (count-sequences n sick))"
+}

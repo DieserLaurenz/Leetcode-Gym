@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 33: Char 29: error: type mismatch: inferred type is Int but Long was expected",
+    "full_compile_error": "Line 33: Char 29: error: type mismatch: inferred type is Int but Long was expected\n            b *= modInverse(i, mod)\n                            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3224",
+    "task_finish_time": 1708413294528,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1180702884",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun numberOfSequence(n: Int, sick: IntArray): Int {\n        val mod = 1000000007\n        var result = 1\n        var gaps = ArrayList<Int>()\n\n        for (i in 1 until sick.size) {\n            val gap = sick[i] - sick[i - 1] - 1\n            if (gap > 0) {\n                gaps.add(gap)\n            }\n        }\n\n        if (sick[0] > 0) gaps.add(sick[0])\n        if (sick.last() < n - 1) gaps.add(n - 1 - sick.last())\n\n        gaps.forEach { gap ->\n            result = (result.toLong() * countWays(gap)).toInt() % mod\n        }\n\n        return result\n    }\n\n    private fun countWays(gap: Int): Long {\n        val mod = 1000000007L\n        var a = 1L\n        var b = 1L\n        for (i in 1..gap) {\n            a *= i\n            a %= mod\n            b *= (2 * gap - i + 1)\n            b %= mod\n            b *= modInverse(i, mod)\n            b %= mod\n        }\n        return b * modInverse(a, mod) % mod\n    }\n\n    private fun modInverse(a: Long, mod: Long): Long {\n        return power(a, mod - 2, mod)\n    }\n\n    private fun power(x: Long, y: Long, p: Long): Long {\n        var res = 1L\n        var x = x % p\n        var y = y\n        while (y > 0) {\n            if (y % 2L == 1L) res = (res * x) % p\n            y = y shr 1\n            x = (x * x) % p\n        }\n        return res\n    }\n}"
+}

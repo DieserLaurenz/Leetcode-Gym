@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 9: call to local/imported function is_good_integer/3 is illegal in guard",
+    "full_compile_error": "Line 11: Char 9: call to local/imported function is_good_integer/3 is illegal in guard\n%   11|         is_good_integer(N, Min_sum, Max_sum) ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2757",
+    "task_finish_time": 1708351238977,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1179908408",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec count(Num1 :: unicode:unicode_binary(), Num2 :: unicode:unicode_binary(), Min_sum :: integer(), Max_sum :: integer()) -> integer().\ncount(Num1, Num2, Min_sum, Max_sum) ->\n    N1 = binary_to_integer(Num1),\n    N2 = binary_to_integer(Num2),\n    find_good_integers(N1, N2, Min_sum, Max_sum, 0).\n\nfind_good_integers(N1, N2, Min_sum, Max_sum, Count) when N1 > N2 -> \n    Count;\nfind_good_integers(N, N2, Min_sum, Max_sum, Count) ->\n    if\n        is_good_integer(N, Min_sum, Max_sum) ->\n            NewCount = (Count + 1) rem 1000000007;\n        true ->\n            NewCount = Count\n    end,\n    find_good_integers(N + 1, N2, Min_sum, Max_sum, NewCount).\n\nis_good_integer(N, Min_sum, Max_sum) ->\n    Sum = digit_sum(N),\n    Sum >= Min_sum andalso Sum =< Max_sum.\n\ndigit_sum(0) -> 0;\ndigit_sum(N) -> \n    N rem 10 + digit_sum(N div 10)."
+}

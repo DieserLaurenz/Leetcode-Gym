@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 9: Char 19: all: unbound identifier",
+    "full_compile_error": "Line 9: Char 19: all: unbound identifier\n  in: all\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:20:18",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3243",
+    "task_finish_time": 1708424820731,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1180845211",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (number-of-powerful-int start finish limit s)\n  (-> exact-integer? exact-integer? exact-integer? string? exact-integer?)\n  (let ([count 0]\n        [suffix (string->number s)])\n    (for ([i (in-range start (add1 finish))])\n      (when (and (<= i finish)\n                 (>= i suffix)\n                 (string-suffix? (number->string i) s)\n                 (all (lambda (digit) (<= (char->integer digit) (+ (char->integer #\\0) limit)))\n                      (string->list (number->string i))))\n        (set! count (add1 count))))\n    count))"
+}

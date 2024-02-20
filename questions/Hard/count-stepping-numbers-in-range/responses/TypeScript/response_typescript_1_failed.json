@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "typescript",
+    "run_success": false,
+    "compile_error": "Line 14: Char 13: error TS2365: Operator '>=' cannot be applied to types 'BigInt' and 'bigint'.",
+    "full_compile_error": "Line 14: Char 13: error TS2365: Operator '>=' cannot be applied to types 'BigInt' and 'bigint'.\nLine 14: Char 31: error TS2365: Operator '<=' cannot be applied to types 'BigInt' and 'bigint'.\nLine 18: Char 13: error TS2365: Operator '>' cannot be applied to types 'BigInt' and 'bigint'.\nLine 20: Char 27: error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nLine 20: Char 27: error TS2365: Operator '%' cannot be applied to types 'BigInt' and 'bigint'.\nLine 21: Char 26: error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nLine 21: Char 26: error TS2365: Operator '*' cannot be applied to types 'BigInt' and 'bigint'.",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2921",
+    "task_finish_time": 1708371350377,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "TypeScript",
+    "submission_id": "1180230409",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "function countSteppingNumbers(low: string, high: string): number {\n    const MOD = 1e9 + 7;\n    let result = 0;\n    const lowNum = BigInt(low);\n    const highNum = BigInt(high);\n\n    const queue: BigInt[] = [];\n    for (let i = 1; i <= 9; ++i) queue.push(BigInt(i));\n\n    if (lowNum <= 0 && highNum >= 0) result += 1; // Include 0 if in range\n\n    while (queue.length > 0) {\n        const curr = queue.shift()!;\n        if (curr >= lowNum && curr <= highNum) {\n            result = (result + 1) % MOD;\n        }\n\n        if (curr > highNum) continue;\n\n        const lastDigit = curr % 10n;\n        const nextBase = curr * 10n;\n\n        if (lastDigit > 0n) queue.push(nextBase + lastDigit - 1n);\n        if (lastDigit < 9n) queue.push(nextBase + lastDigit + 1n);\n    }\n\n    return result;\n}"
+}

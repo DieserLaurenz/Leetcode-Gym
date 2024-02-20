@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 12: Char 5: error: declaration of non-variable \u2018max\u2019 in \u2018for\u2019 loop initial declaration [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018numberOfPowerfulInt\u2019\nLine 12: Char 24: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   15 |     for (long long i = max(start, s_val); i <= finish; i++) {\n      |                        ^~~\n      |                        fmax\nLine 12: Char 5: error: declaration of non-variable \u2018max\u2019 in \u2018for\u2019 loop initial declaration [solution.c]\n   15 |     for (long long i = max(start, s_val); i <= finish; i++) {\n      |     ^~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3243",
+    "task_finish_time": 1708422844596,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1180821404",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <string.h>\n#include <math.h>\n\nlong long numberOfPowerfulInt(long long start, long long finish, int limit, char* s) {\n    long long count = 0;\n    int s_len = strlen(s);\n    long long s_val = atoll(s);\n    long long min_val = pow(10, s_len - 1);\n    if (s_val < start || s_val > finish) return 0; // s as a number is outside the range\n    if (s_val < min_val) return 0; // s has leading zeros or is not a valid number in the range\n\n    for (long long i = max(start, s_val); i <= finish; i++) {\n        // Check if i ends with s and all digits <= limit\n        if (i % (long long)pow(10, s_len) != s_val) continue;\n        long long temp = i;\n        bool isValid = true;\n        while (temp > 0) {\n            if (temp % 10 > limit) {\n                isValid = false;\n                break;\n            }\n            temp /= 10;\n        }\n        if (isValid) count++;\n    }\n    return count;\n}\n\nlong long max(long long a, long long b) {\n    return (a > b) ? a : b;\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 19\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3091",
+    "task_finish_time": 1708361436672,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1180067388",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-sub-multisets nums l r)\n  (-> (listof exact-integer?) exact-integer? exact-integer? exact-integer?)\n  (let ([mod 1000000007]\n        [max-sum (+ (apply max nums) 1)])\n    (letrec ([dp (make-vector (+ max-sum 1) 0)]\n             [update-dp! (lambda (num)\n                           (for ([i (in-range max-sum -1 -1)])\n                             (vector-set! dp (+ i num)\n                                          (modulo (+ (vector-ref dp (+ i num))\n                                                     (vector-ref dp i))\n                                                  mod))))])\n      (vector-set! dp 0 1)\n      (for ([num (in-list nums)])\n        (update-dp! num))\n      (let loop ([i l] [count 0])\n        (if (> i r)\n            count\n            (loop (+ i 1) (modulo (+ count (vector-ref dp i)) mod))))))"
+}

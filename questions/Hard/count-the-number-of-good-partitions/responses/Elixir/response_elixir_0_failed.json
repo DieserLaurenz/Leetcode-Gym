@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: spec for undefined function number_of_good_partitions/1",
+    "full_compile_error": "error: spec for undefined function number_of_good_partitions/1\n  solution.ex:2\n** (CompileError) solution.ex: cannot compile file (errors have been logged)\n    (stdlib 5.1.1) lists.erl:1594: :lists.foldl/3",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3212",
+    "task_finish_time": 1708392190329,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1180439558",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec number_of_good_partitions(nums :: [integer]) :: integer do\n    nums\n    |> Enum.reduce({0, 1, Map.new()}, fn num, {last_unique, acc, seen} ->\n      if Map.has_key?(seen, num) do\n        {num, acc, Map.put(seen, num, true)}\n      else\n        {num, (acc * 2) |> rem(1_000_000_007), Map.put(seen, num, true)}\n      end\n    end)\n    |> then(fn {_last_unique, acc, _seen} -> acc end)\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 17: set!: not an identifier",
+    "full_compile_error": "Line 8: Char 17: set!: not an identifier\n  at: (list-ref dp i)\n  in: (set! (list-ref dp i) (max (list-ref dp i) (+ 1 (list-ref dp j))))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:16",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3248",
+    "task_finish_time": 1708403062615,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1180561936",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (incremovable-subarray-count nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define (lis dp)\n    (for ([i (in-range (length dp))])\n      (for ([j (in-range i)])\n        (when (> (list-ref nums i) (list-ref nums j))\n          (set! (list-ref dp i) (max (list-ref dp i) (+ 1 (list-ref dp j)))))))\n    dp)\n  \n  (define (lds dp)\n    (for ([i (in-range (- (length dp) 1) -1 -1)])\n      (for ([j (in-range (- (length dp) 1) i -1)])\n        (when (> (list-ref nums j) (list-ref nums i))\n          (set! (list-ref dp i) (max (list-ref dp i) (+ 1 (list-ref dp j)))))))\n    dp)\n  \n  (let* ([n (length nums)]\n         [dp-lis (make-list n 1)]\n         [dp-lds (make-list n 1)]\n         [dp-lis-final (lis dp-lis)]\n         [dp-lds-final (lds dp-lds)]\n         [total 0])\n    (for ([i (in-range n)])\n      (set! total (+ total (+ (list-ref dp-lis-final i) (list-ref dp-lds-final i)) - 1)))\n    (- total n)))"
+}

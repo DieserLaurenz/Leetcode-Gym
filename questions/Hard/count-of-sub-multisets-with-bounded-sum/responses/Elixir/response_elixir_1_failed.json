@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 10: Char 65: ** (SyntaxError) syntax error before: 'rem'\n    |\n 10 |           sum = (:array.get(i, acc) + :array.get(i - num, acc)) rem 1_000_000_007\n    |                                                                 ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3091",
+    "task_finish_time": 1708361746973,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1180073170",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count_sub_multisets(nums :: [integer], l :: integer, r :: integer) :: integer\n  def count_sub_multisets(nums, l, r) do\n    dp = :array.new(20001, default_value: 0)\n    dp = :array.set(0, 1, dp)\n\n    for num <- nums do\n      dp = Enum.reduce(20000..0, dp, fn i, acc ->\n        if i >= num do\n          sum = (:array.get(i, acc) + :array.get(i - num, acc)) rem 1_000_000_007\n          :array.set(i, sum, acc)\n        else\n          acc\n        end\n      end)\n    end\n\n    Enum.reduce(l..r, 0, fn i, acc ->\n      (acc + :array.get(i, dp)) rem 1_000_000_007\n    end)\n  end\nend"
+}

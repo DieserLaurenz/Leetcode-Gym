@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 27: Char 13: error: declaration of non-variable \u2018max\u2019 in \u2018for\u2019 loop initial declaration [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018minimumCost\u2019\nLine 27: Char 26: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   30 |             for (int l = max(j - 1, i - dist - 1); l <= i - 1; ++l) { // Ensure the distance condition is met\n      |                          ^~~\n      |                          fmax\nLine 27: Char 13: error: declaration of non-variable \u2018max\u2019 in \u2018for\u2019 loop initial declaration [solution.c]\n   30 |             for (int l = max(j - 1, i - dist - 1); l <= i - 1; ++l) { // Ensure the distance condition is met\n      |             ^~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3260",
+    "task_finish_time": 1708434118748,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1180946032",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <limits.h>\n\nlong long dp[101][101]; // dp[i][j] represents the minimum cost for dividing first i numbers into j groups\n\nlong long minCost(int* nums, int start, int end) {\n    long long cost = LLONG_MAX;\n    for (int i = start; i <= end; ++i) {\n        cost = fmin(cost, (long long)nums[i]);\n    }\n    return cost;\n}\n\nlong long minimumCost(int* nums, int numsSize, int k, int dist) {\n    for (int i = 0; i <= numsSize; ++i) {\n        for (int j = 0; j <= k; ++j) {\n            dp[i][j] = LLONG_MAX;\n        }\n    }\n\n    dp[0][0] = 0;\n    for (int i = 1; i <= numsSize; ++i) {\n        dp[i][1] = nums[0]; // The cost of the first group is always the first number\n    }\n\n    for (int j = 2; j <= k; ++j) { // For each group\n        for (int i = j; i <= numsSize; ++i) { // Start from 'j' to ensure we have enough elements\n            for (int l = max(j - 1, i - dist - 1); l <= i - 1; ++l) { // Ensure the distance condition is met\n                if (dp[l][j - 1] != LLONG_MAX) {\n                    dp[i][j] = fmin(dp[i][j], dp[l][j - 1] + minCost(nums, l, i - 1));\n                }\n            }\n        }\n    }\n\n    return dp[numsSize][k];\n}"
+}

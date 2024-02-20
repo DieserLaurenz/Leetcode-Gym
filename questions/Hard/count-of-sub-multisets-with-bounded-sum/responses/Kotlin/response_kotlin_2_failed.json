@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 24: Char 16: error: type mismatch: inferred type is Long but Int was expected",
+    "full_compile_error": "Line 24: Char 16: error: type mismatch: inferred type is Long but Int was expected\n        return (ans - if (l == 0) 1 else 0 + mod) % mod\n               ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3091",
+    "task_finish_time": 1708353137897,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1179936674",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun countSubMultisets(nums: List<Int>, l: Int, r: Int): Int {\n        val mod = 1_000_000_007\n        val freq = mutableMapOf<Int, Int>()\n        nums.forEach { freq[it] = freq.getOrDefault(it, 0) + 1 }\n        val uniqueNums = freq.keys.toIntArray()\n        val dp = Array(uniqueNums.size + 1) { LongArray(r + 1) }\n        for (i in 0..r) dp[0][i] = 1\n        for (i in 1..uniqueNums.size) {\n            val num = uniqueNums[i - 1]\n            for (sum in 0..r) {\n                dp[i][sum] = dp[i - 1][sum]\n                var pow = 1\n                for (k in 1..freq[num]!!) {\n                    pow = (pow * num) % (r + 1)\n                    if (sum >= pow) {\n                        dp[i][sum] = (dp[i][sum] + dp[i - 1][sum - pow]) % mod\n                    }\n                }\n            }\n        }\n        var ans = 0L\n        for (sum in l..r) ans = (ans + dp[uniqueNums.size][sum]) % mod\n        return (ans - if (l == 0) 1 else 0 + mod) % mod\n    }\n}"
+}

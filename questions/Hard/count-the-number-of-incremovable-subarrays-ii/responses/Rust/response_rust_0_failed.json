@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 13, Char 28: the type `[{integer}]` cannot be indexed by `&usize` (solution.rs)",
+    "full_compile_error": "Line 13, Char 28: the type `[{integer}]` cannot be indexed by `&usize` (solution.rs)\n   |\n13 |                 dp[i] = dp[stack.last().unwrap()] + 1;\n   |                            ^^^^^^^^^^^^^^^^^^^^^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[{integer}]>` is not implemented for `&usize`\n   = help: the trait `SliceIndex<[T]>` is implemented for `usize`\n   = note: required for `Vec<{integer}>` to implement `std::ops::Index<&usize>`\nhelp: dereference this index\n   |\n13 |                 dp[i] = dp[*stack.last().unwrap()] + 1;\n   |                            +\nFor more information about this error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3248",
+    "task_finish_time": 1708402901181,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1180559789",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn incremovable_subarray_count(nums: Vec<i32>) -> i64 {\n        let n = nums.len();\n        let mut dp = vec![0; n];\n        let mut stack: Vec<usize> = Vec::new();\n        let mut res = 0;\n\n        for i in 0..n {\n            while !stack.is_empty() && nums[*stack.last().unwrap()] < nums[i] {\n                stack.pop();\n            }\n            if !stack.is_empty() {\n                dp[i] = dp[stack.last().unwrap()] + 1;\n            }\n            stack.push(i);\n            res += dp[i] as i64;\n        }\n\n        let total_subarrays = (n as i64) * (n as i64 + 1) / 2;\n        total_subarrays - res\n    }\n}"
+}

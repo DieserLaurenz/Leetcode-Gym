@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 54: illegal guard expression",
+    "full_compile_error": "Line 10: Char 54: illegal guard expression\n%   10|                         Val >= Start, Val =< Finish, integer_to_list(Val) -- lists:seq($0, $0 + Limit) == [] ->\n%     |                                                      ^\nLine 10: Char 75: illegal guard expression\n%   10|                         Val >= Start, Val =< Finish, integer_to_list(Val) -- lists:seq($0, $0 + Limit) == [] ->\n%     |                                                                           ^\nLine 10: Char 78: illegal guard expression\n%   10|                         Val >= Start, Val =< Finish, integer_to_list(Val) -- lists:seq($0, $0 + Limit) == [] ->\n%     |                                                                              ^\nLine 11: Char 29: variable 'Count' is unbound\n%   11|                             Count(Num + 1, Acc + 1);\n%     |                             ^\nLine 13: Char 29: variable 'Count' is unbound\n%   13|                             Count(Num + 1, Acc)\n%     |                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3243",
+    "task_finish_time": 1708433457391,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1180938228",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec number_of_powerful_int(Start :: integer(), Finish :: integer(), Limit :: integer(), S :: unicode:unicode_binary()) -> integer().\nnumber_of_powerful_int(Start, Finish, Limit, S) ->\n    Suffix = binary_to_integer(S),\n    SuffixLength = byte_size(S),\n    MaxPrefix = trunc((Finish - Suffix) / math:pow(10, SuffixLength)),\n    Count = fun(Num, Acc) when Num > MaxPrefix -> Acc;\n                (Num, Acc) ->\n                    Val = Num * trunc(math:pow(10, SuffixLength)) + Suffix,\n                    if \n                        Val >= Start, Val =< Finish, integer_to_list(Val) -- lists:seq($0, $0 + Limit) == [] -> \n                            Count(Num + 1, Acc + 1);\n                        true -> \n                            Count(Num + 1, Acc)\n                    end\n            end,\n    Count(0, 0)."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 6: Char 11: every: unbound identifier",
+    "full_compile_error": "Line 6: Char 11: every: unbound identifier\n  in: every\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:17:10",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3243",
+    "task_finish_time": 1708424892167,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1180845987",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (number-of-powerful-int start finish limit s)\n  (-> exact-integer? exact-integer? exact-integer? string? exact-integer?)\n  (define (valid-powerful-int? x)\n    (and (<= x finish)\n         (string-suffix? (number->string x) s)\n         (every (lambda (digit) (<= (char->integer digit) (+ (char->integer #\\0) limit)))\n                (string->list (number->string x)))))\n  (define (generate-powerful-int base len)\n    (if (= len 0)\n        (if (valid-powerful-int? base) 1 0)\n        (let loop ([i 0] [count 0])\n          (if (> i limit)\n              count\n              (loop (add1 i) (+ count (generate-powerful-int (+ base (* i (expt 10 len))) (sub1 len))))))))\n  (generate-powerful-int (string->number s) (max 0 (- (string-length (number->string start)) (string-length s)))))"
+}

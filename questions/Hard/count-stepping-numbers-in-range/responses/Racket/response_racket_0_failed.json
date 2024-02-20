@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 10: Char 6: while: unbound identifier",
+    "full_compile_error": "Line 10: Char 6: while: unbound identifier\n  in: while\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:21:5",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2921",
+    "task_finish_time": 1708372680583,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1180247754",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (count-stepping-numbers low high)\n  (-> string? string? exact-integer?)\n  (let* ((modulus 1000000007)\n         (low-int (string->number low))\n         (high-int (string->number high))\n         (queue (build-list 10 values))\n         (count (if (>= low-int 0) -1 0))) ; Adjust for 0 being counted when low > 0\n    (for ([i (in-range 1 10)])\n      (set! queue (cons i queue)))\n    (while (not (null? queue))\n      (let ((curr (car queue)))\n        (set! queue (cdr queue))\n        (when (and (<= curr high-int) (>= curr low-int))\n          (set! count (modulo (+ count 1) modulus)))\n        (when (and (< curr high-int) (not (= (modulo curr 10) 0)))\n          (let ((next (+ (* curr 10) (+ (modulo curr 10) -1))))\n            (when (<= next high-int)\n              (set! queue (append queue (list next))))))\n        (when (and (< curr high-int) (not (= (modulo curr 10) 9)))\n          (let ((next (+ (* curr 10) (+ (modulo curr 10) 1))))\n            (when (<= next high-int)\n              (set! queue (append queue (list next))))))))\n    count))"
+}

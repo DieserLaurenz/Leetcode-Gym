@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 15: Char 27: num: unbound identifier",
+    "full_compile_error": "Line 15: Char 27: num: unbound identifier\n  in: num\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:26:26",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3212",
+    "task_finish_time": 1708391974384,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1180437517",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (number-of-good-partitions nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define mod 1000000007)\n  (define n (length nums))\n  (define dp (make-vector (+ n 1) 0))\n  (define last-pos (make-hash))\n  \n  (vector-set! dp 0 1)\n  \n  (for ([i (in-range n)])\n    (let* ([num (list-ref nums i)]\n           [prev (if (hash-has-key? last-pos num) (hash-ref last-pos num) -1)])\n      (vector-set! dp (+ i 1) (modulo (+ (vector-ref dp i) (if (> prev -1) (vector-ref dp prev) 0)) mod)))\n      (hash-set! last-pos num i))\n  \n  (modulo (vector-ref dp n) mod))"
+}

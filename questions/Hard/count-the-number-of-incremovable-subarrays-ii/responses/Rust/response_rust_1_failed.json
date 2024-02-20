@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 38, Char 9: mismatched types (solution.rs)",
+    "full_compile_error": "Line 38, Char 9: mismatched types (solution.rs)\n   |\n2  |     pub fn incremovable_subarray_count(nums: Vec<i32>) -> i64 {\n   |                                                           --- expected `i64` because of return type\n...\n38 |         result\n   |         ^^^^^^ expected `i64`, found `i32`\n   |\nhelp: you can convert an `i32` to an `i64`\n   |\n38 |         result.into()\n   |               +++++++\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3248",
+    "task_finish_time": 1708402934201,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1180560241",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn incremovable_subarray_count(nums: Vec<i32>) -> i64 {\n        let n = nums.len();\n        let mut left = vec![0; n];\n        let mut right = vec![0; n];\n        let mut stack: Vec<usize> = Vec::new();\n\n        for i in 0..n {\n            while let Some(&last) = stack.last() {\n                if nums[last] >= nums[i] {\n                    stack.pop();\n                } else {\n                    break;\n                }\n            }\n            left[i] = stack.last().map_or(0, |&last| last as i32 + 1);\n            stack.push(i);\n        }\n\n        stack.clear();\n\n        for i in (0..n).rev() {\n            while let Some(&last) = stack.last() {\n                if nums[last] > nums[i] {\n                    stack.pop();\n                } else {\n                    break;\n                }\n            }\n            right[i] = stack.last().map_or(n as i32, |&last| last as i32) - 1;\n            stack.push(i);\n        }\n\n        let mut result = 0;\n        for i in 0..n {\n            result += (i as i32 - left[i] + 1) * (right[i] - i as i32 + 1);\n        }\n        result\n    }\n}"
+}

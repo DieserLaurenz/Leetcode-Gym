@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 26: Char 49: call to local/imported function is_incremovable/3 is illegal in guard",
+    "full_compile_error": "Line 26: Char 49: call to local/imported function is_incremovable/3 is illegal in guard\n%   26|                                              if is_incremovable(Nums, I, J) -> AccJ + 1;\n%     |                                                 ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3248",
+    "task_finish_time": 1708403204121,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1180563811",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec incremovable_subarray_count(Nums :: [integer()]) -> integer().\nincremovable_subarray_count(Nums) ->\n    lists:foldl(fun(X, {Prev, Count}) ->\n                    if\n                        X > Prev ->\n                            {X, Count + 1};\n                        true ->\n                            {X, Count}\n                    end\n                end, {0, 0}, [0|Nums]).\n\n-spec is_incremovable(Nums :: [integer()], Start :: integer(), End :: integer()) -> boolean().\nis_incremovable(Nums, Start, End) ->\n    Prev = if Start == 1 -> -1; true -> lists:nth(Start - 1, Nums) end,\n    Next = if End == length(Nums) -> infinity; true -> lists:nth(End + 1, Nums) end,\n    Prev < Next.\n\n-spec count_incremovables(Nums :: [integer()]) -> integer().\ncount_incremovables(Nums) ->\n    count_incremovables(Nums, 1, length(Nums), 0).\n\n-spec count_incremovables(Nums :: [integer()], Start :: integer(), End :: integer(), Acc :: integer()) -> integer().\ncount_incremovables(Nums, Start, End, Acc) when Start =< End ->\n    NewAcc = lists:foldl(fun(I, AccIn) ->\n                             lists:foldl(fun(J, AccJ) ->\n                                             if is_incremovable(Nums, I, J) -> AccJ + 1;\n                                                true -> AccJ\n                                             end\n                                         end, AccIn, lists:seq(I, End))\n                         end, Acc, lists:seq(Start, End)),\n    count_incremovables(Nums, Start + 1, End, NewAcc);\ncount_incremovables(_, _, _, Acc) ->\n    Acc.\n\n-spec main(Nums :: [integer()]) -> integer().\nmain(Nums) ->\n    count_incremovables(Nums)."
+}

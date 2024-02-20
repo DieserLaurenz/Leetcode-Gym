@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 5: Char 6: ** (SyntaxError) unexpected reserved word: end\n    HINT: the \"{\" on line 5 is missing terminator \"}\"\n    |\n  5 |     {end, _} = Integer.parse(num2)\n    |      ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2757",
+    "task_finish_time": 1708351373902,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1179910348",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count(num1 :: String.t, num2 :: String.t, min_sum :: integer, max_sum :: integer) :: integer\n  def count(num1, num2, min_sum, max_sum) do\n    {start, _} = Integer.parse(num1)\n    {end, _} = Integer.parse(num2)\n    modulo = 1_000_000_007\n\n    1..(end - start + 1)\n    |> Enum.map(&(&1 + start - 1))\n    |> Enum.filter(fn x -> \n      digit_sum = Integer.digits(x) |> Enum.sum()\n      digit_sum >= min_sum and digit_sum <= max_sum\n    end)\n    |> length()\n    |> rem(modulo)\n  end\nend"
+}

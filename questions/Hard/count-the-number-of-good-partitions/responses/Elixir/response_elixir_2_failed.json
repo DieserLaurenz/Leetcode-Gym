@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 8: Char 86: ** (SyntaxError) syntax error before: 'rem'\n    |\n  8 |       new_count = if Map.get(last_seen, num), do: last_count, else: (last_count * 2) rem @mod\n    |                                                                                      ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3212",
+    "task_finish_time": 1708392255210,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1180440145",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @mod 1_000_000_007\n\n  def number_of_good_partitions(nums) do\n    nums\n    |> Enum.reduce({%{}, 0, 1}, fn num, {last_seen, last_count, total} ->\n      new_last_seen = Map.update(last_seen, num, 1, &(&1 + 1))\n      new_count = if Map.get(last_seen, num), do: last_count, else: (last_count * 2) rem @mod\n      {new_last_seen, new_count, (total + new_count) rem @mod}\n    end)\n    |> then(fn {_last_seen, _last_count, total} -> total end)\n  end\nend"
+}

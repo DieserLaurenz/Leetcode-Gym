@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 16: Char 13: variable 'Incremovable' is unbound",
+    "full_compile_error": "Line 16: Char 13: variable 'Incremovable' is unbound\n%   16|             Incremovable(T, Acc + NewAcc)\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3248",
+    "task_finish_time": 1708403238199,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1180564278",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec incremovable_subarray_count(Nums :: [integer()]) -> integer().\nincremovable_subarray_count(Nums) ->\n    Incremovable = fun\n        ([], Acc) -> Acc;\n        ([_ | T] = List, Acc) ->\n            {NewAcc, _} = lists:foldl(\n                fun(X, {A, Prev}) ->\n                    case X > Prev of\n                        true -> {A + 1, X};\n                        false -> {A, X}\n                    end\n                end,\n                {0, hd(List)},\n                T\n            ),\n            Incremovable(T, Acc + NewAcc)\n    end,\n    TotalLength = length(Nums),\n    TotalSubarrays = TotalLength * (TotalLength + 1) div 2,\n    NonIncremovable = Incremovable(Nums, 0),\n    TotalSubarrays - NonIncremovable."
+}

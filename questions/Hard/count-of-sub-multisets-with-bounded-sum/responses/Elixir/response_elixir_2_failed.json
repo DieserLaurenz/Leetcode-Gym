@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 10: Char 65: ** (SyntaxError) syntax error before: 'rem'\n    |\n 10 |           sum = (Map.get(acc, i, 0) + Map.get(acc, i - num, 0)) rem mod\n    |                                                                 ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3091",
+    "task_finish_time": 1708361782930,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1180073817",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec count_sub_multisets(nums :: [integer], l :: integer, r :: integer) :: integer\n  def count_sub_multisets(nums, l, r) do\n    mod = 1_000_000_007\n    dp = Enum.reduce(0..20000, %{}, fn _, acc -> Map.put(acc, 0, 1) end)\n\n    for num <- nums do\n      dp = Enum.reduce(20000..0, dp, fn i, acc ->\n        if i >= num do\n          sum = (Map.get(acc, i, 0) + Map.get(acc, i - num, 0)) rem mod\n          Map.put(acc, i, sum)\n        else\n          acc\n        end\n      end)\n    end\n\n    Enum.reduce(l..r, 0, fn i, acc ->\n      (acc + Map.get(dp, i, 0)) rem mod\n    end)\n  end\nend"
+}
