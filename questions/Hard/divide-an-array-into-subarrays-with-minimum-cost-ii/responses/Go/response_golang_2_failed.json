@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 16: Char 34: invalid operation: l <= min(j - 1, i - 1 + dist) (mismatched types int and int64) (solution.go)",
+    "full_compile_error": "Line 16: Char 34: invalid operation: l <= min(j - 1, i - 1 + dist) (mismatched types int and int64) (solution.go)\nLine 16: Char 38: cannot use j - 1 (value of type int) as int64 value in argument to min (solution.go)\nLine 16: Char 43: cannot use i - 1 + dist (value of type int) as int64 value in argument to min (solution.go)\nLine 32: Char 6: min redeclared in this block (solution.go)\nLine 25: Char 6: other declaration of min (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3260",
+    "task_finish_time": 1708435345085,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1180961116",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func minimumCost(nums []int, k int, dist int) int64 {\n    n := len(nums)\n    sum := make([]int64, n+1)\n    for i := 1; i <= n; i++ {\n        sum[i] = sum[i-1] + int64(nums[i-1])\n    }\n\n    dp := make([]int64, n+1)\n    for i := range dp {\n        dp[i] = 1<<63 - 1\n    }\n    dp[0] = 0\n\n    for i := 1; i <= k; i++ {\n        for j := n; j >= i; j-- {\n            for l := i - 1; l <= min(j-1, i-1+dist); l++ {\n                dp[j] = min(dp[j], dp[l]+sum[j]-sum[l]-int64(nums[l]))\n            }\n        }\n    }\n\n    return dp[n]\n}\n\nfunc min(a, b int64) int64 {\n    if a < b {\n        return a\n    }\n    return b\n}\n\nfunc min(a, b int) int {\n    if a < b {\n        return a\n    }\n    return b\n}"
+}

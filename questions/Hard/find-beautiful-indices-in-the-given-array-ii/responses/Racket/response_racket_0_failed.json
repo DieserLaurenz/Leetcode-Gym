@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 17: Char 7: any: use of 'any' outside the range of an arrow contract",
+    "full_compile_error": "Line 17: Char 7: any: use of 'any' outside the range of an arrow contract\n  in: (any (lambda (j) (<= (abs (- i j)) k)) b-indices)\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:28:6",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3303",
+    "task_finish_time": 1708473596116,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1181445167",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (beautiful-indices s a b k)\n  (-> string? string? string? exact-integer? (listof exact-integer?))\n  (let ([len-s (string-length s)]\n        [len-a (string-length a)]\n        [len-b (string-length b)])\n    (define (find-substrings str sub)\n      (let loop ([i 0]\n                 [result '()])\n        (if (< i (- (string-length str) (string-length sub) -1))\n            (if (string=? sub (substring str i (+ i (string-length sub))))\n                (loop (+ i 1) (cons i result))\n                (loop (+ i 1) result))\n            (reverse result))))\n    (define a-indices (find-substrings s a))\n    (define b-indices (find-substrings s b))\n    (define (is-beautiful i)\n      (any (lambda (j) (<= (abs (- i j)) k)) b-indices))\n    (filter is-beautiful a-indices)))"
+}

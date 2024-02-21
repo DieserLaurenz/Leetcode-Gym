@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 5: ** (SyntaxError) unexpected comma. Parentheses are required to solve ambiguity inside containers.\nThis error may happen when you forget a comma in a list or other container:\n    [a, b c, d]\nOr when you have ambiguous calls:\n    [function a, b, c]\nIn the example above, we don't know if the values \"b\" and \"c\" belongs to the list or the function \"function\". You can solve this by explicitly adding parentheses:\n    [one, function(a, b, c)]\nElixir cannot compile otherwise. Syntax error before: ','\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3181",
+    "task_finish_time": 1708485492610,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1181553319",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec leftmost_building_queries(heights :: [integer], queries :: [[integer]]) :: [integer]\n  def leftmost_building_queries(heights, queries) do\n    max_right = Enum.reduce(heights, [], fn x, acc -> \n      [if acc == [], do: x, else: max(x, hd(acc))] ++ acc\n    end) |> Enum.reverse()\n\n    Enum.map(queries, fn [a, b] ->\n      if a > b, do: -1, else:\n        Enum.drop(max_right, a)\n        |> Enum.take(b - a + 1)\n        |> Enum.find_index(&(heights[a] < heights[a + &1] and heights[b] < heights[a + &1]))\n        |> (fn \n              nil -> -1\n              index -> a + index\n            end).()\n    end)\n  end\nend"
+}

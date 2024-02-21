@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 26: Char 13: error: declaration of non-variable \u2018max\u2019 in \u2018for\u2019 loop initial declaration [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018beautifulIndices\u2019\nLine 26: Char 26: warning: implicit declaration of function \u2018max\u2019; did you mean \u2018fmax\u2019? [-Wimplicit-function-declaration] [solution.c]\n   29 |             for (int j = max(0, i - k); j <= min(sLen - bLen, i + k); ++j) {\n      |                          ^~~\n      |                          fmax\nLine 26: Char 13: error: declaration of non-variable \u2018max\u2019 in \u2018for\u2019 loop initial declaration [solution.c]\n   29 |             for (int j = max(0, i - k); j <= min(sLen - bLen, i + k); ++j) {\n      |             ^~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3303",
+    "task_finish_time": 1708463732361,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1181366580",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdlib.h>\n#include <string.h>\n\nint* beautifulIndices(char* s, char* a, char* b, int k, int* returnSize) {\n    int sLen = strlen(s), aLen = strlen(a), bLen = strlen(b);\n    int *res = (int *)malloc(sizeof(int) * sLen);\n    int resIndex = 0;\n\n    // Precompute matching indices for a and b\n    int *aMatches = (int *)calloc(sLen, sizeof(int));\n    int *bMatches = (int *)calloc(sLen, sizeof(int));\n\n    // Find all occurrences of a\n    for (int i = 0; i <= sLen - aLen; ++i) {\n        if (strncmp(s + i, a, aLen) == 0) aMatches[i] = 1;\n    }\n\n    // Find all occurrences of b\n    for (int i = 0; i <= sLen - bLen; ++i) {\n        if (strncmp(s + i, b, bLen) == 0) bMatches[i] = 1;\n    }\n\n    // For each index i, check if it is beautiful\n    for (int i = 0; i <= sLen - aLen; ++i) {\n        if (aMatches[i]) {\n            for (int j = max(0, i - k); j <= min(sLen - bLen, i + k); ++j) {\n                if (bMatches[j]) {\n                    res[resIndex++] = i;\n                    break; // Found a valid b, no need to check further for this a\n                }\n            }\n        }\n    }\n\n    *returnSize = resIndex;\n    // Resize the array to the actual number of beautiful indices\n    res = (int *)realloc(res, sizeof(int) * resIndex);\n    return res;\n}"
+}

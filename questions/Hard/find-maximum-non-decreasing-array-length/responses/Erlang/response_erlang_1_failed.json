@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 12: Char 1: function find_maximum_length/1 already defined",
+    "full_compile_error": "Line 12: Char 1: function find_maximum_length/1 already defined\n%   12| find_maximum_length([H | T]) ->\n%     | ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3211",
+    "task_finish_time": 1708495627294,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181687482",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec find_maximum_length(Nums :: [integer()]) -> integer().\nfind_maximum_length(Nums) ->\n    lists:foldl(fun(X, {Prev, Len, MaxLen}) ->\n                        if\n                            X >= Prev ->\n                                {X, Len + 1, max(Len + 1, MaxLen)};\n                            true ->\n                                {X, 1, MaxLen}\n                        end\n                end, {hd(Nums), 1, 1}, tl(Nums)).\n\nfind_maximum_length([H | T]) ->\n    {_, _, MaxLen} = find_maximum_length([H | T]),\n    MaxLen."
+}

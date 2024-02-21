@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 28, Char 46: cannot find value `end` in this scope (solution.rs)",
+    "full_compile_error": "Line 28, Char 46: cannot find value `end` in this scope (solution.rs)\n   |\n28 |         res.iter().map(|&x| if x as usize <= end { x } else { -1 }).collect()\n   |                                              ^^^\n   |\nhelp: the binding `end` is available in a different scope in the same function\n  --> src/main.rs:6:25\n   |\n5  |             let (start, end) = (query[0] as usize, query[1] as usize);\n   |                         ^^^\nFor more information about this error, try `rustc --explain E0425`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3181",
+    "task_finish_time": 1708484960964,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1181547513",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn leftmost_building_queries(heights: Vec<i32>, queries: Vec<Vec<i32>>) -> Vec<i32> {\n        let mut res = vec![];\n        for query in queries.iter() {\n            let (start, end) = (query[0] as usize, query[1] as usize);\n            if start >= end {\n                res.push(-1);\n                continue;\n            }\n            let mut max_height = heights[start];\n            let mut meet_point = -1;\n            for i in start + 1..=end {\n                if heights[i] > max_height {\n                    max_height = heights[i];\n                    if meet_point == -1 {\n                        meet_point = i as i32;\n                    }\n                }\n            }\n            for i in meet_point + 1..heights.len() as i32 {\n                if heights[i as usize] > max_height {\n                    meet_point = i;\n                    break;\n                }\n            }\n            res.push(meet_point);\n        }\n        res.iter().map(|&x| if x as usize <= end { x } else { -1 }).collect()\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 9: call to local/imported function is_good_subset/1 is illegal in guard",
+    "full_compile_error": "Line 9: Char 9: call to local/imported function is_good_subset/1 is illegal in guard\n%    9|         is_good_subset(Subset) ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2826",
+    "task_finish_time": 1708454874242,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181265692",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec good_subsetof_binary_matrix(Grid :: [[integer()]]) -> [integer()].\ngood_subsetof_binary_matrix(Grid) ->\n    find_good_subsets(Grid, lists:seq(0, length(Grid) - 1)).\n\nfind_good_subsets(_, []) -> [];\nfind_good_subsets(Grid, [H|T]) ->\n    Subset = [lists:nth(Index + 1, Grid) || Index <- [H|T]],\n    if\n        is_good_subset(Subset) ->\n            [H|T]; % Return the current subset if it's good\n        true ->\n            NextTry = find_good_subsets(Grid, T),\n            % Try adding more rows to see if a good subset can be found\n            if\n                NextTry == [] ->\n                    find_good_subsets(Grid, T); % Skip the current head and try the next\n                true ->\n                    NextTry\n            end\n    end.\n\nis_good_subset(Subset) ->\n    Transposed = transpose(Subset),\n    lists:all(fun(Column) ->\n                  Sum = lists:sum(Column),\n                  Sum =< length(Subset) div 2\n              end, Transposed).\n\ntranspose([]) -> [];\ntranspose([[]|_]) -> [];\ntranspose([H|T]) ->\n    [ [Head|Tail] || Head <- H, Tail <- transpose(T)]."
+}

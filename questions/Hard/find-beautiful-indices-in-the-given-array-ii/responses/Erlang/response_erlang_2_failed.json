@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 72: syntax error before: '=='",
+    "full_compile_error": "Line 11: Char 72: syntax error before: '=='\n%   11|                            SList >= lists:nthtail(I, SList) -- Pattern == Pattern]\n%     |                                                                        ^\nLine 1: Char 2: spec for undefined function beautiful_indices/4\n%    1| -spec beautiful_indices(S :: unicode:unicode_binary(), A :: unicode:unicode_binary(), B :: unicode:unicode_binary(), K :: integer()) -> [integer()].\n%     |  ^\nLine 40: Char 13: function beautiful_indices/4 undefined\n%   40|       Ret = beautiful_indices(Param_1, Param_2, Param_3, Param_4),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3303",
+    "task_finish_time": 1708473797809,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181446677",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec beautiful_indices(S :: unicode:unicode_binary(), A :: unicode:unicode_binary(), B :: unicode:unicode_binary(), K :: integer()) -> [integer()].\nbeautiful_indices(S, A, B, K) ->\n    SList = binary_to_list(S),\n    AList = binary_to_list(A),\n    BList = binary_to_list(B),\n    SL = length(SList),\n    AL = length(AList),\n    BL = length(BList),\n    FindIndices = fun(Pattern, Max) ->\n                      [I || I <- lists:seq(0, Max - 1),\n                           SList >= lists:nthtail(I, SList) -- Pattern == Pattern]\n                  end,\n    AIndices = FindIndices(AList, SL - AL + 1),\n    BIndices = FindIndices(BList, SL - BL + 1),\n    IsBeautiful = fun(I) ->\n                       lists:any(fun(J) -> abs(I - J) =< K end, BIndices)\n                   end,\n    lists:filter(IsBeautiful, AIndices)."
+}

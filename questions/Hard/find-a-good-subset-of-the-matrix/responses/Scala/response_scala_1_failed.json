@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 12: error: polymorphic expression cannot be instantiated to expected type; (in solution.scala)",
+    "full_compile_error": "Line 12: error: polymorphic expression cannot be instantiated to expected type; (in solution.scala)\n found   : [B >: Int]IndexedSeq[Int]\n required: List[Int]\n            )) return subset.sorted\n                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2826",
+    "task_finish_time": 1708454345269,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1181258045",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def goodSubsetofBinaryMatrix(grid: Array[Array[Int]]): List[Int] = {\n        val m = grid.length\n        val n = grid(0).length\n        \n        for (mask <- 1 until (1 << m)) {\n            val subset = (0 until m).filter(i => (mask & (1 << i)) != 0)\n            if (subset.forall(row => \n                (0 until n).forall(col => \n                    subset.map(grid(_)(col)).sum * 2 <= subset.length\n                )\n            )) return subset.sorted\n        }\n        \n        List()\n    }\n}"
+}

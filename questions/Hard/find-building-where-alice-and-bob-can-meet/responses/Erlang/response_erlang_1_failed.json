@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 10: Char 81: syntax error before: B",
+    "full_compile_error": "Line 10: Char 81: syntax error before: B\n%   10|     case lists:any(fun(X) -> X > lists:nth(A + 1, MaxRight) andalso X > Heights#B end, lists:sublist(Heights, B + 1)) of\n%     |                                                                                 ^\nLine 6: Char 9: function find_meeting_building/4 undefined\n%    6|         find_meeting_building(A, B, Heights, MaxRightRev)\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3181",
+    "task_finish_time": 1708485217217,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181550388",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec leftmost_building_queries(Heights :: [integer()], Queries :: [[integer()]]) -> [integer()].\nleftmost_building_queries(Heights, Queries) ->\n    MaxRight = lists:foldl(fun(H, Acc) -> [max(H, hd(Acc)) | Acc] end, [0], Heights),\n    MaxRightRev = lists:reverse(MaxRight),\n    lists:map(fun([A, B]) ->\n        find_meeting_building(A, B, Heights, MaxRightRev)\n    end, Queries).\n\nfind_meeting_building(A, B, Heights, MaxRight) when A =< B ->\n    case lists:any(fun(X) -> X > lists:nth(A + 1, MaxRight) andalso X > Heights#B end, lists:sublist(Heights, B + 1)) of\n        true -> B;\n        false -> -1\n    end;\nfind_meeting_building(A, B, Heights, MaxRight) ->\n    case lists:any(fun(X) -> X > lists:nth(B + 1, MaxRight) andalso X > Heights#A end, lists:sublist(Heights, A + 1)) of\n        true -> A;\n        false -> -1\n    end."
+}

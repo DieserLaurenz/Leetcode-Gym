@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 18\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3211",
+    "task_finish_time": 1708495524129,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1181686019",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (find-maximum-length nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define (dp lst)\n    (let ([n (length lst)])\n      (if (= n 0) 0\n          (let ([table (make-vector (+ n 1) 0)])\n            (vector-set! table 0 1)\n            (for ([i (in-range 1 n)])\n              (vector-set! table i 1)\n              (for ([j (in-range i)])\n                (when (and (<= (list-ref lst j) (list-ref lst i))\n                           (> (+ 1 (vector-ref table j)) (vector-ref table i)))\n                  (vector-set! table i (+ 1 (vector-ref table j))))))\n            (let ([result (apply max (vector->list table))])\n              (if (= result 1) 1 result)))))\n  (dp nums))"
+}

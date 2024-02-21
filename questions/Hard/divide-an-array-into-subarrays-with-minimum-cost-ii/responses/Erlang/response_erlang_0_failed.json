@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 34: variable 'Start' is unbound",
+    "full_compile_error": "Line 11: Char 34: variable 'Start' is unbound\n%   11|         end, infinity, lists:seq(Start, Idx - 1)),\n%     |                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3260",
+    "task_finish_time": 1708444156112,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181086821",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_cost(Nums :: [integer()], K :: integer(), Dist :: integer()) -> integer().\nminimum_cost(Nums, K, Dist) ->\n    N = length(Nums),\n    DP = lists:duplicate(N + 1, infinity),\n    DP1 = lists:update_at(1, 0, DP),\n    {_, Result} = lists:foldl(fun(X, {Idx, DP_Current}) ->\n        MinCost = lists:foldl(fun(I, Min) ->\n            Start = max(1, Idx - Dist),\n            Cost = lists:nth(I, DP_Current) + lists:nth(Idx, Nums),\n            min(Min, Cost)\n        end, infinity, lists:seq(Start, Idx - 1)),\n        DP_Next = lists:update_at(Idx + 1, MinCost, DP_Current),\n        {Idx + 1, DP_Next}\n    end, {1, DP1}, lists:seq(2, N)),\n    lists:nth(N - K + 2, Result)."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "cpp",
+    "run_success": false,
+    "compile_error": "Line 16: Char 45: error: variable 'find' declared with deduced type 'auto' cannot appear in its own initializer",
+    "full_compile_error": "Line 16: Char 45: error: variable 'find' declared with deduced type 'auto' cannot appear in its own initializer\n   16 |             if (parent[x] != x) parent[x] = find(parent[x]);\n      |                                             ^\n1 error generated.",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708495840542,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C++",
+    "submission_id": "1181690558",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <vector>\n#include <numeric>\n#include <unordered_map>\n#include <unordered_set>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    bool canTraverseAllPairs(vector<int>& nums) {\n        int n = nums.size();\n        vector<int> parent(n);\n        for (int i = 0; i < n; ++i) parent[i] = i;\n\n        auto find = [&](int x) {\n            if (parent[x] != x) parent[x] = find(parent[x]);\n            return parent[x];\n        };\n\n        auto unite = [&](int x, int y) {\n            x = find(x);\n            y = find(y);\n            if (x != y) {\n                parent[x] = y;\n            }\n        };\n\n        unordered_map<int, vector<int>> factors;\n        for (int i = 0; i < n; ++i) {\n            for (int j = 2; j * j <= nums[i]; ++j) {\n                if (nums[i] % j == 0) {\n                    factors[j].push_back(i);\n                    while (nums[i] % j == 0) nums[i] /= j;\n                }\n            }\n            if (nums[i] > 1) factors[nums[i]].push_back(i);\n        }\n\n        for (auto& [factor, indices] : factors) {\n            for (int i = 1; i < indices.size(); ++i) {\n                unite(indices[i], indices[i - 1]);\n            }\n        }\n\n        int representative = find(0);\n        for (int i = 1; i < n; ++i) {\n            if (find(i) != representative) return false;\n        }\n        return true;\n    }\n};"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 6: Char 35: n: unbound identifier",
+    "full_compile_error": "Line 6: Char 35: n: unbound identifier\n  in: n\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:17:34",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3181",
+    "task_finish_time": 1708485076098,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1181548818",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (leftmost-building-queries heights queries)\n  (-> (listof exact-integer?) (listof (listof exact-integer?)) (listof exact-integer?))\n\n  (define (max-reachable heights)\n    (let ([n (length heights)]\n          [max-right (make-vector n)])\n      (vector-set! max-right (- n 1) (- n 1))\n      (for ([i (in-range (- n 2) -1 -1)])\n        (if (> (list-ref heights i) (list-ref heights (vector-ref max-right (+ i 1))))\n            (vector-set! max-right i i)\n            (vector-set! max-right i (vector-ref max-right (+ i 1)))))\n      max-right))\n\n  (define max-right (max-reachable heights))\n\n  (define (query-meet a b max-right)\n    (if (or (= a b) (> (vector-ref max-right a) b))\n        (if (= a b) a -1)\n        (let loop ([i (vector-ref max-right a)])\n          (if (>= i b) i (loop (vector-ref max-right i))))))\n\n  (map (lambda (q)\n         (let ([a (car q)]\n               [b (cadr q)])\n           (query-meet a b max-right)))\n       queries))"
+}

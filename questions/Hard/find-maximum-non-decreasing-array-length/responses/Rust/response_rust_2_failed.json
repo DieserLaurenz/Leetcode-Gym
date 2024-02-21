@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 51, Char 2: this file contains an unclosed delimiter (solution.rs)",
+    "full_compile_error": "Line 51, Char 2: this file contains an unclosed delimiter (solution.rs)\n   |\n1  | impl Solution {\n   |               - unclosed delimiter\n2  |     pub fn find_maximum_length(nums: Vec<i32>) -> i32 {\n   |                                                       - unclosed delimiter\n...\n9 |         for i in 0..nums.len() {\n   |                                - unclosed delimiter\n...\n51 | }\n   |  ^\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3211",
+    "task_finish_time": 1708495391220,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1181684164",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn find_maximum_length(nums: Vec<i32>) -> i32 {\n        use std::collections::HashMap;\n\n        let mut last_pos = HashMap::new();\n        let mut dp = vec![0; nums.len() + 1];\n        let mut max_len = 0;\n\n        for i in 0..nums.len() {\n            let mut len = 1;\n            if"
+}

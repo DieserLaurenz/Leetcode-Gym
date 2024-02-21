@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 10: Char 10: while: unbound identifier",
+    "full_compile_error": "Line 10: Char 10: while: unbound identifier\n  in: while\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:21:9",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3181",
+    "task_finish_time": 1708485116012,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1181549271",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (leftmost-building-queries heights queries)\n  (-> (listof exact-integer?) (listof (listof exact-integer?)) (listof exact-integer?))\n\n  ; Function to compute the next greater element for each building\n  (define (next-greater heights)\n    (let* ((n (length heights))\n           (nge (make-vector n -1)) ; Initialize all elements to -1\n           (stack '()))\n      (for ([i (in-range 0 n)])\n        (while (and (not (null? stack))\n                    (< (list-ref heights (car stack)) (list-ref heights i)))\n          (vector-set! nge (car stack) i)\n          (set! stack (cdr stack)))\n        (set! stack (cons i stack)))\n      nge))\n\n  ; Main function to process queries\n  (define (process-queries queries nge)\n    (map (lambda (query)\n           (let* ((a (car query))\n                  (b (cadr query))\n                  (current a)\n                  (found #f))\n             (while (and (not found) (>= (vector-ref nge current) 0) (< current b))\n               (set! current (vector-ref nge current))\n               (when (>= current b) (set! found #t)))\n             (if found current -1)))\n         queries))\n\n  ; Compute next greater elements and process queries\n  (process-queries queries (next-greater heights)))"
+}

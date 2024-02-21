@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 5: syntax error before: 'end'",
+    "full_compile_error": "Line 11: Char 5: syntax error before: 'end'\n%   11|     end.\n%     |     ^\nLine 1: Char 2: spec for undefined function find_maximum_length/1\n%    1| -spec find_maximum_length(Nums :: [integer()]) -> integer().\n%     |  ^\nLine 14: Char 22: function find_maximum_length/1 undefined\n%   14|     {_, _, MaxLen} = find_maximum_length(Nums),\n%     |                      ^\nLine 31: Char 13: function find_maximum_length/1 undefined\n%   31|       Ret = find_maximum_length(Param_1),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3211",
+    "task_finish_time": 1708495658360,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181687937",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec find_maximum_length(Nums :: [integer()]) -> integer().\nfind_maximum_length(Nums) ->\n    lists:foldl(fun(X, {Prev, Len, MaxLen}) ->\n                        if\n                            X >= Prev ->\n                                {X, Len + 1, max(Len + 1, MaxLen)};\n                            true ->\n                                {X, 1, MaxLen}\n                        end\n                end, {hd(Nums), 1, 1}, tl(Nums))\n    end.\n\nfind_maximum_length_corrected(Nums) ->\n    {_, _, MaxLen} = find_maximum_length(Nums),\n    MaxLen."
+}

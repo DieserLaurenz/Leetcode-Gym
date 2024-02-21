@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 6: Char 85: syntax error before: Idx",
+    "full_compile_error": "Line 6: Char 85: syntax error before: Idx\n%    6|     MeetCandidates = [Idx || Idx <- lists:seq(max(A,B)+1, length(Heights)), Heights#Idx > max(Heights#A, Heights#B)],\n%     |                                                                                     ^\nLine 3: Char 29: function find_meet/3 undefined\n%    3|     lists:map(fun({A,B}) -> find_meet(A, B, Heights) end, Queries).\n%     |                             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3181",
+    "task_finish_time": 1708485243209,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181550680",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec leftmost_building_queries(Heights :: [integer()], Queries :: [[integer()]]) -> [integer()].\nleftmost_building_queries(Heights, Queries) ->\n    lists:map(fun({A,B}) -> find_meet(A, B, Heights) end, Queries).\n\nfind_meet(A, B, Heights) ->\n    MeetCandidates = [Idx || Idx <- lists:seq(max(A,B)+1, length(Heights)), Heights#Idx > max(Heights#A, Heights#B)],\n    case MeetCandidates of\n        [] -> -1;\n        [FirstMeet|_] -> FirstMeet\n    end."
+}
