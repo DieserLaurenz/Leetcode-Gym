@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined function div/1 (expected Solution to define such a function or for it to be imported, but none are available)",
+    "full_compile_error": "error: undefined function div/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 17:   Solution.factorize/1\nerror: undefined function n/1 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 17:   Solution.factorize/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708597980574,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1182924145",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_sum(nums :: [integer]) :: integer\n  def maximum_sum(nums) do\n    nums\n    |> Enum.map(&factorize(&1))\n    |> Enum.reduce(%{}, fn factors, acc -> \n      key = Enum.sort(factors)\n      Map.update(acc, key, Enum.sum(factors), &(&1 + Enum.sum(factors)))\n    end)\n    |> Map.values()\n    |> Enum.max()\n  end\n\n  defp factorize(n) do\n    2..n\n    |> Enum.reduce_while([], fn x, acc ->\n      if rem(n, x) == 0 and is_perfect_square(n div x), do: {:halt, [x | acc]}, else: {:cont, acc}\n    end)\n  end\n\n  defp is_perfect_square(x) do\n    square_root = :math.sqrt(x) |> round\n    square_root * square_root == x\n  end\nend"
+}

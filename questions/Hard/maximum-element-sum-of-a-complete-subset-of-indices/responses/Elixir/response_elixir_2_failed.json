@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: nested captures are not allowed. You cannot define a function using  the capture operator & inside another function defined via &. Got invalid nested capture: &max/2",
+    "full_compile_error": "error: nested captures are not allowed. You cannot define a function using  the capture operator & inside another function defined via &. Got invalid nested capture: &max/2\nLine 11:   Solution.maximum_sum/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\n    (stdlib 5.1.1) lists.erl:1706: :lists.mapfoldl_1/3\n    (stdlib 5.1.1) lists.erl:1707: :lists.mapfoldl_1/3\n    (elixir 1.15.7) src/elixir_fn.erl:140: :elixir_fn.escape/3\n    (elixir 1.15.7) src/elixir_fn.erl:112: :elixir_fn.capture_expr/6\n    (elixir 1.15.7) expanding macro: Kernel.|>/2",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708598012962,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1182924491",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_sum(nums :: [integer]) :: integer\n  def maximum_sum(nums) do\n    nums\n    |> Enum.map(&factor_counts/1)\n    |> Enum.reduce(%{}, fn factors, acc ->\n      Map.update(acc, Map.keys(factors) |> Enum.sort(), factors, &merge_factors(&1, factors))\n    end)\n    |> Map.values()\n    |> Enum.map(&Map.values(&1))\n    |> Enum.map(&Enum.reduce(&1, 0, &max/2))\n    |> Enum.max()\n  end\n\n  defp factor_counts(n), do: prime_factors(n, 2, %{})\n\n  defp prime_factors(1, _, acc), do: acc\n  defp prime_factors(n, i, acc) when n < i, do: acc\n  defp prime_factors(n, i, acc) do\n    if rem(n, i) == 0 do\n      new_acc = Map.update(acc, i, 1, &(&1 + 1))\n      prime_factors(div(n, i), i, new_acc)\n    else\n      prime_factors(n, i+1, acc)\n    end\n  end\n\n  defp merge_factors(acc, factors) do\n    Map.merge(acc, factors, fn _, v1, v2 -> v1 + v2 end)\n  end\n\n  defp max(a, b), do: if(a > b, do: a, else: b)\nend"
+}

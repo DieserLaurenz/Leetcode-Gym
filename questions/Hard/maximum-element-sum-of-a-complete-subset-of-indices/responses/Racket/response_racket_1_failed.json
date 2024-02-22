@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 18: Char 24: group: unbound identifier",
+    "full_compile_error": "Line 18: Char 24: group: unbound identifier\n  in: group\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:29:23",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708597669165,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182920736",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-sum nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define (gcd a b)\n    (if (= b 0) a (gcd b (modulo a b))))\n  \n  (define (reduce-fraction n d)\n    (let ([g (gcd n d)])\n      (cons (/ n g) (/ d g))))\n  \n  (define (factorize n)\n    (let loop ([n n] [f 2] [acc '()])\n      (cond [(= n 1) acc]\n            [(= (modulo n f) 0) (loop (/ n f) f (cons f acc))]\n            [else (loop n (+ f 1) acc)])))\n  \n  (define (square-free n)\n    (apply * (map car (group (sort (factorize n) <)))))\n  \n  (define (max-sum nums)\n    (let* ([sf-nums (map square-free nums)]\n           [groups (make-hash)]\n           [max-sum 0])\n      (for ([n nums] [sf sf-nums])\n        (let* ([key (reduce-fraction n sf)]\n               [group (hash-ref groups key (lambda () 0))])\n          (hash-set! groups key (+ group n))\n          (set! max-sum (max max-sum (+ group n)))))\n      max-sum))\n  \n  (max-sum nums))"
+}

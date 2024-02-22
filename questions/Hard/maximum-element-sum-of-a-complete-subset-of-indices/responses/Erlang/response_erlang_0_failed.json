@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 12: Char 66: variable 'Idx' is unbound",
+    "full_compile_error": "Line 12: Char 66: variable 'Idx' is unbound\n%   12|                               dict:update_append(Key, [lists:nth(Idx, Nums)], Acc)\n%     |                                                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708597795246,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1182922142",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec maximum_sum(Nums :: [integer()]) -> integer().\nmaximum_sum(Nums) ->\n    PrimeFactors = lists:map(fun erlang:prime_factors/1, Nums),\n    FactorCounts = [lists:foldl(fun(X, Acc) -> dict:update_counter(X, 1, Acc) end, dict:new(), PF) || PF <- PrimeFactors],\n    UniqueFactors = lists:foldl(fun(Dict, Acc) -> dict:merge(fun(_K, V1, V2) -> V1 bor V2 end, Dict, Acc) end, dict:new(), FactorCounts),\n    Grouped = lists:foldl(fun(Factors, Acc) -> \n                              Key = dict:fold(fun(K, V, Acc1) -> \n                                                  if V rem 2 == 1 -> [K|Acc1]; \n                                                     true -> Acc1 \n                                                  end \n                                              end, [], Factors),\n                              dict:update_append(Key, [lists:nth(Idx, Nums)], Acc)\n                          end, dict:new(), lists:zip(FactorCounts, lists:seq(1, length(Nums)))),\n    MaxSum = dict:fold(fun(_K, Vals, Acc) -> \n                           Sum = lists:sum(Vals),\n                           if Sum > Acc -> Sum; true -> Acc end\n                       end, 0, Grouped),\n    MaxSum."
+}

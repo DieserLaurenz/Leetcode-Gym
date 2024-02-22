@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 30: Char 38: set-cdr!: unbound identifier",
+    "full_compile_error": "Line 30: Char 38: set-cdr!: unbound identifier\n  in: set-cdr!\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:41:37",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708597726095,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182921356",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-sum nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define (prime-factors n)\n    (define (iter n d)\n      (if (> d (* n d))\n          '()\n          (if (zero? (remainder n d))\n              (cons d (iter (/ n d) d))\n              (iter n (+ d 1)))))\n    (iter n 2))\n  \n  (define (merge-counts a b)\n    (let loop ((a a) (b b) (result '()))\n      (cond\n       ((null? a) (append result b))\n       ((null? b) (append result a))\n       ((= (caar a) (caar b)) \n        (loop (cdr a) (cdr b) (append result (list (cons (caar a) (+ (cdar a) (cdar b)))))))\n       ((< (caar a) (caar b))\n        (loop (cdr a) b (append result (list (car a)))))\n       (else\n        (loop a (cdr b) (append result (list (car b))))))))\n  \n  (define (factor-counts n)\n    (define counts (foldl (lambda (p acc)\n                            (let ((entry (assoc p acc)))\n                              (if entry\n                                  (begin\n                                    (set-cdr! entry (+ 1 (cdr entry)))\n                                    acc)\n                                  (cons (cons p 1) acc))))\n                          '()\n                          (prime-factors n)))\n    (sort counts (lambda (a b) (< (car a) (car b)))))\n  \n  (define (is-perfect-square? counts)\n    (andmap (lambda (count) (even? (cdr count))) counts))\n  \n  (define (subset-sums nums)\n    (let ((n (length nums)))\n      (let loop ((i 0) (sums '()))\n        (if (= i (expt 2 n))\n            sums\n            (let ((new-sum (foldl (lambda (j acc)\n                                    (if (bitwise-and i (expt 2 j))\n                                        (+ acc (list-ref nums j))\n                                        acc))\n                                  0\n                                  (range 0 n))))\n              (loop (+ i 1) (cons new-sum sums)))))))\n  \n  (define (max-perfect-square-sum nums)\n    (let ((sums (subset-sums nums)))\n      (let ((max-sum (apply max sums)))\n        (for/fold ([max-sum max-sum]) ([num nums] [index (in-naturals)])\n          (let* ((factors (factor-counts num))\n                 (square-free (foldl (lambda (factor acc)\n                                       (if (odd? (cdr factor))\n                                           (* acc (car factor))\n                                           acc))\n                                     1\n                                     factors)))\n            (if (and (> square-free 1) (is-perfect-square? factors))\n                max-sum\n                (max max-sum (+ num (list-ref sums index)))))))))\n  \n  (max-perfect-square-sum nums))"
+}

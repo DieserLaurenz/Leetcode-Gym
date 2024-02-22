@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"i\"",
+    "full_compile_error": "error: undefined variable \"i\"\nLine 36:   Solution.count_factors/4\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708597946921,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1182923787",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec maximum_sum(nums :: [integer]) :: integer\n  def maximum_sum(nums) do\n    nums\n    |> Enum.map(&prime_factors_count(&1))\n    |> group_by_factors()\n    |> Map.values()\n    |> Enum.map(&Enum.sum(&1))\n    |> Enum.max()\n  end\n\n  defp prime_factors_count(n) when n > 1 do\n    2..:math.sqrt(n)\n    |> Enum.reduce_while({n, %{}}, fn i, {m, acc} ->\n      if rem(m, i) == 0 do\n        {new_m, new_acc} = count_factors(m, i, acc)\n        {:cont, {new_m, new_acc}}\n      else\n        {:cont, {m, acc}}\n      end\n    end)\n    |> finalize_factors()\n  end\n\n  defp prime_factors_count(1), do: %{}\n\n  defp count_factors(m, i, acc) do\n    count_factors(m, i, acc, 0)\n  end\n\n  defp count_factors(m, i, acc, count) when rem(m, i) == 0 do\n    count_factors(div(m, i), i, acc, count + 1)\n  end\n\n  defp count_factors(m, _, acc, count) when count > 0 do\n    {m, Map.update(acc, to_string(%{i => count}), count, &(&1 + count))}\n  end\n\n  defp count_factors(m, _, acc, _count), do: {m, acc}\n\n  defp finalize_factors({1, acc}), do: acc\n  defp finalize_factors({m, acc}), do: Map.update(acc, to_string(%{m => 1}), 1, &(&1 + 1))\n\n  defp group_by_factors(nums) do\n    Enum.reduce(nums, %{}, fn factors, acc ->\n      Map.update(acc, Enum.sort(factors |> Enum.filter(fn {_, v} -> rem(v, 2) == 1 end), &(&1 < &2)), [Enum.sum(Map.keys(factors))], &(&1 ++ [Enum.sum(Map.keys(factors))]))\n    end)\n  end\nend"
+}
