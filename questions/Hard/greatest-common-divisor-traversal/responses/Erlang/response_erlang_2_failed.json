@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 28: Char 24: call to local/imported function gcd/2 is illegal in guard",
+    "full_compile_error": "Line 28: Char 24: call to local/imported function gcd/2 is illegal in guard\n%   28|                     if gcd(lists:nth(I + 1, Nums), lists:nth(J + 1, Nums)) > 1 ->\n%     |                        ^\nLine 28: Char 28: illegal guard expression\n%   28|                     if gcd(lists:nth(I + 1, Nums), lists:nth(J + 1, Nums)) > 1 ->\n%     |                            ^\nLine 28: Char 52: illegal guard expression\n%   28|                     if gcd(lists:nth(I + 1, Nums), lists:nth(J + 1, Nums)) > 1 ->\n%     |                                                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708506967171,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181834056",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec gcd(Integer1 :: integer(), Integer2 :: integer()) -> integer().\ngcd(A, 0) -> A;\ngcd(A, B) -> gcd(B, A rem B).\n\n-spec find_root(Node :: integer(), Parents :: map()) -> integer().\nfind_root(Node, Parents) ->\n    case maps:get(Node, Parents) of\n        Node -> Node;\n        Parent -> find_root(Parent, Parents)\n    end.\n\n-spec union(Node1 :: integer(), Node2 :: integer(), Parents :: map()) -> map().\nunion(Node1, Node2, Parents) ->\n    Root1 = find_root(Node1, Parents),\n    Root2 = find_root(Node2, Parents),\n    case Root1 == Root2 of\n        true -> Parents;\n        false -> Parents#{Root1 => Root2}\n    end.\n\n-spec can_traverse_all_pairs(Nums :: [integer()]) -> boolean().\ncan_traverse_all_pairs(Nums) ->\n    InitialParents = lists:foldl(fun(X, Acc) -> Acc#{X => X} end, #{}, lists:seq(0, length(Nums) - 1)),\n    FinalParents = lists:foldl(\n        fun(I, Acc) ->\n            lists:foldl(\n                fun(J, Acc1) ->\n                    if gcd(lists:nth(I + 1, Nums), lists:nth(J + 1, Nums)) > 1 ->\n                        union(I, J, Acc1);\n                       true ->\n                        Acc1\n                    end\n                end, Acc, lists:seq(I + 1, length(Nums) - 1))\n        end, InitialParents, lists:seq(0, length(Nums) - 2)),\n    Roots = lists:usort([find_root(X, FinalParents) || X <- lists:seq(0, length(Nums) - 1)]),\n    length(Roots) == 1."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 69: Char 19: error: too few arguments to function \u2018longestValidSubstring\u2019 [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018main\u2019\nLine 69: Char 50: warning: passing argument 2 of \u2018longestValidSubstring\u2019 makes integer from pointer without a cast [-Wint-conversion] [solution.c]\n   72 |         int ret = longestValidSubstring(param_1, param_2, size_2);\n      |                                                  ^~~~~~~\n      |                                                  |\n      |                                                  char **\nLine 4: Char 44: note: expected \u2018int\u2019 but argument is of type \u2018char **\u2019 [solution.c]\n    7 | int longestValidSubstring(char * word, int wordLen, char ** forbidden, int forbiddenSize){\n      |                                        ~~~~^~~~~~~\nLine 69: Char 59: warning: passing argument 3 of \u2018longestValidSubstring\u2019 makes pointer from integer without a cast [-Wint-conversion] [solution.c]\n   72 |         int ret = longestValidSubstring(param_1, param_2, size_2);\n      |                                                           ^~~~~~\n      |                                                           |\n      |                                                           int\nLine 4: Char 61: note: expected \u2018char **\u2019 but argument is of type \u2018int\u2019 [solution.c]\n    7 | int longestValidSubstring(char * word, int wordLen, char ** forbidden, int forbiddenSize){\n      |                                                     ~~~~~~~~^~~~~~~~~\nLine 69: Char 19: error: too few arguments to function \u2018longestValidSubstring\u2019 [solution.c]\n   72 |         int ret = longestValidSubstring(param_1, param_2, size_2);\n      |                   ^~~~~~~~~~~~~~~~~~~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2884",
+    "task_finish_time": 1708515093423,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1181925324",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdbool.h>\n#include <string.h>\n\nint longestValidSubstring(char * word, int wordLen, char ** forbidden, int forbiddenSize){\n    bool isValid;\n    int maxLen = 0;\n\n    for (int i = 0; i < wordLen; ++i) {\n        for (int j = i; j < wordLen; ++j) {\n            isValid = true;\n            int currentLen = j - i + 1;\n            char currentSubstr[currentLen + 1];\n            strncpy(currentSubstr, word + i, currentLen);\n            currentSubstr[currentLen] = '\\0';\n\n            for (int k = 0; k < forbiddenSize; ++k) {\n                if (strstr(currentSubstr, forbidden[k]) != NULL) {\n                    isValid = false;\n                    break;\n                }\n            }\n\n            if (isValid && currentLen > maxLen) {\n                maxLen = currentLen;\n            }\n        }\n    }\n\n    return maxLen;\n}"
+}

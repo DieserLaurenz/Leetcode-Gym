@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 32\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3233",
+    "task_finish_time": 1708536795467,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182225483",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-partitions-after-operations s k)\n  (-> string? exact-integer? exact-integer?)\n  \n  (define (count-partitions s k)\n    (define (helper s k changed)\n      (if (null? s) 0\n          (let loop ((i 0) (distinct 0) (last-char #f) (chars (make-hash)) (max-part 0))\n            (if (>= i (length s))\n                (+ 1 max-part)\n                (let ((char (list-ref s i)))\n                  (unless (hash-ref chars char #f)\n                    (set! distinct (+ distinct 1)))\n                  (hash-set! chars char #t)\n                  (if (> distinct k)\n                      (if changed\n                          max-part\n                          (max (loop (+ i 1) distinct last-char chars max-part)\n                               (helper (cdr s) k #t)))\n                      (loop (+ i 1) distinct char chars (+ 1 max-part)))))))\n    (helper (string->list s) k #f))\n  \n  (define (change-and-count s k)\n    (let ((max-part 0))\n      (for/list (i (in-range (string-length s)))\n        (for/list (char (in-range 97 123)) ; a to z\n          (let ((new-s (string-copy s)))\n            (string-set! new-s i (integer->char char))\n            (set! max-part (max max-part (count-partitions new-s k))))))\n      max-part))\n\n  (max (count-partitions s k) (change-and-count s k)))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 1: Char 8: \"math\" imported and not used (solution.go)",
+    "full_compile_error": "Line 1: Char 8: \"math\" imported and not used (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708506132800,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1181823859",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "import \"math\"\n\nfunc gcd(a, b int) int {\n    for b != 0 {\n        a, b = b, a%b\n    }\n    return a\n}\n\nfunc canTraverseAllPairs(nums []int) bool {\n    n := len(nums)\n    if n == 1 {\n        return true\n    }\n\n    // Prime factorization\n    maxVal := int(1e5 + 1)\n    spf := make([]int, maxVal) // Smallest prime factor\n    for i := range spf {\n        spf[i] = i\n    }\n    for i := 2; i*i < maxVal; i++ {\n        if spf[i] == i {\n            for j := i * i; j < maxVal; j += i {\n                if spf[j] == j {\n                    spf[j] = i\n                }\n            }\n        }\n    }\n\n    // Union-find setup\n    parent := make([]int, n)\n    for i := range parent {\n        parent[i] = i\n    }\n    var find func(x int) int\n    find = func(x int) int {\n        if parent[x] != x {\n            parent[x] = find(parent[x])\n        }\n        return parent[x]\n    }\n    union := func(x, y int) {\n        rootX := find(x)\n        rootY := find(y)\n        if rootX != rootY {\n            parent[rootX] = rootY\n        }\n    }\n\n    // Connect components based on common prime factors\n    primeToIndex := make(map[int]int)\n    for i, num := range nums {\n        for num > 1 {\n            prime := spf[num]\n            if _, found := primeToIndex[prime]; found {\n                union(i, primeToIndex[prime])\n            }\n            primeToIndex[prime] = i\n            for num%prime == 0 {\n                num /= prime\n            }\n        }\n    }\n\n    root := find(0)\n    for i := 1; i < n; i++ {\n        if find(i) != root {\n            return false\n        }\n    }\n    return true\n}"
+}

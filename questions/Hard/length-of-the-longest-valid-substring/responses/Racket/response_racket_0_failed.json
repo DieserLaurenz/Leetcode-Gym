@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 18\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2884",
+    "task_finish_time": 1708524975948,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182043549",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (longest-valid-substring word forbidden)\n  (-> string? (listof string?) exact-integer?)\n  \n  (define (forbidden-substring? s)\n    (ormap (lambda (f) (not (equal? (string-search f s) #f))) forbidden))\n  \n  (define (max-valid-length start end max-len)\n    (if (> start (string-length word))\n        max-len\n        (if (> end (string-length word))\n            (max-valid-length (+ start 1) (+ start 2) max-len)\n            (let ((substr (substring word start end)))\n              (if (forbidden-substring? substr)\n                  (max-valid-length start (+ end 1) max-len)\n                  (max-valid-length start (+ end 1) (max max-len (string-length substr)))))))\n  \n  (max-valid-length 0 1 0))"
+}

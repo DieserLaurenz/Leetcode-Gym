@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 13: Char 13: if: missing an \"else\" expression",
+    "full_compile_error": "Line 13: Char 13: if: missing an \"else\" expression\n  in: (if (= (+ count increment) 0) (set! distinct-categories (- distinct-categories 1)))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:24:12",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2894",
+    "task_finish_time": 1708577991009,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182663460",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (find-maximum-elegance items k)\n  (-> (listof (listof exact-integer?)) exact-integer? exact-integer?)\n  (let* ([sorted-items (sort items (lambda (x y) (> (car x) (car y))))]\n         [max-elegance 0]\n         [category-counts (make-hash)]\n         [total-profit 0]\n         [distinct-categories 0])\n\n    (define (update-category-count category increment)\n      (let ([count (hash-ref category-counts category 0)])\n        (hash-set! category-counts category (+ count increment))\n        (if (= count 0) (set! distinct-categories (+ distinct-categories 1))\n            (if (= (+ count increment) 0) (set! distinct-categories (- distinct-categories 1))))))\n\n    (for ([i (in-range (min k (length sorted-items)))])\n      (let* ([item (list-ref sorted-items i)]\n             [profit (car item)]\n             [category (cadr item)])\n        (set! total-profit (+ total-profit profit))\n        (update-category-count category 1)))\n\n    (set! max-elegance (+ total-profit (* distinct-categories distinct-categories)))\n\n    (for ([i (in-range k (length sorted-items))])\n      (let* ([added-item (list-ref sorted-items i)]\n             [removed-item (list-ref sorted-items (- i k))]\n             [added-profit (car added-item)]\n             [added-category (cadr added-item)]\n             [removed-profit (car removed-item)]\n             [removed-category (cadr removed-item)])\n        (set! total-profit (+ total-profit added-profit (- removed-profit)))\n        (update-category-count added-category 1)\n        (update-category-count removed-category -1)\n        (set! max-elegance (max max-elegance (+ total-profit (* distinct-categories distinct-categories))))))\n    max-elegance))"
+}

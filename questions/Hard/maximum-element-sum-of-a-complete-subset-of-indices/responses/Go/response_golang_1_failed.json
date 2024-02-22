@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 19: syntax error: unexpected n at end of statement (solution.go)",
+    "full_compile_error": "Line 9: Char 19: syntax error: unexpected n at end of statement (solution.go)\nLine 20: Char 5: syntax error: non-declaration statement outside function body (solution.go)\nLine 21: Char 9: syntax error: unexpected for, expected ) (solution.go)\nLine 24: Char 13: syntax error: unexpected } after top level declaration (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708588678653,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1182815339",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "import (\n    \"math\"\n)\n\nfunc maximumSum(nums []int) int64 {\n    getFactors := func(n int) map[int]int {\n        factors := make(map[int]int)\n        for i := 2; i*i <= n; i++ {\n            while n%i == 0 {\n                factors[i]++\n                n /= i\n            }\n        }\n        if n > 1 {\n            factors[n]++\n        }\n        return factors\n    }\n\n    isSquare := func(factors map[int]int) bool {\n        for _, v := range factors {\n            if v%2 != 0 {\n                return false\n            }\n        }\n        return true\n    }\n\n    maxSum := int64(0)\n    for i := 0; i < (1 << uint(len(nums))); i++ {\n        sum := int64(0)\n        factors := make(map[int]int)\n        for j, num := range nums {\n            if (i>>uint(j))&1 == 1 {\n                sum += int64(num)\n                for factor, power := range getFactors(num) {\n                    factors[factor] += power\n                }\n            }\n        }\n        if isSquare(factors) && sum > maxSum {\n            maxSum = sum\n        }\n    }\n    return maxSum\n}"
+}

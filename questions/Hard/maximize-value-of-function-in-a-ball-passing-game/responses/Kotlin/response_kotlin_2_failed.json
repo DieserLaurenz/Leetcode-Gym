@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 34: Char 27: error: no set method providing array access",
+    "full_compile_error": "Line 34: Char 27: error: no set method providing array access\n                    passes[i] += current\n                          ^\nLine 40: Char 23: error: no set method providing array access\n                passes[i] += i\n                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3032",
+    "task_finish_time": 1708546025646,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1182358269",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun getMaxFunctionValue(receiver: List<Int>, k: Long): Long {\n        val n = receiver.size\n        var max = 0L\n\n        // Precompute the total passes to each player\n        val passes = Array(n) { 0L }\n        for (i in receiver.indices) {\n            var current = i\n            var count = k\n\n            // Use a map to detect loops and their entry point\n            val visited = mutableMapOf<Int, Long>()\n            visited[current] = k\n\n            while (count > 0) {\n                current = receiver[current]\n                if (visited.containsKey(current)) {\n                    val loopStart = visited[current]!!\n                    val loopLength = loopStart - count + 1\n                    val totalLoops = (count - 1) / loopLength\n                    val remainder = (count - 1) % loopLength\n\n                    // Add the loop contributions\n                    for (j in 0 until totalLoops) {\n                        passes[i] += loopLength * (n - 1) - (loopLength * (loopLength - 1) / 2)\n                    }\n\n                    // Add the remainder contributions\n                    passes[i] += remainder * (n - 1) - (remainder * (remainder - 1) / 2)\n                    break\n                } else {\n                    visited[current] = count - 1\n                    passes[i] += current\n                    count--\n                }\n            }\n\n            if (visited.size == k.toInt()) {\n                passes[i] += i\n            }\n\n            max = maxOf(max, passes[i])\n        }\n\n        return max\n    }\n}"
+}

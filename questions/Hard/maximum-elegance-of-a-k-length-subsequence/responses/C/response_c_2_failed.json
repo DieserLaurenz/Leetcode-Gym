@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 35: Char 13: error: variable-sized object may not be initialized [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018findMaximumElegance\u2019\nLine 35: Char 13: error: variable-sized object may not be initialized [solution.c]\n   38 |             int categoryMark[itemsSize + 1] = {0};\n      |             ^~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2894",
+    "task_finish_time": 1708567477257,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1182539556",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdlib.h>\n\nint compare(const void *a, const void *b) {\n    int *itemA = *(int **)a;\n    int *itemB = *(int **)b;\n    return itemB[0] - itemA[0]; // Descending order of profit\n}\n\nlong long max(long long a, long long b) {\n    return a > b ? a : b;\n}\n\nlong long findMaximumElegance(int** items, int itemsSize, int* itemsColSize, int k) {\n    qsort(items, itemsSize, sizeof(int*), compare); // Sort items by profit in descending order\n\n    long long dp[itemsSize + 1][k + 1];\n    for (int i = 0; i <= itemsSize; i++)\n        for (int j = 0; j <= k; j++)\n            dp[i][j] = -1;\n    dp[0][0] = 0;\n\n    for (int i = 1; i <= itemsSize; i++) {\n        int profit = items[i-1][0], category = items[i-1][1];\n        for (int j = 0; j <= k; j++) {\n            dp[i][j] = max(dp[i][j], dp[i-1][j]);\n            if (j > 0 && dp[i-1][j-1] != -1)\n                dp[i][j] = max(dp[i][j], dp[i-1][j-1] + profit);\n        }\n    }\n\n    long long maxElegance = 0;\n    for (int i = 1; i <= itemsSize; i++) {\n        if (dp[i][k] != -1) {\n            int distinct = 0;\n            int categoryMark[itemsSize + 1] = {0};\n            for (int j = 0; j < i; j++) {\n                if (!categoryMark[items[j][1]]) {\n                    categoryMark[items[j][1]] = 1;\n                    distinct++;\n                }\n            }\n            int distinctCategories = distinct > k ? k : distinct;\n            long long elegance = dp[i][k] + distinctCategories * distinctCategories;\n            maxElegance = max(maxElegance, elegance);\n        }\n    }\n\n    return maxElegance;\n}"
+}

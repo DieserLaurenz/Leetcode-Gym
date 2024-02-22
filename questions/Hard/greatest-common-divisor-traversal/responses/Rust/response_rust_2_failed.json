@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 26, Char 36: mismatched types (solution.rs)",
+    "full_compile_error": "Line 26, Char 36: mismatched types (solution.rs)\n   |\n26 |                 union(num, factor, &mut parent);\n   |                 -----              ^^^^^^^^^^^ expected `&mut Vec<i32>`, found `&mut Vec<usize>`\n   |                 |\n   |                 arguments to this function are incorrect\n   |\n   = note: expected mutable reference `&mut Vec<i32>`\n              found mutable reference `&mut Vec<usize>`\nnote: function defined here\n  --> src/main.rs:49:4\n   |\n48 | fn union(x: i32, y: i32, parent: &mut Vec<i32>) {\n   |    ^^^^^                 ---------------------\nLine 30, Char 39: mismatched types (solution.rs)\n   |\n30 |         let mut group = find(nums[0], &parent);\n   |                         ----          ^^^^^^^ expected `&Vec<i32>`, found `&Vec<usize>`\n   |                         |\n   |                         arguments to this function are incorrect\n   |\n   = note: expected reference `&Vec<i32>`\n              found reference `&Vec<usize>`\nnote: function defined here\n  --> src/main.rs:42:4\n   |\n41 | fn find(x: i32, parent: &Vec<i32>) -> i32 {\n   |    ^^^^         -----------------\nLine 32, Char 26: mismatched types (solution.rs)\n   |\n32 |             if find(num, &parent) != group {\n   |                ----      ^^^^^^^ expected `&Vec<i32>`, found `&Vec<usize>`\n   |                |\n   |                arguments to this function are incorrect\n   |\n   = note: expected reference `&Vec<i32>`\n              found reference `&Vec<usize>`\nnote: function defined here\n  --> src/main.rs:42:4\n   |\n41 | fn find(x: i32, parent: &Vec<i32>) -> i32 {\n   |    ^^^^         -----------------\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to 3 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708506612549,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1181829751",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "use std::collections::HashSet;\n\nimpl Solution {\n    pub fn can_traverse_all_pairs(nums: Vec<i32>) -> bool {\n        let mut parent = vec![0; 100001];\n        for i in 0..100001 {\n            parent[i] = i;\n        }\n        \n        for &num in &nums {\n            let mut factors = vec![];\n            let mut x = num;\n            for i in 2..=((x as f64).sqrt() as i32 + 1) {\n                if x % i == 0 {\n                    factors.push(i);\n                    while x % i == 0 {\n                        x /= i;\n                    }\n                }\n            }\n            if x > 1 {\n                factors.push(x);\n            }\n            \n            for &factor in &factors {\n                union(num, factor, &mut parent);\n            }\n        }\n        \n        let mut group = find(nums[0], &parent);\n        for &num in &nums[1..] {\n            if find(num, &parent) != group {\n                return false;\n            }\n        }\n        \n        true\n    }\n}\n\nfn find(x: i32, parent: &Vec<i32>) -> i32 {\n    if parent[x as usize] != x {\n        parent[x as usize] = find(parent[x as usize], parent);\n    }\n    parent[x as usize]\n}\n\nfn union(x: i32, y: i32, parent: &mut Vec<i32>) {\n    let px = find(x, parent);\n    let py = find(y, parent);\n    if px != py {\n        parent[px as usize] = py;\n    }\n}"
+}

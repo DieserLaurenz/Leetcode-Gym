@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 13: Char 112: syntax error before: '::'",
+    "full_compile_error": "Line 13: Char 112: syntax error before: '::'\n%   13| -spec group_nodes(Edges :: [{integer(), integer()}], Groups :: map(), GroupNums :: map(), GroupId :: integer() :: map()) when is_map(Groups), is_map(GroupNums) -> map().\n%     |                                                                                                                ^\nLine 21: Char 54: syntax error before: ','\n%   21|                                             {ok, IdI}, {error, _} ->\n%     |                                                      ^\nLine 10: Char 14: function group_nodes/3 undefined\n%   10|     Groups = group_nodes(Edges, maps:new(), maps:new()),\n%     |              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708506919155,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181833463",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec gcd(Integer1 :: integer(), Integer2 :: integer()) -> integer().\ngcd(A, 0) -> A;\ngcd(A, B) -> gcd(B, A rem B).\n\n-spec can_traverse_all_pairs(Nums :: [integer()]) -> boolean().\ncan_traverse_all_pairs(Nums) ->\n    Edges = [{I, J} || I <- lists:seq(0, length(Nums) - 1),\n                      J <- lists:seq(0, length(Nums) - 1),\n                      I < J, gcd(lists:nth(I + 1, Nums), lists:nth(J + 1, Nums)) > 1],\n    Groups = group_nodes(Edges, maps:new(), maps:new()),\n    length(Groups) == 1.\n\n-spec group_nodes(Edges :: [{integer(), integer()}], Groups :: map(), GroupNums :: map(), GroupId :: integer() :: map()) when is_map(Groups), is_map(GroupNums) -> map().\ngroup_nodes([], Groups, _) -> Groups;\ngroup_nodes([{I, J} | T], Groups, GroupNums) ->\n    {GroupsUpdated, GroupNumsUpdated} = case {maps:find(I, GroupNums), maps:find(J, GroupNums)} of\n                                            {error, error} ->\n                                                NewGroupId = map_size(Groups) + 1,\n                                                {maps:update_with(NewGroupId, fun(L) -> lists:usort([I, J | L]) end, [I, J], Groups),\n                                                 maps:put(I, NewGroupId, maps:put(J, NewGroupId, GroupNums))};\n                                            {ok, IdI}, {error, _} ->\n                                                {maps:update_with(IdI, fun(L) -> lists:usort([J | L]) end, [J], Groups),\n                                                 maps:put(J, IdI, GroupNums)};\n                                            {error, _}, {ok, IdJ} ->\n                                                {maps:update_with(IdJ, fun(L) -> lists:usort([I | L]) end, [I], Groups),\n                                                 maps:put(I, IdJ, GroupNums)};\n                                            {ok, IdI}, {ok, IdJ} when IdI == IdJ ->\n                                                {Groups, GroupNums};\n                                            {ok, IdI}, {ok, IdJ} ->\n                                                GroupI = maps:get(IdI, Groups),\n                                                GroupJ = maps:get(IdJ, Groups),\n                                                NewGroup = lists:usort(GroupI ++ GroupJ),\n                                                GroupsTemp = maps:remove(IdJ, maps:put(IdI, NewGroup, Groups)),\n                                                GroupNumsTemp = lists:foldl(fun(E, Acc) -> maps:put(E, IdI, Acc) end, GroupNums, NewGroup),\n                                                {GroupsTemp, GroupNumsTemp}\n                                        end,\n    group_nodes(T, GroupsUpdated, GroupNumsUpdated)."
+}

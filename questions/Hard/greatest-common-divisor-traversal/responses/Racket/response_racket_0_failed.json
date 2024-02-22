@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 14: Char 7: if: bad syntax",
+    "full_compile_error": "Line 14: Char 7: if: bad syntax\n  in: (if (= i n) g (let loop-inner ((j 0)) (when (< j n) (when (and (not (= i j)) (connected? i j)) (vector-set! g i (cons j (vector-ref g i))) (vector-set! g j (cons i (vector-ref g j)))) (loop-inner (+ j 1)))) (loop g (+ i 1)))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:25:6",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708506682623,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1181830624",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (can-traverse-all-pairs nums)\n  (-> (listof exact-integer?) boolean?)\n  \n  (define (gcd a b)\n    (if (= b 0)\n        a\n        (gcd b (remainder a b))))\n  \n  (define (connected? i j)\n    (> (gcd (list-ref nums i) (list-ref nums j)) 1))\n  \n  (define (build-graph n)\n    (let loop ((g (make-vector n '())) (i 0))\n      (if (= i n)\n          g\n          (let loop-inner ((j 0))\n            (when (< j n)\n              (when (and (not (= i j)) (connected? i j))\n                (vector-set! g i (cons j (vector-ref g i)))\n                (vector-set! g j (cons i (vector-ref g j))))\n              (loop-inner (+ j 1))))\n          (loop g (+ i 1)))))\n  \n  (define (dfs graph visited node)\n    (when (not (vector-ref visited node))\n      (vector-set! visited node #t)\n      (for-each (lambda (n) (dfs graph visited n)) (vector-ref graph node))))\n  \n  (let* ((n (length nums))\n         (graph (build-graph n))\n         (visited (make-vector n #f)))\n    (dfs graph visited 0)\n    (for/and ([i (in-range n)])\n      (vector-ref visited i))))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 25: Char 64: illegal character",
+    "full_compile_error": "Line 25: Char 64: illegal character\n%   25| prefix_length([H|T], K, Seen, Length) when length(Seen) < K; H \u2208 Seen ->\n%     |                                                                ^\nLine 27: Char 69: illegal character\n%   27| prefix_length([H|_], K, Seen, Length) when length(Seen) == K, not H \u2208 Seen ->\n%     |                                                                     ^\nLine 27: Char 71: syntax error before: Seen\n%   27| prefix_length([H|_], K, Seen, Length) when length(Seen) == K, not H \u2208 Seen ->\n%     |                                                                       ^\nLine 9: Char 50: variable '_' is unbound\n%    9| find_max_partitions(_, _, _, _) when is_function(_, 0) -> 0; % Base case for recursion termination\n%     |                                                  ^\nLine 21: Char 20: function prefix_length/4 undefined\n%   21|     PrefixLength = prefix_length(S, K, [], 0),\n%     |                    ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3233",
+    "task_finish_time": 1708537000750,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1182228997",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_partitions_after_operations(S :: unicode:unicode_binary(), K :: integer()) -> integer().\nmax_partitions_after_operations(S, K) ->\n    String = unicode:characters_to_list(S),\n    MaxPartitions = fun MaxPartitions(S, K, Changed) ->\n        find_max_partitions(S, K, Changed, MaxPartitions)\n    end,\n    MaxPartitions(String, K, false).\n\nfind_max_partitions(_, _, _, _) when is_function(_, 0) -> 0; % Base case for recursion termination\nfind_max_partitions(S, K, Changed, MaxPartitionsFun) ->\n    CurrentPartitionCount = count_partitions(S, K, 0),\n    if\n        Changed -> CurrentPartitionCount;\n        true ->\n            MaxCountWithChange = lists:max([MaxPartitionsFun(change_char(S, I), K, true) || I <- lists:seq(1, length(S))]),\n            max(CurrentPartitionCount, MaxCountWithChange)\n    end.\n\ncount_partitions([], _, Count) -> Count;\ncount_partitions(S, K, Count) ->\n    PrefixLength = prefix_length(S, K, [], 0),\n    count_partitions(lists:nthtail(PrefixLength, S), K, Count + 1).\n\nprefix_length([], _, _, Length) -> Length;\nprefix_length([H|T], K, Seen, Length) when length(Seen) < K; H \u2208 Seen ->\n    prefix_length(T, K, lists:usort([H|Seen]), Length + 1);\nprefix_length([H|_], K, Seen, Length) when length(Seen) == K, not H \u2208 Seen ->\n    Length.\n\nchange_char(S, Pos) ->\n    [if I == Pos -> $a; true -> C end || {C, I} <- lists:zip(S, lists:seq(1, length(S)))].\n\nmax(A, B) when A >= B -> A;\nmax(_, B) -> B."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 22: Char 14: string-search: unbound identifier",
+    "full_compile_error": "Line 22: Char 14: string-search: unbound identifier\n  in: string-search\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:33:13",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2884",
+    "task_finish_time": 1708525009601,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182043994",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (longest-valid-substring word forbidden)\n  (-> string? (listof string?) exact-integer?)\n\n  (define (contains-forbidden? s)\n    (define (check-substring forbidden-sub)\n      (if (string-contains s forbidden-sub) #t #f))\n    (ormap check-substring forbidden))\n  \n  (define (longest-valid-length pos best)\n    (if (= pos (string-length word))\n        best\n        (let loop ((end (+ pos 1)) (current-best best))\n          (if (> end (string-length word))\n              current-best\n              (if (contains-forbidden? (substring word pos end))\n                  (longest-valid-length (+ pos 1) current-best)\n                  (loop (+ end 1) (max current-best (- end pos))))))))\n  \n  (longest-valid-length 0 0))\n\n(define (string-contains s sub)\n  (not (eq? (string-search sub s) #f)))"
+}

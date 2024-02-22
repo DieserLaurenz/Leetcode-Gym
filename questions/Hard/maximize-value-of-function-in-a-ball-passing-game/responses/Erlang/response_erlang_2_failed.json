@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 4: Char 45: syntax error before: '('",
+    "full_compile_error": "Line 4: Char 45: syntax error before: '('\n%    4|     Next = lists:map(fun(X) -> {X, Receiver#(X+1)} end, lists:seq(0, N-1)),\n%     |                                             ^\nLine 1: Char 2: spec for undefined function get_max_function_value/2\n%    1| -spec get_max_function_value(Receiver :: [integer()], K :: integer()) -> integer().\n%     |  ^\nLine 36: Char 13: function get_max_function_value/2 undefined\n%   36|       Ret = get_max_function_value(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3032",
+    "task_finish_time": 1708555853431,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1182444576",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec get_max_function_value(Receiver :: [integer()], K :: integer()) -> integer().\nget_max_function_value(Receiver, K) ->\n    N = length(Receiver),\n    Next = lists:map(fun(X) -> {X, Receiver#(X+1)} end, lists:seq(0, N-1)),\n    DP = lists:duplicate(N, undefined),\n    CalcFun = fun CalcFun(X, 0, _) -> X;\n                  CalcFun(X, K, DP) ->\n                      case lists:nth(X+1, DP) of\n                          undefined ->\n                              {_, NextX} = lists:keyfind(X, 1, Next),\n                              NewSum = CalcFun(NextX, K-1, DP) + X,\n                              DP2 = lists:sublist(DP, X) ++ [NewSum|lists:nthtail(X+1, DP)],\n                              NewSum;\n                          Sum -> Sum + X\n                      end\n              end,\n    MaxFun = lists:max([CalcFun(X, K-1, DP) || X <- lists:seq(0, N-1)]),\n    MaxFun."
+}

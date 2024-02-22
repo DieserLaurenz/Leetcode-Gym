@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 6: Char 13: for: bad sequence binding clause",
+    "full_compile_error": "Line 6: Char 13: for: bad sequence binding clause\n  at: (j (in-range i (inexact->exact (floor (- (sqrt (+ 8 (* 2 i))) 1.5)))) -1)\n  in: (for ((j (in-range i (inexact->exact (floor (- (sqrt (+ 8 (* 2 i))) 1.5)))) -1)) (vector-set! dp (+ j 1) (max (vector-ref dp (+ j 1)) (+ (list-ref nums i) (vector-ref dp j)))))\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:17:12",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3184",
+    "task_finish_time": 1708566730575,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182532573",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-balanced-subsequence-sum nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([dp (make-vector (+ (length nums) 1) -inf.0)])\n    (vector-set! dp 0 0)\n    (for ([i (in-range (length nums))])\n      (for ([j (in-range i (inexact->exact (floor (- (sqrt (+ 8 (* 2 i))) 1.5)))) -1])\n        (vector-set! dp (+ j 1)\n                     (max (vector-ref dp (+ j 1))\n                          (+ (list-ref nums i) (vector-ref dp j)))))\n      )\n    (let loop ([i (length nums)] [max-sum -inf.0])\n      (if (= i 0)\n          max-sum\n          (loop (- i 1) (max max-sum (vector-ref dp i))))))\n  )"
+}

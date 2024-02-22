@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 15: Char 36: illegal guard expression",
+    "full_compile_error": "Line 15: Char 36: illegal guard expression\n%   15| bfs(Queue, Visited, Graph, N) when sets:size(Visited) == N -> true;\n%     |                                    ^\nLine 22: Char 50: illegal guard expression\n%   22|                                               if sets:is_element(Neighbor, V) ->\n%     |                                                  ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708506845704,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1181832583",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec gcd(Integer1 :: integer(), Integer2 :: integer()) -> integer().\ngcd(A, 0) -> A;\ngcd(A, B) -> gcd(B, A rem B).\n\n-spec connected(Nodes :: [{integer(), integer()}], N :: integer()) -> boolean().\nconnected(Edges, N) ->\n  Graph = lists:foldl(fun({A, B}, Acc) ->\n                        maps:update_with(A, fun(L) -> [B|L] end, [B], Acc)\n                      end, #{}, Edges),\n  Visited = sets:from_list([lists:nth(1, Edges)]),\n  Queue = queue:from_list([lists:nth(1, Edges)]),\n  bfs(Queue, Visited, Graph, N).\n\n-spec bfs(Queue :: queue:queue(), Visited :: sets:set(), Graph :: map(), N :: integer()) -> boolean().\nbfs(Queue, Visited, Graph, N) when sets:size(Visited) == N -> true;\nbfs(Queue, Visited, Graph, N) ->\n  case queue:out(Queue) of\n    {{empty, _}, _} -> false;\n    {{value, Node}, RestQueue} ->\n      Neighbors = maps:get(Node, Graph, []),\n      {NewQueue, NewVisited} = lists:foldl(fun(Neighbor, {Q, V}) ->\n                                              if sets:is_element(Neighbor, V) ->\n                                                {Q, V};\n                                              true ->\n                                                {queue:in(Neighbor, Q), sets:add_element(Neighbor, V)}\n                                              end\n                                            end, {RestQueue, Visited}, Neighbors),\n      bfs(NewQueue, NewVisited, Graph, N)\n  end.\n\n-spec can_traverse_all_pairs(Nums :: [integer()]) -> boolean().\ncan_traverse_all_pairs(Nums) ->\n  N = length(Nums),\n  Indices = lists:seq(0, N - 1),\n  Pairs = [[I, J] || I <- Indices, J <- Indices, I < J, gcd(lists:nth(I + 1, Nums), lists:nth(J + 1, Nums)) > 1],\n  Edges = lists:map(fun([A, B]) -> {A + 1, B + 1} end, Pairs),\n  connected(Edges, N)."
+}

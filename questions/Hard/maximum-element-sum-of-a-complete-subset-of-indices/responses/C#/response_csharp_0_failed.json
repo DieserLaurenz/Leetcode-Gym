@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "csharp",
+    "run_success": false,
+    "compile_error": "Line 8: Char 44: error CS1656: Cannot assign to 'num' because it is a 'foreach iteration variable' (in Solution.cs)",
+    "full_compile_error": "Line 8: Char 44: error CS1656: Cannot assign to 'num' because it is a 'foreach iteration variable' (in Solution.cs)\nLine 10: Char 21: error CS1656: Cannot assign to 'num' because it is a 'foreach iteration variable' (in Solution.cs)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708587523739,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C#",
+    "submission_id": "1182800947",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "public class Solution {\n    public long MaximumSum(IList<int> nums) {\n        Dictionary<int, long> freq = new Dictionary<int, long>();\n        foreach (var num in nums) {\n            int mask = 0;\n            for (int i = 2; i * i <= num; i++) {\n                int count = 0;\n                while (num % (i * i) == 0) num /= i * i;\n                while (num % i == 0) {\n                    num /= i;\n                    count++;\n                }\n                if (count % 2 == 1) mask ^= 1 << (i % 30); // using 30 first primes\n            }\n            if (num > 1) mask ^= 1 << (num % 30);\n            if (freq.ContainsKey(mask)) freq[mask] += num;\n            else freq[mask] = num;\n        }\n        long maxSum = 0;\n        foreach (var sum in freq.Values) {\n            maxSum = Math.Max(maxSum, sum);\n        }\n        return maxSum;\n    }\n}"
+}

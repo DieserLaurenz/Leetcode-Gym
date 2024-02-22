@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 37: Char 1: ** (SyntaxError) unexpected reserved word: end\n    HINT: the \"end\" on line 30 may not have a matching \"do\" defined before it (based on indentation)\n    |\n 37 | end\n    | ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3233",
+    "task_finish_time": 1708537207510,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1182232634",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_partitions_after_operations(s :: String.t(), k :: integer()) :: integer()\n  def max_partitions_after_operations(s, k) do\n    1..String.length(s)\n    |> Enum.map(fn _ ->\n      Enum.map(?a..?z, fn c ->\n        partitions_after_optional_change(String.graphemes(s), c, k)\n      end)\n    end)\n    |> List.flatten()\n    |> Enum.max()\n  end\n\n  defp partitions_after_optional_change(graphemes, change_char, k) do\n    Enum.map(0..length(graphemes) - 1, fn i ->\n      changed = List.update_at(graphemes, i, fn _ -> change_char end)\n      count_partitions(changed, k, 0, %{})\n    end)\n    |> Enum.max()\n  end\n\n  defp count_partitions([], _k, count, _), do: count\n\n  defp count_partitions([h | t], k, count, chars) when map_size(chars) <= k do\n    if Map.has_key?(chars, h), do:\n      count_partitions(t, k, count, Map.update(chars, h, 1, &(&1 + 1)))\n    else\n      count_partitions(t, k, count, Map.put(chars, h, 1))\n    end\n  end\n\n  defp count_partitions(_rest, k, count, chars) when map_size(chars) > k, do: count + 1\n\n  defp count_partitions(rest, k, count, _chars) do\n    count_partitions(rest, k, count + 1, %{})\n  end\nend"
+}

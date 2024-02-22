@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"k\"",
+    "full_compile_error": "error: undefined variable \"k\"\nLine 20:   Solution.group_items_by_category/1\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2894",
+    "task_finish_time": 1708578330537,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1182668582",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec find_maximum_elegance(items :: [[integer]], k :: integer) :: integer\n  def find_maximum_elegance(items, k) do\n    with {:ok, grouped_items} <- group_items_by_category(items),\n         {:ok, sorted_items} <- sort_items_by_profit(grouped_items),\n         {:ok, selected_items} <- select_items(sorted_items, k) do\n      calculate_elegance(selected_items)\n    else\n      _ -> 0\n    end\n  end\n\n  defp group_items_by_category(items) do\n    items\n    |> Enum.group_by(fn [_, c] -> c end, fn [p, _] -> p end)\n    |> Enum.map(fn {_k, v} -> Enum.sort(v, &>=/2) end)\n    |> Enum.sort_by(&Enum.count(&1), :desc)\n    |> Enum.map(&Tuple.to_list/1)\n    |> Enum.concat()\n    |> Enum.take(k)\n    |> Enum.frequencies()\n    |> Map.to_list()\n    |> Enum.reduce([], fn {k, v}, acc -> acc ++ Enum.map(1..v, fn _ -> k end) end)\n    |> Enum.sort(&>=/2)\n    |> case do\n      [] -> {:error, :no_items}\n      grouped -> {:ok, grouped}\n    end\n  end\n\n  defp sort_items_by_profit(grouped_items) do\n    grouped_items\n    |> Enum.sort(&(&1 >= &2))\n    |> case do\n      [] -> {:error, :no_items_sorted}\n      sorted -> {:ok, sorted}\n    end\n  end\n\n  defp select_items(sorted_items, count) do\n    selected_items = Enum.take(sorted_items, count)\n    if Enum.count(selected_items) == count, do: {:ok, selected_items}, else: {:error, :not_enough_items}\n  end\n\n  defp calculate_elegance(selected_items) do\n    total_profit = Enum.sum(selected_items)\n    distinct_categories = Enum.count(selected_items)\n    total_profit + distinct_categories * distinct_categories\n  end\nend"
+}

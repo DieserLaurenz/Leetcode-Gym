@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 28, Char 35: the method `entry` exists for struct `HashMap<HashMap<i32, i32>, i64>`, but its trait bounds were not satisfied (solution.rs)",
+    "full_compile_error": "Line 28, Char 35: the method `entry` exists for struct `HashMap<HashMap<i32, i32>, i64>`, but its trait bounds were not satisfied (solution.rs)\n   |\n28 |             let sum = factor_sums.entry(square_factors).or_insert(0);\n   |                                   ^^^^^ method cannot be called on `HashMap<HashMap<i32, i32>, i64>` due to unsatisfied trait bounds\n  --> /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/std/src/collections/hash/map.rs:216:1\n   |\n   = note: doesn't satisfy `HashMap<i32, i32>: Hash`\n   |\n   = note: the following trait bounds were not satisfied:\n           `HashMap<i32, i32>: Hash`\nFor more information about this error, try `rustc --explain E0599`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708589135509,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1182820733",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "use std::collections::HashMap;\n\nimpl Solution {\n    pub fn maximum_sum(nums: Vec<i32>) -> i64 {\n        fn prime_factors(mut n: i32) -> HashMap<i32, i32> {\n            let mut factors = HashMap::new();\n            for i in 2..=n {\n                while n % i == 0 {\n                    *factors.entry(i).or_insert(0) += 1;\n                    n /= i;\n                }\n                if n == 1 {\n                    break;\n                }\n            }\n            factors\n        }\n\n        fn is_perfect_square(factors: &HashMap<i32, i32>) -> bool {\n            factors.values().all(|&v| v % 2 == 0)\n        }\n\n        let mut factor_sums: HashMap<HashMap<i32, i32>, i64> = HashMap::new();\n        for &num in &nums {\n            let factors = prime_factors(num);\n            let mut square_factors = factors.clone();\n            square_factors.retain(|_, &mut v| v % 2 != 0);\n            let sum = factor_sums.entry(square_factors).or_insert(0);\n            *sum += num as i64;\n        }\n\n        *factor_sums.values().max().unwrap_or(&0)\n    }\n}"
+}

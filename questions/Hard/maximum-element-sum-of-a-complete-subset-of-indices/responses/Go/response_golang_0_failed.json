@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 7: Char 19: syntax error: unexpected x at end of statement (solution.go)",
+    "full_compile_error": "Line 7: Char 19: syntax error: unexpected x at end of statement (solution.go)\nLine 18: Char 5: syntax error: non-declaration statement outside function body (solution.go)\nLine 19: Char 11: syntax error: unexpected := in parameter list; possibly missing comma or ) (solution.go)\nLine 23: Char 13: syntax error: non-declaration statement outside function body (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3047",
+    "task_finish_time": 1708588646160,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1182814902",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "import \"math\"\n\nfunc maximumSum(nums []int) int64 {\n    factorize := func(x int) map[int]int {\n        factors := make(map[int]int)\n        for i := 2; i*i <= x; i++ {\n            while x%i == 0 {\n                factors[i]++\n                x /= i\n            }\n        }\n        if x > 1 {\n            factors[x] = 1\n        }\n        return factors\n    }\n\n    mask := func(factors map[int]int) int {\n        m := 0\n        for factor, power := range factors {\n            if power%2 != 0 {\n                m |= 1 << uint(factor%30) // Use modulo 30 to reduce the size of the mask.\n            }\n        }\n        return m\n    }\n\n    maxSum := int64(0)\n    sums := make(map[int]int64)\n    for _, num := range nums {\n        m := mask(factorize(num))\n        sums[m] += int64(num)\n        if sums[m] > maxSum {\n            maxSum = sums[m]\n        }\n    }\n\n    // Check for zero mask (perfect squares)\n    if sums[0] > maxSum {\n        maxSum = sums[0]\n    }\n\n    return maxSum\n}"
+}

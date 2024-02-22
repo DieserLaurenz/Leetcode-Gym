@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 16: Char 53: read-syntax: missing `]` to close `[` on line 20, found instead `)`",
+    "full_compile_error": "Line 16: Char 53: read-syntax: missing `]` to close `[` on line 20, found instead `)`\n  possible cause: indentation suggests a missing `]` before line 10\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3233",
+    "task_finish_time": 1708536835934,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182226178",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-partitions-after-operations s k)\n  (-> string? exact-integer? exact-integer?)\n  (define (max-prefix-with-k-distinct s k)\n    (define (update-counts counts char delta)\n      (hash-update counts char (lambda (v) (+ v delta)) 0))\n    (define (valid-prefix? s k)\n      (let loop ((chars (make-hash)) (i 0) (distinct 0))\n        (cond [(= i (string-length s)) i]\n              [else\n               (let ((char (string-ref s i)))\n                 (when (= (hash-ref chars char 0) 0)\n                   (set! distinct (+ distinct 1)))\n                 (update-counts chars char 1)\n                 (if (> distinct k)\n                     i\n                     (loop chars (+ i 1) distinct))))]))\n    (let loop ((s s) (acc 0))\n      (if (string-empty? s)\n          acc\n          (let ((prefix-length (valid-prefix? s k)))\n            (loop (substring s prefix-length) (+ acc 1))))))\n  (define (try-change s k)\n    (let ((best (max-prefix-with-k-distinct s k)))\n      (for/fold ([best-score best]) ([i (in-range (string-length s))])\n        (for/fold ([score best-score]) ([c (in-range 97 123)])\n          (let* ((new-s (string-copy s))\n                 (new-char (integer->char c)))\n            (string-set! new-s i new-char)\n            (max score (max-prefix-with-k-distinct new-s k)))))))\n  (try-change s k))"
+}

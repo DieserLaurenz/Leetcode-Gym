@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 23: Char 32: illegal guard expression",
+    "full_compile_error": "Line 23: Char 32: illegal guard expression\n%   23|         length(Seen) == K, not lists:member(H, Seen) ->\n%     |                                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3233",
+    "task_finish_time": 1708537041348,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1182229719",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec max_partitions_after_operations(S :: unicode:unicode_binary(), K :: integer()) -> integer().\nmax_partitions_after_operations(S, K) ->\n    String = unicode:characters_to_list(S),\n    MaxPartitions = fun(MaxPartitions, Str, K, Changed) ->\n        case Changed of\n            true ->\n                lists:max([partition_count(change_char(Str, I, C), K) || I <- lists:seq(1, length(Str)), C <- lists:seq($a, $z)]) + 1;\n            false ->\n                partition_count(Str, K)\n        end\n    end,\n    OriginalCount = MaxPartitions(MaxPartitions, String, K, false),\n    WithChangeCount = MaxPartitions(MaxPartitions, String, K, true),\n    max(OriginalCount, WithChangeCount).\n\npartition_count(Str, K) ->\n    partition_count(Str, K, 0, []).\n\npartition_count([], _, Count, _) ->\n    Count;\npartition_count([H|T], K, Count, Seen) when length(Seen) =< K ->\n    if\n        length(Seen) == K, not lists:member(H, Seen) ->\n            partition_count(T, K, Count + 1, [H]);\n        true ->\n            partition_count(T, K, Count, lists:usort([H|Seen]))\n    end.\n\nchange_char(Str, Pos, Char) ->\n    Prefix = lists:sublist(Str, Pos - 1),\n    Suffix = lists:nthtail(Pos, Str),\n    Prefix ++ [Char] ++ Suffix."
+}

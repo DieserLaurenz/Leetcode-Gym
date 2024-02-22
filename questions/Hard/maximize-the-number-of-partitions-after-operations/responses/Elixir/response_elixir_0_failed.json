@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "** (ArgumentError) ranges (first..last//step) expect both sides to be integers, got: ~c\"a\"..~c\"z\"\n    (elixir 1.15.7) lib/kernel.ex:4056: Kernel.validate_range!/2\n    (elixir 1.15.7) expanding macro: Kernel.\"..\"/2\nLine 9:     Solution.do_max_partitions_after_operations/2\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 9:     Solution.do_max_partitions_after_operations/2\n    (elixir 1.15.7) expanding macro: Kernel.|>/2\nLine 10:     Solution.do_max_partitions_after_operations/2\n    (elixir 1.15.7) expanding macro: Kernel.|>/2",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3233",
+    "task_finish_time": 1708537117639,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1182231092",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec max_partitions_after_operations(s :: String.t(), k :: integer()) :: integer()\n  def max_partitions_after_operations(s, k) do\n    if k >= 26, do: 1, else: do_max_partitions_after_operations(s, k)\n  end\n\n  defp do_max_partitions_after_operations(s, k) do\n    1..String.length(s)\n    |> Enum.map(fn _ -> Enum.map('a'..'z', fn c -> try_change_and_count_partitions(s, c, k) end) end)\n    |> List.flatten()\n    |> Enum.max()\n  end\n\n  defp try_change_and_count_partitions(s, char, k) do\n    0..String.length(s)-1\n    |> Enum.map(fn i -> change_char_at(s, i, char) end)\n    |> Enum.map(&count_partitions(&1, k))\n    |> Enum.max()\n  end\n\n  defp change_char_at(s, i, char) do\n    String.slice(s, 0, i) <> to_string([char]) <> String.slice(s, i+1, String.length(s)-i-1)\n  end\n\n  defp count_partitions(s, k) do\n    count_partitions(s, k, 0)\n  end\n\n  defp count_partitions(\"\", _k, count), do: count\n\n  defp count_partitions(s, k, count) do\n    prefix = longest_prefix_with_k_distinct(s, k, \"\")\n    count_partitions(String.slice(s, String.length(prefix), String.length(s)), k, count + 1)\n  end\n\n  defp longest_prefix_with_k_distinct(\"\", _k, acc), do: acc\n\n  defp longest_prefix_with_k_distinct(s, k, acc) do\n    next_char = String.at(s, 0)\n    new_acc = acc <> to_string([next_char])\n    if MapSet.size(MapSet.new(String.to_charlist(new_acc))) > k, do: acc, else: longest_prefix_with_k_distinct(String.slice(s, 1, String.length(s)), k, new_acc)\n  end\nend"
+}

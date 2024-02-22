@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 23: Char 1: function find_max/7 already defined",
+    "full_compile_error": "Line 23: Char 1: function find_max/7 already defined\n%   23| find_max(Items, [], K, _, CurrentProfit, TotalCategories, MaxElegance) ->\n%     | ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2894",
+    "task_finish_time": 1708578196093,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1182666576",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec find_maximum_elegance(Items :: [[integer()]], K :: integer()) -> integer().\nfind_maximum_elegance(Items, K) ->\n    MaxProfit = lists:foldl(fun([P, _], Acc) -> P + Acc end, 0, Items),\n    Categories = lists:usort([C || [_, C] <- Items]),\n    find_max(Items, Categories, K, MaxProfit, 0, length(Categories), 0).\n\nfind_max(_, _, 0, _, _, _, Elegance) ->\n    Elegance;\nfind_max(Items, Categories, K, MaxProfit, CurrentProfit, TotalCategories, MaxElegance) when K > TotalCategories orelse CurrentProfit + MaxProfit < MaxElegance ->\n    MaxElegance;\nfind_max(Items, [Category | RestCategories], K, MaxProfit, CurrentProfit, TotalCategories, MaxElegance) ->\n    {Selected, Rest} = lists:partition(fun([_, C]) -> C == Category end, Items),\n    NewMaxProfit = MaxProfit - lists:foldl(fun([P, _], Acc) -> P + Acc end, 0, Selected),\n    EleganceWith = case Selected of\n        [] -> MaxElegance;\n        _ ->\n            BestProfit = find_best_profit(Selected, K, 0, 0),\n            Elegance = CurrentProfit + BestProfit + (TotalCategories - length(RestCategories)) * (TotalCategories - length(RestCategories)),\n            max(Elegance, MaxElegance)\n    end,\n    find_max(Rest, RestCategories, K, NewMaxProfit, CurrentProfit, TotalCategories - 1, EleganceWith).\n\nfind_max(Items, [], K, _, CurrentProfit, TotalCategories, MaxElegance) ->\n    EleganceWithout = CurrentProfit + TotalCategories * TotalCategories,\n    max(EleganceWithout, MaxElegance).\n\nfind_best_profit(_, 0, Profit, MaxProfit) ->\n    max(Profit, MaxProfit);\nfind_best_profit([], _, Profit, MaxProfit) ->\n    max(Profit, MaxProfit);\nfind_best_profit([[P, _] | T], K, CurrentProfit, MaxProfit) when K > 0 ->\n    find_best_profit(T, K - 1, CurrentProfit + P, MaxProfit);\nfind_best_profit([_ | T], K, CurrentProfit, MaxProfit) ->\n    find_best_profit(T, K, CurrentProfit, MaxProfit)."
+}

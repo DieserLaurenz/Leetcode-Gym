@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "golang",
+    "run_success": false,
+    "compile_error": "Line 17: Char 25: undefined: find (solution.go)",
+    "full_compile_error": "Line 17: Char 25: undefined: find (solution.go)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2827",
+    "task_finish_time": 1708506035152,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Go",
+    "submission_id": "1181822717",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "func gcd(a, b int) int {\n    for b != 0 {\n        a, b = b, a%b\n    }\n    return a\n}\n\nfunc canTraverseAllPairs(nums []int) bool {\n    n := len(nums)\n    parent := make([]int, n)\n    for i := range parent {\n        parent[i] = i\n    }\n\n    find := func(x int) int {\n        if parent[x] != x {\n            parent[x] = find(parent[x])\n        }\n        return parent[x]\n    }\n\n    union := func(x, y int) {\n        rootX := find(x)\n        rootY := find(y)\n        if rootX != rootY {\n            parent[rootX] = rootY\n        }\n    }\n\n    for i := 0; i < n; i++ {\n        for j := i + 1; j < n; j++ {\n            if gcd(nums[i], nums[j]) > 1 {\n                union(i, j)\n            }\n        }\n    }\n\n    root := find(0)\n    for i := 1; i < n; i++ {\n        if find(i) != root {\n            return false\n        }\n    }\n    return true\n}"
+}

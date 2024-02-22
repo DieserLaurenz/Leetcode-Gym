@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 30: error: not found: value current (in solution.scala)",
+    "full_compile_error": "Line 30: error: not found: value current (in solution.scala)\n            current = i\n            ^\nLine 32: error: value += is not a member of Long (in solution.scala)\n  Expression does not convert to assignment because:\n    not found: value current\n    expansion: sum = sum.+(<current: error>)\n                sum += current\n                    ^\nLine 33: error: not found: value current (in solution.scala)\n                current = next(current)\n                ^\nLine 35: error: value -= is not a member of Long (in solution.scala)\n  Expression does not convert to assignment because receiver is not assignable.\n                stepsToCycle -= 1\n                             ^\nLine 40: error: value += is not a member of Long (in solution.scala)\n  Expression does not convert to assignment because:\n    not found: value current\n    expansion: cycleSum = cycleSum.+(<current: error>)\n                cycleSum += current\n                         ^\nLine 41: error: not found: value current (in solution.scala)\n                current = next(current)\n                ^\nLine 48: error: value += is not a member of Long (in solution.scala)\n  Expression does not convert to assignment because:\n    not found: value current\n    expansion: sum = sum.+(<current: error>)\n                sum += current\n                    ^\nLine 49: error: not found: value current (in solution.scala)\n                current = next(current)\n                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3032",
+    "task_finish_time": 1708546622749,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1182364775",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def getMaxFunctionValue(receiver: List[Int], k: Long): Long = {\n        val n = receiver.length\n        val next = Array.ofDim[Int](n)\n        val count = Array.ofDim[Long](n)\n        var (maxValue, cycleSize, stepsToCycle) = (0L, 0L, 0L)\n\n        for (i <- receiver.indices) {\n            next(i) = receiver(i)\n        }\n\n        def findCycle(start: Int): (Long, Long) = {\n            val visited = Array.fill(n)(-1)\n            var current = start\n            var length = 0\n\n            while (visited(current) == -1) {\n                visited(current) = length\n                length += 1\n                current = next(current)\n            }\n\n            (length - visited(current), visited(current)) // Cycle length and steps to reach the cycle\n        }\n\n        for (i <- 0 until n) {\n            val (cycleLen, stepsToCycle) = findCycle(i)\n            var (sum, remainingSteps) = (0L, k)\n\n            current = i\n            while (remainingSteps > 0 && stepsToCycle > 0) {\n                sum += current\n                current = next(current)\n                remainingSteps -= 1\n                stepsToCycle -= 1\n            }\n\n            var cycleSum = 0L\n            for (_ <- 0 until cycleLen.toInt) {\n                cycleSum += current\n                current = next(current)\n            }\n\n            sum += (remainingSteps / cycleLen) * cycleSum\n            remainingSteps %= cycleLen\n\n            for (_ <- 0 until remainingSteps.toInt) {\n                sum += current\n                current = next(current)\n            }\n\n            maxValue = maxValue max sum\n        }\n\n        maxValue\n    }\n}"
+}

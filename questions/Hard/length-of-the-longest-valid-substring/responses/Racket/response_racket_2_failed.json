@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 5: Char 5: any: use of 'any' outside the range of an arrow contract",
+    "full_compile_error": "Line 5: Char 5: any: use of 'any' outside the range of an arrow contract\n  in: (any (lambda (f) (not (equal? (string-index substr f) #f))) forbidden)\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:16:4",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2884",
+    "task_finish_time": 1708525058271,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1182044683",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (longest-valid-substring word forbidden)\n  (-> string? (listof string?) exact-integer?)\n\n  (define (forbidden-in-substring? substr)\n    (any (lambda (f) (not (equal? (string-index substr f) #f))) forbidden))\n  \n  (define (max-length current-max start end)\n    (if (= start (string-length word))\n        current-max\n        (if (= end (string-length word))\n            (max-length current-max (+ start 1) (+ start 2))\n            (let ((substr (substring word start end)))\n              (if (forbidden-in-substring? substr)\n                  (max-length current-max (+ start 1) (+ start 2))\n                  (max-length (max current-max (- end start)) start (+ end 1)))))))\n  \n  (max-length 0 0 1))\n\n(define (string-index s sub)\n  (let loop ((i 0))\n    (if (> (+ i (string-length sub)) (string-length s))\n        #f\n        (if (string=? (substring s i (+ i (string-length sub))) sub)\n            i\n            (loop (+ i 1))))))"
+}
