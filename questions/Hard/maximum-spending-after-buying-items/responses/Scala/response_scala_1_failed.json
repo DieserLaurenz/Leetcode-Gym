@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 16: error: Unit does not take parameters (in solution.scala)",
+    "full_compile_error": "Line 16: error: Unit does not take parameters (in solution.scala)\n        scala.util.Sorting.quickSort(prices)(Ordering.Int.reverse)\n                                            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3107",
+    "task_finish_time": 1708618679892,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1183186141",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def maxSpending(values: Array[Array[Int]]): Long = {\n        val m = values.length\n        val n = values(0).length\n        val maxDays = m * n\n        val prices = new Array[Int](maxDays)\n        var index = 0\n\n        for (i <- values.indices) {\n            for (j <- values(i).indices) {\n                prices(index) = values(i)(j)\n                index += 1\n            }\n        }\n\n        scala.util.Sorting.quickSort(prices)(Ordering.Int.reverse)\n\n        var total: Long = 0\n        for (day <- 1 to maxDays) {\n            total += prices(day - 1).toLong * day\n        }\n\n        total\n    }\n}"
+}

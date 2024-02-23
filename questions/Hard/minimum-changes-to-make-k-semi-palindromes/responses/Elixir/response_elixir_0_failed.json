@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.",
+    "full_compile_error": "warning: missing parentheses for expression following \"do:\" keyword. Parentheses are required to solve ambiguity inside keywords.\nThis error happens when you have function calls without parentheses inside keywords. For example:\n    function(arg, one: nested_call a, b, c)\n    function(arg, one: if expr, do: :this, else: :that)\nIn the examples above, we don't know if the arguments \"b\" and \"c\" apply to the function \"function\" or \"nested_call\". Or if the keywords \"do\" and \"else\" apply to the function \"function\" or \"if\". You can solve this by explicitly adding parentheses:\n    function(arg, one: if(expr, do: :this, else: :that))\n    function(arg, one: nested_call(a, b, c))\nAmbiguity found at:\n  solution.ex:43\nwarning: variable \"dp\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 9:   Solution.minimum_changes/2\nwarning: variable \"ndp\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 19:   Solution.minimum_changes/2\nwarning: variable \"dp\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 23:   Solution.minimum_changes/2\nwarning: variable \"changes\" is unused (there is a variable with the same name in the context, use the pin operator (^) to match on it or prefix this variable with underscore if it is not meant to be used)\nLine 35:   Solution.calculate_changes/1\nwarning: function length/1 is unused\nLine 42:   Solution (module)\nwarning: function min/2 is unused\nLine 43:   Solution (module)\nerror: imported Kernel.min/2 conflicts with local function\nLine 43:   Solution (module)\nerror: imported Kernel.length/1 conflicts with local function\nLine 42:   Solution (module)\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2879",
+    "task_finish_time": 1708661237260,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1183636908",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_changes(s :: String.t, k :: integer) :: integer\n  def minimum_changes(s, k) do\n    dp = :array.new(fn -> :array.new(fn -> 1000 end, length(s) + 1) end, length(s) + 1)\n    dp = :array.set(dp, 0, :array.set(:array.new(length(s) + 1), 0, 0))\n\n    for i <- 1..String.length(s) do\n      for j <- i..String.length(s) do\n        dp = :array.set(dp, i, :array.set(:array.get(dp, i), j, calculate_changes(String.slice(s, i-1, j-i+1))))\n      end\n    end\n\n    for _i <- 1..k do\n      ndp = :array.new(fn -> 1000 end, length(s) + 1)\n      ndp = :array.set(ndp, 0, 0)\n\n      for j <- 1..String.length(s) do\n        for l <- 0..j-1 do\n          ndp = :array.set(ndp, j, min(:array.get(ndp, j), :array.get(ndp, l) + :array.get(:array.get(dp, l+1), j)))\n        end\n      end\n\n      dp = :array.new(fn -> ndp end, length(s) + 1)\n    end\n\n    :array.get(:array.get(dp, String.length(s)), String.length(s))\n  end\n\n  defp calculate_changes(substring) do\n    len = String.length(substring)\n    changes = 0\n\n    for i <- 0..div(len-1, 2) do\n      if String.at(substring, i) != String.at(substring, len-i-1) do\n        changes = changes + 1\n      end\n    end\n\n    changes\n  end\n\n  defp length(s), do: String.length(s)\n  defp min(a, b), do: if a < b, do: a, else: b\nend"
+}

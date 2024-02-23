@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 47: Char 107: syntax error before: '.'",
+    "full_compile_error": "Line 47: Char 107: syntax error before: '.'\n%   47|         error -> if Source == [] -> error; true -> find_min_operation(tl(Source), [T|TargetRest], Ops) end.\n%     |                                                                                                           ^\nLine 14: Char 10: function find_min_operation/3 undefined\n%   14|     case find_min_operation(Source, Target, Ops) of\n%     |          ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3238",
+    "task_finish_time": 1708672864700,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1183775231",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_cost(Source :: unicode:unicode_binary(), Target :: unicode:unicode_binary(), Original :: [unicode:unicode_binary()], Changed :: [unicode:unicode_binary()], Cost :: [integer()]) -> integer().\nminimum_cost(Source, Target, Original, Changed, Cost) ->\n    {SourceList, TargetList} = {binary_to_list(Source), binary_to_list(Target)},\n    Ops = lists:zip3(Original, Changed, Cost),\n    MinCost = find_min_cost(SourceList, TargetList, Ops, 0),\n    case MinCost of\n        infinity -> -1;\n        _ -> MinCost\n    end.\n\nfind_min_cost(_, [], _, Cost) ->\n    Cost;\nfind_min_cost(Source, Target, Ops, AccumulatedCost) ->\n    case find_min_operation(Source, Target, Ops) of\n        {ok, {Cost, SourceAfterOp, TargetAfterOp}} ->\n            find_min_cost(SourceAfterOp, TargetAfterOp, Ops, AccumulatedCost + Cost);\n        error ->\n            infinity\n    end.\n\nfind_min_operation(Source, [T|TargetRest], Ops) ->\n    MinOp = lists:foldl(\n        fun({Orig, Changed, Cost}, Acc) ->\n            OrigList = binary_to_list(Orig),\n            ChangedList = binary_to_list(Changed),\n            case {lists:prefix(OrigList, Source), lists:prefix(ChangedList, [T|TargetRest])} of\n                {true, true} ->\n                    SourceAfterOp = lists:nthtail(length(OrigList), Source),\n                    TargetAfterOp = lists:nthtail(length(ChangedList), [T|TargetRest]),\n                    case Acc of\n                        {ok, {AccCost, _, _}} when Cost < AccCost ->\n                            {ok, {Cost, SourceAfterOp, TargetAfterOp}};\n                        {ok, _} ->\n                            Acc;\n                        error ->\n                            {ok, {Cost, SourceAfterOp, TargetAfterOp}}\n                    end;\n                _ ->\n                    Acc\n            end\n        end,\n        error,\n        Ops\n    ),\n    case MinOp of\n        {ok, _} = Op -> Op;\n        error -> if Source == [] -> error; true -> find_min_operation(tl(Source), [T|TargetRest], Ops) end."
+}

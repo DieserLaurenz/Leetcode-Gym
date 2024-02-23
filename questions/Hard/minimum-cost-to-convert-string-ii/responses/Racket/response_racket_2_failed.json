@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 46\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3238",
+    "task_finish_time": 1708672678545,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1183773049",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-cost source target original changed cost)\n  (-> string? string? (listof string?) (listof string?) (listof exact-integer?) exact-integer?)\n  \n  (define (str->vector str)\n    (list->vector (string->list str)))\n  \n  (define source-v (str->vector source))\n  (define target-v (str->vector target))\n  \n  (define transformations\n    (map (lambda (o c cst) (cons (str->vector o) (cons (str->vector c) cst)))\n         original changed cost))\n  \n  (define (transformation-cost s t)\n    (let loop ([trans transformations] [min-cost +inf.0])\n      (if (null? trans) min-cost\n          (let ([tran (car trans)])\n            (let ([o (car tran)] [c (cadr tran)] [cst (cddr tran)])\n              (if (and (equal? s o) (equal? t c))\n                  (min min-cost cst)\n                  (loop (cdr trans) min-cost)))))))\n  \n  (define (dp i j memo)\n    (if (or (< i 0) (< j 0)) +inf.0\n        (if (= i 0)\n            (if (= j 0) 0 +inf.0)\n            (if (= j 0) +inf.0\n                (if (vector-ref memo i j) (vector-ref memo i j)\n                    (let ([cost-skip (dp (- i 1) j memo)])\n                      (let ([cost-trans\n                             (let loop ([k 1] [min-cost +inf.0])\n                               (if (> k i) min-cost\n                                   (let ([prev-cost (dp (- i k) (- j k) memo)])\n                                     (let ([tran-cost (transformation-cost (vector-copy source-v (- i k) i) (vector-copy target-v (- j k) j))])\n                                       (loop (+ k 1) (if (and (not (= tran-cost +inf.0)) (< (+ prev-cost tran-cost) min-cost))\n                                                         (+ prev-cost tran-cost)\n                                                         min-cost))))))])\n                        (let ([res (min cost-skip cost-trans)])\n                          (vector-set! memo i j res)\n                          res)))))))\n  \n  (let ([n (string-length source)] [m (string-length target)])\n    (let ([memo (make-vector n (make-vector m +inf.0))])\n      (let ([result (dp (- n 1) (- m 1) memo)])\n        (if (= result +inf.0) -1 result)))))"
+}

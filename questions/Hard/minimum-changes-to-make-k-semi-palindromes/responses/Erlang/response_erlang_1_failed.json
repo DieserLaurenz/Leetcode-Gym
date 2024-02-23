@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 23: Char 9: illegal guard expression",
+    "full_compile_error": "Line 23: Char 9: illegal guard expression\n%   23|         lists:nth(L, Str) == lists:nth(R, Str) ->\n%     |         ^\nLine 23: Char 30: illegal guard expression\n%   23|         lists:nth(L, Str) == lists:nth(R, Str) ->\n%     |                              ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2879",
+    "task_finish_time": 1708661139087,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1183635892",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_changes(S :: unicode:unicode_binary(), K :: integer()) -> integer().\nminimum_changes(S, K) ->\n    Str = unicode:characters_to_list(S),\n    {DP, _} = lists:foldl(fun(E, {Acc, Idx}) -> \n                            {[lists:update_nth(Idx, Acc, 0) | Acc], Idx + 1} \n                          end, \n                          {lists:duplicate(length(Str) + 1, infinity), 1}, \n                          lists:seq(1, K)),\n    lists:foldl(fun(_, Acc) -> lists:map(fun(Row) -> \n                                           [calculate_cost(Str, 1, length(Str), K, Row, 1) | Row] \n                                         end, Acc) \n                end, \n                DP, lists:seq(1, length(Str))).\n\ncalculate_cost(Str, L, R, K, DP, CurrK) when L > R; K < CurrK -> hd(DP);\ncalculate_cost(Str, L, R, K, [H|T], CurrK) ->\n    Min = lists:min([H + semi_palindrome_cost(Str, L, I - 1) || I <- lists:seq(L, R)]),\n    [Min | calculate_cost(Str, L + 1, R, K, T, CurrK + 1)].\n\nsemi_palindrome_cost(Str, L, R) when L >= R -> 0;\nsemi_palindrome_cost(Str, L, R) ->\n    if\n        lists:nth(L, Str) == lists:nth(R, Str) -> \n            semi_palindrome_cost(Str, L + 1, R - 1);\n        true -> \n            1 + semi_palindrome_cost(Str, L + 1, R - 1)\n    end."
+}

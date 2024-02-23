@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "c",
+    "run_success": false,
+    "compile_error": "Line 17: Char 81: error: \u2018compare\u2019 undeclared (first use in this function) [solution.c]",
+    "full_compile_error": "solution.c: In function \u2018maximumSumQueries\u2019\nLine 17: Char 81: error: \u2018compare\u2019 undeclared (first use in this function) [solution.c]\n   20 |     qsort(prefixMax, nums1Size, sizeof(int), (int (*)(const void*, const void*))compare);\n      |                                                                                 ^~~~~~~",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2839",
+    "task_finish_time": 1708639315190,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "C",
+    "submission_id": "1183460537",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "#include <stdlib.h>\n\n/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nint* maximumSumQueries(int* nums1, int nums1Size, int* nums2, int nums2Size, int** queries, int queriesSize, int* queriesColSize, int* returnSize) {\n    *returnSize = queriesSize;\n    int* result = (int*)malloc(sizeof(int) * queriesSize);\n    int* prefixMax = (int*)malloc(sizeof(int) * nums1Size);\n    \n    // Create an array to store the sum of nums1[i] and nums2[i]\n    for (int i = 0; i < nums1Size; i++) {\n        prefixMax[i] = nums1[i] + nums2[i];\n    }\n    \n    // Sort the sums in descending order\n    qsort(prefixMax, nums1Size, sizeof(int), (int (*)(const void*, const void*))compare);\n    \n    for (int i = 0; i < queriesSize; i++) {\n        int x = queries[i][0], y = queries[i][1];\n        int maxSum = -1;\n        for (int j = 0; j < nums1Size; j++) {\n            if (nums1[j] >= x && nums2[j] >= y && (nums1[j] + nums2[j]) > maxSum) {\n                maxSum = nums1[j] + nums2[j];\n            }\n        }\n        result[i] = maxSum;\n    }\n    \n    free(prefixMax);\n    \n    return result;\n}\n\nint compare(const int* a, const int* b) {\n    return *b - *a;\n}"
+}

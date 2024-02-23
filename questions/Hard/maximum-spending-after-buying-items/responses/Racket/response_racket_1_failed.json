@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 7: Char 19: map-indexed: unbound identifier",
+    "full_compile_error": "Line 7: Char 19: map-indexed: unbound identifier\n  in: map-indexed\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:18:18",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3107",
+    "task_finish_time": 1708618909971,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1183189739",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (max-spending values)\n  (-> (listof (listof exact-integer?)) exact-integer?)\n  (let* ((transpose (lambda (lst)\n                      (apply map list lst)))\n         (sorted-flat (sort (apply append (transpose values)) >))\n         (day-multiplier (lambda (idx) (+ 1 (quotient idx (length values)))))\n         (prices (map-indexed (lambda (idx val) (* val (day-multiplier idx))) sorted-flat)))\n    (apply + prices)))"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 25: Char 1: syntax error before: SemiPalindromeCost",
+    "full_compile_error": "Line 25: Char 1: syntax error before: SemiPalindromeCost\n%   25| SemiPalindromeCost(_, 0) -> 0;\n%     | ^\nLine 23: Char 5: variable 'SemiPalindromeCost' is unbound\n%   23|     SemiPalindromeCost(SubStr, (J - I) div 2).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2879",
+    "task_finish_time": 1708661107482,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1183635569",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_changes(S :: unicode:unicode_binary(), K :: integer()) -> integer().\nminimum_changes(S, K) ->\n    Str = unicode:characters_to_list(S),\n    Len = length(Str),\n    DP = lists:foldl(fun(_, Acc) -> [lists:duplicate(Len + 1, infinity) | Acc] end, [], lists:seq(0, K)),\n    DP1 = lists:keystore(1, 1, DP, 1, 1, lists:duplicate(Len + 1, 0)),\n    MinChanges = calculate_min_changes(Str, DP1, K, Len),\n    hd(hd(lists:nth(K + 1, MinChanges))).\n\ncalculate_min_changes(_, DP, 0, 0) -> DP;\ncalculate_min_changes(Str, DP, K, Len) when K >= 1, Len >= 1 ->\n    NewDP = lists:map(fun(KthList) -> calculate_kth(Str, DP, KthList, K, Len) end, lists:seq(1, K + 1)),\n    calculate_min_changes(Str, NewDP, K, Len - 1).\n\ncalculate_kth(_, _, KthList, _, Len) when Len < 1 -> KthList;\ncalculate_kth(Str, DP, KthList, K, Len) ->\n    Costs = [calculate_cost(Str, I, Len) + lists:nth(I + 1, hd(lists:nth(K, DP))) || I <- lists:seq(0, Len - 1)],\n    MinCost = lists:min(Costs),\n    lists:update_nth(Len + 1, fun(_) -> MinCost end, KthList).\n\ncalculate_cost(Str, I, J) ->\n    SubStr = lists:sublist(Str, I + 1, J - I),\n    SemiPalindromeCost(SubStr, (J - I) div 2).\n\nSemiPalindromeCost(_, 0) -> 0;\nSemiPalindromeCost(Str, Mid) ->\n    {Left, Right} = lists:split(Mid, Str),\n    RightRev = lists:reverse(Right),\n    lists:foldl(fun({L, R}, Acc) when L =/= R -> Acc + 1; (_, Acc) -> Acc end, 0, lists:zip(Left, RightRev))."
+}

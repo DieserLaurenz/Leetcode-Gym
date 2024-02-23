@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 14: Char 42: o: unbound identifier",
+    "full_compile_error": "Line 14: Char 42: o: unbound identifier\n  in: o\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:25:41",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3238",
+    "task_finish_time": 1708672589806,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1183772048",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-cost source target original changed cost)\n  (-> string? string? (listof string?) (listof string?) (listof exact-integer?) exact-integer?)\n  \n  (define (dp i j)\n    (cond\n      [(= i (string-length source)) (if (= j (string-length target)) 0 (add1 (expt 10 9)))]\n      [(= j (string-length target)) (add1 (expt 10 9))]\n      [(char=? (string-ref source i) (string-ref target j)) (dp (add1 i) (add1 j))]\n      [else\n       (let loop ([k 0] [min-cost (add1 (expt 10 9))])\n         (if (< k (length original))\n             (let ([o (list-ref original k)]\n                   [c (list-ref changed k)]\n                   [o-len (string-length o)])\n               (if (and (<= (+ i o-len) (string-length source))\n                        (string=? o (substring source i (+ i o-len)))\n                        (<= (+ j o-len) (string-length target))\n                        (string=? c (substring target j (+ j o-len))))\n                   (let ([new-cost (+ (list-ref cost k) (dp (+ i o-len) (+ j o-len)))])\n                     (loop (add1 k) (if (< new-cost min-cost) new-cost min-cost)))\n                   (loop (add1 k) min-cost)))\n             min-cost))]))\n\n  (let ([result (dp 0 0)])\n    (if (= result (add1 (expt 10 9))) -1 result)))"
+}

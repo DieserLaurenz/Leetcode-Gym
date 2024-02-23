@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 15\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2839",
+    "task_finish_time": 1708649667836,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1183538032",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (maximum-sum-queries nums1 nums2 queries)\n  (-> (listof exact-integer?) (listof exact-integer?) (listof (listof exact-integer?)) (listof exact-integer?))\n  (let ((combined (map (lambda (x y) (list x y (+ x y))) nums1 nums2)))\n    (map (lambda (q)\n           (let ((xi (car q))\n                 (yi (cadr q)))\n             (let loop ((rem combined) (max -1))\n               (if (null? rem)\n                   max\n                   (let ((curr (car rem)))\n                     (if (and (>= (car curr) xi) (>= (cadr curr) yi))\n                         (loop (cdr rem) (max max (caddr curr)))\n                         (loop (cdr rem) max))))))\n         queries)))"
+}

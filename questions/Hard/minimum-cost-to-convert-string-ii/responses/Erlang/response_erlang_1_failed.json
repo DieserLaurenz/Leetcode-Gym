@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 51: Char 18: syntax error before: '.'",
+    "full_compile_error": "Line 51: Char 18: syntax error before: '.'\n%   51|             error.\n%     |                  ^\nLine 39: Char 5: function replace_substring_helper/5 undefined\n%   39|     replace_substring_helper(SourceList, OrigList, ChangedList, Cost, TargetList).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3238",
+    "task_finish_time": 1708672816601,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1183774659",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec minimum_cost(Source :: unicode:unicode_binary(), Target :: unicode:unicode_binary(), Original :: [unicode:unicode_binary()], Changed :: [unicode:unicode_binary()], Cost :: [integer()]) -> integer().\nminimum_cost(Source, Target, Original, Changed, Cost) ->\n    Ops = lists:zip(Original, lists:zip(Changed, Cost)),\n    MinCost = find_min_cost(Source, Target, Ops, 0),\n    case MinCost of\n        infinity -> -1;\n        _ -> MinCost\n    end.\n\nfind_min_cost(Source, Target, Ops, AccumulatedCost) when Source == Target ->\n    AccumulatedCost;\nfind_min_cost(_, _, [], _) ->\n    infinity;\nfind_min_cost(Source, Target, Ops, AccumulatedCost) ->\n    MinOpCosts = lists:foldl(\n        fun({Orig, {Changed, Cost}}, Acc) ->\n            case replace_substring(Source, Orig, Changed, Cost, Target) of\n                {ok, NewSource, NewCost} ->\n                    [{NewSource, AccumulatedCost + NewCost} | Acc];\n                error ->\n                    Acc\n            end\n        end, [], Ops),\n    case MinOpCosts of\n        [] -> infinity;\n        _ ->\n            lists:foldl(\n                fun({NewSource, NewCost}, Acc) ->\n                    case find_min_cost(NewSource, Target, Ops, NewCost) of\n                        infinity -> Acc;\n                        Cost when Cost < Acc; Acc == infinity -> Cost;\n                        _ -> Acc\n                    end\n                end, infinity, MinOpCosts)\n    end.\n\nreplace_substring(Source, Orig, Changed, Cost, Target) ->\n    {SourceList, TargetList, OrigList, ChangedList} = {binary_to_list(Source), binary_to_list(Target), binary_to_list(Orig), binary_to_list(Changed)},\n    replace_substring_helper(SourceList, OrigList, ChangedList, Cost, TargetList).\n\nreplace_substring_helper(Source, Orig, Changed, Cost, Target) ->\n    case lists:prefix(Orig, Source) of\n        true ->\n            NewSource = Changed ++ lists:nthtail(length(Orig), Source),\n            if binary_to_list(list_to_binary(NewSource)) -- Target == [] ->\n                {ok, list_to_binary(NewSource), Cost};\n               true ->\n                error\n            end;\n        false ->\n            error."
+}

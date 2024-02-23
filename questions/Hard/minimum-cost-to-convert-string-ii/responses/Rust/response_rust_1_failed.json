@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 23, Char 28: mismatched types (solution.rs)",
+    "full_compile_error": "Line 23, Char 28: mismatched types (solution.rs)\n   |\n23 |                 for (o, c, &cost) in &subs {\n   |                            ^^^^^     ----- this is an iterator with items of type `&(&std::string::String, &std::string::String, i32)`\n   |                            |\n   |                            expected `i32`, found `&_`\n   |\n   = note:   expected type `i32`\n           found reference `&_`\nhelp: consider removing `&` from the pattern\n   |\n24 -                 for (o, c, &cost) in &subs {\n24 +                 for (o, c, cost) in &subs {\n   |\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3238",
+    "task_finish_time": 1708672474901,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1183770708",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn minimum_cost(source: String, target: String, original: Vec<String>, changed: Vec<String>, cost: Vec<i32>) -> i64 {\n        let n = source.len();\n        let mut dp = vec![vec![None; n + 1]; n + 1];\n        let mut subs = vec![];\n\n        for i in 0..original.len() {\n            subs.push((&original[i], &changed[i], cost[i]));\n        }\n\n        // Initialize DP for single characters\n        for i in 0..n {\n            dp[i][i + 1] = if source[i..i + 1] == target[i..i + 1] {\n                Some(0)\n            } else {\n                None\n            };\n        }\n\n        // Fill substitution costs\n        for i in 0..n {\n            for j in i + 1..=n {\n                for (o, c, &cost) in &subs {\n                    if i + o.len() <= n && &source[i..i + o.len()] == *o && i + c.len() <= j && &target[i..i + c.len()] == *c {\n                        let new_cost = cost as i64;\n                        if dp[i][i + o.len()].is_none() || dp[i][i + o.len()].unwrap() > new_cost {\n                            dp[i][i + o.len()] = Some(new_cost);\n                        }\n                    }\n                }\n            }\n        }\n\n        for len in 2..=n {\n            for i in 0..=n - len {\n                let j = i + len;\n                for k in i + 1..j {\n                    if let (Some(left), Some(right)) = (dp[i][k], dp[k][j]) {\n                        let new_cost = left + right;\n                        if dp[i][j].is_none() || dp[i][j].unwrap() > new_cost {\n                            dp[i][j] = Some(new_cost);\n                        }\n                    }\n                }\n            }\n        }\n\n        dp[0][n].unwrap_or(-1)\n    }\n}"
+}

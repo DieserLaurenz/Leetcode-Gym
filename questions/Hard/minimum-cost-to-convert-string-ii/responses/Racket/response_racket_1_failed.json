@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 29: Char 50: read-syntax: unexpected `)`",
+    "full_compile_error": "Line 29: Char 50: read-syntax: unexpected `)`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3238",
+    "task_finish_time": 1708672630180,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1183772502",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-cost source target original changed cost)\n  (-> string? string? (listof string?) (listof string?) (listof exact-integer?) exact-integer?)\n  \n  (define (make-change-map original changed cost)\n    (let loop ([i 0] [map '()])\n      (if (< i (length original))\n          (loop (add1 i) (cons (list (list-ref original i) (list-ref changed i) (list-ref cost i)) map))\n          map)))\n  \n  (define changes (make-change-map original changed cost))\n  \n  (define (find-min-cost s t)\n    (if (string=? s t) 0\n        (let loop ([i 0] [min-cost (add1 (expt 10 9))])\n          (if (< i (length changes))\n              (let* ([change (list-ref changes i)]\n                     [orig (first change)]\n                     [chg (second change)]\n                     [chg-cost (third change)]\n                     [pos (string-search orig s)])\n                (if (and pos (string=? (substring s 0 pos) (substring t 0 pos))\n                         (string=? (substring s (+ pos (string-length orig))) (substring t (+ pos (string-length chg))))))\n                    (let ([new-s (string-append (substring s 0 pos) chg (substring s (+ pos (string-length orig))))])\n                      (loop (add1 i) (min min-cost (+ chg-cost (find-min-cost new-s t)))))\n                    (loop (add1 i) min-cost)))\n              min-cost))))\n  \n  (let ([result (find-min-cost source target)])\n    (if (= result (add1 (expt 10 9))) -1 result)))"
+}
