@@ -292,6 +292,9 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
             cache[cache_key] = submission_response
             print("Answer saved to cache")
 
+        if lang_slug == "python":
+            lang_slug = "python2"
+
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
         save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         return True, "", ""
@@ -306,15 +309,18 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
                 cache[cache_key] = submission_response
                 print("Answer saved to cache")
 
+        if lang_slug == "python":
+            lang_slug = "python2"
+
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
         save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         return False, error_prompt, conversation_id
 
 
 def generate_prompt_content(question, snippet):
-    if snippet["lang"] == "python":
+    if snippet["lang"] == "Python":
         return (
-            f'Solve the specified problem within the provided python 2.7.12 function template, without declaring the '
+            f'Solve the specified problem within the provided Python 2.7.12 function template, without declaring the '
             f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
             f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
         )
