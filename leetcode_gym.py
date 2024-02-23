@@ -228,7 +228,7 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
     cache_path = 'snippet_cache.db'
 
     if lang == "Python":
-        lang = "Python 2"
+        lang = "Python2"
 
     lang_response_directory = os.path.join(response_directory, lang)
     problem_url = f"https://leetcode.com/problems/{title_slug}"
