@@ -410,7 +410,7 @@ def should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_p
             return True
 
     if check_cache(cache_path, question_id, lang_slug):
-        print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
+        print(f"Cache hit for {lang_response_directory} Skipping.")
         return True
     else:
         return False
