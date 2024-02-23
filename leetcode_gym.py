@@ -13,7 +13,6 @@ import leetcode_submitter
 
 SKIP_PYTHON = False
 
-
 def read_json_file(file_path):
     with open(file_path, 'r') as json_file:
         return json.load(json_file)
@@ -309,11 +308,18 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
 
 
 def generate_prompt_content(question, snippet):
-    return (
-        f'Solve the specified problem within the provided {snippet["lang"]} function template, without declaring the '
-        f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
-        f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
+    if snippet["lang"] == "python":
+        return (
+            f'Solve the specified problem within the provided python 2.7.12 function template, without declaring the '
+            f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
+            f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
         )
+    else:
+        return (
+            f'Solve the specified problem within the provided {snippet["lang"]} function template, without declaring the '
+            f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
+            f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
+            )
 
 
 def extract_info_and_generate_prompt(response):

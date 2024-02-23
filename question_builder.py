@@ -28,11 +28,18 @@ def process_subfolder(base_path, subfolder):
     write_to_file(url_content, os.path.join(subfolder_path, f"{title_slug}.url"))
 
     for snippet in question["codeSnippets"]:
-        prompt_content = (
-            f'Solve the specified problem within the provided {snippet["lang"]} function template, without declaring the '
-            f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
-            f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
-        )
+        if snippet["lang"] == "python":
+            prompt_content =  (
+                f'Solve the specified problem within the provided python 2.7.12 function template, without declaring the '
+                f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
+                f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
+            )
+        else:
+            prompt_content = (
+                f'Solve the specified problem within the provided {snippet["lang"]} function template, without declaring the '
+                f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
+                f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
+            )
         write_to_file(prompt_content, os.path.join(prompt_directory, f'{snippet["lang"]}.txt'))
 
 
