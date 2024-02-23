@@ -11,6 +11,8 @@ import chatgpt_selenium_automation
 import chatgptapi_new
 import leetcode_submitter
 
+SKIP_PYTHON = False
+
 
 def read_json_file(file_path):
     with open(file_path, 'r') as json_file:
@@ -386,9 +388,10 @@ def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
             print("Copied error prompt to clipboard")
 
 def should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_path, title_slug):
-    if lang_slug in ('python', 'python3'):
-        print(f"Python. Skipping.")
-        return True
+    if SKIP_PYTHON:
+        if lang_slug in ('python', 'python3'):
+            print(f"Python. Skipping.")
+            return True
 
     if check_cache(cache_path, question_id, lang_slug):
         print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
