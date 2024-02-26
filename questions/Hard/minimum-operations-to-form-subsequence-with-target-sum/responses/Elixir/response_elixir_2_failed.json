@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "warning: variable \"target\" is unused (if the variable is not meant to be used, prefix it with an underscore)",
+    "full_compile_error": "warning: variable \"target\" is unused (if the variable is not meant to be used, prefix it with an underscore)\nLine 33:   Solution.result_to_integer/3\nerror: undefined function while/2 (expected Solution to define such a function or for it to be imported, but none are available)\nLine 13:   Solution.min_operations/2\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3025",
+    "task_finish_time": 1708912383690,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1186276777",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations(nums :: [integer], target :: integer) :: integer\n  def min_operations(nums, target) do\n    nums\n    |> Enum.sort(:desc)\n    |> Enum.reduce_while({0, target}, fn num, {ops, remaining} ->\n      if remaining >= num do\n        {:cont, {ops, remaining - num}}\n      else\n        new_num = num\n        ops_acc = ops\n\n        while new_num > remaining and new_num > 1 do\n          new_num = div(new_num, 2)\n          ops_acc = ops_acc + 1\n        end\n\n        if new_num <= remaining do\n          {:cont, {ops_acc, remaining - new_num}}\n        else\n          {:halt, {ops, remaining}}\n        end\n      end\n    end)\n    |> case do\n      {_, 0} -> :ok\n      _ -> :error\n    end\n    |> result_to_integer(nums, target)\n  end\n\n  defp result_to_integer(:ok, _, _), do: 0\n  defp result_to_integer(:error, nums, target) do\n    nums\n    |> Enum.map(&(&1 |> Math.log2() |> trunc()))\n    |> Enum.sum()\n    |> (&(&1 + 1)).()\n  end\nend"
+}

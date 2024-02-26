@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 18: Char 55: ** (SyntaxError) syntax error before: 'div'\n    |\n 18 |         new_sum = sum - k * div(v, 2) + k * div(v, 2) div 2\n    |                                                       ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3025",
+    "task_finish_time": 1708912350053,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1186276484",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec min_operations(nums :: [integer], target :: integer) :: integer\n  def min_operations(nums, target) do\n    nums\n    |> Enum.reduce(%{sum: 0, count: 0, freq: Map.new}, fn x, acc ->\n      sum = acc.sum + x\n      freq = Map.update(acc.freq, x, 1, &(&1 + 1))\n      %{acc | sum: sum, freq: freq}\n    end)\n    |> find_min_operations(target)\n  end\n\n  defp find_min_operations(%{sum: sum, count: count, freq: freq} = acc, target) when sum < target, do: -1\n  defp find_min_operations(%{sum: sum, count: count, freq: freq}, target) when sum == target, do: count\n  defp find_min_operations(%{sum: sum, count: count, freq: freq} = acc, target) do\n    Enum.reduce_while(freq, acc, fn\n      {k, v}, %{sum: sum, count: cnt} when sum >= target ->\n        new_sum = sum - k * div(v, 2) + k * div(v, 2) div 2\n        if new_sum >= target do\n          {:cont, %{sum: new_sum, count: cnt + div(v, 2), freq: update_freq(freq, k)}}\n        else\n          {:halt, cnt + div(v, 2)}\n        end\n      _, acc ->\n        {:cont, acc}\n    end)\n    |> case do\n      %{count: final_count} -> final_count\n      count when is_integer(count) -> count\n    end\n  end\n\n  defp update_freq(freq, k) do\n    freq\n    |> Map.update(k, 0, &(&1 - div(&1, 2)))\n    |> Map.update(k div 2, 0, &(&1 + div(freq[k], 2) * 2))\n  end\nend"
+}

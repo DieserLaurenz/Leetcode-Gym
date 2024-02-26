@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 25: Char 3: begin (possibly implicit): the last form is not an expression",
+    "full_compile_error": "Line 25: Char 3: begin (possibly implicit): the last form is not an expression\n  at: (define (map-indexed f lst) (let loop ((lst lst) (i 0) (acc (quote ()))) (if (empty? lst) (reverse acc) (loop (rest lst) (+ i 1) (cons (f i (first lst)) acc)))))\n  in: (begin (let ((n (length nums1))) (let loop ((i 0) (time 0) (total (apply + nums1))) (if (<= total x) time (let* ((efficiency (map (lambda (j) (if (= (list-ref nums2 j) 0) 0 (/ (+ (list-ref nums1 j) (* time (list-ref nums2 j))) (list-ref nums2 j)))) (ran...\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:36:2",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2952",
+    "task_finish_time": 1708923678966,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1186392208",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (minimum-time nums1 nums2 x)\n  (-> (listof exact-integer?) (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([n (length nums1)])\n    (let loop ([i 0] [time 0] [total (apply + nums1)])\n      (if (<= total x) time\n          (let* ([efficiency (map (lambda (j) (if (= (list-ref nums2 j) 0) \n                                                  0 \n                                                  (/ (+ (list-ref nums1 j) (* time (list-ref nums2 j))) \n                                                     (list-ref nums2 j))))\n                                  (range n))]\n                 [max-index (argmax efficiency (range n))]\n                 [updated-nums1 (map-indexed (lambda (j val) \n                                               (if (= j max-index) \n                                                   0 \n                                                   (+ val (list-ref nums2 j))))\n                                             nums1)])\n            (if (and max-index (< (list-ref efficiency max-index) 1))\n                -1\n                (loop i (+ time 1) (apply + updated-nums1)))))))\n  (define (argmax f lst)\n    (let loop ([lst lst] [max-val (f (first lst))] [max-ind (first lst)])\n      (cond [(empty? lst) max-ind]\n            [(> (f (first lst)) max-val) (loop (rest lst) (f (first lst)) (first lst))]\n            [else (loop (rest lst) max-val max-ind)])))\n  (define (map-indexed f lst)\n    (let loop ([lst lst] [i 0] [acc '()])\n      (if (empty? lst)\n          (reverse acc)\n          (loop (rest lst) (+ i 1) (cons (f i (first lst)) acc))))))"
+}

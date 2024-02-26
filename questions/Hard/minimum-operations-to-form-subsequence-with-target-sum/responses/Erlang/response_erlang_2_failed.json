@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 34: Char 16: syntax error before: '.'",
+    "full_compile_error": "Line 34: Char 16: syntax error before: '.'\n%   34|             end.\n%     |                ^\nLine 4: Char 5: function min_operations/3 undefined\n%    4|     min_operations(Counts, Target, 0).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3025",
+    "task_finish_time": 1708912241693,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1186275612",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec min_operations(Nums :: [integer()], Target :: integer()) -> integer().\nmin_operations(Nums, Target) ->\n    Counts = lists:foldl(fun(X, Acc) -> maps:update_with(X, fun(V) -> V + 1 end, 1, Acc) end, #{}, Nums),\n    min_operations(Counts, Target, 0).\n\nmin_operations(_, 0, Ops) ->\n    Ops;\nmin_operations(Counts, Target, Ops) when Target rem 2 == 1 ->\n    case maps:find(1, Counts) of\n        {ok, C} when C > 0 ->\n            min_operations(maps:update(1, C - 1, Counts), Target - 1, Ops);\n        _ ->\n            -1\n    end;\nmin_operations(Counts, Target, Ops) ->\n    Power = trunc(math:log2(Target)),\n    case maps:find(1 bsl Power, Counts) of\n        {ok, C} when C > 0 ->\n            min_operations(maps:update(1 bsl Power, C - 1, Counts), Target - (1 bsl Power), Ops);\n        _ ->\n            NextTarget = Target bsr 1,\n            NewCounts = case maps:find(1 bsl (Power + 1), Counts) of\n                {ok, C} when C > 0 ->\n                    Counts1 = maps:update(1 bsl (Power + 1), C - 1, Counts),\n                    maps:update_with(1 bsl Power, fun(V) -> V + 2 end, 2, Counts1);\n                _ ->\n                    Counts\n            end,\n            if\n                NewCounts == Counts ->\n                    -1;\n                true ->\n                    min_operations(NewCounts, NextTarget, Ops + 1)\n            end."
+}

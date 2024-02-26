@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 12, Char 88: mismatched types (solution.rs)",
+    "full_compile_error": "Line 12, Char 88: mismatched types (solution.rs)\n   |\n12 |             times.push(((nums1[i] as i64) - (nums1[i] as i64 + nums2[i] as i64 * ((x / nums1.iter().sum::<i32>()) as i64)), i));\n   |                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^ expected `i64`, found `i32`\nLine 12, Char 86: cannot divide `i64` by `i32` (solution.rs)\n   |\n12 |             times.push(((nums1[i] as i64) - (nums1[i] as i64 + nums2[i] as i64 * ((x / nums1.iter().sum::<i32>()) as i64)), i));\n   |                                                                                      ^ no implementation for `i64 / i32`\n   |\n   = help: the trait `Div<i32>` is not implemented for `i64`\n   = help: the following other types implement trait `Div<Rhs>`:\n             <i64 as Div>\n             <i64 as Div<&i64>>\n             <&'a i64 as Div<i64>>\n             <&i64 as Div<&i64>>\nLine 20, Char 24: mismatched types (solution.rs)\n   |\n20 |                 return time;\n   |                        ^^^^ expected `i32`, found `i64`\n   |\nhelp: you can convert an `i64` to an `i32` and panic if the converted value doesn't fit\n   |\n20 |                 return time.try_into().unwrap();\n   |                            ++++++++++++++++++++\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to 3 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2952",
+    "task_finish_time": 1708923507861,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1186390055",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn minimum_time(nums1: Vec<i32>, nums2: Vec<i32>, x: i32) -> i32 {\n        let mut times = vec![];\n        let mut total_sum: i64 = nums1.iter().map(|&x| x as i64).sum();\n        let x = x as i64;\n\n        if total_sum <= x {\n            return 0;\n        }\n\n        for i in 0..nums1.len() {\n            times.push(((nums1[i] as i64) - (nums1[i] as i64 + nums2[i] as i64 * ((x / nums1.iter().sum::<i32>()) as i64)), i));\n        }\n\n        times.sort_unstable();\n        let mut time = 1;\n        for (_, i) in times {\n            total_sum -= nums1[i] as i64 + nums2[i] as i64 * (time - 1);\n            if total_sum <= x {\n                return time;\n            }\n            time += 1;\n        }\n\n        -1\n    }\n}"
+}

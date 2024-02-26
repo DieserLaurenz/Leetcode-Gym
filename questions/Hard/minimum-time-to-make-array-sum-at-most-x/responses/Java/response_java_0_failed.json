@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "java",
+    "run_success": false,
+    "compile_error": "Line 10: error: array required, but List<Integer> found",
+    "full_compile_error": "Line 10: error: array required, but List<Integer> found\n            diff[i] = nums1[i] - nums2[i];\n                           ^\nLine 10: error: array required, but List<Integer> found\n            diff[i] = nums1[i] - nums2[i];\n                                      ^\nLine 11: error: array required, but List<Integer> found\n            total += nums1[i];\n                          ^\n3 errors",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2952",
+    "task_finish_time": 1708912565846,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Java",
+    "submission_id": "1186278340",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "import java.util.Collections;\nimport java.util.List;\n\nclass Solution {\n    public int minimumTime(List<Integer> nums1, List<Integer> nums2, int x) {\n        int n = nums1.size();\n        Integer[] diff = new Integer[n];\n        long total = 0, sum = 0;\n        for (int i = 0; i < n; i++) {\n            diff[i] = nums1[i] - nums2[i];\n            total += nums1[i];\n        }\n        if (total <= x) return 0;\n        Arrays.sort(diff, Collections.reverseOrder());\n        for (int i = 0; i < n; i++) {\n            sum += diff[i];\n            if (total - sum <= x) return i + 1;\n        }\n        return -1;\n    }\n}"
+}

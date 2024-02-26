@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 20\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3025",
+    "task_finish_time": 1708912075316,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1186274204",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (min-operations nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  (let ([freq (make-hash)])\n    (for-each (lambda (num) (hash-update! freq num add1 0)) nums)\n    (let loop ([target target] [ops 0])\n      (cond [(= target 0) ops]\n            [(zero? target) ops]\n            [else\n             (let* ([power (inexact->exact (floor (log target 2)))]\n                    [val (expt 2 power)])\n               (if (>= (hash-ref freq val 0) 1)\n                   (begin\n                     (hash-update! freq val sub1)\n                     (loop (- target val) ops))\n                   (if (zero? val) -1\n                       (begin\n                         (hash-update! freq val add1 0)\n                         (hash-update! freq (/ val 2) add1 2)\n                         (loop target (+ ops 1))))))])))"
+}

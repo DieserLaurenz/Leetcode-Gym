@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 15, Char 28: mismatched types (solution.rs)",
+    "full_compile_error": "Line 15, Char 28: mismatched types (solution.rs)\n   |\n15 |                     sum -= val;\n   |                            ^^^ expected `i64`, found `i32`\nLine 16, Char 38: type `i32` cannot be dereferenced (solution.rs)\n   |\n16 |                     heap.push((gain, *gain));\n   |                                      ^^^^^\nLine 15, Char 25: cannot subtract-assign `i32` from `i64` (solution.rs)\n   |\n15 |                     sum -= val;\n   |                         ^^ no implementation for `i64 -= i32`\n   |\n   = help: the trait `SubAssign<i32>` is not implemented for `i64`\n   = help: the following other types implement trait `SubAssign<Rhs>`:\n             <i64 as SubAssign>\n             <i64 as SubAssign<&i64>>\nSome errors have detailed explanations: E0277, E0308, E0614.\nFor more information about an error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to 3 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2952",
+    "task_finish_time": 1708923476097,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1186389664",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn minimum_time(nums1: Vec<i32>, nums2: Vec<i32>, x: i32) -> i32 {\n        let mut heap = std::collections::BinaryHeap::new();\n        let mut sum: i64 = nums1.iter().map(|&n| n as i64).sum();\n        let x = x as i64;\n\n        for (n1, n2) in nums1.iter().zip(nums2.iter()) {\n            heap.push((n2 - n1, n1 + n2));\n        }\n\n        let mut time = 0;\n        while sum > x {\n            match heap.pop() {\n                Some((gain, val)) => {\n                    sum -= val;\n                    heap.push((gain, *gain));\n                    time += 1;\n                }\n                None => return -1,\n            }\n            if sum <= x {\n                return time;\n            }\n        }\n\n        -1\n    }\n}"
+}

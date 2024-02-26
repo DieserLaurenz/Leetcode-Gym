@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: misplaced operator ->",
+    "full_compile_error": "error: misplaced operator ->\nThis typically means invalid syntax or a macro is not available in scope\nLine 6:   Solution.minimum_time/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)\nLine 3:     (module)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2952",
+    "task_finish_time": 1708923901340,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1186394924",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec minimum_time(nums1 :: [integer], nums2 :: [integer], x :: integer) :: integer\n  def minimum_time(nums1, nums2, x) do\n    with {:ok, time} <- try_reduce(nums1, nums2, x, 0),\n      do: time,\n      else: _ -> -1\n  end\n\n  defp try_reduce(nums1, nums2, x, time),\n    do: try_reduce(nums1, nums2, x, time, Enum.zip(nums1, nums2), 0)\n\n  defp try_reduce(_, _, x, time, _, sum) when sum > x, do: {:error, time}\n  defp try_reduce(_, _, x, _, _, sum) when sum <= x, do: {:ok, 0}\n  defp try_reduce(nums1, nums2, x, time, [], sum), do: try_reduce(nums1, nums2, x, time + 1)\n  defp try_reduce(nums1, nums2, x, time, [head | tail], sum) do\n    {n1, n2} = head\n    new_sum = sum + n1 + (n2 * time)\n    if new_sum <= x do\n      try_reduce(nums1, nums2, x, time, tail, new_sum)\n    else\n      try_reduce(nums1, nums2, x, time + 1)\n    end\n  end\nend"
+}
