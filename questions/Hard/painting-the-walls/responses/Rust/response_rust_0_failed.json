@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 4, Char 33: mismatched types (solution.rs)",
+    "full_compile_error": "Line 4, Char 33: mismatched types (solution.rs)\n  |\n4 |         walls.sort_by_key(|&(_, &(_, t))| t);\n  |                            -----^^^^^^^-\n  |                            |    |\n  |                            |    expected `(&i32, &i32)`, found `&_`\n  |                            expected due to this\n  |\n  = note:  expected tuple `(&i32, &i32)`\n          found reference `&_`\nLine 10, Char 17: mismatched types (solution.rs)\n   |\n10 |         for (i, &(c, t)) in walls.iter() {\n   |                 ^^^^^^^     ------------ this is an iterator with items of type `&(usize, (&i32, &i32))`\n   |                 |\n   |                 expected `(&i32, &i32)`, found `&_`\n   |\n   = note:  expected tuple `(&i32, &i32)`\n           found reference `&_`\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to 2 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2808",
+    "task_finish_time": 1708954858510,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1186755320",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn paint_walls(cost: Vec<i32>, time: Vec<i32>) -> i32 {\n        let mut walls = cost.iter().zip(time.iter()).enumerate().collect::<Vec<_>>();\n        walls.sort_by_key(|&(_, &(_, t))| t);\n        \n        let mut total_cost = 0;\n        let mut total_time = 0;\n        let mut painted_by_paid = 0;\n        \n        for (i, &(c, t)) in walls.iter() {\n            if painted_by_paid < *t {\n                total_cost += c;\n                painted_by_paid += 1;\n            }\n            total_time = total_time.max(*t);\n        }\n        \n        total_cost\n    }\n}"
+}

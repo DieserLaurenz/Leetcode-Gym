@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 5: Char 27: ** (SyntaxError) syntax error before: 'rem'\n    |\n  5 |     |> Stream.filter(&(&1 rem k == 0))\n    |                           ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3017",
+    "task_finish_time": 1708943512987,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1186628453",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec number_of_beautiful_integers(low :: integer, high :: integer, k :: integer) :: integer\n  def number_of_beautiful_integers(low, high, k) do\n    (low..high)\n    |> Stream.filter(&(&1 rem k == 0))\n    |> Stream.filter(&even_odd_equal?(Integer.digits(&1)))\n    |> Enum.count()\n  end\n\n  defp even_odd_equal?(digits) do\n    counts = Enum.frequencies_by(digits, &rem(&1, 2))\n    Map.get(counts, 0, 0) == Map.get(counts, 1, 0)\n  end\nend"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 17: Char 51: syntax error before: '|'",
+    "full_compile_error": "Line 17: Char 51: syntax error before: '|'\n%   17|                 end, {hd(Sorted), 0}, tl(Sorted)) |> element(2).\n%     |                                                   ^\nLine 6: Char 38: function imbalance_window/2 undefined\n%    6|     lists:foldl(fun(_, Acc) -> Acc + imbalance_window(Size, Nums) end, 0, lists:seq(1, length(Nums) - Size + 1)),\n%     |                                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2849",
+    "task_finish_time": 1709017424757,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1187474072",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec sum_imbalance_numbers(Nums :: [integer()]) -> integer().\nsum_imbalance_numbers(Nums) ->\n    lists:foldl(fun(X, Acc) -> Acc + count_imbalance(X, Nums) end, 0, lists:seq(1, length(Nums))).\n\ncount_imbalance(Size, Nums) ->\n    lists:foldl(fun(_, Acc) -> Acc + imbalance_window(Size, Nums) end, 0, lists:seq(1, length(Nums) - Size + 1)),\n    lists:sublist(Nums, Size + 1, length(Nums) - Size).\n\nimbalance_window(Size, Nums) ->\n    {Sublist, _Rest} = lists:split(Size, Nums),\n    Sorted = lists:usort(Sublist),\n    lists:foldl(fun(X, {Prev, Count}) -> \n                    if \n                        X - Prev > 1 -> {X, Count + 1}; \n                        true -> {X, Count} \n                    end \n                end, {hd(Sorted), 0}, tl(Sorted)) |> element(2)."
+}

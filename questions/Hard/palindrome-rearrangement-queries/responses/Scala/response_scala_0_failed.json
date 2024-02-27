@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "scala",
+    "run_success": false,
+    "compile_error": "Line 24: error: value min is not a member of Boolean (in solution.scala)",
+    "full_compile_error": "Line 24: error: value min is not a member of Boolean (in solution.scala)\n            mismatches / 2 <= (bi - ai + 1) min (di - ci + 1)\n                                            ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3203",
+    "task_finish_time": 1708974734443,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Scala",
+    "submission_id": "1187043624",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "object Solution {\n    def canMakePalindromeQueries(s: String, queries: Array[Array[Int]]): Array[Boolean] = {\n        val n = s.length\n        val prefixCount = Array.ofDim[Int](n + 1, 26)\n        \n        for (i <- 0 until n) {\n            for (j <- 0 until 26) {\n                prefixCount(i + 1)(j) = prefixCount(i)(j)\n            }\n            prefixCount(i + 1)(s(i) - 'a') += 1\n        }\n        \n        queries.map { case Array(ai, bi, ci, di) =>\n            val leftCount = new Array[Int](26)\n            val rightCount = new Array[Int](26)\n            \n            for (i <- 0 until 26) {\n                leftCount(i) = prefixCount(bi + 1)(i) - prefixCount(ai)(i)\n                rightCount(i) = prefixCount(di + 1)(i) - prefixCount(ci)(i)\n            }\n            \n            val mismatches = leftCount.zip(rightCount).count { case (l, r) => l != r }\n            \n            mismatches / 2 <= (bi - ai + 1) min (di - ci + 1)\n        }\n    }\n}"
+}

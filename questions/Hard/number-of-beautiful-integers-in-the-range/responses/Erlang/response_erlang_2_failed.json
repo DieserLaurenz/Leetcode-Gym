@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 7: Char 9: call to local/imported function is_beautiful/2 is illegal in guard",
+    "full_compile_error": "Line 7: Char 9: call to local/imported function is_beautiful/2 is illegal in guard\n%    7|         is_beautiful(Current, K) ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3017",
+    "task_finish_time": 1708943415187,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1186627343",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec number_of_beautiful_integers(Low :: integer(), High :: integer(), K :: integer()) -> integer().\nnumber_of_beautiful_integers(Low, High, K) ->\n    count_beautiful(Low, High, K, 0).\n\ncount_beautiful(Current, High, K, Count) when Current =< High ->\n    if\n        is_beautiful(Current, K) ->\n            count_beautiful(Current + 1, High, K, Count + 1);\n        true ->\n            count_beautiful(Current + 1, High, K, Count)\n    end;\ncount_beautiful(_, _, _, Count) ->\n    Count.\n\nis_beautiful(Number, K) ->\n    if\n        Number rem K =/= 0 ->\n            false;\n        true ->\n            Digits = integer_to_list_custom(Number),\n            Even = length([D || D <- Digits, D rem 2 == 0]),\n            Odd = length(Digits) - Even,\n            Even == Odd\n    end.\n\ninteger_to_list_custom(Number) ->\n    integer_to_list_custom(Number, []).\n\ninteger_to_list_custom(0, Acc) when Acc =/= [] ->\n    Acc;\ninteger_to_list_custom(Number, Acc) ->\n    integer_to_list_custom(Number div 10, [Number rem 10 | Acc])."
+}

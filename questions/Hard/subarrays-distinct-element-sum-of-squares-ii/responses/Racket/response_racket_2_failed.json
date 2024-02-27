@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 27: Char 43: read-syntax: missing `)` to close `(` on line 26, found instead `]`",
+    "full_compile_error": "Line 27: Char 43: read-syntax: missing `)` to close `(` on line 26, found instead `]`\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3139",
+    "task_finish_time": 1709005979153,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1187323923",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (sum-counts nums)\n  (-> (listof exact-integer?) exact-integer?)\n  (let ([mod 1000000007])\n    (define (add-mod a b) (modulo (+ a b) mod))\n    (let ([len (length nums)])\n      (letrec ([dp (make-vector (add1 len) 0)]\n               [last-idx (make-hash)]\n               [update-dp!\n                (lambda (i)\n                  (vector-set! dp i\n                               (if (= i 0)\n                                   0\n                                   (add-mod (vector-ref dp (sub1 i)) (vector-ref dp i)))))\n               [compute\n                (lambda (i)\n                  (when (< i len)\n                    (let* ([num (list-ref nums i)]\n                           [last (hash-ref last-idx num #f)]\n                           [contribution (if last\n                                             (sub1 (- i (car last)))\n                                             i)])\n                      (vector-set! dp (add1 i)\n                                   (add-mod (vector-ref dp i)\n                                            (add1 contribution)))\n                      (update-dp! (add1 i))\n                      (hash-set! last-idx num (cons i last))\n                      (compute (add1 i))))])\n        (compute 0)\n        (modulo (vector-ref dp len) mod)))))"
+}

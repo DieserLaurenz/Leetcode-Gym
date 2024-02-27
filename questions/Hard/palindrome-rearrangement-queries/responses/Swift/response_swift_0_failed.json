@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "swift",
+    "run_success": false,
+    "compile_error": "Line 7: Char 28: error: cannot convert value of type 'DefaultIndices<String>.Element' (aka 'String.Index') to expected argument type 'Int' in solution.swift",
+    "full_compile_error": "Line 7: Char 28: error: cannot convert value of type 'DefaultIndices<String>.Element' (aka 'String.Index') to expected argument type 'Int' in solution.swift\n            let c = sArray[i].asciiValue! - Character(\"a\").asciiValue!\n                           ^\nLine 9: Char 27: error: cannot convert value of type 'DefaultIndices<String>.Element' (aka 'String.Index') to expected argument type 'Int' in solution.swift\n                prefixSum[i + 1][j] = prefixSum[i][j] + (j == c ? 1 : 0)\n                          ^\nLine 9: Char 49: error: cannot convert value of type 'DefaultIndices<String>.Element' (aka 'String.Index') to expected argument type 'Int' in solution.swift\n                prefixSum[i + 1][j] = prefixSum[i][j] + (j == c ? 1 : 0)\n                                                ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3203",
+    "task_finish_time": 1708965828981,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Swift",
+    "submission_id": "1186910149",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    func canMakePalindromeQueries(_ s: String, _ queries: [[Int]]) -> [Bool] {\n        let sArray = Array(s)\n        var prefixSum = Array(repeating: Array(repeating: 0, count: 26), count: s.count + 1)\n\n        for i in s.indices {\n            let c = sArray[i].asciiValue! - Character(\"a\").asciiValue!\n            for j in 0..<26 {\n                prefixSum[i + 1][j] = prefixSum[i][j] + (j == c ? 1 : 0)\n            }\n        }\n\n        return queries.map { query -> Bool in\n            let (ai, bi, ci, di) = (query[0], query[1], query[2], query[3])\n            var oddCount = 0\n            for j in 0..<26 {\n                let left = prefixSum[bi + 1][j] - prefixSum[ai][j]\n                let right = prefixSum[di + 1][j] - prefixSum[ci][j]\n                if (left + right) % 2 != 0 {\n                    oddCount += 1\n                }\n            }\n            return oddCount <= 2\n        }\n    }\n}"
+}

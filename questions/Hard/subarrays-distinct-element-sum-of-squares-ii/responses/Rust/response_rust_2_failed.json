@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 22, Char 9: mismatched types (solution.rs)",
+    "full_compile_error": "Line 22, Char 9: mismatched types (solution.rs)\n   |\n2  |     pub fn sum_counts(nums: Vec<i32>) -> i32 {\n   |                                          --- expected `i32` because of return type\n...\n22 |         result\n   |         ^^^^^^ expected `i32`, found `usize`\n   |\nhelp: you can convert a `usize` to an `i32` and panic if the converted value doesn't fit\n   |\n22 |         result.try_into().unwrap()\n   |               ++++++++++++++++++++\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `prog` (bin \"prog\") due to previous error\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3139",
+    "task_finish_time": 1709005844016,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1187322458",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn sum_counts(nums: Vec<i32>) -> i32 {\n        let modulo = 1_000_000_007;\n        let n = nums.len();\n        let mut last_seen = std::collections::HashMap::new();\n        let mut result = 0;\n        let mut prefix_sum = vec![0; n + 1];\n\n        for i in 0..n {\n            if let Some(&last) = last_seen.get(&nums[i]) {\n                prefix_sum[i + 1] = (prefix_sum[i] + (i - last)) % modulo;\n            } else {\n                prefix_sum[i + 1] = (prefix_sum[i] + i + 1) % modulo;\n            }\n            last_seen.insert(nums[i], i + 1);\n        }\n\n        for i in 1..=n {\n            result = (result + prefix_sum[i]) % modulo;\n        }\n\n        result\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 5: Char 1: syntax error before: CountBeautifulIntegers",
+    "full_compile_error": "Line 5: Char 1: syntax error before: CountBeautifulIntegers\n%    5| CountBeautifulIntegers(Current, High, K, Count) when Current =< High ->\n%     | ^\nLine 3: Char 5: variable 'CountBeautifulIntegers' is unbound\n%    3|     CountBeautifulIntegers(Low, High, K, 0).\n%     |     ^\nLine 20: Char 22: ambiguous call of overridden pre R14 auto-imported BIF integer_to_list/1\n - use erlang:integer_to_list/1 or \"-compile({no_auto_import,[integer_to_list/1]}).\" to resolve name clash\n%   20|             Digits = integer_to_list(Number),\n%     |                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3017",
+    "task_finish_time": 1708943374937,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1186626899",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec number_of_beautiful_integers(Low :: integer(), High :: integer(), K :: integer()) -> integer().\nnumber_of_beautiful_integers(Low, High, K) ->\n    CountBeautifulIntegers(Low, High, K, 0).\n\nCountBeautifulIntegers(Current, High, K, Count) when Current =< High ->\n    if\n        is_beautiful(Current, K) ->\n            CountBeautifulIntegers(Current + 1, High, K, Count + 1);\n        true ->\n            CountBeautifulIntegers(Current + 1, High, K, Count)\n    end;\nCountBeautifulIntegers(_, _, _, Count) ->\n    Count.\n\nis_beautiful(Number, K) ->\n    if\n        Number rem K =/= 0 ->\n            false;\n        true ->\n            Digits = integer_to_list(Number),\n            Even = length([D || D <- Digits, D rem 2 == 0]),\n            Odd = length(Digits) - Even,\n            Even == Odd\n    end.\n\ninteger_to_list(Number) ->\n    integer_to_list(Number, []).\n\ninteger_to_list(0, Acc) ->\n    Acc;\ninteger_to_list(Number, Acc) when Number > 0 ->\n    integer_to_list(Number div 10, [(Number rem 10) | Acc])."
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 9: Char 9: call to local/imported function is_rotation/2 is illegal in guard",
+    "full_compile_error": "Line 9: Char 9: call to local/imported function is_rotation/2 is illegal in guard\n%    9|         is_rotation(S, T) andalso K >= 1 ->\n%     |         ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3024",
+    "task_finish_time": 1708986497930,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1187158787",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec number_of_ways(S :: unicode:unicode_binary(), T :: unicode:unicode_binary(), K :: integer()) -> integer().\nnumber_of_ways(S, T, K) ->\n    Mod = 1000000007,\n    if\n        S == T andalso K rem 2 == 0 ->\n            (pow(2, K, Mod) - 2) rem Mod;\n        S == T andalso K rem 2 == 1 ->\n            2;\n        is_rotation(S, T) andalso K >= 1 ->\n            if\n                K rem 2 == 1 ->\n                    2;\n                true ->\n                    (pow(2, K - 1, Mod) - 2) rem Mod\n            end;\n        true ->\n            0\n    end.\n\nis_rotation(S, T) ->\n    ST = S ++ S,\n    lists:substring(ST, 1, byte_size(S) * 2) =:= T ++ T.\n\npow(_, 0, _) -> 1;\npow(Base, Exp, Mod) ->\n    case Exp rem 2 of\n        0 ->\n            Half = pow(Base, Exp div 2, Mod),\n            (Half * Half) rem Mod;\n        1 ->\n            (Base * pow(Base, Exp - 1, Mod)) rem Mod\n    end."
+}

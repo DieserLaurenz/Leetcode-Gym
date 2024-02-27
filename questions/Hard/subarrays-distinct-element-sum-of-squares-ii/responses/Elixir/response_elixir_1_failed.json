@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "",
+    "full_compile_error": "Line 11: Char 71: ** (SyntaxError) syntax error before: mod\n    |\n 11 |         {Map.put(last_seen, x, 0), new_sum, (res + new_sum * new_sum) mod mod}\n    |                                                                       ^\n    (elixir 1.15.7) lib/kernel/parallel_compiler.ex:377: anonymous fn/5 in Kernel.ParallelCompiler.spawn_workers/8",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3139",
+    "task_finish_time": 1709006183837,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1187326259",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec sum_counts(nums :: [integer]) :: integer\n  def sum_counts(nums) do\n    mod = 1_000_000_007\n\n    nums\n    |> Enum.reduce({%{}, 0, 0}, fn x, {last_seen, sum, res} ->\n      {Map.update(last_seen, x, 0, &(&1 + 1)), sum + 1, res}\n      |> then(fn {last_seen, sum, res} ->\n        new_sum = sum - (last_seen[x] - 1)\n        {Map.put(last_seen, x, 0), new_sum, (res + new_sum * new_sum) mod mod}\n      end)\n    end)\n    |> then(fn {_, _, res} -> res end)\n  end\nend"
+}

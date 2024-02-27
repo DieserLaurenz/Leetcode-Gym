@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 36: Char 5: function snd/1 undefined",
+    "full_compile_error": "Line 36: Char 5: function snd/1 undefined\n%   36|     snd(Imbalance).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2849",
+    "task_finish_time": 1709017496800,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1187475067",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec sum_imbalance_numbers(Nums :: [integer()]) -> integer().\nsum_imbalance_numbers(Nums) ->\n    sum_imbalance_numbers(Nums, maps:new(), 1, length(Nums), 0).\n\nsum_imbalance_numbers(_Nums, _Map, _Start, 0, Acc) ->\n    Acc;\nsum_imbalance_numbers(Nums, Map, Start, Length, Acc) ->\n    {SubList, NewMap} = get_sublist(Nums, Map, Start, Length),\n    Imbalance = calculate_imbalance(SubList, NewMap),\n    NextAcc = Acc + Imbalance,\n    if Start + Length > length(Nums) ->\n        sum_imbalance_numbers(Nums, Map, 1, Length - 1, NextAcc);\n    true ->\n        sum_imbalance_numbers(Nums, Map, Start + 1, Length, NextAcc)\n    end.\n\nget_sublist(Nums, Map, Start, Length) ->\n    case maps:find({Start, Length}, Map) of\n        {ok, SubList} ->\n            {SubList, Map};\n        error ->\n            SubList = lists:sublist(Nums, Start, Length),\n            {SubList, maps:put({Start, Length}, SubList, Map)}\n    end.\n\ncalculate_imbalance(SubList, Map) ->\n    Sorted = lists:usort(SubList),\n    Imbalance = lists:foldl(fun(X, {Prev, Acc}) ->\n                                if\n                                    X - Prev > 1 ->\n                                        {X, Acc + 1};\n                                    true ->\n                                        {X, Acc}\n                                end\n                            end, {hd(Sorted) - 1, 0}, Sorted),\n    snd(Imbalance)."
+}

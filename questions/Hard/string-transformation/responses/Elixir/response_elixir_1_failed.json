@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "elixir",
+    "run_success": false,
+    "compile_error": "error: undefined variable \"n\"",
+    "full_compile_error": "error: undefined variable \"n\"\nLine 8:   Solution.number_of_ways/3\n** (CompileError) solution.ex: cannot compile module Solution (errors have been logged)",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3024",
+    "task_finish_time": 1708986589211,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Elixir",
+    "submission_id": "1187159469",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "defmodule Solution do\n  @spec number_of_ways(s :: String.t(), t :: String.t(), k :: integer()) :: integer()\n  def number_of_ways(s, t, k) do\n    mod = 1_000_000_007\n\n    if s == t do\n      if k == 1 do\n        rem(n - 1, mod)\n      else\n        rem(2, mod)\n      end\n    else\n      if k == 1 do\n        0\n      else\n        positions = for i <- 1..String.length(s) - 1, do: String.slice(s, -i) <> String.slice(s, 0, String.length(s) - i), into: [], uniq: true\n        count = Enum.count(positions, fn p -> p == t end)\n        if k == 2 do\n          count\n        else\n          rem(count * pow(2, k - 2, mod), mod)\n        end\n      end\n    end\n  end\n\n  defp pow(_base, 0, _mod), do: 1\n  defp pow(base, exp, mod) do\n    case exp do\n      1 -> base\n      _ ->\n        half_exp = div(exp, 2)\n        half_res = pow(base, half_exp, mod)\n        if rem(exp, 2) == 0 do\n          rem(half_res * half_res, mod)\n        else\n          rem(half_res * half_res * base, mod)\n        end\n    end\n  end\nend"
+}

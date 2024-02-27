@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 11: Char 1: syntax error before: PaidPainterCost",
+    "full_compile_error": "Line 11: Char 1: syntax error before: PaidPainterCost\n%   11| PaidPainterCost([], _, AccCost) -> AccCost;\n%     | ^\nLine 9: Char 5: variable 'PaidPainterCost' is unbound\n%    9|     PaidPainterCost(Sorted, FreePainterTime, 0).\n%     |     ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2808",
+    "task_finish_time": 1708955205656,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1186760197",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec paint_walls(Cost :: [integer()], Time :: [integer()]) -> integer().\npaint_walls(Cost, Time) ->\n    Pairs = lists:zip(Cost, Time),\n    Sorted = lists:sort(fun({Cost1, Time1}, {Cost2, Time2}) ->\n                            Time1 < Time2 or (Time1 == Time2 andalso Cost1 > Cost2)\n                        end, Pairs),\n    TotalTime = lists:foldl(fun({_, T}, Acc) -> Acc + T end, 0, Sorted),\n    FreePainterTime = TotalTime div 2,\n    PaidPainterCost(Sorted, FreePainterTime, 0).\n\nPaidPainterCost([], _, AccCost) -> AccCost;\nPaidPainterCost([{Cost, Time} | Rest], FreeTimeLeft, AccCost) when FreeTimeLeft >= Time ->\n    PaidPainterCost(Rest, FreeTimeLeft - Time, AccCost);\nPaidPainterCost([{Cost, _Time} | Rest], FreeTimeLeft, AccCost) when FreeTimeLeft < Time ->\n    PaidPainterCost(Rest, FreeTimeLeft, AccCost + Cost)."
+}

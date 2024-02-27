@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 18: Char 1: syntax error before: CanFormPalindrome",
+    "full_compile_error": "Line 18: Char 1: syntax error before: CanFormPalindrome\n%   18| CanFormPalindrome(LeftFreq, RightFreq, TotalFreq) ->\n%     | ^\nLine 9: Char 19: variable 'CanFormPalindrome' is unbound\n%    9|                   CanFormPalindrome(LeftFreq, RightFreq, Frequencies)\n%     |                   ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3203",
+    "task_finish_time": 1708975210958,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1187049582",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec can_make_palindrome_queries(S :: unicode:unicode_binary(), Queries :: [[integer()]]) -> [boolean()].\ncan_make_palindrome_queries(S, Queries) ->\n    Frequencies = lists:foldl(fun(Char, Acc) ->\n                                  maps:update_with(Char, fun(Count) -> Count + 1 end, 1, Acc)\n                              end, #{}, binary:bin_to_list(S)),\n    lists:map(fun([Ai, Bi, Ci, Di]) ->\n                  LeftFreq = substring_frequency(Ai, Bi, S),\n                  RightFreq = substring_frequency(Ci, Di, S),\n                  CanFormPalindrome(LeftFreq, RightFreq, Frequencies)\n              end, Queries).\n\nsubstring_frequency(A, B, S) ->\n    Substring = binary:part(S, {A, B - A + 1}),\n    lists:foldl(fun(Char, Acc) ->\n                    maps:update_with(Char, fun(Count) -> Count + 1 end, 1, Acc)\n                end, #{}, binary:bin_to_list(Substring)).\n\nCanFormPalindrome(LeftFreq, RightFreq, TotalFreq) ->\n    %% Calculate the frequency difference between left and right substrings and the rest of the string\n    DeltaFreq = maps:fold(fun(Char, Count, Acc) ->\n                              LCount = maps:get(Char, LeftFreq, 0),\n                              RCount = maps:get(Char, RightFreq, 0),\n                              TCount = maps:get(Char, TotalFreq),\n                              NewCount = abs(TCount - LCount - RCount),\n                              Acc#{Char => NewCount}\n                          end, #{}, TotalFreq),\n    %% Count how many characters have odd frequencies in the delta frequency map\n    OddCount = maps:fold(fun(_, Count, Acc) when Count rem 2 == 1 -> Acc + 1;\n                             (_, _, Acc) -> Acc\n                         end, 0, DeltaFreq),\n    %% It's possible to form a palindrome if the odd count is less than or equal to 2\n    OddCount =< 2."
+}

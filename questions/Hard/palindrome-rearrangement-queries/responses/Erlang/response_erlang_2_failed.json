@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "erlang",
+    "run_success": false,
+    "compile_error": "Line 8: Char 42: syntax error before: oralso",
+    "full_compile_error": "Line 8: Char 42: syntax error before: oralso\n%    8|                   QueryResult rem 2 == 0 oralso QueryResult == 1\n%     |                                          ^\nLine 1: Char 2: spec for undefined function can_make_palindrome_queries/2\n%    1| -spec can_make_palindrome_queries(S :: unicode:unicode_binary(), Queries :: [[integer()]]) -> [boolean()].\n%     |  ^\nLine 53: Char 13: function can_make_palindrome_queries/2 undefined\n%   53|       Ret = can_make_palindrome_queries(Param_1, Param_2),\n%     |             ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3203",
+    "task_finish_time": 1708975290347,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Erlang",
+    "submission_id": "1187050613",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "-spec can_make_palindrome_queries(S :: unicode:unicode_binary(), Queries :: [[integer()]]) -> [boolean()].\ncan_make_palindrome_queries(S, Queries) ->\n    SList = binary:bin_to_list(S),\n    Len = length(SList) div 2,\n    PrefixSum = prefix_sum(SList, Len),\n    lists:map(fun([Ai, Bi, Ci, Di]) -> \n                  QueryResult = query_result(PrefixSum, Ai, Bi, Ci - Len, Di - Len),\n                  QueryResult rem 2 == 0 oralso QueryResult == 1\n              end, Queries).\n\nprefix_sum(SList, Len) ->\n    Freq = lists:foldl(fun(Char, Acc) ->\n                           maps:update_with(Char, fun(C) -> C + 1 end, 1, Acc)\n                       end, #{}, lists:sublist(SList, Len)),\n    lists:foldl(fun(Char, [H|T]) -> \n                    Updated = maps:update_with(Char, fun(C) -> C - 1 end, -1, H),\n                    [Updated | [H|T]]\n                end, [Freq], lists:reverse(lists:nthtail(Len, SList))).\n\nquery_result(PrefixSum, Ai, Bi, Ci, Di) ->\n    Left = maps:fold(fun(Char, Count, Acc) -> \n                         if Count > 0 -> Acc + Count; true -> Acc end \n                     end, 0, lists:nth(Ai + 1, PrefixSum)),\n    Right = maps:fold(fun(Char, Count, Acc) -> \n                          if Count > 0 -> Acc + Count; true -> Acc end \n                      end, 0, lists:nth(Ci + 1, PrefixSum)),\n    Middle = if Bi < Ci -> \n                 maps:fold(fun(Char, Count, Acc) -> \n                               Delta = maps:get(Char, lists:nth(Di + 1, PrefixSum), 0) - maps:get(Char, lists:nth(Bi + 1, PrefixSum), 0),\n                               if Delta > 0 -> Acc + Delta; true -> Acc end \n                           end, 0, lists:nth(Ci, PrefixSum));\n             true -> \n                 0 \n             end,\n    Left + Right - Middle."
+}

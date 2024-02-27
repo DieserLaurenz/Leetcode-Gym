@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "kotlin",
+    "run_success": false,
+    "compile_error": "Line 4: Char 23: error: operator '==' cannot be applied to 'Long' and 'Int'",
+    "full_compile_error": "Line 4: Char 23: error: operator '==' cannot be applied to 'Long' and 'Int'\n        if (s == t && k % 2 == 0) return 1\n                      ^\nLine 5: Char 23: error: operator '==' cannot be applied to 'Long' and 'Int'\n        if (s != t && k % 2 == 1) return 0\n                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3024",
+    "task_finish_time": 1708985221431,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Kotlin",
+    "submission_id": "1187148868",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    fun numberOfWays(s: String, t: String, k: Long): Int {\n        val mod = 1000000007\n        if (s == t && k % 2 == 0) return 1\n        if (s != t && k % 2 == 1) return 0\n        if (k == 1L) return 0\n        var ways = 0\n        val n = s.length\n        for (i in 1 until n) {\n            if (s.substring(i) + s.substring(0, i) == t || s == t) ways++\n        }\n        if (k == 2L) return ways\n        if (s == t) ways++ // For no change at all, applicable only when s == t\n        return (ways % mod).toInt()\n    }\n}"
+}

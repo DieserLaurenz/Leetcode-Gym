@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "java",
+    "run_success": false,
+    "compile_error": "Line 12: error: incompatible types: possible lossy conversion from long to int",
+    "full_compile_error": "Line 12: error: incompatible types: possible lossy conversion from long to int\n            dp[i + 1] = (dp[i] + (i - last[nums[i]])) % mod;\n                                                      ^",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3139",
+    "task_finish_time": 1708995406767,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Java",
+    "submission_id": "1187226943",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "class Solution {\n    public int sumCounts(int[] nums) {\n        long mod = 1000000007;\n        long result = 0;\n        int n = nums.length;\n        int[] last = new int[100001];\n        int[] dp = new int[n + 1];\n        for (int i = 0; i < 100001; i++) {\n            last[i] = -1;\n        }\n        for (int i = 0; i < n; i++) {\n            dp[i + 1] = (dp[i] + (i - last[nums[i]])) % mod;\n            result = (result + dp[i + 1]) % mod;\n            last[nums[i]] = i;\n        }\n        return (int) result;\n    }\n}"
+}

@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 8: Char 34: sublist: unbound identifier",
+    "full_compile_error": "Line 8: Char 34: sublist: unbound identifier\n  in: sublist\n  compilation context...:\n   solution.rkt\n  location...:\n   prog_joined.rkt:19:33",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2849",
+    "task_finish_time": 1709017367558,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1187473346",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (sum-imbalance-numbers nums)\n  (-> (listof exact-integer?) exact-integer?)\n  \n  (define (calculate-imbalance arr)\n    (let ([n (length arr)])\n      (let loop ([i 0] [total 0])\n        (if (< i n)\n            (let ([subarr (sort (sublist arr 0 (+ i 1)) <)])\n              (loop (+ i 1) (+ total (imbalance subarr))))\n            total))))\n  \n  (define (imbalance sorted-arr)\n    (let loop ([i 0] [count 0])\n      (if (< i (- (length sorted-arr) 1))\n          (if (> (- (list-ref sorted-arr (+ i 1)) (list-ref sorted-arr i)) 1)\n              (loop (+ i 1) (+ count 1))\n              (loop (+ i 1) count))\n          count)))\n  \n  (define (sum-imbalance)\n    (let ([len (length nums)])\n      (let loop ([start 0] [acc 0])\n        (if (< start len)\n            (loop (+ start 1) (+ acc (calculate-imbalance (sublist nums start len))))\n            acc))))\n  \n  (sum-imbalance))"
+}

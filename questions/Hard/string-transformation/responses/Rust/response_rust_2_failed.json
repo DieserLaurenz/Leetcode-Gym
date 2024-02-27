@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "rust",
+    "run_success": false,
+    "compile_error": "Line 25, Char 29: mismatched types (solution.rs)",
+    "full_compile_error": "Line 25, Char 29: mismatched types (solution.rs)\n   |\n25 |                 (2 * same % MOD) as i32\n   |                             ^^^ expected `i32`, found `i64`\nLine 25, Char 27: cannot calculate the remainder of `i32` divided by `i64` (solution.rs)\n   |\n25 |                 (2 * same % MOD) as i32\n   |                           ^ no implementation for `i32 % i64`\n   |\n   = help: the trait `Rem<i64>` is not implemented for `i32`\n   = help: the following other types implement trait `Rem<Rhs>`:\n             <i32 as Rem>\n             <i32 as Rem<&i32>>\n             <&'a i32 as Rem<i32>>\n             <&i32 as Rem<&i32>>\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\nerror: could not compile `prog` (bin \"prog\") due to 2 previous errors\nmv: cannot stat '/leetcode/rust_compile/target/release/prog': No such file or directory",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "3024",
+    "task_finish_time": 1708986217214,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Rust",
+    "submission_id": "1187156651",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "impl Solution {\n    pub fn number_of_ways(s: String, t: String, k: i64) -> i32 {\n        const MOD: i64 = 1_000_000_007;\n        if s == t {\n            if k == 1 {\n                (s.len() as i64 % MOD) as i32\n            } else if k % 2 == 0 {\n                1\n            } else {\n                (s.len() as i64 % MOD) as i32\n            }\n        } else if k == 1 {\n            0\n        } else {\n            let n = s.len();\n            let mut same = 0;\n            for i in 1..n {\n                if &s[i..] == &t[..n-i] && &s[..i] == &t[n-i..] {\n                    same += 1;\n                }\n            }\n            if k == 2 {\n                same\n            } else if k % 2 == 0 {\n                (2 * same % MOD) as i32\n            } else {\n                ((n as i64 - 1) % MOD) as i32\n            }\n        }\n    }\n}"
+}

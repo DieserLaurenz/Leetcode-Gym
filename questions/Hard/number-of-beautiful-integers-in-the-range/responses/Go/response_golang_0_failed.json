@@ -3,7 +3,7 @@
     "lang": "golang",
     "run_success": false,
     "status_runtime": "N/A",
-    "memory": 2248000,
+    "memory": 2348000,
     "question_id": "3017",
     "elapsed_time": 3008,
     "compare_result": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000000000",
@@ -11,7 +11,7 @@
     "std_output": "",
     "last_testcase": "364083150\n652959398\n12",
     "expected_output": "0",
-    "task_finish_time": 1708934162870,
+    "task_finish_time": 1708942612436,
     "task_name": "judger.judgetask.Judge",
     "finished": true,
     "total_correct": 579,
@@ -20,8 +20,8 @@
     "status_memory": "N/A",
     "memory_percentile": null,
     "pretty_lang": "Go",
-    "submission_id": "1186521552",
+    "submission_id": "1186618173",
     "status_msg": "Time Limit Exceeded",
     "state": "SUCCESS",
-    "code": "func numberOfBeautifulIntegers(low int, high int, k int) int {\n    count := 0\n    for num := low; num <= high; num++ {\n        if num%k == 0 && isBeautiful(num) {\n            count++\n        }\n    }\n    return count\n}\n\nfunc isBeautiful(n int) bool {\n    evenCount, oddCount := 0, 0\n    for n > 0 {\n        digit := n % 10\n        if digit%2 == 0 {\n            evenCount++\n        } else {\n            oddCount++\n        }\n        n /= 10\n    }\n    return evenCount == oddCount\n}"
+    "code": "func numberOfBeautifulIntegers(low int, high int, k int) int {\n    count := 0\n    for i := low; i <= high; i++ {\n        if i%k == 0 && isBeautiful(i) {\n            count++\n        }\n    }\n    return count\n}\n\nfunc isBeautiful(n int) bool {\n    even, odd := 0, 0\n    for n > 0 {\n        digit := n % 10\n        if digit%2 == 0 {\n            even++\n        } else {\n            odd++\n        }\n        n /= 10\n    }\n    return even == odd\n}"
 }

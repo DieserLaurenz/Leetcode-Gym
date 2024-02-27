@@ -1,0 +1,23 @@
+{
+    "status_code": 20,
+    "lang": "racket",
+    "run_success": false,
+    "compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`",
+    "full_compile_error": "Line 1: Char 1: read-syntax: expected a `)` to close `(`\n  possible cause: indentation suggests a missing `)` before line 13\n  compilation context...:\n   solution.rkt",
+    "status_runtime": "N/A",
+    "memory": 0,
+    "question_id": "2808",
+    "task_finish_time": 1708955062639,
+    "task_name": "judger.judgetask.Judge",
+    "finished": true,
+    "total_correct": null,
+    "total_testcases": null,
+    "runtime_percentile": null,
+    "status_memory": "N/A",
+    "memory_percentile": null,
+    "pretty_lang": "Racket",
+    "submission_id": "1186758193",
+    "status_msg": "Compile Error",
+    "state": "SUCCESS",
+    "code": "(define/contract (paint-walls cost time)\n  (-> (listof exact-integer?) (listof exact-integer?) exact-integer?)\n  (let* ([n (length cost)]\n         [sorted-pairs (sort (map list cost time) (lambda (x y) (< (car x) (car y))))]\n         [max-time (apply max (map cdr sorted-pairs))])\n    (let loop ([i 0] [current-time 0] [total-cost 0])\n      (if (= i n)\n          total-cost\n          (let ([pair (list-ref sorted-pairs i)])\n            (if (<= (cdr pair) current-time)\n                (loop (+ i 1) current-time total-cost)\n                (loop (+ i 1) (+ current-time 1) (+ total-cost (car pair))))))))"
+}
