@@ -1,0 +1,81 @@
+Language,Error Type,Count
+C,Wrong Answer,277
+C,Memory Limit Exceeded,2
+C,Time Limit Exceeded,38
+C,Runtime Error,21
+C,Compile Error,28
+C#,Runtime Error,6
+C#,Compile Error,5
+C#,Time Limit Exceeded,41
+C#,Wrong Answer,290
+C++,Compile Error,8
+C++,Wrong Answer,288
+C++,Time Limit Exceeded,29
+C++,Memory Limit Exceeded,2
+C++,Runtime Error,18
+Dart,Wrong Answer,238
+Dart,Runtime Error,70
+Dart,Time Limit Exceeded,50
+Elixir,Memory Limit Exceeded,4
+Elixir,Time Limit Exceeded,26
+Elixir,Wrong Answer,182
+Elixir,Compile Error,129
+Elixir,Runtime Error,113
+Erlang,Memory Limit Exceeded,4
+Erlang,Wrong Answer,206
+Erlang,Compile Error,147
+Erlang,Runtime Error,80
+Erlang,Time Limit Exceeded,19
+Go,Compile Error,29
+Go,Wrong Answer,277
+Go,Memory Limit Exceeded,3
+Go,Runtime Error,3
+Go,Time Limit Exceeded,39
+Java,Runtime Error,14
+Java,Compile Error,8
+Java,Wrong Answer,284
+Java,Time Limit Exceeded,39
+JavaScript,Time Limit Exceeded,47
+JavaScript,Runtime Error,4
+JavaScript,Wrong Answer,300
+Kotlin,Time Limit Exceeded,34
+Kotlin,Runtime Error,15
+Kotlin,Memory Limit Exceeded,3
+Kotlin,Compile Error,12
+Kotlin,Wrong Answer,266
+PHP,Runtime Error,12
+PHP,Time Limit Exceeded,47
+PHP,Wrong Answer,282
+Python2,Wrong Answer,288
+Python2,Memory Limit Exceeded,5
+Python2,Time Limit Exceeded,33
+Python2,Runtime Error,23
+Python3,Wrong Answer,299
+Python3,Runtime Error,13
+Python3,Time Limit Exceeded,41
+Racket,Runtime Error,79
+Racket,Time Limit Exceeded,44
+Racket,Memory Limit Exceeded,4
+Racket,Compile Error,153
+Racket,Wrong Answer,155
+Ruby,Wrong Answer,287
+Ruby,Time Limit Exceeded,61
+Ruby,Runtime Error,9
+Rust,Wrong Answer,264
+Rust,Runtime Error,17
+Rust,Time Limit Exceeded,34
+Rust,Compile Error,27
+Scala,Memory Limit Exceeded,36
+Scala,Time Limit Exceeded,8
+Scala,Wrong Answer,270
+Scala,Compile Error,28
+Scala,Runtime Error,13
+Swift,Runtime Error,35
+Swift,Compile Error,10
+Swift,Time Limit Exceeded,28
+Swift,Wrong Answer,284
+Swift,Memory Limit Exceeded,1
+TypeScript,Wrong Answer,288
+TypeScript,Runtime Error,5
+TypeScript,Time Limit Exceeded,44
+TypeScript,Compile Error,3

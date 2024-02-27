@@ -1,4 +1,4 @@
-Solve the following problem in Python. Solely use the provided template to implement the function. Do not redeclare the main function
+Solve the specified problem within the provided Python function template, without declaring the main function and using only libraries from the standard library. Provide the code without explanation.
 
 Template:
 
