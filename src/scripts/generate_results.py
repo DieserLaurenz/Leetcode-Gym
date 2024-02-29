@@ -6,6 +6,7 @@ import pandas as pd
 
 def generate_results(questions_directory, save_directory, difficulty_order=None):
     print("Generating results...")
+    json_counter = 0
 
     if not os.path.exists(save_directory):
         os.makedirs(save_directory)
@@ -26,7 +27,7 @@ def generate_results(questions_directory, save_directory, difficulty_order=None)
                 problem_info_path = os.path.join(root, problem_info_file[0])
                 with open(problem_info_path, 'r') as f:
                     problem_info = json.load(f)
-                    problem_name = problem_info_file[0].replace('.json', '')
+                    problem_name = problem_info.get("titleSlug", None)
                     acRate = problem_info.get("acRate", None)
                     topicTags = problem_info.get("topicTags", [])
                     topics = [tag["name"] for tag in topicTags]
@@ -53,6 +54,7 @@ def generate_results(questions_directory, save_directory, difficulty_order=None)
 
                         for file in sorted(os.listdir(language_path)):
                             if file.startswith("response") and file.endswith(".json"):
+                                json_counter += 1
                                 with open(os.path.join(language_path, file), 'r') as f:
                                     content = json.load(f)
                                     attempt_match = file.split('_')
@@ -76,6 +78,7 @@ def generate_results(questions_directory, save_directory, difficulty_order=None)
     df.to_csv(f"{save_directory}/results.csv", index=False)
     df.to_pickle(f"{save_directory}/results.pkl")
     print(f"Saved results to {save_directory}/results.csv and {save_directory}/results.pkl")
+    print(json_counter)
     return df
 
 if __name__ == "__main__":

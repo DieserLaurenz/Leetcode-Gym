@@ -97,6 +97,35 @@ def mean_memory_percentiles(df):
     sorted_memory_averages = memory_averages.sort_values(by=['Memory Percentile'], ascending=False)
     return sorted_memory_averages
 
+def percentage_success_attempts(df):
+    # Schritt 1: Filtere gelöste Probleme
+    solved_df = df[df['Solved'] == True]
+
+    # Schritt 2: Berechne die Gesamtzahl der Lösungen pro Sprache und die Anzahl der Lösungen pro Versuch
+    total_solutions_per_language = solved_df.groupby('Language').size()
+    solutions_per_attempt = solved_df.groupby(['Language', 'Attempt']).size()
+
+    # Schritt 3: Berechne Prozentwerte
+    percentage_solutions = solutions_per_attempt.unstack(fill_value=0).div(total_solutions_per_language, axis=0) * 100
+
+    return percentage_solutions
+
+def save_count_success_attempt(df):
+    df.plot(kind='bar', stacked=True, figsize=(10, 6))
+    plt.title('Prozentualer Anteil der Lösungen nach Versuch und Sprache')
+    plt.xlabel('Sprache')
+    plt.ylabel('Prozentualer Anteil der Lösungen')
+    plt.xticks(rotation=45)
+    plt.legend(title='Versuch', labels=['Versuch 0', 'Versuch 1', 'Versuch 2'])
+    plt.tight_layout()
+
+    # Füge eine Beschriftung hinzu, um die Prozentsätze anzuzeigen
+    for n, x in enumerate([*df.index.values]):
+        for (prozent, y) in zip([*df.loc[x]], df.loc[x].cumsum()):
+            plt.text(n, y - (prozent / 2), f'{prozent:.1f}%', ha='center', va='center', color='white', rotation=90)
+
+    plt.savefig('../results/count_success_attempt.png')
+
 
 file_path = '../results/results.pkl'
 df = pd.read_pickle(file_path)
@@ -113,3 +142,7 @@ runtime_averages = mean_runtime_percentiles(df)
 runtime_averages.to_csv("../results/runtime_analysis.csv")
 memory_averages = mean_memory_percentiles(df)
 memory_averages.to_csv("../results/memory_analysis.csv")
+
+percentage_solutions_df = percentage_success_attempts(df)
+print(percentage_solutions_df)
+save_count_success_attempt(percentage_solutions_df)
