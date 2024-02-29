@@ -4,8 +4,10 @@ import shelve
 
 import os
 
+
 def file_ends_with(files, suffix):
     return any(file.endswith(suffix) for file in files)
+
 
 def find_failed_after_success(base_directory):
     for root, dirs, files in os.walk(base_directory):
@@ -28,11 +30,12 @@ def find_failed_after_success(base_directory):
                         if file_ends_with(files_in_lang, success_suffix):
                             success_found = True
 
-                        if file_ends_with(files_in_lang, success_suffix) and file_ends_with(files_in_lang, failed_suffix):
+                        if file_ends_with(files_in_lang, success_suffix) and file_ends_with(files_in_lang,
+                                                                                            failed_suffix):
                             # No success and failure in same attempt
                             problem_detected = True
                             break
-                        
+
                         if success_found and file_ends_with(files_in_lang, failed_suffix):
                             problem_detected = True
                             break
@@ -57,41 +60,41 @@ def find_failed_after_success(base_directory):
 
 
 def find_problematic_responses(base_directory, cache_path):
-    for root, dirs, files in os.walk(base_directory):
-        if 'responses' in dirs:
-            responses_dir = os.path.join(root, 'responses')
+    with shelve.open(cache_path) as cache:
+        for root, dirs, files in os.walk(base_directory):
+            if 'responses' in dirs:
+                responses_dir = os.path.join(root, 'responses')
 
-            # Durchsuchen aller Programmiersprachen-Unterordner in responses
-            for lang_dir in os.listdir(responses_dir):
-                lang_path = os.path.join(responses_dir, lang_dir)
-                if os.path.isdir(lang_path):
-                    files_in_lang = os.listdir(lang_path)
-                    codes = set()
+                # Durchsuchen aller Programmiersprachen-Unterordner in responses
+                for lang_dir in os.listdir(responses_dir):
+                    lang_path = os.path.join(responses_dir, lang_dir)
+                    if os.path.isdir(lang_path):
+                        files_in_lang = os.listdir(lang_path)
+                        codes = set()
 
-                    # Überprüfen, ob 'code' doppelt vorkommt
-                    # Eventuell obsolet, da check eingebaut wurde und ChatGPT manchmal auch den selben Code mehrmals vorschlägt
-                    for file_name in files_in_lang:
-                        if file_name.endswith('.json'):
-                            with open(os.path.join(lang_path, file_name), 'r') as file:
-                                data = json.load(file)
-                                code = data.get('code')
-                                question_id = data.get('question_id')
-                                lang_slug = data.get('lang')
+                        # Überprüfen, ob 'code' doppelt vorkommt
+                        # Eventuell obsolet, da check eingebaut wurde und ChatGPT manchmal auch den selben Code mehrmals vorschlägt
+                        for file_name in files_in_lang:
+                            if file_name.endswith('.json'):
+                                with open(os.path.join(lang_path, file_name), 'r') as file:
+                                    data = json.load(file)
+                                    code = data.get('code')
+                                    question_id = data.get('question_id')
+                                    lang_slug = data.get('lang')
 
-                                if code and code in codes:
-                                    print(f"Doppelter 'code' gefunden in: {root}/{lang_dir}")
-                                    # Cache löschen, wenn vorhanden
-                                    cache_key = f"{question_id}_{lang_slug}"
-                                    with shelve.open(cache_path) as cache:
+                                    if code and code in codes:
+                                        print(f"Doppelter 'code' gefunden in: {root}/{lang_dir}")
+                                        # Cache löschen, wenn vorhanden
+                                        cache_key = f"{question_id}_{lang_slug}"
                                         if cache_key in cache:
                                             del cache[cache_key]
                                             print(f"Cache für {cache_key} entfernt.")
-                                    break
-                                codes.add(code)
+                                        break
+                                    codes.add(code)
+
 
 # Basisverzeichnis und Cache-Pfad
-base_directory = '../../questions'  # Setzen Sie hier Ihren Basispfad
-cache_path = '../../cache/snippet_cache.db'  # Pfad zur Cache-Datei
+base_directory = '../questions'  # Setzen Sie hier Ihren Basispfad
+cache_path = '../cache/snippet_cache.db'  # Pfad zur Cache-Datei
 find_failed_after_success(base_directory)
 find_problematic_responses(base_directory, cache_path)
-

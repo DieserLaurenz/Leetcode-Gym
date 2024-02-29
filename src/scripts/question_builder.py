@@ -29,7 +29,7 @@ def process_subfolder(base_path, subfolder):
 
     for snippet in question["codeSnippets"]:
         if snippet["lang"] == "python":
-            prompt_content =  (
+            prompt_content = (
                 f'Solve the specified problem within the provided python 2.7.12 function template, without declaring the '
                 f'main function and using only libraries from the standard library. Provide the code without explanation.\n\n'
                 f'Template:\n\n{snippet["code"]}\n\nProblem:\n\n{question["content"]}\n\n'
@@ -53,7 +53,4 @@ def process_folders(base_path, folders):
 
 def add_prompts_and_url_shortcut():
     base_folders = ['Easy', 'Medium', 'Hard']
-    process_folders('../../questions/', base_folders)
-
-
-add_prompts_and_url_shortcut()
+    process_folders('../questions/', base_folders)

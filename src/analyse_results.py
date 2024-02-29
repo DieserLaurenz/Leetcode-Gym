@@ -1,12 +1,8 @@
-import os
-import json
-import pandas as pd
-from collections import defaultdict
-import pandas as pd
 import matplotlib
+import pandas as pd
+
 matplotlib.use('Agg')  # Or 'TkAgg', 'Qt5Agg', etc., based on your environment
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 def create_solved_and_total_problems_ranking(df):
@@ -37,6 +33,7 @@ def create_solved_and_total_problems_ranking(df):
 
     return ranking
 
+
 def count_errors(df):
     error_df = pd.DataFrame(columns=['Language', 'Error Type', 'Count'])
 
@@ -64,6 +61,7 @@ def count_errors(df):
 
     return error_df
 
+
 def show_count_error_plot(df):
     # Step 2: Manipulate DataFrame for plotting
     df_pivot = df.pivot(index='Language', columns='Error Type', values='Count').fillna(0)
@@ -85,11 +83,13 @@ def show_count_error_plot(df):
     # Save the plot to a file
     plt.savefig('error_analysis_chart.png')
 
+
 def mean_runtime_percentiles(df):
     grouped_language = df.groupby('Language')
     runtime_averages = grouped_language[['Runtime Percentile']].mean()
     sorted_runtime_averages = runtime_averages.sort_values(by=['Runtime Percentile'], ascending=False)
     return sorted_runtime_averages
+
 
 def mean_memory_percentiles(df):
     grouped_language = df.groupby('Language')
@@ -98,7 +98,7 @@ def mean_memory_percentiles(df):
     return sorted_memory_averages
 
 
-file_path = '../results/main_results.pkl'
+file_path = '../results/results.pkl'
 df = pd.read_pickle(file_path)
 
 ranking_df = create_solved_and_total_problems_ranking(df)

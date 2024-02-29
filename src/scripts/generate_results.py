@@ -1,15 +1,21 @@
-import os
 import json
-import pandas as pd
-from collections import defaultdict
+import os
 
-def generate_results(response_directory, save_directory, difficulty_order=None):
+import pandas as pd
+
+
+def generate_results(questions_directory, save_directory, difficulty_order=None):
+    print("Generating results...")
+
+    if not os.path.exists(save_directory):
+        os.makedirs(save_directory)
+
     data = []
     if difficulty_order is None:
         difficulty_order = ["Easy", "Medium", "Hard"]
 
     for difficulty in difficulty_order:
-        difficulty_path = os.path.join(response_directory, difficulty)
+        difficulty_path = os.path.join(questions_directory, difficulty)
         if not os.path.exists(difficulty_path):
             continue
 
@@ -62,20 +68,21 @@ def generate_results(response_directory, save_directory, difficulty_order=None):
                                         status_msg = content.get("status_msg", "No error message provided")
                                         # Speichert die Fehlermeldung als Key-Value-Paar
                                         attempts_info["Error Messages"][f"{attempt_match[2]}"] = status_msg
-                        
+
                         data.append(attempts_info)
 
     df = pd.DataFrame(data)
 
-    df.to_csv(f"{save_directory}/main_results.csv", index=False)
-    df.to_pickle(f"{save_directory}/main_results.pkl")
+    df.to_csv(f"{save_directory}/results.csv", index=False)
+    df.to_pickle(f"{save_directory}/results.pkl")
+    print(f"Saved results to {save_directory}/results.csv and {save_directory}/results.pkl")
     return df
 
-save_directory = "../results/"
-response_directory = "../questions/"
+if __name__ == "__main__":
+    questions_directory = "../questions/"
+    save_directory = "../results/"
+    # Beispiel: Rufe die Funktion auf und sortiere die Ergebnisse dynamisch nach Schwierigkeitsgrad
+    df_detailed_success_info = generate_results(questions_directory, save_directory,
+                                                difficulty_order=["Easy", "Medium", "Hard"])
 
-# Beispiel: Rufe die Funktion auf und sortiere die Ergebnisse dynamisch nach Schwierigkeitsgrad
-df_detailed_success_info = generate_results(response_directory, save_directory, difficulty_order=["Easy", "Medium", "Hard"])
-
-print(df_detailed_success_info)
 

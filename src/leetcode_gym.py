@@ -8,7 +8,7 @@ import traceback
 
 import pyperclip
 
-from scripts import chatgpt_selenium_automation, leetcode_submitter, chatgptapi_new
+from scripts import chatgpt_selenium_automation, leetcode_submitter, chatgptapi_new, generate_results
 
 SKIP_PYTHON = False
 
@@ -217,13 +217,12 @@ def delete_all_files_in_directory(dir):
             os.remove(file_path)
 
 
-def process_snippet_with_selenium_method(prompt, response_directory, question, snippet, attempt, conversation_id,
+def process_snippet_with_selenium_method(cache, prompt, response_directory, question, snippet, attempt, conversation_id,
                                          driver):
     lang_slug = snippet['langSlug']
     lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
-    cache_path = '../cache/snippet_cache.db'
 
     if lang == "Python":
         lang = "Python2"
@@ -232,7 +231,7 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
     if attempt == 0:
-        print(f"Processing: {title_slug} in {lang_slug}.\n")
+        print(f"Processing: {title_slug} in {lang_slug}.")
         if check_for_files(lang_response_directory):
             print(f"Files found: {title_slug} in {lang_slug} but attempt 0. Deleting...")
             delete_all_files_in_directory(lang_response_directory)
@@ -285,10 +284,9 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
     # Überprüfe, ob die Lösung akzeptiert wurde
     if submission_response.get("status_msg") == 'Accepted':
         print(f"Korrekte Antwort in Versuch: {attempt}")
-        with shelve.open(cache_path) as cache:
-            cache_key = f"{question_id}_{lang_slug}"
-            cache[cache_key] = submission_response
-            print("Answer saved to cache")
+        cache_key = f"{question_id}_{lang_slug}"
+        cache[cache_key] = submission_response
+        print("Answer saved to cache")
 
         if lang_slug == "python":
             lang_slug = "python2"
@@ -302,10 +300,9 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
 
         if attempt == 2:
             print(f"Versuche überschritten")
-            with shelve.open(cache_path) as cache:
-                cache_key = f"{question_id}_{lang_slug}"
-                cache[cache_key] = submission_response
-                print("Answer saved to cache")
+            cache_key = f"{question_id}_{lang_slug}"
+            cache[cache_key] = submission_response
+            print("Answer saved to cache")
 
         if lang_slug == "python":
             lang_slug = "python2"
@@ -372,9 +369,8 @@ def extract_info_and_generate_prompt(response):
     return " ".join(prompt_parts)
 
 
-def check_cache(cache_path, question_id, lang_slug):
-    with shelve.open(cache_path) as cache:
-        return cache.get(f"{question_id}_{lang_slug}") is not None
+def check_cache(cache, question_id, lang_slug):
+    return cache.get(f"{question_id}_{lang_slug}") is not None
 
 
 def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
@@ -400,14 +396,14 @@ def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
             pyperclip.copy(prompt)
             print("Copied error prompt to clipboard")
 
-def should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_path, title_slug):
+def should_skip_snippet(cache, lang_slug, question_id, lang_response_directory):
     if SKIP_PYTHON:
         if lang_slug in ('python', 'python3'):
-            print(f"Python. Skipping.")
+            print("Python. Skipping.")
             return True
 
-    if check_cache(cache_path, question_id, lang_slug):
-        print(f"Cache hit for {lang_response_directory} Skipping.")
+    if check_cache(cache, question_id, lang_slug):
+        print(f"Cache hit for {lang_response_directory}. Skipping.")
         return True
     else:
         return False
@@ -416,49 +412,50 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
     question = read_json_file(json_file_path)
     response_directory = os.path.join(subfolder_path, 'responses')
     driver = None
+    cache_path = '../cache/snippet_cache.db'
 
-    for snippet in question["codeSnippets"]:
-        lang_slug = snippet['langSlug']
-        question_id = question['questionId']
-        cache_path = '../cache/snippet_cache.db'
-        lang_response_directory = os.path.join(response_directory, snippet['lang'])
+    with shelve.open(cache_path) as cache:
+        for snippet in question["codeSnippets"]:
+            lang_slug = snippet['langSlug']
+            question_id = question['questionId']
+            lang_response_directory = os.path.join(response_directory, snippet['lang'])
 
-        # Check if we should skip processing based on language or cache before initiating driver
-        if should_skip_snippet(lang_slug, question_id, lang_response_directory, cache_path, question['titleSlug']):
-            continue  # Skip this snippet and move to the next
+            # Pass the cache object instead of the path
+            if should_skip_snippet(cache, lang_slug, question_id, lang_response_directory):
+                continue  # Skip this snippet and move to the next
 
-        attempt = 0
-        conversation_id = None
-        prompt = generate_prompt_content(question, snippet)
+            attempt = 0
+            conversation_id = None
+            prompt = generate_prompt_content(question, snippet)
 
-        while attempt < 3:
-            if attempt == 0:
-                if is_driver_alive(driver):
-                    driver.quit()
-                driver = chatgpt_selenium_automation.init_driver()
-
-            is_success, error_prompt, conversation_id = process_snippet_with_selenium_method(prompt, response_directory,
-                                                                                             question,
-                                                                                             snippet,
-                                                                                             attempt, conversation_id,
-                                                                                             driver)
-            if is_success:
-                driver.quit()
-                break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
-            else:
-                if error_prompt == "":
-                    print("Retrying to fetch the answer from ChatGPT...")
-                    driver.quit()
-                    attempt = 0
-                    conversation_id = None
-                    prompt = generate_prompt_content(question, snippet)
-                    continue
-                else:
-                    attempt += 1
-                    if attempt == 3:
+            while attempt < 3:
+                if attempt == 0:
+                    if is_driver_alive(driver):
                         driver.quit()
-                        break
-                    prompt = error_prompt
+                    driver = chatgpt_selenium_automation.init_driver()
+
+                is_success, error_prompt, conversation_id = process_snippet_with_selenium_method(cache, prompt, response_directory,
+                                                                                                 question,
+                                                                                                 snippet,
+                                                                                                 attempt, conversation_id,
+                                                                                                 driver)
+                if is_success:
+                    driver.quit()
+                    break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
+                else:
+                    if error_prompt == "":
+                        print("Retrying to fetch the answer from ChatGPT...")
+                        driver.quit()
+                        attempt = 0
+                        conversation_id = None
+                        prompt = generate_prompt_content(question, snippet)
+                        continue
+                    else:
+                        attempt += 1
+                        if attempt == 3:
+                            driver.quit()
+                            break
+                        prompt = error_prompt
 
 
 def process_question_with_web_api(json_file_path, subfolder_path):
@@ -536,5 +533,10 @@ def main():
             time.sleep(5)
             continue
 
+if __name__ == "__main__":
+    main()
 
-main()
+    questions_directory = "../questions/"
+    save_directory = "../results/"
+
+    generate_results.generate_results(questions_directory, save_directory)
