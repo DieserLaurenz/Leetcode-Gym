@@ -10,7 +10,7 @@ from colorama import Fore
 
 # Constants for configuration
 REQUEST_DELAY = 2  # Delay between requests in seconds
-QUESTIONS_TO_FETCH = 400  # Number of questions to fetch in ascending order
+QUESTIONS_TO_FETCH = 20  # Number of questions to fetch in ascending order
 FILTER_OUT_PAID_QUESTIONS = True  # Flag to filter out paid questions
 PROBLEM_FETCH_START_DATE = "14-05-2023"  # Start date for fetching problems (DD-MM-YYYY)
 REMOVE_QUESTIONS_WITH_IMAGE = True
@@ -140,7 +140,7 @@ def filter_questions(questions):
     print(Fore.LIGHTWHITE_EX + "Filtering out questions before cutoff date...")
 
     try:
-        with shelve.open('request_cache.db') as cache:
+        with shelve.open('../../cache/request_cache.db') as cache:
             for question in questions:
                 title = question['titleSlug']
                 cache_key = title
@@ -379,7 +379,7 @@ def add_question_content_and_save_to_file(filtered_questions):
 
         title = question["titleSlug"]
 
-        path = f"./questions/{question['difficulty']}/{question['titleSlug']}/{question['titleSlug']}.json"
+        path = f"../../questions/{question['difficulty']}/{question['titleSlug']}/{question['titleSlug']}.json"
 
         try:
             if os.path.exists(path):
@@ -449,7 +449,7 @@ def save_question_to_folder(question):
 
     try:
         # Constructing the file path
-        path = f"./questions/{question['difficulty']}/{question['titleSlug']}"
+        path = f"../../questions/{question['difficulty']}/{question['titleSlug']}"
 
         # Creating the directory if it doesn't exist
         if not os.path.exists(path):

@@ -1,5 +1,0 @@
-﻿Startet möglicherweise nicht bei der Korrekten Aufgabe erneut. Schauen was das Problem hier ist
-
-Retry logik einführen für leetcode scraper und sowas
-
-Irgendwie beim content fetch wird nicht zuerst der cache gecheckt kp wieso

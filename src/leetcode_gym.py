@@ -4,19 +4,17 @@ import os
 import re
 import shelve
 import time
+import traceback
 
 import pyperclip
 
-import chatgpt_selenium_automation
-import chatgptapi_new
-import leetcode_submitter
+from scripts import chatgpt_selenium_automation, leetcode_submitter, chatgptapi_new
 
 SKIP_PYTHON = False
 
 def read_json_file(file_path):
     with open(file_path, 'r') as json_file:
         return json.load(json_file)
-
 
 def save_response(lang_response_directory, response_filename, submission_response, extracted_code):
     # Ensure extracted_code is a string
@@ -69,7 +67,7 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
     lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
-    cache_path = 'snippet_cache.db'
+    cache_path = '../cache/snippet_cache.db'
     response_directory = os.path.join(subfolder_path, 'responses')
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
@@ -153,7 +151,7 @@ def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, atte
     lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
-    cache_path = 'snippet_cache.db'
+    cache_path = '../cache/snippet_cache.db'
     response_directory = os.path.join(subfolder_path, 'responses')
     lang_response_directory = os.path.join(response_directory, lang)
     problem_url = f"https://leetcode.com/problems/{title_slug}"
@@ -225,7 +223,7 @@ def process_snippet_with_selenium_method(prompt, response_directory, question, s
     lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
-    cache_path = 'snippet_cache.db'
+    cache_path = '../cache/snippet_cache.db'
 
     if lang == "Python":
         lang = "Python2"
@@ -379,7 +377,6 @@ def check_cache(cache_path, question_id, lang_slug):
         return cache.get(f"{question_id}_{lang_slug}") is not None
 
 
-
 def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
     question = read_json_file(json_file_path)
 
@@ -423,7 +420,7 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
     for snippet in question["codeSnippets"]:
         lang_slug = snippet['langSlug']
         question_id = question['questionId']
-        cache_path = 'snippet_cache.db'
+        cache_path = '../cache/snippet_cache.db'
         lang_response_directory = os.path.join(response_directory, snippet['lang'])
 
         # Check if we should skip processing based on language or cache before initiating driver
@@ -510,7 +507,7 @@ def process_folders(base_path, folders, chatgpt_mode):
 
 def access_questions(chatgpt_mode):
     base_folders = ['Easy', 'Medium', 'Hard']
-    process_folders('questions/', base_folders, chatgpt_mode)
+    process_folders('../questions/', base_folders, chatgpt_mode)
 
 
 def is_driver_alive(driver):
@@ -533,6 +530,7 @@ def main():
 
         except Exception as e:
             print(f"Ein Fehler ist aufgetreten: {e}")
+            traceback.print_exc()
             # Here, you can decide whether to retry or not
             print("Restarting the programm...")
             time.sleep(5)

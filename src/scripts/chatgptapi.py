@@ -6,7 +6,7 @@ from openai import OpenAI
 
 
 def load_config():
-    load_dotenv(".env")
+    load_dotenv("../../.env")
     return os.getenv("OPENAI_API_KEY")
 
 

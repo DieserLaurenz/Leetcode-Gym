@@ -90,8 +90,8 @@ def find_problematic_responses(base_directory, cache_path):
                                 codes.add(code)
 
 # Basisverzeichnis und Cache-Pfad
-base_directory = '.'  # Setzen Sie hier Ihren Basispfad
-cache_path = '../snippet_cache.db'  # Pfad zur Cache-Datei
+base_directory = '../../questions'  # Setzen Sie hier Ihren Basispfad
+cache_path = '../../cache/snippet_cache.db'  # Pfad zur Cache-Datei
 find_failed_after_success(base_directory)
 find_problematic_responses(base_directory, cache_path)
 

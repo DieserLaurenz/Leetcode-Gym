@@ -53,7 +53,7 @@ def process_folders(base_path, folders):
 
 def add_prompts_and_url_shortcut():
     base_folders = ['Easy', 'Medium', 'Hard']
-    process_folders('questions/', base_folders)
+    process_folders('../../questions/', base_folders)
 
 
 add_prompts_and_url_shortcut()

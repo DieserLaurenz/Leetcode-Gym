@@ -25,6 +25,7 @@ def create_session():
         csrf_token = os.getenv('CSRF_TOKEN')
         leetcode_session = os.getenv('LEETCODE_SESSION')
 
+
         if not csrf_token or not leetcode_session:
             logging.error(Fore.LIGHTRED_EX + "Error: CSRF token or LEETCODE_SESSION not set in .env file")
             exit()
