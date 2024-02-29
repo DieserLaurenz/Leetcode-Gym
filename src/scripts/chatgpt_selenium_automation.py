@@ -10,6 +10,14 @@ from seleniumbase import Driver
 
 load_dotenv()
 
+# List of required environment variables
+required_vars = ['CSRF_TOKEN', 'LEETCODE_SESSION', 'CHATGPT_SESSION_TOKEN']
+
+# Check each variable and raise an error if not found
+for var in required_vars:
+    if not os.getenv(var):
+        raise Exception(f"{var} is not set in the .env file.")
+
 
 def init_driver():
     chatgpt_session_token = os.getenv('CHATGPT_SESSION_TOKEN')
