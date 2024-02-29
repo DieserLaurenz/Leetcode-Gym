@@ -62,7 +62,7 @@ def count_errors(df):
     return error_df
 
 
-def show_count_error_plot(df):
+def save_count_error_plot(df):
     # Step 2: Manipulate DataFrame for plotting
     df_pivot = df.pivot(index='Language', columns='Error Type', values='Count').fillna(0)
 
@@ -81,7 +81,7 @@ def show_count_error_plot(df):
     plt.tight_layout()
 
     # Save the plot to a file
-    plt.savefig('error_analysis_chart.png')
+    plt.savefig('../results/error_analysis_chart.png')
 
 
 def mean_runtime_percentiles(df):
@@ -107,7 +107,7 @@ ranking_df.to_csv("../results/solved_problems_analysis.csv", index=False)
 errors_df = count_errors(df)
 print(errors_df)
 errors_df.to_csv("../results/error_analysis.csv", index=False)
-show_count_error_plot(errors_df)
+save_count_error_plot(errors_df)
 
 runtime_averages = mean_runtime_percentiles(df)
 runtime_averages.to_csv("../results/runtime_analysis.csv")
