@@ -17,7 +17,7 @@ Dieses Projekt ermöglicht das automatische Fetchen und Analysieren von LeetCode
 Klonen Sie dieses Repository auf Ihren lokalen Computer.
 
 ```bash
-git clone [[Repository-URL]](https://github.com/DieserLaurenz/Leetcode-Scraper.git)
+git clone https://github.com/DieserLaurenz/Leetcode-Scraper.git
 cd [Projektverzeichnis]
 ```
 
