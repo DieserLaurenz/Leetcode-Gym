@@ -11,7 +11,7 @@ Um das Projekt zu verwenden, befolgen Sie die untenstehenden Schritte.
 
 - Python 3.x
 - Ein LeetCode-Konto
-- Ein ChatGPT-Konto
+- Ein ChatGPT-Konto mit GPT-Plus Zugriff
 
 ### Einrichtung der virtuellen Umgebung
 
