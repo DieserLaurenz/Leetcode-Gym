@@ -1,77 +1,97 @@
 
-# LeetCode Scraper und Analysetool
+# Projektname
 
-Dieses Projekt ermöglicht es, LeetCode-Probleme zu fetchen und anschließend Datenanalysen durchzuführen.
+## Beschreibung
 
-## Erste Schritte
+Dieses Projekt ermöglicht das automatische Fetchen und Analysieren von LeetCode-Problemen. Es verwendet Python-Skripte, um LeetCode-Probleme basierend auf spezifischen Kriterien zu sammeln, die Datenerhebung zu organisieren und anschließend die gesammelten Daten zu analysieren. Die Ergebnisse der Analyse werden für weitere Untersuchungen gespeichert.
 
-Um das Projekt zu verwenden, befolgen Sie die untenstehenden Schritte.
-
-### Voraussetzungen
+## Voraussetzungen
 
 - Python 3.x
-- Ein LeetCode-Konto
-- Ein OpenAI-Konto mit GPT-Plus Zugriff
+- pip
 
-### Einrichtung der virtuellen Umgebung
+## Einrichtung
 
-1. Klone das Repository auf deinen lokalen Computer.
-2. Erstelle eine virtuelle Umgebung mit dem Befehl:
+### Schritt 1: Klonen des Repositories
 
-   ```bash
-   python -m venv venv
-   ```
+Klonen Sie dieses Repository auf Ihren lokalen Computer.
 
-3. Aktiviere die virtuelle Umgebung:
+```bash
+git clone [Repository-URL]
+cd [Projektverzeichnis]
+```
 
-   - **Windows:**
+### Schritt 2: Erstellen einer virtuellen Umgebung
 
-     ```bash
-     venv\Scripts\activate
-     ```
+Erstellen Sie eine virtuelle Umgebung, um Konflikte mit anderen Projekten oder Systembibliotheken zu vermeiden.
 
-   - **macOS und Linux:**
+```bash
+python -m venv venv
+```
 
-     ```bash
-     source venv/bin/activate
-     ```
+Aktivieren Sie die virtuelle Umgebung.
 
-### Installation der Abhängigkeiten
+- Windows:
+  ```bash
+  venv\Scripts\activate
+  ```
+- macOS/Linux:
+  ```bash
+  source venv/bin/activate
+  ```
 
-Installiere die benötigten Python-Pakete mit:
+### Schritt 3: Installieren der Abhängigkeiten
+
+Installieren Sie alle erforderlichen Pakete aus der `requirements.txt` Datei.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Konfigurieren der Umgebungsvariablen
+### Schritt 4: Konfigurieren der Umgebungsvariablen
 
-1. Kopiere die Datei `.env.example` und benenne die Kopie in `.env` um.
-2. Füge deine persönlichen Werte für die folgenden Variablen in der `.env` Datei ein:
-   - `CSRF_TOKEN` - Cookie von deinem eingeloggten LeetCode-Konto (`csrftoken`).
-   - `LEETCODE_SESSION` - Cookie von deinem eingeloggten LeetCode-Konto (`LEETCODE_SESSION`).
-   - `CHATGPT_SESSION_TOKEN` - Cookie von deinem eingeloggten ChatGPT-Konto (`__Secure-next-auth.session-token`).
+Kopieren Sie `env.example` und erstellen Sie eine neue Datei namens `.env`. Fügen Sie die erforderlichen Werte für die Umgebungsvariablen hinzu:
 
-### Daten Fetchen
+- `CSRF_TOKEN`: Cookie von eingeloggtem LeetCode.com Account (cookie name: `csrftoken`)
+- `LEETCODE_SESSION`: Cookie von eingeloggtem LeetCode.com Account (cookie name: `LEETCODE_SESSION`)
+- `CHATGPT_SESSION_TOKEN`: Cookie von eingeloggtem ChatGPT Account (cookie name: `__Secure-next-auth.session-token`)
 
-1. Wechsle in den `src` Ordner.
-2. Führe die Datei `leetcode_question_scraper.py` aus, um LeetCode-Probleme zu fetchen. Du kannst die Konstanten im Skript anpassen, um deine Anforderungen zu erfüllen:
-   - `REQUEST_DELAY`
-   - `QUESTIONS_TO_FETCH`
-   - `FILTER_OUT_PAID_QUESTIONS`
-   - `PROBLEM_FETCH_START_DATE`
-   - `REMOVE_QUESTIONS_WITH_IMAGE`
-   - `LANGUAGES`
+### Schritt 5: Ausführen der Skripte
 
-### Datenerhebung starten
+#### LeetCode Frage Scraper
 
-Führe die Datei `leetcode_gym.py` aus, um den Datenerhebungsprozess zu starten. Nach Abschluss der Datenerhebung werden die Ergebnisse im `results` Ordner als `results.csv` und `results.pkl` für weitere Analysen gespeichert.
+Navigieren Sie zum `src` Ordner und führen Sie das `leetcode_question_scraper.py` Skript aus, um LeetCode-Probleme zu fetchen. Passen Sie die Konstanten im Skript nach Bedarf an:
 
-### Optionale Schritte
+- `REQUEST_DELAY`
+- `QUESTIONS_TO_FETCH`
+- `FILTER_OUT_PAID_QUESTIONS`
+- `PROBLEM_FETCH_START_DATE`
+- `REMOVE_QUESTIONS_WITH_IMAGE`
+- `LANGUAGES`
 
-- Führe das Skript `find_problematic_responses.py` aus, um nach Problemen zu suchen, die während des Datenerhebungsprozesses aufgetreten sind.
-- Führe `analyse_results.py` aus, um Analysen zu erstellen. Die Ergebnisse werden ebenfalls im `results` Ordner gespeichert.
+```bash
+cd src
+python leetcode_question_scraper.py
+```
+
+#### Datenerhebung starten
+
+Führen Sie anschließend das `leetcode_gym.py` Skript aus, um den Datenerhebungsprozess zu starten. Die Ergebnisse werden im `results` Ordner als `results.csv` und `results.pkl` für weitere Analysen gespeichert.
+
+```bash
+python leetcode_gym.py
+```
+
+### Schritt 6: Optionale Analysen
+
+- `find_problematic_responses.py`: Sucht nach Problemen, die während des Datenerhebungsprozesses aufgetreten sind.
+- `analyse_results.py`: Führt Analysen durch und speichert die Ergebnisse im `results` Ordner.
 
 ## Lizenz
 
-Dieses Projekt ist unter der MIT Lizenz lizenziert - siehe die [LICENSE.md](LICENSE.md) Datei für Details.
+[MIT](LICENSE)
+
+## Beitragende
+
+Wenn Sie zur Verbesserung dieses Projekts beitragen möchten, sind Ihre Pull-Anfragen willkommen. Für größere Änderungen eröffnen Sie bitte zuerst ein Issue, um zu besprechen, was Sie ändern möchten.
+
