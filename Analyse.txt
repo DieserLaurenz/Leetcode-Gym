@@ -1,0 +1,9 @@
+Welche Programmiersprachen weisen die höchsten Fehlerraten in den Lösungen von ChatGPT auf, und welche spezifischen Fehlermeldungen treten am häufigsten auf?
+
+Abhängig vom Schwierigkeitsgrad, wieviele Programmierprobleme konnte ChatGPT in den verschiedenen Programmiersprachen lösen? (Optional: In wie vielen Versuchen)
+
+Abhängig vom Thema, wieviele Programmierprobleme konnte ChatGPT in den verschiedenen Programmiersprachen lösen? (Optional: In wie vielen Versuchen)
+
+(Durchschnittliche) Memory / Runtime Perzentile in verschiedenen Schwierigkeitsgraden / Themen pro Programmiersprache.
+
+Vielleicht Analyse über verschiedene Iterationen auslassen weil sonst alles ein bisschen zu umfangreich wird

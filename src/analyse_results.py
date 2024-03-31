@@ -1,5 +1,6 @@
 import matplotlib
 import pandas as pd
+import os
 
 matplotlib.use('Agg')  # Or 'TkAgg', 'Qt5Agg', etc., based on your environment
 import matplotlib.pyplot as plt
@@ -62,26 +63,28 @@ def count_errors(df):
     return error_df
 
 
-def save_count_error_plot(df):
-    # Step 2: Manipulate DataFrame for plotting
+def save_count_error_plot(df, difficulty_path):
+    # Convert counts to percentages
     df_pivot = df.pivot(index='Language', columns='Error Type', values='Count').fillna(0)
+    df_percent = df_pivot.div(df_pivot.sum(axis=1), axis=0) * 100
 
     # Optional: sort by the total count if you prefer
-    df_pivot = df_pivot.sort_values(by=df_pivot.columns.tolist()).fillna(0)
+    df_percent = df_percent.sort_values(by=df_percent.columns.tolist()).fillna(0)
 
-    # Step 3: Create a stacked bar chart
-    df_pivot.plot(kind='bar', stacked=True, figsize=(10, 7))
+    # Create a stacked bar chart
+    df_percent.plot(kind='bar', stacked=True, figsize=(10, 7))
 
     plt.title('Programming Errors by Language')
     plt.xlabel('Programming Language')
-    plt.ylabel('Count of Errors')
+    plt.ylabel('Percentage of Errors')
     plt.xticks(rotation=45)
     plt.legend(title='Error Type')
 
     plt.tight_layout()
 
     # Save the plot to a file
-    plt.savefig('../results/error_analysis_chart.png')
+    plt.savefig(f'{difficulty_path}/error_analysis_chart.png')
+
 
 
 def mean_runtime_percentiles(df):
@@ -110,7 +113,11 @@ def percentage_success_attempts(df):
 
     return percentage_solutions
 
-def save_count_success_attempt(df):
+def save_count_success_attempt(df, difficulty_folder_path):
+
+    # Sortieren des DataFrames nach 'Versuch 0'
+    df = df.sort_values(by='0', ascending=True)
+
     df.plot(kind='bar', stacked=True, figsize=(10, 6))
     plt.title('Prozentualer Anteil der Lösungen nach Versuch und Sprache')
     plt.xlabel('Sprache')
@@ -124,25 +131,59 @@ def save_count_success_attempt(df):
         for (prozent, y) in zip([*df.loc[x]], df.loc[x].cumsum()):
             plt.text(n, y - (prozent / 2), f'{prozent:.1f}%', ha='center', va='center', color='white', rotation=90)
 
-    plt.savefig('../results/count_success_attempt.png')
+    plt.savefig(f'{difficulty_folder_path}/count_success_attempt.png')
 
 
-file_path = '../results/results.pkl'
-df = pd.read_pickle(file_path)
+def run_analysis():
 
-ranking_df = create_solved_and_total_problems_ranking(df)
-print(ranking_df)
-ranking_df.to_csv("../results/solved_problems_analysis.csv", index=False)
-errors_df = count_errors(df)
-print(errors_df)
-errors_df.to_csv("../results/error_analysis.csv", index=False)
-save_count_error_plot(errors_df)
+    file_path = '../results/results.pkl'
+    df = pd.read_pickle(file_path)
 
-runtime_averages = mean_runtime_percentiles(df)
-runtime_averages.to_csv("../results/runtime_analysis.csv")
-memory_averages = mean_memory_percentiles(df)
-memory_averages.to_csv("../results/memory_analysis.csv")
+    ranking_df = create_solved_and_total_problems_ranking(df)
+    print(ranking_df)
+    ranking_df.to_csv(f"../results/solved_problems_analysis.csv", index=False)
 
-percentage_solutions_df = percentage_success_attempts(df)
-print(percentage_solutions_df)
-save_count_success_attempt(percentage_solutions_df)
+    unique_difficulties = df['Difficulty'].unique()
+
+    for difficulty in unique_difficulties:
+
+        difficulty_folder_path = f"../results/{difficulty}"
+        if not os.path.exists(difficulty_folder_path):
+            os.makedirs(difficulty_folder_path)
+        
+        filtered_df = df[df["Difficulty"] == difficulty]
+
+        errors_df = count_errors(filtered_df)
+        print(errors_df)
+        errors_df.to_csv(f"{difficulty_folder_path}/error_analysis.csv", index=False)
+        save_count_error_plot(errors_df, difficulty_folder_path)
+
+        runtime_averages = mean_runtime_percentiles(filtered_df)
+        runtime_averages.to_csv(f"{difficulty_folder_path}/runtime_analysis.csv")
+        memory_averages = mean_memory_percentiles(filtered_df)
+        memory_averages.to_csv(f"{difficulty_folder_path}/memory_analysis.csv")
+
+        percentage_solutions_df = percentage_success_attempts(filtered_df)
+        print(percentage_solutions_df)
+        save_count_success_attempt(percentage_solutions_df, difficulty_folder_path)
+
+
+    difficulty_folder_path = f"../results/Total"
+    if not os.path.exists(difficulty_folder_path):
+        os.makedirs(difficulty_folder_path)
+
+    errors_df = count_errors(df)
+    print(errors_df)
+    errors_df.to_csv(f"{difficulty_folder_path}/error_analysis.csv", index=False)
+    save_count_error_plot(errors_df, difficulty_folder_path)
+
+    runtime_averages = mean_runtime_percentiles(df)
+    runtime_averages.to_csv(f"{difficulty_folder_path}/runtime_analysis.csv")
+    memory_averages = mean_memory_percentiles(df)
+    memory_averages.to_csv(f"{difficulty_folder_path}/memory_analysis.csv")
+
+    percentage_solutions_df = percentage_success_attempts(df)
+    print(percentage_solutions_df)
+    save_count_success_attempt(percentage_solutions_df, difficulty_folder_path)
+
+run_analysis()

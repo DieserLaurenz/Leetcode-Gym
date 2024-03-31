@@ -1,0 +1,96 @@
+Language,Error Type,Count
+C,Compile Error,8
+C,Memory Limit Exceeded,2
+C,Runtime Error,8
+C,Time Limit Exceeded,17
+C,Wrong Answer,82
+C#,Compile Error,2
+C#,Memory Limit Exceeded,0
+C#,Runtime Error,2
+C#,Time Limit Exceeded,19
+C#,Wrong Answer,91
+C++,Compile Error,2
+C++,Memory Limit Exceeded,1
+C++,Runtime Error,8
+C++,Time Limit Exceeded,15
+C++,Wrong Answer,87
+Dart,Compile Error,0
+Dart,Memory Limit Exceeded,0
+Dart,Runtime Error,25
+Dart,Time Limit Exceeded,22
+Dart,Wrong Answer,70
+Elixir,Compile Error,30
+Elixir,Memory Limit Exceeded,3
+Elixir,Runtime Error,28
+Elixir,Time Limit Exceeded,14
+Elixir,Wrong Answer,39
+Erlang,Compile Error,37
+Erlang,Memory Limit Exceeded,3
+Erlang,Runtime Error,24
+Erlang,Time Limit Exceeded,9
+Erlang,Wrong Answer,44
+Go,Compile Error,7
+Go,Memory Limit Exceeded,3
+Go,Runtime Error,2
+Go,Time Limit Exceeded,19
+Go,Wrong Answer,85
+Java,Compile Error,4
+Java,Memory Limit Exceeded,0
+Java,Runtime Error,4
+Java,Time Limit Exceeded,18
+Java,Wrong Answer,91
+JavaScript,Compile Error,0
+JavaScript,Memory Limit Exceeded,0
+JavaScript,Runtime Error,3
+JavaScript,Time Limit Exceeded,29
+JavaScript,Wrong Answer,83
+Kotlin,Compile Error,5
+Kotlin,Memory Limit Exceeded,1
+Kotlin,Runtime Error,8
+Kotlin,Time Limit Exceeded,16
+Kotlin,Wrong Answer,84
+PHP,Compile Error,0
+PHP,Memory Limit Exceeded,0
+PHP,Runtime Error,6
+PHP,Time Limit Exceeded,27
+PHP,Wrong Answer,84
+Python2,Compile Error,0
+Python2,Memory Limit Exceeded,5
+Python2,Runtime Error,8
+Python2,Time Limit Exceeded,17
+Python2,Wrong Answer,82
+Python3,Compile Error,0
+Python3,Memory Limit Exceeded,0
+Python3,Runtime Error,2
+Python3,Time Limit Exceeded,27
+Python3,Wrong Answer,84
+Racket,Compile Error,41
+Racket,Memory Limit Exceeded,3
+Racket,Runtime Error,23
+Racket,Time Limit Exceeded,15
+Racket,Wrong Answer,35
+Ruby,Compile Error,0
+Ruby,Memory Limit Exceeded,0
+Ruby,Runtime Error,4
+Ruby,Time Limit Exceeded,31
+Ruby,Wrong Answer,81
+Rust,Compile Error,15
+Rust,Memory Limit Exceeded,0
+Rust,Runtime Error,9
+Rust,Time Limit Exceeded,21
+Rust,Wrong Answer,69
+Scala,Compile Error,8
+Scala,Memory Limit Exceeded,20
+Scala,Runtime Error,7
+Scala,Time Limit Exceeded,1
+Scala,Wrong Answer,77
+Swift,Compile Error,2
+Swift,Memory Limit Exceeded,1
+Swift,Runtime Error,20
+Swift,Time Limit Exceeded,15
+Swift,Wrong Answer,77
+TypeScript,Compile Error,2
+TypeScript,Memory Limit Exceeded,0
+TypeScript,Runtime Error,3
+TypeScript,Time Limit Exceeded,23
+TypeScript,Wrong Answer,87

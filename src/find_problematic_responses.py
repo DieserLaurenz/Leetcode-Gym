@@ -73,7 +73,6 @@ def find_problematic_responses(base_directory, cache_path):
                         codes = set()
 
                         # Überprüfen, ob 'code' doppelt vorkommt
-                        # Eventuell obsolet, da check eingebaut wurde und ChatGPT manchmal auch den selben Code mehrmals vorschlägt
                         for file_name in files_in_lang:
                             if file_name.endswith('.json'):
                                 with open(os.path.join(lang_path, file_name), 'r') as file:
