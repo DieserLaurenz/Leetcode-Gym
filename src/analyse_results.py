@@ -134,6 +134,62 @@ def save_count_success_attempt(df, difficulty_folder_path):
     plt.savefig(f'{difficulty_folder_path}/count_success_attempt.png')
 
 
+def save_total_plot(data, filename_prefix):
+    # Schwierigkeitsgrade und deren relevanten Spalten in der Datenstruktur
+    categories = {
+        'Easy': ('Total Easy', 'Solved Easy'),
+        'Medium': ('Total Medium', 'Solved Medium'),
+        'Hard': ('Total Hard', 'Solved Hard')
+    }
+    
+    for difficulty, (total_col, solved_col) in categories.items():
+        # Berechnung des Prozentsatzes der gelösten Probleme pro Kategorie
+        data[f'Solved {difficulty} Percentage'] = (data[solved_col] / data[total_col]) * 100
+
+        # Sortieren der Daten absteigend nach dem gelösten Prozentsatz
+        sorted_data = data.sort_values(by=f'Solved {difficulty} Percentage', ascending=False)
+
+        # Erstellung des Diagramms für die aktuelle Kategorie
+        plt.figure(figsize=(12, 8))
+        colors = plt.cm.viridis(sorted_data[f'Solved {difficulty} Percentage'] / 100)
+        bars = plt.bar(sorted_data['Language'], sorted_data[f'Solved {difficulty} Percentage'], color=colors)
+        plt.ylabel(f'Prozentsatz der gelösten {difficulty}-Probleme (%)', fontsize=12)
+        plt.title(f'Prozentsatz der gelösten {difficulty}-Probleme nach Programmiersprache', fontsize=14)
+        plt.xticks(rotation=45, ha='right')
+        plt.ylim(0, 100)  # Setzen der Y-Achse von 0% bis 100%
+        plt.grid(False)
+        
+        for bar in bars:
+            plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5, f'{bar.get_height():.1f}%', 
+                     va='bottom', ha='center', fontsize=10, color='black')
+        
+        # Speichern des Diagramms
+        plt.savefig(f'{filename_prefix}_{difficulty.lower()}.png')
+        plt.close()
+
+
+    data['Solved Percentage'] = (data['Solved Problems'] / data['Total Problems']) * 100
+
+    # Plotting
+    plt.figure(figsize=(12, 8))
+    colors = plt.cm.viridis(data['Solved Percentage'] / 100)
+    bars = plt.bar(data['Language'], data['Solved Percentage'], color=colors)
+    plt.ylabel('Prozentsatz der gelösten Probleme (%)', fontsize=12)
+    plt.title('Prozentsatz der gelösten Probleme nach Programmiersprache', fontsize=14)
+    plt.xticks(rotation=45, ha='right')
+    plt.ylim(0, 100)  # Setzen der Y-Achse von 0% bis 100%
+    plt.grid(False)
+    for bar in bars:
+        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5, f'{bar.get_height():.1f}%', 
+                 va='bottom', ha='center', fontsize=10, color='black')
+    plt.savefig(f"{filename_prefix}.png")
+    plt.close()
+
+# Beispiel für die Verwendung der Funktion
+# save_total_plot(data_frame, 'plot_output')
+
+
+
 def run_analysis():
 
     file_path = '../results/results.pkl'
@@ -185,5 +241,7 @@ def run_analysis():
     percentage_solutions_df = percentage_success_attempts(df)
     print(percentage_solutions_df)
     save_count_success_attempt(percentage_solutions_df, difficulty_folder_path)
+
+    save_total_plot(ranking_df, 'Total')
 
 run_analysis()
