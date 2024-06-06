@@ -1,0 +1,1524 @@
+Language,Error Type,Message,File Path,Code
+scala,compile_error,"Line 11: error: expected class or object definition (in solution.scala)
+println(Solution.accountBalanceAfterPurchase(9))   // Output: 90
+^
+Line 12: error: expected class or object definition (in solution.scala)
+println(Solution.accountBalanceAfterPurchase(15))  // Output: 80
+^",../questions/Easy\account-balance-after-rounded-purchase\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def accountBalanceAfterPurchase(purchaseAmount: Int): Int = {
+        // Calculate the nearest higher or equal multiple of 10
+        val roundedAmount = ((purchaseAmount + 9) / 10) * 10
+        // Subtract the rounded amount from the initial balance
+        100 - roundedAmount
+    }
+}
+
+// Example usage
+println(Solution.accountBalanceAfterPurchase(9))   // Output: 90
+println(Solution.accountBalanceAfterPurchase(15))  // Output: 80"
+scala,compile_error,"Line 9: error: type mismatch; (in solution.scala)
+ found   : Int
+ required: Char
+                chars(i) = minChar
+                           ^
+Line 10: error: type mismatch; (in solution.scala)
+ found   : Int
+ required: Char
+                chars(n - 1 - i) = minChar
+                                   ^",../questions/Easy\lexicographically-smallest-palindrome\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def makeSmallestPalindrome(s: String): String = {
+        val chars = s.toCharArray
+        val n = s.length
+        for (i <- 0 until n / 2) {
+            if (chars(i) != chars(n - 1 - i)) {
+                // Replace the character at either end with the lexicographically smaller one.
+                val minChar = Math.min(chars(i), chars(n - 1 - i))
+                chars(i) = minChar
+                chars(n - 1 - i) = minChar
+            }
+        }
+        new String(chars)
+    }
+}"
+scala,compile_error,"Line 20: error: missing parameter type (in solution.scala)
+        default =>
+        ^",../questions/Easy\make-three-strings-equal\responses\Scala\response_scala_1_failed.json,"object Solution {
+  def findMinimumOperations(s1: String, s2: String, s3: String): Int = {
+    // Convert strings to lists for easier manipulation from the end
+    val l1 = s1.toList
+    val l2 = s2.toList
+    val l3 = s3.toList
+
+    def trimEnds(l1: List[Char], l2: List[Char], l3: List[Char], acc: Int): Int = {
+      (l1, l2, l3) match {
+        // Case when all three lists are non-empty and their last elements are equal
+        case (h1 :: t1, h2 :: t2, h3 :: t3) if h1 == h2 && h2 == h3 =>
+          trimEnds(t1, t2, t3, acc)
+        // Case when any two lists are empty and the third is non-empty
+        case (Nil, Nil, _ :: _) | (Nil, _ :: _, Nil) | (_ :: _, Nil, Nil) =>
+          acc + l1.length + l2.length + l3.length // Sum the lengths of all non-empty lists
+        // Case when all lists are empty, meaning they have been made equal
+        case (Nil, Nil, Nil) =>
+          acc
+        // Default case when it's not possible to equalize the lists
+        default =>
+          -1
+      }
+    }
+
+    trimEnds(l1, l2, l3, 0)
+  }
+}"
+scala,compile_error,"Line 23: error: expected class or object definition (in solution.scala)
+val numsExample1 = Array(5, 4, 2, 3)
+^
+Line 24: error: expected class or object definition (in solution.scala)
+val resultExample1 = Solution.numberGame(numsExample1)
+^
+Line 25: error: expected class or object definition (in solution.scala)
+println(resultExample1.mkString(""["", "", "", ""]""))
+^
+Line 27: error: expected class or object definition (in solution.scala)
+val numsExample2 = Array(2, 5)
+^
+Line 28: error: expected class or object definition (in solution.scala)
+val resultExample2 = Solution.numberGame(numsExample2)
+^
+Line 29: error: expected class or object definition (in solution.scala)
+println(resultExample2.mkString(""["", "", "", ""]""))
+^",../questions/Easy\minimum-number-game\responses\Scala\response_scala_0_failed.json,"object Solution {
+  def numberGame(nums: Array[Int]): Array[Int] = {
+    // Step 1: Sort the input array to simplify the removal of minimum elements
+    val sortedNums = nums.sorted
+    
+    // Step 2: Initialize an empty array to store the results
+    val arr = new Array[Int](nums.length)
+    
+    // Step 3: Use a loop to process elements according to the game's rules
+    for (i <- sortedNums.indices by 2) {
+      // Bob's choice (the second minimum in each round) goes first
+      arr(i) = sortedNums(i + 1)
+      // Alice's choice (the first minimum in each round) goes second
+      arr(i + 1) = sortedNums(i)
+    }
+    
+    // Return the resulting array
+    arr
+  }
+}
+
+// Example usage:
+val numsExample1 = Array(5, 4, 2, 3)
+val resultExample1 = Solution.numberGame(numsExample1)
+println(resultExample1.mkString(""["", "", "", ""]""))
+
+val numsExample2 = Array(2, 5)
+val resultExample2 = Solution.numberGame(numsExample2)
+println(resultExample2.mkString(""["", "", "", ""]""))"
+scala,compile_error,"Line 22: error: expected class or object definition (in solution.scala)
+println(Solution.minLength(""ABFCACDB""))  // Expected output: 2
+^
+Line 23: error: expected class or object definition (in solution.scala)
+println(Solution.minLength(""ACBBD""))     // Expected output: 5
+^",../questions/Easy\minimum-string-length-after-removing-substrings\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def minLength(s: String): Int = {
+        // Stack to keep track of characters
+        val stack = scala.collection.mutable.Stack[Char]()
+
+        s.foreach { c =>
+            if (stack.nonEmpty && ((stack.top == 'A' && c == 'B') || (stack.top == 'C' && c == 'D'))) {
+                // If the current character with the top of the stack forms ""AB"" or ""CD"", remove the top
+                stack.pop()
+            } else {
+                // Otherwise, push the current character onto the stack
+                stack.push(c)
+            }
+        }
+
+        // The size of the stack is the minimum length of the string we can obtain
+        stack.size
+    }
+}
+
+// Testing the solution
+println(Solution.minLength(""ABFCACDB""))  // Expected output: 2
+println(Solution.minLength(""ACBBD""))     // Expected output: 5"
+scala,compile_error,"Line 11: error: not found: type i (in solution.scala)
+                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]
+                         ^
+Line 11: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)
+                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]
+                        ^
+Line 11: error: not found: type j (in solution.scala)
+                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]
+                                   ^
+Line 11: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)
+                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]
+                                  ^
+Line 11: error: not found: type i (in solution.scala)
+                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]
+                                                                  ^
+Line 11: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)
+                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]
+                                                                 ^
+Line 16: error: not found: type k (in solution.scala)
+                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]
+                         ^
+Line 16: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)
+                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]
+                        ^
+Line 16: error: not found: type j (in solution.scala)
+                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]
+                                   ^
+Line 16: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)
+                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]
+                                  ^
+Line 16: error: not found: type k (in solution.scala)
+                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]
+                                                                    ^
+Line 16: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)
+                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]
+                                                                   ^
+Line 21: error: not found: type j (in solution.scala)
+                minSum = minSum min (leftMin + nums[j] + rightMin)
+                                                    ^
+Line 21: error: value nums of type Array[Int] does not take type parameters. (in solution.scala)
+                minSum = minSum min (leftMin + nums[j] + rightMin)
+                                                   ^",../questions/Easy\minimum-sum-of-mountain-triplets-i\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def minimumSum(nums: Array[Int]): Int = {
+        var minSum = Int.MaxValue // Use MaxValue as an initial value
+        
+        for (j <- 1 until nums.length - 1) {
+            var leftMin = Int.MaxValue
+            var rightMin = Int.MaxValue
+            
+            // Find the smallest value to the left of j
+            for (i <- 0 until j) {
+                if (nums[i] < nums[j]) leftMin = leftMin min nums[i]
+            }
+            
+            // Find the smallest value to the right of j
+            for (k <- j + 1 until nums.length) {
+                if (nums[k] < nums[j]) rightMin = rightMin min nums[k]
+            }
+            
+            // If valid mountain triplet found, update minSum
+            if (leftMin != Int.MaxValue && rightMin != Int.MaxValue) {
+                minSum = minSum min (leftMin + nums[j] + rightMin)
+            }
+        }
+        
+        if (minSum == Int.MaxValue) -1 else minSum // Return result
+    }
+}"
+scala,compile_error,"Line 18: error: not found: value break (in solution.scala)
+        break
+        ^",../questions/Easy\smallest-missing-integer-greater-than-sequential-prefix-sum\responses\Scala\response_scala_1_failed.json,"object Solution {
+  def missingInteger(nums: Array[Int]): Int = {
+    // Ensure the array is sorted to find sequential numbers easily
+    val sortedNums = nums.sorted
+
+    var longestPrefixSum = 0
+    var currentNum = 0
+
+    // Iterate through the array to find the longest sequential prefix
+    for (num <- sortedNums) {
+      // Check if the current number continues the sequence
+      if (num == currentNum + 1) {
+        longestPrefixSum += num
+        currentNum = num
+      } else if (num > currentNum + 1) {
+        // If we find a number that breaks the sequence, we don't need to continue
+        // as we are looking for the longest sequential prefix
+        break
+      }
+    }
+
+    // Start checking from the sum of the longest sequential prefix + 1
+    var missingInt = longestPrefixSum + 1
+    while (nums.contains(missingInt)) {
+      missingInt += 1
+    }
+
+    missingInt
+  }
+}"
+scala,compile_error,"Line 18: error: type mismatch; (in solution.scala)
+ found   : Long
+ required: Int
+        }) % mod
+           ^",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def countKSubsequencesWithMaxBeauty(s: String, k: Int): Int = {
+        val mod = 1000000007
+        val freq = s.groupBy(identity).mapValues(_.length)
+        val sortedFreq = freq.values.toList.sortWith(_ > _)
+
+        if (k > sortedFreq.size) return 0
+
+        val maxBeautyFreqs = sortedFreq.take(k)
+        val maxBeauty = maxBeautyFreqs.sum
+        val freqCount = maxBeautyFreqs.groupBy(identity).mapValues(_.size)
+
+        freqCount.foldLeft(1L)((acc, fc) => {
+            val (value, count) = fc
+            val occurrences = freq.count(_._2 == value)
+            val combination = (1 to occurrences).map(BigInt(_)).product / ((1 to count).map(BigInt(_)).product * (1 to (occurrences - count)).map(BigInt(_)).product)
+            (acc * combination % mod).toInt
+        }) % mod
+    }
+}"
+scala,compile_error,"Line 17: error: type mismatch; (in solution.scala)
+ found   : Long
+ required: Int
+        }) % mod.toInt
+           ^",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def countKSubsequencesWithMaxBeauty(s: String, k: Int): Int = {
+        val mod = 1000000007
+        val freq = s.groupBy(identity).mapValues(_.length).view.mapValues(_.toLong).toMap
+        val sortedFreq = freq.values.toList.sortWith(_ > _)
+
+        if (k > sortedFreq.size) return 0
+
+        val maxBeautyFreqs = sortedFreq.take(k)
+        val freqCount = maxBeautyFreqs.groupBy(identity).mapValues(_.size)
+
+        freqCount.foldLeft(1L)((acc, fc) => {
+            val (value, count) = fc
+            val occurrences = freq.count(_._2 == value)
+            val combination = (1 to occurrences).map(BigInt(_)).product / ((1 to count).map(BigInt(_)).product * (1 to (occurrences - count)).map(BigInt(_)).product)
+            (acc * combination % mod).toInt
+        }) % mod.toInt
+    }
+}"
+scala,compile_error,"Line 42: error: type mismatch; (in solution.scala)
+ found   : Long
+ required: Int
+            t = y
+                ^",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def countKSubsequencesWithMaxBeauty(s: String, k: Int): Int = {
+        val mod = 1000000007
+        val freq = s.groupBy(identity).mapValues(_.length).toMap
+        val sortedFreq = freq.values.toList.sortWith(_ > _)
+
+        if (k > sortedFreq.size) return 0
+
+        val maxBeautyFreqs = sortedFreq.take(k)
+        val freqCount = maxBeautyFreqs.groupBy(identity).mapValues(_.size)
+
+        freqCount.foldLeft(1L)((acc, fc) => {
+            val (value, count) = fc
+            val occurrences = freq.count(_._2 == value)
+            val combination = factorial(occurrences, mod) * modInverse(factorial(count, mod), mod) % mod * modInverse(factorial(occurrences - count, mod), mod) % mod
+            (acc * combination) % mod
+        }).toInt
+    }
+
+    def factorial(n: Int, mod: Int): Long = {
+        var result = 1L
+        for (i <- 1 to n) {
+            result = (result * i) % mod
+        }
+        result
+    }
+
+    def modInverse(a: Long, mod: Int): Long = {
+        var m = mod
+        var y = 0L
+        var x = 1L
+
+        if (mod == 1) return 0
+
+        var a1 = a
+        while (a1 > 1) {
+            val q = a1 / m
+            var t = m
+
+            m = (a1 % m).toInt
+            a1 = t
+            t = y
+
+            y = x - q * y
+            x = t
+        }
+
+        if (x < 0) x += mod
+
+        x
+    }
+}"
+scala,compile_error,"Line 12: error: polymorphic expression cannot be instantiated to expected type; (in solution.scala)
+ found   : [B >: Int]IndexedSeq[Int]
+ required: List[Int]
+            )) return subset.sorted
+                             ^",../questions/Hard\find-a-good-subset-of-the-matrix\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def goodSubsetofBinaryMatrix(grid: Array[Array[Int]]): List[Int] = {
+        val m = grid.length
+        val n = grid(0).length
+        
+        for (mask <- 1 until (1 << m)) {
+            val subset = (0 until m).filter(i => (mask & (1 << i)) != 0)
+            if (subset.forall(row => 
+                (0 until n).forall(col => 
+                    subset.map(grid(_)(col)).sum * 2 <= subset.length
+                )
+            )) return subset.sorted
+        }
+        
+        List()
+    }
+}"
+scala,compile_error,"Line 30: error: not found: value current (in solution.scala)
+            current = i
+            ^
+Line 32: error: value += is not a member of Long (in solution.scala)
+  Expression does not convert to assignment because:
+    not found: value current
+    expansion: sum = sum.+(<current: error>)
+                sum += current
+                    ^
+Line 33: error: not found: value current (in solution.scala)
+                current = next(current)
+                ^
+Line 35: error: value -= is not a member of Long (in solution.scala)
+  Expression does not convert to assignment because receiver is not assignable.
+                stepsToCycle -= 1
+                             ^
+Line 40: error: value += is not a member of Long (in solution.scala)
+  Expression does not convert to assignment because:
+    not found: value current
+    expansion: cycleSum = cycleSum.+(<current: error>)
+                cycleSum += current
+                         ^
+Line 41: error: not found: value current (in solution.scala)
+                current = next(current)
+                ^
+Line 48: error: value += is not a member of Long (in solution.scala)
+  Expression does not convert to assignment because:
+    not found: value current
+    expansion: sum = sum.+(<current: error>)
+                sum += current
+                    ^
+Line 49: error: not found: value current (in solution.scala)
+                current = next(current)
+                ^",../questions/Hard\maximize-value-of-function-in-a-ball-passing-game\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def getMaxFunctionValue(receiver: List[Int], k: Long): Long = {
+        val n = receiver.length
+        val next = Array.ofDim[Int](n)
+        val count = Array.ofDim[Long](n)
+        var (maxValue, cycleSize, stepsToCycle) = (0L, 0L, 0L)
+
+        for (i <- receiver.indices) {
+            next(i) = receiver(i)
+        }
+
+        def findCycle(start: Int): (Long, Long) = {
+            val visited = Array.fill(n)(-1)
+            var current = start
+            var length = 0
+
+            while (visited(current) == -1) {
+                visited(current) = length
+                length += 1
+                current = next(current)
+            }
+
+            (length - visited(current), visited(current)) // Cycle length and steps to reach the cycle
+        }
+
+        for (i <- 0 until n) {
+            val (cycleLen, stepsToCycle) = findCycle(i)
+            var (sum, remainingSteps) = (0L, k)
+
+            current = i
+            while (remainingSteps > 0 && stepsToCycle > 0) {
+                sum += current
+                current = next(current)
+                remainingSteps -= 1
+                stepsToCycle -= 1
+            }
+
+            var cycleSum = 0L
+            for (_ <- 0 until cycleLen.toInt) {
+                cycleSum += current
+                current = next(current)
+            }
+
+            sum += (remainingSteps / cycleLen) * cycleSum
+            remainingSteps %= cycleLen
+
+            for (_ <- 0 until remainingSteps.toInt) {
+                sum += current
+                current = next(current)
+            }
+
+            maxValue = maxValue max sum
+        }
+
+        maxValue
+    }
+}"
+scala,compile_error,"Line 16: error: Unit does not take parameters (in solution.scala)
+        scala.util.Sorting.quickSort(prices)(Ordering.Int.reverse)
+                                            ^",../questions/Hard\maximum-spending-after-buying-items\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def maxSpending(values: Array[Array[Int]]): Long = {
+        val m = values.length
+        val n = values(0).length
+        val maxDays = m * n
+        val prices = new Array[Int](maxDays)
+        var index = 0
+
+        for (i <- values.indices) {
+            for (j <- values(i).indices) {
+                prices(index) = values(i)(j)
+                index += 1
+            }
+        }
+
+        scala.util.Sorting.quickSort(prices)(Ordering.Int.reverse)
+
+        var total: Long = 0
+        for (day <- 1 to maxDays) {
+            total += prices(day - 1).toLong * day
+        }
+
+        total
+    }
+}"
+scala,compile_error,"Line 5: error: constructor cannot be instantiated to expected type; (in solution.scala)
+ found   : (T1, T2, T3)
+ required: ((Int, Int), Int)
+            (n1, n2, index) <- nums1.zip(nums2).zipWithIndex
+            ^",../questions/Hard\maximum-sum-queries\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def maximumSumQueries(nums1: Array[Int], nums2: Array[Int], queries: Array[Array[Int]]): Array[Int] = {
+        val sums = nums1.zip(nums2).map { case (n1, n2) => n1 + n2 }
+        val filteredIndices = for {
+            (n1, n2, index) <- nums1.zip(nums2).zipWithIndex
+        } yield (n1, n2, index)
+
+        queries.map { case Array(xi, yi) =>
+            filteredIndices
+                .filter { case (n1, n2, _) => n1 >= xi && n2 >= yi }
+                .map { case (_, _, index) => sums(index) }
+                .reduceOption(_ max _)
+                .getOrElse(-1)
+        }
+    }
+}"
+scala,compile_error,"Line 24: error: value min is not a member of Boolean (in solution.scala)
+            mismatches / 2 <= (bi - ai + 1) min (di - ci + 1)
+                                            ^",../questions/Hard\palindrome-rearrangement-queries\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def canMakePalindromeQueries(s: String, queries: Array[Array[Int]]): Array[Boolean] = {
+        val n = s.length
+        val prefixCount = Array.ofDim[Int](n + 1, 26)
+        
+        for (i <- 0 until n) {
+            for (j <- 0 until 26) {
+                prefixCount(i + 1)(j) = prefixCount(i)(j)
+            }
+            prefixCount(i + 1)(s(i) - 'a') += 1
+        }
+        
+        queries.map { case Array(ai, bi, ci, di) =>
+            val leftCount = new Array[Int](26)
+            val rightCount = new Array[Int](26)
+            
+            for (i <- 0 until 26) {
+                leftCount(i) = prefixCount(bi + 1)(i) - prefixCount(ai)(i)
+                rightCount(i) = prefixCount(di + 1)(i) - prefixCount(ci)(i)
+            }
+            
+            val mismatches = leftCount.zip(rightCount).count { case (l, r) => l != r }
+            
+            mismatches / 2 <= (bi - ai + 1) min (di - ci + 1)
+        }
+    }
+}"
+scala,compile_error,"/leetcode/user_code/1166329269/prog_joined.scala:10: warning: match may not be exhaustive.
+It would fail on the following inputs: List(_), Nil
+        coordinates.combinations(2).count { case List(a, b) =>
+                                          ^
+warning: 1 deprecation (since 2.13.3); re-run with -deprecation for details",../questions/Medium\count-pairs-of-points-with-distance-k\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def countPairs(coordinates: List[List[Int]], k: Int): Int = {
+        coordinates.combinations(2).count { case List(a, b) =>
+            (a(0) ^ b(0)) + (a(1) ^ b(1)) == k
+        }
+    }
+}"
+scala,compile_error,"Line 28: error: reassignment to val (in solution.scala)
+                i = j - 1 // Skip processed part
+                  ^",../questions/Medium\count-subarrays-where-max-element-appears-at-least-k-times\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def countSubarrays(nums: Array[Int], k: Int): Long = {
+        val n = nums.length
+        val maxVal = nums.max
+        var answer = 0L
+
+        for (i <- nums.indices) {
+            if (nums(i) == maxVal) {
+                var count = 0
+                var j = i
+                while (j < n && nums(j) == maxVal) {
+                    count += 1
+                    j += 1
+                }
+
+                if (count >= k) {
+                    val left = i
+                    var right = j
+
+                    while (right < n && nums(right) != maxVal) right += 1
+
+                    val totalLeft = if (left > 0) left else 1
+                    val totalRight = if (right < n) (n - right) else 1
+
+                    answer += totalLeft.toLong * totalRight.toLong
+                }
+
+                i = j - 1 // Skip processed part
+            }
+        }
+
+        answer
+    }
+}"
+scala,compile_error,"Line 13: error: not found: value break (in solution.scala)
+                        break
+                        ^",../questions/Medium\find-the-longest-semi-repetitive-substring\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def longestSemiRepetitiveSubstring(s: String): Int = {
+        var maxLen = 0
+        for (i <- s.indices) {
+            var repeat = false
+            var len = 1
+            for (j <- i + 1 until s.length) {
+                if (s(j) == s(j - 1)) {
+                    if (repeat) {
+                        len = j - i
+                        maxLen = maxLen max len
+                        len = 0
+                        break
+                    }
+                    repeat = true
+                }
+                len += 1
+            }
+            maxLen = maxLen max len
+        }
+        maxLen
+    }
+}"
+scala,compile_error,"Line 6: error: postfix operator toInt needs to be enabled (in solution.scala)
+by making the implicit value scala.language.postfixOps visible.
+This can be achieved by adding the import clause 'import scala.language.postfixOps'
+or by setting the compiler option -language:postfixOps.
+See the Scaladoc for value scala.language.postfixOps for a discussion
+why the feature needs to be explicitly enabled.
+            (((1L + mid) * mid / 2) + ((mid + 2).toLong + (mid + n)) * (n - mid) / 2) % mod toInt
+                                                                                            ^
+Line 8: error: postfix operator toInt needs to be enabled (in solution.scala)
+by making the implicit value scala.language.postfixOps visible.
+            ((1L + n) * n / 2) % mod toInt
+                                     ^",../questions/Medium\find-the-minimum-possible-sum-of-a-beautiful-array\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def minimumPossibleSum(n: Int, target: Int): Int = {
+        val mod = 1000000007
+        val mid = target / 2
+        if (target % 2 == 0 && n > mid) {
+            (((1L + mid) * mid / 2) + ((mid + 2).toLong + (mid + n)) * (n - mid) / 2) % mod toInt
+        } else {
+            ((1L + n) * n / 2) % mod toInt
+        }
+    }
+}"
+scala,compile_error,"Line 13: error: type mismatch; (in solution.scala)
+ found   : (Int, Int) => Boolean
+ required: Int => Boolean
+        (1 to n).filter(canPartition(_, _)).map(i => i * i).sum
+                                    ^",../questions/Medium\find-the-punishment-number-of-an-integer\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def punishmentNumber(n: Int): Int = {
+        def canPartition(num: Int, i: Int): Boolean = {
+            val sqrStr = (i * i).toString
+            def helper(s: String, target: Int): Boolean = {
+                if (target == 0) return true
+                if (s.isEmpty) return false
+                (1 to s.length).exists(j => s.substring(0, j).toInt <= target && helper(s.substring(j), target - s.substring(0, j).toInt))
+            }
+            helper(sqrStr, i)
+        }
+
+        (1 to n).filter(canPartition(_, _)).map(i => i * i).sum
+    }
+}"
+scala,compile_error,"Line 21: error: value update is not a member of IndexedSeq[Int] (in solution.scala)
+did you mean updated?
+                sortedIndices(minPos) = i
+                ^",../questions/Medium\make-lexicographically-smallest-array-by-swapping-elements\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def lexicographicallySmallestArray(nums: Array[Int], limit: Int): Array[Int] = {
+        val n = nums.length
+        val sortedIndices = nums.indices.sortBy(nums)
+        val pos = Array.ofDim[Int](n)
+        sortedIndices.zipWithIndex.foreach { case (index, sortedIndex) => pos(index) = sortedIndex }
+
+        def canSwap(i: Int, j: Int): Boolean = math.abs(nums(i) - nums(j)) <= limit
+
+        for (i <- 0 until n) {
+            var minPos = pos(i)
+            for (j <- i until n if pos(j) < minPos && canSwap(i, j)) {
+                minPos = pos(j)
+            }
+            if (minPos != pos(i)) {
+                val temp = nums(i)
+                nums(i) = nums(sortedIndices(minPos))
+                nums(sortedIndices(minPos)) = temp
+
+                pos(sortedIndices(minPos)) = pos(i)
+                sortedIndices(minPos) = i
+            }
+        }
+        nums
+    }
+}"
+scala,compile_error,"Line 19: error: recursive value cost needs type (in solution.scala)
+                    if (needed > 0) needed * cost(metal) else 0
+                                             ^
+Line 20: error: ambiguous implicit values: (in solution.scala)
+ both object BigIntIsIntegral in object Numeric of type scala.math.Numeric.BigIntIsIntegral.type
+ and object IntIsIntegral in object Numeric of type scala.math.Numeric.IntIsIntegral.type
+ match expected type scala.math.Numeric[B]
+                }.sum
+                  ^",../questions/Medium\maximum-number-of-alloys\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def maxNumberOfAlloys(n: Int, k: Int, budget: Int, composition: List[List[Int]], stock: List[Int], cost: List[Int]): Int = {
+        (0 until k).map { machine =>
+            var maxPossible = Int.MaxValue
+            (0 until n).foreach { metal =>
+                val neededPerAlloy = composition(machine)(metal)
+                val totalNeeded = neededPerAlloy - stock(metal)
+                if (totalNeeded > 0) {
+                    maxPossible = math.min(maxPossible, budget / (totalNeeded * cost(metal)))
+                }
+            }
+            if (maxPossible == Int.MaxValue) maxPossible = 0
+            var low = 0
+            var high = maxPossible
+            while (low < high) {
+                val mid = (low + high + 1) / 2
+                val cost = (0 until n).map { metal =>
+                    val needed = mid * composition(machine)(metal) - stock(metal)
+                    if (needed > 0) needed * cost(metal) else 0
+                }.sum
+                if (cost <= budget) low = mid else high = mid - 1
+            }
+            low
+        }.max
+    }
+}"
+scala,compile_error,"Line 11: error: not found: value break (in solution.scala)
+                    break
+                    ^",../questions/Medium\minimum-absolute-difference-between-elements-with-constraint\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def minAbsoluteDifference(nums: List[Int], x: Int): Int = {
+        val sortedWithIndex = nums.zipWithIndex.sortBy(_._1)
+        var minDiff = Int.MaxValue
+        for (i <- 0 until sortedWithIndex.length - 1) {
+            for (j <- i + 1 until sortedWithIndex.length) {
+                if (math.abs(sortedWithIndex(i)._2 - sortedWithIndex(j)._2) >= x) {
+                    minDiff = math.min(minDiff, math.abs(sortedWithIndex(i)._1 - sortedWithIndex(j)._1))
+                    // Once a pair meeting the index distance requirement is found, all subsequent pairs will also meet it.
+                    // Break the inner loop to avoid unnecessary comparisons.
+                    break
+                }
+            }
+        }
+        minDiff
+    }
+}"
+scala,compile_error,"Line 18: error: reassignment to val (in solution.scala)
+                    start = mid + 1
+                          ^",../questions/Medium\minimum-size-subarray-in-infinite-array\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def minSizeSubarray(nums: Array[Int], target: Int): Int = {
+        val sums = Array.fill(nums.length * 2 + 1)(0)
+        for (i <- nums.indices) sums(i + 1) = sums(i) + nums(i)
+        for (i <- nums.indices) sums(i + nums.length + 1) = sums(i + nums.length) + nums(i)
+        var result = Int.MaxValue
+        
+        for (start <- nums.indices) {
+            var end = start + nums.length
+            var found = false
+            while (start < end) {
+                val mid = (start + end) / 2
+                if (sums(mid + 1) - sums(mid + 1 - nums.length) >= target) {
+                    found = true
+                    result = result.min(mid + 1 - nums.length)
+                    end = mid
+                } else {
+                    start = mid + 1
+                }
+            }
+            if (!found && sums(start + 1) - sums(start + 1 - nums.length) >= target) {
+                result = result.min(start + 1 - nums.length)
+            }
+        }
+        
+        if (result == Int.MaxValue) -1 else result
+    }
+}"
+scala,compile_error,"Line 14: error: type mismatch; (in solution.scala)
+ found   : Long
+ required: Int
+        ((sum % mod) + mod) % mod.toInt
+                            ^",../questions/Medium\movement-of-robots\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def sumDistance(nums: Array[Int], s: String, d: Int): Int = {
+        val mod = 1000000007
+        val n = nums.length
+        val positions = Array.ofDim[Int](n)
+        for (i <- nums.indices) {
+            positions(i) = nums(i) + (if (s(i) == 'R') d else -d)
+        }
+        scala.util.Sorting.quickSort(positions)
+        var sum: Long = 0
+        for (i <- positions.indices) {
+            sum = (sum + (positions(i).toLong * i - positions(i).toLong * (n - i - 1))) % mod
+        }
+        ((sum % mod) + mod) % mod.toInt
+    }
+}"
+scala,compile_error,"Line 33: error: type mismatch; (in solution.scala)
+ found   : Long
+ required: Int
+        (totalCount * modPow(25, n - 4, mod)) % mod
+                                              ^",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\Scala\response_scala_1_failed.json,"object Solution {
+    val mod = 1000000007
+
+    def modPow(base: Long, exponent: Long, modulus: Long): Long = {
+        var result = 1L
+        var b = base % modulus
+        var e = exponent
+        while (e > 0) {
+            if ((e & 1) == 1) result = (result * b) % modulus
+            e >>= 1
+            b = (b * b) % modulus
+        }
+        result
+    }
+
+    def stringCount(n: Int): Int = {
+        if (n < 4) return 0
+
+        val factorial = new Array[Long](n + 1)
+        factorial(0) = 1
+        for (i <- 1 to n) {
+            factorial(i) = factorial(i - 1) * i % mod
+        }
+
+        def inverse(x: Long): Long = modPow(x, mod - 2, mod)
+
+        def choose(n: Int, k: Int): Long = {
+            if (n < k) 0
+            else factorial(n) * inverse(factorial(k)) % mod * inverse(factorial(n - k)) % mod
+        }
+
+        val totalCount = choose(26, 4) * choose(n - 1, 3) % mod * factorial(n - 4) % mod
+        (totalCount * modPow(25, n - 4, mod)) % mod
+    }
+}"
+scala,compile_error,"Line 8: error: value += is not a member of Int (in solution.scala)
+  Expression does not convert to assignment because receiver is not assignable.
+                    i += 1
+                      ^",../questions/Medium\remove-adjacent-almost-equal-characters\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def removeAlmostEqualCharacters(word: String): Int = {
+        var ops = 0
+        for(i <- 1 until word.length) {
+            if(word(i) == word(i-1) || Math.abs(word(i) - word(i-1)) == 1) {
+                ops += 1
+                if(i+1 < word.length && (word(i+1) == word(i) || Math.abs(word(i+1) - word(i)) == 1))
+                    i += 1
+            }
+        }
+        ops
+    }
+}"
+scala,compile_error,"/leetcode/user_code/1177596674/prog_joined.scala:25: warning: match may not be exhaustive.
+It would fail on the following inputs: List(_), Nil
+        val merged = strings.permutations.map { case List(x, y, z) =>
+                                              ^
+warning: 1 deprecation (since 2.13.3); re-run with -deprecation for details",../questions/Medium\shortest-string-that-contains-three-strings\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def minimumString(a: String, b: String, c: String): String = {
+        def overlap(s1: String, s2: String): Int = {
+            (0 to s1.length).find(i => s2.startsWith(s1.substring(i))) match {
+                case Some(index) => s1.length - index
+                case None => 0
+            }
+        }
+
+        def merge(s1: String, s2: String): String = {
+            val overlap1 = overlap(s1, s2)
+            val overlap2 = overlap(s2, s1)
+            if (overlap1 >= overlap2) s1 + s2.substring(overlap1)
+            else s2 + s1.substring(overlap2)
+        }
+
+        val strings = List(a, b, c)
+        val merged = strings.permutations.map { case List(x, y, z) =>
+            merge(merge(x, y), z)
+        }.minBy(s => (s.length, s))
+
+        merged
+    }
+}"
+scala,runtime_error,"java.lang.IllegalArgumentException: More than Int.MaxValue elements.
+Line 324: scala.collection.immutable.NumericRange$.check$1 (NumericRange.scala)
+Line 334: scala.collection.immutable.NumericRange$.count (NumericRange.scala)
+Line 75: scala.collection.immutable.NumericRange.length$lzycompute (NumericRange.scala)
+Line 75: scala.collection.immutable.NumericRange.length (NumericRange.scala)
+Line 83: scala.collection.immutable.NumericRange.last (NumericRange.scala)
+Line 421: scala.collection.immutable.NumericRange$NumericRangeIterator.<init> (NumericRange.scala)
+Line 55: scala.collection.immutable.NumericRange.iterator (NumericRange.scala)
+Line 604: scala.collection.IterableOnceOps.count (IterableOnce.scala)
+Line 602: scala.collection.IterableOnceOps.count$ (IterableOnce.scala)
+Line 926: scala.collection.AbstractIterable.count (Iterable.scala)
+Line 6: Solution$.countGoodIntegers$1 (solution.scala)
+Line 14: Solution$.count (solution.scala)
+Line 20: Main$.__helper__ (solution.scala)
+Line 40: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Hard\count-of-integers\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def count(num1: String, num2: String, min_sum: Int, max_sum: Int): Int = {
+        def digitSum(n: BigInt): Int = n.toString.map(_.asDigit).sum
+
+        def countGoodIntegers(start: BigInt, end: BigInt): Int = {
+            (start to end).count(x => {
+                val sum = digitSum(x)
+                sum >= min_sum && sum <= max_sum
+            })
+        }
+
+        val start = BigInt(num1)
+        val end = BigInt(num2)
+        countGoodIntegers(start, end).toInt % (1e9.toInt + 7)
+    }
+}"
+scala,runtime_error,"java.lang.ArrayIndexOutOfBoundsException: 4
+Line 17: Solution$.$anonfun$incremovableSubarrayCount$3 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 15: Solution$.$anonfun$incremovableSubarrayCount$2 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 14: Solution$.incremovableSubarrayCount (solution.scala)
+Line 29: Main$.__helper__ (solution.scala)
+Line 43: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Hard\count-the-number-of-incremovable-subarrays-ii\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def incremovableSubarrayCount(nums: Array[Int]): Long = {
+        val n = nums.length
+        var totalIncremovable = 0L
+
+        // Helper function to check if a subarray is strictly increasing
+        def isStrictlyIncreasing(start: Int, end: Int): Boolean = {
+            for (i <- start until end) {
+                if (nums(i) >= nums(i + 1)) return false
+            }
+            true
+        }
+
+        for (i <- 0 until n) {
+            for (j <- i until n) {
+                // Check if removing the subarray [i, j] makes the entire array strictly increasing
+                if ((i == 0 || nums(i - 1) < nums(j + 1)) && (j == n - 1 || isStrictlyIncreasing(j + 1, n - 1))) {
+                    totalIncremovable += 1
+                }
+            }
+        }
+
+        totalIncremovable
+    }
+}"
+scala,runtime_error,"java.lang.IllegalArgumentException: Error when serializing long: -9223372036854775808 out of range [-(2^53-1), 2^53-1]
+Line 29: precompiled.Serializer$.serialize (Serializer.scala)
+Line 48: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def minimumCost(nums: Array[Int], k: Int, dist: Int): Long = {
+        val n = nums.length
+        val dp = Array.fill(n + 1, k + 1)(Long.MaxValue)
+        dp(0)(0) = 0
+        
+        for (i <- 1 to n) {
+            for (j <- 1 to k) {
+                var minIndex = i - 1
+                while (minIndex >= 0 && i - minIndex <= dist + 1) {
+                    dp(i)(j) = dp(i)(j) min (dp(minIndex)(j - 1) + nums(minIndex))
+                    minIndex -= 1
+                }
+            }
+        }
+        
+        var ans = Long.MaxValue
+        for (i <- n - dist to n) {
+            ans = ans min dp(i)(k)
+        }
+        ans
+    }
+}"
+scala,runtime_error,"java.util.NoSuchElementException: key not found: 2
+Line 274: scala.collection.MapOps.default (Map.scala)
+Line 273: scala.collection.MapOps.default$ (Map.scala)
+Line 405: scala.collection.AbstractMap.default (Map.scala)
+Line 425: scala.collection.mutable.HashMap.apply (HashMap.scala)
+Line 15: Solution$.$anonfun$findMaximumElegance$2 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 7: Solution$.findMaximumElegance (solution.scala)
+Line 36: Main$.__helper__ (solution.scala)
+Line 52: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Hard\maximum-elegance-of-a-k-length-subsequence\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def findMaximumElegance(items: Array[Array[Int]], k: Int): Long = {
+        val sortedItems = items.sortBy(-_(0))
+        val categoryCount = new scala.collection.mutable.HashMap[Int, Int]()
+        var totalProfit = 0L
+        var totalCategories = 0
+        for (i <- sortedItems.indices) {
+            if (i < k) {
+                totalProfit += sortedItems(i)(0)
+                if (categoryCount.getOrElseUpdate(sortedItems(i)(1), 0) == 0) {
+                    totalCategories += 1
+                }
+                categoryCount(sortedItems(i)(1)) += 1
+            } else {
+                if (categoryCount(sortedItems(i)(1)) == 0) {
+                    totalProfit -= sortedItems(k - 1)(0) - sortedItems(i)(0)
+                    if (sortedItems(k - 1)(1) != sortedItems(i)(1)) {
+                        categoryCount(sortedItems(k - 1)(1)) -= 1
+                        if (categoryCount(sortedItems(k - 1)(1)) == 0) {
+                            totalCategories -= 1
+                        }
+                        if (categoryCount.getOrElseUpdate(sortedItems(i)(1), 0) == 0) {
+                            totalCategories += 1
+                        }
+                        categoryCount(sortedItems(i)(1)) += 1
+                    }
+                }
+            }
+        }
+        totalProfit + totalCategories * totalCategories
+    }
+}"
+scala,runtime_error,"java.lang.StringIndexOutOfBoundsException: String index out of range: 5
+Line 658: java.lang.String.charAt (String.java)
+Line 185: scala.collection.StringOps$.apply$extension (StringOps.scala)
+Line 9: Solution$.$anonfun$minimumChanges$2 (solution.scala)
+Line 17: scala.runtime.java8.JFunction2$mcIII$sp.apply (JFunction2$mcIII$sp.scala)
+Line 646: scala.collection.IterableOnceOps.foldLeft (IterableOnce.scala)
+Line 642: scala.collection.IterableOnceOps.foldLeft$ (IterableOnce.scala)
+Line 926: scala.collection.AbstractIterable.foldLeft (Iterable.scala)
+Line 9: Solution$.cost$1 (solution.scala)
+Line 17: Solution$.$anonfun$minimumChanges$5 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 15: Solution$.$anonfun$minimumChanges$4 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 14: Solution$.$anonfun$minimumChanges$3 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 13: Solution$.minimumChanges (solution.scala)
+Line 26: Main$.__helper__ (solution.scala)
+Line 42: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Hard\minimum-changes-to-make-k-semi-palindromes\responses\Scala\response_scala_1_failed.json,"object Solution {
+  def minimumChanges(s: String, k: Int): Int = {
+    val n = s.length
+    val inf = 1000 * 1000 * 1000
+    val dp = Array.fill(n + 1, k + 1)(inf)
+    dp(0)(0) = 0
+
+    def cost(l: Int, r: Int): Int = {
+      (l until (l + r) / 2).foldLeft(0)((acc, i) => acc + (if (s(i) != s(r - i + l)) 1 else 0))
+    }
+
+    for {
+      i <- 1 to n
+      j <- 1 to k.min(i)
+      l <- 1 to i / j
+    } {
+      dp(i)(j) = dp(i)(j).min(dp(i - l)(j - 1) + cost(i - l, i))
+    }
+
+    dp(n)(k)
+  }
+}"
+scala,runtime_error,"java.lang.IllegalArgumentException: Error when serializing long: -9223372036854775784 out of range [-(2^53-1), 2^53-1]
+Line 29: precompiled.Serializer$.serialize (Serializer.scala)
+Line 50: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Hard\minimum-cost-to-convert-string-ii\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def minimumCost(source: String, target: String, original: Array[String], changed: Array[String], cost: Array[Int]): Long = {
+        val n = source.length
+        val dp = Array.fill(n + 1)(Long.MaxValue)
+        dp(0) = 0
+
+        for (i <- 1 to n) {
+            dp(i) = dp(i - 1) + (if (source(i - 1) == target(i - 1)) 0 else Long.MaxValue)
+            for (j <- original.indices) {
+                if (i >= original(j).length && source.substring(i - original(j).length, i) == original(j)) {
+                    val targetSubstring = target.substring(i - original(j).length, i)
+                    if (targetSubstring == changed(j) && dp(i - original(j).length) != Long.MaxValue) {
+                        dp(i) = Math.min(dp(i), dp(i - original(j).length) + cost(j))
+                    }
+                }
+            }
+        }
+
+        if (dp(n) == Long.MaxValue) -1 else dp(n)
+    }
+}"
+scala,runtime_error,"java.lang.ArrayIndexOutOfBoundsException: 6
+Line 17: Solution$.$anonfun$canMakePalindromeQueries$4 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 16: Solution$.$anonfun$canMakePalindromeQueries$3 (solution.scala)
+Line 14: Solution$.$anonfun$canMakePalindromeQueries$3$adapted (solution.scala)
+Line 929: scala.collection.ArrayOps$.map$extension (ArrayOps.scala)
+Line 14: Solution$.canMakePalindromeQueries (solution.scala)
+Line 27: Main$.__helper__ (solution.scala)
+Line 43: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Hard\palindrome-rearrangement-queries\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def canMakePalindromeQueries(s: String, queries: Array[Array[Int]]): Array[Boolean] = {
+        val n = s.length
+        val prefixCount = Array.ofDim[Int](n / 2 + 1, 26)
+        
+        for (i <- 0 until n / 2) {
+            for (j <- 0 until 26) {
+                prefixCount(i + 1)(j) = prefixCount(i)(j)
+            }
+            prefixCount(i + 1)(s(i) - 'a') += 1
+            prefixCount(i + 1)(s(n - i - 1) - 'a') -= 1
+        }
+
+        queries.map { case Array(ai, bi, ci, di) =>
+            val countDiffs = new Array[Int](26)
+            for (i <- 0 until 26) {
+                countDiffs(i) = Math.abs(prefixCount(bi + 1)(i) - prefixCount(ai)(i) + prefixCount(di + 1)(i) - prefixCount(ci)(i))
+            }
+            val oddCounts = countDiffs.count(_ % 2 != 0)
+            oddCounts <= 1
+        }
+    }
+}"
+scala,runtime_error,"java.lang.ArithmeticException: BigInteger not invertible.
+Line 2121: java.math.MutableBigInteger.modInverse (MutableBigInteger.java)
+Line 1982: java.math.MutableBigInteger.mutableModInverse (MutableBigInteger.java)
+Line 3156: java.math.BigInteger.modInverse (BigInteger.java)
+Line 465: scala.math.BigInt.modInverse (BigInt.scala)
+Line 31: Solution$.$anonfun$constructProductMatrix$8 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 27: Solution$.$anonfun$constructProductMatrix$6 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 22: Solution$.constructProductMatrix (solution.scala)
+Line 44: Main$.__helper__ (solution.scala)
+Line 58: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Medium\construct-product-matrix\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def constructProductMatrix(grid: Array[Array[Int]]): Array[Array[Int]] = {
+        val n = grid.length
+        val m = grid(0).length
+        val mod = 12345
+        
+        // Initialize the product matrix with 1s
+        val productMatrix = Array.ofDim[Int](n, m)
+        for(i <- 0 until n; j <- 0 until m) productMatrix(i)(j) = 1
+        
+        // Calculate row and column products except self
+        for(i <- 0 until n) {
+            var rowProduct = 1
+            for(j <- 0 until m) {
+                rowProduct = (rowProduct * grid(i)(j)) % mod
+            }
+            for(j <- 0 until m) {
+                productMatrix(i)(j) = rowProduct
+            }
+        }
+        
+        for(j <- 0 until m) {
+            var colProduct = 1
+            for(i <- 0 until n) {
+                colProduct = (colProduct * grid(i)(j)) % mod
+            }
+            for(i <- 0 until n) {
+                // Since we already multiplied by rowProduct, we need to divide by grid(i)(j) but since we are in modulo arithmetic, we use multiplication by modulo inverse instead.
+                // This approach may not work directly because of modulo inverses and division in modular arithmetic, thus needing a different strategy to directly calculate each cell without division.
+                productMatrix(i)(j) = (productMatrix(i)(j) * colProduct) % mod
+                if(grid(i)(j) != 0) productMatrix(i)(j) = (productMatrix(i)(j) * BigInt(grid(i)(j)).modInverse(BigInt(mod)).toInt) % mod
+            }
+        }
+        
+        // Correct the product for each cell by excluding its own value, which we included earlier by mistake due to direct multiplication.
+        // This might require a different approach as direct exclusion after multiplication is not straightforward in modular arithmetic.
+        
+        productMatrix
+    }
+}"
+scala,runtime_error,"java.lang.ArithmeticException: BigInteger not invertible.
+Line 2121: java.math.MutableBigInteger.modInverse (MutableBigInteger.java)
+Line 1982: java.math.MutableBigInteger.mutableModInverse (MutableBigInteger.java)
+Line 3156: java.math.BigInteger.modInverse (BigInteger.java)
+Line 465: scala.math.BigInt.modInverse (BigInt.scala)
+Line 30: Solution$.$anonfun$constructProductMatrix$4 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 19: Solution$.$anonfun$constructProductMatrix$3 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 19: Solution$.constructProductMatrix (solution.scala)
+Line 57: Main$.__helper__ (solution.scala)
+Line 71: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Medium\construct-product-matrix\responses\Scala\response_scala_1_failed.json,"object Solution {
+    def constructProductMatrix(grid: Array[Array[Int]]): Array[Array[Int]] = {
+        val n = grid.length
+        val m = grid(0).length
+        val mod = 12345
+
+        // Initialize the product matrix with the required size.
+        val productMatrix = Array.ofDim[Int](n, m)
+
+        // Calculate the product of all elements in the grid and count zeros.
+        var totalProduct = 1
+        var zeroCount = 0
+        for (i <- grid.indices; j <- grid(i).indices) {
+            if (grid(i)(j) != 0) totalProduct = (totalProduct * grid(i)(j)) % mod
+            else zeroCount += 1
+        }
+
+        // Fill the productMatrix based on the total product and zero counts.
+        for (i <- grid.indices; j <- grid(i).indices) {
+            productMatrix(i)(j) = if (zeroCount > 1) {
+                // If there are more than one zero, all elements in the product matrix should be 0.
+                0
+            } else if (zeroCount == 1) {
+                // If there is exactly one zero, only the elements in the same row or column as the zero should be non-zero.
+                if (grid(i)(j) == 0) totalProduct else 0
+            } else {
+                // If there are no zeros, calculate the product excluding the current element.
+                // Note: This division is not allowed due to constraints, so this part needs to be adjusted.
+                // This illustrates the conceptual approach, but the direct calculation like this won't work in Scala due to division/modulo issues.
+                (totalProduct * BigInt(grid(i)(j)).modInverse(BigInt(mod)).toInt) % mod
+            }
+        }
+
+        // Correctly handle cases with zeros and without division.
+        if (zeroCount == 0) {
+            for (i <- grid.indices; j <- grid(i).indices) {
+                productMatrix(i)(j) = (totalProduct * BigInt(grid(i)(j)).modInverse(BigInt(mod)).toInt) % mod
+            }
+        } else if (zeroCount == 1) {
+            for (i <- grid.indices; j <- grid(i).indices) {
+                if (grid(i)(j) == 0) {
+                    var productWithoutCurrent = 1
+                    for (k <- grid.indices; l <- grid(k).indices if !(k == i && l == j)) {
+                        productWithoutCurrent = (productWithoutCurrent * grid(k)(l)) % mod
+                    }
+                    productMatrix(i)(j) = productWithoutCurrent
+                }
+            }
+        }
+
+        productMatrix
+    }
+}"
+scala,runtime_error,"java.lang.UnsupportedOperationException: empty.min
+Line 914: scala.collection.IterableOnceOps.min (IterableOnce.scala)
+Line 912: scala.collection.IterableOnceOps.min$ (IterableOnce.scala)
+Line 926: scala.collection.AbstractIterable.min (Iterable.scala)
+Line 13: Solution$.minimumCost (solution.scala)
+Line 19: Main$.__helper__ (solution.scala)
+Line 33: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Medium\minimum-cost-to-make-array-equalindromic\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def isPalindrome(x: Int): Boolean = {
+        val s = x.toString
+        s == s.reverse
+    }
+
+    def minimumCost(nums: Array[Int]): Long = {
+        val sorted = nums.sorted
+        val median = if (nums.length % 2 == 0) 
+                        (sorted(nums.length / 2 - 1) + sorted(nums.length / 2)) / 2 
+                     else sorted(nums.length / 2)
+        val candidates = (median - 2 to median + 2).filter(isPalindrome)
+        candidates.map(candidate => nums.foldLeft(0L)((acc, num) => acc + (num - candidate).abs)).min
+    }
+}"
+scala,runtime_error,"java.lang.ArrayIndexOutOfBoundsException: -1
+Line 14: Solution$.$anonfun$minOperations$4 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 8: Solution$.minOperations (solution.scala)
+Line 23: Main$.__helper__ (solution.scala)
+Line 37: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Medium\minimum-number-of-operations-to-make-array-empty\responses\Scala\response_scala_2_failed.json,"object Solution {
+    def minOperations(nums: Array[Int]): Int = {
+        val countMap = nums.groupBy(identity).mapValues(_.length)
+        val freq = new Array[Int](nums.length + 1)
+        countMap.values.foreach(count => freq(count) += 1)
+
+        var res = 0
+        for (i <- freq.indices.reverse) {
+            if (freq(i) > 0) {
+                res += freq(i)
+                val next = Math.min(freq(i), freq(i - 1))
+                freq(i - 1) -= next
+                freq(i - 2) += next
+                freq(i - 3) += freq(i) - next
+            }
+        }
+        if (freq(0) == nums.length) res else -1
+    }
+}"
+scala,runtime_error,"java.lang.ArrayIndexOutOfBoundsException: 26
+Line 22: Solution$.nCr$1 (solution.scala)
+Line 27: Solution$.$anonfun$stringCount$3 (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach$mVc$sp (Range.scala)
+Line 26: Solution$.stringCount (solution.scala)
+Line 35: Main$.__helper__ (solution.scala)
+Line 49: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def stringCount(n: Int): Int = {
+        val mod = 1000000007
+        if (n < 4) return 0
+        val factorial = Array.fill(n + 1)(1L)
+        for (i <- 1 to n) factorial(i) = factorial(i - 1) * i % mod
+        
+        def modInv(a: Long, m: Long): Long = {
+            def extGcd(a: Long, b: Long): (Long, Long, Long) = {
+                if (b == 0L) (a, 1L, 0L)
+                else {
+                    val (g, x, y) = extGcd(b, a % b)
+                    (g, y, x - (a / b) * y)
+                }
+            }
+            val (_, x, _) = extGcd(a, m)
+            (x % m + m) % m
+        }
+        
+        def nCr(n: Int, r: Int): Long = {
+            if (n < r) 0
+            else factorial(n) * modInv(factorial(r), mod) % mod * modInv(factorial(n - r), mod) % mod
+        }
+        
+        var total = 0L
+        for (i <- 4 to n) {
+            total = (total + nCr(26, 4) * nCr(i - 1, 3) % mod * factorial(i - 4) % mod) % mod
+        }
+        total.toInt
+    }
+}"
+scala,runtime_error,"java.util.NoSuchElementException: key not found: 2
+Line 274: scala.collection.MapOps.default (Map.scala)
+Line 273: scala.collection.MapOps.default$ (Map.scala)
+Line 405: scala.collection.AbstractMap.default (Map.scala)
+Line 425: scala.collection.mutable.HashMap.apply (HashMap.scala)
+Line 6: Solution$.$anonfun$relocateMarbles$3 (solution.scala)
+Line 5: Solution$.$anonfun$relocateMarbles$3$adapted (solution.scala)
+Line 190: scala.collection.immutable.Range.foreach (Range.scala)
+Line 5: Solution$.relocateMarbles (solution.scala)
+Line 16: Main$.__helper__ (solution.scala)
+Line 34: Main$.main (solution.scala)
+Main.main (prog_joined.scala)
+sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+Line 62: sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java)
+Line 43: sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java)
+Line 498: java.lang.reflect.Method.invoke (Method.java)
+Line 101: scala.reflect.internal.util.RichClassLoader$.$anonfun$run$extension$1 (ScalaClassLoader.scala)
+Line 36: scala.reflect.internal.util.RichClassLoader$.run$extension (ScalaClassLoader.scala)
+Line 30: scala.tools.nsc.CommonRunner.run (ObjectRunner.scala)
+Line 28: scala.tools.nsc.CommonRunner.run$ (ObjectRunner.scala)
+Line 45: scala.tools.nsc.ObjectRunner$.run (ObjectRunner.scala)
+Line 37: scala.tools.nsc.CommonRunner.runAndCatch (ObjectRunner.scala)
+Line 36: scala.tools.nsc.CommonRunner.runAndCatch$ (ObjectRunner.scala)
+Line 70: scala.tools.nsc.MainGenericRunner.runTarget$1 (MainGenericRunner.scala)
+Line 91: scala.tools.nsc.MainGenericRunner.run$1 (MainGenericRunner.scala)
+Line 103: scala.tools.nsc.MainGenericRunner.process (MainGenericRunner.scala)
+Line 108: scala.tools.nsc.MainGenericRunner$.main (MainGenericRunner.scala)
+scala.tools.nsc.MainGenericRunner.main (MainGenericRunner.scala)",../questions/Medium\relocate-marbles\responses\Scala\response_scala_0_failed.json,"object Solution {
+    def relocateMarbles(nums: Array[Int], moveFrom: Array[Int], moveTo: Array[Int]): List[Int] = {
+        val marblePositions = scala.collection.mutable.Map[Int, Int]()
+        nums.foreach(pos => marblePositions(pos) = marblePositions.getOrElse(pos, 0) + 1)
+        for (i <- moveFrom.indices) {
+            val count = marblePositions(moveFrom(i))
+            marblePositions(moveTo(i)) = marblePositions.getOrElse(moveTo(i), 0) + count
+            marblePositions.remove(moveFrom(i))
+        }
+        marblePositions.keys.toList.sorted
+    }
+}"

@@ -1,0 +1,1154 @@
+Language,Error Type,Message,File Path,Code
+cpp,compile_error,"Line 18: Char 23: error: no matching function for call to 'max'
+   18 |             maxFreq = max(maxFreq, right - left + 1);
+      |                       ^~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:407:5: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('long long' vs. 'int')
+  398 |     max(const _Tp&, const _Tp&);
+      |     ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3467:5: note: candidate template ignored: could not match 'initializer_list<_Tp>' against 'long long'
+ 3458 |     max(initializer_list<_Tp> __l, _Compare __comp)
+      |     ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3461:5: note: candidate function template not viable: requires single argument '__l', but 2 arguments were provided
+ 3452 |     max(initializer_list<_Tp> __l)
+      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:412:5: note: candidate function template not viable: requires 3 arguments, but 2 were provided
+  403 |     max(const _Tp&, const _Tp&, _Compare);
+      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.",../questions/Hard\apply-operations-to-maximize-frequency-score\responses\C++\response_cpp_2_failed.json,"#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    int maxFrequencyScore(vector<int>& nums, long long k) {
+        sort(nums.begin(), nums.end());
+        long long maxFreq = 1, windowSum = 0;
+        int left = 0;
+        for (int right = 0; right < nums.size(); ++right) {
+            windowSum += nums[right];
+            while ((right - left + 1) * nums[right] - windowSum > k) {
+                windowSum -= nums[left];
+                ++left;
+            }
+            maxFreq = max(maxFreq, right - left + 1);
+        }
+        return maxFreq;
+    }
+};"
+cpp,compile_error,"Line 16: Char 45: error: variable 'find' declared with deduced type 'auto' cannot appear in its own initializer
+   16 |             if (parent[x] != x) parent[x] = find(parent[x]);
+      |                                             ^
+1 error generated.",../questions/Hard\greatest-common-divisor-traversal\responses\C++\response_cpp_0_failed.json,"#include <vector>
+#include <numeric>
+#include <unordered_map>
+#include <unordered_set>
+
+using namespace std;
+
+class Solution {
+public:
+    bool canTraverseAllPairs(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> parent(n);
+        for (int i = 0; i < n; ++i) parent[i] = i;
+
+        auto find = [&](int x) {
+            if (parent[x] != x) parent[x] = find(parent[x]);
+            return parent[x];
+        };
+
+        auto unite = [&](int x, int y) {
+            x = find(x);
+            y = find(y);
+            if (x != y) {
+                parent[x] = y;
+            }
+        };
+
+        unordered_map<int, vector<int>> factors;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 2; j * j <= nums[i]; ++j) {
+                if (nums[i] % j == 0) {
+                    factors[j].push_back(i);
+                    while (nums[i] % j == 0) nums[i] /= j;
+                }
+            }
+            if (nums[i] > 1) factors[nums[i]].push_back(i);
+        }
+
+        for (auto& [factor, indices] : factors) {
+            for (int i = 1; i < indices.size(); ++i) {
+                unite(indices[i], indices[i - 1]);
+            }
+        }
+
+        int representative = find(0);
+        for (int i = 1; i < n; ++i) {
+            if (find(i) != representative) return false;
+        }
+        return true;
+    }
+};"
+cpp,compile_error,"Line 13: Char 23: error: no matching function for call to 'min'
+   13 |             left[i] = std::min(maxHeights[i], left[i - 1]);
+      |                       ^~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:420:5: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('value_type' (aka 'int') vs. 'value_type' (aka 'long long'))
+  411 |     min(const _Tp&, const _Tp&);
+      |     ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3455:5: note: candidate template ignored: could not match 'initializer_list<_Tp>' against 'value_type' (aka 'int')
+ 3446 |     min(initializer_list<_Tp> __l, _Compare __comp)
+      |     ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3449:5: note: candidate function template not viable: requires single argument '__l', but 2 arguments were provided
+ 3440 |     min(initializer_list<_Tp> __l)
+      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:425:5: note: candidate function template not viable: requires 3 arguments, but 2 were provided
+  416 |     min(const _Tp&, const _Tp&, _Compare);
+      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",../questions/Medium\beautiful-towers-i\responses\C++\response_cpp_2_failed.json,"#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    long long maximumSumOfHeights(vector<int>& maxHeights) {
+        int n = maxHeights.size();
+        vector<long long> left(n, 0), right(n, 0);
+        
+        // Compute maximum heights descending to the left
+        left[0] = maxHeights[0];
+        for (int i = 1; i < n; ++i) {
+            left[i] = std::min(maxHeights[i], left[i - 1]);
+        }
+
+        // Compute maximum heights descending to the right
+        right[n - 1] = maxHeights[n - 1];
+        for (int i = n - 2; i >= 0; --i) {
+            right[i] = std::min(maxHeights[i], right[i + 1]);
+        }
+
+        long long maxSum = 0;
+
+        // Calculate the maximum sum for each possible peak
+        for (int peak = 0; peak < n; ++peak) {
+            long long sum = 0;
+            long long peakHeight = maxHeights[peak];
+            
+            // Sum to the left of the peak
+            for (int i = 0; i <= peak; ++i) {
+                long long height = std::min(peakHeight, left[i]);
+                sum += height;
+                peakHeight = std::max(1LL, peakHeight - 1); // Ensure non-increasing
+            }
+
+            peakHeight = maxHeights[peak];
+            // Sum to the right of the peak, excluding the peak itself
+            for (int i = n - 1; i > peak; --i) {
+                long long height = std::min(peakHeight, right[i]);
+                sum += height;
+                peakHeight = std::max(1LL, peakHeight - 1); // Ensure non-increasing
+            }
+
+            maxSum = std::max(maxSum, sum);
+        }
+
+        return maxSum;
+    }
+};"
+cpp,compile_error,"Line 5: Char 21: error: no matching constructor for initialization of 'vector<int>'
+    5 |         vector<int> overlap(words.size(), vector<int>(words.size(), 0));
+      |                     ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:510:7: note: candidate constructor not viable: no known conversion from 'vector<int>' to 'const allocator_type' (aka 'const std::allocator<int>') for 2nd argument
+  501 |       vector(size_type __n, const allocator_type& __a = allocator_type())
+      |       ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:522:7: note: candidate constructor not viable: no known conversion from 'vector<int>' to 'const value_type' (aka 'const int') for 2nd argument
+  513 |       vector(size_type __n, const value_type& __value,
+      |       ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:575:7: note: candidate constructor not viable: no known conversion from 'size_type' (aka 'unsigned long') to 'const vector<int>' for 1st argument
+  566 |       vector(const vector& __x, const allocator_type& __a)
+      |       ^      ~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:607:7: note: candidate constructor not viable: no known conversion from 'size_type' (aka 'unsigned long') to 'vector<int>' for 1st argument
+  598 |       vector(vector&& __rv, const allocator_type& __m)
+      |       ^      ~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:625:7: note: candidate constructor not viable: no known conversion from 'size_type' (aka 'unsigned long') to 'initializer_list<value_type>' (aka 'initializer_list<int>') for 1st argument
+  616 |       vector(initializer_list<value_type> __l,
+      |       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:653:2: note: candidate template ignored: deduced conflicting types for parameter '_InputIterator' ('size_type' (aka 'unsigned long') vs. 'vector<int>')
+  644 |         vector(_InputIterator __first, _InputIterator __last,
+      |         ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:497:7: note: candidate constructor not viable: requires single argument '__a', but 2 arguments were provided
+  488 |       vector(const allocator_type& __a) _GLIBCXX_NOEXCEPT
+      |       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:553:7: note: candidate constructor not viable: requires single argument '__x', but 2 arguments were provided
+  544 |       vector(const vector& __x)
+      |       ^      ~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:572:7: note: candidate constructor not viable: requires 1 argument, but 2 were provided
+  563 |       vector(vector&&) noexcept = default;
+      |       ^      ~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:585:7: note: candidate constructor not viable: requires 3 arguments, but 2 were provided
+  576 |       vector(vector&& __rv, const allocator_type& __m, true_type) noexcept
+      |       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:589:7: note: candidate constructor not viable: requires 3 arguments, but 2 were provided
+  580 |       vector(vector&& __rv, const allocator_type& __m, false_type)
+      |       ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:487:7: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
+  478 |       vector() = default;
+      |       ^",../questions/Medium\decremental-string-concatenation\responses\C++\response_cpp_1_failed.json,"class Solution {
+public:
+    int minimizeConcatenatedLength(vector<string>& words) {
+        vector<vector<int>> dp(1 << words.size(), vector<int>(words.size(), INT_MAX));
+        vector<int> overlap(words.size(), vector<int>(words.size(), 0));
+        for (int i = 0; i < words.size(); ++i) {
+            for (int j = 0; j < words.size(); ++j) {
+                if (i != j) {
+                    for (int k = min(words[i].size(), words[j].size()); k > 0; --k) {
+                        if (words[i].substr(words[i].size() - k) == words[j].substr(0, k)) {
+                            overlap[i][j] = k;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < words.size(); ++i) {
+            dp[1 << i][i] = words[i].length();
+        }
+        for (int mask = 1; mask < (1 << words.size()); ++mask) {
+            for (int j = 0; j < words.size(); ++j) {
+                if (mask & (1 << j)) {
+                    for (int k = 0; k < words.size(); ++k) {
+                        if (j != k && (mask & (1 << k))) {
+                            int prevMask = mask ^ (1 << j);
+                            dp[mask][j] = min(dp[mask][j], dp[prevMask][k] + (int)words[j].length() - overlap[k][j]);
+                        }
+                    }
+                }
+            }
+        }
+        int result = INT_MAX;
+        for (int i = 0; i < words.size(); ++i) {
+            result = min(result, dp[(1 << words.size()) - 1][i]);
+        }
+        return result;
+    }
+};"
+cpp,compile_error,"Line 11: Char 58: error: invalid operands to binary expression ('typename __gnu_cxx::__promote_2<long long, long long>::__type' (aka 'double') and 'long long')
+   11 |             if (pow(static_cast<long long>(a*b % 10), c) % m == target) {
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~
+1 error generated.",../questions/Medium\double-modular-exponentiation\responses\C++\response_cpp_0_failed.json,"#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> getGoodIndices(vector<vector<int>>& variables, int target) {
+        vector<int> goodIndices;
+        for (int i = 0; i < variables.size(); ++i) {
+            auto& v = variables[i];
+            long long a = v[0], b = v[1], c = v[2], m = v[3];
+            if (pow(static_cast<long long>(a*b % 10), c) % m == target) {
+                goodIndices.push_back(i);
+            }
+        }
+        return goodIndices;
+    }
+};"
+cpp,compile_error,"Line 11: Char 34: error: expected ';' after return statement
+   11 |                 return {words[i]} + getWordsInLongestSubsequence(n, words, dp, parent[i], groups[parent[i]], groups, parent);
+      |                                  ^
+      |                                  ;",../questions/Medium\longest-unequal-adjacent-groups-subsequence-ii\responses\C++\response_cpp_0_failed.json,"#include <vector>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<vector<int>>& dp, int i, int prevGroup, vector<int>& groups, vector<int>& parent) {
+        if (i == n) return {};
+        if (dp[i][prevGroup + 1] != -1) {
+            if (parent[i] != -1)
+                return {words[i]} + getWordsInLongestSubsequence(n, words, dp, parent[i], groups[parent[i]], groups, parent);
+            else
+                return {};
+        }
+
+        // Not taking the current word
+        vector<string> res1 = getWordsInLongestSubsequence(n, words, dp, i + 1, prevGroup, groups, parent);
+        vector<string> res2 = {};
+
+        // Taking the current word if it satisfies the conditions
+        if (prevGroup != groups[i]) {
+            for (int j = 0; j < i; ++j) {
+                if (words[j].length() == words[i].length() && hammingDistance(words[j], words[i]) == 1 && groups[j] != groups[i]) {
+                    vector<string> tmp = getWordsInLongestSubsequence(n, words, dp, j, groups[j], groups, parent);
+                    if (tmp.size() + 1 > res2.size()) {
+                        res2 = tmp;
+                        res2.push_back(words[i]);
+                        parent[i] = j;
+                    }
+                }
+            }
+        }
+
+        // Choose the longer subsequence
+        if (res1.size() > res2.size()) {
+            dp[i][prevGroup + 1] = res1.size();
+            return res1;
+        } else {
+            dp[i][prevGroup + 1] = res2.size();
+            return res2;
+        }
+    }
+
+    int hammingDistance(const string& a, const string& b) {
+        int count = 0;
+        for (int i = 0; i < a.length(); ++i) {
+            if (a[i] != b[i]) ++count;
+        }
+        return count;
+    }
+
+    vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups) {
+        vector<vector<int>> dp(n, vector<int>(n + 1, -1));
+        vector<int> parent(n, -1);
+        return getWordsInLongestSubsequence(n, words, dp, 0, -1, groups, parent);
+    }
+};"
+cpp,compile_error,"Line 11: Char 33: error: variable 'prev' declared with deduced type 'auto' cannot appear in its own initializer
+   11 |                     auto prev = prev(it);
+      |                                 ^",../questions/Medium\make-lexicographically-smallest-array-by-swapping-elements\responses\C++\response_cpp_0_failed.json,"class Solution {
+public:
+    vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
+        int n = nums.size();
+        multiset<int> window;
+        for (int i = 0; i < n; ++i) {
+            window.insert(nums[i]);
+            if (i > 0) {
+                auto it = window.lower_bound(nums[i]);
+                if (it != window.begin()) {
+                    auto prev = prev(it);
+                    if (*it - *prev <= limit) {
+                        nums[i] = *prev;
+                        nums[i - 1] = *it;
+                        window.erase(window.find(*prev));
+                        window.insert(nums[i - 1]);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < n - 1; ++i) {
+            auto it = window.lower_bound(nums[i]);
+            auto next = next(it);
+            if (next != window.end() && *next - nums[i] <= limit) {
+                for (int j = i + 1; j < n; ++j) {
+                    if (nums[j] == *next) {
+                        swap(nums[i], nums[j]);
+                        break;
+                    }
+                }
+            }
+        }
+        return nums;
+    }
+};"
+cpp,compile_error,"Line 26: Char 53: error: no matching function for call to 'min'
+   26 |                         dist = max(0LL, dist - 2 * (min(d, meetTime) - meetTime));
+      |                                                     ^~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:420:5: note: candidate template ignored: deduced conflicting types for parameter '_Tp' ('int' vs. 'long long')
+  411 |     min(const _Tp&, const _Tp&);
+      |     ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3455:5: note: candidate template ignored: could not match 'initializer_list<_Tp>' against 'int'
+ 3446 |     min(initializer_list<_Tp> __l, _Compare __comp)
+      |     ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_algo.h:3449:5: note: candidate function template not viable: requires single argument '__l', but 2 arguments were provided
+ 3440 |     min(initializer_list<_Tp> __l)
+      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/algorithmfwd.h:425:5: note: candidate function template not viable: requires 3 arguments, but 2 were provided
+  416 |     min(const _Tp&, const _Tp&, _Compare);
+      |     ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.",../questions/Medium\movement-of-robots\responses\C++\response_cpp_0_failed.json,"#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    int sumDistance(vector<int>& nums, string s, int d) {
+        const int mod = 1e9 + 7;
+        vector<pair<int, char>> robots;
+        for (int i = 0; i < nums.size(); ++i) {
+            robots.emplace_back(nums[i], s[i]);
+        }
+        // Sort the robots based on their initial positions
+        sort(robots.begin(), robots.end());
+
+        long long totalDistance = 0;
+        for (int i = 0; i < robots.size(); ++i) {
+            for (int j = i + 1; j < robots.size(); ++j) {
+                long long dist = robots[j].first - robots[i].first;
+                // If robots are moving towards each other
+                if (robots[i].second == 'R' && robots[j].second == 'L') {
+                    long long meetTime = dist / 2; // Time when they meet and change directions
+                    if (d >= meetTime) {
+                        dist = max(0LL, dist - 2 * (min(d, meetTime) - meetTime));
+                    }
+                }
+                totalDistance = (totalDistance + dist) % mod;
+            }
+        }
+        return totalDistance;
+    }
+};"
+cpp,runtime_error,"=================================================================
+==22==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x5020000000a0 at pc 0x562d7d94ffca bp 0x7fff47eaa950 sp 0x7fff47eaa948
+READ of size 4 at 0x5020000000a0 thread T0
+    #2 0x7f662cca5d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+    #3 0x7f662cca5e3f  (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+0x5020000000a0 is located 0 bytes after 16-byte region [0x502000000090,0x5020000000a0)
+allocated by thread T0 here:
+    #6 0x7f662cca5d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+Shadow bytes around the buggy address:
+  0x501ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502000000000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x502000000080: fa fa 00 00[fa]fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==22==ABORTING",../questions/Easy\count-the-number-of-incremovable-subarrays-i\responses\C++\response_cpp_0_failed.json,"#include <vector>
+
+class Solution {
+public:
+    int incremovableSubarrayCount(std::vector<int>& nums) {
+        int count = 0;
+        int n = nums.size();
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = i; j < n; ++j) {
+                // Check if subarray from i to j is incremovable
+                if ((i == 0 || nums[i - 1] < nums[j + 1]) && (j == n - 1 || nums[i] < nums[j + 2])) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+};"
+cpp,runtime_error,"=================================================================
+==23==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x5020000000a0 at pc 0x55b032a78fd8 bp 0x7ffc16cfe060 sp 0x7ffc16cfe058
+READ of size 4 at 0x5020000000a0 thread T0
+    #2 0x7fb2725f7d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+    #3 0x7fb2725f7e3f  (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+0x5020000000a0 is located 0 bytes after 16-byte region [0x502000000090,0x5020000000a0)
+allocated by thread T0 here:
+    #6 0x7fb2725f7d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+Shadow bytes around the buggy address:
+  0x501ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502000000000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x502000000080: fa fa 00 00[fa]fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==23==ABORTING",../questions/Easy\count-the-number-of-incremovable-subarrays-i\responses\C++\response_cpp_1_failed.json,"#include <vector>
+
+class Solution {
+public:
+    int incremovableSubarrayCount(std::vector<int>& nums) {
+        int count = 0;
+        int n = nums.size();
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = i; j < n; ++j) {
+                // Check if subarray from i to j is incremovable
+                // Ensure that indices used to access vector elements are within bounds
+                if ((i == 0 || (j + 1 < n && nums[i - 1] < nums[j + 1])) && 
+                    (j == n - 1 || (i < n && nums[i] < nums[j + 2]))) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+};"
+cpp,runtime_error,"=================================================================
+==24==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x5020000000a0 at pc 0x559dedcff055 bp 0x7fff8f83bfd0 sp 0x7fff8f83bfc8
+READ of size 4 at 0x5020000000a0 thread T0
+    #2 0x7fdd063d8d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+    #3 0x7fdd063d8e3f  (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+0x5020000000a0 is located 0 bytes after 16-byte region [0x502000000090,0x5020000000a0)
+allocated by thread T0 here:
+    #6 0x7fdd063d8d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+Shadow bytes around the buggy address:
+  0x501ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502000000000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x502000000080: fa fa 00 00[fa]fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==24==ABORTING",../questions/Easy\count-the-number-of-incremovable-subarrays-i\responses\C++\response_cpp_2_failed.json,"#include <vector>
+
+class Solution {
+public:
+    int incremovableSubarrayCount(std::vector<int>& nums) {
+        int count = 0;
+        int n = nums.size();
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = i; j < n; ++j) {
+                // Check left and right boundaries
+                bool leftBoundary = (i == 0) || (nums[i - 1] < nums[j + 1]);
+                bool rightBoundary = (j == n - 1) || (nums[i] < nums[j + 2]);
+
+                // Ensure we are not accessing out-of-bound elements
+                if ((i == 0 || j + 1 < n) && (j == n - 1 || i < n - 1 && j + 2 < n)) {
+                    if (leftBoundary && rightBoundary) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+};"
+cpp,runtime_error,"Line 1037: Char 34: runtime error: addition of unsigned offset to 0x50b000000510 overflowed to 0x50b00000038c (stl_vector.h)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:1046:34",../questions/Hard\count-complete-substrings\responses\C++\response_cpp_1_failed.json,"#include <string>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+class Solution {
+public:
+    int countCompleteSubstrings(string word, int k) {
+        int res = 0;
+        for (char startChar = 'a'; startChar <= 'z'; ++startChar) {
+            vector<int> count(26, 0);
+            int total = 0, valid = 0;
+            for (int l = 0, r = 0; r < word.length(); ++r) {
+                int idx = word[r] - 'a';
+                if (++count[idx] == k) valid++;
+                if (count[idx] == 1) total++;
+                while (total > 2 || word[l] < startChar || count[word[l] - 'a'] > k) {
+                    int lIdx = word[l] - 'a';
+                    if (count[lIdx] == k) valid--;
+                    if (--count[lIdx] == 0) total--;
+                    l++;
+                }
+                if (valid == total && total > 0) res++;
+            }
+        }
+        return res;
+    }
+};"
+cpp,runtime_error,"AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==23==ERROR: AddressSanitizer: SEGV on unknown address 0x7fff53ff01b0 (pc 0x564378bbd155 bp 0x7fff53fcf3b0 sp 0x7fff53fcf350 T0)
+==23==The signal is caused by a READ memory access.
+    #24 0x7f458b30dd8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+    #25 0x7f458b30de3f  (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+AddressSanitizer can not provide additional info.
+==23==ABORTING",../questions/Hard\count-of-integers\responses\C++\response_cpp_0_failed.json,"#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+    static const int MOD = 1e9 + 7;
+    
+    int dp[20][2][2][400];
+
+    int digitSum(int idx, int tightNum1, int tightNum2, int sum, const string &num1, const string &num2, int min_sum, int max_sum) {
+        if (sum > max_sum) return 0; // Early termination if sum exceeds max_sum
+        if (idx == num1.size()) { // Base case: all digits processed
+            return sum >= min_sum && sum <= max_sum;
+        }
+        if (dp[idx][tightNum1][tightNum2][sum] != -1) return dp[idx][tightNum1][tightNum2][sum]; // Memoization
+        
+        int limit1 = tightNum1 ? num1[idx] - '0' : 0;
+        int limit2 = tightNum2 ? num2[idx] - '0' : 9;
+        int count = 0;
+        
+        for (int d = limit1; d <= limit2; ++d) {
+            count = (count + digitSum(idx + 1, tightNum1 && d == limit1, tightNum2 && d == limit2, sum + d, num1, num2, min_sum, max_sum)) % MOD;
+        }
+
+        return dp[idx][tightNum1][tightNum2][sum] = count;
+    }
+    
+public:
+    int count(string num1, string num2, int min_sum, int max_sum) {
+        while (num1.size() < num2.size()) num1 = ""0"" + num1; // Padding num1 to match the length of num2
+        
+        memset(dp, -1, sizeof(dp)); // Initializing dp array with -1
+        
+        return digitSum(0, 1, 1, 0, num1, num2, min_sum, max_sum);
+    }
+};"
+cpp,runtime_error,"Line 11: Char 36: runtime error: signed integer overflow: 999999999999999999 * 10 cannot be represented in type 'long long' (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:20:36",../questions/Hard\count-stepping-numbers-in-range\responses\C++\response_cpp_0_failed.json,"#include <string>
+#include <vector>
+#include <queue>
+#define MOD 1000000007
+
+using namespace std;
+
+class Solution {
+    long long toInt(string& s) {
+        long long num = 0;
+        for (char c : s) num = num * 10 + (c - '0');
+        return num;
+    }
+    
+    int bfs(long long low, long long high) {
+        queue<long long> q;
+        for (int i = 1; i <= 9; ++i) q.push(i);
+        int count = 0;
+        while (!q.empty()) {
+            long long curr = q.front();
+            q.pop();
+            if (curr >= low && curr <= high) ++count;
+            if (curr > high) continue;
+            int lastDigit = curr % 10;
+            if (lastDigit > 0) q.push(curr * 10 + lastDigit - 1);
+            if (lastDigit < 9) q.push(curr * 10 + lastDigit + 1);
+        }
+        return count;
+    }
+public:
+    int countSteppingNumbers(string low, string high) {
+        long long l = toInt(low), h = toInt(high);
+        if (l == 0) return 1 + bfs(1, h) % MOD; // Include 0 manually
+        return bfs(l, h) % MOD;
+    }
+};"
+cpp,runtime_error,"terminate called after throwing an instance of 'std::out_of_range'
+  what():  stoll",../questions/Hard\count-stepping-numbers-in-range\responses\C++\response_cpp_1_failed.json,"#include <string>
+#include <vector>
+#include <queue>
+#define MOD 1000000007
+
+using namespace std;
+
+class Solution {
+    long long toInt(string& s) {
+        long long num = 0;
+        for (char c : s) num = num * 10 + (c - '0');
+        return num;
+    }
+
+    int bfs(string low, string high) {
+        long long l = stoll(low), h = stoll(high);
+        int count = 0;
+        for (int i = 0; i <= 9; ++i) {
+            queue<long long> q;
+            q.push(i);
+            while (!q.empty()) {
+                long long curr = q.front();
+                q.pop();
+                if (curr >= l && curr <= h) count++;
+                if (curr == 0 || curr > h) continue;
+                int lastDigit = curr % 10;
+                if (lastDigit > 0) q.push(curr * 10 + lastDigit - 1);
+                if (lastDigit < 9) q.push(curr * 10 + lastDigit + 1);
+            }
+        }
+        return count % MOD;
+    }
+public:
+    int countSteppingNumbers(string low, string high) {
+        return bfs(low, high);
+    }
+};"
+cpp,runtime_error,"terminate called after throwing an instance of 'std::out_of_range'
+  what():  stoll",../questions/Hard\count-stepping-numbers-in-range\responses\C++\response_cpp_2_failed.json,"#include <string>
+#include <vector>
+#define MOD 1000000007
+
+using namespace std;
+
+class Solution {
+public:
+    int countSteppingNumbers(string low, string high) {
+        long long l = stoll(low), h = stoll(high);
+        vector<long long> steppingNumbers;
+        
+        // Special case for 0, as it's a valid stepping number but won't be included in the loop below.
+        if (l == 0) {
+            steppingNumbers.push_back(0);
+            l = 1; // To avoid counting 0 twice if it's within the range.
+        }
+
+        for (int i = 1; i <= 9; ++i) {
+            dfs(i, l, h, steppingNumbers);
+        }
+
+        return steppingNumbers.size() % MOD;
+    }
+
+private:
+    void dfs(long long current, long long& low, long long& high, vector<long long>& steppingNumbers) {
+        if (current >= low && current <= high) {
+            steppingNumbers.push_back(current);
+        }
+        
+        if (current > high) return;
+
+        int lastDigit = current % 10;
+        if (lastDigit > 0) dfs(current * 10 + lastDigit - 1, low, high, steppingNumbers);
+        if (lastDigit < 9) dfs(current * 10 + lastDigit + 1, low, high, steppingNumbers);
+    }
+};"
+cpp,runtime_error,"Line 20: Char 36: runtime error: signed integer overflow: 9223372036854775807 + 4 cannot be represented in type 'long long' (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:29:36",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\C++\response_cpp_0_failed.json,"#include <vector>
+#include <algorithm>
+#include <limits>
+
+using namespace std;
+
+class Solution {
+public:
+    long long minimumCost(vector<int>& nums, int k, int dist) {
+        int n = nums.size();
+        vector<vector<long long>> dp(k + 1, vector<long long>(n + 1, LLONG_MAX));
+        dp[0][0] = 0;
+
+        for (int i = 1; i <= k; ++i) {
+            for (int j = i; j <= n; ++j) {
+                long long minCost = LLONG_MAX;
+                for (int m = max(i - 1, j - dist - 1); m < j; ++m) {
+                    minCost = min(minCost, dp[i - 1][m]);
+                }
+                dp[i][j] = minCost + nums[j - 1];
+            }
+        }
+
+        return *min_element(dp[k].begin() + k, dp[k].end());
+    }
+};"
+cpp,runtime_error,"Line 19: Char 47: runtime error: division by zero (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:28:47",../questions/Hard\maximize-value-of-function-in-a-ball-passing-game\responses\C++\response_cpp_0_failed.json,"#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    long long getMaxFunctionValue(vector<int>& receiver, long long k) {
+        int n = receiver.size();
+        vector<long long> f(n, 0);
+        vector<int> visit(n, -1);
+        long long maxVal = 0;
+
+        for (int i = 0; i < n; ++i) {
+            long long sum = i;
+            int x = i;
+            long long passes = k;
+            while (passes > 0) {
+                if (visit[x] == i) { // Cycle detected
+                    long long cycleLength = f[i] - f[x];
+                    long long cycles = passes / (f[i] - f[receiver[x]]);
+                    sum += cycles * cycleLength;
+                    passes -= cycles * (f[i] - f[receiver[x]]);
+                }
+                if (passes > 0) {
+                    visit[x] = i;
+                    sum += receiver[x];
+                    f[x] = sum;
+                    x = receiver[x];
+                    --passes;
+                }
+            }
+            maxVal = max(maxVal, sum);
+        }
+        return maxVal;
+    }
+};"
+cpp,runtime_error,"Line 1037: Char 34: runtime error: addition of unsigned offset to 0x503000000070 overflowed to 0x503000000068 (stl_vector.h)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_vector.h:1046:34",../questions/Hard\subarrays-distinct-element-sum-of-squares-ii\responses\C++\response_cpp_1_failed.json,"#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+class Solution {
+public:
+    int sumCounts(vector<int>& nums) {
+        const int mod = 1e9 + 7;
+        long long answer = 0;
+        vector<int> last(nums.size() + 1, -1);
+        vector<long long> dp(nums.size() + 1, 0);
+        
+        for (int i = 0; i < nums.size(); ++i) {
+            dp[i + 1] = (2 * dp[i] - dp[last[nums[i]]] + 2 + mod) % mod;
+            answer = (answer + dp[i + 1] - dp[i] + mod) % mod;
+            last[nums[i]] = i;
+        }
+        
+        return (int)answer;
+    }
+};"
+cpp,runtime_error,"=================================================================
+==23==ERROR: AddressSanitizer: heap-use-after-free on address 0x502000000050 at pc 0x55833ca589f6 bp 0x7fffc1de6310 sp 0x7fffc1de6308
+READ of size 8 at 0x502000000050 thread T0
+    #2 0x7fb88fdcad8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+    #3 0x7fb88fdcae3f  (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+0x502000000050 is located 0 bytes inside of 8-byte region [0x502000000050,0x502000000058)
+freed by thread T0 here:
+    #6 0x7fb88fdcad8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+previously allocated by thread T0 here:
+    #6 0x7fb88fdcad8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+Shadow bytes around the buggy address:
+  0x501ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x502000000000: fa fa fd fa fa fa fd fa fa fa[fd]fa fa fa fa fa
+  0x502000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==23==ABORTING",../questions/Medium\find-the-punishment-number-of-an-integer\responses\C++\response_cpp_1_failed.json,"class Solution {
+public:
+    int punishmentNumber(int n) {
+        auto canPartition = [](int i, int square) {
+            string squareStr = to_string(square);
+            int length = squareStr.length();
+            vector<vector<bool>> dp(length + 1, vector<bool>(i + 1, false));
+            dp[0][0] = true;
+            for (int j = 1; j <= length; j++) {
+                for (int k = 0; k <= i; k++) {
+                    dp[j][k] = dp[j - 1][k]; // not take the current digit
+                    if (k - (squareStr[j - 1] - '0') >= 0) {
+                        int val = 0;
+                        for (int l = j; l > 0; l--) {
+                            val += (squareStr[l - 1] - '0') * pow(10, j - l);
+                            if (val > k) break; // optimization to stop early
+                            if (k - val >= 0 && dp[l - 1][k - val]) {
+                                dp[j][k] = true;
+                                break; // found a valid partition
+                            }
+                        }
+                    }
+                }
+            }
+            return dp[length][i];
+        };
+
+        int sum = 0;
+        for (int i = 1; i <= n; ++i) {
+            int square = i * i;
+            if (canPartition(i, square)) sum += square;
+        }
+        return sum;
+    }
+};"
+cpp,runtime_error,"=================================================================
+==23==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x5020000000a0 at pc 0x5642fefbaf05 bp 0x7ffe61c972f0 sp 0x7ffe61c972e8
+READ of size 4 at 0x5020000000a0 thread T0
+    #2 0x7f3d4baaad8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+    #3 0x7f3d4baaae3f  (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+0x5020000000a0 is located 0 bytes after 16-byte region [0x502000000090,0x5020000000a0)
+allocated by thread T0 here:
+    #6 0x7f3d4baaad8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+Shadow bytes around the buggy address:
+  0x501ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x502000000000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x502000000080: fa fa 00 00[fa]fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==23==ABORTING",../questions/Medium\maximum-beauty-of-an-array-after-applying-operation\responses\C++\response_cpp_2_failed.json,"class Solution {
+public:
+    int maximumBeauty(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        vector<long long> prefix(n + 1, 0);
+        for (int i = 1; i <= n; ++i) prefix[i] = prefix[i - 1] + nums[i - 1];
+        
+        int res = 1;
+        for (int i = 0; i < n; ++i) {
+            int l = i, r = n, best = i;
+            while (l <= r) {
+                int m = l + (r - l) / 2;
+                long long need = (long long)nums[m] * (m - i + 1) - (prefix[m + 1] - prefix[i]);
+                if (need <= k) {
+                    best = m;
+                    l = m + 1;
+                } else {
+                    r = m - 1;
+                }
+            }
+            res = max(res, best - i + 1);
+        }
+        return res;
+    }
+};"
+cpp,runtime_error,"Line 10: Char 55: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int' (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:19:55",../questions/Medium\maximum-number-of-jumps-to-reach-the-last-index\responses\C++\response_cpp_1_failed.json,"class Solution {
+public:
+    int maximumJumps(vector<int>& nums, int target) {
+        int n = nums.size();
+        vector<int> jumps(n, INT_MAX);
+        jumps[0] = 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n && nums[j] - nums[i] <= target; ++j) {
+                if (nums[j] - nums[i] >= -target) {
+                    jumps[j] = min(jumps[j], jumps[i] + 1);
+                }
+            }
+        }
+        return jumps[n - 1] == INT_MAX ? -1 : jumps[n - 1];
+    }
+};"
+cpp,runtime_error,"Line 7: Char 49: runtime error: signed integer overflow: 53449611838892 * 712958946092406 cannot be represented in type 'long long' (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:16:49",../questions/Medium\maximum-xor-product\responses\C++\response_cpp_1_failed.json,"class Solution {
+public:
+    int maximumXorProduct(long long a, long long b, int n) {
+        long long maxVal = (1LL << n) - 1;
+        long long maxX = 0;
+        for (long long x = 0; x <= maxVal; ++x) {
+            long long currentProduct = ((a ^ x) * (b ^ x)) % (1000000007);
+            maxX = max(maxX, currentProduct);
+        }
+        return maxX;
+    }
+};"
+cpp,runtime_error,"Line 13: Char 48: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'value_type' (aka 'int') (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:22:48",../questions/Medium\minimum-number-of-coins-for-fruits\responses\C++\response_cpp_2_failed.json,"class Solution {
+public:
+    int minimumCoins(vector<int>& prices) {
+        int n = prices.size();
+        vector<int> dp(n + 1, INT_MAX);
+        dp[0] = 0;
+        for (int i = 0; i < n; i++) {
+            int cost = 0;
+            for (int j = i; j < n; j++) {
+                cost += prices[j];
+                int next = j + (j - i + 2);
+                if (next > n) next = n;
+                dp[next] = min(dp[next], dp[i] + prices[i]);
+            }
+        }
+        return dp[n];
+    }
+};"
+cpp,runtime_error,"Line 18: Char 73: runtime error: signed integer overflow: -2000000000 - 2000000000 cannot be represented in type 'int' (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:27:73",../questions/Medium\movement-of-robots\responses\C++\response_cpp_2_failed.json,"#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+class Solution {
+public:
+    int sumDistance(vector<int>& nums, string s, int d) {
+        const int mod = 1e9 + 7;
+        long long sum = 0;
+        int n = nums.size();
+        
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                // Calculate the distance after d seconds
+                long long dist = abs((nums[i] + (s[i] == 'R' ? d : -d)) - 
+                                     (nums[j] + (s[j] == 'R' ? d : -d)));
+                sum = (sum + dist) % mod;
+            }
+        }
+        
+        return sum;
+    }
+};"
+cpp,runtime_error,"=================================================================
+==20==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x504000000120 at pc 0x55b7727bdd9c bp 0x7ffffbd64930 sp 0x7ffffbd64928
+READ of size 8 at 0x504000000120 thread T0
+    #3 0x7fbccb013d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+    #4 0x7fbccb013e3f  (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+0x504000000120 is located 168 bytes after 40-byte region [0x504000000050,0x504000000078)
+allocated by thread T0 here:
+    #5 0x7fbccb013d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: c289da5071a3399de893d2af81d6a30c62646e1e)
+Shadow bytes around the buggy address:
+  0x503ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x504000000000: fa fa 00 00 00 00 00 05 fa fa 00 00 00 00 00 fa
+  0x504000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=>0x504000000100: fa fa fa fa[fa]fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000380: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==20==ABORTING",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\C++\response_cpp_0_failed.json,"#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int stringCount(int n) {
+        const int MOD = 1e9 + 7;
+        std::vector<long long> factorial(n + 1, 1);
+        for (int i = 2; i <= n; ++i) {
+            factorial[i] = factorial[i - 1] * i % MOD;
+        }
+
+        auto modPow = [&](long long x, int y) {
+            long long res = 1;
+            while (y > 0) {
+                if (y % 2 == 1) res = res * x % MOD;
+                x = x * x % MOD;
+                y /= 2;
+            }
+            return res;
+        };
+
+        auto modInv = [&](long long x) {
+            return modPow(x, MOD - 2);
+        };
+
+        auto nCr = [&](int n, int r) {
+            return factorial[n] * modInv(factorial[r]) % MOD * modInv(factorial[n - r]) % MOD;
+        };
+
+        if (n < 4) return 0;
+        long long result = 0;
+        for (int i = 4; i <= n; ++i) {
+            result += nCr(26, i - 4) * factorial[i - 1] % MOD;
+            result %= MOD;
+        }
+
+        return result;
+    }
+};"

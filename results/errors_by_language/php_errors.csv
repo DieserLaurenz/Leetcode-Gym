@@ -1,0 +1,502 @@
+Language,Error Type,Message,File Path,Code
+php,runtime_error,Line 14: PHP Parse error:  Unclosed '{' on line 14 does not match ')' in solution.php,../questions/Easy\longest-alternating-subarray\responses\PHP\response_php_1_failed.json,"class Solution {
+
+    /**
+     * @param Integer[] $nums
+     * @return Integer
+     */
+    function alternatingSubarray($nums) {
+        $maxLen = -1;
+        $currentLen = 1;
+
+        for ($i = 1; $i < count($nums); $i++) {
+            // Check if the current and previous element follow the alternating pattern
+            if ($i > 1 && (($nums[$i] - $nums[$i - 1]) === 1 && ($nums[$i - 1] - $nums[$i - 2]) === -1) || 
+                ($nums[$i] - $nums[$i - 1]) === -1 && ($nums[$i - 1] - $nums[$i - 2]) === 1)) {
+                $currentLen++;
+            } else {
+                // Reset current length if the pattern breaks, but first check if it's alternating
+                if ($nums[$i] - $nums[$i - 1] === 1 || $nums[$i] - $nums[$i - 1] === -1) {
+                    $currentLen = 2; // Start a new subarray with a length of 2 (it's alternating)
+                } else {
+                    $currentLen = 1; // Not an alternating pattern
+                }
+            }
+            // Update maximum length found
+            $maxLen = max($maxLen, $currentLen);
+        }
+
+        // Return -1 if no alternating subarray exists, else return the max length found
+        return $maxLen > 1 ? $maxLen : -1;
+    }
+}"
+php,runtime_error,"Line 19: PHP Fatal error:  Uncaught ArgumentCountError: pow() expects exactly 2 arguments, 3 given in solution.php
+Stack trace:
+#0 solution.php: pow()
+#1 solution.php: Solution->countKSubsequencesWithMaxBeauty()
+#2 {main}",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\PHP\response_php_1_failed.json,"class Solution {
+
+    /**
+     * @param String $s
+     * @param Integer $k
+     * @return Integer
+     */
+    function countKSubsequencesWithMaxBeauty($s, $k) {
+        $mod = 1000000007;
+        $freq = array_count_values(str_split($s));
+        $freqValues = array_values($freq);
+        
+        // Calculate factorials and inverse factorials for later combinations calculation
+        $maxN = max($freqValues) + 1;
+        $factorial = array_fill(0, $maxN, 1);
+        $inverseFactorial = array_fill(0, $maxN, 1);
+        for ($i = 2; $i < $maxN; $i++) {
+            $factorial[$i] = ($factorial[$i - 1] * $i) % $mod;
+            $inverseFactorial[$i] = pow($factorial[$i], $mod - 2, $mod); // Fermat's little theorem for modular inverse
+        }
+
+        // Combination function using precomputed factorials and their inverses
+        $comb = function($n, $k) use ($mod, $factorial, $inverseFactorial) {
+            if ($k > $n) return 0;
+            return $factorial[$n] * $inverseFactorial[$k] % $mod * $inverseFactorial[$n - $k] % $mod;
+        };
+
+        $result = 0;
+        foreach ($freq as $char => $count) {
+            if ($count >= $k) {
+                $result = ($result + $comb($count, $k)) % $mod;
+            }
+        }
+
+        return $result;
+    }
+}"
+php,runtime_error,Line 12: PHP Fatal error:  Cannot redeclare digitSum() (previously declared in solution.php:12) in solution.php,../questions/Hard\count-of-integers\responses\PHP\response_php_0_failed.json,"class Solution {
+
+    /**
+     * @param String $num1
+     * @param String $num2
+     * @param Integer $min_sum
+     * @param Integer $max_sum
+     * @return Integer
+     */
+    function count($num1, $num2, $min_sum, $max_sum) {
+        $MOD = 1000000007;
+        function digitSum($n) {
+            $sum = 0;
+            while ($n > 0) {
+                $sum += $n % 10;
+                $n = intdiv($n, 10);
+            }
+            return $sum;
+        }
+
+        $count = 0;
+        for ($i = max(1, (int)$num1); $i <= (int)$num2; $i++) {
+            $sum = digitSum($i);
+            if ($sum >= $min_sum && $sum <= $max_sum) {
+                $count = ($count + 1) % $MOD;
+            }
+        }
+        return $count;
+    }
+}"
+php,runtime_error,Line 12: PHP Fatal error:  Cannot redeclare dfs() (previously declared in solution.php:12) in solution.php,../questions/Hard\count-stepping-numbers-in-range\responses\PHP\response_php_1_failed.json,"class Solution {
+
+    /**
+     * @param String $low
+     * @param String $high
+     * @return Integer
+     */
+    function countSteppingNumbers($low, $high) {
+        $mod = 1000000007;
+        $count = 0;
+
+        function dfs($n, $low, $high, &$count, $mod) {
+            if ($n >= $low && $n <= $high) $count = ($count + 1) % $mod;
+            if ($n == 0 || $n > $high) return;
+            $lastDigit = $n % 10;
+            if ($lastDigit == 0) {
+                dfs($n * 10 + 1, $low, $high, $count, $mod);
+            } elseif ($lastDigit == 9) {
+                dfs($n * 10 + 8, $low, $high, $count, $mod);
+            } else {
+                dfs($n * 10 + $lastDigit - 1, $low, $high, $count, $mod);
+                dfs($n * 10 + $lastDigit + 1, $low, $high, $count, $mod);
+            }
+        }
+
+        if ($low == ""0"") $count = 1; // Include 0 manually as it won't be included in the loop below.
+        for ($i = 1; $i <= 9; ++$i) {
+            dfs($i, $low, $high, $count, $mod);
+        }
+
+        return $count;
+    }
+}"
+php,runtime_error,"Line 28: PHP Fatal error:  Uncaught ValueError: str_repeat(): Argument #2 ($times) must be greater than or equal to 0 in solution.php
+Stack trace:
+#0 solution.php: str_repeat()
+#1 solution.php: Solution->numberOfPowerfulInt()
+#2 {main}",../questions/Hard\count-the-number-of-powerful-integers\responses\PHP\response_php_2_failed.json,"class Solution {
+
+    /**
+     * @param Integer $start
+     * @param Integer $finish
+     * @param Integer $limit
+     * @param String $s
+     * @return Integer
+     */
+    function numberOfPowerfulInt($start, $finish, $limit, $s) {
+        $count = 0;
+        $sLen = strlen($s);
+        $sInt = intval($s);
+        $startSuffix = max($start, $sInt);
+        if ($startSuffix > $finish) return 0; // Early return if no number in the range can have s as suffix
+
+        // Find the range of numbers to prepend
+        $maxPrepend = $finish - $sInt;
+        $maxPrependStrLen = strlen((string)$maxPrepend);
+        $startLen = strlen((string)$start);
+
+        // Optimization: Only generate numbers that can fit within the range
+        $minLen = min($sLen + 1, $startLen);
+        $maxLen = strlen((string)$finish);
+
+        for ($len = $minLen; $len <= $maxLen; $len++) {
+            $prependLen = $len - $sLen;
+            $maxNum = (int)str_repeat($limit, $prependLen);
+
+            for ($num = 0; $num <= $maxNum; $num++) {
+                $candidate = (int)($num . $s);
+                if ($candidate >= $start && $candidate <= $finish) {
+                    $isValid = true;
+                    foreach (str_split((string)$num) as $digit) {
+                        if ((int)$digit > $limit) {
+                            $isValid = false;
+                            break;
+                        }
+                    }
+                    if ($isValid) $count++;
+                }
+            }
+        }
+
+        return $count;
+    }
+}"
+php,runtime_error,"Line 11: PHP Parse error:  syntax error, unexpected token ""use"", expecting ""{"" in solution.php",../questions/Hard\greatest-common-divisor-traversal\responses\PHP\response_php_0_failed.json,"class Solution {
+
+    /**
+     * @param Integer[] $nums
+     * @return Boolean
+     */
+    function canTraverseAllPairs($nums) {
+        $n = count($nums);
+        $parent = range(0, $n - 1);
+
+        function find($x) use (&$parent) {
+            return $x == $parent[$x] ? $x : $parent[$x] = find($parent[$x]);
+        }
+
+        function union($x, $y) use (&$parent) {
+            $parent[find($x)] = find($y);
+        }
+
+        function gcd($a, $b) {
+            return $b ? gcd($b, $a % $b) : $a;
+        }
+
+        for ($i = 0; $i < $n; $i++) {
+            for ($j = $i + 1; $j < $n; $j++) {
+                if (gcd($nums[$i], $nums[$j]) > 1) {
+                    union($i, $j);
+                }
+            }
+        }
+
+        $root = find(0);
+        for ($i = 1; $i < $n; $i++) {
+            if (find($i) != $root) {
+                return false;
+            }
+        }
+        return true;
+    }
+}"
+php,runtime_error,"Line 11: PHP Parse error:  syntax error, unexpected token ""use"", expecting ""{"" in solution.php",../questions/Hard\greatest-common-divisor-traversal\responses\PHP\response_php_2_failed.json,"class Solution {
+
+    /**
+     * @param Integer[] $nums
+     * @return Boolean
+     */
+    function canTraverseAllPairs($nums) {
+        $n = count($nums);
+        $parent = range(0, max($nums));
+        
+        function find($x) use (&$parent) {
+            while ($x != $parent[$x]) {
+                $parent[$x] = $parent[$parent[$x]];
+                $x = $parent[$x];
+            }
+            return $x;
+        }
+
+        function union($x, $y) use (&$parent, &$find) {
+            $rootX = $find($x);
+            $rootY = $find($y);
+            if ($rootX != $rootY) {
+                $parent[$rootX] = $rootY;
+            }
+        }
+
+        for ($i = 2; $i <= max($nums); $i++) {
+            $first = true;
+            $prev = null;
+            for ($j = $i; $j <= max($nums); $j += $i) {
+                if (isset($nums[$j])) {
+                    if ($first) {
+                        $prev = $j;
+                        $first = false;
+                    } else {
+                        union($prev, $j);
+                        $prev = $j;
+                    }
+                }
+            }
+        }
+
+        $groups = [];
+        foreach ($nums as $num) {
+            $groups[$find($num)] = 1;
+        }
+
+        return count($groups) === 1;
+    }
+}"
+php,runtime_error,"Line 49: PHP Fatal error:  Uncaught DivisionByZeroError: Division by zero in solution.php
+Stack trace:
+#0 solution.php: intdiv()
+#1 solution.php: Solution->modInverse()
+#2 solution.php: Solution->constructProductMatrix()
+#3 {main}",../questions/Medium\construct-product-matrix\responses\PHP\response_php_1_failed.json,"class Solution {
+
+    /**
+     * @param Integer[][] $grid
+     * @return Integer[][]
+     */
+    function constructProductMatrix($grid) {
+        $n = count($grid);
+        $m = count($grid[0]);
+        $productMatrix = array_fill(0, $n, array_fill(0, $m, 1));
+        $rowProduct = array_fill(0, $n, 1);
+        $colProduct = array_fill(0, $m, 1);
+
+        // First, compute the product of all numbers in each row and each column, excluding zeros
+        for ($i = 0; $i < $n; $i++) {
+            for ($j = 0; $j < $m; $j++) {
+                if ($grid[$i][$j] != 0) {
+                    $rowProduct[$i] = ($rowProduct[$i] * $grid[$i][$j]) % 12345;
+                    $colProduct[$j] = ($colProduct[$j] * $grid[$i][$j]) % 12345;
+                }
+            }
+        }
+
+        // Compute the product for each position by multiplying the row and column products, excluding the current element
+        for ($i = 0; $i < $n; $i++) {
+            for ($j = 0; $j < $m; $j++) {
+                $excludeCurrent = ($rowProduct[$i] * $colProduct[$j]) % 12345;
+                if ($grid[$i][$j] != 0) {
+                    $excludeCurrent = ($excludeCurrent * $this->modInverse($grid[$i][$j], 12345)) % 12345;
+                }
+                $productMatrix[$i][$j] = $excludeCurrent;
+            }
+        }
+
+        return $productMatrix;
+    }
+
+    private function modInverse($a, $m) {
+        // Placeholder for the modular inverse calculation
+        // Implementing the actual logic if needed
+        $m0 = $m;
+        $y = 0;
+        $x = 1;
+
+        if ($m == 1) return 0;
+
+        while ($a > 1) {
+            // q is quotient
+            $q = intdiv($a, $m);
+            $t = $m;
+
+            // m is remainder now, process same as Euclid's algo
+            $m = $a % $m;
+            $a = $t;
+            $t = $y;
+
+            // Update x and y
+            $y = $x - $q * $y;
+            $x = $t;
+        }
+
+        // Make x positive
+        if ($x < 0) $x += $m0;
+
+        return $x;
+    }
+}"
+php,runtime_error,Line 16: PHP Fatal error:  Cannot redeclare hammingDistance() (previously declared in solution.php:16) in solution.php,../questions/Medium\longest-unequal-adjacent-groups-subsequence-ii\responses\PHP\response_php_0_failed.json,"class Solution {
+
+    /**
+     * @param Integer $n
+     * @param String[] $words
+     * @param Integer[] $groups
+     * @return String[]
+     */
+    function getWordsInLongestSubsequence($n, $words, $groups) {
+        $dp = array_fill(0, $n, 1);
+        $prev = array_fill(0, $n, -1);
+        $maxLength = 1;
+        $lastIndex = 0;
+
+        // Calculate Hamming distance
+        function hammingDistance($str1, $str2) {
+            $count = 0;
+            for ($i = 0; $i < strlen($str1); $i++) {
+                if ($str1[$i] != $str2[$i]) $count++;
+            }
+            return $count;
+        }
+
+        // Build DP table
+        for ($i = 1; $i < $n; $i++) {
+            for ($j = 0; $j < $i; $j++) {
+                if ($groups[$i] != $groups[$j] && strlen($words[$i]) == strlen($words[$j]) && hammingDistance($words[$i], $words[$j]) == 1) {
+                    if ($dp[$j] + 1 > $dp[$i]) {
+                        $dp[$i] = $dp[$j] + 1;
+                        $prev[$i] = $j;
+                        if ($dp[$i] > $maxLength) {
+                            $maxLength = $dp[$i];
+                            $lastIndex = $i;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Reconstruct the longest subsequence
+        $result = [];
+        while ($lastIndex != -1) {
+            array_unshift($result, $words[$lastIndex]);
+            $lastIndex = $prev[$lastIndex];
+        }
+
+        return $result;
+    }
+}"
+php,runtime_error,"Line 22: PHP Fatal error:  Uncaught DivisionByZeroError: Division by zero in solution.php
+Stack trace:
+#0 solution.php: Solution->maxNumberOfAlloys()
+#1 {main}",../questions/Medium\maximum-number-of-alloys\responses\PHP\response_php_0_failed.json,"class Solution {
+
+    /**
+     * @param Integer $n
+     * @param Integer $k
+     * @param Integer $budget
+     * @param Integer[][] $composition
+     * @param Integer[] $stock
+     * @param Integer[] $cost
+     * @return Integer
+     */
+    function maxNumberOfAlloys($n, $k, $budget, $composition, $stock, $cost) {
+        $maxAlloys = 0;
+        for ($i = 0; $i < $k; $i++) {
+            $totalCost = 0;
+            for ($j = 0; $j < $n; $j++) {
+                $requiredMetal = $composition[$i][$j];
+                $availableStock = $stock[$j];
+                $additionalMetalNeeded = max(0, $requiredMetal - $availableStock);
+                $totalCost += $additionalMetalNeeded * $cost[$j];
+            }
+            $possibleAlloys = $budget / $totalCost;
+            $maxAlloys = max($maxAlloys, floor($possibleAlloys));
+        }
+        return $maxAlloys;
+    }
+}"
+php,runtime_error,"Line 16: PHP Fatal error:  Uncaught Error: Class ""SplDQueue"" not found in solution.php
+Stack trace:
+#0 solution.php: Solution->minSizeSubarray()
+#1 {main}",../questions/Medium\minimum-size-subarray-in-infinite-array\responses\PHP\response_php_0_failed.json,"class Solution {
+
+    /**
+     * @param Integer[] $nums
+     * @param Integer $target
+     * @return Integer
+     */
+    function minSizeSubarray($nums, $target) {
+        $n = count($nums);
+        $prefixSum = array_fill(0, 2 * $n + 1, 0);
+        for ($i = 1; $i <= 2 * $n; $i++) {
+            $prefixSum[$i] = $prefixSum[$i - 1] + $nums[($i - 1) % $n];
+        }
+        
+        $result = PHP_INT_MAX;
+        $deque = new SplDQueue();
+        
+        for ($i = 0; $i <= 2 * $n; $i++) {
+            while (!$deque->isEmpty() && $prefixSum[$i] - $prefixSum[$deque->bottom()] >= $target) {
+                $result = min($result, $i - $deque->bottom());
+                $deque->shift();
+            }
+            $deque->push($i);
+        }
+        
+        return $result == PHP_INT_MAX ? -1 : $result;
+    }
+}"
+php,runtime_error,"Line 21: PHP Fatal error:  Uncaught ArgumentCountError: pow() expects exactly 2 arguments, 3 given in solution.php
+Stack trace:
+#0 solution.php: pow()
+#1 solution.php: Solution->{closure}()
+#2 solution.php: Solution->stringCount()
+#3 {main}",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\PHP\response_php_2_failed.json,"class Solution {
+
+    /**
+     * @param Integer $n
+     * @return Integer
+     */
+    function stringCount($n) {
+        $mod = 1000000007;
+        
+        // Compute factorial modulo mod
+        $factorial = function($n) use ($mod) {
+            $result = 1;
+            for ($i = 2; $i <= $n; $i++) {
+                $result = ($result * $i) % $mod;
+            }
+            return $result;
+        };
+        
+        // Function to compute nPr modulo mod
+        $nPr = function($n, $r) use ($factorial, $mod) {
+            return $factorial($n) * pow($factorial($n - $r), $mod - 2, $mod) % $mod;
+        };
+        
+        if ($n < 4) {
+            return 0;
+        }
+        
+        $count = 0;
+        // Count of permutations of ""leet""
+        $countOfLeet = $factorial(4);
+        // For each position where ""leet"" can start, count the permutations of the rest of the letters
+        for ($i = 4; $i <= $n; $i++) {
+            $rest = $n - $i; // Rest of the positions after placing ""leet""
+            $count = ($count + $countOfLeet * $nPr(26, $rest)) % $mod;
+        }
+        
+        return $count;
+    }
+}"

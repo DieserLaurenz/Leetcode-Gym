@@ -1,0 +1,2442 @@
+Language,Error Type,Message,File Path,Code
+dart,runtime_error,"Line 28: Char 13: Error: Non-nullable variable 'repeated' must be assigned before it can be used.
+    return [repeated, missing];
+            ^^^^^^^^
+Line 28: Char 23: Error: Non-nullable variable 'missing' must be assigned before it can be used.
+    return [repeated, missing];
+                      ^^^^^^^",../questions/Easy\find-missing-and-repeated-values\responses\Dart\response_dart_0_failed.json,"class Solution {
+  List<int> findMissingAndRepeatedValues(List<List<int>> grid) {
+    int n = grid.length;
+    int size = n * n;
+    List<bool> seen = List.filled(size + 1, false);
+    int repeated;
+    int missing;
+
+    // Iterate through the grid to find the repeated number
+    for (var row in grid) {
+      for (var num in row) {
+        if (seen[num]) {
+          repeated = num;
+          break;
+        }
+        seen[num] = true;
+      }
+    }
+
+    // Find the missing number
+    for (int i = 1; i <= size; i++) {
+      if (!seen[i]) {
+        missing = i;
+        break;
+      }
+    }
+
+    return [repeated, missing];
+  }
+}"
+dart,runtime_error,"Line 14: Unsupported operation: Cannot modify an unmodifiable list
+#0      UnmodifiableListMixin.[]= (dart:_internal/list.dart:90:5)
+#1      Solution.makeSmallestPalindrome (file:///solution.dart:14:14)
+#2      main (file:///solution.dart:47:30)
+<asynchronous suspension>",../questions/Easy\lexicographically-smallest-palindrome\responses\Dart\response_dart_0_failed.json,"class Solution {
+  String makeSmallestPalindrome(String s) {
+    List<int> chars = s.codeUnits;
+    int left = 0;
+    int right = s.length - 1;
+
+    while (left < right) {
+      // Replace the character at the right with the character at the left if 
+      // the left character is lexicographically smaller or equal, 
+      // otherwise replace the left character with the right one.
+      if (chars[left] > chars[right]) {
+        chars[left] = chars[right];
+      } else {
+        chars[right] = chars[left];
+      }
+      left++;
+      right--;
+    }
+
+    return String.fromCharCodes(chars);
+  }
+}"
+dart,runtime_error,"Line 17: Char 19: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      maxLength = Math.max(maxLength, currentLength);
+                  ^^^^",../questions/Easy\longest-alternating-subarray\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int alternatingSubarray(List<int> nums) {
+    if (nums.length < 2) return -1; // Early return for arrays smaller than required subarray length
+
+    int maxLength = -1;
+    int currentLength = 1; // Start from 1 as we compare pairs of elements
+
+    for (int i = 1; i < nums.length; i++) {
+      // Check if the current pair is alternating according to the problem's definition
+      if ((nums[i] - nums[i - 1]).abs() == 1) {
+        currentLength++;
+      } else {
+        // If not alternating, reset the length
+        currentLength = 1;
+      }
+      // Update the max length
+      maxLength = Math.max(maxLength, currentLength);
+    }
+
+    // Check if an alternating subarray was found and adjust the return value accordingly
+    return maxLength > 1 ? maxLength : -1;
+  }
+}"
+dart,runtime_error,"Line 7: Char 50: Error: The method 'min' isn't defined for the class 'int'.
+Try correcting the name to the name of an existing method, or defining a method named 'min'.
+        if ((nums[i] - nums[j]).abs() <= nums[i].min(nums[j])) {
+                                                 ^^^
+Line 8: Char 27: Error: The method 'max' isn't defined for the class 'int'.
+Try correcting the name to the name of an existing method, or defining a method named 'max'.
+          maxXor = maxXor.max(nums[i] ^ nums[j]);
+                          ^^^",../questions/Easy\maximum-strong-pair-xor-i\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximumStrongPairXor(List<int> nums) {
+    int maxXor = 0;
+    for (int i = 0; i < nums.length; i++) {
+      for (int j = i; j < nums.length; j++) {
+        // Check if (nums[i], nums[j]) is a strong pair
+        if ((nums[i] - nums[j]).abs() <= nums[i].min(nums[j])) {
+          maxXor = maxXor.max(nums[i] ^ nums[j]);
+        }
+      }
+    }
+    return maxXor;
+  }
+}"
+dart,runtime_error,"Line 3: Char 9: Error: 'char' isn't a type.
+    Map<char, int> freq = {};
+        ^^^^
+Line 3: Char 27: Error: A value of type 'Map<dynamic, dynamic>' can't be assigned to a variable of type 'Map<invalid-type, int>'.
+ - 'Map' is from 'dart:core'.
+    Map<char, int> freq = {};
+                          ^",../questions/Easy\minimize-string-length\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minimizedStringLength(String s) {
+    Map<char, int> freq = {};
+    for (var c in s.runes) {
+      freq[c] = (freq[c] ?? 0) + 1;
+    }
+    int result = 0;
+    for (var entry in freq.entries) {
+      if (entry.value % 2 != 0) result++;
+    }
+    return result > 0 ? result : 1;
+  }
+}"
+dart,runtime_error,"Line 14: Char 26: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        merged.last[1] = Math.max(merged.last[1], interval[1]);
+                         ^^^^",../questions/Easy\points-that-intersect-with-cars\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int numberOfPoints(List<List<int>> nums) {
+    // Sort the intervals based on their start points.
+    nums.sort((a, b) => a[0].compareTo(b[0]));
+    
+    List<List<int>> merged = [];
+    for (List<int> interval in nums) {
+      // If the list of merged intervals is empty or if the current interval does not overlap with the last one added,
+      // append it to the list of merged intervals.
+      if (merged.isEmpty || merged.last[1] < interval[0]) {
+        merged.add(interval);
+      } else {
+        // If there is an overlap, merge the current interval with the last one added by updating the end point.
+        merged.last[1] = Math.max(merged.last[1], interval[1]);
+      }
+    }
+    
+    int count = 0;
+    // Count the number of integer points covered by each interval in the merged list.
+    for (List<int> interval in merged) {
+      count += interval[1] - interval[0] + 1; // +1 because both endpoints are included.
+    }
+    
+    return count;
+  }
+}"
+dart,runtime_error,"Line 33: Char 37: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+    int startSearch = longestSeqSum - (maxLength * (maxLength - 1) / 2); // First element of the sequence
+                                    ^",../questions/Easy\smallest-missing-integer-greater-than-sequential-prefix-sum\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int missingInteger(List<int> nums) {
+    int longestSeqSum = 0;
+    int currentSeqSum = nums[0];
+    int maxLength = 1;
+    int currentLength = 1;
+    
+    // To ensure we consider the case where the longest sequence starts from the first element
+    int lastNum = nums[0];
+
+    for (int i = 1; i < nums.length; ++i) {
+      if (nums[i] == lastNum + 1) {
+        currentLength++;
+        currentSeqSum += nums[i];
+      } else {
+        if (currentLength > maxLength) {
+          maxLength = currentLength;
+          longestSeqSum = currentSeqSum;
+        }
+        // Reset for the next sequence
+        currentLength = 1;
+        currentSeqSum = nums[i];
+      }
+      lastNum = nums[i];
+    }
+
+    // Check after the loop in case the longest sequence ends at the last element
+    if (currentLength > maxLength) {
+      longestSeqSum = currentSeqSum;
+    }
+
+    // The starting point for searching the missing integer
+    int startSearch = longestSeqSum - (maxLength * (maxLength - 1) / 2); // First element of the sequence
+    int endSeq = startSearch + maxLength; // The next integer that would continue the sequence
+
+    for (int x = endSeq; ; ++x) {
+      if (!nums.contains(x)) {
+        return x;
+      }
+    }
+  }
+}"
+dart,runtime_error,"Line 5: Char 5: Error: 'int64_t' isn't a type.
+    int64_t total = 0;
+    ^^^^^^^
+Line 8: Char 16: Error: The method 'int64_t' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing method, or defining a method named 'int64_t'.
+      total += int64_t(nums[right] - nums[right - 1]) * (right - left);
+               ^^^^^^^",../questions/Hard\apply-operations-to-maximize-frequency-score\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maxFrequencyScore(List<int> nums, int k) {
+    nums.sort();
+    int left = 0, maxFreq = 1;
+    int64_t total = 0;
+
+    for (int right = 1; right < nums.length; ++right) {
+      total += int64_t(nums[right] - nums[right - 1]) * (right - left);
+      while (total > k) {
+        total -= nums[right] - nums[left];
+        ++left;
+      }
+      maxFreq = max(maxFreq, right - left + 1);
+    }
+
+    return maxFreq;
+  }
+}"
+dart,runtime_error,"Line 6: Char 5: Error: 'int64' isn't a type.
+    int64 total = 0; // Correcting type to int64 for Dart
+    ^^^^^",../questions/Hard\apply-operations-to-maximize-frequency-score\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int maxFrequencyScore(List<int> nums, int k) {
+    nums.sort();
+    int left = 0;
+    int maxFreq = 1;
+    int64 total = 0; // Correcting type to int64 for Dart
+
+    for (int right = 1; right < nums.length; right++) {
+      total += (nums[right] - nums[right - 1]) * (right - left);
+      while (total > k) {
+        total -= nums[right] - nums[left];
+        left++;
+      }
+      maxFreq = max(maxFreq, right - left + 1);
+    }
+
+    return maxFreq;
+  }
+
+  int max(int a, int b) => a > b ? a : b;
+}"
+dart,runtime_error,"Line 6: Char 13: Error: Expected an identifier, but got ']'.
+Try inserting an identifier before ']'.
+        int[] count = new int[26];
+            ^
+Line 6: Char 13: Error: Expected ';' after this.
+        int[] count = new int[26];
+            ^
+Line 6: Char 27: Error: Expected '(' after this.
+        int[] count = new int[26];
+                          ^^^
+Line 6: Char 27: Error: Couldn't find constructor 'int'.
+        int[] count = new int[26];
+                          ^^^
+Line 5: Char 27: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      for (int j = i; j < Math.min(26, i + 3); j++) {
+                          ^^^^
+Line 6: Char 12: Error: The operator '[]' isn't defined for the class 'Type'.
+ - 'Type' is from 'dart:core'.
+Try correcting the operator to an existing operator, or defining a '[]' operator.
+        int[] count = new int[26];
+           ^
+Line 6: Char 15: Error: The setter 'count' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing setter, or defining a setter or field named 'count'.
+        int[] count = new int[26];
+              ^^^^^
+Line 9: Char 22: Error: The getter 'count' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'count'.
+          total += ++count[word[r] - 'a'] == k ? 1 : 0;
+                     ^^^^^
+Line 9: Char 36: Error: The operator '-' isn't defined for the class 'String'.
+Try correcting the operator to an existing operator, or defining a '-' operator.
+          total += ++count[word[r] - 'a'] == k ? 1 : 0;
+                                   ^
+Line 10: Char 24: Error: The getter 'count' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'count'.
+          lessThanK += count[word[r] - 'a'] == 1 ? 1 : 0;
+                       ^^^^^",../questions/Hard\count-complete-substrings\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int countCompleteSubstrings(String word, int k) {
+    int res = 0;
+    for (int i = 0; i < 26; i++) {
+      for (int j = i; j < Math.min(26, i + 3); j++) {
+        int[] count = new int[26];
+        int total = 0, lessThanK = 0;
+        for (int l = 0, r = 0; r < word.length; r++) {
+          total += ++count[word[r] - 'a'] == k ? 1 : 0;
+          lessThanK += count[word[r] - 'a'] == 1 ? 1 : 0;
+          while (lessThanK > 3 || (l <= r && count[word[r] - 'a'] > k) || (l <= r && !(word[r] - 'a' >= i && word[r] - 'a' <= j))) {
+            total -= count[word[l] - 'a']-- == k ? 1 : 0;
+            lessThanK -= count[word[l] - 'a'] == 0 ? 1 : 0;
+            l++;
+          }
+          if (total == j - i + 1) res++;
+        }
+      }
+    }
+    return res;
+  }
+}"
+dart,runtime_error,"Line 4: Char 15: Error: 'char' isn't a type.
+    final Map<char, int> freq = {};
+              ^^^^
+Line 4: Char 33: Error: A value of type 'Map<dynamic, dynamic>' can't be assigned to a variable of type 'Map<invalid-type, int>'.
+ - 'Map' is from 'dart:core'.
+    final Map<char, int> freq = {};
+                                ^",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int countKSubsequencesWithMaxBeauty(String s, int k) {
+    const int mod = 1000000007;
+    final Map<char, int> freq = {};
+    for (final char in s.split('')) {
+      freq[char] = (freq[char] ?? 0) + 1;
+    }
+    final List<int> values = freq.values.toList()..sort((a, b) => b.compareTo(a));
+    if (k > values.length) return 0;
+    int maxBeauty = values.sublist(0, k).reduce((a, b) => a + b);
+    final List<int> comb = List.filled(k + 1, 0);
+    comb[0] = 1;
+    int count = 1;
+    for (int i = 0; i < k; ++i) {
+      comb[i + 1] = (comb[i] * (values[i] - i)) % mod;
+      count = (count * comb[i + 1]) % mod;
+    }
+    return count;
+  }
+}"
+dart,runtime_error,"Line 14: Exhausted heap space, trying to allocate 61989635440 bytes.
+Out of Memory
+#0      new _List (dart:core-patch/array.dart)
+#1      new _List.filled (dart:core-patch/array.dart:97:20)
+#2      Solution._preparePrefixSum (file:///solution.dart:14:32)
+#3      Solution.count (file:///solution.dart:24:27)
+#4      main (file:///solution.dart:84:30)
+#5      _FutureListener.handleValue (dart:async/future_impl.dart:162:18)
+#6      Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:846:45)
+#7      Future._propagateToListeners (dart:async/future_impl.dart:875:13)
+#8      Future._complete (dart:async/future_impl.dart:638:7)
+#9      _StreamIterator._onData (dart:async/stream_impl.dart:1034:20)
+#10     _RootZone.runUnaryGuarded (dart:async/zone.dart:1594:10)
+#11     _BufferingStreamSubscription._sendData (dart:async/stream_impl.dart:339:11)
+#12     _BufferingStreamSubscription._add (dart:async/stream_impl.dart:271:7)
+#13     _SinkTransformerStreamSubscription._add (dart:async/stream_transformers.dart:63:11)
+#14     _EventSinkWrapper.add (dart:async/stream_transformers.dart:13:11)
+#15     _StringAdapterSink.add (dart:convert/string_conversion.dart:228:11)
+#16     _LineSplitterSink._addLines (dart:convert/line_splitter.dart:164:13)
+#17     _LineSplitterSink.addSlice (dart:convert/line_splitter.dart:131:7)
+#18     StringConversionSink.add (dart:convert/string_conversion.dart:39:5)
+#19     _SinkTransformerStreamSubscription._handleData (dart:async/stream_transformers.dart:111:24)
+#20     _RootZone.runUnaryGuarded (dart:async/zone.dart:1594:10)
+#21     _BufferingStreamSubscription._sendData (dart:async/stream_impl.dart:339:11)
+#22     _BufferingStreamSubscription._add (dart:async/stream_impl.dart:271:7)
+#23     _SinkTransformerStreamSubscription._add (dart:async/stream_transformers.dart:63:11)
+#24     _EventSinkWrapper.add (dart:async/stream_transformers.dart:13:11)
+#25     _StringAdapterSink.add (dart:convert/string_conversion.dart:228:11)
+#26     _StringAdapterSink.addSlice (dart:convert/string_conversion.dart:233:7)
+#27     _Utf8ConversionSink.addSlice (dart:convert/string_conversion.dart:307:20)
+#28     _Utf8ConversionSink.add (dart:convert/string_conversion.dart:300:5)
+#29     _ConverterStreamEventSink.add (dart:convert/chunked_conversion.dart:69:18)
+#30     _SinkTransformerStreamSubscription._handleData (dart:async/stream_transformers.dart:111:24)
+#31     _RootZone.runUnaryGuarded (dart:async/zone.dart:1594:10)
+#32     _BufferingStreamSubscription._sendData (dart:async/stream_impl.dart:339:11)
+#33     _BufferingStreamSubscription._add (dart:async/stream_impl.dart:271:7)
+#34     _SyncStreamControllerDispatch._sendData (dart:async/stream_controller.dart:784:19)
+#35     _StreamController._add (dart:async/stream_controller.dart:658:7)
+#36     _StreamController.add (dart:async/stream_controller.dart:606:5)
+#37     _FileStream._readBlock.<anonymous closure> (dart:io/file_impl.dart:125:21)
+#38     _FutureListener.handleValue (dart:async/future_impl.dart:162:18)
+#39     Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:846:45)
+#40     Future._propagateToListeners (dart:async/future_impl.dart:875:13)
+#41     Future._completeWithValue (dart:async/future_impl.dart:647:5)
+#42     Future._asyncCompleteWithValue.<anonymous closure> (dart:async/future_impl.dart:721:7)
+#43     _microtaskLoop (dart:async/schedule_microtask.dart:40:21)
+#44     _startMicrotaskLoop (dart:async/schedule_microtask.dart:49:5)
+#45     _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:118:13)
+#46     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:185:5)",../questions/Hard\count-of-integers\responses\Dart\response_dart_2_failed.json,"class Solution {
+  static final int mod = 1000000007;
+
+  int _digitSum(int n) {
+    int sum = 0;
+    while (n > 0) {
+      sum += n % 10;
+      n ~/= 10;
+    }
+    return sum;
+  }
+
+  List<int> _preparePrefixSum(int n) {
+    List<int> prefixSum = List.filled(n + 1, 0);
+    for (int i = 1; i <= n; i++) {
+      prefixSum[i] = (prefixSum[i - 1] + _digitSum(i)) % mod;
+    }
+    return prefixSum;
+  }
+
+  int count(String num1, String num2, int minSum, int maxSum) {
+    int n2 = int.parse(num2);
+    int n1 = int.parse(num1) - 1; // Inclusive for num2, exclusive for num1
+    List<int> prefixSum = _preparePrefixSum(n2);
+    int totalForNum2 = 0, totalForNum1 = 0;
+
+    for (int i = 0; i <= n2; i++) {
+      if (_digitSum(i) >= minSum && _digitSum(i) <= maxSum) {
+        totalForNum2 = (totalForNum2 + 1) % mod;
+      }
+    }
+
+    for (int i = 0; i <= n1; i++) {
+      if (_digitSum(i) >= minSum && _digitSum(i) <= maxSum) {
+        totalForNum1 = (totalForNum1 + 1) % mod;
+      }
+    }
+
+    return (totalForNum2 - totalForNum1 + mod) % mod;
+  }
+}"
+dart,runtime_error,"Line 21: Char 15: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+          num /= 10;
+              ^",../questions/Hard\count-stepping-numbers-in-range\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int countSteppingNumbers(String low, String high) {
+    int mod = 1000000007;
+    int lowNum = int.parse(low);
+    int highNum = int.parse(high);
+    int count = 0;
+
+    for (int num = 1; num <= highNum && num < 1000000000; num++) {
+      if (num >= lowNum && isStepping(num)) {
+        count = (count + 1) % mod;
+      }
+      if (num % 10 < 9) {
+        int next = num * 10 + (num % 10 + 1);
+        if (next <= highNum) {
+          num = next - 1;
+        } else {
+          break;
+        }
+      } else {
+        while (num % 10 == 9) {
+          num /= 10;
+        }
+      }
+    }
+
+    if (lowNum == 0) count = (count + 1) % mod; // Including 0 if it's within the range
+    return count;
+  }
+
+  bool isStepping(int num) {
+    int prevDigit = -1;
+    while (num > 0) {
+      int currentDigit = num % 10;
+      if (prevDigit != -1 && (currentDigit - prevDigit).abs() != 1) {
+        return false;
+      }
+      prevDigit = currentDigit;
+      num = num ~/ 10;
+    }
+    return true;
+  }
+}"
+dart,runtime_error,"Line 7: Char 5: Error: 'Queue' isn't a type.
+    Queue<int> q = Queue();
+    ^^^^^
+Line 7: Char 20: Error: The method 'Queue' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing method, or defining a method named 'Queue'.
+    Queue<int> q = Queue();
+                   ^^^^^",../questions/Hard\count-stepping-numbers-in-range\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int countSteppingNumbers(String low, String high) {
+    final int mod = 1000000007;
+    final int l = int.parse(low), h = int.parse(high);
+    int count = 0;
+
+    Queue<int> q = Queue();
+    if (l == 0) {
+      count++;
+    }
+
+    for (int i = 1; i <= 9; i++) {
+      q.add(i);
+    }
+
+    while (q.isNotEmpty) {
+      int curr = q.removeFirst();
+      if (curr >= l && curr <= h) {
+        count = (count + 1) % mod;
+      }
+
+      if (curr <= h) {
+        int lastDigit = curr % 10;
+        if (lastDigit > 0) {
+          int a = curr * 10 + (lastDigit - 1);
+          if (a <= h) {
+            q.add(a);
+          }
+        }
+        if (lastDigit < 9) {
+          int b = curr * 10 + (lastDigit + 1);
+          if (b <= h) {
+            q.add(b);
+          }
+        }
+      }
+    }
+
+    return count;
+  }
+}"
+dart,runtime_error,"Line 10: Char 7: Error: 'Queue' isn't a type.
+      Queue<int> q = Queue<int>();
+      ^^^^^
+Line 10: Char 22: Error: The method 'Queue' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing method, or defining a method named 'Queue'.
+      Queue<int> q = Queue<int>();
+                     ^^^^^",../questions/Hard\count-stepping-numbers-in-range\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int countSteppingNumbers(String low, String high) {
+    final int mod = 1000000007;
+    int l = int.parse(low);
+    int h = int.parse(high);
+    int count = 0;
+
+    List<int> bfs(int start, int l, int h) {
+      List<int> res = [];
+      Queue<int> q = Queue<int>();
+      q.add(start);
+      while (q.isNotEmpty) {
+        int curr = q.removeFirst();
+        if (curr <= h && curr >= l) {
+          res.add(curr);
+        }
+        if (curr == 0 || curr > h) continue;
+        int lastDigit = curr % 10;
+        int num1 = curr * 10 + lastDigit - 1;
+        int num2 = curr * 10 + lastDigit + 1;
+        if (lastDigit > 0) q.add(num1);
+        if (lastDigit < 9) q.add(num2);
+      }
+      return res;
+    }
+
+    if (l == 0) {
+      count++;
+      l = 1;
+    }
+
+    for (int i = 1; i <= 9; i++) {
+      count += bfs(i, l, h).length;
+    }
+
+    return count % mod;
+  }
+}"
+dart,runtime_error,"Line 11: Char 46: Error: A value of type 'int?' can't be assigned to a variable of type 'int' because 'int?' is nullable and 'int' isn't.
+        dp[i + 1] = (dp[i + 1] - dp[lastIndex[nums[i]]] + mod) % mod; // Subtract partitions that are not good
+                                             ^",../questions/Hard\count-the-number-of-good-partitions\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int numberOfGoodPartitions(List<int> nums) {
+    const int mod = 1000000007;
+    Map<int, int> lastIndex = {};
+    List<int> dp = List.filled(nums.length + 1, 0);
+    dp[0] = 1; // Base case: empty array has 1 good partition
+
+    for (int i = 0; i < nums.length; i++) {
+      dp[i + 1] = dp[i] * 2 % mod; // Each element can either start a new subarray or join the previous one
+      if (lastIndex.containsKey(nums[i])) {
+        dp[i + 1] = (dp[i + 1] - dp[lastIndex[nums[i]]] + mod) % mod; // Subtract partitions that are not good
+      }
+      lastIndex[nums[i]] = i; // Update the last index of the current element
+    }
+
+    return dp[nums.length];
+  }
+}"
+dart,runtime_error,"Line 9: Unsupported operation: Infinity or NaN toInt
+#0      double.toInt (dart:core-patch/double.dart)
+#1      Solution.incremovableSubarrayCount.isIncremovable (file:///solution.dart:9:63)
+#2      Solution.incremovableSubarrayCount (file:///solution.dart:15:13)
+#3      main (file:///solution.dart:48:30)
+<asynchronous suspension>",../questions/Hard\count-the-number-of-incremovable-subarrays-ii\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int incremovableSubarrayCount(List<int> nums) {
+    final int n = nums.length;
+    int count = 0;
+
+    // Function to check if removing subarray from i to j makes the array strictly increasing
+    bool isIncremovable(int i, int j) {
+      int left = (i > 0) ? nums[i - 1] : 0;
+      int right = (j < n - 1) ? nums[j + 1] : double.infinity.toInt();
+      return i == 0 || j == n - 1 || left < right;
+    }
+
+    for (int i = 0; i < n; ++i) {
+      for (int j = i; j < n; ++j) {
+        if (isIncremovable(i, j)) {
+          ++count;
+        }
+      }
+    }
+
+    return count;
+  }
+}"
+dart,runtime_error,"Line 7: Char 69: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    int maxLength = (finish.toString().length - s.length).clamp(0, (Math.log(finish) / Math.log(10)).floor());
+                                                                    ^^^^
+Line 7: Char 88: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    int maxLength = (finish.toString().length - s.length).clamp(0, (Math.log(finish) / Math.log(10)).floor());
+                                                                                       ^^^^
+Line 7: Char 59: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+    int maxLength = (finish.toString().length - s.length).clamp(0, (Math.log(finish) / Math.log(10)).floor());
+                                                          ^
+Line 12: Char 16: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      minVal = Math.max(start, minVal);
+               ^^^^
+Line 13: Char 16: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      maxVal = Math.min(finish, maxVal);
+               ^^^^
+Line 15: Char 29: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        int possibleStart = Math.pow(10, length).toInt();
+                            ^^^^
+Line 16: Char 37: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        int startPrefix = (minVal / Math.pow(10, minLength)).floor();
+                                    ^^^^
+Line 17: Char 35: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        int endPrefix = (maxVal / Math.pow(10, minLength)).floor();
+                                  ^^^^",../questions/Hard\count-the-number-of-powerful-integers\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int numberOfPowerfulInt(int start, int finish, int limit, String s) {
+    int count = 0;
+    int suffix = int.parse(s);
+    if (suffix > finish) return 0;
+    int minLength = s.length;
+    int maxLength = (finish.toString().length - s.length).clamp(0, (Math.log(finish) / Math.log(10)).floor());
+    for (int length = 0; length <= maxLength; length++) {
+      int minVal = length == 0 ? suffix : int.parse('1' + '0' * length + s);
+      int maxVal = int.parse(String.fromCharCodes(List.filled(length, '0'.codeUnitAt(0) + limit)) + s);
+      if (minVal > finish || maxVal < start) continue;
+      minVal = Math.max(start, minVal);
+      maxVal = Math.min(finish, maxVal);
+      if (minVal <= maxVal) {
+        int possibleStart = Math.pow(10, length).toInt();
+        int startPrefix = (minVal / Math.pow(10, minLength)).floor();
+        int endPrefix = (maxVal / Math.pow(10, minLength)).floor();
+        for (int prefix = startPrefix; prefix <= endPrefix; prefix++) {
+          if (prefix.toString().split('').every((digit) => int.parse(digit) <= limit)) {
+            count++;
+          }
+        }
+      }
+    }
+    return count;
+  }
+}"
+dart,runtime_error,"Line 19: Char 24: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+            dp[i][j] = Math.min(dp[i][j], dp[i - 1][x] + nums[j - 1]);
+                       ^^^^
+Line 28: Char 18: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        answer = Math.min(answer, dp[k][i]);
+                 ^^^^",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minimumCost(List<int> nums, int k, int dist) {
+    int n = nums.length;
+    List<int> cost = List.filled(n, 0);
+    List<List<int>> dp = List.generate(k + 1, (_) => List.filled(n + 1, double.infinity.toInt()));
+
+    for (int i = 0; i < n; i++) {
+      cost[i] = i == 0 ? nums[i] : nums[i] + cost[i - 1];
+    }
+
+    for (int i = 0; i < n; i++) {
+      dp[1][i + 1] = nums[i];
+    }
+
+    for (int i = 2; i <= k; i++) {
+      for (int j = i; j <= n; j++) {
+        for (int x = i - 1; x < j; x++) {
+          if (j - x - 1 <= dist) {
+            dp[i][j] = Math.min(dp[i][j], dp[i - 1][x] + nums[j - 1]);
+          }
+        }
+      }
+    }
+
+    int answer = double.infinity.toInt();
+    for (int i = k; i <= n; i++) {
+      if (n - i <= dist) {
+        answer = Math.min(answer, dp[k][i]);
+      }
+    }
+
+    return answer;
+  }
+}"
+dart,runtime_error,"Line 23: Char 18: Error: For-in loops use 'in' rather than a colon.
+Try replacing the colon with the keyword 'in'.
+      for (int i : subset) {
+                 ^",../questions/Hard\find-a-good-subset-of-the-matrix\responses\Dart\response_dart_1_failed.json,"class Solution {
+  List<int> goodSubsetofBinaryMatrix(List<List<int>> grid) {
+    int m = grid.length, n = grid[0].length;
+    List<int> ans = [];
+    for (int mask = 1; mask < (1 << m); mask++) {
+      List<int> subset = [];
+      for (int i = 0; i < m; i++) {
+        if ((mask & (1 << i)) != 0) {
+          subset.add(i);
+        }
+      }
+      if (_isValidSubset(grid, subset, n)) {
+        return subset;
+      }
+    }
+    return ans;
+  }
+
+  bool _isValidSubset(List<List<int>> grid, List<int> subset, int n) {
+    int k = subset.length;
+    for (int j = 0; j < n; j++) {
+      int sum = 0;
+      for (int i : subset) {
+        sum += grid[i][j];
+      }
+      if (sum > k / 2) return false;
+    }
+    return true;
+  }
+}"
+dart,runtime_error,"Line 23: Char 14: Error: Expected ';' after this.
+    for (int i of aIndices) {
+             ^
+Line 23: Char 16: Error: Expected ';' after this.
+    for (int i of aIndices) {
+               ^^
+Line 24: Char 16: Error: Expected ';' after this.
+      for (int j of bIndices) {
+               ^
+Line 24: Char 18: Error: Expected ';' after this.
+      for (int j of bIndices) {
+                 ^^
+Line 23: Char 16: Error: The getter 'of' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'of'.
+    for (int i of aIndices) {
+               ^^
+Line 24: Char 18: Error: The getter 'of' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'of'.
+      for (int j of bIndices) {
+                 ^^
+Line 25: Char 14: Error: Non-nullable variable 'j' must be assigned before it can be used.
+        if ((j - i).abs() <= k) {
+             ^
+Line 25: Char 18: Error: Non-nullable variable 'i' must be assigned before it can be used.
+        if ((j - i).abs() <= k) {
+                 ^
+Line 26: Char 22: Error: Non-nullable variable 'i' must be assigned before it can be used.
+          result.add(i);
+                     ^",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\Dart\response_dart_0_failed.json,"class Solution {
+  List<int> beautifulIndices(String s, String a, String b, int k) {
+    List<int> result = [];
+    List<int> aIndices = [];
+    List<int> bIndices = [];
+    int aLen = a.length, bLen = b.length;
+
+    // Find all occurrences of a
+    for (int i = 0; i <= s.length - aLen; i++) {
+      if (s.substring(i, i + aLen) == a) {
+        aIndices.add(i);
+      }
+    }
+
+    // Find all occurrences of b
+    for (int i = 0; i <= s.length - bLen; i++) {
+      if (s.substring(i, i + bLen) == b) {
+        bIndices.add(i);
+      }
+    }
+
+    // Check for beautiful indices
+    for (int i of aIndices) {
+      for (int j of bIndices) {
+        if ((j - i).abs() <= k) {
+          result.add(i);
+          break; // Found a valid j, move to the next i
+        }
+      }
+    }
+
+    return result;
+  }
+}"
+dart,runtime_error,"Line 7: Char 22: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        for (int j = Math.max(0, i - k); j <= Math.min(s.length - b.length, i + k); j++) {
+                     ^^^^
+Line 7: Char 47: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        for (int j = Math.max(0, i - k); j <= Math.min(s.length - b.length, i + k); j++) {
+                                              ^^^^",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\Dart\response_dart_2_failed.json,"class Solution {
+  List<int> beautifulIndices(String s, String a, String b, int k) {
+    List<int> results = [];
+    for (int i = 0; i <= s.length - a.length; i++) {
+      if (s.startsWith(a, i)) {
+        bool found = false;
+        for (int j = Math.max(0, i - k); j <= Math.min(s.length - b.length, i + k); j++) {
+          if (s.startsWith(b, j)) {
+            found = true;
+            break;
+          }
+        }
+        if (found) {
+          results.add(i);
+        }
+      }
+    }
+    return results;
+  }
+}"
+dart,runtime_error,"Line 41: Char 7: Error: 'boolean' isn't a type.
+      boolean canMeet = true;
+      ^^^^^^^",../questions/Hard\find-building-where-alice-and-bob-can-meet\responses\Dart\response_dart_1_failed.json,"class Solution {
+  List<int> leftmostBuildingQueries(List<int> heights, List<List<int>> queries) {
+    List<int> answer = [];
+    for (var query in queries) {
+      int start = query[0];
+      int end = query[1];
+      int max_height = -1;
+      int meet_point = -1;
+
+      if (start < end) {
+        for (int i = start + 1; i <= end; i++) {
+          if (heights[i] > heights[start] && heights[i] > max_height) {
+            max_height = heights[i];
+            meet_point = i;
+            break;
+          }
+        }
+        for (int i = meet_point + 1; i <= end && meet_point != -1; i++) {
+          if (heights[i] > max_height) {
+            max_height = heights[i];
+            meet_point = i;
+          }
+        }
+      } else {
+        for (int i = start - 1; i >= end; i--) {
+          if (heights[i] > heights[start] && heights[i] > max_height) {
+            max_height = heights[i];
+            meet_point = i;
+            break;
+          }
+        }
+        for (int i = meet_point - 1; i >= end && meet_point != -1; i--) {
+          if (heights[i] > max_height) {
+            max_height = heights[i];
+            meet_point = i;
+          }
+        }
+      }
+
+      // Check if both can meet
+      boolean canMeet = true;
+      if (meet_point == -1) {
+        canMeet = false;
+      } else {
+        for (int i = start; i != meet_point; i = (i < meet_point) ? i + 1 : i - 1) {
+          if (heights[i] >= heights[meet_point]) {
+            canMeet = false;
+            break;
+          }
+        }
+        for (int i = end; i != meet_point; i = (i < meet_point) ? i + 1 : i - 1) {
+          if (heights[i] >= heights[meet_point]) {
+            canMeet = false;
+            break;
+          }
+        }
+      }
+      answer.add(canMeet ? meet_point : -1);
+    }
+    return answer;
+  }
+}"
+dart,runtime_error,"Line 22: Char 21: Error: A comparison expression can't be an operand of another comparison expression.
+Try putting parentheses around one of the comparisons.
+      Set<characters> = {};
+                    ^
+Line 22: Char 23: Error: Expected an identifier, but got '='.
+Try inserting an identifier before '='.
+      Set<characters> = {};
+                      ^
+Line 22: Char 23: Error: Can't assign to this.
+      Set<characters> = {};
+                      ^
+Line 25: Char 14: Error: The getter 'characters' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'characters'.
+        if (!characters.contains(s[i])) {
+             ^^^^^^^^^^
+Line 29: Char 9: Error: The getter 'characters' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'characters'.
+        characters.add(s[i]);
+        ^^^^^^^^^^",../questions/Hard\maximize-the-number-of-partitions-after-operations\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int maxPartitionsAfterOperations(String s, int k) {
+    int maxPartitions = 0;
+    for (int changeIndex = -1; changeIndex < s.length; changeIndex++) {
+      String modifiedS = s;
+      if (changeIndex != -1) {
+        for (int ascii = 97; ascii <= 122; ascii++) {
+          modifiedS = s.substring(0, changeIndex) + String.fromCharCode(ascii) + s.substring(changeIndex + 1);
+          maxPartitions = max(maxPartitions, calculatePartitions(modifiedS, k));
+        }
+      } else {
+        maxPartitions = max(maxPartitions, calculatePartitions(modifiedS, k));
+      }
+    }
+    return maxPartitions;
+  }
+
+  int calculatePartitions(String s, int k) {
+    int partitions = 0;
+    while (s.isNotEmpty) {
+      int distinctCount = 0;
+      Set<characters> = {};
+      int i = 0;
+      for (; i < s.length && distinctCount <= k; i++) {
+        if (!characters.contains(s[i])) {
+          distinctCount++;
+          if (distinctCount > k) break;
+        }
+        characters.add(s[i]);
+      }
+      partitions++;
+      s = s.substring(i);
+    }
+    return partitions;
+  }
+
+  int max(int a, int b) => a > b ? a : b;
+}"
+dart,runtime_error,"Line 22: Char 21: Error: A comparison expression can't be an operand of another comparison expression.
+Try putting parentheses around one of the comparisons.
+      Set<characters> = Set();
+                    ^
+Line 22: Char 23: Error: Expected an identifier, but got '='.
+Try inserting an identifier before '='.
+      Set<characters> = Set();
+                      ^
+Line 22: Char 23: Error: Can't assign to this.
+      Set<characters> = Set();
+                      ^
+Line 23: Char 19: Error: A comparison expression can't be an operand of another comparison expression.
+Try putting parentheses around one of the comparisons.
+      Map<charFreq> = {};
+                  ^
+Line 23: Char 21: Error: Expected an identifier, but got '='.
+Try inserting an identifier before '='.
+      Map<charFreq> = {};
+                    ^
+Line 23: Char 21: Error: Can't assign to this.
+      Map<charFreq> = {};
+                    ^
+Line 24: Char 28: Error: The getter 'characters' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'characters'.
+      while (right < n && (characters.contains(s[right]) || characters.length < k)) {
+                           ^^^^^^^^^^
+Line 24: Char 61: Error: The getter 'characters' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'characters'.
+      while (right < n && (characters.contains(s[right]) || characters.length < k)) {
+                                                            ^^^^^^^^^^
+Line 25: Char 9: Error: The getter 'characters' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'characters'.
+        characters.add(s[right]);
+        ^^^^^^^^^^",../questions/Hard\maximize-the-number-of-partitions-after-operations\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int maxPartitionsAfterOperations(String s, int k) {
+    int result = 0;
+
+    for (int i = 0; i < s.length; i++) {
+      for (int j = 0; j < 26; j++) {
+        String modified = s.substring(0, i) + String.fromCharCode(97 + j) + s.substring(i + 1);
+        result = max(result, getMaxPartitions(modified, k));
+      }
+    }
+
+    // Check without any modification
+    result = max(result, getMaxPartitions(s, k));
+
+    return result;
+  }
+
+  int getMaxPartitions(String s, int k) {
+    int left = 0, partitions = 0, n = s.length;
+    while (left < n) {
+      int right = left;
+      Set<characters> = Set();
+      Map<charFreq> = {};
+      while (right < n && (characters.contains(s[right]) || characters.length < k)) {
+        characters.add(s[right]);
+        right++;
+      }
+      partitions++;
+      left = right;
+    }
+    return partitions;
+  }
+
+  int max(int a, int b) => a > b ? a : b;
+}"
+dart,runtime_error,"Line 14: Char 25: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    for (int i = 0; i < Math.min(k, maxProfits.length); i++) {
+                        ^^^^",../questions/Hard\maximum-elegance-of-a-k-length-subsequence\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int findMaximumElegance(List<List<int>> items, int k) {
+    items.sort((a, b) => b[0].compareTo(a[0]));
+    Map<int, List<int>> profitsByCategory = {};
+    for (var item in items) {
+      profitsByCategory.putIfAbsent(item[1], () => []).add(item[0]);
+    }
+    List<int> maxProfits = [];
+    for (var entry in profitsByCategory.entries) {
+      maxProfits.add(entry.value.reduce((value, element) => value + element));
+    }
+    maxProfits.sort((a, b) => b.compareTo(a));
+    int totalProfit = 0, categoriesUsed = 0;
+    for (int i = 0; i < Math.min(k, maxProfits.length); i++) {
+      totalProfit += maxProfits[i];
+      categoriesUsed++;
+    }
+    int elegance = totalProfit + categoriesUsed * categoriesUsed;
+    return elegance;
+  }
+}"
+dart,runtime_error,"Line 15: Char 160: Error: Expected ')' before this.
+  void _dfs(int index, int currentProfit, int itemCount, Set<int> categories, List<int> profits, Map<int, int> categoryCount, int k, List<List<int>> items, int& maxElegance) {
+                                                                                                                                                               ^
+Line 11: Char 65: Error: Expected an identifier, but got '&'.
+Try inserting an identifier before '&'.
+    _dfs(0, 0, 0, Set<int>(), profits, categoryCount, k, items, &maxElegance);
+                                                                ^
+Line 25: Char 116: Error: Expected an identifier, but got '&'.
+Try inserting an identifier before '&'.
+      _dfs(index + 1, currentProfit + profits[index], itemCount + 1, categories, profits, categoryCount, k, items, &maxElegance);
+                                                                                                                   ^
+Line 30: Char 93: Error: Expected an identifier, but got '&'.
+Try inserting an identifier before '&'.
+    _dfs(index + 1, currentProfit, itemCount, categories, profits, categoryCount, k, items, &maxElegance);
+                                                                                            ^
+Line 17: Char 25: Error: The getter 'maxElegance' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'maxElegance'.
+      maxElegance = max(maxElegance, currentProfit + categories.length * categories.length);
+                        ^^^^^^^^^^^
+Line 17: Char 21: Error: Inferred type argument 'dynamic' doesn't conform to the bound 'num' of the type variable 'T' on 'max'.
+Try specifying type arguments explicitly so that they conform to the bounds.
+      maxElegance = max(maxElegance, currentProfit + categories.length * categories.length);
+                    ^
+org-dartlang-sdk:///sdk/lib/_internal/vm/lib/math_patch.dart: Context: This is the type variable whose bound isn't conformed to.
+Line 17: Char 7: Error: The setter 'maxElegance' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing setter, or defining a setter or field named 'maxElegance'.
+      maxElegance = max(maxElegance, currentProfit + categories.length * categories.length);
+      ^^^^^^^^^^^
+Line 25: Char 117: Error: The getter 'maxElegance' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'maxElegance'.
+      _dfs(index + 1, currentProfit + profits[index], itemCount + 1, categories, profits, categoryCount, k, items, &maxElegance);
+                                                                                                                    ^^^^^^^^^^^
+Line 30: Char 94: Error: The getter 'maxElegance' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'maxElegance'.
+    _dfs(index + 1, currentProfit, itemCount, categories, profits, categoryCount, k, items, &maxElegance);
+                                                                                             ^^^^^^^^^^^",../questions/Hard\maximum-elegance-of-a-k-length-subsequence\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int findMaximumElegance(List<List<int>> items, int k) {
+    items.sort((a, b) => b[0] - a[0]);
+    Map<int, int> categoryCount = {};
+    List<int> profits = [];
+    for (var item in items) {
+      profits.add(item[0]);
+      categoryCount[item[1]] = (categoryCount[item[1]] ?? 0) + 1;
+    }
+    int maxElegance = 0;
+    _dfs(0, 0, 0, Set<int>(), profits, categoryCount, k, items, &maxElegance);
+    return maxElegance;
+  }
+
+  void _dfs(int index, int currentProfit, int itemCount, Set<int> categories, List<int> profits, Map<int, int> categoryCount, int k, List<List<int>> items, int& maxElegance) {
+    if (itemCount == k) {
+      maxElegance = max(maxElegance, currentProfit + categories.length * categories.length);
+      return;
+    }
+    if (index == items.length) return;
+
+    // Include this item
+    if (itemCount < k) {
+      categories.add(items[index][1]);
+      _dfs(index + 1, currentProfit + profits[index], itemCount + 1, categories, profits, categoryCount, k, items, &maxElegance);
+      categories.remove(items[index][1]);
+    }
+
+    // Exclude this item
+    _dfs(index + 1, currentProfit, itemCount, categories, profits, categoryCount, k, items, &maxElegance);
+  }
+}"
+dart,runtime_error,"Line 11: Char 17: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+            num /= i;
+                ^",../questions/Hard\maximum-element-sum-of-a-complete-subset-of-indices\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximumSum(List<int> nums) {
+    int n = nums.length;
+    Map<int, int> maskSum = {};
+    for (var num in nums) {
+      int mask = 0;
+      for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+          int count = 0;
+          while (num % i == 0) {
+            num /= i;
+            count++;
+          }
+          if (count % 2 == 1) mask ^= (1 << i);
+        }
+      }
+      if (num > 1) mask ^= (1 << num);
+      maskSum[mask] = (maskSum[mask] ?? 0) + num;
+    }
+    int result = 0;
+    for (var sum in maskSum.values) {
+      if (sum > result) result = sum;
+    }
+    return result;
+  }
+}"
+dart,runtime_error,"Line 17: Char 22: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+          dp[i][j] = Math.min(dp[i][j], dp[i - 1][l] + cost[l][j - 1]);
+                     ^^^^",../questions/Hard\minimum-changes-to-make-k-semi-palindromes\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int minimumChanges(String s, int k) {
+    int n = s.length;
+    List<List<int>> dp = List.generate(k + 1, (_) => List.generate(n + 1, (_) => 1 << 20));
+    List<List<int>> cost = List.generate(n, (_) => List.generate(n, (_) => 0));
+
+    for (int len = 2; len <= n; ++len) {
+      for (int i = 0, j = len - 1; j < n; ++i, ++j) {
+        cost[i][j] = cost[i + 1][j - 1] + (s[i] != s[j] ? 1 : 0);
+      }
+    }
+
+    dp[0][0] = 0;
+    for (int i = 1; i <= k; ++i) {
+      for (int j = 1; j <= n; ++j) {
+        for (int l = i - 1; l < j; ++l) {
+          dp[i][j] = Math.min(dp[i][j], dp[i - 1][l] + cost[l][j - 1]);
+        }
+      }
+    }
+
+    return dp[k][n];
+  }
+}"
+dart,runtime_error,"Line 23: Char 27: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+                dp[end] = Math.min(dp[end], dp[start] + conversionCost[key]!);
+                          ^^^^",../questions/Hard\minimum-cost-to-convert-string-ii\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minimumCost(String source, String target, List<String> original, List<String> changed, List<int> cost) {
+    int n = source.length;
+    Map<String, int> conversionCost = {};
+    for (int i = 0; i < original.length; i++) {
+      String key = ""${original[i]}->${changed[i]}"";
+      conversionCost[key] = (conversionCost[key] ?? 0) + cost[i];
+    }
+
+    List<int> dp = List.filled(n + 1, double.infinity.toInt());
+    dp[0] = 0;
+
+    for (int i = 0; i < n; i++) {
+      for (int j = i + 1; j <= n; j++) {
+        String srcSubstring = source.substring(i, j);
+        for (int k = 0; k < target.length; k++) {
+          for (int l = k + 1; l <= target.length; l++) {
+            String tgtSubstring = target.substring(k, l);
+            String key = ""$srcSubstring->$tgtSubstring"";
+            if (conversionCost.containsKey(key)) {
+              int start = i, end = j - i + k;
+              if (end <= n) {
+                dp[end] = Math.min(dp[end], dp[start] + conversionCost[key]!);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return dp[n] == double.infinity.toInt() ? -1 : dp[n];
+  }
+}"
+dart,runtime_error,"Line 17: Char 45: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+          sum = sum - nums[i] + nums[i] / 2 + nums[i] / 2;
+                                            ^",../questions/Hard\minimum-operations-to-form-subsequence-with-target-sum\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minOperations(List<int> nums, int target) {
+    nums.sort((a, b) => b.compareTo(a)); // Sort in descending order
+    int operations = 0;
+
+    while (true) {
+      int sum = nums.fold(0, (prev, element) => prev + element);
+      if (sum == target) {
+        return operations;
+      } else if (sum < target) {
+        return -1;
+      }
+
+      bool operationPerformed = false;
+      for (int i = 0; i < nums.length; i++) {
+        if (nums[i] > 1 && sum - nums[i] + nums[i] / 2 + nums[i] / 2 >= target) {
+          sum = sum - nums[i] + nums[i] / 2 + nums[i] / 2;
+          nums.add(nums[i] ~/ 2);
+          nums.add(nums[i] ~/ 2);
+          nums.removeAt(i);
+          operations++;
+          operationPerformed = true;
+          break;
+        }
+      }
+
+      if (!operationPerformed) {
+        break;
+      }
+    }
+
+    // After operations, check if a subsequence can form the target
+    nums.sort((a, b) => b.compareTo(a)); // Sort in descending order again
+    int currentSum = 0;
+    for (int num in nums) {
+      if (currentSum + num <= target) {
+        currentSum += num;
+      }
+      if (currentSum == target) {
+        return operations;
+      }
+    }
+
+    return -1;
+  }
+}"
+dart,runtime_error,"Line 8: Char 11: Error: 'char' isn't a type.
+      Map<char, int> countMap = {};
+          ^^^^
+Line 8: Char 33: Error: A value of type 'Map<dynamic, dynamic>' can't be assigned to a variable of type 'Map<invalid-type, int>'.
+ - 'Map' is from 'dart:core'.
+      Map<char, int> countMap = {};
+                                ^",../questions/Hard\palindrome-rearrangement-queries\responses\Dart\response_dart_0_failed.json,"class Solution {
+  List<bool> canMakePalindromeQueries(String s, List<List<int>> queries) {
+    List<bool> result = [];
+    for (var query in queries) {
+      int ai = query[0], bi = query[1], ci = query[2], di = query[3];
+      String firstHalf = s.substring(ai, bi + 1);
+      String secondHalf = s.substring(ci, di + 1);
+      Map<char, int> countMap = {};
+      for (int i = 0; i < firstHalf.length; i++) {
+        countMap[firstHalf[i]] = (countMap[firstHalf[i]] ?? 0) + 1;
+      }
+      for (int i = 0; i < secondHalf.length; i++) {
+        countMap[secondHalf[i]] = (countMap[secondHalf[i]] ?? 0) - 1;
+      }
+      int oddCount = 0;
+      for (var entry in countMap.entries) {
+        if (entry.value.abs() % 2 != 0) oddCount++;
+      }
+      result.add(oddCount <= 2);
+    }
+    return result;
+  }
+}"
+dart,runtime_error,"Line 26: Char 44: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      cost += pairs + (diff / 2 - pairs) * Math.min(x, 2);
+                                           ^^^^
+Line 26: Char 12: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+      cost += pairs + (diff / 2 - pairs) * Math.min(x, 2);
+           ^
+Line 29: Char 19: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+      cost = diff / 2;
+                  ^",../questions/Medium\apply-operations-to-make-two-strings-equal\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int minOperations(String s1, String s2, int x) {
+    int n = s1.length;
+    int diff = 0;
+    int pairs = 0;
+
+    // Count differences and adjacent pairs
+    for (int i = 0; i < n; i++) {
+      if (s1[i] != s2[i]) {
+        diff++;
+        // Check for adjacent pairs and ensure we don't double-count
+        if (i < n - 1 && s1[i] != s1[i + 1] && s1[i + 1] != s2[i + 1]) {
+          pairs++;
+          i++; // Skip the next index as it's part of a resolved pair
+        }
+      }
+    }
+
+    // If differences are odd, it's impossible to make strings equal
+    if (diff % 2 != 0) return -1;
+
+    // Calculate cost
+    int cost = 0;
+    if (x > 2) {
+      // Optimize cost by using adjacent flips for pairs and then individual flips
+      cost += pairs + (diff / 2 - pairs) * Math.min(x, 2);
+    } else {
+      // If x is less than or equal to 2, use the second operation for all differences
+      cost = diff / 2;
+    }
+    return cost;
+  }
+}"
+dart,runtime_error,"Line 10: Char 17: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      left[i] = Math.min(maxHeights[i], left[i - 1] + 1);
+                ^^^^
+Line 16: Char 18: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      right[i] = Math.min(maxHeights[i], right[i + 1] + 1);
+                 ^^^^
+Line 22: Char 17: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      maxSum += Math.min(left[i], right[i]);
+                ^^^^
+Line 22: Char 14: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+      maxSum += Math.min(left[i], right[i]);
+             ^",../questions/Medium\beautiful-towers-i\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximumSumOfHeights(List<int> maxHeights) {
+    int n = maxHeights.length;
+    List<int> left = List<int>.filled(n, 0); // Tracks max height from left to right
+    List<int> right = List<int>.filled(n, 0); // Tracks max height from right to left
+
+    // Calculate max possible height from left to right
+    left[0] = maxHeights[0];
+    for (int i = 1; i < n; i++) {
+      left[i] = Math.min(maxHeights[i], left[i - 1] + 1);
+    }
+
+    // Calculate max possible height from right to left
+    right[n - 1] = maxHeights[n - 1];
+    for (int i = n - 2; i >= 0; i--) {
+      right[i] = Math.min(maxHeights[i], right[i + 1] + 1);
+    }
+
+    // Calculate maximum sum of heights by taking the minimum of left and right at each position
+    int maxSum = 0;
+    for (int i = 0; i < n; i++) {
+      maxSum += Math.min(left[i], right[i]);
+    }
+
+    return maxSum;
+  }
+}"
+dart,runtime_error,"Line 10: Char 17: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      left[i] = Math.min(maxHeights[i], left[i - 1] + 1);
+                ^^^^
+Line 16: Char 18: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      right[i] = Math.min(maxHeights[i], right[i + 1] + 1);
+                 ^^^^
+Line 22: Char 17: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      maxSum += Math.min(left[i], right[i]);
+                ^^^^
+Line 22: Char 14: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+      maxSum += Math.min(left[i], right[i]);
+             ^",../questions/Medium\beautiful-towers-ii\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximumSumOfHeights(List<int> maxHeights) {
+    int n = maxHeights.length;
+    // Left and right arrays to store the maximum height achievable from each side.
+    List<int> left = List.filled(n, 0), right = List.filled(n, 0);
+
+    // Calculate maximum heights from the left side towards the peak.
+    left[0] = maxHeights[0];
+    for (int i = 1; i < n; i++) {
+      left[i] = Math.min(maxHeights[i], left[i - 1] + 1);
+    }
+
+    // Calculate maximum heights from the right side towards the peak.
+    right[n - 1] = maxHeights[n - 1];
+    for (int i = n - 2; i >= 0; i--) {
+      right[i] = Math.min(maxHeights[i], right[i + 1] + 1);
+    }
+
+    // Find the maximum sum of heights by taking the minimum of left and right at each position.
+    int maxSum = 0;
+    for (int i = 0; i < n; i++) {
+      maxSum += Math.min(left[i], right[i]);
+    }
+
+    return maxSum;
+  }
+}"
+dart,runtime_error,"Line 16: Char 19: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        minCost = Math.min(minCost, currentCost + totalCost - nums[currentIndex]); // Update minCost
+                  ^^^^",../questions/Medium\collecting-chocolates\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int minCost(List<int> nums, int x) {
+    int n = nums.length;
+    int totalCost = nums.reduce((a, b) => a + b); // Step 1: Direct purchase cost
+    int minCost = totalCost; // Initialize minCost with totalCost
+
+    // Step 2: Calculate minimum cost for each starting chocolate type
+    for (int start = 0; start < n; start++) {
+      int currentCost = 0;
+      int operations = 0;
+      for (int i = 0; i < n; i++) { // Simulate purchasing and rotating
+        int currentIndex = (start + i) % n;
+        int operationCost = x * operations; // Cost of operations so far
+        currentCost += operationCost + nums[currentIndex]; // Total cost with current operation
+        operations++; // Increase the number of operations for the next chocolate
+        minCost = Math.min(minCost, currentCost + totalCost - nums[currentIndex]); // Update minCost
+      }
+    }
+
+    return minCost; // Step 3: Return the minimum cost found
+  }
+}"
+dart,runtime_error,"Line 57: IntegerDivisionByZeroException
+#0      int.~/ (dart:core-patch/integers.dart:30:7)
+#1      Solution.modInverse (file:///solution.dart:57:17)
+#2      Solution.constructProductMatrix (file:///solution.dart:40:49)
+#3      main (file:///solution.dart:102:30)
+<asynchronous suspension>",../questions/Medium\construct-product-matrix\responses\Dart\response_dart_0_failed.json,"class Solution {
+  List<List<int>> constructProductMatrix(List<List<int>> grid) {
+    int n = grid.length;
+    int m = grid[0].length;
+    List<List<int>> productMatrix = List.generate(n, (_) => List.filled(m, 1));
+
+    // Compute the product of all elements in the grid modulo 12345, handling zeros if present.
+    int totalProduct = 1;
+    bool hasZero = false; // To check if there's a zero in the grid.
+    int zeroCount = 0; // Count zeros in grid.
+
+    // Calculate total product and zero count
+    for (var row in grid) {
+      for (var value in row) {
+        if (value != 0) {
+          totalProduct = (totalProduct * value) % 12345;
+        } else {
+          hasZero = true;
+          zeroCount++;
+        }
+      }
+    }
+
+    // If there's more than one zero, all products will be zero.
+    if (zeroCount > 1) {
+      return List.generate(n, (_) => List.filled(m, 0));
+    }
+
+    // Populate the productMatrix
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (hasZero) {
+          if (grid[i][j] != 0) {
+            productMatrix[i][j] = 0; // If there's a zero in the grid but not at current position.
+          } else {
+            productMatrix[i][j] = totalProduct; // If the current position is the zero.
+          }
+        } else {
+          // Calculate product excluding current element without direct division.
+          productMatrix[i][j] = (totalProduct * modInverse(grid[i][j], 12345)) % 12345;
+        }
+      }
+    }
+
+    return productMatrix;
+  }
+
+  // Implement the Extended Euclidean Algorithm to find the modular inverse
+  int modInverse(int a, int m) {
+    int m0 = m;
+    int y = 0, x = 1;
+
+    if (m == 1) return 0;
+
+    while (a > 1) {
+      // q is quotient
+      int q = a ~/ m;
+      int t = m;
+
+      // m is remainder now, process same as Euclid's algo
+      m = a % m;
+      a = t;
+      t = y;
+
+      // Update y and x
+      y = x - q * y;
+      x = t;
+    }
+
+    // Make x positive
+    if (x < 0) {
+      x += m0;
+    }
+
+    return x;
+  }
+}"
+dart,runtime_error,"Line 33: Char 70: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+        if (i < n-1) prod = (prod * rowProduct[n-1] / rowProduct[i]) % 12345;
+                                                                     ^
+Line 35: Char 70: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+        if (j < m-1) prod = (prod * colProduct[m-1] / colProduct[j]) % 12345;
+                                                                     ^",../questions/Medium\construct-product-matrix\responses\Dart\response_dart_1_failed.json,"class Solution {
+  List<List<int>> constructProductMatrix(List<List<int>> grid) {
+    int n = grid.length;
+    int m = grid[0].length;
+    List<List<int>> productMatrix = List.generate(n, (_) => List.filled(m, 1));
+    List<int> rowProduct = List.filled(n, 1);
+    List<int> colProduct = List.filled(m, 1);
+
+    // Calculate row-wise product
+    for (int i = 0; i < n; i++) {
+      int prod = 1;
+      for (int j = 0; j < m; j++) {
+        prod = (prod * grid[i][j]) % 12345;
+        rowProduct[i] = prod;
+      }
+    }
+
+    // Calculate column-wise product
+    for (int j = 0; j < m; j++) {
+      int prod = 1;
+      for (int i = 0; i < n; i++) {
+        prod = (prod * grid[i][j]) % 12345;
+        colProduct[j] = prod;
+      }
+    }
+
+    // Construct the product matrix
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        int prod = 1;
+        // Exclude the current element by dividing the product of the row and column by the element, using modular arithmetic properties.
+        if (i > 0) prod = (prod * rowProduct[i-1]) % 12345;
+        if (i < n-1) prod = (prod * rowProduct[n-1] / rowProduct[i]) % 12345;
+        if (j > 0) prod = (prod * colProduct[j-1]) % 12345;
+        if (j < m-1) prod = (prod * colProduct[m-1] / colProduct[j]) % 12345;
+        productMatrix[i][j] = prod;
+      }
+    }
+
+    return productMatrix;
+  }
+}"
+dart,runtime_error,"Line 4: Char 14: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    if (z >= Math.abs(x - y)) {
+             ^^^^
+Line 12: Char 17: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    int minAB = Math.min(x, y) + z;
+                ^^^^",../questions/Medium\construct-the-longest-new-string\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int longestString(int x, int y, int z) {
+    // Calculate the total length directly if one of the pairs can be completely buffered by ""AB""s
+    if (z >= Math.abs(x - y)) {
+      return 2 * (x + y + z);
+    }
+
+    // When ""AB""s are not enough to buffer all ""AA"" and ""BB"" pairs, we need to account for the imbalance
+    // The strategy is to use ""AB""s to separate ""AA"" and ""BB"" as much as possible, then alternate ""AA"" and ""BB"".
+    // However, if ""z"" is less than the absolute difference between ""x"" and ""y"", the maximum length
+    // comes down to twice the sum of the smaller count, ""z"", and the difference reduced by ""z"".
+    int minAB = Math.min(x, y) + z;
+    return 2 * (minAB + 1 + z); // The ""+1"" accounts for starting or ending with a longer chain
+  }
+}"
+dart,runtime_error,"Line 23: Char 13: Error: The method 'abs' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing method, or defining a method named 'abs'.
+    if (z > abs(x - y)) {
+            ^^^
+Line 25: Char 31: Error: The method 'abs' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing method, or defining a method named 'abs'.
+      totalLength += 2 * (z - abs(x - y));
+                              ^^^
+Line 25: Char 19: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+      totalLength += 2 * (z - abs(x - y));
+                  ^",../questions/Medium\construct-the-longest-new-string\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int longestString(int x, int y, int z) {
+    // Balancing ""AA"" and ""BB"" strings with ""AB"" as a separator
+    // The idea is to use ""AB"" optimally to avoid ""AAA"" or ""BBB""
+    
+    // If there's an imbalance between ""AA"" and ""BB"", and not enough ""AB"" to perfectly balance,
+    // the strategy is to use as many ""AA"" and ""BB"" as possible without violating the constraints.
+    // This involves using ""AB"" to separate excess ""AA"" or ""BB"".
+    
+    // When ""AB"" is less than the difference between ""AA"" and ""BB"", adjust the counts.
+    int totalLength = 0;
+    if (x > y) {
+      totalLength += 2 * min(x, y + z); // Use ""BB"" and ""AB"" to limit ""AAA""
+    } else {
+      totalLength += 2 * min(y, x + z); // Use ""AA"" and ""AB"" to limit ""BBB""
+    }
+    
+    // Account for ""AB"" in the total length
+    // If ""AB"" is more than the difference, it can be placed between all ""AA"" and ""BB""
+    totalLength += 2 * min(z, x + y + z); // Add ""AB"" strings that can be used
+    
+    // Adjusting for the case where ""AB"" can fully balance ""AA"" and ""BB"", leading to possibly more ""AB"" usage
+    if (z > abs(x - y)) {
+      // Add the leftover ""AB"" once, as it can only be optimally used to this extent
+      totalLength += 2 * (z - abs(x - y));
+    }
+
+    return totalLength;
+  }
+}"
+dart,runtime_error,"Line 10: Char 36: Error: The getter 'last' isn't defined for the class 'String'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'last'.
+          int reduction = words[i].last == words[k].first ? 1 : 0;
+                                   ^^^^
+Line 10: Char 53: Error: The getter 'first' isn't defined for the class 'String'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'first'.
+          int reduction = words[i].last == words[k].first ? 1 : 0;
+                                                    ^^^^^
+Line 11: Char 31: Error: The method 'min' isn't defined for the class 'int'.
+Try correcting the name to the name of an existing method, or defining a method named 'min'.
+          dp[i][j] = dp[i][j].min(dp[i + 1][k] + dp[k][j] + words[i].length - reduction);
+                              ^^^",../questions/Medium\decremental-string-concatenation\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int minimizeConcatenatedLength(List<String> words) {
+    int n = words.length;
+    List<List<int>> dp = List.generate(n, (_) => List.generate(n, (_) => 0));
+    for (int len = 1; len < n; ++len) {
+      for (int i = 0; i + len < n; ++i) {
+        int j = i + len;
+        dp[i][j] = dp[i + 1][j] + words[i].length;
+        for (int k = i + 1; k <= j; ++k) {
+          int reduction = words[i].last == words[k].first ? 1 : 0;
+          dp[i][j] = dp[i][j].min(dp[i + 1][k] + dp[k][j] + words[i].length - reduction);
+        }
+      }
+    }
+    return dp[0][n - 1] + words[n - 1].length;
+  }
+}"
+dart,runtime_error,"Line 37: Char 28: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+          dp[mask][last] = Math.min(dp[mask][last], dp[prevMask][prev] + words[last].length - overlapCache[prev][last]);
+                           ^^^^
+Line 45: Char 13: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      ans = Math.min(ans, dp[(1 << n) - 1][i]);
+            ^^^^",../questions/Medium\decremental-string-concatenation\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minimizeConcatenatedLength(List<String> words) {
+    // Helper function to calculate the overlap between two words
+    int overlap(String a, String b) {
+      for (int i = 0; i < a.length; i++) {
+        if (b.startsWith(a.substring(i))) {
+          return a.length - i;
+        }
+      }
+      return 0;
+    }
+
+    int n = words.length;
+    // dp[mask][i] represents the minimum concatenated length ending with word i
+    List<List<int>> dp = List.generate(1 << n, (_) => List.filled(n, 100000));
+    List<List<int>> overlapCache = List.generate(n, (_) => List.filled(n, 0));
+
+    // Precompute overlaps to optimize
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (i != j) overlapCache[i][j] = overlap(words[i], words[j]);
+      }
+    }
+
+    // Base case: single word masks
+    for (int i = 0; i < n; i++) {
+      dp[1 << i][i] = words[i].length;
+    }
+
+    // Fill DP table
+    for (int mask = 1; mask < (1 << n); mask++) {
+      for (int last = 0; last < n; last++) {
+        if ((mask & (1 << last)) == 0) continue; // Last is not in the current mask
+        for (int prev = 0; prev < n; prev++) {
+          if ((mask & (1 << prev)) == 0 || last == prev) continue; // Prev is not in the mask or same as last
+          int prevMask = mask ^ (1 << last);
+          dp[mask][last] = Math.min(dp[mask][last], dp[prevMask][prev] + words[last].length - overlapCache[prev][last]);
+        }
+      }
+    }
+
+    // Find minimum among all combinations ending with any word
+    int ans = 100000;
+    for (int i = 0; i < n; i++) {
+      ans = Math.min(ans, dp[(1 << n) - 1][i]);
+    }
+
+    return ans;
+  }
+}"
+dart,runtime_error,"Line 9: Char 33: Error: The method 'pow' isn't defined for the class 'int'.
+Try correcting the name to the name of an existing method, or defining a method named 'pow'.
+      if (((a * b % 10).toInt().pow(c) % m) == target) {
+                                ^^^",../questions/Medium\double-modular-exponentiation\responses\Dart\response_dart_1_failed.json,"class Solution {
+  List<int> getGoodIndices(List<List<int>> variables, int target) {
+    List<int> goodIndices = [];
+    for (int i = 0; i < variables.length; i++) {
+      int a = variables[i][0];
+      int b = variables[i][1];
+      int c = variables[i][2];
+      int m = variables[i][3];
+      if (((a * b % 10).toInt().pow(c) % m) == target) {
+        goodIndices.add(i);
+      }
+    }
+    return goodIndices;
+  }
+}"
+dart,runtime_error,"Line 4: Char 43: Error: Member not found: 'maxValue'.
+    List<int> dp = List.filled(n + 1, int.maxValue);
+                                          ^^^^^^^^",../questions/Medium\extra-characters-in-a-string\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minExtraChar(String s, List<String> dictionary) {
+    int n = s.length;
+    List<int> dp = List.filled(n + 1, int.maxValue);
+    dp[0] = 0;
+    for (int i = 1; i <= n; i++) {
+      for (String word in dictionary) {
+        if (i >= word.length && s.substring(i - word.length, i) == word) {
+          dp[i] = min(dp[i], dp[i - word.length]);
+        }
+      }
+      dp[i] = min(dp[i], dp[i - 1] + 1);
+    }
+    return dp[n] - dp[0];
+  }
+
+  int min(int a, int b) => a < b ? a : b;
+}"
+dart,runtime_error,"Line 17: Char 42: Error: Can't return a value from a void function.
+      if (groups[count]!.isEmpty) return false;
+                                         ^",../questions/Medium\find-if-array-can-be-sorted\responses\Dart\response_dart_2_failed.json,"class Solution {
+  bool canSortArray(List<int> nums) {
+    List<int> bitCounts = nums.map((n) => n.toRadixString(2).replaceAll('0', '').length).toList();
+    List<int> sortedNums = List.from(nums)..sort();
+    List<int> sortedBitCounts = sortedNums.map((n) => n.toRadixString(2).replaceAll('0', '').length).toList();
+    Map<int, List<int>> groups = {};
+    bitCounts.forEach((count) => groups[count] = []);
+    for (int num in nums) {
+      int count = num.toRadixString(2).replaceAll('0', '').length;
+      groups[count]!.add(num);
+    }
+    for (var group in groups.values) {
+      group.sort();
+    }
+    List<int> result = [];
+    sortedBitCounts.forEach((count) {
+      if (groups[count]!.isEmpty) return false;
+      result.add(groups[count]!.removeAt(0));
+    });
+    for (int i = 0; i < result.length; i++) {
+      if (result[i] != sortedNums[i]) return false;
+    }
+    return true;
+  }
+}"
+dart,runtime_error,"Line 15: Char 25: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+            maxLength = Math.max(maxLength, sub.length);
+                        ^^^^",../questions/Medium\find-longest-special-substring-that-occurs-thrice-i\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximumLength(String s) {
+    int maxLength = -1;
+    for (int i = 0; i < s.length; ++i) {
+      for (int j = i + 1; j <= s.length; ++j) {
+        String sub = s.substring(i, j);
+        if (sub.split('').toSet().length == 1) { // Check if the substring is special
+          int count = 0;
+          for (int k = 0; k <= s.length - sub.length; ++k) {
+            if (s.substring(k, k + sub.length) == sub) {
+              ++count;
+            }
+          }
+          if (count >= 3) {
+            maxLength = Math.max(maxLength, sub.length);
+          }
+        }
+      }
+    }
+    return maxLength;
+  }
+}"
+dart,runtime_error,"Line 16: Char 25: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+            maxLength = Math.max(maxLength, currentLength + k);
+                        ^^^^
+Line 21: Char 12: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    return Math.min(maxLength, n);
+           ^^^^",../questions/Medium\find-the-longest-equal-subarray\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int longestEqualSubarray(List<int> nums, int k) {
+    int n = nums.length, maxLength = 0;
+    Map<int, List<int>> positions = {};
+    for (int i = 0; i < n; i++) {
+      positions.putIfAbsent(nums[i], () => []).add(i);
+    }
+    for (var entry in positions.entries) {
+      List<int> pos = entry.value;
+      int size = pos.length;
+      for (int i = 0; i < size; i++) {
+        for (int j = i; j < size; j++) {
+          int currentLength = j - i + 1;
+          int gaps = (j > i) ? pos[j] - pos[i] - currentLength + 1 : 0;
+          if (gaps <= k) {
+            maxLength = Math.max(maxLength, currentLength + k);
+          }
+        }
+      }
+    }
+    return Math.min(maxLength, n);
+  }
+}"
+dart,runtime_error,"Line 10: Char 23: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+          maxLength = Math.max(maxLength, currentLength);
+                      ^^^^
+Line 18: Char 19: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      maxLength = Math.max(maxLength, currentLength);
+                  ^^^^",../questions/Medium\find-the-longest-semi-repetitive-substring\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int longestSemiRepetitiveSubstring(String s) {
+    int maxLength = 1, currentLength = 1, repeated = 0;
+    for (int i = 1; i < s.length; i++) {
+      if (s[i] == s[i - 1]) {
+        repeated++;
+        if (repeated < 2) {
+          currentLength++;
+        } else {
+          maxLength = Math.max(maxLength, currentLength);
+          currentLength = 2; // Reset current length to 2 as we found a second repetition
+          repeated = 1; // Reset repeated count to 1
+        }
+      } else {
+        currentLength++;
+        repeated = 0; // No repetition, reset count
+      }
+      maxLength = Math.max(maxLength, currentLength);
+    }
+    return maxLength;
+  }
+}"
+dart,runtime_error,"Line 8: Char 20: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+          maxLen = Math.max(maxLen, sub.length);
+                   ^^^^",../questions/Medium\find-the-longest-semi-repetitive-substring\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int longestSemiRepetitiveSubstring(String s) {
+    int maxLen = 0;
+    for (int i = 0; i < s.length; i++) {
+      for (int j = i; j < s.length; j++) {
+        String sub = s.substring(i, j + 1);
+        if (isSemiRepetitive(sub)) {
+          maxLen = Math.max(maxLen, sub.length);
+        }
+      }
+    }
+    return maxLen;
+  }
+
+  bool isSemiRepetitive(String s) {
+    int repeatCount = 0;
+    for (int i = 0; i < s.length - 1; i++) {
+      if (s[i] == s[i + 1]) {
+        repeatCount++;
+        if (repeatCount > 1) return false;
+        if (i + 2 < s.length && s[i] == s[i + 2]) return false; // Check for the third consecutive match
+      } else {
+        repeatCount = 0;
+      }
+    }
+    return true;
+  }
+}"
+dart,runtime_error,"Line 9: Char 26: Error: Expected ')' before this.
+      sum = (sum + (long)halfTarget * remaining) % mod;
+                         ^^^^^^^^^^
+Line 10: Char 27: Error: Expected ')' before this.
+      sum = (sum + ((long)remaining * (remaining + 1)) / 2) % mod;
+                          ^^^^^^^^^
+Line 12: Char 20: Error: Expected ')' before this.
+      sum = ((long)n * (n + 1) / 2) % mod;
+                   ^
+Line 9: Char 21: Error: The getter 'long' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'long'.
+      sum = (sum + (long)halfTarget * remaining) % mod;
+                    ^^^^
+Line 9: Char 50: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+      sum = (sum + (long)halfTarget * remaining) % mod;
+                                                 ^
+Line 10: Char 22: Error: The getter 'long' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'long'.
+      sum = (sum + ((long)remaining * (remaining + 1)) / 2) % mod;
+                     ^^^^
+Line 10: Char 61: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+      sum = (sum + ((long)remaining * (remaining + 1)) / 2) % mod;
+                                                            ^
+Line 12: Char 15: Error: The getter 'long' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'long'.
+      sum = ((long)n * (n + 1) / 2) % mod;
+              ^^^^",../questions/Medium\find-the-minimum-possible-sum-of-a-beautiful-array\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minimumPossibleSum(int n, int target) {
+    int mod = 1000000007;
+    int halfTarget = (target + 1) >> 1;
+    int sum = 0;
+    if (n >= halfTarget) {
+      sum = (halfTarget * (halfTarget - 1)) % mod;
+      int remaining = n - halfTarget;
+      sum = (sum + (long)halfTarget * remaining) % mod;
+      sum = (sum + ((long)remaining * (remaining + 1)) / 2) % mod;
+    } else {
+      sum = ((long)n * (n + 1) / 2) % mod;
+    }
+    return sum;
+  }
+}"
+dart,runtime_error,"Line 9: Char 66: Error: A value of type 'int?' can't be assigned to a variable of type 'int' because 'int?' is nullable and 'int' isn't.
+          newDp[newSum] = (newDp[newSum] ?? 0) > entry.value + 1 ? newDp[newSum] : entry.value + 1;
+                                                                 ^",../questions/Medium\length-of-the-longest-subsequence-that-sums-to-target\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int lengthOfLongestSubsequence(List<int> nums, int target) {
+    Map<int, int> dp = {0: 0};
+    for (int num in nums) {
+      Map<int, int> newDp = Map.from(dp);
+      for (MapEntry<int, int> entry in dp.entries) {
+        int newSum = entry.key + num;
+        if (newSum <= target) {
+          newDp[newSum] = (newDp[newSum] ?? 0) > entry.value + 1 ? newDp[newSum] : entry.value + 1;
+        }
+      }
+      dp = newDp;
+    }
+    return dp[target] ?? -1;
+  }
+}"
+dart,runtime_error,"Line 4: Char 16: Error: The operator '>' isn't defined for the class 'String'.
+Try correcting the operator to an existing operator, or defining a '>' operator.
+      if (s[i] > s[i + 1]) {
+               ^",../questions/Medium\lexicographically-smallest-string-after-substring-operation\responses\Dart\response_dart_1_failed.json,"class Solution {
+  String smallestString(String s) {
+    for (int i = 0; i < s.length - 1; i++) {
+      if (s[i] > s[i + 1]) {
+        return s.substring(0, i) + String.fromCharCode(s.codeUnitAt(i) - 1) + 'a' * (s.length - i - 1);
+      }
+    }
+    return String.fromCharCode(s.codeUnitAt(s.length - 1) - 1) + 'a' * (s.length - 1);
+  }
+}"
+dart,runtime_error,"Line 13: Char 24: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+            dp[i][j] = Math.max(dp[i][j], 1 + dp[i + 1][0]);
+                       ^^^^
+Line 16: Char 24: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+            dp[i][j] = Math.max(dp[i][j], 1 + dp[i + 1][1]);
+                       ^^^^
+Line 21: Char 12: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    return Math.max(dp[0][0], dp[0][1]);
+           ^^^^",../questions/Medium\longest-non-decreasing-subarray-from-two-arrays\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maxNonDecreasingLength(List<int> nums1, List<int> nums2) {
+    int n = nums1.length;
+    List<List<int>> dp = List.generate(n + 1, (_) => List.filled(2, 0));
+    for (int i = n - 1; i >= 0; i--) {
+      for (int j = 0; j < 2; j++) {
+        int current = (j == 0) ? nums1[i] : nums2[i];
+        if (i == n - 1) {
+          dp[i][j] = 1;
+        } else {
+          dp[i][j] = 1;
+          if (current <= nums1[i + 1]) {
+            dp[i][j] = Math.max(dp[i][j], 1 + dp[i + 1][0]);
+          }
+          if (current <= nums2[i + 1]) {
+            dp[i][j] = Math.max(dp[i][j], 1 + dp[i + 1][1]);
+          }
+        }
+      }
+    }
+    return Math.max(dp[0][0], dp[0][1]);
+  }
+}"
+dart,runtime_error,"Line 20: Char 27: Error: Operator '>' cannot be called on 'int?' because it is potentially null.
+        dp[end] = dp[end] > maxSoFar + gold ? dp[end] : maxSoFar + gold;
+                          ^
+Line 20: Char 45: Error: A value of type 'int?' can't be assigned to a variable of type 'int' because 'int?' is nullable and 'int' isn't.
+        dp[end] = dp[end] > maxSoFar + gold ? dp[end] : maxSoFar + gold;
+                                            ^",../questions/Medium\maximize-the-profit-as-the-salesman\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximizeTheProfit(int n, List<List<int>> offers) {
+    offers.sort((a, b) => a[1].compareTo(b[1])); // Sort by end time
+    Map<int, int> dp = {0: 0}; // dp[i] = max profit up to house i
+    for (var offer in offers) {
+      int start = offer[0], end = offer[1] + 1, gold = offer[2];
+      int maxSoFar = 0;
+      // Find the max profit before the start of this offer
+      for (var entry in dp.entries) {
+        if (entry.key <= start) {
+          maxSoFar = maxSoFar > entry.value ? maxSoFar : entry.value;
+        } else {
+          break;
+        }
+      }
+      // Update the dp for the end of current offer if it's better than existing
+      if (!dp.containsKey(end)) {
+        dp[end] = maxSoFar + gold;
+      } else {
+        dp[end] = dp[end] > maxSoFar + gold ? dp[end] : maxSoFar + gold;
+      }
+    }
+    return dp.values.reduce((a, b) => a > b ? a : b); // Get the max value from dp
+  }
+}"
+dart,runtime_error,"Line 22: Char 15: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        res = Math.max(res, j - i);
+              ^^^^",../questions/Medium\maximum-beauty-of-an-array-after-applying-operation\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximumBeauty(List<int> nums, int k) {
+    nums.sort();
+    List<int> prefixSum = List.filled(nums.length, 0);
+    prefixSum[0] = nums[0];
+    for (int i = 1; i < nums.length; i++) {
+      prefixSum[i] = nums[i] + prefixSum[i - 1];
+    }
+    int res = 1, j = 0;
+    for (int i = 0; i < nums.length; i++) {
+      while (j < nums.length && nums[j] - nums[i] <= k) {
+        j++;
+      }
+      int total = (j - i) * nums[i];
+      if (i > 0) {
+        total += prefixSum[i - 1];
+      }
+      if (j < nums.length) {
+        total += (prefixSum[nums.length - 1] - prefixSum[j - 1]) - (nums.length - j) * (nums[i] + k);
+      }
+      if (total <= k + prefixSum[nums.length - 1]) {
+        res = Math.max(res, j - i);
+      }
+    }
+    return res;
+  }
+}"
+dart,runtime_error,"Line 8: Char 38: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+        int canProduce = needed == 0 ? budget + 1 : (budget / (needed * cost[j]));
+                                     ^
+Line 9: Char 31: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        minAlloysForMachine = Math.min(minAlloysForMachine, canProduce);
+                              ^^^^
+Line 11: Char 19: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      maxAlloys = Math.max(maxAlloys, minAlloysForMachine);
+                  ^^^^",../questions/Medium\maximum-number-of-alloys\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maxNumberOfAlloys(int n, int k, int budget, List<List<int>> composition, List<int> stock, List<int> cost) {
+    int maxAlloys = 0;
+    for (int i = 0; i < k; i++) {
+      int minAlloysForMachine = budget + 1;
+      for (int j = 0; j < n; j++) {
+        int needed = composition[i][j] > 0 ? (composition[i][j] - stock[j] <= 0 ? 0 : composition[i][j] - stock[j]) : 0;
+        int canProduce = needed == 0 ? budget + 1 : (budget / (needed * cost[j]));
+        minAlloysForMachine = Math.min(minAlloysForMachine, canProduce);
+      }
+      maxAlloys = Math.max(maxAlloys, minAlloysForMachine);
+    }
+    return maxAlloys;
+  }
+}"
+dart,runtime_error,"Line 10: Char 34: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+            dp[j] = dp[j] > -1 ? Math.min(dp[j], dp[i] + 1) : dp[i] + 1;
+                                 ^^^^",../questions/Medium\maximum-number-of-jumps-to-reach-the-last-index\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int maximumJumps(List<int> nums, int target) {
+    int n = nums.length;
+    List<int> dp = List.filled(n, -1);
+    dp[0] = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = i + 1; j < n; j++) {
+        if (nums[j] - nums[i] <= target && nums[j] - nums[i] >= -target) {
+          if (dp[i] != -1) {
+            dp[j] = dp[j] > -1 ? Math.min(dp[j], dp[i] + 1) : dp[i] + 1;
+          }
+        }
+      }
+    }
+    return dp[n - 1];
+  }
+}"
+dart,runtime_error,"Line 9: Char 25: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+        if (i == x) sum += (mid / i) % 2;
+                        ^",../questions/Medium\maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int findMaximumNumber(int k, int x) {
+    int low = 1, high = k;
+    while (low < high) {
+      int mid = (low + high + 1) >> 1;
+      int sum = 0;
+      for (int i = 1; i <= x; i *= 2) {
+        sum += (mid / i) ~/ 2;
+        if (i == x) sum += (mid / i) % 2;
+      }
+      if (sum <= k) low = mid;
+      else high = mid - 1;
+    }
+    return low;
+  }
+}"
+dart,runtime_error,"Line 10: Char 24: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        costMap[key] = Math.min(costMap[key]!, cost[i]);
+                       ^^^^",../questions/Medium\minimum-cost-to-convert-string-i\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int minimumCost(String source, String target, List<String> original, List<String> changed, List<int> cost) {
+    if (source.length != target.length) return -1;
+    Map<String, int> costMap = {};
+    for (int i = 0; i < original.length; i++) {
+      String key = original[i] + changed[i];
+      if (!costMap.containsKey(key)) {
+        costMap[key] = cost[i];
+      } else {
+        costMap[key] = Math.min(costMap[key]!, cost[i]);
+      }
+    }
+    int totalCost = 0;
+    for (int i = 0; i < source.length; i++) {
+      if (source[i] == target[i]) continue;
+      String key = source[i] + target[i];
+      if (!costMap.containsKey(key)) return -1;
+      totalCost += costMap[key]!;
+    }
+    return totalCost;
+  }
+}"
+dart,runtime_error,"Line 8: Char 17: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        cost += Math.min(flips, 1);
+                ^^^^
+Line 8: Char 14: Error: A value of type 'num' can't be assigned to a variable of type 'int'.
+        cost += Math.min(flips, 1);
+             ^",../questions/Medium\minimum-cost-to-make-all-characters-equal\responses\Dart\response_dart_0_failed.json,"class Solution {
+  int minimumCost(String s) {
+    int cost = 0, flips = 0;
+    for (int i = 0; i < s.length; i++) {
+      if (s[i] == '0') {
+        flips++;
+      } else {
+        cost += Math.min(flips, 1);
+        flips = 0;
+      }
+    }
+    return cost;
+  }
+}"
+dart,runtime_error,"Line 19: Char 17: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      minCost = Math.min(minCost, Math.min(cost, altCost));
+                ^^^^
+Line 19: Char 35: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      minCost = Math.min(minCost, Math.min(cost, altCost));
+                                  ^^^^",../questions/Medium\minimum-cost-to-make-all-characters-equal\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minimumCost(String s) {
+    int n = s.length;
+    List<int> prefixZero = List.filled(n + 1, 0);
+    List<int> prefixOne = List.filled(n + 1, 0);
+
+    for (int i = 1; i <= n; i++) {
+      prefixZero[i] = prefixZero[i - 1] + (s[i - 1] == '0' ? 1 : 0);
+      prefixOne[i] = prefixOne[i - 1] + (s[i - 1] == '1' ? 1 : 0);
+    }
+
+    int minCost = n; // Maximum possible cost
+
+    for (int i = 0; i <= n; i++) {
+      // Cost to make all 0s till i and all 1s from i+1 to n-1
+      int cost = prefixOne[i] + (prefixZero[n] - prefixZero[i]);
+      // Cost to make all 1s till i and all 0s from i+1 to n-1
+      int altCost = prefixZero[i] + (prefixOne[n] - prefixOne[i]);
+      minCost = Math.min(minCost, Math.min(cost, altCost));
+    }
+
+    return minCost;
+  }
+}"
+dart,runtime_error,"Line 12: Char 21: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      return sum1 + Math.max(zeros1, zeros2);
+                    ^^^^
+Line 12: Char 19: Error: A value of type 'num' can't be returned from a function with return type 'int'.
+      return sum1 + Math.max(zeros1, zeros2);
+                  ^",../questions/Medium\minimum-equal-sum-of-two-arrays-after-replacing-zeros\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minSum(List<int> nums1, List<int> nums2) {
+    int sum1 = nums1.fold(0, (a, b) => a + b);
+    int sum2 = nums2.fold(0, (a, b) => a + b);
+    int zeros1 = nums1.where((element) => element == 0).length;
+    int zeros2 = nums2.where((element) => element == 0).length;
+    if ((sum1 - sum2).abs() % (zeros1 + zeros2) != 0 && zeros1 + zeros2 > 0) {
+      return -1;
+    }
+    int targetDiff = (sum1 - sum2).abs();
+    if (sum1 == sum2) {
+      return sum1 + Math.max(zeros1, zeros2);
+    }
+    int totalZeros = zeros1 + zeros2;
+    if (targetDiff % totalZeros != 0) {
+      return -1;
+    }
+    int minFill = targetDiff ~/ totalZeros + 1;
+    return sum1 + sum2 + minFill * totalZeros;
+  }
+}"
+dart,runtime_error,"Line 13: Char 12: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+    return Math.min(change0, change1);
+           ^^^^",../questions/Medium\minimum-number-of-changes-to-make-binary-string-beautiful\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int minChanges(String s) {
+    int change0 = 0, change1 = 0;
+    for (int i = 0; i < s.length; i++) {
+      if (i % 2 == 0) {
+        if (s[i] == '0') change1++;
+        else change0++;
+      } else {
+        if (s[i] == '1') change1++;
+        else change0++;
+      }
+    }
+    return Math.min(change0, change1);
+  }
+}"
+dart,runtime_error,"Line 7: Char 31: Error: A value of type 'int?' can't be assigned to a variable of type 'num' because 'int?' is nullable and 'num' isn't.
+      maxFreq = maxFreq > freq[num] ? maxFreq : freq[num];
+                              ^
+Line 7: Char 37: Error: A value of type 'int?' can't be assigned to a variable of type 'int' because 'int?' is nullable and 'int' isn't.
+      maxFreq = maxFreq > freq[num] ? maxFreq : freq[num];
+                                    ^",../questions/Medium\minimum-number-of-groups-to-create-a-valid-assignment\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minGroupsForValidAssignment(List<int> nums) {
+    Map<int, int> freq = {};
+    int maxFreq = 0;
+    for (int num in nums) {
+      freq[num] = (freq[num] ?? 0) + 1;
+      maxFreq = maxFreq > freq[num] ? maxFreq : freq[num];
+    }
+    return maxFreq;
+  }
+}"
+dart,runtime_error,"Line 9: Char 7: Error: 'boolean' isn't a type.
+      boolean operationPerformed = false;
+      ^^^^^^^
+Line 11: Char 9: Error: 'long' isn't a type.
+        long powerOfTwo = 1L << i; // Use long to avoid overflow.
+        ^^^^
+Line 11: Char 27: Error: Expected ';' after this.
+        long powerOfTwo = 1L << i; // Use long to avoid overflow.
+                          ^
+Line 11: Char 28: Error: The getter 'L' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'L'.
+        long powerOfTwo = 1L << i; // Use long to avoid overflow.
+                           ^
+Line 12: Char 13: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        if (Math.abs(num2) <= powerOfTwo) {
+            ^^^^
+Line 14: Char 18: Error: A value of type 'double' can't be assigned to a variable of type 'int'.
+            num1 -= (powerOfTwo + num2);
+                 ^",../questions/Medium\minimum-operations-to-make-the-integer-zero\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int makeTheIntegerZero(int num1, int num2) {
+    if (num2 == 0) return -1; // If num2 is 0, it's impossible to proceed.
+    int operations = 0;
+
+    while (num1 != 0) {
+      if (operations > 60) return -1; // If more than 60 operations are needed, return -1.
+      int i = 60;
+      boolean operationPerformed = false;
+      while (i >= 0 && !operationPerformed) {
+        long powerOfTwo = 1L << i; // Use long to avoid overflow.
+        if (Math.abs(num2) <= powerOfTwo) {
+          if ((num1 - num2) % powerOfTwo == 0) {
+            num1 -= (powerOfTwo + num2);
+            operations++;
+            operationPerformed = true;
+          }
+        }
+        i--;
+      }
+      if (!operationPerformed) return -1; // If no operation can be performed, return -1.
+    }
+
+    return operations;
+  }
+}"
+dart,runtime_error,"Line 20: Char 19: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        maxDist = Math.max(maxDist, currDist);
+                  ^^^^
+Line 22: Char 24: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+      maxConsecutive = Math.max(maxConsecutive, value.length + (n - maxDist) ~/ 2);
+                       ^^^^",../questions/Medium\minimum-seconds-to-equalize-a-circular-array\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int minimumSeconds(List<int> nums) {
+    if (nums.toSet().length == 1) return 0; // All elements are already equal
+    Map<int, List<int>> positions = {};
+    int n = nums.length;
+    
+    // Record positions of each number in nums
+    for (int i = 0; i < n; i++) {
+      positions.putIfAbsent(nums[i], () => []).add(i);
+    }
+
+    // Check consecutive distances for each unique number
+    int maxConsecutive = 0;
+    positions.forEach((key, value) {
+      int maxDist = 1;
+      for (int i = 0; i < value.length; i++) {
+        int currDist = i == value.length - 1 ? 
+                       n - value.last + value.first : 
+                       value[i + 1] - value[i];
+        maxDist = Math.max(maxDist, currDist);
+      }
+      maxConsecutive = Math.max(maxConsecutive, value.length + (n - maxDist) ~/ 2);
+    });
+
+    return (n + 1 - maxConsecutive + 1) ~/ 2;
+  }
+}"
+dart,runtime_error,"Line 5: Char 19: Error: Member not found: 'max'.
+    int ans = int.max;
+                  ^^^
+Line 29: Char 23: Error: Member not found: 'max'.
+    return ans == int.max ? -1 : ans;
+                      ^^^",../questions/Medium\minimum-size-subarray-in-infinite-array\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int minSizeSubarray(List<int> nums, int target) {
+    int n = nums.length;
+    int sum = 0;
+    int ans = int.max;
+    int left = 0;
+
+    // Calculate the total sum of the array to check if it's possible to reach the target
+    for (int num in nums) {
+      sum += num;
+    }
+    if (sum == target) return n; // If the total sum equals to target, then the whole array is the answer
+    if (sum < target) return -1; // If total sum is less than target, it's impossible to find a subarray
+
+    // Extend the array to simulate the infinite appending
+    List<int> extendedNums = List.from(nums)..addAll(nums);
+
+    sum = 0; // Reset sum for the sliding window calculation
+    for (int right = 0; right < extendedNums.length; right++) {
+      sum += extendedNums[right];
+      while (sum - extendedNums[left] >= target && left < right) {
+        sum -= extendedNums[left++];
+      }
+      if (sum >= target) {
+        ans = min(ans, right - left + 1);
+      }
+    }
+
+    return ans == int.max ? -1 : ans;
+  }
+
+  int min(int a, int b) => a < b ? a : b;
+}"
+dart,runtime_error,"Line 16: Char 21: Error: The getter 'Math' isn't defined for the class 'Solution'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'Math'.
+        minLength = Math.min(minLength, end - start + 1);
+                    ^^^^",../questions/Medium\minimum-size-subarray-in-infinite-array\responses\Dart\response_dart_2_failed.json,"class Solution {
+  int minSizeSubarray(List<int> nums, int target) {
+    final int n = nums.length;
+    int minLength = n + 1;
+    List<int> prefixSums = List.filled(n * 2, 0);
+    for (int i = 0; i < n * 2; i++) {
+      prefixSums[i] = nums[i % n] + (i == 0 ? 0 : prefixSums[i - 1]);
+    }
+
+    for (int start = 0; start < n; start++) {
+      int end = start;
+      while (end < start + n && prefixSums[end] - (start == 0 ? 0 : prefixSums[start - 1]) < target) {
+        end++;
+      }
+      if (end < start + n) {
+        minLength = Math.min(minLength, end - start + 1);
+      }
+    }
+
+    return minLength <= n ? minLength : -1;
+  }
+}"
+dart,runtime_error,"Line 10: RangeError (index): Invalid value: Not in inclusive range 0..2: 3
+#0      _StringBase.[] (dart:core-patch/string_patch.dart:258:41)
+#1      Solution.minimumString (file:///solution.dart:10:40)
+#2      main (file:///solution.dart:60:30)
+<asynchronous suspension>",../questions/Medium\shortest-string-that-contains-three-strings\responses\Dart\response_dart_0_failed.json,"class Solution {
+  String minimumString(String a, String b, String c) {
+    List<String> substrings = [a, b, c];
+    substrings.sort((x, y) => x.length.compareTo(y.length));
+    String longest = substrings[2];
+    for (String s in substrings) {
+      String temp = longest;
+      for (int i = 0; i <= longest.length; i++) {
+        for (int j = 0; j <= s.length && i + j <= temp.length; j++) {
+          if (i + j == temp.length || s[j] != temp[i + j]) {
+            String candidate = temp.substring(0, i) + s + temp.substring(i + j);
+            if (!longest.contains(s)) longest = candidate;
+            else if (candidate.length < longest.length || (candidate.length == longest.length && candidate.compareTo(longest) < 0)) {
+              longest = candidate;
+            }
+            break;
+          }
+        }
+      }
+    }
+    return longest;
+  }
+}"
+dart,runtime_error,"Line 25: Char 23: Error: A value of type 'double' can't be returned from a function with return type 'int'.
+    return operations / 2; // Each swap fixes two positions
+                      ^",../questions/Medium\sorting-three-groups\responses\Dart\response_dart_1_failed.json,"class Solution {
+  int minimumOperations(List<int> nums) {
+    List<List<int>> groups = List.generate(3, (_) => []);
+    for (int i = 0; i < nums.length; i++) {
+      groups[nums[i] - 1].add(i);
+    }
+
+    int operations = 0;
+
+    // Sort each group by their indices to simulate the sorting process
+    for (var group in groups) {
+      group.sort();
+    }
+
+    List<int> res = [];
+    for (var group in groups) {
+      res.addAll(group);
+    }
+
+    // Find the number of elements out of place in the res array
+    for (int i = 0; i < res.length; i++) {
+      if (res[i] != i) operations++;
+    }
+
+    return operations / 2; // Each swap fixes two positions
+  }
+}"

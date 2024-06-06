@@ -1,0 +1,2065 @@
+Language,Error Type,Message,File Path,Code
+c,compile_error,"Line 47: Char 5: error: redefinition of ‘main’ [solution.c]
+   50 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Easy\number-of-beautiful-pairs\responses\C\response_c_0_failed.json,"#include <stdio.h>
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int firstDigit(int num) {
+    while (num >= 10) {
+        num /= 10;
+    }
+    return num;
+}
+
+int countBeautifulPairs(int* nums, int numsSize) {
+    int count = 0;
+    for (int i = 0; i < numsSize; ++i) {
+        for (int j = i + 1; j < numsSize; ++j) {
+            int firstDigitNum = firstDigit(nums[i]);
+            int lastDigitNum = nums[j] % 10;
+            if (gcd(firstDigitNum, lastDigitNum) == 1) {
+                ++count;
+            }
+        }
+    }
+    return count;
+}
+
+// Example usage
+int main() {
+    int nums1[] = {2, 5, 1, 4};
+    int size1 = sizeof(nums1) / sizeof(nums1[0]);
+    printf(""Example 1: %d\n"", countBeautifulPairs(nums1, size1));
+
+    int nums2[] = {11, 21, 12};
+    int size2 = sizeof(nums2) / sizeof(nums2[0]);
+    printf(""Example 2: %d\n"", countBeautifulPairs(nums2, size2));
+
+    return 0;
+}"
+c,compile_error,"Line 43: Char 5: error: redefinition of ‘main’ [solution.c]
+   46 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Easy\points-that-intersect-with-cars\responses\C\response_c_0_failed.json,"#include <stdio.h>
+
+int numberOfPoints(int** nums, int numsSize, int* numsColSize) {
+    int coveredPoints[101] = {0}; // Step 1: Initialize the tracking array.
+    int count = 0;
+
+    // Step 2: Iterate through the nums array to mark covered points.
+    for(int i = 0; i < numsSize; i++) {
+        for(int point = nums[i][0]; point <= nums[i][1]; point++) {
+            coveredPoints[point] = 1;
+        }
+    }
+
+    // Step 3: Count the number of covered points.
+    for(int i = 1; i <= 100; i++) {
+        if(coveredPoints[i]) count++;
+    }
+
+    // Step 4: Return the count.
+    return count;
+}
+
+// Example usage
+int main() {
+    // Example 1
+    int nums1[][2] = {{3,6},{1,5},{4,7}};
+    int nums1Size = 3;
+    int nums1ColSize[] = {2, 2, 2};
+    int* nums1Ptrs[3] = {nums1[0], nums1[1], nums1[2]};
+    printf(""Example 1 Output: %d\n"", numberOfPoints(nums1Ptrs, nums1Size, nums1ColSize));
+
+    // Example 2
+    int nums2[][2] = {{1,3},{5,8}};
+    int nums2Size = 2;
+    int nums2ColSize[] = {2, 2};
+    int* nums2Ptrs[2] = {nums2[0], nums2[1]};
+    printf(""Example 2 Output: %d\n"", numberOfPoints(nums2Ptrs, nums2Size, nums2ColSize));
+
+    return 0;
+}"
+c,compile_error,"Line 72: Char 5: error: redefinition of ‘main’ [solution.c]
+   75 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Easy\split-strings-by-separator\responses\C\response_c_0_failed.json,"#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char ** splitWordsBySeparator(char ** words, int wordsSize, char separator, int* returnSize) {
+    // Initially, we don't know how many strings we'll have after the split
+    int totalStrings = 0;
+    char **result = NULL;
+    *returnSize = 0;
+
+    for (int i = 0; i < wordsSize; ++i) {
+        char *word = words[i];
+        int length = strlen(word);
+        int start = 0; // Start of the next string to copy
+
+        for (int j = 0; j <= length; ++j) {
+            if (word[j] == separator || word[j] == '\0') {
+                if (j > start) {
+                    // We have a non-empty string to copy
+                    int newSize = j - start;
+                    char *newString = (char *)malloc(newSize + 1);
+                    strncpy(newString, word + start, newSize);
+                    newString[newSize] = '\0'; // Null-terminate the new string
+
+                    // Add the new string to the result array
+                    result = (char **)realloc(result, sizeof(char *) * (++totalStrings));
+                    result[totalStrings - 1] = newString;
+
+                    *returnSize = totalStrings;
+                }
+                start = j + 1; // Update start for the next string
+            }
+        }
+    }
+
+    return result;
+}
+
+// Function to print the result, for demonstration purposes
+void printResult(char **result, int size) {
+    printf(""["");
+    for (int i = 0; i < size; i++) {
+        printf(""\""%s\"""", result[i]);
+        if (i < size - 1) printf("", "");
+    }
+    printf(""]\n"");
+}
+
+// Example usage
+int main() {
+    char *words[] = {""one.two.three"", ""four.five"", ""six""};
+    int wordsSize = sizeof(words) / sizeof(words[0]);
+    char separator = '.';
+    int returnSize;
+
+    char **result = splitWordsBySeparator(words, wordsSize, separator, &returnSize);
+    printResult(result, returnSize);
+
+    // Free allocated memory
+    for (int i = 0; i < returnSize; i++) {
+        free(result[i]);
+    }
+    free(result);
+
+    return 0;
+}"
+c,compile_error,"Line 69: Char 5: error: redefinition of ‘main’ [solution.c]
+   72 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Easy\split-strings-by-separator\responses\C\response_c_1_failed.json,"#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char **splitWordsBySeparator(char **words, int wordsSize, char separator, int *returnSize) {
+    int totalStrings = 0, capacity = 100;
+    char **result = (char **)malloc(capacity * sizeof(char *));
+    *returnSize = 0;
+
+    for (int i = 0; i < wordsSize; ++i) {
+        char *word = words[i];
+        int length = strlen(word);
+        int start = 0; // Start of the next string to copy
+
+        for (int j = 0; j <= length; ++j) {
+            if (word[j] == separator || word[j] == '\0') {
+                if (j > start) {
+                    // We have a non-empty string to copy
+                    int newSize = j - start;
+                    char *newString = (char *)malloc((newSize + 1) * sizeof(char));
+                    strncpy(newString, word + start, newSize);
+                    newString[newSize] = '\0'; // Null-terminate the new string
+
+                    if (*returnSize == capacity) {
+                        capacity *= 2;
+                        result = (char **)realloc(result, capacity * sizeof(char *));
+                    }
+
+                    result[*returnSize] = newString;
+                    (*returnSize)++;
+                }
+                start = j + 1; // Update start for the next string
+            }
+        }
+    }
+
+    return result;
+}
+
+// Example usage
+int main() {
+    char *words[] = {""one.two.three"", ""four.five"", ""six""};
+    int wordsSize = sizeof(words) / sizeof(words[0]);
+    char separator = '.';
+    int returnSize;
+
+    char **result = splitWordsBySeparator(words, wordsSize, separator, &returnSize);
+    
+    // Print the result
+    for (int i = 0; i < returnSize; i++) {
+        printf(""\""%s\"""", result[i]);
+        if (i < returnSize - 1) printf("", "");
+    }
+    printf(""\n"");
+
+    // Free allocated memory
+    for (int i = 0; i < returnSize; i++) {
+        free(result[i]);
+    }
+    free(result);
+
+    return 0;
+}"
+c,compile_error,"solution.c: In function ‘maximumScore’
+Line 52: Char 43: error: expected expression before ‘[’ token [solution.c]
+   55 |     qsort(indices, numsSize, sizeof(int), [&](const void* a, const void* b) {
+      |                                           ^",../questions/Hard\apply-operations-to-maximize-score\responses\C\response_c_1_failed.json,"#include <stdio.h>
+#include <stdlib.h>
+
+#define MOD 1000000007
+
+int primeFactors(int n) {
+    int factors = 0;
+    int count;
+
+    // Count the number of 2s that divide n
+    if (n % 2 == 0) {
+        factors++;
+        while (n % 2 == 0) n = n / 2;
+    }
+
+    // n must be odd at this point. So we can skip one element (Note i = i +2)
+    for (int i = 3; i <= sqrt(n); i = i + 2) {
+        // While i divides n, print i and divide n
+        if (n % i == 0) {
+            factors++;
+            while (n % i == 0) n = n / i;
+        }
+    }
+
+    // This condition is to handle the case when n is a prime number
+    // greater than 2
+    if (n > 2) factors++;
+
+    return factors;
+}
+
+// Custom comparator for sorting
+int cmp(const void *a, const void *b) {
+    return (*(int*)b) - (*(int*)a);
+}
+
+int maximumScore(int* nums, int numsSize, int k) {
+    long long score = 1; // Use long long to avoid overflow
+
+    // Allocate memory to store prime factors
+    int* primeScores = (int*)malloc(numsSize * sizeof(int));
+    if (!primeScores) return -1; // Memory allocation failed
+
+    // Calculate prime scores for each element
+    for (int i = 0; i < numsSize; ++i) {
+        primeScores[i] = primeFactors(nums[i]);
+    }
+
+    // Sort nums based on their prime scores, and if equal, by their value
+    int* indices = (int*)malloc(numsSize * sizeof(int));
+    for (int i = 0; i < numsSize; ++i) indices[i] = i;
+    qsort(indices, numsSize, sizeof(int), [&](const void* a, const void* b) {
+        int idx1 = *(const int*)a;
+        int idx2 = *(const int*)b;
+        if (primeScores[idx1] == primeScores[idx2]) return nums[idx2] - nums[idx1];
+        return primeScores[idx2] - primeScores[idx1];
+    });
+
+    // Pick the first k elements based on sorted prime scores (and values)
+    for (int i = 0; i < k; ++i) {
+        score = (score * nums[indices[i]]) % MOD;
+    }
+
+    free(primeScores);
+    free(indices);
+
+    return (int)score;
+}"
+c,compile_error,"solution.c: In function ‘countKSubsequencesWithMaxBeauty’
+Line 50: Char 65: error: invalid operands to binary % (have ‘double’ and ‘int’) [solution.c]
+   53 |                 total = (numerator * pow(denominator, MOD - 2)) % MOD; // Fermat's little theorem for modular inverse
+      |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^
+      |                                    |
+      |                                    double",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\C\response_c_0_failed.json,"#include <stdio.h>
+#include <string.h>
+
+#define MOD 1000000007
+
+int countKSubsequencesWithMaxBeauty(char* s, int k) {
+    int freq[26] = {0};
+    int n = strlen(s);
+    
+    // Count frequency of each character in s
+    for (int i = 0; i < n; i++) {
+        freq[s[i] - 'a']++;
+    }
+    
+    // Sort frequencies in decreasing order
+    for (int i = 0; i < 26; i++) {
+        for (int j = i + 1; j < 26; j++) {
+            if (freq[i] < freq[j]) {
+                int temp = freq[i];
+                freq[i] = freq[j];
+                freq[j] = temp;
+            }
+        }
+    }
+    
+    // Calculate the maximum beauty
+    int maxBeauty = 0;
+    for (int i = 0; i < k; i++) {
+        maxBeauty += freq[i];
+    }
+    
+    // Calculate the number of ways to choose k distinct characters
+    // with the maximum beauty. This involves combinatorial calculations,
+    // but since we only need the count of max beauty subsequences,
+    // we simplify by considering characters with equal frequencies together.
+    long long ways = 1;
+    int currentFreq = freq[0], count = 0, selected = 0;
+    for (int i = 0; i < 26 && selected < k; i++) {
+        if (freq[i] == currentFreq) {
+            count++; // Count characters with the current frequency
+        } else {
+            // When frequency changes, calculate combinations for the previous frequency set
+            if (count >= k - selected) {
+                // Calculate nCk for the count
+                long long total = 1, numerator = 1, denominator = 1;
+                for (int j = 0; j < k - selected; j++) {
+                    numerator = (numerator * (count - j)) % MOD;
+                    denominator = (denominator * (1 + j)) % MOD;
+                }
+                total = (numerator * pow(denominator, MOD - 2)) % MOD; // Fermat's little theorem for modular inverse
+                ways = (ways * total) % MOD;
+                selected = k; // All characters selected
+                break;
+            } else {
+                selected += count; // Select all characters of the current frequency
+                currentFreq = freq[i];
+                count = 1;
+            }
+        }
+    }
+    
+    return ways % MOD;
+}"
+c,compile_error,"solution.c: In function ‘numberOfPowerfulInt’
+Line 12: Char 24: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   15 |     for (long long i = max(start, s_val); i <= finish; i++) {
+      |                        ^~~
+      |                        fmax
+Line 12: Char 5: error: declaration of non-variable ‘max’ in ‘for’ loop initial declaration [solution.c]
+   15 |     for (long long i = max(start, s_val); i <= finish; i++) {
+      |     ^~~",../questions/Hard\count-the-number-of-powerful-integers\responses\C\response_c_0_failed.json,"#include <string.h>
+#include <math.h>
+
+long long numberOfPowerfulInt(long long start, long long finish, int limit, char* s) {
+    long long count = 0;
+    int s_len = strlen(s);
+    long long s_val = atoll(s);
+    long long min_val = pow(10, s_len - 1);
+    if (s_val < start || s_val > finish) return 0; // s as a number is outside the range
+    if (s_val < min_val) return 0; // s has leading zeros or is not a valid number in the range
+
+    for (long long i = max(start, s_val); i <= finish; i++) {
+        // Check if i ends with s and all digits <= limit
+        if (i % (long long)pow(10, s_len) != s_val) continue;
+        long long temp = i;
+        bool isValid = true;
+        while (temp > 0) {
+            if (temp % 10 > limit) {
+                isValid = false;
+                break;
+            }
+            temp /= 10;
+        }
+        if (isValid) count++;
+    }
+    return count;
+}
+
+long long max(long long a, long long b) {
+    return (a > b) ? a : b;
+}"
+c,compile_error,"solution.c: In function ‘minimumCost’
+Line 27: Char 26: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   30 |             for (int l = max(j - 1, i - dist - 1); l <= i - 1; ++l) { // Ensure the distance condition is met
+      |                          ^~~
+      |                          fmax
+Line 27: Char 13: error: declaration of non-variable ‘max’ in ‘for’ loop initial declaration [solution.c]
+   30 |             for (int l = max(j - 1, i - dist - 1); l <= i - 1; ++l) { // Ensure the distance condition is met
+      |             ^~~",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\C\response_c_2_failed.json,"#include <limits.h>
+
+long long dp[101][101]; // dp[i][j] represents the minimum cost for dividing first i numbers into j groups
+
+long long minCost(int* nums, int start, int end) {
+    long long cost = LLONG_MAX;
+    for (int i = start; i <= end; ++i) {
+        cost = fmin(cost, (long long)nums[i]);
+    }
+    return cost;
+}
+
+long long minimumCost(int* nums, int numsSize, int k, int dist) {
+    for (int i = 0; i <= numsSize; ++i) {
+        for (int j = 0; j <= k; ++j) {
+            dp[i][j] = LLONG_MAX;
+        }
+    }
+
+    dp[0][0] = 0;
+    for (int i = 1; i <= numsSize; ++i) {
+        dp[i][1] = nums[0]; // The cost of the first group is always the first number
+    }
+
+    for (int j = 2; j <= k; ++j) { // For each group
+        for (int i = j; i <= numsSize; ++i) { // Start from 'j' to ensure we have enough elements
+            for (int l = max(j - 1, i - dist - 1); l <= i - 1; ++l) { // Ensure the distance condition is met
+                if (dp[l][j - 1] != LLONG_MAX) {
+                    dp[i][j] = fmin(dp[i][j], dp[l][j - 1] + minCost(nums, l, i - 1));
+                }
+            }
+        }
+    }
+
+    return dp[numsSize][k];
+}"
+c,compile_error,"solution.c: In function ‘beautifulIndices’
+Line 26: Char 26: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   29 |             for (int j = max(0, i - k); j <= min(sLen - bLen, i + k); ++j) {
+      |                          ^~~
+      |                          fmax
+Line 26: Char 13: error: declaration of non-variable ‘max’ in ‘for’ loop initial declaration [solution.c]
+   29 |             for (int j = max(0, i - k); j <= min(sLen - bLen, i + k); ++j) {
+      |             ^~~",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\C\response_c_1_failed.json,"#include <stdlib.h>
+#include <string.h>
+
+int* beautifulIndices(char* s, char* a, char* b, int k, int* returnSize) {
+    int sLen = strlen(s), aLen = strlen(a), bLen = strlen(b);
+    int *res = (int *)malloc(sizeof(int) * sLen);
+    int resIndex = 0;
+
+    // Precompute matching indices for a and b
+    int *aMatches = (int *)calloc(sLen, sizeof(int));
+    int *bMatches = (int *)calloc(sLen, sizeof(int));
+
+    // Find all occurrences of a
+    for (int i = 0; i <= sLen - aLen; ++i) {
+        if (strncmp(s + i, a, aLen) == 0) aMatches[i] = 1;
+    }
+
+    // Find all occurrences of b
+    for (int i = 0; i <= sLen - bLen; ++i) {
+        if (strncmp(s + i, b, bLen) == 0) bMatches[i] = 1;
+    }
+
+    // For each index i, check if it is beautiful
+    for (int i = 0; i <= sLen - aLen; ++i) {
+        if (aMatches[i]) {
+            for (int j = max(0, i - k); j <= min(sLen - bLen, i + k); ++j) {
+                if (bMatches[j]) {
+                    res[resIndex++] = i;
+                    break; // Found a valid b, no need to check further for this a
+                }
+            }
+        }
+    }
+
+    *returnSize = resIndex;
+    // Resize the array to the actual number of beautiful indices
+    res = (int *)realloc(res, sizeof(int) * resIndex);
+    return res;
+}"
+c,compile_error,"solution.c: In function ‘main’
+Line 69: Char 50: warning: passing argument 2 of ‘longestValidSubstring’ makes integer from pointer without a cast [-Wint-conversion] [solution.c]
+   72 |         int ret = longestValidSubstring(param_1, param_2, size_2);
+      |                                                  ^~~~~~~
+      |                                                  |
+      |                                                  char **
+Line 4: Char 44: note: expected ‘int’ but argument is of type ‘char **’ [solution.c]
+    7 | int longestValidSubstring(char * word, int wordLen, char ** forbidden, int forbiddenSize){
+      |                                        ~~~~^~~~~~~
+Line 69: Char 59: warning: passing argument 3 of ‘longestValidSubstring’ makes pointer from integer without a cast [-Wint-conversion] [solution.c]
+   72 |         int ret = longestValidSubstring(param_1, param_2, size_2);
+      |                                                           ^~~~~~
+      |                                                           |
+      |                                                           int
+Line 4: Char 61: note: expected ‘char **’ but argument is of type ‘int’ [solution.c]
+    7 | int longestValidSubstring(char * word, int wordLen, char ** forbidden, int forbiddenSize){
+      |                                                     ~~~~~~~~^~~~~~~~~
+Line 69: Char 19: error: too few arguments to function ‘longestValidSubstring’ [solution.c]
+   72 |         int ret = longestValidSubstring(param_1, param_2, size_2);
+      |                   ^~~~~~~~~~~~~~~~~~~~~",../questions/Hard\length-of-the-longest-valid-substring\responses\C\response_c_0_failed.json,"#include <stdbool.h>
+#include <string.h>
+
+int longestValidSubstring(char * word, int wordLen, char ** forbidden, int forbiddenSize){
+    bool isValid;
+    int maxLen = 0;
+
+    for (int i = 0; i < wordLen; ++i) {
+        for (int j = i; j < wordLen; ++j) {
+            isValid = true;
+            int currentLen = j - i + 1;
+            char currentSubstr[currentLen + 1];
+            strncpy(currentSubstr, word + i, currentLen);
+            currentSubstr[currentLen] = '\0';
+
+            for (int k = 0; k < forbiddenSize; ++k) {
+                if (strstr(currentSubstr, forbidden[k]) != NULL) {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (isValid && currentLen > maxLen) {
+                maxLen = currentLen;
+            }
+        }
+    }
+
+    return maxLen;
+}"
+c,compile_error,"solution.c: In function ‘findMaximumElegance’
+Line 35: Char 13: error: variable-sized object may not be initialized [solution.c]
+   38 |             int categoryMark[itemsSize + 1] = {0};
+      |             ^~~",../questions/Hard\maximum-elegance-of-a-k-length-subsequence\responses\C\response_c_2_failed.json,"#include <stdlib.h>
+
+int compare(const void *a, const void *b) {
+    int *itemA = *(int **)a;
+    int *itemB = *(int **)b;
+    return itemB[0] - itemA[0]; // Descending order of profit
+}
+
+long long max(long long a, long long b) {
+    return a > b ? a : b;
+}
+
+long long findMaximumElegance(int** items, int itemsSize, int* itemsColSize, int k) {
+    qsort(items, itemsSize, sizeof(int*), compare); // Sort items by profit in descending order
+
+    long long dp[itemsSize + 1][k + 1];
+    for (int i = 0; i <= itemsSize; i++)
+        for (int j = 0; j <= k; j++)
+            dp[i][j] = -1;
+    dp[0][0] = 0;
+
+    for (int i = 1; i <= itemsSize; i++) {
+        int profit = items[i-1][0], category = items[i-1][1];
+        for (int j = 0; j <= k; j++) {
+            dp[i][j] = max(dp[i][j], dp[i-1][j]);
+            if (j > 0 && dp[i-1][j-1] != -1)
+                dp[i][j] = max(dp[i][j], dp[i-1][j-1] + profit);
+        }
+    }
+
+    long long maxElegance = 0;
+    for (int i = 1; i <= itemsSize; i++) {
+        if (dp[i][k] != -1) {
+            int distinct = 0;
+            int categoryMark[itemsSize + 1] = {0};
+            for (int j = 0; j < i; j++) {
+                if (!categoryMark[items[j][1]]) {
+                    categoryMark[items[j][1]] = 1;
+                    distinct++;
+                }
+            }
+            int distinctCategories = distinct > k ? k : distinct;
+            long long elegance = dp[i][k] + distinctCategories * distinctCategories;
+            maxElegance = max(maxElegance, elegance);
+        }
+    }
+
+    return maxElegance;
+}"
+c,compile_error,"solution.c: In function ‘maximumSumQueries’
+Line 17: Char 81: error: ‘compare’ undeclared (first use in this function) [solution.c]
+   20 |     qsort(prefixMax, nums1Size, sizeof(int), (int (*)(const void*, const void*))compare);
+      |                                                                                 ^~~~~~~",../questions/Hard\maximum-sum-queries\responses\C\response_c_2_failed.json,"#include <stdlib.h>
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* maximumSumQueries(int* nums1, int nums1Size, int* nums2, int nums2Size, int** queries, int queriesSize, int* queriesColSize, int* returnSize) {
+    *returnSize = queriesSize;
+    int* result = (int*)malloc(sizeof(int) * queriesSize);
+    int* prefixMax = (int*)malloc(sizeof(int) * nums1Size);
+    
+    // Create an array to store the sum of nums1[i] and nums2[i]
+    for (int i = 0; i < nums1Size; i++) {
+        prefixMax[i] = nums1[i] + nums2[i];
+    }
+    
+    // Sort the sums in descending order
+    qsort(prefixMax, nums1Size, sizeof(int), (int (*)(const void*, const void*))compare);
+    
+    for (int i = 0; i < queriesSize; i++) {
+        int x = queries[i][0], y = queries[i][1];
+        int maxSum = -1;
+        for (int j = 0; j < nums1Size; j++) {
+            if (nums1[j] >= x && nums2[j] >= y && (nums1[j] + nums2[j]) > maxSum) {
+                maxSum = nums1[j] + nums2[j];
+            }
+        }
+        result[i] = maxSum;
+    }
+    
+    free(prefixMax);
+    
+    return result;
+}
+
+int compare(const int* a, const int* b) {
+    return *b - *a;
+}"
+c,compile_error,"solution.c: In function ‘constructProductMatrix’
+Line 39: Char 74: warning: implicit declaration of function ‘powMod’ [-Wimplicit-function-declaration] [solution.c]
+   42 |                     productExcludingCurrent = (productExcludingCurrent * powMod(grid[i][j], 12344, 12345)) % 12345; // This line is conceptual and needs proper function for modular inverse or adjustment for cases with zeros.
+      |                                                                          ^~~~~~
+solution.c: At top level
+Line 50: Char 11: error: conflicting types for ‘powMod’; have ‘long long int(int,  int,  int)’ [solution.c]
+   53 | long long powMod(int base, int exponent, int modulus) {
+      |           ^~~~~~",../questions/Medium\construct-product-matrix\responses\C\response_c_0_failed.json,"#include <stdlib.h>
+
+int** constructProductMatrix(int** grid, int gridSize, int* gridColSize, int* returnSize, int** returnColumnSizes) {
+    // Allocate memory for the product matrix and column sizes.
+    int **productMatrix = (int**)malloc(gridSize * sizeof(int*));
+    *returnColumnSizes = (int*)malloc(gridSize * sizeof(int));
+    *returnSize = gridSize;
+
+    for (int i = 0; i < gridSize; i++) {
+        productMatrix[i] = (int*)malloc(gridColSize[i] * sizeof(int));
+        (*returnColumnSizes)[i] = gridColSize[i];
+    }
+
+    // Calculate product of all elements modulo 12345, handling zeros separately.
+    long long totalProduct = 1;
+    int zeroCount = 0;
+    for (int i = 0; i < gridSize; i++) {
+        for (int j = 0; j < gridColSize[i]; j++) {
+            if (grid[i][j] != 0) {
+                totalProduct = (totalProduct * grid[i][j]) % 12345;
+            } else {
+                zeroCount++;
+            }
+        }
+    }
+
+    for (int i = 0; i < gridSize; i++) {
+        for (int j = 0; j < gridColSize[i]; j++) {
+            if (zeroCount > 1 || (zeroCount == 1 && grid[i][j] != 0)) {
+                productMatrix[i][j] = 0; // If more than one zero exists or current element is not zero in a grid with one zero.
+            } else if (zeroCount == 1 && grid[i][j] == 0) {
+                productMatrix[i][j] = totalProduct; // If this is the only zero element.
+            } else {
+                // Calculate the product excluding the current element by dividing the total product by the current element.
+                long long productExcludingCurrent = totalProduct;
+                if (grid[i][j] != 0) {
+                    // Since direct division will not work in modular arithmetic, an alternative approach should be used.
+                    // However, for simplicity, this part will assume division is directly possible, which may need adjustment in actual implementation.
+                    productExcludingCurrent = (productExcludingCurrent * powMod(grid[i][j], 12344, 12345)) % 12345; // This line is conceptual and needs proper function for modular inverse or adjustment for cases with zeros.
+                }
+                productMatrix[i][j] = productExcludingCurrent;
+            }
+        }
+    }
+
+    return productMatrix;
+}
+
+// Function to calculate (base^exponent) % modulus using modular exponentiation, assuming it's defined elsewhere.
+long long powMod(int base, int exponent, int modulus) {
+    long long result = 1;
+    base = base % modulus;
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result = (result * base) % modulus;
+        }
+        exponent = exponent >> 1;
+        base = (base * base) % modulus;
+    }
+    return result;
+}"
+c,compile_error,"Line 44: Char 5: error: redefinition of ‘main’ [solution.c]
+   47 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Medium\continuous-subarrays\responses\C\response_c_0_failed.json,"#include <stdio.h>
+
+long long continuousSubarrays(int* nums, int numsSize){
+    long long count = 0; // To store the total number of continuous subarrays
+    int start = 0, end = 0; // Start and end pointers for the current window
+
+    while (end < numsSize) {
+        // Find the maximum and minimum in the current window to check the condition
+        int windowMax = nums[start];
+        int windowMin = nums[start];
+
+        for (int i = start; i <= end; i++) {
+            if (nums[i] > windowMax) windowMax = nums[i];
+            if (nums[i] < windowMin) windowMin = nums[i];
+        }
+
+        if (windowMax - windowMin <= 2) {
+            // If the window is valid, calculate the number of subarrays
+            // Increment end to expand the window
+            end++;
+        } else {
+            // If the condition is violated, move start to shrink the window
+            start++;
+        }
+
+        // Calculate the number of continuous subarrays for the current window
+        // This is done for every valid window when either end is incremented or start is moved forward
+        count += end - start; // Adding the number of new subarrays formed by adding a new element
+    }
+
+    return count;
+}
+
+int main() {
+    int nums[] = {5, 4, 2, 4};
+    int numsSize = 4;
+    long long result = continuousSubarrays(nums, numsSize);
+    printf(""Total continuous subarrays: %lld\n"", result);
+
+    return 0;
+}"
+c,compile_error,"Line 53: Char 5: error: redefinition of ‘main’ [solution.c]
+   56 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Medium\count-beautiful-substrings-i\responses\C\response_c_1_failed.json,"#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+bool isVowel(char c) {
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+}
+
+int beautifulSubstrings(char* s, int k) {
+    int beautifulCount = 0;
+    int length = strlen(s);
+    int vowelCount = 0, consonantCount = 0;
+
+    // To avoid directly dealing with squares and large numbers modulo k,
+    // we use an array to count occurrences of products meeting the conditions.
+    int count[1001] = {0}; // Adjust size based on constraints
+    count[0] = 1; // Base case, no characters considered yet
+
+    for (int i = 0; i < length; ++i) {
+        if (isVowel(s[i])) {
+            ++vowelCount;
+        } else {
+            ++consonantCount;
+        }
+
+        // The product we're interested in is (vowels * consonants),
+        // but we need to find substrings where vowels == consonants.
+        // Thus, we only need to find where (vowelCount - consonantCount) % k == 0
+        // However, to ensure a positive modulo result, we adjust the index.
+        for (int j = 0; j < k; ++j) {
+            int diff = (vowelCount - consonantCount) - j;
+            if (diff % k == 0) {
+                beautifulCount += count[j];
+            }
+        }
+
+        // Update the count of the current difference modulo k
+        int modDiff = abs((vowelCount - consonantCount) % k);
+        count[modDiff]++;
+    }
+
+    return beautifulCount;
+}
+
+int main() {
+    char s[] = ""your_test_string_here"";
+    int k = 112;
+    printf(""Beautiful Substrings: %d\n"", beautifulSubstrings(s, k));
+    return 0;
+}"
+c,compile_error,"Line 47: Char 5: error: redefinition of ‘main’ [solution.c]
+   50 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Medium\count-beautiful-substrings-i\responses\C\response_c_2_failed.json,"#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int beautifulSubstrings(char* s, int k) {
+    int count = 0;
+    int length = strlen(s);
+
+    // Iterate over all possible substrings
+    for (int start = 0; start < length; ++start) {
+        int vowels = 0, consonants = 0;
+        for (int end = start; end < length; ++end) {
+            // Check if the current character is a vowel or a consonant
+            if (s[end] == 'a' || s[end] == 'e' || s[end] == 'i' || s[end] == 'o' || s[end] == 'u') {
+                vowels++;
+            } else {
+                consonants++;
+            }
+            // Check if the substring is beautiful
+            if (vowels == consonants && (vowels * consonants) % k == 0) {
+                count++;
+            }
+        }
+    }
+    
+    return count;
+}
+
+// Example usage
+int main() {
+    char example1[] = ""baeyh"";
+    int k1 = 2;
+    printf(""Example 1: %d\n"", beautifulSubstrings(example1, k1));
+
+    char example2[] = ""abba"";
+    int k2 = 1;
+    printf(""Example 2: %d\n"", beautifulSubstrings(example2, k2));
+
+    char example3[] = ""bcdf"";
+    int k3 = 1;
+    printf(""Example 3: %d\n"", beautifulSubstrings(example3, k3));
+
+    return 0;
+}"
+c,compile_error,"solution.c: In function ‘dfs’
+Line 27: Char 86: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   30 |     dp[left][right] = joinCost(words[left], wordsRev[wordsSize - 1 - right]) + ans - max(strlen(words[left]), strlen(wordsRev[wordsSize - 1 - right]));
+      |                                                                                      ^~~
+      |                                                                                      fmax
+solution.c: At top level
+Line 50: Char 5: error: redefinition of ‘main’ [solution.c]
+   53 | int main(int argc, char *argv[]) {
+      |     ^~~~",../questions/Medium\decremental-string-concatenation\responses\C\response_c_1_failed.json,"#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int dp[1001][1001];
+
+int joinCost(char *a, char *b) {
+    int lenA = strlen(a), lenB = strlen(b);
+    if (a[lenA - 1] == b[0]) return lenA + lenB - 1;
+    else return lenA + lenB;
+}
+
+int min(int a, int b) {
+    return a < b ? a : b;
+}
+
+int dfs(char **words, int left, int right, char **wordsRev, int wordsSize) {
+    if (left == right) return strlen(words[left]);
+    if (dp[left][right] != -1) return dp[left][right];
+    
+    int ans = INT_MAX;
+    for (int i = left; i < right; ++i) {
+        int cost = dfs(words, left, i, wordsRev, wordsSize) + dfs(wordsRev, wordsSize - 1 - right, wordsSize - 1 - (i + 1), words, wordsSize) - 1;
+        ans = min(ans, cost);
+    }
+
+    dp[left][right] = joinCost(words[left], wordsRev[wordsSize - 1 - right]) + ans - max(strlen(words[left]), strlen(wordsRev[wordsSize - 1 - right]));
+    return dp[left][right];
+}
+
+int minimizeConcatenatedLength(char **words, int wordsSize) {
+    char **wordsRev = (char**)malloc(wordsSize * sizeof(char*));
+    for (int i = 0; i < wordsSize; ++i) {
+        wordsRev[i] = words[wordsSize - 1 - i];
+    }
+
+    memset(dp, -1, sizeof(dp));
+    return dfs(words, 0, wordsSize - 1, wordsRev, wordsSize);
+}
+
+// Example usage
+int main() {
+    char *words[] = {""aaa"", ""c"", ""aba""};
+    int wordsSize = sizeof(words) / sizeof(words[0]);
+    printf(""Minimum possible length: %d\n"", minimizeConcatenatedLength(words, wordsSize));
+    return 0;
+}"
+c,compile_error,"solution.c: In function ‘maxSubarrayLength’
+Line 9: Char 22: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   12 |             maxLen = max(maxLen, end - start + 1);
+      |                      ^~~
+      |                      fmax
+/tmp/ccNYnOWf.o:prog_joined.c:function maxSubarrayLength: error: undefined reference to 'max'
+collect2: error: ld returned 1 exit status",../questions/Medium\length-of-longest-subarray-with-at-most-k-frequency\responses\C\response_c_2_failed.json,"int maxSubarrayLength(int* nums, int numsSize, int k) {
+    int maxLen = 0;
+    for (int start = 0; start < numsSize; ++start) {
+        int freq[1001] = {0};
+        int uniqueCount = 0;
+        for (int end = start; end < numsSize; ++end) {
+            if (freq[nums[end] % 1000]++ == 0) uniqueCount++;
+            if (uniqueCount > k) break;
+            maxLen = max(maxLen, end - start + 1);
+        }
+    }
+    return maxLen;
+}"
+c,compile_error,"solution.c: In function ‘maxNumberOfAlloys’
+Line 16: Char 33: warning: implicit declaration of function ‘min’; did you mean ‘fmin’? [-Wimplicit-function-declaration] [solution.c]
+   19 |             minAlloysPossible = min(minAlloysPossible, alloysPossibleWithThisMetal);
+      |                                 ^~~
+      |                                 fmin
+Line 18: Char 21: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   21 |         maxAlloys = max(maxAlloys, minAlloysPossible);
+      |                     ^~~
+      |                     fmax
+/tmp/ccs18HzK.o:prog_joined.c:function maxNumberOfAlloys: error: undefined reference to 'min'
+/tmp/ccs18HzK.o:prog_joined.c:function maxNumberOfAlloys: error: undefined reference to 'max'
+collect2: error: ld returned 1 exit status",../questions/Medium\maximum-number-of-alloys\responses\C\response_c_2_failed.json,"int maxNumberOfAlloys(int n, int k, int budget, int** composition, int compositionSize, int* compositionColSize, int* stock, int stockSize, int* cost, int costSize){
+    int maxAlloys = 0;
+    for (int i = 0; i < k; i++) { // Iterate over each machine
+        int minAlloysPossible = INT_MAX;
+        for (int j = 0; j < n; j++) { // Iterate over each metal type
+            int totalMetalNeeded = 0;
+            if (composition[i][j] > stock[j]) { // If more metal is needed than in stock
+                totalMetalNeeded = (composition[i][j] - stock[j]) * cost[j];
+            }
+            int alloysPossibleWithThisMetal = (budget - totalMetalNeeded) / (composition[i][j] * cost[j]);
+            if (composition[i][j] > 0) { // Avoid division by zero
+                alloysPossibleWithThisMetal = (stock[j] / composition[i][j]) + ((budget - totalMetalNeeded) / (composition[i][j] * cost[j]));
+            } else {
+                alloysPossibleWithThisMetal = INT_MAX; // If no metal is required, theoretically infinite alloys could be made
+            }
+            minAlloysPossible = min(minAlloysPossible, alloysPossibleWithThisMetal);
+        }
+        maxAlloys = max(maxAlloys, minAlloysPossible);
+    }
+    return maxAlloys;
+}"
+c,compile_error,"solution.c: In function ‘maximumJumps’
+Line 13: Char 34: warning: implicit declaration of function ‘min’; did you mean ‘fmin’? [-Wimplicit-function-declaration] [solution.c]
+   16 |                     else dp[j] = min(dp[j], dp[i] + 1);
+      |                                  ^~~
+      |                                  fmin
+/tmp/ccZ4yHJL.o:prog_joined.c:function maximumJumps: error: undefined reference to 'min'
+collect2: error: ld returned 1 exit status",../questions/Medium\maximum-number-of-jumps-to-reach-the-last-index\responses\C\response_c_0_failed.json,"int maximumJumps(int* nums, int numsSize, int target) {
+    int dp[numsSize];
+    for (int i = 0; i < numsSize; ++i) {
+        dp[i] = -1;
+    }
+    dp[0] = 0; // start from the first index
+
+    for (int i = 0; i < numsSize; ++i) {
+        for (int j = i + 1; j < numsSize; ++j) {
+            if (abs(nums[j] - nums[i]) <= target) {
+                if (dp[i] != -1) {
+                    if (dp[j] == -1) dp[j] = dp[i] + 1;
+                    else dp[j] = min(dp[j], dp[i] + 1);
+                }
+            }
+        }
+    }
+
+    return dp[numsSize - 1];
+}"
+c,compile_error,"solution.c: In function ‘maxSum’
+Line 12: Char 38: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   15 |         if (distinct >= m) max_sum = max(max_sum, current_sum);
+      |                                      ^~~
+      |                                      fmax
+/tmp/cc9kmvOG.o:prog_joined.c:function maxSum: error: undefined reference to 'max'
+collect2: error: ld returned 1 exit status",../questions/Medium\maximum-sum-of-almost-unique-subarray\responses\C\response_c_1_failed.json,"long long maxSum(int* nums, int numsSize, int m, int k){
+    long long max_sum = 0;
+    for (int i = 0; i <= numsSize - k; ++i) {
+        int distinct = 0;
+        long long current_sum = 0;
+        int freq[20001] = {0}; // Adjusted for a practical approach, using a map-like structure is ideal but not allowed per instructions
+        for (int j = i; j < i + k; ++j) {
+            if (freq[(nums[j] % 20000) + 1] == 0) distinct++; // Using modulo to simulate hashing for uniqueness check
+            freq[(nums[j] % 20000) + 1]++;
+            current_sum += nums[j];
+        }
+        if (distinct >= m) max_sum = max(max_sum, current_sum);
+    }
+    return max_sum;
+}"
+c,compile_error,"solution.c: In function ‘minAbsoluteDifference’
+Line 4: Char 22: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+    7 |         for (int j = max(i + x, (minDiff == INT_MAX) ? 0 : i + 1); j < numsSize; j++) {
+      |                      ^~~
+      |                      fmax
+Line 4: Char 9: error: declaration of non-variable ‘max’ in ‘for’ loop initial declaration [solution.c]
+    7 |         for (int j = max(i + x, (minDiff == INT_MAX) ? 0 : i + 1); j < numsSize; j++) {
+      |         ^~~",../questions/Medium\minimum-absolute-difference-between-elements-with-constraint\responses\C\response_c_1_failed.json,"int minAbsoluteDifference(int* nums, int numsSize, int x) {
+    int minDiff = INT_MAX;
+    for (int i = 0; i < numsSize; i++) {
+        for (int j = max(i + x, (minDiff == INT_MAX) ? 0 : i + 1); j < numsSize; j++) {
+            int currentDiff = abs(nums[i] - nums[j]);
+            if (currentDiff < minDiff) {
+                minDiff = currentDiff;
+            }
+            if (minDiff == 0) return 0; // Best possible outcome
+        }
+    }
+    return minDiff;
+}"
+c,compile_error,"solution.c: In function ‘minAbsoluteDifference’
+Line 3: Char 40: error: ‘cmp’ undeclared (first use in this function); did you mean ‘bcmp’? [solution.c]
+    6 |     qsort(nums, numsSize, sizeof(int), cmp);
+      |                                        ^~~
+      |                                        bcmp",../questions/Medium\minimum-absolute-difference-between-elements-with-constraint\responses\C\response_c_2_failed.json,"int minAbsoluteDifference(int* nums, int numsSize, int x) {
+    // Sort the array to ensure the differences are calculated in a non-decreasing order
+    qsort(nums, numsSize, sizeof(int), cmp);
+
+    int minDiff = INT_MAX;
+    for (int i = 0; i < numsSize - x; ++i) {
+        int diff = abs(nums[i] - nums[i + x]);
+        if (diff < minDiff) {
+            minDiff = diff;
+        }
+    }
+    return minDiff;
+}
+
+// Comparator function for qsort
+int cmp(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}"
+c,compile_error,"solution.c: In function ‘minSum’
+Line 25: Char 27: warning: implicit declaration of function ‘max’; did you mean ‘fmax’? [-Wimplicit-function-declaration] [solution.c]
+   28 |     long long targetSum = max(sum1, sum2) + totalZeroCount * max(zeroCount1, zeroCount2);
+      |                           ^~~
+      |                           fmax
+/tmp/cc01guMS.o:prog_joined.c:function minSum: error: undefined reference to 'max'
+/tmp/cc01guMS.o:prog_joined.c:function minSum: error: undefined reference to 'max'
+/tmp/cc01guMS.o:prog_joined.c:function minSum: error: undefined reference to 'max'
+collect2: error: ld returned 1 exit status",../questions/Medium\minimum-equal-sum-of-two-arrays-after-replacing-zeros\responses\C\response_c_2_failed.json,"long long minSum(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+    long long sum1 = 0, sum2 = 0;
+    int zeroCount1 = 0, zeroCount2 = 0;
+
+    // Sum up all elements in nums1 and count zeros
+    for (int i = 0; i < nums1Size; ++i) {
+        sum1 += nums1[i];
+        if (nums1[i] == 0) ++zeroCount1;
+    }
+
+    // Sum up all elements in nums2 and count zeros
+    for (int i = 0; i < nums2Size; ++i) {
+        sum2 += nums2[i];
+        if (nums2[i] == 0) ++zeroCount2;
+    }
+
+    // If the total number of zeros is 0 and sums are not equal, return -1
+    if (zeroCount1 == 0 && zeroCount2 == 0 && sum1 != sum2) return -1;
+
+    // Calculate the adjustment needed to make sums equal
+    long long totalZeroCount = zeroCount1 + zeroCount2;
+    if (sum1 == sum2) return sum1; // If sums are already equal, no need to add
+
+    // The strategy is to balance the sums by adding the minimum amount where needed
+    long long targetSum = max(sum1, sum2) + totalZeroCount * max(zeroCount1, zeroCount2);
+
+    // If after balancing one sum, the other cannot be made equal due to insufficient zeros, return -1
+    if (sum1 < sum2) {
+        if ((targetSum - sum1) < zeroCount1 || (targetSum - sum2) < zeroCount2) return -1;
+    } else {
+        if ((targetSum - sum2) < zeroCount2 || (targetSum - sum1) < zeroCount1) return -1;
+    }
+
+    long long diff = abs(sum1 - sum2);
+    long long minAddition = (diff / totalZeroCount) * totalZeroCount + ((diff % totalZeroCount) ? totalZeroCount : 0);
+
+    return max(sum1, sum2) + minAddition;
+}"
+c,compile_error,"solution.c: In function ‘minimumAddedCoins’
+Line 7: Char 42: error: ‘compare’ undeclared (first use in this function) [solution.c]
+   10 |     qsort(coins, coinsSize, sizeof(int), compare);
+      |                                          ^~~~~~~",../questions/Medium\minimum-number-of-coins-to-be-added\responses\C\response_c_0_failed.json,"int minimumAddedCoins(int* coins, int coinsSize, int target) {
+    long long maxReachable = 0; // Use long long to avoid integer overflow
+    int addedCoins = 0;
+    int i = 0; // Index to iterate through the coins array
+    
+    // Sort the coins array to ensure we process coins in ascending order
+    qsort(coins, coinsSize, sizeof(int), compare);
+
+    while (maxReachable < target) {
+        // If current coin is within reach or we have exhausted all available coins,
+        // then we need to add a new coin
+        if (i >= coinsSize || coins[i] > maxReachable + 1) {
+            maxReachable = 2 * maxReachable + 1; // Adding a coin that doubles the reach
+            addedCoins++;
+        } else {
+            // Use the current coin to extend the maximum reachable value
+            maxReachable += coins[i];
+            i++;
+        }
+    }
+
+    return addedCoins;
+}
+
+// Comparator function for qsort
+int compare(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}"
+c,compile_error,"solution.c: In function ‘minimumOperations’
+Line 13: Char 69: warning: implicit declaration of function ‘min’; did you mean ‘fmin’? [-Wimplicit-function-declaration] [solution.c]
+   16 |                 if (lastPos[2] != -1 && lastPos[2] < i) ops = len - min(i, lastPos[2]) - 2;
+      |                                                                     ^~~
+      |                                                                     fmin
+/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'
+/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'
+/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'
+/tmp/ccgbrfKW.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'
+collect2: error: ld returned 1 exit status",../questions/Medium\minimum-operations-to-make-a-special-number\responses\C\response_c_0_failed.json,"int minimumOperations(char* num) {
+    int len = strlen(num);
+    int minOps = len; // Initialize to maximum possible operations.
+    int lastPos[10] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}; // Last positions of digits 0-9.
+
+    for (int i = len - 1; i >= 0; --i) {
+        int digit = num[i] - '0';
+        lastPos[digit] = i;
+        // Check for 00, 25, 50, 75 patterns.
+        if ((digit == 0 || digit == 5) && lastPos[0] != -1) {
+            int ops = len - i - 1; // Operations to move to end.
+            if (digit == 5) {
+                if (lastPos[2] != -1 && lastPos[2] < i) ops = len - min(i, lastPos[2]) - 2;
+                if (lastPos[7] != -1 && lastPos[7] < i) ops = min(ops, len - min(i, lastPos[7]) - 2);
+            } else if (digit == 0) {
+                if (lastPos[0] != -1 && lastPos[0] < i) ops = len - min(i, lastPos[0]) - 2;
+                if (lastPos[5] != -1 && lastPos[5] < i) ops = min(ops, len - min(i, lastPos[5]) - 2);
+            }
+            minOps = min(minOps, ops);
+        }
+    }
+
+    return minOps == len ? len - 1 : minOps; // Special case handling when num is already special.
+}"
+c,compile_error,"solution.c: In function ‘minimumOperations’
+Line 14: Char 41: warning: implicit declaration of function ‘min’; did you mean ‘fmin’? [-Wimplicit-function-declaration] [solution.c]
+   17 |                     ops = len - 2 + i - min(i, lastPos[j]); // Calculate operations needed
+      |                                         ^~~
+      |                                         fmin
+/tmp/cc23Zd5L.o:prog_joined.c:function minimumOperations: error: undefined reference to 'min'
+collect2: error: ld returned 1 exit status",../questions/Medium\minimum-operations-to-make-a-special-number\responses\C\response_c_1_failed.json,"int minimumOperations(char* num) {
+    int len = strlen(num), i, j, ops, minOps = len; // Initialize to maximum possible operations.
+    int lastPos[10];
+    for (i = 0; i < 10; ++i) lastPos[i] = -1; // Initialize last positions of digits 0-9 to -1.
+
+    for (i = len - 1; i >= 0; --i) {
+        int digit = num[i] - '0';
+        lastPos[digit] = i;
+
+        // Check for patterns ending in 00, 25, 50, 75
+        if (digit == 0 || digit == 5) {
+            for (j = 0; j < 10; ++j) {
+                if (lastPos[j] != -1 && ((digit == 0 && (j == 0 || j == 5)) || (digit == 5 && (j == 2 || j == 7)))) {
+                    ops = len - 2 + i - min(i, lastPos[j]); // Calculate operations needed
+                    if (ops < minOps) minOps = ops;
+                }
+            }
+        }
+    }
+
+    // Special case: if minOps wasn't updated, return len - 1; else return minOps.
+    return minOps == len ? len - 1 : minOps;
+}"
+c,compile_error,"solution.c: In function ‘relocateMarbles’
+Line 19: Char 10: warning: type defaults to ‘int’ in declaration of ‘hash’ [-Wimplicit-int] [solution.c]
+   22 |     auto hash = [](int value) { return value % 100000; };
+      |          ^~~~
+Line 19: Char 17: error: expected expression before ‘[’ token [solution.c]
+   22 |     auto hash = [](int value) { return value % 100000; };
+      |                 ^",../questions/Medium\relocate-marbles\responses\C\response_c_1_failed.json,"#include <stdlib.h>
+
+int cmp(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* relocateMarbles(int* nums, int numsSize, int* moveFrom, int moveFromSize, int* moveTo, int moveToSize, int* returnSize) {
+    // Use a hash table with dynamic allocation due to the high range of possible values (up to 10^9).
+    int** hashTable = (int**)calloc(100000, sizeof(int*)); // Primary array
+    for (int i = 0; i < 100000; i++) {
+        hashTable[i] = (int*)calloc(2, sizeof(int)); // Secondary arrays for value and count
+    }
+    int hashTableSize = 100000;
+
+    // Helper function to hash values (simple modulo hash for demonstration)
+    auto hash = [](int value) { return value % 100000; };
+
+    // Function to insert or update the hash table
+    auto insertOrUpdate = [&](int value, int delta) {
+        int index = hash(value);
+        if (!hashTable[index][0]) { // If the slot is empty, insert the value and count
+            hashTable[index][0] = value;
+            hashTable[index][1] = delta;
+        } else if (hashTable[index][0] == value) { // If the value exists, update the count
+            hashTable[index][1] += delta;
+        } else { // Collision resolution: linear probing
+            int originalIndex = index;
+            do {
+                index = (index + 1) % hashTableSize; // Move to the next slot
+                if (!hashTable[index][0] || hashTable[index][0] == value) {
+                    hashTable[index][0] = value;
+                    hashTable[index][1] += delta;
+                    break;
+                }
+            } while (index != originalIndex); // Ensure we don't loop indefinitely
+        }
+    };
+
+    // Populate the hash table with initial positions
+    for (int i = 0; i < numsSize; i++) {
+        insertOrUpdate(nums[i], 1);
+    }
+
+    // Process moves
+    for (int i = 0; i < moveFromSize; i++) {
+        insertOrUpdate(moveFrom[i], -1);
+        insertOrUpdate(moveTo[i], 1);
+    }
+
+    // Count non-empty positions
+    int count = 0;
+    for (int i = 0; i < hashTableSize; i++) {
+        if (hashTable[i][0] && hashTable[i][1] > 0) {
+            count++;
+        }
+    }
+
+    // Allocate return array
+    *returnSize = count;
+    int* result = (int*)malloc(count * sizeof(int));
+    int j = 0;
+    for (int i = 0; i < hashTableSize; i++) {
+        if (hashTable[i][0] && hashTable[i][1] > 0) {
+            result[j++] = hashTable[i][0];
+        }
+    }
+
+    // Sort result array for the correct order
+    qsort(result, count, sizeof(int), cmp);
+
+    // Free allocated memory
+    for (int i = 0; i < 100000; i++) {
+        free(hashTable[i]);
+    }
+    free(hashTable);
+
+    return result;
+}"
+c,runtime_error,"=================================================================
+==23==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ffd50bda0ba at pc 0x7f53814ba04f bp 0x7ffd50bd9f10 sp 0x7ffd50bd96a0
+WRITE of size 11 at 0x7ffd50bda0ba thread T0
+    #0 0x7f53814ba04e in __interceptor_vsprintf ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:1687
+    #1 0x7f53814ba386 in __interceptor___sprintf_chk ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:1735
+    #4 0x7f5380b3fd8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #5 0x7f5380b3fe3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+Address 0x7ffd50bda0ba is located in stack of thread T0 at offset 138 in frame
+  This frame has 2 object(s):
+    [48, 88) 'digit_count' (line 14)
+    [128, 138) 'concatenated' (line 9) <== Memory access at offset 138 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:1687 in __interceptor_vsprintf
+Shadow bytes around the buggy address:
+  0x10002a1733c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002a1733d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002a1733e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002a1733f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002a173400: 00 00 00 00 00 00 f1 f1 f1 f1 f1 f1 00 00 00 00
+=>0x10002a173410: 00 f2 f2 f2 f2 f2 00[02]f3 f3 00 00 00 00 00 00
+  0x10002a173420: 00 00 00 00 00 00 00 00 00 00 f1 f1 f1 f1 00 f2
+  0x10002a173430: f2 f2 00 f2 f2 f2 04 f3 f3 f3 00 00 00 00 00 00
+  0x10002a173440: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002a173450: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10002a173460: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==23==ABORTING",../questions/Easy\check-if-the-number-is-fascinating\responses\C\response_c_0_failed.json,"#include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
+
+bool isFascinating(int n) {
+    char concatenated[10];
+    sprintf(concatenated, ""%d%d%d"", n, 2 * n, 3 * n);
+
+    if (strlen(concatenated) != 9) return false;
+
+    int digit_count[10] = {0};
+    for (int i = 0; i < 9; i++) {
+        if (concatenated[i] == '0') return false;
+        int digit = concatenated[i] - '0';
+        digit_count[digit]++;
+        if (digit_count[digit] > 1) return false;
+    }
+
+    return true;
+}"
+c,runtime_error,Line 7: Char 22: runtime error: left shift of 1 by 31 places cannot be represented in type 'int' [solution.c],../questions/Easy\find-the-k-or-of-an-array\responses\C\response_c_0_failed.json,"int findKOr(int* nums, int numsSize, int k) {
+    int result = 0;
+
+    // Iterate over each bit position
+    for (int bit = 0; bit < 32; ++bit) {
+        int count = 0;
+        int mask = 1 << bit;
+
+        // Count how many numbers have this bit set
+        for (int i = 0; i < numsSize; ++i) {
+            if ((nums[i] & mask) != 0) {
+                ++count;
+            }
+        }
+
+        // If count is at least k, set this bit in the result
+        if (count >= k) {
+            result |= mask;
+        }
+    }
+
+    return result;
+}"
+c,runtime_error,Line 12: Char 30: runtime error: left shift of 1 by 31 places cannot be represented in type 'int' [solution.c],../questions/Hard\apply-operations-on-array-to-maximize-sum-of-squares\responses\C\response_c_2_failed.json,"#define MOD 1000000007
+
+int maxSum(int* nums, int numsSize, int k) {
+    long long max_value = 0;
+    for (int i = 0; i < numsSize; ++i) {
+        max_value = (max_value > nums[i]) ? max_value : nums[i];
+    }
+
+    int bits[32] = {0};
+    for (int i = 0; i < numsSize; ++i) {
+        for (int j = 0; j < 32; ++j) {
+            if (nums[i] & (1 << j)) {
+                bits[j]++;
+            }
+        }
+    }
+
+    long long result = 0;
+    for (int i = 0; i < k; ++i) {
+        long long num = 0;
+        for (int j = 0; j < 32; ++j) {
+            if (bits[j] > i) {
+                num |= 1LL << j;
+            }
+        }
+        result = (result + num * num) % MOD;
+    }
+
+    return (int)result;
+}"
+c,runtime_error,"=================================================================
+==22==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000017 at pc 0x55a714c1ab68 bp 0x7ffd39a62f20 sp 0x7ffd39a62f10
+READ of size 1 at 0x602000000017 thread T0
+    #2 0x7fe8308d6d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #3 0x7fe8308d6e3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+0x602000000017 is located 0 bytes to the right of 7-byte region [0x602000000010,0x602000000017)
+allocated by thread T0 here:
+    #0 0x7fe8312a6887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #3 0x7fe8308d6d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa[07]fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==22==ABORTING",../questions/Hard\count-complete-substrings\responses\C\response_c_1_failed.json,"#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <limits.h>
+
+int countCompleteSubstrings(char* word, int k) {
+    int total = 0;
+    for (char ch = 'a'; ch <= 'z'; ++ch) {
+        int count[128] = {0}, distinct = 0;
+        for (int i = 0, j = 0; word[i]; ++i) {
+            if (++count[word[i]] == k) distinct += k;
+            while (distinct > k * 3 || (word[i] > ch + 2 || word[i] < ch - 2)) {
+                if (count[word[j]] == k) distinct -= k;
+                --count[word[j++]];
+            }
+            if (distinct == k * 3) total += j + 1;
+        }
+    }
+    return total;
+}"
+c,runtime_error,Line 13: Char 32: runtime error: signed integer overflow: 1010101010101010101 * 10 cannot be represented in type 'long long int' [solution.c],../questions/Hard\count-stepping-numbers-in-range\responses\C\response_c_0_failed.json,"#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MOD 1000000007
+
+void dfs(long long num, int prevDigit, long long low, long long high, int* count) {
+    if (num >= low && num <= high) {
+        (*count)++;
+    }
+    if (num > high) return;
+    
+    if (prevDigit > 0) dfs(num * 10 + prevDigit - 1, prevDigit - 1, low, high, count);
+    if (prevDigit < 9) dfs(num * 10 + prevDigit + 1, prevDigit + 1, low, high, count);
+}
+
+int countSteppingNumbers(char * low, char * high) {
+    long long lowNum = atoll(low);
+    long long highNum = atoll(high);
+    int count = 0;
+    
+    if (lowNum == 0) count++; // 0 is a stepping number but not part of dfs tree
+    
+    for (int digit = 1; digit <= 9; digit++) {
+        dfs(digit, digit, lowNum, highNum, &count);
+    }
+    
+    return count % MOD;
+}"
+c,runtime_error,"Line 24: Char 9: runtime error: null pointer passed as argument 1, which is declared to never be null [solution.c]",../questions/Hard\count-stepping-numbers-in-range\responses\C\response_c_1_failed.json,"#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MOD 1000000007
+
+long long toLongLong(const char *str) {
+    long long result = 0;
+    for (int i = 0; str[i] != '\0'; ++i) {
+        result = result * 10 + (str[i] - '0');
+        if (result > MOD) result %= MOD;
+    }
+    return result;
+}
+
+void dfs(int num, long long low, long long high, int* count) {
+    if (num != 0) {
+        long long current = toLongLong(num);
+        if (current >= low && current <= high) {
+            (*count)++;
+            if (*count >= MOD) *count -= MOD;
+        }
+    }
+    if (strlen(num) == 10) return; // Limit the length to avoid overflow and because high < 10^100
+
+    if (num == 0) {
+        for (int i = 1; i <= 9; ++i) {
+            dfs(i, low, high, count);
+        }
+    } else {
+        int lastDigit = num % 10;
+        if (lastDigit > 0) dfs(num * 10 + lastDigit - 1, low, high, count);
+        if (lastDigit < 9) dfs(num * 10 + lastDigit + 1, low, high, count);
+    }
+}
+
+int countSteppingNumbers(char *low, char *high) {
+    long long lowNum = atoll(low);
+    long long highNum = atoll(high);
+    int count = 0;
+    
+    dfs(0, lowNum, highNum, &count);
+    
+    return count;
+}"
+c,runtime_error,Line 12: Char 25: runtime error: signed integer overflow: 999999999999999999 * 10 cannot be represented in type 'long long int' [solution.c],../questions/Hard\count-stepping-numbers-in-range\responses\C\response_c_2_failed.json,"#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MOD 1000000007
+
+int count = 0;
+
+long long stringToLongLong(char *s) {
+    long long number = 0;
+    for (int i = 0; s[i]; i++) {
+        number = number * 10 + (s[i] - '0');
+    }
+    return number;
+}
+
+void dfs(long long n, long long low, long long high) {
+    if (n >= low && n <= high) count = (count + 1) % MOD;
+    if (n == 0 || n > high) return;
+    
+    int lastDigit = n % 10;
+    long long next1 = n * 10 + lastDigit - 1;
+    long long next2 = n * 10 + lastDigit + 1;
+    
+    if (lastDigit > 0) dfs(next1, low, high);
+    if (lastDigit < 9) dfs(next2, low, high);
+}
+
+int countSteppingNumbers(char *low, char *high) {
+    long long lowVal = stringToLongLong(low);
+    long long highVal = stringToLongLong(high);
+    count = 0;
+    
+    if (lowVal == 0) {
+        count = 1; // 0 is a stepping number
+        lowVal = 1; // Start from 1 to avoid infinite recursion
+    }
+    
+    for (int i = 1; i <= 9; i++) {
+        dfs(i, lowVal, highVal);
+    }
+    
+    return count;
+}"
+c,runtime_error,"AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==22==ERROR: AddressSanitizer: SEGV on unknown address 0x602df5f5f630 (pc 0x56379e576ddf bp 0x7ffeba7fb690 sp 0x7ffeba7fb630 T0)
+==22==The signal is caused by a READ memory access.
+    #2 0x7fce63b02d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #3 0x7fce63b02e3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+AddressSanitizer can not provide additional info.
+==22==ABORTING",../questions/Hard\maximize-value-of-function-in-a-ball-passing-game\responses\C\response_c_1_failed.json,"#include <stdio.h>
+#include <stdlib.h>
+
+long long getMaxFunctionValue(int* receiver, int receiverSize, long long k) {
+    long long* dp = (long long*)malloc(receiverSize * sizeof(long long));
+    int* next = (int*)malloc(receiverSize * sizeof(int));
+    int* visited = (int*)calloc(receiverSize, sizeof(int));
+    long long max = 0;
+
+    for (int i = 0; i < receiverSize; i++) {
+        if (!visited[i]) {
+            int current = i;
+            long long cycleSum = 0;
+            int cycleLength = 0;
+            while (!visited[current]) {
+                visited[current] = 1;
+                current = receiver[current];
+                cycleLength++;
+                cycleSum += current;
+            }
+
+            // Now find cycle start
+            current = i;
+            int stepsToCycleStart = 0;
+            while (next[current] == 0) {
+                next[current] = receiver[current];
+                dp[current] = receiver[current] + (stepsToCycleStart > 0 ? dp[receiver[current]] : 0);
+                current = receiver[current];
+                stepsToCycleStart++;
+                if (stepsToCycleStart == cycleLength) {
+                    // Once we hit the cycle length, start counting from 0 again to only count within the cycle
+                    stepsToCycleStart = 0;
+                }
+            }
+
+            // Calculate maximum value using the precomputed sums
+            current = i;
+            for (int j = 0; j < receiverSize && j < k; j++) {
+                long long passesInCycle = (k - j + cycleLength - 1) / cycleLength;
+                long long total = dp[current] + cycleSum * passesInCycle - current;
+                if (total > max) max = total;
+                current = next[current];
+            }
+        }
+    }
+
+    free(dp);
+    free(next);
+    free(visited);
+
+    return max;
+}"
+c,runtime_error,"AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==22==ERROR: AddressSanitizer: stack-overflow on address 0x7ffc204a6248 (pc 0x5654cdfeca1b bp 0x7ffc264042c0 sp 0x7ffc204a5250 T0)
+    #2 0x7ff537900d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #3 0x7ff537900e3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+==22==ABORTING",../questions/Hard\maximum-strong-pair-xor-ii\responses\C\response_c_2_failed.json,"#include <stdio.h>
+
+int maximumStrongPairXor(int* nums, int numsSize) {
+    int max = 0;
+    for (int i = 0; i < 31; i++) {
+        int mask = (1 << (i + 1)) - 1;
+        int count[1 << (i + 1)];
+        for (int j = 0; j < (1 << (i + 1)); j++) count[j] = 0;
+        for (int j = 0; j < numsSize; j++) {
+            nums[j] &= mask;
+            count[nums[j]]++;
+        }
+        int add = 0;
+        for (int j = 0; j < numsSize; j++) {
+            if (count[nums[j]] > (nums[j] == 0 ? 1 : 2)) {
+                add = 1;
+                break;
+            }
+        }
+        max |= add << i;
+    }
+    return max;
+}"
+c,runtime_error,"=================================================================
+==22==ERROR: AddressSanitizer: stack-buffer-underflow on address 0x7ffd45a7be1c at pc 0x56448363d767 bp 0x7ffd45a7bda0 sp 0x7ffd45a7bd90
+READ of size 4 at 0x7ffd45a7be1c thread T0
+    #2 0x7f09aac13d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #3 0x7f09aac13e3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+Address 0x7ffd45a7be1c is located in stack of thread T0 at offset 28 in frame
+  This frame has 1 object(s):
+    [32, 156) 'count' (line 6) <== Memory access at offset 28 underflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+Shadow bytes around the buggy address:
+  0x100028b47770: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100028b47780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100028b47790: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100028b477a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100028b477b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x100028b477c0: f1 f1 f1[f1]00 00 00 00 00 00 00 00 00 00 00 00
+  0x100028b477d0: 00 00 00 04 f3 f3 f3 f3 00 00 00 00 00 00 00 00
+  0x100028b477e0: 00 00 00 00 00 00 00 00 00 00 f1 f1 f1 f1 f1 f1
+  0x100028b477f0: 04 f2 00 f2 f2 f2 00 f2 f2 f2 04 f3 f3 f3 00 00
+  0x100028b47800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100028b47810: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==22==ABORTING",../questions/Hard\minimum-operations-to-form-subsequence-with-target-sum\responses\C\response_c_2_failed.json,"int minOperations(int* nums, int numsSize, int target) {
+    long long sum = 0;
+    int count[31] = {0};
+    for (int i = 0; i < numsSize; ++i) {
+        sum += nums[i];
+        int bit = 0;
+        while ((1 << bit) < nums[i]) ++bit;
+        ++count[bit];
+    }
+    if (sum < target) return -1; // If total sum is less than target, impossible to achieve target
+
+    int ops = 0;
+    for (int bit = 30; bit >= 0; --bit) {
+        long long bitValue = 1LL << bit;
+        while (target >= bitValue && count[bit] > 0) {
+            if (target & bitValue) { // If the current bit is set in target
+                target -= bitValue; // Reduce target by the value of the current bit
+            }
+            --count[bit]; // Use one instance of the current power of 2
+            count[bit - 1] += 2; // Split current power of 2 into two instances of the next lower power of 2
+            if (bit > 0) ++ops; // Increment operations if bit > 0, as splitting 1 into 0.5 + 0.5 is not counted as an operation
+        }
+    }
+    return target == 0 ? ops : -1; // Check if the target has been met
+}"
+c,runtime_error,Line 17: Char 44: runtime error: signed integer overflow: 9578 * 767292749 cannot be represented in type 'int' [solution.c],../questions/Medium\construct-product-matrix\responses\C\response_c_1_failed.json,"#include <stdlib.h>
+
+int** constructProductMatrix(int** grid, int gridSize, int* gridColSize, int* returnSize, int** returnColumnSizes) {
+    *returnSize = gridSize;
+    *returnColumnSizes = (int*)malloc(sizeof(int) * gridSize);
+    int **p = (int**)malloc(sizeof(int*) * gridSize);
+
+    for (int i = 0; i < gridSize; ++i) {
+        (*returnColumnSizes)[i] = gridColSize[i];
+        p[i] = (int*)malloc(sizeof(int) * gridColSize[i]);
+        for (int j = 0; j < gridColSize[i]; ++j) {
+            p[i][j] = 1; // Initialize product matrix elements to 1
+            // Compute the product of all elements except grid[i][j]
+            for (int x = 0; x < gridSize; ++x) {
+                for (int y = 0; y < gridColSize[x]; ++y) {
+                    if (x != i || y != j) { // Exclude grid[i][j]
+                        p[i][j] = (p[i][j] * grid[x][y]) % 12345;
+                    }
+                }
+            }
+        }
+    }
+
+    return p;
+}"
+c,runtime_error,"=================================================================
+==22==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000000f at pc 0x559873bf4711 bp 0x7ffe367220d0 sp 0x7ffe367220c0
+READ of size 1 at 0x60200000000f thread T0
+    #2 0x7fc470e3ed8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #3 0x7fc470e3ee3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+0x60200000000f is located 1 bytes to the left of 5-byte region [0x602000000010,0x602000000015)
+allocated by thread T0 here:
+    #0 0x7fc47180e887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #3 0x7fc470e3ed8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa[fa]05 fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==22==ABORTING",../questions/Medium\find-longest-special-substring-that-occurs-thrice-ii\responses\C\response_c_1_failed.json,"int maximumLength(char* s) {
+    int maxLen = -1;
+    for (char ch = 'a'; ch <= 'z'; ++ch) {
+        int count = 0;
+        for (int i = 0; s[i]; ++i) {
+            if (s[i] == ch) {
+                ++count;
+                if (count == 3) {
+                    int len = 0;
+                    while (s[i - len] == ch) ++len;
+                    maxLen = maxLen > len ? maxLen : len;
+                    break;
+                }
+            } else count = 0;
+        }
+    }
+    return maxLen;
+}"
+c,runtime_error,Line 4: Char 13: runtime error: index 1000000000 out of bounds for type 'int [100001]' [solution.c],../questions/Medium\length-of-longest-subarray-with-at-most-k-frequency\responses\C\response_c_0_failed.json,"int maxSubarrayLength(int* nums, int numsSize, int k) {
+    int freq[100001] = {0}, left = 0, right = 0, maxLength = 0;
+    while (right < numsSize) {
+        freq[nums[right]]++;
+        while (freq[nums[right]] > k) {
+            freq[nums[left]]--;
+            left++;
+        }
+        maxLength = (right - left + 1 > maxLength) ? right - left + 1 : maxLength;
+        right++;
+    }
+    return maxLength;
+}"
+c,runtime_error,"=================================================================
+==22==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000014 at pc 0x5562d98ae365 bp 0x7ffc274c6f40 sp 0x7ffc274c6f30
+READ of size 1 at 0x602000000014 thread T0
+    #2 0x7f059d042d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #3 0x7f059d042e3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+0x602000000014 is located 0 bytes to the right of 4-byte region [0x602000000010,0x602000000014)
+allocated by thread T0 here:
+    #0 0x7f059da12887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #3 0x7f059d042d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa[04]fa fa fa 03 fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==22==ABORTING",../questions/Medium\make-string-a-subsequence-using-cyclic-increments\responses\C\response_c_1_failed.json,"bool canMakeSubsequence(char * str1, char * str2) {
+    int i = 0, j = 0;
+    while (str1[i] != '\0' && str2[j] != '\0') {
+        if (str1[i] == str2[j]) {
+            j++;
+        } else if ((str1[i] == 'z' && str2[j] == 'a') || (str1[i] + 1 == str2[j])) {
+            j++;
+            i++; // Skip the next character in str1 to simulate one operation per character
+            while (str1[i] != '\0' && str2[j] != '\0' && str1[i] != str2[j]) i++;
+        }
+        i++;
+    }
+    return str2[j] == '\0';
+}"
+c,runtime_error,Line 8: Char 28: runtime error: shift exponent 64 is too large for 64-bit type 'long long int' [solution.c],../questions/Medium\maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k\responses\C\response_c_2_failed.json,"long long findMaximumNumber(long long k, int x) {
+    long long left = 0, right = 2e18;
+    while (left < right) {
+        long long mid = (left + right + 1) / 2;
+        long long sum = 0;
+        for (long long i = 1; i <= 64; i++) {
+            if ((i % x) == 0) {
+                sum += mid >> i;
+            }
+        }
+        if (sum <= k) left = mid;
+        else right = mid - 1;
+    }
+    return left;
+}"
+c,runtime_error,Line 8: Char 21: runtime error: index 892172933 out of bounds for type 'int [1000001]' [solution.c],../questions/Medium\maximum-sum-of-almost-unique-subarray\responses\C\response_c_0_failed.json,"long long maxSum(int* nums, int numsSize, int m, int k){
+    long long max_sum = 0;
+    for (int i = 0; i <= numsSize - k; ++i) {
+        int freq[1000001] = {0}; // Assuming nums[i] <= 10^9, but adjusting for practical memory limits
+        int distinct = 0;
+        long long current_sum = 0;
+        for (int j = i; j < i + k; ++j) {
+            if (freq[nums[j]] == 0) ++distinct;
+            ++freq[nums[j]];
+            current_sum += nums[j];
+        }
+        if (distinct >= m) max_sum = max_sum > current_sum ? max_sum : current_sum;
+    }
+    return max_sum;
+}"
+c,runtime_error,Line 5: Char 38: runtime error: signed integer overflow: 53449611838892 * 712958946092406 cannot be represented in type 'long long int' [solution.c],../questions/Medium\maximum-xor-product\responses\C\response_c_1_failed.json,"int maximumXorProduct(long long a, long long b, int n) {
+    long long maxProduct = 0;
+    const int MOD = 1000000007;
+    for (long long x = 0; x < (1LL << n); ++x) {
+        long long product = ((a ^ x) * (b ^ x)) % MOD;
+        if (product > maxProduct) {
+            maxProduct = product;
+        }
+    }
+    return (int)maxProduct;
+}"
+c,runtime_error,Line 17: Char 19: runtime error: index 6 out of bounds for type 'int [*]' [solution.c],../questions/Medium\minimum-size-subarray-in-infinite-array\responses\C\response_c_2_failed.json,"int minSizeSubarray(int* nums, int numsSize, int target) {
+    int totalSum = 0;
+    for (int i = 0; i < numsSize; i++) {
+        totalSum += nums[i];
+    }
+    if (totalSum == target) {
+        return numsSize;
+    }
+    if (totalSum < target) {
+        return -1;
+    }
+
+    int result = INT_MAX;
+    int prefixSums[numsSize * 2];
+    prefixSums[0] = 0;
+    for (int i = 0; i < numsSize * 2; i++) {
+        prefixSums[i + 1] = prefixSums[i] + nums[i % numsSize];
+    }
+
+    for (int i = 0; i < numsSize; i++) {
+        int sum = 0;
+        for (int j = i; j < i + numsSize; j++) {
+            sum += nums[j % numsSize];
+            if (sum >= target) {
+                result = result < (j - i + 1) ? result : (j - i + 1);
+                break;
+            }
+        }
+    }
+
+    return result == INT_MAX ? -1 : result;
+}"
+c,runtime_error,Line 10: Char 51: runtime error: signed integer overflow: -2000000000 - 2000000000 cannot be represented in type 'int' [solution.c],../questions/Medium\movement-of-robots\responses\C\response_c_2_failed.json,"int sumDistance(int* nums, int numsSize, char * s, int d){
+    long long sum = 0;
+    const int MOD = 1000000007;
+    int* positions = (int*)malloc(numsSize * sizeof(int));
+    for (int i = 0; i < numsSize; ++i) {
+        positions[i] = nums[i] + (s[i] == 'L' ? -d : d);
+    }
+    for (int i = 0; i < numsSize; ++i) {
+        for (int j = i + 1; j < numsSize; ++j) {
+            long long distance = abs(positions[i] - positions[j]);
+            sum = (sum + distance) % MOD;
+        }
+    }
+    free(positions);
+    return sum;
+}"
+c,runtime_error,"=================================================================
+==22==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000193 at pc 0x559e3d8d490a bp 0x7ffc8e12f2f0 sp 0x7ffc8e12f2e0
+READ of size 1 at 0x602000000193 thread T0
+    #1 0x7f6aedaecd8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #2 0x7f6aedaece3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+0x602000000193 is located 0 bytes to the right of 3-byte region [0x602000000190,0x602000000193)
+allocated by thread T0 here:
+    #0 0x7f6aee4bc887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #3 0x7f6aedaecd8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+Shadow bytes around the buggy address:
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 06 fa fa fa 04 fa fa fa 07 fa fa fa 04 fa
+  0x0c047fff8010: fa fa 00 fa fa fa 04 fa fa fa 02 fa fa fa 04 fa
+  0x0c047fff8020: fa fa 02 fa fa fa 04 fa fa fa 02 fa fa fa 04 fa
+=>0x0c047fff8030: fa fa[03]fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==22==ABORTING",../questions/Medium\remove-adjacent-almost-equal-characters\responses\C\response_c_1_failed.json,"#include <stdlib.h>
+
+int removeAlmostEqualCharacters(char* word) {
+    int count = 0;
+    for (int i = 1; word[i] != '\0'; i++) {
+        if (word[i] == word[i - 1] || abs(word[i] - word[i - 1]) == 1) {
+            count++;
+            i++; // Skip next character to avoid double counting
+        }
+    }
+    return count;
+}"
+c,runtime_error,"AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==22==ERROR: AddressSanitizer: SEGV on unknown address 0x55e48ba33870 (pc 0x7f57180cdb46 bp 0x55e48ba33880 sp 0x7fff33d90760 T0)
+==22==The signal is caused by a WRITE memory access.
+    #0 0x7f57180cdb46 in bool __sanitizer::atomic_compare_exchange_strong<__sanitizer::atomic_uint8_t>(__sanitizer::atomic_uint8_t volatile*, __sanitizer::atomic_uint8_t::Type*, __sanitizer::atomic_uint8_t::Type, __sanitizer::memory_order) ../../../../src/libsanitizer/sanitizer_common/sanitizer_atomic_clang.h:80
+    #1 0x7f57180cdb46 in __asan::Allocator::AtomicallySetQuarantineFlagIfAllocated(__asan::AsanChunk*, void*, __sanitizer::BufferedStackTrace*) ../../../../src/libsanitizer/asan/asan_allocator.cpp:621
+    #2 0x7f57180cdb46 in __asan::Allocator::Deallocate(void*, unsigned long, unsigned long, __sanitizer::BufferedStackTrace*, __asan::AllocType) ../../../../src/libsanitizer/asan/asan_allocator.cpp:697
+    #3 0x7f57180cdb46 in __asan::asan_free(void*, __sanitizer::BufferedStackTrace*, __asan::AllocType) ../../../../src/libsanitizer/asan/asan_allocator.cpp:971
+    #4 0x7f57181594f4 in __interceptor_free ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:128
+    #7 0x7f5717789d8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #8 0x7f5717789e3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV ../../../../src/libsanitizer/sanitizer_common/sanitizer_atomic_clang.h:80 in bool __sanitizer::atomic_compare_exchange_strong<__sanitizer::atomic_uint8_t>(__sanitizer::atomic_uint8_t volatile*, __sanitizer::atomic_uint8_t::Type*, __sanitizer::atomic_uint8_t::Type, __sanitizer::memory_order)
+==22==ABORTING",../questions/Medium\shortest-and-lexicographically-smallest-beautiful-string\responses\C\response_c_0_failed.json,"#include <string.h>
+#include <stdlib.h>
+
+char* shortestBeautifulSubstring(char* s, int k) {
+    int onesCount = 0, start = 0, minLen = INT_MAX;
+    char *result = """", *temp;
+    for (int i = 0; s[i] != '\0'; ++i) {
+        onesCount += s[i] == '1';
+        if (onesCount == k) {
+            int j = start;
+            while (onesCount - (s[j] == '1') >= k) {
+                onesCount -= s[j] == '1';
+                ++j;
+            }
+            if (i - j + 1 < minLen) {
+                minLen = i - j + 1;
+                temp = (char*)malloc(sizeof(char) * (minLen + 1));
+                strncpy(temp, s + j, minLen);
+                temp[minLen] = '\0';
+                free(result);
+                result = temp;
+            } else if (i - j + 1 == minLen) {
+                temp = (char*)malloc(sizeof(char) * (minLen + 1));
+                strncpy(temp, s + j, minLen);
+                temp[minLen] = '\0';
+                if (strcmp(temp, result) < 0) {
+                    free(result);
+                    result = temp;
+                } else {
+                    free(temp);
+                }
+            }
+            onesCount -= s[start] == '1';
+            ++start;
+        }
+    }
+    if (minLen == INT_MAX) {
+        return """";
+    }
+    return result;
+}"

@@ -1,0 +1,339 @@
+Language,Error Type,Message,File Path,Code
+csharp,compile_error,"Line 28: Char 26: error CS1002: ; expected (in Solution.cs)
+Line 28: Char 26: error CS1525: Invalid expression term ':' (in Solution.cs)
+Line 28: Char 26: error CS1001: Identifier expected (in Solution.cs)",../questions/Hard\find-a-good-subset-of-the-matrix\responses\C#\response_csharp_1_failed.json,"public class Solution {
+    public IList<int> GoodSubsetofBinaryMatrix(int[][] grid) {
+        int m = grid.Length, n = grid[0].Length;
+        // Initialize the list to keep track of the best subset found
+        List<int> bestSubset = new List<int>();
+        int bestSubsetSize = int.MaxValue;
+
+        // Use bit manipulation to generate all possible subsets
+        for (int mask = 1; mask < (1 << m); mask++) {
+            List<int> currentSubset = new List<int>();
+            int[] columnSum = new int[n];
+            int rowCount = 0;
+
+            // Check each row if it's included in the current subset
+            for (int i = 0; i < m; i++) {
+                if ((mask & (1 << i)) != 0) {
+                    currentSubset.Add(i);
+                    rowCount++;
+                    // Sum up the columns for the current subset
+                    for (int j = 0; j < n; j++) {
+                        columnSum[j] += grid[i][j];
+                    }
+                }
+            }
+
+            // Verify if the current subset is a good subset
+            bool isGood = true;
+            for (int sum : columnSum) {
+                if (sum > rowCount / 2) {
+                    isGood = false;
+                    break;
+                }
+            }
+
+            // Update the best subset if a new, smaller good subset is found
+            if (isGood && rowCount < bestSubsetSize) {
+                bestSubset = new List<int>(currentSubset);
+                bestSubsetSize = rowCount;
+            }
+        }
+
+        // If no good subset is found, return an empty list
+        if (bestSubsetSize == int.MaxValue) {
+            return new List<int>();
+        }
+
+        // Return the indices of the best subset found
+        return bestSubset;
+    }
+}"
+csharp,compile_error,"Line 8: Char 44: error CS1656: Cannot assign to 'num' because it is a 'foreach iteration variable' (in Solution.cs)
+Line 10: Char 21: error CS1656: Cannot assign to 'num' because it is a 'foreach iteration variable' (in Solution.cs)",../questions/Hard\maximum-element-sum-of-a-complete-subset-of-indices\responses\C#\response_csharp_0_failed.json,"public class Solution {
+    public long MaximumSum(IList<int> nums) {
+        Dictionary<int, long> freq = new Dictionary<int, long>();
+        foreach (var num in nums) {
+            int mask = 0;
+            for (int i = 2; i * i <= num; i++) {
+                int count = 0;
+                while (num % (i * i) == 0) num /= i * i;
+                while (num % i == 0) {
+                    num /= i;
+                    count++;
+                }
+                if (count % 2 == 1) mask ^= 1 << (i % 30); // using 30 first primes
+            }
+            if (num > 1) mask ^= 1 << (num % 30);
+            if (freq.ContainsKey(mask)) freq[mask] += num;
+            else freq[mask] = num;
+        }
+        long maxSum = 0;
+        foreach (var sum in freq.Values) {
+            maxSum = Math.Max(maxSum, sum);
+        }
+        return maxSum;
+    }
+}"
+csharp,compile_error,"Line 8: Char 25: error CS0019: Operator '>>' cannot be applied to operands of type 'long' and 'long' (in Solution.cs)
+Line 8: Char 47: error CS0019: Operator '<<' cannot be applied to operands of type 'long' and 'long' (in Solution.cs)
+Line 8: Char 66: error CS0019: Operator '<<' cannot be applied to operands of type 'long' and 'long' (in Solution.cs)",../questions/Medium\maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k\responses\C#\response_csharp_0_failed.json,"public class Solution {
+    public long FindMaximumNumber(long k, int x) {
+        long low = 1, high = k;
+        while (low < high) {
+            long mid = (low + high + 1) / 2;
+            long sum = 0;
+            for (long i = 1; i <= x; i++) {
+                sum += (mid >> i) + ((mid & ((1L << i) - 1)) >= (1L << (i - 1)) ? 1 : 0);
+            }
+            if (sum <= k) low = mid;
+            else high = mid - 1;
+        }
+        return low;
+    }
+}"
+csharp,compile_error,Line 4: Char 18: error CS0136: A local or parameter named 'i' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter (in Solution.cs),../questions/Medium\maximum-size-of-a-set-after-removals\responses\C#\response_csharp_0_failed.json,"public class Solution {
+    public int MaximumSetSize(int[] nums1, int[] nums2) {
+        Dictionary<int, int> freq = new Dictionary<int, int>();
+        for (int i = 0; i < nums1.Length; i++) {
+            if (!freq.ContainsKey(nums1[i])) freq[nums1[i]] = 0;
+            freq[nums1[i]]++;
+            if (!freq.ContainsKey(nums2[i])) freq[nums2[i]] = 0;
+            freq[nums2[i]]++;
+        }
+
+        List<int> values = new List<int>(freq.Values);
+        values.Sort((a, b) => b.CompareTo(a));
+
+        int n = nums1.Length / 2, setSize = 0, i = 0;
+        while (n > 0 && i < values.Count) {
+            int remove = Math.Min(values[i++] / 2, n);
+            n -= remove;
+            setSize++;
+        }
+
+        return setSize + values.Count - i;
+    }
+}"
+csharp,compile_error,"Line 3: Char 20: error CS1503: Argument 1: cannot convert from 'System.Collections.Generic.IList<int>' to 'System.Array' (in Solution.cs)
+Line 4: Char 20: error CS1503: Argument 1: cannot convert from 'System.Collections.Generic.IList<int>' to 'System.Array' (in Solution.cs)",../questions/Medium\minimum-processing-time\responses\C#\response_csharp_0_failed.json,"public class Solution {
+    public int MinProcessingTime(IList<int> processorTime, IList<int> tasks) {
+        Array.Sort(processorTime);
+        Array.Sort(tasks);
+        int n = processorTime.Count;
+        int maxTime = 0;
+        for (int i = 0; i < n; i++) {
+            int processorEndTime = processorTime[i] + tasks[4 * i] + tasks[4 * i + 1] + tasks[4 * i + 2] + tasks[4 * i + 3];
+            maxTime = Math.Max(maxTime, processorEndTime);
+        }
+        return maxTime;
+    }
+}"
+csharp,runtime_error,"Unhandled exception. System.OverflowException: Value was either too large or too small for an Int64.
+At System.Number.ThrowOverflowException[TInteger]()
+At System.Int64.Parse(String s)
+At Solution.CountSteppingNumbers(String low, String high)
+At __DriverSolution__.__Helper__(String param_1, String param_2)
+At __Driver__.Main(String[] args)",../questions/Hard\count-stepping-numbers-in-range\responses\C#\response_csharp_0_failed.json,"public class Solution {
+    public int CountSteppingNumbers(string low, string high) {
+        int MOD = 1000000007;
+        long lowNum = long.Parse(low);
+        long highNum = long.Parse(high);
+        int count = 0;
+        
+        Queue<long> queue = new Queue<long>();
+        for (int i = 1; i <= 9; i++) {
+            queue.Enqueue(i);
+        }
+        
+        if (lowNum == 0) {
+            count++;
+        }
+        
+        while (queue.Count > 0) {
+            long current = queue.Dequeue();
+            if (current >= lowNum && current <= highNum) {
+                count = (count + 1) % MOD;
+            }
+            
+            if (current > highNum) {
+                continue;
+            }
+            
+            long lastDigit = current % 10;
+            long next1 = current * 10 + (lastDigit - 1);
+            long next2 = current * 10 + (lastDigit + 1);
+            
+            if (lastDigit > 0) queue.Enqueue(next1);
+            if (lastDigit < 9) queue.Enqueue(next2);
+        }
+        
+        return count;
+    }
+}"
+csharp,runtime_error,"Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.
+At Solution.NumberOfGoodPartitions(Int32[] nums)
+At __DriverSolution__.__Helper__(Int32[] param_1)
+At __Driver__.Main(String[] args)",../questions/Hard\count-the-number-of-good-partitions\responses\C#\response_csharp_1_failed.json,"public class Solution {
+    public int NumberOfGoodPartitions(int[] nums) {
+        const int MOD = 1000000007;
+        int n = nums.Length;
+        Dictionary<int, int> lastPosition = new Dictionary<int, int>();
+        long[] dp = new long[n + 1];
+        dp[0] = 1; // Base case: for the empty prefix
+
+        for (int i = 0; i < n; i++) {
+            dp[i + 1] = dp[i]; // Initially, assume current element does not create new partitions
+            int lastPos = -1;
+            if (lastPosition.ContainsKey(nums[i])) {
+                lastPos = lastPosition[nums[i]];
+            }
+            // Calculate the number of good partitions ending at the current element
+            for (int j = i; j > lastPos; j--) {
+                dp[i + 1] = (dp[i + 1] + dp[j - 1]) % MOD;
+            }
+            lastPosition[nums[i]] = i; // Update the last position for the current element
+        }
+
+        return (int)dp[n];
+    }
+}"
+csharp,runtime_error,"Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.
+At Solution.ModInverse(Int64 a, Int64 mod)
+At Solution.ConstructProductMatrix(Int32[][] grid)
+At __DriverSolution__.__Helper__(Int32[][] param_1)
+At __Driver__.Main(String[] args)",../questions/Medium\construct-product-matrix\responses\C#\response_csharp_0_failed.json,"public class Solution {
+    public int[][] ConstructProductMatrix(int[][] grid) {
+        int n = grid.Length;
+        int m = grid[0].Length;
+        long totalProduct = 1;
+        int zeroCount = 0;
+        int[][] result = new int[n][];
+
+        // Initialize result matrix
+        for (int i = 0; i < n; i++) {
+            result[i] = new int[m];
+        }
+
+        // Calculate total product and count zeros
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 0) {
+                    zeroCount++;
+                } else {
+                    totalProduct = (totalProduct * grid[i][j]) % 12345;
+                }
+            }
+        }
+
+        // Fill in the result matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (zeroCount > 1) {
+                    result[i][j] = 0; // If more than one zero, all products are 0
+                } else if (zeroCount == 1) {
+                    result[i][j] = grid[i][j] == 0 ? (int)totalProduct : 0; // Non-zero positions are 0 if there's a zero in grid
+                } else {
+                    long productWithoutCurrent = totalProduct * ModInverse(grid[i][j], 12345) % 12345;
+                    result[i][j] = (int)productWithoutCurrent;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    // Calculate Modular Multiplicative Inverse
+    private long ModInverse(long a, long mod) {
+        long m0 = mod;
+        long y = 0, x = 1;
+
+        if (mod == 1)
+            return 0;
+
+        while (a > 1) {
+            long q = a / mod;
+            long t = mod;
+
+            // m is remainder now, process same as Euclid's algo
+            mod = a % mod; a = t;
+            t = y;
+
+            // Update y and x
+            y = x - q * y;
+            x = t;
+        }
+
+        // Make x positive
+        if (x < 0)
+            x += m0;
+
+        return x;
+    }
+}"
+csharp,runtime_error,"Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.
+At Solution.MaxNumberOfAlloys(Int32 n, Int32 k, Int32 budget, IList`1 composition, IList`1 stock, IList`1 cost)
+At __DriverSolution__.__Helper__(Int32 param_1, Int32 param_2, Int32 param_3, IList`1 param_4, IList`1 param_5, IList`1 param_6)
+At __Driver__.Main(String[] args)",../questions/Medium\maximum-number-of-alloys\responses\C#\response_csharp_2_failed.json,"public class Solution {
+    public int MaxNumberOfAlloys(int n, int k, int budget, IList<IList<int>> composition, IList<int> stock, IList<int> cost) {
+        int maxAlloys = 0;
+        for (int i = 0; i < k; i++) {
+            int minAlloyCost = 0;
+            for (int j = 0; j < n; j++) {
+                minAlloyCost += (composition[i][j] - stock[j] > 0 ? composition[i][j] - stock[j] : 0) * cost[j];
+            }
+            if (minAlloyCost > budget) continue;
+            int low = 1, high = (budget - minAlloyCost) / minAlloyCost + 1;
+            while (low <= high) {
+                int mid = low + (high - low) / 2;
+                long totalCost = 0;
+                for (int j = 0; j < n; j++) {
+                    totalCost += (long)Math.Max(0, composition[i][j] * mid - stock[j]) * cost[j];
+                }
+                if (totalCost <= budget) {
+                    maxAlloys = Math.Max(maxAlloys, mid);
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+        }
+        return maxAlloys;
+    }
+}"
+csharp,runtime_error,Out of memory.,../questions/Medium\maximum-sum-of-almost-unique-subarray\responses\C#\response_csharp_2_failed.json,"public class Solution {
+    public long MaxSum(IList<int> nums, int m, int k) {
+        long maxSum = 0;
+        int[] freq = new int[1000000000]; // Frequency array to hold the count of each number
+        int distinct = 0; // To track the number of distinct elements
+        long currentSum = 0; // To keep track of the current sum of the subarray
+
+        // Initialize the first window
+        for (int i = 0; i < k; i++) {
+            if (freq[nums[i]] == 0) distinct++;
+            freq[nums[i]]++;
+            currentSum += nums[i];
+        }
+        if (distinct >= m) maxSum = Math.Max(maxSum, currentSum);
+
+        // Slide the window
+        for (int i = k; i < nums.Count; i++) {
+            // Remove the first element of the previous window
+            if (freq[nums[i - k]] == 1) distinct--;
+            freq[nums[i - k]]--;
+            currentSum -= nums[i - k];
+
+            // Add the new element to the current window
+            if (freq[nums[i]] == 0) distinct++;
+            freq[nums[i]]++;
+            currentSum += nums[i];
+
+            // Update maxSum if conditions are met
+            if (distinct >= m) maxSum = Math.Max(maxSum, currentSum);
+        }
+
+        return maxSum;
+    }
+}"

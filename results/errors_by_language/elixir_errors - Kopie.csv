@@ -1,0 +1,114 @@
+Language,Error Type,Message
+elixir,runtime_error,Line 34: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,"Line 25: ** (Protocol.UndefinedError) protocol Enumerable not implemented for ""string"" of type BitString"
+elixir,runtime_error,"Line 4: ** (Protocol.UndefinedError) protocol Enumerable not implemented for ""string"" of type BitString"
+elixir,runtime_error,"Line 7: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 7: ** (Protocol.UndefinedError) protocol Enumerable not implemented for {0, 0} of type Tuple"
+elixir,runtime_error,"Line 9: ** (BadMapError) expected a map, got: [""cd"", ""ac"", ""dc"", ""ca"", ""zz""]"
+elixir,runtime_error,Line 5: ** (UndefinedFunctionError) function Enum.flatten/1 is undefined or private
+elixir,runtime_error,Line 6: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 19: ** (UndefinedFunctionError) function Tuple.first/1 is undefined or private
+elixir,runtime_error,Line 23: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 5: ** (UndefinedFunctionError) function String.count/2 is undefined or private
+elixir,runtime_error,"Line 9: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 6: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 6: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 16: ** (ArithmeticError) bad argument in arithmetic expression: rem(nil, 10)"
+elixir,runtime_error,Line 8: ** (FunctionClauseError) no function clause matching in anonymous fn/1 in Solution.number_of_points/1
+elixir,runtime_error,Line 11: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 4: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,"Line 25: ** (ArgumentError) ranges (first..last) expect both sides to be integers, got: 2..2.0"
+elixir,runtime_error,"Line 23: ** (ArgumentError) ranges (first..last) expect both sides to be integers, got: 2..2.0"
+elixir,runtime_error,Line 6: ** (FunctionClauseError) no function clause matching in anonymous fn/2 in Solution.beautiful_substrings/2
+elixir,runtime_error,"Line 10: ** (BadMapError) expected a map, got: []"
+elixir,runtime_error,Line 13: ** (ArgumentError) argument error
+elixir,runtime_error,Line 11: ** (UndefinedFunctionError) function Enum.last/1 is undefined or private
+elixir,runtime_error,Line 8: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 6: ** (UndefinedFunctionError) function Tuple.put_element/3 is undefined or private
+elixir,runtime_error,Line 17: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,"Line 6: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 6: ** (Protocol.UndefinedError) protocol Enumerable not implemented for {0, 2} of type Tuple"
+elixir,runtime_error,"Line 5: ** (Protocol.UndefinedError) protocol Enumerable not implemented for ""cbaaaabc"" of type BitString"
+elixir,runtime_error,"Line 28: ** (Protocol.UndefinedError) protocol Enumerable not implemented for ""ca"" of type BitString"
+elixir,runtime_error,Line 5: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 5: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 11: ** (FunctionClauseError) no function clause matching in Solution.max_xor_pair/2
+elixir,runtime_error,"Line 6: ** (KeyError) key :third not found in: {4, 2, 6}"
+elixir,runtime_error,Line 20: ** (Protocol.UndefinedError) protocol Enumerable not implemented for 1000 of type Integer
+elixir,runtime_error,"Line 6: ** (Protocol.UndefinedError) protocol Enumerable not implemented for ""a"" of type BitString"
+elixir,runtime_error,Line 23: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 6: ** (UndefinedFunctionError) function Array.new/2 is undefined (module Array is not available)
+elixir,runtime_error,Line 8: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,"Line 5: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 12: ** (BadArityError) #Function<0.124927518/2 in Solution.can_form_palindrome?/2> with arity 2 called with 1 argument ({""b"", 1})"
+elixir,runtime_error,Line 25: ** (FunctionClauseError) no function clause matching in String.slice/2
+elixir,runtime_error,Line 8: ** (ArithmeticError) bad argument in arithmetic expression: nil - 2
+elixir,runtime_error,Line 8: ** (ArithmeticError) bad argument in arithmetic expression: nil - 2
+elixir,runtime_error,Line 5: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 8: ** (FunctionClauseError) no function clause matching in anonymous fn/1 in Solution.check_strings/2
+elixir,runtime_error,"Line 4: ** (Protocol.UndefinedError) protocol Enumerable not implemented for ""abcdba"" of type BitString"
+elixir,runtime_error,Line 14: ** (UndefinedFunctionError) function Enum.nth/2 is undefined or private
+elixir,runtime_error,Line 12: ** (UndefinedFunctionError) function Enum.reduce_with_index/3 is undefined or private. Did you mean:
+elixir,runtime_error,"Line 5: ** (ArithmeticError) bad argument in arithmetic expression: 0 + {1, 2}"
+elixir,runtime_error,"Line 5: ** (ArithmeticError) bad argument in arithmetic expression: 0 + {1, 0}"
+elixir,runtime_error,"Line 6: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,Line 40: ** (UndefinedFunctionError) function Enum.none?/2 is undefined or private
+elixir,runtime_error,"Line 5: ** (BadFunctionError) expected a function, got: []"
+elixir,runtime_error,"Line 6: ** (ArithmeticError) bad argument in arithmetic expression: rem(216.0, 10)"
+elixir,runtime_error,"Line 10: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,Line 5: ** (UndefinedFunctionError) function Bitwise.popcount/1 is undefined or private
+elixir,runtime_error,Line 16: ** (UndefinedFunctionError) function Kernel.bor/2 is undefined or private
+elixir,runtime_error,"Line 33: ** (BadFunctionError) expected a function, got: [-1, -1]"
+elixir,runtime_error,Line 5: ** (FunctionClauseError) no function clause matching in Enumerable.List.reduce/3
+elixir,runtime_error,"Line 14: ** (MatchError) no match of right hand side value: ~c""aa"""
+elixir,runtime_error,Line 6: ** (UndefinedFunctionError) function Map.fold/2 is undefined or private
+elixir,runtime_error,Line 6: ** (FunctionClauseError) no function clause matching in anonymous fn/2 in Solution.largest_perimeter/1
+elixir,runtime_error,Line 10: ** (Protocol.UndefinedError) protocol Enumerable not implemented for 5 of type Integer
+elixir,runtime_error,Line 9: ** (FunctionClauseError) no function clause matching in String.graphemes/1
+elixir,runtime_error,"Line 5: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,Line 12: ** (FunctionClauseError) no function clause matching in :lists.max/2
+elixir,runtime_error,Line 8: ** (UndefinedFunctionError) function Integer.max/2 is undefined or private
+elixir,runtime_error,Line 4: ** (ArgumentError) argument error
+elixir,runtime_error,Line 10: ** (FunctionClauseError) no function clause matching in Solution.char_shift/1
+elixir,runtime_error,Line 11: ** (FunctionClauseError) no function clause matching in String.slice/2
+elixir,runtime_error,"Line 7: ** (ArgumentError) ranges (first..last) expect both sides to be integers, got: ""c""..""c"""
+elixir,runtime_error,"Line 12: ** (ArgumentError) the Access module does not support accessing lists by index, got: 1"
+elixir,runtime_error,"Line 11: ** (ArgumentError) the Access module does not support accessing lists by index, got: 1"
+elixir,runtime_error,"Line 4: ** (ArgumentError) the Access module does not support accessing lists by index, got: 1"
+elixir,runtime_error,"Line 5: ** (ArgumentError) the Access module does not support accessing lists by index, got: 1"
+elixir,runtime_error,"Line 6: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 12: ** (Protocol.UndefinedError) protocol Enumerable not implemented for {1, 1} of type Tuple"
+elixir,runtime_error,Line 7: ** (FunctionClauseError) no function clause matching in Solution.check_subsequence/3
+elixir,runtime_error,"Line 8: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 6: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 12: ** (ArithmeticError) bad argument in arithmetic expression: {:cont, 0} + 1"
+elixir,runtime_error,Line 7: ** (UndefinedFunctionError) function Enum.values/1 is undefined or private
+elixir,runtime_error,Line 11: ** (UndefinedFunctionError) function Map.from_list/1 is undefined or private. Did you mean:
+elixir,runtime_error,Line 5: ** (UndefinedFunctionError) function Enum.each_cons/2 is undefined or private. Did you mean:
+elixir,runtime_error,Line 32: ** (FunctionClauseError) no function clause matching in Enum.max_sort_fun/1
+elixir,runtime_error,Line 30: ** (FunctionClauseError) no function clause matching in Enum.max_sort_fun/1
+elixir,runtime_error,"Line 7: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,Line 7: ** (Protocol.UndefinedError) protocol Enumerable not implemented for {1000000001} of type Tuple
+elixir,runtime_error,Line 9: ** (FunctionClauseError) no function clause matching in Enum.min_sort_fun/1
+elixir,runtime_error,Line 6: ** (FunctionClauseError) no function clause matching in anonymous fn/2 in Solution.minimum_cost/1
+elixir,runtime_error,Line 5: ** (FunctionClauseError) no function clause matching in anonymous fn/2 in Solution.minimum_cost/1
+elixir,runtime_error,Line 13: ** (ArithmeticError) bad argument in arithmetic expression: nil * 2
+elixir,runtime_error,Line 22: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 6: ** (ArgumentError) errors were found at the given arguments:
+elixir,runtime_error,Line 8: ** (FunctionClauseError) no function clause matching in anonymous fn/2 in Solution.minimum_operations/1
+elixir,runtime_error,Line 41: ** (FunctionClauseError) no function clause matching in Enumerable.Range.reduce/5
+elixir,runtime_error,Line 17: ** (UndefinedFunctionError) function Enum.append/2 is undefined or private
+elixir,runtime_error,"Line 11: ** (ArgumentError) ranges (first..last) expect both sides to be integers, got: 3..0..-1//-1"
+elixir,runtime_error,"Line 10: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 8: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 10: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"
+elixir,runtime_error,"Line 13: ** (ArgumentError) ranges (first..last) expect both sides to be integers, got: 2..1.7320508075688772"
+elixir,runtime_error,Line 5: ** (UndefinedFunctionError) function Enum.none?/2 is undefined or private
+elixir,runtime_error,Line 5: ** (UndefinedFunctionError) function Enum.none?/2 is undefined or private
+elixir,runtime_error,Line 4: ** (ArgumentError) argument error
+elixir,runtime_error,Line 19: ** (FunctionClauseError) no function clause matching in String.to_charlist/1
+elixir,runtime_error,Line 8: ** (UndefinedFunctionError) function String.chr/1 is undefined or private
+elixir,runtime_error,Line 14: ** (UndefinedFunctionError) function Enum.flatten/1 is undefined or private
+elixir,runtime_error,Line 5: ** (UndefinedFunctionError) function Enum.permutations/1 is undefined or private
+elixir,runtime_error,Line 9: ** (FunctionClauseError) no function clause matching in Solution.merge_three/1
+elixir,runtime_error,"Line 7: ** (ArgumentError) the Access module does not support accessing lists by index, got: 0"

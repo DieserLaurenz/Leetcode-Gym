@@ -1,0 +1,173 @@
+Language,Error Type,Message,File Path,Code
+javascript,runtime_error,"Line 11 in solution.js
+        sum = (sum + BigInt(nums[i]) * BigInt(nums[i])) % BigInt(mod);
+                   ^
+TypeError: Cannot mix BigInt and other types, use explicit conversions
+    Line 11: Char 20 in solution.js (maxSum)
+    Line 26: Char 19 in solution.js (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 15: Char 26 in solution.js (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49
+Node.js v20.10.0",../questions/Hard\apply-operations-on-array-to-maximize-sum-of-squares\responses\JavaScript\response_javascript_0_failed.json,"/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var maxSum = function(nums, k) {
+    nums.sort((a, b) => b - a);
+    let sum = 0;
+    const mod = 1e9 + 7;
+    for (let i = 0; i < k; i++) {
+        sum = (sum + BigInt(nums[i]) * BigInt(nums[i])) % BigInt(mod);
+    }
+    return Number(sum);
+};"
+javascript,runtime_error,"Line 15 in solution.js
+            sum += n % 10;
+                     ^
+TypeError: Cannot mix BigInt and other types, use explicit conversions
+    Line 15: Char 22 in solution.js (sumDigits)
+    Line 34: Char 13 in solution.js (count)
+    Line 56: Char 19 in solution.js (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 41: Char 26 in solution.js (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+Node.js v20.10.0",../questions/Hard\count-of-integers\responses\JavaScript\response_javascript_1_failed.json,"/**
+ * @param {string} num1
+ * @param {string} num2
+ * @param {number} min_sum
+ * @param {number} max_sum
+ * @return {number}
+ */
+var count = function(num1, num2, min_sum, max_sum) {
+    const MOD = 1e9 + 7;
+    let result = 0;
+
+    function sumDigits(n) {
+        let sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n = Math.floor(n / 10);
+        }
+        return sum;
+    }
+
+    function countInRange(start, end) {
+        let count = 0;
+        for (let i = start; i <= end; i++) {
+            const sum = sumDigits(i);
+            if (sum >= min_sum && sum <= max_sum) {
+                count = (count + 1) % MOD;
+            }
+        }
+        return count;
+    }
+
+    const start = BigInt(num1), end = BigInt(num2);
+    for (let i = start; i <= end; i++) {
+        if (sumDigits(i) >= min_sum && sumDigits(i) <= max_sum) {
+            result = (result + 1) % MOD;
+        }
+    }
+
+    return result;
+};"
+javascript,runtime_error,"Line 29 in solution.js
+        if (isValid && __builtin_popcount(mask) > answer.length) {
+        ^
+ReferenceError: __builtin_popcount is not defined
+    Line 29: Char 9 in solution.js (goodSubsetofBinaryMatrix)
+    Line 51: Char 19 in solution.js (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 42: Char 26 in solution.js (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49
+Node.js v20.10.0",../questions/Hard\find-a-good-subset-of-the-matrix\responses\JavaScript\response_javascript_2_failed.json,"/**
+ * @param {number[][]} grid
+ * @return {number[]}
+ */
+var goodSubsetofBinaryMatrix = function(grid) {
+    let m = grid.length, n = grid[0].length;
+    let answer = [];
+
+    for (let mask = 1; mask < (1 << m); mask++) {
+        let sum = new Array(n).fill(0);
+        let bits = 0;
+        for (let i = 0; i < m; i++) {
+            if ((mask & (1 << i)) > 0) {
+                bits++;
+                for (let j = 0; j < n; j++) {
+                    sum[j] += grid[i][j];
+                }
+            }
+        }
+
+        let isValid = true;
+        for (let j = 0; j < n; j++) {
+            if (sum[j] > Math.floor(bits / 2)) {
+                isValid = false;
+                break;
+            }
+        }
+
+        if (isValid && __builtin_popcount(mask) > answer.length) {
+            let newAnswer = [];
+            for (let i = 0; i < m; i++) {
+                if ((mask & (1 << i)) > 0) {
+                    newAnswer.push(i);
+                }
+            }
+            answer = newAnswer;
+        }
+    }
+
+    return answer;
+};"
+javascript,runtime_error,"Line 17 in solution.js
+        if (j < 0 && i > 0) continue; // Not enough digits to match target
+                     ^
+ReferenceError: i is not defined
+    Line 17: Char 22 in solution.js (minimumOperations)
+    Line 31: Char 19 in solution.js (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 22: Char 26 in solution.js (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49
+Node.js v20.10.0",../questions/Medium\minimum-operations-to-make-a-special-number\responses\JavaScript\response_javascript_1_failed.json,"/**
+ * @param {string} num
+ * @return {number}
+ */
+var minimumOperations = function(num) {
+    let minOp = num.length;
+    const targets = ['00', '25', '50', '75'];
+    for (let t of targets) {
+        let op = 0, j = num.length - 1;
+        for (let i = 1; i >= 0; i--) {
+            while (j >= 0 && num[j] !== t[i]) {
+                op++; // Count operations needed to remove non-matching digits
+                j--;
+            }
+            j--; // Move past the found matching digit
+        }
+        if (j < 0 && i > 0) continue; // Not enough digits to match target
+        minOp = Math.min(minOp, op + Math.max(0, i + 1)); // Update minimum operations, add remaining unmatched digits in target
+    }
+    return minOp === num.length ? num.length - 1 : minOp; // If unchanged, return num.length - 1; otherwise, return minOp
+};"

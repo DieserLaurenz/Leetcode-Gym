@@ -1,0 +1,806 @@
+Language,Error Type,Message,File Path,Code
+kotlin,compile_error,"Line 6: Char 33: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public inline fun <T, K> Array<out TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections
+public inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> TypeVariable(K)): Grouping<Char, TypeVariable(K)> defined in kotlin.text
+public inline fun <T, K> Iterable<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections
+public inline fun <T, K> Sequence<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.sequences
+        val frequencyMap = nums.groupingBy { it }.eachCount()
+                                ^
+Line 6: Char 46: error: unresolved reference: it
+        val frequencyMap = nums.groupingBy { it }.eachCount()
+                                             ^",../questions/Easy\check-if-array-is-good\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun isGood(nums: IntArray): Boolean {
+        val n = nums.maxOrNull() ?: return false
+        if (nums.size != n + 1) return false
+
+        val frequencyMap = nums.groupingBy { it }.eachCount()
+
+        if (frequencyMap[n] != 2) return false
+        for (i in 1 until n) {
+            if (frequencyMap[i] != 1) return false
+        }
+        
+        return true
+    }
+}"
+kotlin,compile_error,"Line 24: Char 16: error: type mismatch: inferred type is Long but Int was expected
+        return (ans - if (l == 0) 1 else 0 + mod) % mod
+               ^",../questions/Hard\count-of-sub-multisets-with-bounded-sum\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun countSubMultisets(nums: List<Int>, l: Int, r: Int): Int {
+        val mod = 1_000_000_007
+        val freq = mutableMapOf<Int, Int>()
+        nums.forEach { freq[it] = freq.getOrDefault(it, 0) + 1 }
+        val uniqueNums = freq.keys.toIntArray()
+        val dp = Array(uniqueNums.size + 1) { LongArray(r + 1) }
+        for (i in 0..r) dp[0][i] = 1
+        for (i in 1..uniqueNums.size) {
+            val num = uniqueNums[i - 1]
+            for (sum in 0..r) {
+                dp[i][sum] = dp[i - 1][sum]
+                var pow = 1
+                for (k in 1..freq[num]!!) {
+                    pow = (pow * num) % (r + 1)
+                    if (sum >= pow) {
+                        dp[i][sum] = (dp[i][sum] + dp[i - 1][sum - pow]) % mod
+                    }
+                }
+            }
+        }
+        var ans = 0L
+        for (sum in l..r) ans = (ans + dp[uniqueNums.size][sum]) % mod
+        return (ans - if (l == 0) 1 else 0 + mod) % mod
+    }
+}"
+kotlin,compile_error,"Line 14: Char 52: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+local final fun BigInteger.modInc(): Unit defined in Solution.countSteppingNumbers
+            if (n >= lowNum && n <= highNum) count.modInc()
+                                                   ^
+Line 22: Char 78: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+local final fun BigInteger.modInc(): Unit defined in Solution.countSteppingNumbers
+        if (lowNum <= 0.toBigInteger() && highNum >= 0.toBigInteger()) count.modInc()
+                                                                             ^",../questions/Hard\count-stepping-numbers-in-range\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun countSteppingNumbers(low: String, high: String): Int {
+        val mod = 1000000007
+        val lowNum = low.toBigInteger()
+        val highNum = high.toBigInteger()
+        var count = 0
+
+        fun BigInteger.modInc() {
+            count = (count + 1) % mod
+        }
+
+        fun dfs(n: BigInteger) {
+            if (n > highNum) return
+            if (n >= lowNum && n <= highNum) count.modInc()
+            val lastDigit = n % 10.toBigInteger()
+            if (n > 0.toBigInteger()) {
+                if (lastDigit > 0.toBigInteger()) dfs(n * 10.toBigInteger() + lastDigit - 1.toBigInteger())
+                if (lastDigit < 9.toBigInteger()) dfs(n * 10.toBigInteger() + lastDigit + 1.toBigInteger())
+            }
+        }
+
+        if (lowNum <= 0.toBigInteger() && highNum >= 0.toBigInteger()) count.modInc()
+        for (i in 1..9) dfs(i.toBigInteger())
+        return count
+    }
+}"
+kotlin,compile_error,"Line 33: Char 29: error: type mismatch: inferred type is Int but Long was expected
+            b *= modInverse(i, mod)
+                            ^",../questions/Hard\count-the-number-of-infection-sequences\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun numberOfSequence(n: Int, sick: IntArray): Int {
+        val mod = 1000000007
+        var result = 1
+        var gaps = ArrayList<Int>()
+
+        for (i in 1 until sick.size) {
+            val gap = sick[i] - sick[i - 1] - 1
+            if (gap > 0) {
+                gaps.add(gap)
+            }
+        }
+
+        if (sick[0] > 0) gaps.add(sick[0])
+        if (sick.last() < n - 1) gaps.add(n - 1 - sick.last())
+
+        gaps.forEach { gap ->
+            result = (result.toLong() * countWays(gap)).toInt() % mod
+        }
+
+        return result
+    }
+
+    private fun countWays(gap: Int): Long {
+        val mod = 1000000007L
+        var a = 1L
+        var b = 1L
+        for (i in 1..gap) {
+            a *= i
+            a %= mod
+            b *= (2 * gap - i + 1)
+            b %= mod
+            b *= modInverse(i, mod)
+            b %= mod
+        }
+        return b * modInverse(a, mod) % mod
+    }
+
+    private fun modInverse(a: Long, mod: Long): Long {
+        return power(a, mod - 2, mod)
+    }
+
+    private fun power(x: Long, y: Long, p: Long): Long {
+        var res = 1L
+        var x = x % p
+        var y = y
+        while (y > 0) {
+            if (y % 2L == 1L) res = (res * x) % p
+            y = y shr 1
+            x = (x * x) % p
+        }
+        return res
+    }
+}"
+kotlin,compile_error,"Line 34: Char 27: error: no set method providing array access
+                    passes[i] += current
+                          ^
+Line 40: Char 23: error: no set method providing array access
+                passes[i] += i
+                      ^",../questions/Hard\maximize-value-of-function-in-a-ball-passing-game\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun getMaxFunctionValue(receiver: List<Int>, k: Long): Long {
+        val n = receiver.size
+        var max = 0L
+
+        // Precompute the total passes to each player
+        val passes = Array(n) { 0L }
+        for (i in receiver.indices) {
+            var current = i
+            var count = k
+
+            // Use a map to detect loops and their entry point
+            val visited = mutableMapOf<Int, Long>()
+            visited[current] = k
+
+            while (count > 0) {
+                current = receiver[current]
+                if (visited.containsKey(current)) {
+                    val loopStart = visited[current]!!
+                    val loopLength = loopStart - count + 1
+                    val totalLoops = (count - 1) / loopLength
+                    val remainder = (count - 1) % loopLength
+
+                    // Add the loop contributions
+                    for (j in 0 until totalLoops) {
+                        passes[i] += loopLength * (n - 1) - (loopLength * (loopLength - 1) / 2)
+                    }
+
+                    // Add the remainder contributions
+                    passes[i] += remainder * (n - 1) - (remainder * (remainder - 1) / 2)
+                    break
+                } else {
+                    visited[current] = count - 1
+                    passes[i] += current
+                    count--
+                }
+            }
+
+            if (visited.size == k.toInt()) {
+                passes[i] += i
+            }
+
+            max = maxOf(max, passes[i])
+        }
+
+        return max
+    }
+}"
+kotlin,compile_error,"Line 4: Char 23: error: operator '==' cannot be applied to 'Long' and 'Int'
+        if (s == t && k % 2 == 0) return 1
+                      ^
+Line 5: Char 23: error: operator '==' cannot be applied to 'Long' and 'Int'
+        if (s != t && k % 2 == 1) return 0
+                      ^",../questions/Hard\string-transformation\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun numberOfWays(s: String, t: String, k: Long): Int {
+        val mod = 1000000007
+        if (s == t && k % 2 == 0) return 1
+        if (s != t && k % 2 == 1) return 0
+        if (k == 1L) return 0
+        var ways = 0
+        val n = s.length
+        for (i in 1 until n) {
+            if (s.substring(i) + s.substring(0, i) == t || s == t) ways++
+        }
+        if (k == 2L) return ways
+        if (s == t) ways++ // For no change at all, applicable only when s == t
+        return (ways % mod).toInt()
+    }
+}"
+kotlin,compile_error,"Line 37: Char 39: error: type mismatch: inferred type is Long but Int was expected
+                productMatrix[i][j] = (excludeCurrent * modInverse(currentVal, mod)) % mod
+                                      ^",../questions/Medium\construct-product-matrix\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun constructProductMatrix(grid: Array<IntArray>): Array<IntArray> {
+        val n = grid.size
+        val m = grid[0].size
+        val mod = 12345
+
+        // Initialize the product matrix with 1s
+        val productMatrix = Array(n) { IntArray(m) { 1 } }
+        
+        // Calculate row and column products excluding the current element
+        val rowProducts = Array(n) { 1 }
+        val colProducts = IntArray(m) { 1 }
+
+        // Calculate row products
+        for (i in 0 until n) {
+            var product = 1
+            for (j in 0 until m) {
+                product = (product * grid[i][j]) % mod
+            }
+            rowProducts[i] = product
+        }
+
+        // Calculate column products
+        for (j in 0 until m) {
+            var product = 1
+            for (i in 0 until n) {
+                product = (product * grid[i][j]) % mod
+            }
+            colProducts[j] = product
+        }
+
+        // Fill the productMatrix
+        for (i in 0 until n) {
+            for (j in 0 until m) {
+                val excludeCurrent = (rowProducts[i] * colProducts[j]) % mod
+                val currentVal = grid[i][j]
+                productMatrix[i][j] = (excludeCurrent * modInverse(currentVal, mod)) % mod
+            }
+        }
+
+        return productMatrix
+    }
+
+    private fun modInverse(a: Int, mod: Int): Long {
+        // Assuming 'a' and 'mod' are coprime, we can use Fermat's Little Theorem
+        // a^(mod-2) % mod is the modular inverse when mod is a prime
+        return power(a.toLong(), mod - 2, mod.toLong())
+    }
+
+    private fun power(x: Long, y: Int, p: Long): Long {
+        var x = x % p
+        var y = y
+        var res: Long = 1
+        while (y > 0) {
+            if (y and 1 != 0) res = (res * x) % p
+            y = y shr 1 // y = y/2
+            x = (x * x) % p
+        }
+        return res
+    }
+}"
+kotlin,compile_error,"Line 21: Char 17: error: operator '==' cannot be applied to 'Long' and 'Int'
+            if (fullCycles % 2 == 1 && bit % x == 0) sum += (1L shl (bit - 1))
+                ^",../questions/Medium\maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun findMaximumNumber(k: Long, x: Int): Long {
+        var left = 1L
+        var right = 1L
+        while (getSum(right, x) <= k) right *= 2
+        while (left < right) {
+            val mid = left + (right - left) / 2
+            if (getSum(mid, x) <= k) left = mid + 1
+            else right = mid
+        }
+        return left - 1
+    }
+
+    private fun getSum(n: Long, x: Int): Long {
+        var sum = 0L
+        var bit = 1
+        while (bit <= 64) {
+            val fullCycles = n / (1L shl bit)
+            val partialCycle = n % (1L shl bit) - (1L shl (bit - 1)) + 1
+            sum += (fullCycles / 2) * (1L shl (bit - 1))
+            if (fullCycles % 2 == 1 && bit % x == 0) sum += (1L shl (bit - 1))
+            if (partialCycle > 0 && bit % x == 0) sum += partialCycle
+            bit++
+        }
+        return sum
+    }
+}"
+kotlin,compile_error,"Line 3: Char 29: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public inline fun <T, K> Array<out TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections
+public inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> TypeVariable(K)): Grouping<Char, TypeVariable(K)> defined in kotlin.text
+public inline fun <T, K> Iterable<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections
+public inline fun <T, K> Sequence<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.sequences
+        val countMap = nums.groupingBy { it }.eachCount()
+                            ^
+Line 3: Char 42: error: unresolved reference: it
+        val countMap = nums.groupingBy { it }.eachCount()
+                                         ^
+Line 4: Char 41: error: unresolved reference: it
+        val maxCount = countMap.maxOf { it.value }
+                                        ^
+Line 7: Char 43: error: overload resolution ambiguity: 
+public final operator fun plus(other: Byte): Int defined in kotlin.Int
+public final operator fun plus(other: Double): Double defined in kotlin.Int
+public final operator fun plus(other: Float): Float defined in kotlin.Int
+public final operator fun plus(other: Int): Int defined in kotlin.Int
+public final operator fun plus(other: Long): Long defined in kotlin.Int
+public final operator fun plus(other: Short): Int defined in kotlin.Int
+        return maxOf(maxCount, (nums.size + uniqueValuesCount - 1) / uniqueValuesCount)
+                                          ^",../questions/Medium\minimum-number-of-groups-to-create-a-valid-assignment\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun minGroupsForValidAssignment(nums: IntArray): Int {
+        val countMap = nums.groupingBy { it }.eachCount()
+        val maxCount = countMap.maxOf { it.value }
+        val uniqueValuesCount = countMap.keys.size
+
+        return maxOf(maxCount, (nums.size + uniqueValuesCount - 1) / uniqueValuesCount)
+    }
+}"
+kotlin,compile_error,"Line 3: Char 28: error: unresolved reference. None of the following candidates is applicable because of receiver type mismatch: 
+public inline fun <T, K> Array<out TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections
+public inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> TypeVariable(K)): Grouping<Char, TypeVariable(K)> defined in kotlin.text
+public inline fun <T, K> Iterable<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.collections
+public inline fun <T, K> Sequence<TypeVariable(T)>.groupingBy(crossinline keySelector: (TypeVariable(T)) -> TypeVariable(K)): Grouping<TypeVariable(T), TypeVariable(K)> defined in kotlin.sequences
+        val freqMap = nums.groupingBy { it }.eachCount()
+                           ^
+Line 3: Char 41: error: unresolved reference: it
+        val freqMap = nums.groupingBy { it }.eachCount()
+                                        ^",../questions/Medium\minimum-number-of-operations-to-make-array-empty\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun minOperations(nums: IntArray): Int {
+        val freqMap = nums.groupingBy { it }.eachCount()
+        var operations = 0
+        var leftovers = 0
+
+        for (count in freqMap.values) {
+            operations += count / 3
+            leftovers += count % 3
+        }
+
+        return if (leftovers % 2 == 0) operations + leftovers / 2 else -1
+    }
+}"
+kotlin,compile_error,"Line 11: Char 56: error: type mismatch: inferred type is Int but Long was expected
+        for (i in 1..n) inverse[i] = pow(factorial[i], mod - 2, mod)
+                                                       ^",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun stringCount(n: Int): Int {
+        val mod = 1000000007
+        if (n < 4) return 0
+        val factorial = LongArray(n + 1)
+        factorial[0] = 1
+        for (i in 1..n) factorial[i] = factorial[i - 1] * i % mod
+
+        val inverse = LongArray(n + 1)
+        inverse[0] = 1
+        for (i in 1..n) inverse[i] = pow(factorial[i], mod - 2, mod)
+
+        fun binomial(n: Int, k: Int) = factorial[n] * inverse[k] % mod * inverse[n - k] % mod
+
+        var result = 0L
+        for (i in 4..n) {
+            val arrangements = binomial(26, 4) * binomial(i - 1, 3) % mod
+            val remainingPositions = pow(25L, (n - i).toLong(), mod)
+            result = (result + arrangements * remainingPositions % mod) % mod
+        }
+        return result.toInt()
+    }
+
+    private fun pow(base: Long, exponent: Long, mod: Int): Long {
+        var result = 1L
+        var b = base % mod
+        var e = exponent
+        while (e > 0) {
+            if (e and 1L != 0L) result = result * b % mod
+            e = e shr 1
+            b = b * b % mod
+        }
+        return result
+    }
+}"
+kotlin,compile_error,"Line 9: Char 51: error: no set method providing array access
+            if (nums[i] % 2 != nums[i - 1] % 2) dp[i] -= x
+                                                  ^",../questions/Medium\visit-array-positions-to-maximize-score\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun maxScore(nums: IntArray, x: Int): Long {
+        val n = nums.size
+        val dp = LongArray(n) { 0 }
+        dp[0] = nums[0].toLong()
+
+        for (i in 1 until n) {
+            dp[i] = dp[i - 1] + nums[i]
+            if (nums[i] % 2 != nums[i - 1] % 2) dp[i] -= x
+        }
+
+        var maxScore = dp[0]
+        for (score in dp) {
+            maxScore = maxOf(maxScore, score)
+        }
+
+        return maxScore
+    }
+}"
+kotlin,runtime_error,"Line 14: Exception in thread ""main"" java.lang.NumberFormatException: For input string: ""4179205230""",../questions/Hard\count-of-integers\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    private val MOD = 1_000_000_007
+
+    private fun digitSum(s: String): Int {
+        return s.sumOf { it - '0' }
+    }
+
+    private fun isGood(x: Int, minSum: Int, maxSum: Int): Boolean {
+        return digitSum(x.toString()) in minSum..maxSum
+    }
+
+    fun count(num1: String, num2: String, min_sum: Int, max_sum: Int): Int {
+        var count = 0
+        val start = num1.toInt()
+        val end = num2.toInt()
+        for (i in start..end) {
+            if (isGood(i, min_sum, max_sum)) {
+                count = (count + 1) % MOD
+            }
+        }
+        return count
+    }
+}"
+kotlin,runtime_error,"Line 7: Exception in thread ""main"" java.lang.NumberFormatException: For input string: ""9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999""",../questions/Hard\count-stepping-numbers-in-range\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    private val mod = 1000000007
+
+    fun countSteppingNumbers(low: String, high: String): Int {
+        var count = 0
+        val lowNum = low.toLong()
+        val highNum = high.toLong()
+
+        fun dfs(n: Long) {
+            if (n > highNum) return
+            if (n >= lowNum) count = (count + 1) % mod
+            val lastDigit = n % 10
+            if (lastDigit < 9) dfs(n * 10 + lastDigit + 1)
+            if (lastDigit > 0) dfs(n * 10 + lastDigit - 1)
+        }
+
+        if (lowNum == 0L) count++
+        for (i in 1..9) dfs(i.toLong())
+        return count
+    }
+}"
+kotlin,runtime_error,"Line 41: Exception in thread ""main"" java.lang.RuntimeException: Error when serializing long: -9223372036854775805 out of range [-(2^53-1), 2^53-1]",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun minimumCost(nums: IntArray, k: Int, dist: Int): Long {
+        val n = nums.size
+        val dp = Array(n + 1) { LongArray(k + 1) { Long.MAX_VALUE } }
+        dp[0][0] = 0
+        for (i in 1..n) {
+            for (j in 1..k) {
+                var minCost = Long.MAX_VALUE
+                for (l in maxOf(i - dist - 1, 0)..i - 1) {
+                    minCost = minOf(minCost, dp[l][j - 1] + nums[i - 1])
+                }
+                dp[i][j] = minCost
+            }
+        }
+        return dp[n][k]
+    }
+}"
+kotlin,runtime_error,"Line 42: Exception in thread ""main"" java.lang.RuntimeException: Error when serializing long: -9223372036854775797 out of range [-(2^53-1), 2^53-1]",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun minimumCost(nums: IntArray, k: Int, dist: Int): Long {
+        val n = nums.size
+        val dp = Array(k + 1) { LongArray(n + 1) { Long.MAX_VALUE } }
+        dp[0][0] = 0
+        for (i in 1..k) {
+            for (j in i..n) {
+                var minCost = Long.MAX_VALUE
+                for (l in j - 1 downTo i - 1) {
+                    if (j - l > dist && i != k) break
+                    minCost = minOf(minCost, dp[i - 1][l])
+                    dp[i][j] = minCost + nums[j - 1]
+                }
+            }
+        }
+        return dp[k][n]
+    }
+}"
+kotlin,runtime_error,"Line 8: Exception in thread ""main"" java.lang.ArrayIndexOutOfBoundsException: 3",../questions/Hard\greatest-common-divisor-traversal\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun canTraverseAllPairs(nums: IntArray): Boolean {
+        val n = nums.size
+        val parent = IntArray(n) { it }
+        val size = IntArray(n) { 1 }
+
+        fun find(x: Int): Int {
+            if (parent[x] != x) parent[x] = find(parent[x])
+            return parent[x]
+        }
+
+        fun union(x: Int, y: Int) {
+            var rootX = find(x)
+            var rootY = find(y)
+            if (rootX != rootY) {
+                if (size[rootX] < size[rootY]) {
+                    val temp = rootX
+                    rootX = rootY
+                    rootY = temp
+                }
+                parent[rootY] = rootX
+                size[rootX] += size[rootY]
+            }
+        }
+
+        val primes = Array<MutableList<Int>>(100001) { mutableListOf() }
+        for (i in 2..100000) {
+            if (primes[i].isEmpty()) {
+                for (j in i..100000 step i) {
+                    primes[j].add(i)
+                }
+            }
+        }
+
+        for (i in 0 until n) {
+            for (prime in primes[nums[i]]) {
+                if (primes[prime].isNotEmpty()) {
+                    union(i, primes[prime][0])
+                }
+                primes[prime][0] = i
+            }
+        }
+
+        val root = find(0)
+        for (i in 1 until n) {
+            if (find(i) != root) return false
+        }
+
+        return true
+    }
+}"
+kotlin,runtime_error,"Line 10: Exception in thread ""main"" java.lang.StringIndexOutOfBoundsException: String index out of range: 9",../questions/Hard\length-of-the-longest-valid-substring\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun longestValidSubstring(word: String, forbidden: List<String>): Int {
+        var maxLength = 0
+        var start = 0
+
+        while (start < word.length) {
+            var valid = true
+            var end = start
+            while (end <= word.length && valid) {
+                val currentSubstring = word.substring(start..end)
+                for (f in forbidden) {
+                    if (currentSubstring.contains(f)) {
+                        valid = false
+                        break
+                    }
+                }
+                if (valid) maxLength = maxOf(maxLength, currentSubstring.length)
+                end++
+            }
+            start++
+        }
+
+        return maxLength
+    }
+}"
+kotlin,runtime_error,"Line 4: Exception in thread ""main"" java.lang.ArrayIndexOutOfBoundsException: 5",../questions/Hard\maximum-number-of-groups-with-increasing-length\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun maxIncreasingGroups(usageLimits: List<Int>): Int {
+        val freq = IntArray(usageLimits.size + 1)
+        usageLimits.forEach { freq[it]++ }
+
+        var result = 0
+        var carryOver = 0
+        for (i in freq.indices) {
+            if (freq[i] == 0 && carryOver == 0) break
+            val total = freq[i] + carryOver
+            result++
+            carryOver = total - 1
+        }
+
+        return result
+    }
+}"
+kotlin,runtime_error,"Line 15: Exception in thread ""main"" java.lang.ArrayIndexOutOfBoundsException: 9",../questions/Hard\palindrome-rearrangement-queries\responses\Kotlin\response_kotlin_2_failed.json,"class Solution {
+    fun canMakePalindromeQueries(s: String, queries: Array<IntArray>): BooleanArray {
+        val n = s.length
+        val half = n / 2
+        val preSum = Array(n + 1) { IntArray(26) }
+        for (i in 1..n) {
+            preSum[i] = preSum[i - 1].clone()
+            ++preSum[i][s[i - 1] - 'a']
+        }
+
+        fun canFormPalindrome(a: Int, b: Int, c: Int, d: Int): Boolean {
+            var oddCount = 0
+            for (i in 0..25) {
+                val left = preSum[b + 1][i] - preSum[a][i]
+                val right = preSum[d + 1][i] - preSum[c][i]
+                if ((left + right) % 2 != 0) oddCount++
+            }
+            return oddCount / 2 <= ((b - a + 1) + (d - c + 1)) % 2
+        }
+
+        return BooleanArray(queries.size) { i ->
+            val (a, b, c, d) = queries[i]
+            canFormPalindrome(a, b, c + half, d + half)
+        }
+    }
+}"
+kotlin,runtime_error,"Line 14: Exception in thread ""main"" java.lang.ArrayIndexOutOfBoundsException: 3",../questions/Medium\decremental-string-concatenation\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun minimizeConcatenatedLength(words: Array<String>): Int {
+        val n = words.size
+        val dp = Array(n) { IntArray(n) }
+        for (i in words.indices) {
+            for (j in words.indices) {
+                dp[i][j] = if (words[i].last() == words[j].first()) words[i].length + words[j].length - 1
+                           else words[i].length + words[j].length
+            }
+        }
+        val memo = Array(n) { IntArray(1 shl n) { -1 } }
+        fun dfs(pos: Int, mask: Int): Int {
+            if (mask == (1 shl n) - 1) return 0
+            if (memo[pos][mask] != -1) return memo[pos][mask]
+            var ans = Int.MAX_VALUE
+            for (next in 0 until n) {
+                if (mask and (1 shl next) == 0) {
+                    val nextMask = mask or (1 shl next)
+                    val cost = if (pos == n) 0 else dp[pos][next]
+                    ans = minOf(ans, cost + dfs(next, nextMask))
+                }
+            }
+            memo[pos][mask] = ans
+            return ans
+        }
+        return dfs(n, 0)
+    }
+}"
+kotlin,runtime_error,"Line 8: Exception in thread ""main"" java.lang.ArrayIndexOutOfBoundsException: -1",../questions/Medium\distribute-candies-among-children-ii\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun distributeCandies(n: Int, limit: Int): Long {
+        val dp = Array(n + 1) { LongArray(limit + 1) }
+        for (i in 0..limit) dp[0][i] = 1L
+        for (i in 1..n) {
+            for (j in 1..limit) {
+                for (k in 0..minOf(i, j)) {
+                    dp[i][j] += dp[i - k][k - 1]
+                }
+            }
+        }
+        var sum = 0L
+        for (i in 1..limit) {
+            sum += dp[n][i]
+        }
+        return sum
+    }
+}"
+kotlin,runtime_error,"Line 8: Exception in thread ""main"" java.lang.StringIndexOutOfBoundsException: String index out of range: -1",../questions/Medium\find-the-longest-semi-repetitive-substring\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun longestSemiRepetitiveSubstring(s: String): Int {
+        var maxLen = 1
+        var i = 0
+        while (i < s.length) {
+            var j = i
+            var repeatCount = 0
+            while (j + 1 < s.length && (s[j + 1] == s[j] || s[j + 1] == s[j - 1].takeIf { j > i })) {
+                if (s[j + 1] == s[j]) repeatCount++
+                if (repeatCount > 1) break
+                j++
+            }
+            maxLen = maxOf(maxLen, j - i + 1 - repeatCount)
+            i = j + 1 - repeatCount
+        }
+        return maxLen
+    }
+}"
+kotlin,runtime_error,"Line 12: Exception in thread ""main"" java.lang.ArithmeticException: / by zero",../questions/Medium\maximum-number-of-alloys\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun maxNumberOfAlloys(n: Int, k: Int, budget: Int, composition: List<List<Int>>, stock: List<Int>, cost: List<Int>): Int {
+        var maxAlloys = 0
+        for (i in 0 until k) {
+            var totalCost = 0L
+            for (j in 0 until n) {
+                val needed = maxOf(0, composition[i][j] - stock[j])
+                totalCost += needed * cost[j]
+            }
+            if (totalCost <= budget) {
+                var low = 1
+                var high = (budget / totalCost).toInt()
+                while (low <= high) {
+                    val mid = low + (high - low) / 2
+                    var currentCost = 0L
+                    for (j in 0 until n) {
+                        val needed = maxOf(0, mid * composition[i][j] - stock[j])
+                        currentCost += needed * cost[j]
+                    }
+                    if (currentCost <= budget) {
+                        maxAlloys = maxOf(maxAlloys, mid)
+                        low = mid + 1
+                    } else {
+                        high = mid - 1
+                    }
+                }
+            }
+        }
+        return maxAlloys
+    }
+}"
+kotlin,runtime_error,"Line 9: Exception in thread ""main"" java.lang.ArrayIndexOutOfBoundsException: 892172933",../questions/Medium\maximum-sum-of-almost-unique-subarray\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun maxSum(nums: List<Int>, m: Int, k: Int): Long {
+        var maxSum = 0L
+        val window = IntArray(1000001)
+        var distinctCount = 0
+        var sum = 0L
+
+        for (i in 0 until k) {
+            if (window[nums[i]] == 0) distinctCount++
+            window[nums[i]]++
+            sum += nums[i]
+        }
+        if (distinctCount >= m) maxSum = sum
+
+        for (i in k until nums.size) {
+            sum += nums[i] - nums[i - k]
+            window[nums[i - k]]--
+            if (window[nums[i - k]] == 0) distinctCount--
+            if (window[nums[i]] == 0) distinctCount++
+            window[nums[i]]++
+
+            if (distinctCount >= m) maxSum = maxOf(maxSum, sum)
+        }
+
+        return maxSum
+    }
+}"
+kotlin,runtime_error,"Line 43: Exception in thread ""main"" java.lang.RuntimeException: Error when serializing long: 9223372036854775807 out of range [-(2^53-1), 2^53-1]",../questions/Medium\minimum-cost-to-make-array-equalindromic\responses\Kotlin\response_kotlin_1_failed.json,"class Solution {
+    fun minimumCost(nums: IntArray): Long {
+        fun isPalindrome(n: Int): Boolean {
+            return n.toString() == n.toString().reversed()
+        }
+
+        val sortedNums = nums.sorted()
+        var minCost = Long.MAX_VALUE
+        val minNum = sortedNums.first()
+        val maxNum = sortedNums.last()
+
+        for (num in minNum..maxNum) {
+            if (isPalindrome(num)) {
+                val cost = nums.fold(0L) { acc, current ->
+                    acc + kotlin.math.abs(current - num).toLong()
+                }
+                minCost = kotlin.math.min(minCost, cost)
+            }
+        }
+
+        return minCost
+    }
+}"
+kotlin,runtime_error,"Line 19: Exception in thread ""main"" java.lang.NullPointerException",../questions/Medium\shortest-string-that-contains-three-strings\responses\Kotlin\response_kotlin_0_failed.json,"class Solution {
+    fun minimumString(a: String, b: String, c: String): String {
+        val substrings = listOf(a, b, c)
+
+        fun containsAllSubstrings(s: String): Boolean =
+            substrings.all { sub -> s.contains(sub) }
+
+        fun mergeTwoStrings(s1: String, s2: String): String {
+            for (i in s1.indices) {
+                if (s2.startsWith(s1.substring(i))) {
+                    return s1.substring(0, i) + s2
+                }
+            }
+            return s1 + s2
+        }
+
+        var result = (substrings + substrings.flatMap { s1 ->
+            substrings.map { s2 -> mergeTwoStrings(s1, s2) }
+        }).filter { containsAllSubstrings(it) }.minByOrNull { it.length }!!
+
+        for (perm in substrings.permutations()) {
+            val temp = perm.reduce(::mergeTwoStrings)
+            if (containsAllSubstrings(temp) && temp.length <= result.length) {
+                result = if (temp.length < result.length) temp else minOf(temp, result)
+            }
+        }
+
+        return result
+    }
+
+    private fun <T> List<T>.permutations(): List<List<T>> {
+        if (this.size == 1) return listOf(this)
+        val perms = mutableListOf<List<T>>()
+        val toInsert = this[0]
+        for (perm in this.drop(1).permutations()) {
+            for (i in 0..perm.size) {
+                val newPerm = perm.toMutableList()
+                newPerm.add(i, toInsert)
+                perms.add(newPerm)
+            }
+        }
+        return perms
+    }
+}"

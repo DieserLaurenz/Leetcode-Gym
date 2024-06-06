@@ -1,0 +1,247 @@
+Language,Error Type,Message,File Path,Code
+typescript,compile_error,"Line 6: Char 5: error TS2322: Type 'bigint' is not assignable to type 'number'.
+Line 6: Char 12: error TS2365: Operator '+' cannot be applied to types 'number' and 'bigint'.",../questions/Hard\apply-operations-on-array-to-maximize-sum-of-squares\responses\TypeScript\response_typescript_0_failed.json,"function maxSum(nums: number[], k: number): number {
+  const mod = 1e9 + 7;
+  nums.sort((a, b) => b - a); // Sort the array in descending order
+  let sum = 0;
+  for (let i = 0; i < k; i++) {
+    sum = (sum + BigInt(nums[i]) ** BigInt(2)) % BigInt(mod);
+  }
+  return Number(sum);
+};"
+typescript,compile_error,"Line 14: Char 13: error TS2365: Operator '>=' cannot be applied to types 'BigInt' and 'bigint'.
+Line 14: Char 31: error TS2365: Operator '<=' cannot be applied to types 'BigInt' and 'bigint'.
+Line 18: Char 13: error TS2365: Operator '>' cannot be applied to types 'BigInt' and 'bigint'.
+Line 20: Char 27: error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+Line 20: Char 27: error TS2365: Operator '%' cannot be applied to types 'BigInt' and 'bigint'.
+Line 21: Char 26: error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+Line 21: Char 26: error TS2365: Operator '*' cannot be applied to types 'BigInt' and 'bigint'.",../questions/Hard\count-stepping-numbers-in-range\responses\TypeScript\response_typescript_1_failed.json,"function countSteppingNumbers(low: string, high: string): number {
+    const MOD = 1e9 + 7;
+    let result = 0;
+    const lowNum = BigInt(low);
+    const highNum = BigInt(high);
+
+    const queue: BigInt[] = [];
+    for (let i = 1; i <= 9; ++i) queue.push(BigInt(i));
+
+    if (lowNum <= 0 && highNum >= 0) result += 1; // Include 0 if in range
+
+    while (queue.length > 0) {
+        const curr = queue.shift()!;
+        if (curr >= lowNum && curr <= highNum) {
+            result = (result + 1) % MOD;
+        }
+
+        if (curr > highNum) continue;
+
+        const lastDigit = curr % 10n;
+        const nextBase = curr * 10n;
+
+        if (lastDigit > 0n) queue.push(nextBase + lastDigit - 1n);
+        if (lastDigit < 9n) queue.push(nextBase + lastDigit + 1n);
+    }
+
+    return result;
+}"
+typescript,compile_error,"Line 2: Char 5: error TS2322: Type '{ num: number; index: number; }[]' is not assignable to type 'number[]'.
+Line 7: Char 42: error TS2339: Property 'num' does not exist on type 'number'.
+Line 7: Char 60: error TS2339: Property 'num' does not exist on type 'number'.
+Line 8: Char 33: error TS2339: Property 'index' does not exist on type 'number'.
+Line 8: Char 53: error TS2339: Property 'index' does not exist on type 'number'.",../questions/Medium\minimum-absolute-difference-between-elements-with-constraint\responses\TypeScript\response_typescript_1_failed.json,"function minAbsoluteDifference(nums: number[], x: number): number {
+    nums = nums.map((num, index) => ({ num, index })).sort((a, b) => a.num - b.num);
+    let minDiff = Infinity;
+    let left = 0, right = 1;
+
+    while (right < nums.length) {
+        const diff = Math.abs(nums[left].num - nums[right].num);
+        if (Math.abs(nums[left].index - nums[right].index) >= x) {
+            minDiff = Math.min(minDiff, diff);
+            if (minDiff === 0) break; // Early exit if minimum possible difference found
+            left++; // Move left pointer to try and find a smaller difference
+        } else {
+            right++; // Move right pointer to maintain the minimum distance condition
+        }
+        if (left === right) right++; // Ensure right is always ahead of left
+    }
+
+    return minDiff;
+};"
+typescript,runtime_error,"        if (!tight && dp[index][sum][tight] != -1) return dp[index][sum][tight];
+                                    ^
+TypeError: Cannot read properties of undefined (reading '0')
+    Line 6: Char 37 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)
+    Line 10: Char 20 in solution.ts (dfs)",../questions/Hard\count-of-integers\responses\TypeScript\response_typescript_2_failed.json,"function count(num1: string, num2: string, min_sum: number, max_sum: number): number {
+    const MOD = 1e9 + 7;
+
+    function dfs(index: number, tight: number, sum: number, num: string, dp: number[][][]): number {
+        if (index == num.length) return sum >= min_sum && sum <= max_sum ? 1 : 0;
+        if (!tight && dp[index][sum][tight] != -1) return dp[index][sum][tight];
+        let ans = 0;
+        let limit = tight ? parseInt(num[index]) : 9;
+        for (let digit = 0; digit <= limit; digit++) {
+            ans += dfs(index + 1, tight && digit == limit ? 1 : 0, sum + digit, num, dp);
+            ans %= MOD;
+        }
+        if (!tight) dp[index][sum][tight] = ans;
+        return ans;
+    }
+
+    function solve(num: string): number {
+        let dp: number[][][] = Array.from({ length: num.length }, () => 
+                                         Array.from({ length: max_sum + 1 }, () => 
+                                                    Array(2).fill(-1)));
+        return dfs(0, 1, 0, num, dp);
+    }
+
+    let num2Ans = solve(num2);
+    let num1Minus1 = (BigInt(num1) - BigInt(1)).toString();
+    let num1Ans = num1Minus1 == ""0"" ? 0 : solve(num1Minus1);
+    return (num2Ans - num1Ans + MOD) % MOD;
+}"
+typescript,runtime_error,"             throw new TypeError(__serialize__(ret) + "" is not valid value for the expected return type long"");
+                   ^
+TypeError: null is not valid value for the expected return type long
+    Line 35: Char 20 in solution.ts (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 17: Char 26 in solution.ts (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\TypeScript\response_typescript_2_failed.json,"function minimumCost(nums: number[], k: number, dist: number): number {
+    let dp = Array.from({length: k+1}, () => Array(nums.length).fill(Infinity));
+    dp[0] = Array(nums.length).fill(0);
+
+    for (let i = 1; i <= k; i++) {
+        for (let j = i-1; j < nums.length; j++) {
+            let windowMin = Infinity;
+            for (let m = j; m >= i-1 && j-m <= dist; m--) {
+                windowMin = Math.min(windowMin, nums[m]);
+                dp[i][j] = Math.min(dp[i][j], dp[i-1][m-1] + windowMin);
+            }
+        }
+    }
+
+    return dp[k][nums.length-1];
+}"
+typescript,runtime_error,"            cost[i][j] = len % 2 === 0 ? 0 : Math.min(cost[i + 1][j], cost[i][j - 1]);
+                                                                 ^
+TypeError: Cannot read properties of undefined (reading '4')
+    Line 9: Char 66 in solution.ts (minimumChanges)
+    Line 50: Char 19 in solution.ts (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 39: Char 26 in solution.ts (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49",../questions/Hard\minimum-changes-to-make-k-semi-palindromes\responses\TypeScript\response_typescript_0_failed.json,"function minimumChanges(s: string, k: number): number {
+    const n = s.length;
+    const dp = Array.from({ length: n + 1 }, () => Array(k + 1).fill(Infinity));
+    const cost = Array.from({ length: n }, () => Array(n).fill(0));
+
+    for (let len = 1; len <= n; len++) {
+        for (let i = 0; i + len <= n; i++) {
+            let j = i + len - 1;
+            cost[i][j] = len % 2 === 0 ? 0 : Math.min(cost[i + 1][j], cost[i][j - 1]);
+            for (let d = 1; d < len; d++) {
+                if (len % d === 0) {
+                    let changes = 0;
+                    for (let k = 0; k < d; k++) {
+                        let freq = Array(26).fill(0);
+                        let maxFreq = 0;
+                        for (let l = i + k; l <= j; l += d) {
+                            const charIndex = s.charCodeAt(l) - 'a'.charCodeAt(0);
+                            maxFreq = Math.max(maxFreq, ++freq[charIndex]);
+                        }
+                        changes += (len / d) - maxFreq;
+                    }
+                    cost[i][j] = Math.min(cost[i][j], changes);
+                }
+            }
+        }
+    }
+
+    dp[0][0] = 0;
+    for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= k; j++) {
+            for (let l = 0; l < i; l++) {
+                dp[i][j] = Math.min(dp[i][j], dp[l][j - 1] + cost[l][i - 1]);
+            }
+        }
+    }
+
+    return dp[n][k];
+}"
+typescript,runtime_error,"             throw new TypeError(__serialize__(ret) + "" is not valid value for the expected return type long"");
+                   ^
+TypeError: null is not valid value for the expected return type long
+    Line 29: Char 20 in solution.ts (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 15: Char 26 in solution.ts (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49",../questions/Medium\largest-element-in-an-array-after-merge-operations\responses\TypeScript\response_typescript_2_failed.json,"function maxArrayValue(nums: number[]): number {
+    while (nums.length > 1) {
+        let maxSumIndex = 0;
+        for (let i = 1; i < nums.length; i++) {
+            if (nums[i - 1] <= nums[i]) {
+                maxSumIndex = i;
+                break;
+            }
+        }
+        nums[maxSumIndex] += nums[maxSumIndex - 1];
+        nums.splice(maxSumIndex - 1, 1);
+    }
+    return nums[0];
+};"
+typescript,runtime_error,"            if (offers[j][1] + 1 == i) { // If the offer ends at the current house
+                         ^
+TypeError: Cannot read properties of undefined (reading '1')
+    Line 17: Char 26 in solution.ts (maximizeTheProfit)
+    Line 37: Char 19 in solution.ts (Object.<anonymous>)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 26: Char 26 in solution.ts (Object.<anonymous>)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49",../questions/Medium\maximize-the-profit-as-the-salesman\responses\TypeScript\response_typescript_0_failed.json,"function maximizeTheProfit(n: number, offers: number[][]): number {
+    offers.sort((a, b) => a[1] - b[1]); // Sort offers based on the end index
+    const dp = new Array(n + 1).fill(0); // DP array to store max profit up to ith house
+
+    let offerIndex = 0; // Pointer to iterate over offers
+
+    for (let i = 1; i <= n; i++) {
+        dp[i] = dp[i - 1]; // Initially, max profit up to i houses is same as max profit up to i-1 houses
+
+        // Process all offers whose end house is i-1
+        while (offerIndex < offers.length && offers[offerIndex][1] < i) {
+            offerIndex++;
+        }
+
+        // Check for offers that end at the current house (i-1) and update DP accordingly
+        for (let j = 0; j <= offerIndex; j++) {
+            if (offers[j][1] + 1 == i) { // If the offer ends at the current house
+                const [start, , gold] = offers[j];
+                dp[i] = Math.max(dp[i], dp[start] + gold); // Update DP: max of current or taking this offer
+            }
+        }
+    }
+
+    return dp[n]; // Max profit for n houses
+};"

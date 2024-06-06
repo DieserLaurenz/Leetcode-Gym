@@ -1,9 +1,16 @@
 import matplotlib
 import pandas as pd
 import os
+import locale
 
 matplotlib.use('Agg')  # Or 'TkAgg', 'Qt5Agg', etc., based on your environment
 import matplotlib.pyplot as plt
+
+# Setze Arial als Standard-Schriftart
+#matplotlib.rcParams['font.family'] = 'Arial'
+
+# Lokale Einstellungen auf Deutsch setzen, um Kommas als Dezimalzeichen zu verwenden
+locale.setlocale(locale.LC_NUMERIC, 'de_DE')
 
 
 def create_solved_and_total_problems_ranking(df):
@@ -64,27 +71,31 @@ def count_errors(df):
 
 
 def save_count_error_plot(df, difficulty_path):
-    # Convert counts to percentages
+    # Daten in Prozent umrechnen
     df_pivot = df.pivot(index='Language', columns='Error Type', values='Count').fillna(0)
     df_percent = df_pivot.div(df_pivot.sum(axis=1), axis=0) * 100
 
-    # Optional: sort by the total count if you prefer
+    # Optional: Sortierung nach Gesamtzahl der Fehler, falls gewünscht
     df_percent = df_percent.sort_values(by=df_percent.columns.tolist()).fillna(0)
 
-    # Create a stacked bar chart
-    df_percent.plot(kind='bar', stacked=True, figsize=(10, 7))
+    # Erstellung eines gestapelten Balkendiagramms
+    ax = df_percent.plot(kind='bar', stacked=True, figsize=(10, 7), colormap='viridis')
 
-    plt.title('Programming Errors by Language')
-    plt.xlabel('Programming Language')
-    plt.ylabel('Percentage of Errors')
+    # Titel entfernen und Achsenbeschriftungen auf Deutsch übersetzen
+    plt.xlabel('Programmiersprache', fontsize=12)
+    plt.ylabel('Anteil der Fehlertypen (%)', fontsize=12)
+
     plt.xticks(rotation=45)
-    plt.legend(title='Error Type')
+
+    # Umkehrung der Reihenfolge der Legende
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles[::-1], labels[::-1], title='Fehlertyp', loc='upper right', bbox_to_anchor=(1, 1))
 
     plt.tight_layout()
 
-    # Save the plot to a file
-    plt.savefig(f'{difficulty_path}/error_analysis_chart.png')
-
+    # Speichern des Plots mit minimalem Rand
+    plt.savefig(f'{difficulty_path}/error_analysis_chart.png', bbox_inches='tight', pad_inches=0.1)
+    plt.close()
 
 
 def mean_runtime_percentiles(df):
@@ -134,60 +145,102 @@ def save_count_success_attempt(df, difficulty_folder_path):
     plt.savefig(f'{difficulty_folder_path}/count_success_attempt.png')
 
 
-def save_total_plot(data, filename_prefix):
-    # Schwierigkeitsgrade und deren relevanten Spalten in der Datenstruktur
+
+def save_solved_plot(data, filename_prefix):
     categories = {
-        'Easy': ('Total Easy', 'Solved Easy'),
-        'Medium': ('Total Medium', 'Solved Medium'),
-        'Hard': ('Total Hard', 'Solved Hard')
+        'Einfach': ('Total Easy', 'Solved Easy'),
+        'Mittelschwer': ('Total Medium', 'Solved Medium'),
+        'Schwer': ('Total Hard', 'Solved Hard')
+    }
+
+    german_labels = {
+        'Einfach': 'einfache',
+        'Mittelschwer': 'mittelschwere',
+        'Schwer': 'schwere'
     }
     
+    paths = {
+        'Einfach': 'Easy',
+        'Mittelschwer': 'Medium',
+        'Schwer': 'Hard'
+    }
+    
+    bar_color = 'darkgrey'
+    
     for difficulty, (total_col, solved_col) in categories.items():
-        # Berechnung des Prozentsatzes der gelösten Probleme pro Kategorie
         data[f'Solved {difficulty} Percentage'] = (data[solved_col] / data[total_col]) * 100
-
-        # Sortieren der Daten absteigend nach dem gelösten Prozentsatz
         sorted_data = data.sort_values(by=f'Solved {difficulty} Percentage', ascending=False)
-
-        # Erstellung des Diagramms für die aktuelle Kategorie
+        
         plt.figure(figsize=(12, 8))
-        colors = plt.cm.viridis(sorted_data[f'Solved {difficulty} Percentage'] / 100)
-        bars = plt.bar(sorted_data['Language'], sorted_data[f'Solved {difficulty} Percentage'], color=colors)
-        plt.ylabel(f'Prozentsatz der gelösten {difficulty}-Probleme (%)', fontsize=12)
-        plt.title(f'Prozentsatz der gelösten {difficulty}-Probleme nach Programmiersprache', fontsize=14)
+        bars = plt.bar(sorted_data['Language'], sorted_data[f'Solved {difficulty} Percentage'], color=bar_color)
+        plt.ylabel(f'Gelöste {german_labels[difficulty]} Probleme (%)', fontsize=12)
+        plt.xlabel('Programmiersprache', fontsize=12)
         plt.xticks(rotation=45, ha='right')
-        plt.ylim(0, 100)  # Setzen der Y-Achse von 0% bis 100%
+        plt.ylim(0, 100)
         plt.grid(False)
         
         for bar in bars:
-            plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5, f'{bar.get_height():.1f}%', 
+            height = bar.get_height()
+            plt.text(bar.get_x() + bar.get_width()/2, height + 0.5, f'{height:.2f}'.replace('.', ','), 
                      va='bottom', ha='center', fontsize=10, color='black')
         
-        # Speichern des Diagramms
-        plt.savefig(f'{filename_prefix}_{difficulty.lower()}.png')
+        plt.savefig(f'../results/{paths[difficulty]}/{filename_prefix}_{difficulty.lower()}.png', bbox_inches='tight', pad_inches=0.1)
         plt.close()
 
-
     data['Solved Percentage'] = (data['Solved Problems'] / data['Total Problems']) * 100
-
-    # Plotting
+    
     plt.figure(figsize=(12, 8))
-    colors = plt.cm.viridis(data['Solved Percentage'] / 100)
-    bars = plt.bar(data['Language'], data['Solved Percentage'], color=colors)
-    plt.ylabel('Prozentsatz der gelösten Probleme (%)', fontsize=12)
-    plt.title('Prozentsatz der gelösten Probleme nach Programmiersprache', fontsize=14)
+    bars = plt.bar(data['Language'], data['Solved Percentage'], color=bar_color)
+    plt.ylabel('Gelöste Probleme (%)', fontsize=12)
+    plt.xlabel('Programmiersprache', fontsize=12)
     plt.xticks(rotation=45, ha='right')
-    plt.ylim(0, 100)  # Setzen der Y-Achse von 0% bis 100%
+    plt.ylim(0, 100)
     plt.grid(False)
+    
     for bar in bars:
-        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5, f'{bar.get_height():.1f}%', 
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, height + 0.5, f'{height:.2f}'.replace('.', ','), 
                  va='bottom', ha='center', fontsize=10, color='black')
-    plt.savefig(f"{filename_prefix}.png")
+    plt.savefig("../results/Total/" + f"{filename_prefix}_total.png", bbox_inches='tight', pad_inches=0.1)
     plt.close()
 
-# Beispiel für die Verwendung der Funktion
-# save_total_plot(data_frame, 'plot_output')
+def save_runtime_and_memory_plot(runtime_averages, memory_averages):
+    
+    bar_color = 'darkgrey'
+    upper_limit = 102  # Maximum y-axis value
+    buffer_space = 5   # Space below the graph edge for text
 
+    plt.figure(figsize=(12, 8))
+    bars = plt.bar(runtime_averages.index, runtime_averages['Runtime Percentile'], color=bar_color)
+    plt.ylabel('Durchschnittliches Laufzeitperzentil (%)', fontsize=12)
+    plt.xlabel('Programmiersprache', fontsize=12)
+    plt.xticks(rotation=45, ha='right')
+    plt.ylim(0, upper_limit)
+    plt.grid(False)
+
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, height + 0.5, f'{height:.2f}'.replace('.', ','), 
+                 va='bottom', ha='center', fontsize=10, color='black')
+    
+    plt.savefig("../results/Total/total_runtime_averages.png", bbox_inches='tight', pad_inches=0.1)
+    plt.close()
+
+    plt.figure(figsize=(12, 8))
+    bars = plt.bar(memory_averages.index, memory_averages['Memory Percentile'], color=bar_color)
+    plt.ylabel('Durchschnittliches Speicherperzentil (%)', fontsize=12)
+    plt.xlabel('Programmiersprache', fontsize=12)
+    plt.xticks(rotation=45, ha='right')
+    plt.ylim(0, upper_limit)
+    plt.grid(False)
+
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, height + 0.5, f'{height:.2f}'.replace('.', ','), 
+                 va='bottom', ha='center', fontsize=10, color='black')
+    
+    plt.savefig("../results/Total/total_memory_averages.png", bbox_inches='tight', pad_inches=0.1)
+    plt.close()
 
 
 def run_analysis():
@@ -219,9 +272,9 @@ def run_analysis():
         memory_averages = mean_memory_percentiles(filtered_df)
         memory_averages.to_csv(f"{difficulty_folder_path}/memory_analysis.csv")
 
-        percentage_solutions_df = percentage_success_attempts(filtered_df)
-        print(percentage_solutions_df)
-        save_count_success_attempt(percentage_solutions_df, difficulty_folder_path)
+        #percentage_solutions_df = percentage_success_attempts(filtered_df)
+        #print(percentage_solutions_df)
+        #save_count_success_attempt(percentage_solutions_df, difficulty_folder_path)
 
 
     difficulty_folder_path = f"../results/Total"
@@ -242,6 +295,8 @@ def run_analysis():
     print(percentage_solutions_df)
     save_count_success_attempt(percentage_solutions_df, difficulty_folder_path)
 
-    save_total_plot(ranking_df, 'Total')
+    save_solved_plot(ranking_df, 'solved_problems')
+
+    save_runtime_and_memory_plot(runtime_averages, memory_averages)
 
 run_analysis()

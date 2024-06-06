@@ -1,0 +1,2139 @@
+Language,Error Type,Message,File Path,Code
+swift,compile_error,"Line 16: Char 27: error: immutable value 'roundedAmount' may only be initialized once in solution.swift
+            roundedAmount = purchaseAmount + 5
+                          ^",../questions/Easy\account-balance-after-rounded-purchase\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func accountBalanceAfterPurchase(_ purchaseAmount: Int) -> Int {
+        // Find the nearest multiple of 10, choosing the larger one in case of a tie
+        let remainder = purchaseAmount % 10
+        let roundedAmount: Int
+        if remainder == 0 {
+            roundedAmount = purchaseAmount
+        } else if remainder <= 5 {
+            roundedAmount = purchaseAmount - remainder
+        } else {
+            roundedAmount = purchaseAmount + (10 - remainder)
+        }
+
+        // If exactly halfway, choose the larger multiple
+        if remainder == 5 {
+            roundedAmount = purchaseAmount + 5
+        }
+
+        // Subtract the rounded amount from the initial balance
+        return 100 - roundedAmount
+    }
+}"
+swift,compile_error,"Line 12: Char 18: error: single-quoted string literal found, use '""' in solution.swift
+            case 'L':
+                 ^~~
+Line 14: Char 18: error: single-quoted string literal found, use '""' in solution.swift
+            case 'R':
+                 ^~~
+Line 16: Char 18: error: single-quoted string literal found, use '""' in solution.swift
+            case '_':
+                 ^~~",../questions/Easy\furthest-point-from-origin\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func furthestDistanceFromOrigin(_ moves: String) -> Int {
+        // Count of '_' characters which can be used as either 'L' or 'R'
+        var underscoreCount = 0
+        // Current position from the origin
+        var currentPosition = 0
+        // Maximum distance from the origin
+        var maxDistance = 0
+        
+        for move in moves {
+            switch move {
+            case 'L':
+                currentPosition -= 1
+            case 'R':
+                currentPosition += 1
+            case '_':
+                underscoreCount += 1
+            default:
+                break
+            }
+            
+            // Update maxDistance based on the absolute current position
+            maxDistance = max(maxDistance, abs(currentPosition))
+        }
+        
+        // The furthest distance can be achieved by using all '_' as the move that maximizes the distance from the origin
+        // Either all to the left or all to the right, depending on where we are relative to the origin
+        return maxDistance + underscoreCount
+    }
+}"
+swift,compile_error,"Line 25: Char 88: error: no exact matches in call to instance method 'distance' in solution.swift
+                       source.distance(from: source.startIndex, offsetBy: i) <= source.distance(from: range.lowerBound, offsetBy: 0),
+                                                                                       ^
+Line 25: Char 39: error: incorrect argument label in call (have 'from:offsetBy:', expected 'from:to:') in solution.swift
+                       source.distance(from: source.startIndex, offsetBy: i) <= source.distance(from: range.lowerBound, offsetBy: 0),
+                                      ^                         ~~~~~~~~
+Line 25: Char 75: error: cannot convert value of type 'Int' to expected argument type 'String.Index' in solution.swift
+                       source.distance(from: source.startIndex, offsetBy: i) <= source.distance(from: range.lowerBound, offsetBy: 0),
+                                                                          ^
+Line 26: Char 108: error: cannot convert value of type 'String.Index' to expected argument type 'Int' in solution.swift
+                       let targetRange = target.range(of: changed[original.index(of: original, offsetBy: 0)!], options: [], range: j < n ? (target.index(target.startIndex, offsetBy: j)..<target.endIndex) : nil),
+                                                                                                           ^
+Line 26: Char 81: error: extraneous argument label 'of:' in call in solution.swift
+                       let targetRange = target.range(of: changed[original.index(of: original, offsetBy: 0)!], options: [], range: j < n ? (target.index(target.startIndex, offsetBy: j)..<target.endIndex) : nil),
+                                                                                ^~~~~
+Line 26: Char 86: error: cannot convert value of type 'String' to expected argument type 'String.Index' in solution.swift
+                       let targetRange = target.range(of: changed[original.index(of: original, offsetBy: 0)!], options: [], range: j < n ? (target.index(target.startIndex, offsetBy: j)..<target.endIndex) : nil),
+                                                                                     ^
+Line 26: Char 108: error: cannot force unwrap value of non-optional type 'String.Index' in solution.swift
+                       let targetRange = target.range(of: changed[original.index(of: original, offsetBy: 0)!], options: [], range: j < n ? (target.index(target.startIndex, offsetBy: j)..<target.endIndex) : nil),
+                                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+Line 27: Char 88: error: no exact matches in call to instance method 'distance' in solution.swift
+                       target.distance(from: target.startIndex, offsetBy: j) <= target.distance(from: targetRange.lowerBound, offsetBy: 0) {
+                                                                                       ^
+Line 27: Char 39: error: incorrect argument label in call (have 'from:offsetBy:', expected 'from:to:') in solution.swift
+                       target.distance(from: target.startIndex, offsetBy: j) <= target.distance(from: targetRange.lowerBound, offsetBy: 0) {
+                                      ^                         ~~~~~~~~
+Line 27: Char 75: error: cannot convert value of type 'Int' to expected argument type 'String.Index' in solution.swift
+                       target.distance(from: target.startIndex, offsetBy: j) <= target.distance(from: targetRange.lowerBound, offsetBy: 0) {
+                                                                          ^",../questions/Hard\minimum-cost-to-convert-string-ii\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func minimumCost(_ source: String, _ target: String, _ original: [String], _ changed: [String], _ cost: [Int]) -> Int {
+        let n = source.count
+        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n + 1), count: n + 1)
+        dp[0][0] = 0
+
+        let sChars = Array(source)
+        let tChars = Array(target)
+
+        var replacements = [String: Int]()
+        for i in 0..<original.count {
+            replacements[original[i], default: Int.max] = min(replacements[original[i], default: Int.max], cost[i])
+        }
+
+        for i in 0...n {
+            for j in 0...n {
+                if i > 0 {
+                    dp[i][j] = min(dp[i][j], dp[i - 1][j] + (j > 0 && sChars[i - 1] == tChars[j - 1] ? 0 : Int.max / 3))
+                }
+                if j > 0 {
+                    dp[i][j] = min(dp[i][j], dp[i][j - 1] + Int.max / 3)
+                }
+                for (original, changeCost) in replacements {
+                    if let range = source.range(of: original, options: [], range: i < n ? (source.index(source.startIndex, offsetBy: i)..<source.endIndex) : nil),
+                       source.distance(from: source.startIndex, offsetBy: i) <= source.distance(from: range.lowerBound, offsetBy: 0),
+                       let targetRange = target.range(of: changed[original.index(of: original, offsetBy: 0)!], options: [], range: j < n ? (target.index(target.startIndex, offsetBy: j)..<target.endIndex) : nil),
+                       target.distance(from: target.startIndex, offsetBy: j) <= target.distance(from: targetRange.lowerBound, offsetBy: 0) {
+                        let nextSourceIndex = source.distance(from: source.startIndex, to: range.upperBound)
+                        let nextTargetIndex = target.distance(from: target.startIndex, to: targetRange.upperBound)
+                        dp[nextSourceIndex][nextTargetIndex] = min(dp[nextSourceIndex][nextTargetIndex], dp[i][j] + changeCost)
+                    }
+                }
+            }
+        }
+
+        return dp[n][n] < Int.max / 2 ? dp[n][n] : -1
+    }
+}"
+swift,compile_error,"Line 7: Char 28: error: cannot convert value of type 'DefaultIndices<String>.Element' (aka 'String.Index') to expected argument type 'Int' in solution.swift
+            let c = sArray[i].asciiValue! - Character(""a"").asciiValue!
+                           ^
+Line 9: Char 27: error: cannot convert value of type 'DefaultIndices<String>.Element' (aka 'String.Index') to expected argument type 'Int' in solution.swift
+                prefixSum[i + 1][j] = prefixSum[i][j] + (j == c ? 1 : 0)
+                          ^
+Line 9: Char 49: error: cannot convert value of type 'DefaultIndices<String>.Element' (aka 'String.Index') to expected argument type 'Int' in solution.swift
+                prefixSum[i + 1][j] = prefixSum[i][j] + (j == c ? 1 : 0)
+                                                ^",../questions/Hard\palindrome-rearrangement-queries\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func canMakePalindromeQueries(_ s: String, _ queries: [[Int]]) -> [Bool] {
+        let sArray = Array(s)
+        var prefixSum = Array(repeating: Array(repeating: 0, count: 26), count: s.count + 1)
+
+        for i in s.indices {
+            let c = sArray[i].asciiValue! - Character(""a"").asciiValue!
+            for j in 0..<26 {
+                prefixSum[i + 1][j] = prefixSum[i][j] + (j == c ? 1 : 0)
+            }
+        }
+
+        return queries.map { query -> Bool in
+            let (ai, bi, ci, di) = (query[0], query[1], query[2], query[3])
+            var oddCount = 0
+            for j in 0..<26 {
+                let left = prefixSum[bi + 1][j] - prefixSum[ai][j]
+                let right = prefixSum[di + 1][j] - prefixSum[ci][j]
+                if (left + right) % 2 != 0 {
+                    oddCount += 1
+                }
+            }
+            return oddCount <= 2
+        }
+    }
+}"
+swift,compile_error,"Line 17: Char 23: error: left side of mutating operator isn't mutable: 'i' is a 'let' constant in solution.swift
+                    i += 1 // Skip the next index as it's part of a handled pair
+                    ~ ^",../questions/Medium\apply-operations-to-make-two-strings-equal\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func minOperations(_ s1: String, _ s2: String, _ x: Int) -> Int {
+        let n = s1.count
+        var mismatches = 0
+        var mismatchedPairs = 0 // Count of adjacent mismatched pairs
+        
+        // Convert strings to arrays for easier access
+        let arr1 = Array(s1)
+        let arr2 = Array(s2)
+        
+        // Count mismatches and adjacent mismatched pairs
+        for i in 0..<n-1 {
+            if arr1[i] != arr2[i] {
+                mismatches += 1
+                if arr1[i+1] != arr2[i+1] && arr1[i] != arr1[i+1] {
+                    mismatchedPairs += 1
+                    i += 1 // Skip the next index as it's part of a handled pair
+                }
+            }
+        }
+        // Handle the last character separately if not already compared
+        if arr1[n-1] != arr2[n-1] && n % 2 == 1 {
+            mismatches += 1
+        }
+        
+        // If mismatches are odd, return -1
+        if mismatches % 2 != 0 {
+            return -1
+        }
+        
+        // Calculate the cost
+        var cost = 0
+        // Cost for flipping adjacent mismatched pairs
+        cost += mismatchedPairs
+        // Remaining mismatches to be handled by the first operation
+        let remainingMismatches = (mismatches - 2*mismatchedPairs) / 2
+        // Cost for flipping non-adjacent pairs or single mismatches
+        cost += remainingMismatches * x
+        
+        return cost
+    }
+}"
+swift,compile_error,"Line 11: Char 83: error: expected ',' separator in solution.swift
+        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)
+                                                                                  ^
+Line 11: Char 83: error: expected expression in list of expressions in solution.swift
+        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)
+                                                                                  ^
+Line 11: Char 81: error: '_' can only appear in a pattern or on the left side of an assignment in solution.swift
+        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)
+                                                                                ^",../questions/Medium\decremental-string-concatenation\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func minimizeConcatenatedLength(_ words: [String]) -> Int {
+        // Helper function to calculate the cost of joining two words considering the overlap rule
+        func joinCost(_ a: String, _ b: String) -> Int {
+            let aLast = a.last!
+            let bFirst = b.first!
+            return aLast == bFirst ? 1 : 0
+        }
+
+        let n = words.count
+        var dp = Array(repeating: Array(repeating: Int.max / 2, count: n), for: _ in 0..<n)
+        
+        // Initialize the DP table with the lengths of individual words
+        for i in 0..<n {
+            dp[i][i] = words[i].count
+        }
+        
+        // Fill DP table
+        for len in 2...n {
+            for i in 0...n-len {
+                let j = i + len - 1
+                for k in i..<j {
+                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] - joinCost(words[k], words[k + 1]))
+                }
+            }
+        }
+        
+        return dp[0][n - 1]
+    }
+}"
+swift,compile_error,"Line 8: Char 42: error: value of optional type 'UnicodeScalar?' (aka 'Optional<Unicode.Scalar>') must be unwrapped to a value of type 'UnicodeScalar' (aka 'Unicode.Scalar') in solution.swift
+                    chars[j] = Character(UnicodeScalar(chars[j].unicodeScalars.first!.value - 1))
+                                         ^",../questions/Medium\lexicographically-smallest-string-after-substring-operation\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func smallestString(_ s: String) -> String {
+        var chars = Array(s)
+        for i in 0..<chars.count {
+            if chars[i] != ""a"" {
+                for j in i..<chars.count {
+                    if chars[j] == ""a"" { break }
+                    chars[j] = Character(UnicodeScalar(chars[j].unicodeScalars.first!.value - 1))
+                }
+                break
+            }
+        }
+        return String(chars)
+    }
+}"
+swift,compile_error,Unknown preprocess compile error,../questions/Medium\movement-of-robots\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func sumDistance(_ nums: [Int], _ s: String, _ d: Int) -> Int {
+        let mod = 1_000_000_007
+        var distances = [Int]()
+        for i in 0..<nums.count {
+            for j in i+1..<nums.count {
+                let distance = abs((nums[i] + (s[i] == ""L"" ? -d : d)) - (nums[j] + (s[j] == ""L"" ? -d : d)))
+                distances.append(distance)
+            }
+        }
+        let sum = distances.reduce(0) { ($0 + $1) % mod }
+        return sum
+    }
+}"
+swift,compile_error,"Line 32: Char 13: error: cannot assign to value: 'm' is a 'let' constant in solution.swift
+            m = a % m
+            ^",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func stringCount(_ n: Int) -> Int {
+        let mod = 1000000007
+        if n < 4 { return 0 }
+        var factorial = [Int](repeating: 1, count: n + 1)
+        for i in 1...n {
+            factorial[i] = (factorial[i - 1] * i) % mod
+        }
+        var total = 0
+        for i in 4...n {
+            let combinations = factorial[i] * modInverse(a: (factorial[4] * factorial[i - 4]) % mod, m: mod) % mod
+            total = (total + combinations * power(a: 25, b: i - 4, m: mod)) % mod
+        }
+        return total
+    }
+
+    private func power(a: Int, b: Int, m: Int) -> Int {
+        if b == 0 { return 1 }
+        var temp = power(a: a, b: b / 2, m: m)
+        temp = (temp * temp) % m
+        if b % 2 == 0 { return temp }
+        return (temp * a) % m
+    }
+
+    private func modInverse(a: Int, m: Int) -> Int {
+        var m0 = m, y = 0, x = 1
+        if m == 1 { return 0 }
+        var a = a
+        while a > 1 {
+            let q = a / m
+            var t = m
+            m = a % m
+            a = t
+            t = y
+            y = x - q * y
+            x = t
+        }
+        if x < 0 { x += m0 }
+        return x
+    }
+}"
+swift,compile_error,"Line 7: Char 67: error: cannot convert value of type 'UInt8' to expected argument type 'Int' in solution.swift
+            if chars[i] == chars[i+1] || abs(chars[i].asciiValue! - chars[i+1].asciiValue!) == 1 {
+                                                                  ^
+Line 10: Char 113: error: cannot convert value of type 'UInt8' to expected argument type 'Int' in solution.swift
+                while nextChar < chars.count && (chars[nextChar] == chars[i] || abs(chars[nextChar].asciiValue! - chars[i].asciiValue!) == 1) {
+                                                                                                                ^
+Line 13: Char 17: error: cannot assign to value: 'i' is a 'let' constant in solution.swift
+                i = nextChar - 1
+                ^",../questions/Medium\remove-adjacent-almost-equal-characters\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func removeAlmostEqualCharacters(_ word: String) -> Int {
+        let chars = Array(word)
+        var operations = 0
+        
+        for i in 0..<chars.count-1 {
+            if chars[i] == chars[i+1] || abs(chars[i].asciiValue! - chars[i+1].asciiValue!) == 1 {
+                operations += 1
+                var nextChar = i + 2
+                while nextChar < chars.count && (chars[nextChar] == chars[i] || abs(chars[nextChar].asciiValue! - chars[i].asciiValue!) == 1) {
+                    nextChar += 1
+                }
+                i = nextChar - 1
+            }
+        }
+        
+        return operations
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x00005610901ae243 ***
+Thread 0 ""prog"" crashed:
+0  0x00005610901ae243 specialized Solution.incremovableSubarrayCount(_:) + 803 in prog
+Registers:
+rax 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x00007fb343739e50  f8 87 73 43 b3 7f 00 00 ff ff ff ff 04 00 00 80  ø·sC³···ÿÿÿÿ····
+rcx 0xffffffffffffffff  f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8  øøøøøøøøøøøøøøøø
+rbx 0x00007fb343738ea0  00 00 00 00 00 00 00 00 48 8e 73 43 b3 7f 00 00  ········H·sC³···
+rsi 0x00007fb343739e50  f8 87 73 43 b3 7f 00 00 ff ff ff ff 04 00 00 80  ø·sC³···ÿÿÿÿ····
+rdi 0x00007fb343738ea0  00 00 00 00 00 00 00 00 48 8e 73 43 b3 7f 00 00  ········H·sC³···
+rbp 0x0000000000000004  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007ffc9c8bc6a0  f8 c6 8b 9c fc 7f 00 00 03 00 00 00 00 00 00 00  øÆ··ü···········
+ r8 0x00005610918a5ed0  b5 46 83 f0 15 56 00 00 c6 71 b2 6d 91 bf 69 df  µF·ð·V··Æq²m·¿iß
+ r9 0x80000000ffffffff  b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5  µµµµµµµµµµµµµµµµ
+r10 0x0000000000000004  b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5  µµµµµµµµµµµµµµµµ
+r11 0x0000000000000000  b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5 b5  µµµµµµµµµµµµµµµµ
+r12 0x00007fb343739e50  f8 87 73 43 b3 7f 00 00 ff ff ff ff 04 00 00 80  ø·sC³···ÿÿÿÿ····
+r13 0x0000000000000000  f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8  øøøøøøøøøøøøøøøø
+r14 0x0000000000000000  f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8  øøøøøøøøøøøøøøøø
+r15 0x0000000000000000  f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8  øøøøøøøøøøøøøøøø
+rip 0x00005610901ae243  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 66 66  ··············ff
+rflags 0x0000000000010297  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Easy\count-the-number-of-incremovable-subarrays-i\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func incremovableSubarrayCount(_ nums: [Int]) -> Int {
+        var count = 0
+        
+        for i in 0..<nums.count {
+            for j in i..<nums.count {
+                let subarray = Array(nums[0..<i] + nums[j+1..<nums.count])
+                if isStrictlyIncreasing(subarray) {
+                    count += 1
+                }
+            }
+        }
+
+        return count
+    }
+
+    private func isStrictlyIncreasing(_ array: [Int]) -> Bool {
+        for i in 0..<array.count - 1 {
+            if array[i] >= array[i + 1] {
+                return false
+            }
+        }
+        return true
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055e2df2d7238 ***
+Thread 0 ""prog"" crashed:
+0      0x000055e2df2d7238 specialized Solution.countKSubsequencesWithMaxBeauty(_:_:) + 1016 in prog
+1 [ra] 0x0707070707070707
+Registers:
+rax 0x000055e2e0c3ff60  b8 7e bf f5 a1 7f 00 00 03 00 00 00 00 00 00 00  ¸~¿õ¡···········
+rdx 0x000055e2e0c3f810  18 09 d0 f5 a1 7f 00 00 03 00 00 00 00 00 00 00  ··Ðõ¡···········
+rcx 0xfffffffe00000000  18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18  ················
+rbx 0x0000000600000003  18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18  ················
+rsi 0x000055e2e0c3f748  03 00 00 00 06 00 00 00 03 00 00 00 00 00 00 00  ················
+rdi 0x000055e2e0c3f760  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rbp 0x0000000100000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007fff4af6fff0  00 00 00 00 00 00 00 e1 30 fe c3 e0 e2 55 00 00  ·······á0þÃàâU··
+ r8 0x00007fa1f5bf13b0  00 02 00 00 00 00 00 00 00 e8 c1 f5 a1 7f 00 00  ·········èÁõ¡···
+ r9 0x000000000ff43eb7  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r10 0x00007fa1f56cdf98  ca 1c 08 00 12 03 0b 00 40 70 40 00 00 00 00 00  Ê·······@p@·····
+r11 0x00007fa1f5aa7040  55 48 89 e5 48 8b 05 45 3c 16 00 48 8d 0d be 1a  UH·åH··E<··H··¾·
+r12 0x0000000000000002  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+r13 0x0000000000000000  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+r14 0x000055e2e0c3ff60  b8 7e bf f5 a1 7f 00 00 03 00 00 00 00 00 00 00  ¸~¿õ¡···········
+r15 0x0000000061636362  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x000055e2df2d7238  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010206  PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func countKSubsequencesWithMaxBeauty(_ s: String, _ k: Int) -> Int {
+        let mod = 1_000_000_007
+        var freq = [Int](repeating: 0, count: 26)
+        for ch in s {
+            let index = Int(ch.asciiValue! - Character(""a"").asciiValue!)
+            freq[index] += 1
+        }
+        
+        freq.sort(by: >)
+        
+        var comb = [[Int]](repeating: [Int](repeating: 0, count: k+1), count: s.count+1)
+        for i in 0...s.count {
+            comb[i][0] = 1
+            for j in 1...min(i, k) {
+                comb[i][j] = (comb[i-1][j-1] + comb[i-1][j]) % mod
+            }
+        }
+        
+        var result = 0
+        var sum = 0
+        for i in 0..<26 {
+            if freq[i] == 0 { break }
+            sum += freq[i]
+            if sum < k { continue }
+            if sum == k || i == 25 || freq[i+1] == 0 {
+                result = (result + comb[sum][k]) % mod
+                break
+            }
+            let nextSum = sum - freq[i+1]
+            if nextSum >= k {
+                result = (result + mod - comb[nextSum][k]) % mod
+            }
+        }
+        
+        return result
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055d337b3a245 ***
+Thread 0 ""prog"" crashed:
+0  0x000055d337b3a245 specialized Solution.countKSubsequencesWithMaxBeauty(_:_:) + 581 in prog
+Registers:
+rax 0x000055d33917efa0  b8 0e ae b7 8b 7f 00 00 03 00 00 00 00 00 00 00  ¸·®·············
+rdx 0x000055d33917e810  18 99 be b7 8b 7f 00 00 03 00 00 00 00 00 00 00  ··¾·············
+rcx 0xfffffffe00000000  18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18  ················
+rbx 0x0000000400000003  18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18  ················
+rsi 0x000055d33917e748  03 00 00 00 04 00 00 00 03 00 00 00 00 00 00 00  ················
+rdi 0x000055d33917e760  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rbp 0x0000000000000003  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007ffc9d039da0  80 e7 17 39 d3 55 00 00 30 ee 17 39 d3 55 00 00  ·ç·9ÓU··0î·9ÓU··
+ r8 0x000055d33917e860  7e 91 33 5d 05 00 00 00 fd 6b 09 f4 e6 7d d5 d6  ~·3]····ýk·ôæ}ÕÖ
+ r9 0x0000000000000000  7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e 7e  ~~~~~~~~~~~~~~~~
+r10 0x00007f8bb7b05d7c  09 00 00 00 03 00 00 00 01 00 00 00 38 27 d6 ff  ············8'Öÿ
+r11 0xd6d57de6f4096bfd  09 09 09 09 09 09 09 09 09 09 09 09 09 09 09 09  ················
+r12 0x0000000000000000  09 09 09 09 09 09 09 09 09 09 09 09 09 09 09 09  ················
+r13 0x0000000000000002  09 09 09 09 09 09 09 09 09 09 09 09 09 09 09 09  ················
+r14 0x000055d33917efa0  b8 0e ae b7 8b 7f 00 00 03 00 00 00 00 00 00 00  ¸·®·············
+r15 0x0000000000000003  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x000055d337b3a245  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 48 8b 3c 24 e8 e8  ··········H·<$èè
+rflags 0x0000000000010206  PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func countKSubsequencesWithMaxBeauty(_ s: String, _ k: Int) -> Int {
+        let mod = 1_000_000_007
+        var charCounts = [Int](repeating: 0, count: 26) // Count of each character
+        s.forEach { charCounts[Int($0.asciiValue! - Character(""a"").asciiValue!)] += 1 }
+        
+        // Counts of characters sorted by their frequency in descending order
+        let sortedCounts = charCounts.filter { $0 > 0 }.sorted(by: >)
+        
+        // Dynamic programming table for combinations: C(n, k) = n! / (k! * (n-k)!)
+        var combination = Array(repeating: Array(repeating: 0, count: k+1), count: sortedCounts.count + 1)
+        for i in 0...sortedCounts.count {
+            combination[i][0] = 1 // Base case: C(n, 0) = 1
+            for j in 1...min(i, k) {
+                combination[i][j] = (combination[i-1][j] + combination[i-1][j-1]) % mod
+            }
+        }
+        
+        // Calculate the number of k-subsequences with max beauty
+        var total = 0
+        func dfs(_ index: Int, _ remainingK: Int, _ currentProduct: Int) {
+            if remainingK == 0 {
+                total = (total + currentProduct) % mod
+                return
+            }
+            if index == sortedCounts.count {
+                return
+            }
+            
+            // Skip this character
+            dfs(index + 1, remainingK, currentProduct)
+            
+            // Include this character if its count is enough to contribute to remainingK
+            if sortedCounts[index] >= remainingK {
+                let nextProduct = (currentProduct * combination[sortedCounts[index]][remainingK]) % mod
+                dfs(index + 1, 0, nextProduct)
+            }
+        }
+        
+        dfs(0, k, 1)
+        return total
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x00005654a6241a7b ***
+Thread 0 ""prog"" crashed:
+0  0x00005654a6241a7b dfs #1 (_:_:_:_:_:_:) in Solution.count(_:_:_:_:) + 619 in prog
+Registers:
+rax 0x00005654a7690470  18 a9 d0 c3 a9 7f 00 00 03 00 00 00 00 00 00 00  ·©ÐÃ©···········
+rdx 0x0000000000000009  18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18  ················
+rcx 0x0000000000000000  18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18  ················
+rbx 0x0000000000000009  18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18  ················
+rsi 0x00005654a768d5c0  b8 1e c0 c3 a9 7f 00 00 03 00 00 00 00 00 00 00  ¸·ÀÃ©···········
+rdi 0x000000000000000a  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0x0000000000000009  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsp 0x00007ffc32546f30  00 00 00 00 00 00 00 00 38 74 54 32 fc 7f 00 00  ········8tT2ü···
+ r8 0x000000000000002f  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+ r9 0x00007ffc32547438  f0 03 69 a7 54 56 00 00 00 00 00 00 00 00 00 00  ð·i§TV··········
+r10 0x000000000000002e  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r11 0x0000000000000008  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r12 0x000000000000002d  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r13 0x0000000000000000  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r14 0x0000000000000008  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r15 0x000000000000002e  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+rip 0x00005654a6241a7b  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 1f  ················
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\count-of-integers\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func count(_ num1: String, _ num2: String, _ min_sum: Int, _ max_sum: Int) -> Int {
+        let mod = 1_000_000_007
+        func dfs(_ num: [Int], _ n: Int, _ index: Int, _ tight: Bool, _ sum: Int, _ dp: inout [[[Int]]]) -> Int {
+            if index == n {
+                return sum >= min_sum && sum <= max_sum ? 1 : 0
+            }
+            if !tight && dp[index][sum][0] != -1 {
+                return dp[index][sum][0]
+            }
+            let limit = tight ? num[index] : 9
+            var ans = 0
+            for digit in 0...limit {
+                let newTight = tight && (digit == limit)
+                ans = (ans + dfs(num, n, index + 1, newTight, sum + digit, &dp)) % mod
+            }
+            if !tight {
+                dp[index][sum][0] = ans
+            }
+            return ans
+        }
+        
+        func solve(_ num: String) -> Int {
+            let numArr = num.map { Int(String($0))! }
+            var dp = Array(repeating: Array(repeating: Array(repeating: -1, count: 1), count: max_sum + 1), count: num.count)
+            return dfs(numArr, numArr.count, 0, true, 0, &dp)
+        }
+        
+        let n1 = Int(num1)! - 1
+        let count1 = n1 >= 0 ? solve(String(n1)) : 0
+        let count2 = solve(num2)
+        return (count2 - count1 + mod) % mod
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055bda63aa0f2 ***
+Thread 0 ""prog"" crashed:
+0  0x000055bda63aa0f2 specialized Solution.countSteppingNumbers(_:_:) + 1122 in prog
+Registers:
+rax 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x000055bda8319e30  58 0d 90 b7 8f 7f 00 00 03 00 00 00 02 00 00 00  X···············
+rcx 0xfffffffe00000000  58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58  XXXXXXXXXXXXXXXX
+rbx 0x0000000000000001  58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58  XXXXXXXXXXXXXXXX
+rsi 0x000055bda8319e38  03 00 00 00 02 00 00 00 70 00 00 00 00 00 00 80  ········p·······
+rdi 0x000055bda8319eb4  00 00 00 00 4a 99 06 4e 02 00 00 00 00 00 00 00  ····J··N········
+rbp 0x0000000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007ffc4cfdc4a0  f0 59 30 a8 bd 55 00 00 31 00 00 00 00 00 00 00  ðY0¨½U··1·······
+ r8 0x0000000000000061  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+ r9 0x0000000000000041  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r10 0x000000000000003a  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r11 0x8ac7230489e7fff6  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r12 0xe100000000000000  f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0 f0  ðððððððððððððððð
+r13 0x00007f8fb78e83b0  00 02 00 00 00 00 00 00 00 58 91 b7 8f 7f 00 00  ·········X······
+r14 0xf000000000000064  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r15 0x0000000000000001  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rip 0x000055bda63aa0f2  0f 0b 66 66 66 2e 0f 1f 84 00 00 00 00 00 55 48  ··fff.········UH
+rflags 0x0000000000010202  
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\count-stepping-numbers-in-range\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func countSteppingNumbers(_ low: String, _ high: String) -> Int {
+        let mod = 1000000007
+        let lowInt = Int(low)!
+        let highInt = Int(high)!
+        var count = 0
+        
+        func bfs(start: Int) {
+            var queue = [start]
+            while !queue.isEmpty {
+                let current = queue.removeFirst()
+                if current >= lowInt && current <= highInt {
+                    count = (count + 1) % mod
+                }
+                if current == 0 || current > highInt {
+                    continue
+                }
+                let lastDigit = current % 10
+                let nextNumbers = [lastDigit - 1, lastDigit + 1]
+                for next in nextNumbers {
+                    if next >= 0 && next <= 9 {
+                        let nextNumber = current * 10 + next
+                        if nextNumber <= highInt {
+                            queue.append(nextNumber)
+                        }
+                    }
+                }
+            }
+        }
+        
+        for i in 0...9 {
+            bfs(start: i)
+        }
+        
+        return count
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000559e5b48f606 ***
+Thread 0 ""prog"" crashed:
+0  0x0000559e5b48f606 specialized Solution.countSteppingNumbers(_:_:) + 1190 in prog
+Registers:
+rax 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000559e5c333080  58 ad 0f 2e 61 7f 00 00 03 00 00 00 02 00 00 00  X­·.a···········
+rcx 0xfffffffe00000000  58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58  XXXXXXXXXXXXXXXX
+rbx 0x0000000000000001  58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58  XXXXXXXXXXXXXXXX
+rsi 0x0000559e5c333088  03 00 00 00 02 00 00 00 70 00 00 00 00 00 00 80  ········p·······
+rdi 0x0000559e5c333104  00 00 00 00 32 8f 56 bf 00 00 00 00 00 00 00 00  ····2·V¿········
+rbp 0x0000000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007ffebf600f50  31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  1···············
+ r8 0x0000000000000061  31 31 31 31 31 31 31 31 31 31 31 31 31 31 31 31  1111111111111111
+ r9 0x0000000000000041  31 31 31 31 31 31 31 31 31 31 31 31 31 31 31 31  1111111111111111
+r10 0x000000000000003a  31 31 31 31 31 31 31 31 31 31 31 31 31 31 31 31  1111111111111111
+r11 0x8ac7230489e7fff6  31 31 31 31 31 31 31 31 31 31 31 31 31 31 31 31  1111111111111111
+r12 0xe100000000000000  31 31 31 31 31 31 31 31 31 31 31 31 31 31 31 31  1111111111111111
+r13 0x00007f612e0e23b0  00 02 00 00 00 00 00 00 00 f8 10 2e 61 7f 00 00  ·········ø·.a···
+r14 0xf000000000000064  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r15 0x0000000000000001  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rip 0x0000559e5b48f606  0f 0b 0f 1f 84 00 00 00 00 00 55 48 89 e5 53 50  ··········UH·åSP
+rflags 0x0000000000010202  
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\count-stepping-numbers-in-range\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func countSteppingNumbers(_ low: String, _ high: String) -> Int {
+        let mod = 1_000_000_007
+        let lowInt = Int(low)!, highInt = Int(high)!
+        var count = 0
+        var seen = Set<Int>()
+
+        func dfs(_ n: Int) {
+            if n >= lowInt && n <= highInt { seen.insert(n) }
+            if n == 0 || n > highInt { return }
+
+            let lastDigit = n % 10
+            if lastDigit > 0 { dfs(n * 10 + lastDigit - 1) }
+            if lastDigit < 9 { dfs(n * 10 + lastDigit + 1) }
+        }
+
+        for i in 0...9 { dfs(i) }
+        count = seen.count
+
+        return count % mod
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055cd93e7fcbb ***
+Thread 0 ""prog"" crashed:
+0  0x000055cd93e7fcbb specialized Solution.minimumCost(_:_:_:) + 539 in prog
+Registers:
+rax 0x000055cd93ff47c0  b8 9e 84 80 8d 7f 00 00 03 00 00 00 00 00 00 00  ¸···············
+rdx 0x0000000000000003  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rcx 0x000055cd93ff47e0  00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00  ················
+rbx 0x0000000000000001  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsi 0x0000000000000003  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rdi 0x0000000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rbp 0x7fffffffffffffff  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007fff6e8c8700  10 ab 6f 80 8d 7f 00 00 00 00 00 00 00 00 00 00  ·«o·············
+ r8 0x0000000000000006  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+ r9 0x0000000000000000  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r10 0x0000000000000004  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r11 0x0000000000000004  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r12 0x0000000000000006  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r13 0x0000000000000006  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r14 0x0000000000000003  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r15 0x000055cd93ff4810  b8 9e 84 80 8d 7f 00 00 03 00 00 00 02 00 00 00  ¸···············
+rip 0x000055cd93e7fcbb  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func minimumCost(_ nums: [Int], _ k: Int, _ dist: Int) -> Int {
+        let n = nums.count
+        var dp = Array(repeating: Int.max, count: k+1)
+        dp[0] = 0
+        
+        for i in 1...k {
+            var j = max(0, i - dist - 1)
+            var minCost = Int.max
+            while j + i <= n {
+                minCost = min(minCost, dp[j])
+                dp[j + 1] = minCost + nums[j]
+                j += 1
+            }
+        }
+        
+        return dp[n]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000564d8e77a09a ***
+Thread 0 ""prog"" crashed:
+0  0x0000564d8e77a09a specialized Solution.minimumCost(_:_:_:) + 1258 in prog
+Registers:
+rax 0x4000000000000005  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x3fffffffffffffff  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000564d90173810  b8 7e fa b8 03 7f 00 00 03 00 00 00 02 00 00 00  ¸~ú¸············
+rbx 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x0000564d90173730  b8 7e fa b8 03 7f 00 00 03 00 00 00 00 00 00 00  ¸~ú¸············
+rdi 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsp 0x00007ffd10010120  33 0a 00 00 00 00 00 00 c0 37 17 90 4d 56 00 00  3·······À7··MV··
+ r8 0x0000564d901736c0  e3 37 ce f4 48 56 00 00 38 12 86 c9 da c1 d8 2e  ã7ÎôHV··8··ÉÚÁØ.
+ r9 0x80000000ffffffff  e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3  ãããããããããããããããã
+r10 0x0000000100000000  e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3  ãããããããããããããããã
+r11 0x2ed8c1dac9861238  e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3 e3  ãããããããããããããããã
+r12 0x0000564d90173730  b8 7e fa b8 03 7f 00 00 03 00 00 00 00 00 00 00  ¸~ú¸············
+r13 0x0000564d901737c0  b8 7e fa b8 03 7f 00 00 03 00 00 00 00 00 00 00  ¸~ú¸············
+r14 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0x0000564d901737e0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 40  ···············@
+rip 0x0000564d8e77a09a  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func minimumCost(_ nums: [Int], _ k: Int, _ dist: Int) -> Int {
+        let n = nums.count
+        var dp = Array(repeating: Int.max / 2, count: k + 1)
+        dp[0] = 0
+        
+        for i in 1...k {
+            var window = [Int]()
+            var minCost = Int.max / 2
+            for j in 1...n {
+                while !window.isEmpty && window.first! < j - dist - 1 {
+                    minCost = min(minCost, dp[window.removeFirst()])
+                }
+                if j >= i {
+                    dp[j % (dist + 2)] = minCost + nums[j - 1]
+                    while !window.isEmpty && dp[window.last!] >= dp[j % (dist + 2)] {
+                        window.removeLast()
+                    }
+                    window.append(j % (dist + 2))
+                }
+            }
+        }
+        
+        return dp[n % (dist + 2)]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055f4419deebb ***
+Thread 0 ""prog"" crashed:
+0      0x000055f4419deebb specialized Solution.minimumCost(_:_:_:) + 1051 in prog
+1 [ra] 0x0000000000000003
+Registers:
+rax 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rdx 0x0000000000000003  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rcx 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x000055f4427f0810  b8 fe c8 d6 ae 7f 00 00 03 00 00 00 02 00 00 00  ¸þÈÖ®···········
+rdi 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0x000055f4427f07c0  b8 fe c8 d6 ae 7f 00 00 03 00 00 00 00 00 00 00  ¸þÈÖ®···········
+rsp 0x00007ffc6f850900  10 08 7f 42 f4 55 00 00 09 00 00 00 00 00 00 00  ···BôU··········
+ r8 0x0000000000000009  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+ r9 0x0000000000000020  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r10 0x7fffffffffffffff  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r11 0x0000000000000000  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r12 0x0000000000000005  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r13 0x000055f4427f0770  b8 fe c8 d6 ae 7f 00 00 03 00 00 00 00 00 00 00  ¸þÈÖ®···········
+r14 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x000055f4419deebb  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func minimumCost(_ nums: [Int], _ k: Int, _ dist: Int) -> Int {
+        let n = nums.count
+        var dp = Array(repeating: Int.max, count: k + 1)
+        dp[0] = 0
+
+        for i in 1...k {
+            var newDp = Array(repeating: Int.max, count: k + 1)
+            var minCost = Int.max
+            for j in 1...n {
+                minCost = min(minCost, dp[j - 1])
+                if j - i + k - 1 <= n + dist {
+                    newDp[i] = min(newDp[i], minCost + nums[j - 1])
+                }
+            }
+            dp = newDp
+        }
+
+        return dp[k]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x00005588f17c6004 ***
+Thread 0 ""prog"" crashed:
+0  0x00005588f17c6004 specialized Solution.goodSubsetofBinaryMatrix(_:) + 628 in prog
+Registers:
+rax 0x0000000002000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x00005588f22298f0  b8 0e 00 da 89 7f 00 00 03 00 00 00 00 00 00 00  ¸··Ú············
+rcx 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x00007f89d8db5ce0  c0 f2 22 f2 88 55 00 00 30 c7 22 f2 88 55 00 00  Àò""ò·U··0Ç""ò·U··
+rsi 0x00005588f222db30  e0 8e 10 da 89 7f 00 00 03 00 00 00 00 00 00 00  à··Ú············
+rdi 0x0000000000000000  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rbp 0xe200000000000000  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rsp 0x00007fff78e6e330  60 df 22 f2 88 55 00 00 59 00 00 00 00 00 00 00  `ß""ò·U··Y·······
+ r8 0x0000000000000007  60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60  ````````````````
+ r9 0x80000000ffffffff  60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60  ````````````````
+r10 0x0000000100000000  60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60  ````````````````
+r11 0x0000000200000000  60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60  ````````````````
+r12 0x00005588f22203e0  84 2e ad fb 00 00 00 00 80 24 22 f2 88 55 00 00  ·.­û·····$""ò·U··
+r13 0x00005588f22234f0  a3 1f ad aa 8d 55 00 00 bd fb 0b 5d a4 06 01 a4  £·­ª·U··½û·]¤··¤
+r14 0x0000000000000059  a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3  ££££££££££££££££
+r15 0x00005588f222d770  58 2d 01 da 89 7f 00 00 03 00 00 00 00 00 00 00  X-·Ú············
+rip 0x00005588f17c6004  0f 0b 66 2e 0f 1f 84 00 00 00 00 00 55 48 89 e5  ··f.········UH·å
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\find-a-good-subset-of-the-matrix\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func goodSubsetofBinaryMatrix(_ grid: [[Int]]) -> [Int] {
+        let m = grid.count
+        let n = grid[0].count
+        var result = [Int]()
+
+        for subset in 1..<(1 << m) {
+            var sums = Array(repeating: 0, count: n)
+            var rows = [Int]()
+            for i in 0..<m {
+                if subset & (1 << i) != 0 {
+                    rows.append(i)
+                    for j in 0..<n {
+                        sums[j] += grid[i][j]
+                    }
+                }
+            }
+            let k = rows.count
+            if sums.allSatisfy({ $0 <= k / 2 }) {
+                return rows
+            }
+        }
+        return result
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x00005558c3479528 ***
+Thread 0 ""prog"" crashed:
+0  0x00005558c3479528 specialized Solution.beautifulIndices(_:_:_:_:) + 1240 in prog
+Registers:
+rax 0x0000000000000002  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000001  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x80000002ffffffff  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0x00007f675c2dbe58  ff ff ff ff 04 00 00 80 00 00 00 00 00 00 00 00  ÿÿÿÿ············
+rdi 0x00007f675c2dbe70  20 a9 2d 5c 67 7f 00 00 ff ff ff ff 04 00 00 80   ©-\g···ÿÿÿÿ····
+rbp 0x0000000000000001  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                  
+rsp 0x00007ffeaf58fa80  00 00 00 00 00 00 00 e1 00 00 00 00 00 00 00 e2  ·······á·······â
+ r8 0x00007f675c301ba4  07 00 00 00 00 00 00 00 07 00 00 00 ed d6 f0 ff  ············íÖðÿ
+ r9 0x0000000000000028  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+r10 0x1effffffffffffff  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+r11 0x013f4ff6dc55d155  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+r12 0x00005558c52efd20  b8 8d 2c 5c 67 7f 00 00 03 00 00 00 00 00 00 00  ¸·,\g···········
+r13 0x00005558c52f1730  b8 8e 2c 5c 67 7f 00 00 03 00 00 00 00 00 00 00  ¸·,\g···········
+r14 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0xfffffffffffffffe  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x00005558c3479528  0f 0b 0f 0b 0f 0b 66 90 55 48 89 e5 53 50 48 8b  ······f·UH·åSPH·
+rflags 0x0000000000010282  SF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func beautifulIndices(_ s: String, _ a: String, _ b: String, _ k: Int) -> [Int] {
+        let sArray = Array(s)
+        let aLen = a.count
+        let bLen = b.count
+        var beautifulIndices = [Int]()
+        var bPositions = [Int]()
+        
+        // Find all positions of b in s
+        for i in 0..<(sArray.count - bLen + 1) {
+            if String(sArray[i..<(i + bLen)]) == b {
+                bPositions.append(i)
+            }
+        }
+        
+        // Check each position of a in s for the condition
+        for i in 0..<(sArray.count - aLen + 1) {
+            if String(sArray[i..<(i + aLen)]) == a {
+                for j in bPositions {
+                    if abs(j - i) <= k {
+                        beautifulIndices.append(i)
+                        break
+                    }
+                }
+            }
+        }
+        
+        return beautifulIndices
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x00005590c9bb3032 ***
+Thread 0 ""prog"" crashed:
+0  0x00005590c9bb3032 specialized Solution.beautifulIndices(_:_:_:_:) + 1394 in prog
+Registers:
+rax 0x0000000000000005  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x00005590cac1ed20  b8 9d 41 eb 9b 7f 00 00 03 00 00 00 00 00 00 00  ¸·Aë············
+rcx 0x0000000000000005  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x0000000000050107  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rdi 0x0000006365657264  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0xe500000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsp 0x00007ffccc1b58a0  64 63 00 00 00 00 00 00 00 00 00 00 00 00 00 e2  dc·············â
+ r8 0xe200000000000000  64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64  dddddddddddddddd
+ r9 0x0000000000000001  64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64  dddddddddddddddd
+r10 0x00007ffccc1b5811  00 00 00 00 00 00 00 00 00 04 00 00 00 00 00 07  ················
+r11 0x0000000000000008  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r12 0x0000000000006364  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r13 0x0000006365657264  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r14 0xfffffffffffffffd  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r15 0xe200000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rip 0x00005590c9bb3032  0f 0b 0f 0b 0f 0b 0f 0b 48 8b 7c 24 20 e8 ec 26  ········H·|$ èì&
+rflags 0x0000000000010293  SF AF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func beautifulIndices(_ s: String, _ a: String, _ b: String, _ k: Int) -> [Int] {
+        let sChars = Array(s)
+        let sLength = s.count
+        var aMatches = [Int]()
+        var bMatches = [Int]()
+        var beautifulIndices = [Int]()
+
+        // Find matches of a
+        for i in 0...(sLength - a.count) {
+            if String(sChars[i..<i + a.count]) == a {
+                aMatches.append(i)
+            }
+        }
+
+        // Find matches of b
+        for i in 0...(sLength - b.count) {
+            if String(sChars[i..<i + b.count]) == b {
+                bMatches.append(i)
+            }
+        }
+
+        // Check for beautiful indices
+        for aMatch in aMatches {
+            for bMatch in bMatches {
+                if abs(aMatch - bMatch) <= k {
+                    beautifulIndices.append(aMatch)
+                    break
+                }
+            }
+        }
+
+        return beautifulIndices.sorted()
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000559c42f6b261 ***
+Thread 0 ""prog"" crashed:
+0  0x0000559c42f6b261 specialized Solution.beautifulIndices(_:_:_:_:) + 1697 in prog
+Registers:
+rax 0x0000000000000005  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000000000000002  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000005  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x0000000000000001  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0x0000000000050107  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdi 0x0000006365657264  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbp 0xfffffffffffffffe  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsp 0x00007ffdf8dfe520  00 00 00 00 00 00 00 e1 53 74 29 54 f7 7f 00 00  ·······áSt)T÷···
+ r8 0xe200000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+ r9 0x0000000000000001  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r10 0x00007ffdf8dfe491  00 00 00 00 00 00 00 00 00 04 00 00 00 00 00 07  ················
+r11 0x0000000000000008  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r12 0x0000006365657264  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r13 0xe500000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r14 0x0000559c4335fd20  b8 7d 65 55 f7 7f 00 00 03 00 00 00 00 00 00 00  ¸}eU÷···········
+r15 0xe200000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x0000559c42f6b261  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 48 8b  ··············H·
+rflags 0x0000000000010282  SF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func beautifulIndices(_ s: String, _ a: String, _ b: String, _ k: Int) -> [Int] {
+        var result = [Int]()
+        let sChars = Array(s)
+        var aIndices = [(Int, Int)]() // Store start index and end index
+        var bIndices = [(Int, Int)]()
+
+        // Find all occurrences of a
+        for i in 0..<(sChars.count - a.count + 1) {
+            if String(sChars[i..<(i + a.count)]) == a {
+                aIndices.append((i, i + a.count - 1))
+            }
+        }
+
+        // Find all occurrences of b
+        for i in 0..<(sChars.count - b.count + 1) {
+            if String(sChars[i..<(i + b.count)]) == b {
+                bIndices.append((i, i + b.count - 1))
+            }
+        }
+
+        // Check each a index against all b indices to find beautiful indices
+        for (aStart, _) in aIndices {
+            for (bStart, _) in bIndices {
+                if abs(aStart - bStart) <= k {
+                    result.append(aStart)
+                    break // Found a valid b, move to the next a index
+                }
+            }
+        }
+
+        return result.sorted()
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055fe400e3c52 ***
+Thread 0 ""prog"" crashed:
+0  0x000055fe400e3c52 specialized Solution.canTraverseAllPairs(_:) + 2546 in prog
+Registers:
+rax 0xc0095f619980c432  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000001  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x000000055fe41976  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0x000055fe41976730  b8 fe f3 ce 33 7f 00 00 03 00 00 00 00 00 00 00  ¸þóÎ3···········
+rdi 0x000055fe41963010  03 00 02 00 01 00 02 00 01 00 01 00 01 00 01 00  ················
+rbp 0x0000000000000001  03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03  ················
+rsp 0x00007ffc0aed5990  10 0b df ce 33 7f 00 00 70 2e f5 ce 33 7f 00 00  ··ßÎ3···p.õÎ3···
+ r8 0x000055fe41976870  76 19 e4 5f 05 00 00 00 4b 8f 5e ff 4e 53 b9 0a  v·ä_····K·^ÿNS¹·
+ r9 0x80000000ffffffff  76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76  vvvvvvvvvvvvvvvv
+r10 0x0000000100000000  76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76  vvvvvvvvvvvvvvvv
+r11 0x0ab9534eff5e8f4b  76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76  vvvvvvvvvvvvvvvv
+r12 0x0000000000000000  76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76  vvvvvvvvvvvvvvvv
+r13 0x000055fe400e27f0  50 e8 8a 00 00 00 31 c0 59 c3 66 0f 1f 44 00 00  Pè····1ÀYÃf··D··
+r14 0x0000000000000002  50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50  PPPPPPPPPPPPPPPP
+r15 0x00007ffc0aed59f0  30 67 97 41 fe 55 00 00 70 68 97 41 fe 55 00 00  0g·AþU··ph·AþU··
+rip 0x000055fe400e3c52  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 31 ff 48 83 f8 02  ··········1ÿH·ø·
+rflags 0x0000000000010297  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\greatest-common-divisor-traversal\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func canTraverseAllPairs(_ nums: [Int]) -> Bool {
+        func gcd(_ a: Int, _ b: Int) -> Int {
+            if b == 0 { return a }
+            return gcd(b, a % b)
+        }
+
+        let n = nums.count
+        var primeToIndex = [Int: [Int]]()
+
+        func addPrimeFactors(_ num: Int, _ index: Int) {
+            var num = num
+            for prime in 2...Int(sqrt(Double(num))) where num % prime == 0 {
+                while num % prime == 0 {
+                    num /= prime
+                }
+                primeToIndex[prime, default: []].append(index)
+            }
+            if num > 1 {
+                primeToIndex[num, default: []].append(index)
+            }
+        }
+
+        for i in 0..<n {
+            addPrimeFactors(nums[i], i)
+        }
+
+        var visited = Array(repeating: false, count: n)
+        var queue = [Int]()
+        visited[0] = true
+        queue.append(0)
+
+        while !queue.isEmpty {
+            let current = queue.removeFirst()
+            for (prime, indices) in primeToIndex where indices.contains(current) {
+                for index in indices where !visited[index] {
+                    visited[index] = true
+                    queue.append(index)
+                }
+            }
+        }
+
+        return visited.allSatisfy { $0 }
+    }
+}"
+swift,runtime_error,"*** Program crashed: Bad pointer dereference at 0x00007ffdfe909ff8 ***
+Thread 0 ""prog"" crashed:
+0      0x00007fd99d917ceb swift::runtime::SwiftTLSContext::get() + 11 in libswiftCore.so
+1 [ra] 0x00007fd99d8cd15e swift_beginAccess + 45 in libswiftCore.so
+Registers:
+rax 0x00007fd99a3b77e8  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rdx 0x00007ffdfe90a050  20 00 00 00 00 00 00 00 17 69 c9 7e 89 55 00 00   ········iÉ~·U··
+rcx 0x0000000000000000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                  
+rbx 0x0000000000000020  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                  
+rsi 0x00007fd99da22fb0  01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rdi 0x00007ffdfe90a050  20 00 00 00 00 00 00 00 17 69 c9 7e 89 55 00 00   ········iÉ~·U··
+rbp 0x00007ffdfe90a000  30 a0 90 fe fd 7f 00 00 5e d1 8c 9d d9 7f 00 00  0 ·þý···^Ñ··Ù···
+rsp 0x00007ffdfe90a000  30 a0 90 fe fd 7f 00 00 5e d1 8c 9d d9 7f 00 00  0 ·þý···^Ñ··Ù···
+ r8 0x0000000000000001  30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30  0000000000000000
+ r9 0x000055897fba74f0  10 86 d0 7e 89 55 00 00 03 00 00 00 00 00 00 00  ··Ð~·U··········
+r10 0x000055897fba75b0  b0 00 00 00 00 00 00 00 b0 01 00 00 00 00 00 00  °·······°·······
+r11 0x00007fd99c7d3ce0  60 77 ba 7f 89 55 00 00 00 75 ba 7f 89 55 00 00  `wº··U···uº··U··
+r12 0x000055897fba7500  70 1e a3 9d d9 7f 00 00 b1 00 00 00 00 00 00 00  p·£·Ù···±·······
+r13 0x00007fd99da31e70  20 09 a3 9d d9 7f 00 00 ff ff ff ff 04 00 00 80   ·£·Ù···ÿÿÿÿ····
+r14 0x0000000000000020  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                  
+r15 0x000055897ec96917  4c 8b 6d 10 49 83 7d 10 00 74 1f 4c 89 ff e8 26  L·m·I·}··t·L·ÿè&
+rip 0x00007fd99d917ceb  e8 e0 4b cf ff 48 8d 80 00 00 00 00 5d c3 0f 1f  èàKÏÿH······]Ã··
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):
+0x00007fd99d4c7000–0x00007fd99da0dbf0 <no build ID> libswiftCore.so /swift/usr/lib/swift/linux/libswiftCore.so",../questions/Hard\maximize-value-of-function-in-a-ball-passing-game\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func getMaxFunctionValue(_ receiver: [Int], _ k: Int) -> Int {
+        let n = receiver.count
+        var dp = [Int: Int]()
+
+        func dfs(_ i: Int, _ k: Int) -> Int {
+            if k == 0 { return i }
+            if let val = dp[(i << 20) | k] {
+                return val
+            }
+            let val = i + dfs(receiver[i], k - 1)
+            dp[(i << 20) | k] = val
+            return val
+        }
+
+        var maxVal = 0
+        for i in 0..<n {
+            maxVal = max(maxVal, dfs(i, k))
+        }
+        return maxVal
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000559aa592670a ***
+Thread 0 ""prog"" crashed:
+0  0x0000559aa592670a specialized Solution.maximumSum(_:) + 1898 in prog
+Registers:
+rax 0x0000000000000001  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000559aa6f348c0  b8 7e b4 79 f8 7f 00 00 03 00 00 00 02 00 00 00  ¸~´yø···········
+rcx 0x7ff0000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x0000559fff5923e4  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x0000000000000007  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rdi 0x0000559aa6f21010  03 00 01 00 02 00 02 00 01 00 02 00 01 00 00 00  ················
+rbp 0x0000000000000003  03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03  ················
+rsp 0x00007fffb0a6c2b0  60 49 f3 a6 9a 55 00 00 60 49 f3 a6 9a 55 00 00  `Ió¦·U··`Ió¦·U··
+ r8 0x0000559aa6f34c60  e4 23 59 ff 9f 55 00 00 a1 75 43 8f ee c5 c6 23  ä#Yÿ·U··¡uC·îÅÆ#
+ r9 0x80000000ffffffff  e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4  ääääääääääääääää
+r10 0x0000000100000000  e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4  ääääääääääääääää
+r11 0x23c6c5ee8f4375a1  e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4  ääääääääääääääää
+r12 0x0000000000000003  e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4 e4  ääääääääääääääää
+r13 0x0000559aa6f34960  b8 7f b4 79 f8 7f 00 00 03 00 00 00 00 00 00 00  ¸·´yø···········
+r14 0x0000000000000002  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0x0000000000000008  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x0000559aa592670a  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010297  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\maximum-element-sum-of-a-complete-subset-of-indices\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func maximumSum(_ nums: [Int]) -> Int {
+        var maxSum = 0
+        var factorMap = [Int: Int]()
+
+        for num in nums {
+            let factors = primeFactors(num)
+            var mask = 0
+            for (prime, count) in factors {
+                if count % 2 != 0 {
+                    mask ^= (1 << prime)
+                }
+            }
+            factorMap[mask, default: 0] += num
+            maxSum = max(maxSum, factorMap[mask]!)
+        }
+
+        return maxSum
+    }
+
+    private func primeFactors(_ n: Int) -> [Int: Int] {
+        var n = n
+        var factors = [Int: Int]()
+        for i in 2...Int(sqrt(Double(n))) {
+            while n % i == 0 {
+                factors[i, default: 0] += 1
+                n /= i
+            }
+        }
+        if n > 1 {
+            factors[n, default: 0] += 1
+        }
+        return factors
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055a9ab5fa68c ***
+Thread 0 ""prog"" crashed:
+0  0x000055a9ab5fa68c specialized Solution.maxIncreasingGroups(_:) + 268 in prog
+Registers:
+rax 0x0000000000000003  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x000055a9ad5486f0  b8 ce d6 f6 5e 7f 00 00 03 00 00 00 02 00 00 00  ¸ÎÖö^···········
+rcx 0x0000000000000005  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rdi 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsp 0x00007fff72575410  05 00 00 00 00 00 00 00 f0 86 54 ad a9 55 00 00  ········ð·T­©U··
+ r8 0x0000000000000001  05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05  ················
+ r9 0x000000000febdeda  05 05 05 05 05 05 05 05 05 05 05 05 05 05 05 05  ················
+r10 0x00007f5ef5912e98  15 7c 00 00 1a 00 0f 00 d0 96 0a 00 00 00 00 00  ·|······Ð·······
+r11 0x00007f5ef5aa7f80  f3 0f 1e fa c5 f9 6e c6 48 89 f8 c4 e2 7d 78 c0  ó··úÅùnÆH·øÄâ}xÀ
+r12 0x0000000000000003  f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3  óóóóóóóóóóóóóóóó
+r13 0x000055a9ab5f97e0  50 e8 7a 00 00 00 31 c0 59 c3 66 0f 1f 44 00 00  Pèz···1ÀYÃf··D··
+r14 0x000055a9ad5487c0  b8 ce d6 f6 5e 7f 00 00 03 00 00 00 00 00 00 00  ¸ÎÖö^···········
+r15 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x000055a9ab5fa68c  0f 0b 0f 0b 0f 0b 48 89 df e8 86 30 f0 ff 4d 8b  ······H·ßè·0ðÿM·
+rflags 0x0000000000010202  
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\maximum-number-of-groups-with-increasing-length\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func maxIncreasingGroups(_ usageLimits: [Int]) -> Int {
+        let sortedLimits = usageLimits.sorted()
+        var dp = Array(repeating: 0, count: usageLimits.count + 1)
+        for limit in sortedLimits {
+            for j in stride(from: limit, through: 1, by: -1) {
+                dp[j] = max(dp[j], dp[j - 1] + 1)
+            }
+        }
+        return dp.max() ?? 0
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000560693ff6374 ***
+Thread 0 ""prog"" crashed:
+0  0x0000560693ff6374 specialized Solution.minimumChanges(_:_:) + 1220 in prog
+Registers:
+rax 0x00005606942ad860  18 e9 d8 96 25 7f 00 00 03 00 00 00 00 00 00 00  ·éØ·%···········
+rdx 0x00005606942ade60  b8 5e c8 96 25 7f 00 00 03 00 00 00 00 00 00 00  ¸^È·%···········
+rcx 0xfffffffe00000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x0000000800000003  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x00005606942ad748  03 00 00 00 08 00 00 00 03 00 00 00 00 00 00 00  ················
+rdi 0x00005606942ad760  ff ff ff ff ff ff ff 3f ff ff ff ff ff ff ff 3f  ÿÿÿÿÿÿÿ?ÿÿÿÿÿÿÿ?
+rbp 0x0000000000000000  ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff  ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ
+rsp 0x00007fffd85eb180  60 d8 2a 94 06 56 00 00 c0 c5 2a 94 06 56 00 00  `Ø*··V··ÀÅ*··V··
+ r8 0x0000000000000000  60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60  ````````````````
+ r9 0x1effffffffffffff  60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60  ````````````````
+r10 0x00007f25967407e8  19 cb 05 00 12 03 0b 00 00 4a 2a 00 00 00 00 00  ·Ë·······J*·····
+r11 0x00007f25969d2a00  55 48 89 e5 48 b8 00 00 00 00 00 00 00 60 41 80  UH·åH¸·······`A·
+r12 0x00005606942ad7c0  18 e9 d8 96 25 7f 00 00 03 00 00 00 00 00 00 00  ·éØ·%···········
+r13 0x00005606942aded0  b8 5e c8 96 25 7f 00 00 03 00 00 00 00 00 00 00  ¸^È·%···········
+r14 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0x00005606942ad860  18 e9 d8 96 25 7f 00 00 03 00 00 00 00 00 00 00  ·éØ·%···········
+rip 0x0000560693ff6374  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 55 48 89 e5  ············UH·å
+rflags 0x0000000000010202  
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\minimum-changes-to-make-k-semi-palindromes\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func minimumChanges(_ s: String, _ k: Int) -> Int {
+        let n = s.count
+        let arr = Array(s)
+        var dp = Array(repeating: Array(repeating: Int.max / 2, count: k + 1), count: n + 1)
+        var cost = Array(repeating: Array(repeating: 0, count: n), count: n)
+
+        for len in 1...n {
+            for start in 0...(n - len) {
+                let end = start + len - 1
+                if len == 1 {
+                    cost[start][end] = 0
+                } else {
+                    cost[start][end] = cost[start + 1][end - 1] + (arr[start] == arr[end] ? 0 : 1)
+                }
+            }
+        }
+
+        for i in 0..<n {
+            dp[i][1] = cost[0][i]
+            for j in 2...min(i + 1, k) {
+                for m in (j - 2)...i {
+                    dp[i][j] = min(dp[i][j], dp[m][j - 1] + cost[m + 1][i])
+                }
+            }
+        }
+
+        return dp[n - 1][k]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000556d8d4dd304 ***
+Thread 0 ""prog"" crashed:
+0  0x0000556d8d4dd304 specialized Solution.minimumChanges(_:_:) + 1108 in prog
+Registers:
+rax 0x0000556d8f4f2860  18 d9 ad c1 cd 7f 00 00 03 00 00 00 00 00 00 00  ·Ù­ÁÍ···········
+rdx 0x0000556d8f4f2e60  b8 4e 9d c1 cd 7f 00 00 03 00 00 00 00 00 00 00  ¸N·ÁÍ···········
+rcx 0xfffffffe00000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x0000000800000003  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x0000556d8f4f2748  03 00 00 00 08 00 00 00 03 00 00 00 00 00 00 00  ················
+rdi 0x0000556d8f4f2760  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rbp 0x0000000000000002  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007fff2a4f0030  00 00 00 00 00 00 00 e1 60 28 4f 8f 6d 55 00 00  ·······á`(O·mU··
+ r8 0x0000000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+ r9 0x1effffffffffffff  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r10 0x00007fcdc148f7e8  19 cb 05 00 12 03 0b 00 00 4a 2a 00 00 00 00 00  ·Ë·······J*·····
+r11 0x00007fcdc1721a00  55 48 89 e5 48 b8 00 00 00 00 00 00 00 60 41 80  UH·åH¸·······`A·
+r12 0x0000556d8f4f27c0  18 d9 ad c1 cd 7f 00 00 03 00 00 00 00 00 00 00  ·Ù­ÁÍ···········
+r13 0x0000556d8f4f2ed0  b8 4e 9d c1 cd 7f 00 00 03 00 00 00 00 00 00 00  ¸N·ÁÍ···········
+r14 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0x0000556d8f4f2860  18 d9 ad c1 cd 7f 00 00 03 00 00 00 00 00 00 00  ·Ù­ÁÍ···········
+rip 0x0000556d8d4dd304  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 66 90 55 48 89 e5  ··········f·UH·å
+rflags 0x0000000000010202  
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\minimum-changes-to-make-k-semi-palindromes\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func minimumChanges(_ s: String, _ k: Int) -> Int {
+        let n = s.count
+        let chars = Array(s)
+        var dp = Array(repeating: Array(repeating: 0, count: k + 1), count: n + 1)
+        var cost = Array(repeating: Array(repeating: 0, count: n), count: n)
+
+        for length in 1...n {
+            for start in 0...(n - length) {
+                let end = start + length - 1
+                if length == 1 || length == 2 {
+                    cost[start][end] = chars[start] == chars[end] ? 0 : 1
+                } else {
+                    cost[start][end] = cost[start + 1][end - 1] + (chars[start] == chars[end] ? 0 : 1)
+                }
+            }
+        }
+
+        for i in 1...n {
+            dp[i][1] = cost[0][i - 1]
+            for j in 2...min(i, k) {
+                dp[i][j] = Int.max
+                for p in j - 1..<i {
+                    dp[i][j] = min(dp[i][j], dp[p][j - 1] + cost[p][i - 1])
+                }
+            }
+        }
+
+        return dp[n][k]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055a5fa83212e ***
+Thread 0 ""prog"" crashed:
+0  0x000055a5fa83212e specialized Solution.minimumChanges(_:_:) + 1374 in prog
+Registers:
+rax 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x7fffffffffffffff  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x000055a5faa25780  b8 9e 87 4d ec 7f 00 00 03 00 00 00 00 00 00 00  ¸··Mì···········
+rsi 0x6100000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rdi 0xe100000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsp 0x00007ffed1264830  80 57 a2 fa a5 55 00 00 c0 45 a2 fa a5 55 00 00  ·W¢ú¥U··ÀE¢ú¥U··
+ r8 0x0000000000000001  80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80  ················
+ r9 0x0000000000000003  80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80  ················
+r10 0x00007fec4d3347e8  19 cb 05 00 12 03 0b 00 00 4a 2a 00 00 00 00 00  ·Ë·······J*·····
+r11 0x00007fec4d5c6a00  55 48 89 e5 48 b8 00 00 00 00 00 00 00 60 41 80  UH·åH¸·······`A·
+r12 0x0000000000000001  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+r13 0x000055a5faa245e0  61 00 00 00 00 00 00 00 00 00 00 00 00 00 00 e1  a··············á
+r14 0x0000000000000002  61 61 61 61 61 61 61 61 61 61 61 61 61 61 61 61  aaaaaaaaaaaaaaaa
+r15 0x0000000000000001  61 61 61 61 61 61 61 61 61 61 61 61 61 61 61 61  aaaaaaaaaaaaaaaa
+rip 0x000055a5fa83212e  0f 0b 4c 8b 34 24 4d 3b 7e 10 73 3a 4b 8b 5c fe  ··L·4$M;~·s:K·\þ
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\minimum-changes-to-make-k-semi-palindromes\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func minimumChanges(_ s: String, _ k: Int) -> Int {
+        let chars = Array(s)
+        let n = chars.count
+        var dp = Array(repeating: Int.max, count: k + 1)
+        dp[0] = 0
+        
+        for i in 1...k {
+            var newDp = Array(repeating: Int.max, count: k + 1)
+            for j in i...n {
+                var changes = 0
+                var l = 0
+                for m in stride(from: j, through: i, by: -1) {
+                    l += chars[m - 1] != chars[j - l - 1] ? 1 : 0
+                    if (j - m + 1) % i == 0 {
+                        if dp[m - i] != Int.max {
+                            newDp[j] = min(newDp[j], dp[m - i] + changes)
+                        }
+                    }
+                }
+            }
+            dp = newDp
+        }
+        
+        return dp[n]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055fba17e2e2a ***
+Thread 0 ""prog"" crashed:
+0  0x000055fba17e2e2a specialized Solution.minOperations(_:_:) + 698 in prog
+Registers:
+rax 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x000000000000000b  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000007  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x0000000000000006  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0x0000000000000006  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdi 0x8000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbp 0x0000000000000003  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsp 0x00007ffee7e0e5b0  07 00 00 00 00 00 00 00 03 00 00 00 00 00 00 00  ················
+ r8 0x0000000000000001  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+ r9 0x000000000fe5125d  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+r10 0x00007f2891a53e30  21 5d 00 00 22 00 0f 00 10 6b 0a 00 00 00 00 00  !]··""····k······
+r11 0x00007f2891af5b10  f3 0f 1e fa 48 85 ff 74 27 48 8b 4f f8 48 89 ca  ó··úH·ÿt'H·OøH·Ê
+r12 0x0000000000000001  f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3  óóóóóóóóóóóóóóóó
+r13 0x0000000000000008  f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3  óóóóóóóóóóóóóóóó
+r14 0x000055fba360d730  b8 4e eb 92 28 7f 00 00 03 00 00 00 04 00 00 00  ¸Në·(···········
+r15 0x000055fba360d870  b8 4e eb 92 28 7f 00 00 03 00 00 00 00 00 00 00  ¸Në·(···········
+rip 0x000055fba17e2e2a  0f 0b 4c 89 f7 e8 ec 38 f0 ff 48 8b 34 24 4d 85  ··L·÷èì8ðÿH·4$M·
+rflags 0x0000000000010a97  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Hard\minimum-operations-to-form-subsequence-with-target-sum\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func minOperations(_ nums: [Int], _ target: Int) -> Int {
+        var sum = 0
+        var maxElement = 0
+        for num in nums {
+            sum += num
+            maxElement = max(maxElement, num)
+        }
+        
+        if sum < target { return -1 }
+        
+        var dp = Array(repeating: Int.max, count: target + 1)
+        dp[0] = 0
+        for num in nums {
+            for j in stride(from: target, through: num, by: -1) {
+                dp[j] = min(dp[j], dp[j - num] + 1)
+            }
+        }
+        
+        var result = Int.max
+        var current = maxElement
+        var operations = 0
+        
+        while current >= 1 {
+            if target - sum + current < dp.count && dp[target - sum + current] != Int.max {
+                result = min(result, dp[target - sum + current] + operations)
+            }
+            current /= 2
+            operations += 1
+        }
+        
+        return result == Int.max ? -1 : result
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055f73bf130e6 ***
+Thread 0 ""prog"" crashed:
+0  0x000055f73bf130e6 specialized Solution.beautifulIndices(_:_:_:_:) + 1574 in prog
+Registers:
+rax 0x0000000000000002  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000000000000005  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000002  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x0000000000000001  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0x0000000000020107  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdi 0x0000000000006c77  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbp 0x0000000000006c77  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsp 0x00007fff6e652990  e8 29 65 6e ff 7f 00 00 05 00 00 00 00 00 00 00  è)enÿ···········
+ r8 0xe200000000000000  e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8  èèèèèèèèèèèèèèèè
+ r9 0x0000000000000001  e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8 e8  èèèèèèèèèèèèèèèè
+r10 0x00007fff6e652901  00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 0f  ················
+r11 0x0000000000000008  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r12 0xe200000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r13 0x0000000000006c77  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r14 0x000055f73d6fed20  b8 1d 7e 97 1e 7f 00 00 03 00 00 00 00 00 00 00  ¸·~·············
+r15 0xfffffffffffffffe  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x000055f73bf130e6  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 48 8b  ··············H·
+rflags 0x0000000000010282  SF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\find-beautiful-indices-in-the-given-array-i\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func beautifulIndices(_ s: String, _ a: String, _ b: String, _ k: Int) -> [Int] {
+        let sChars = Array(s)
+        let aLen = a.count
+        let bLen = b.count
+        var aIndices = [Int]()
+        var bIndices = [Int]()
+        var result = [Int]()
+
+        // Find all indices where a or b occurs in s
+        for i in 0..<(s.count - aLen + 1) {
+            let range = i..<(i + aLen)
+            if String(sChars[range]) == a {
+                aIndices.append(i)
+            }
+        }
+
+        for i in 0..<(s.count - bLen + 1) {
+            let range = i..<(i + bLen)
+            if String(sChars[range]) == b {
+                bIndices.append(i)
+            }
+        }
+
+        // Check each a index for a corresponding b index within k distance
+        for aIndex in aIndices {
+            for bIndex in bIndices {
+                if abs(aIndex - bIndex) <= k {
+                    result.append(aIndex)
+                    break // Found a valid b, move to next a
+                }
+            }
+        }
+
+        return result.sorted()
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000562401f00e6e ***
+Thread 0 ""prog"" crashed:
+0      0x0000562401f00e6e specialized Solution.findIndices(_:_:_:) + 238 in prog
+1 [ra] 0x0000000200000003
+Registers:
+rax 0x0000000000000003  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rdx 0x0000000000000002  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rcx 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbx 0x0000000000000004  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsi 0x000056240330c6f0  b8 8e 53 3d b3 7f 00 00 03 00 00 00 02 00 00 00  ¸·S=³···········
+rdi 0x0000000000000002  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0x000056240330c6f0  b8 8e 53 3d b3 7f 00 00 03 00 00 00 02 00 00 00  ¸·S=³···········
+rsp 0x00007ffe512c0050  10 9b 3e 3d b3 7f 00 00 04 00 00 00 00 00 00 00  ··>=³···········
+ r8 0x0000000000000001  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+ r9 0x0000000000000003  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r10 0x0000000000000002  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r11 0xde354be9ace95d5e  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r12 0x0000000000000002  10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10  ················
+r13 0x000056240330cf80  0c 33 40 62 05 00 00 00 5e 5d e9 ac e9 4b 35 de  ·3@b····^]é¬éK5Þ
+r14 0x0000000000000003  0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c  ················
+r15 0xe100000000000000  0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c  ················
+rip 0x0000562401f00e6e  0f 0b 55 48 89 e5 53 50 48 8b 07 48 85 c0 78 07  ··UH·åSPH··H·Àx·
+rflags 0x0000000000010297  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\find-indices-with-index-and-value-difference-ii\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func findIndices(_ nums: [Int], _ indexDifference: Int, _ valueDifference: Int) -> [Int] {
+        for i in 0..<nums.count {
+            for j in (i+indexDifference)..<nums.count {
+                if abs(nums[i] - nums[j]) >= valueDifference {
+                    return [i, j]
+                }
+            }
+        }
+        return [-1, -1]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055f3ad2147dc ***
+Thread 0 ""prog"" crashed:
+0  0x000055f3ad2147dc specialized Solution.canMakeSubsequence(_:_:) + 1372 in prog
+Registers:
+rax 0x00007fcc20942b10  55 48 89 e5 48 85 ff 7e 26 48 b9 00 00 00 00 fe  UH·åH·ÿ~&H¹····þ
+rdx 0x000000000000007a  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+rcx 0x00007fcc20942b10  55 48 89 e5 48 85 ff 7e 26 48 b9 00 00 00 00 fe  UH·åH·ÿ~&H¹····þ
+rbx 0x0000000000000001  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+rsi 0x8000000000000000  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+rdi 0x0000000000000001  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+rbp 0x0000000000000001  55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55  UUUUUUUUUUUUUUUU
+rsp 0x00007ffd6fe672e0  00 00 00 00 00 00 00 00 c0 67 2e ad f3 55 00 00  ········Àg.­óU··
+ r8 0x0000000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+ r9 0x1dffffffffffffff  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r10 0x00007ffd6fe67251  64 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02  d···············
+r11 0x0000000000000008  64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64  dddddddddddddddd
+r12 0x00000000000000e7  64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64  dddddddddddddddd
+r13 0xe100000000000000  64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64  dddddddddddddddd
+r14 0x000055f3ad2e67e8  00 00 00 00 00 00 00 e1 63 00 00 00 00 00 00 00  ·······ác·······
+r15 0x000000000000007a  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rip 0x000055f3ad2147dc  0f 0b 0f 0b 48 89 df e8 b8 31 f0 ff 0f 0b 4c 89  ····H·ßè¸1ðÿ··L·
+rflags 0x0000000000010297  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\make-string-a-subsequence-using-cyclic-increments\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func canMakeSubsequence(_ str1: String, _ str2: String) -> Bool {
+        var i = 0, j = 0
+        let s1 = Array(str1), s2 = Array(str2)
+        
+        while i < s1.count && j < s2.count {
+            if s1[i] == s2[j] || (s2[j].asciiValue! - s1[i].asciiValue! + 26) % 26 == 1 {
+                j += 1
+            }
+            i += 1
+        }
+        
+        return j == s2.count
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055b3f2250e70 ***
+Thread 0 ""prog"" crashed:
+0  0x000055b3f2250e70 specialized Solution.maxNumberOfAlloys(_:_:_:_:_:_:) + 704 in prog
+Registers:
+rax 0x0000000000000007  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x8000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x000055b3f3da6c80  e0 ae 24 11 22 7f 00 00 03 00 00 00 02 00 00 00  à®$·""···········
+rbx 0x0000000000000001  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rsi 0x0000000000000003  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rdi 0x0000000000000002  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rbp 0x0000000000000007  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rsp 0x00007ffe08283a08  0f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 e7  ···············ç
+ r8 0x000055b3f3da6c00  b8 2e 14 11 22 7f 00 00 03 00 00 00 02 00 00 00  ¸.··""···········
+ r9 0x000055b3f3da6780  b8 2e 14 11 22 7f 00 00 03 00 00 00 00 00 00 00  ¸.··""···········
+r10 0x000000000000000f  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r11 0x000055b3f3da6c40  b8 2e 14 11 22 7f 00 00 03 00 00 00 00 00 00 00  ¸.··""···········
+r12 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r13 0x0000000000000003  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r14 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x000055b3f2250e70  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\maximum-number-of-alloys\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func maxNumberOfAlloys(_ n: Int, _ k: Int, _ budget: Int, _ composition: [[Int]], _ stock: [Int], _ cost: [Int]) -> Int {
+        var result = 0
+        for i in 0..<k {
+            var minAlloy = Int.max
+            for j in 0..<n {
+                let needed = max(0, composition[i][j] - stock[j])
+                minAlloy = min(minAlloy, (budget / (needed * cost[j])))
+            }
+            var totalCost = 0
+            for j in 0..<n {
+                let needed = max(0, composition[i][j] * minAlloy - stock[j])
+                totalCost += needed * cost[j]
+            }
+            if totalCost <= budget {
+                result = max(result, minAlloy)
+            } else {
+                for alloys in stride(from: minAlloy, to: 0, by: -1) {
+                    totalCost = 0
+                    for j in 0..<n {
+                        let needed = max(0, composition[i][j] * alloys - stock[j])
+                        totalCost += needed * cost[j]
+                    }
+                    if totalCost <= budget {
+                        result = max(result, alloys)
+                        break
+                    }
+                }
+            }
+        }
+        return result
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055fd4807ec9b ***
+Thread 0 ""prog"" crashed:
+0  0x000055fd4807ec9b specialized Solution.maximumJumps(_:_:) + 571 in prog
+Registers:
+rax 0x000055fd48610bb0  b8 7e 3c 43 6d 7f 00 00 03 00 00 00 00 00 00 00  ¸~<Cm···········
+rdx 0x0000000000000006  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rcx 0x000055fd48610bd0  00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00  ················
+rbx 0x0000000000000006  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsi 0x0000000000000003  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rdi 0x0000000000000003  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rbp 0x8000000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007ffdaf03e220  10 8b 27 43 6d 7f 00 00 00 00 00 00 00 00 00 00  ··'Cm···········
+ r8 0x000055fd48610be8  02 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00  ················
+ r9 0x000055fd48610848  04 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00  ················
+r10 0x0000000000000002  04 04 04 04 04 04 04 04 04 04 04 04 04 04 04 04  ················
+r11 0x0000000000000006  04 04 04 04 04 04 04 04 04 04 04 04 04 04 04 04  ················
+r12 0x000055fd48610810  b8 7e 3c 43 6d 7f 00 00 03 00 00 00 02 00 00 00  ¸~<Cm···········
+r13 0x0000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r14 0x0000000000000002  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0x0000000000000006  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x000055fd4807ec9b  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010a97  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\maximum-number-of-jumps-to-reach-the-last-index\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func maximumJumps(_ nums: [Int], _ target: Int) -> Int {
+        let n = nums.count
+        var dp = Array(repeating: Int.max, count: n)
+        dp[0] = 0
+        for i in 0..<n {
+            for j in (i + 1)..<n {
+                if abs(nums[j] - nums[i]) <= target {
+                    dp[j] = min(dp[j], dp[i] + 1)
+                }
+            }
+        }
+        return dp[n - 1] == Int.max ? -1 : dp[n - 1]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000056063061fc6f ***
+Thread 0 ""prog"" crashed:
+0  0x000056063061fc6f specialized Solution.maximumTripletValue(_:) + 607 in prog
+Registers:
+rax 0x8000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000000000000005  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x0000000000000005  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0x0000560631e017c0  b8 0e 52 c5 08 7f 00 00 03 00 00 00 00 00 00 00  ¸·RÅ············
+rdi 0x8000000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rbp 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rsp 0x00007fff0fb98118  00 00 00 00 00 00 00 00 98 82 b9 0f ff 7f 00 00  ··········¹·ÿ···
+ r8 0x0000000000000004  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+ r9 0x0000560631e017f8  02 00 00 00 00 00 00 00 07 00 00 00 00 00 00 00  ················
+r10 0x0000000000000001  02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02  ················
+r11 0x0000000000000004  02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02  ················
+r12 0x0000000000000004  02 02 02 02 02 02 02 02 02 02 02 02 02 02 02 02  ················
+r13 0x000056063061f7e0  50 e8 7a 00 00 00 31 c0 59 c3 66 0f 1f 44 00 00  Pèz···1ÀYÃf··D··
+r14 0x0000000000000004  50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50  PPPPPPPPPPPPPPPP
+r15 0x0000000000000007  50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50  PPPPPPPPPPPPPPPP
+rip 0x000056063061fc6f  0f 0b 66 66 66 66 66 66 2e 0f 1f 84 00 00 00 00  ··ffffff.·······
+rflags 0x0000000000010a47  ZF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\maximum-value-of-an-ordered-triplet-ii\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func maximumTripletValue(_ nums: [Int]) -> Int {
+        var maxProduct = 0
+        for i in 0..<nums.count {
+            var maxI = Int.min, maxK = Int.min
+            for j in 0..<i {
+                maxI = max(maxI, nums[j] - nums[i])
+            }
+            for k in i+1..<nums.count {
+                maxK = max(maxK, nums[k])
+            }
+            maxProduct = max(maxProduct, maxI * maxK)
+        }
+        return maxProduct
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x000055eb98ddab61 ***
+Thread 0 ""prog"" crashed:
+0  0x000055eb98ddab61 _driver() + 657 in prog
+Registers:
+rax 0x0000309cb52085ac  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x89705f3112a28fe5  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0xf2e8c427c6c57948  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdi 0x0000000000000040  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbp 0xe100000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsp 0x00007ffd83510ae0  e0 33 3a 9a eb 55 00 00 00 00 00 00 00 00 00 00  à3:·ëU··········
+ r8 0x0000000000000000  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+ r9 0x80000000ffffffff  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r10 0x0000000100000000  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r11 0x251f1a092c4c0697  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r12 0x0000000000000036  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r13 0x0000309cb52085ac  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r14 0x0002886eb0b8a576  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r15 0x0000000000000006  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rip 0x000055eb98ddab61  0f 0b 0f 0b 0f 0b 0f 0b 0f 1f 80 00 00 00 00 55  ···············U
+rflags 0x0000000000010a03  CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\maximum-xor-product\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func maximumXorProduct(_ a: Int, _ b: Int, _ n: Int) -> Int {
+        let mod = 1_000_000_007
+        let limit = 1 << n
+        var maxXorProduct = 0
+        for x in 0..<limit {
+            let xorProduct = ((a ^ x) * (b ^ x)) % mod
+            maxXorProduct = max(maxXorProduct, xorProduct)
+        }
+        return maxXorProduct
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x00005584953d1b1a ***
+Thread 0 ""prog"" crashed:
+0  0x00005584953d1b1a specialized Solution.maximumXorProduct(_:_:_:) + 154 in prog
+Registers:
+rax 0x0000309cb52085ac  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x00005584963793e0  84 2e ad fb 00 00 00 00 40 a8 37 96 84 55 00 00  ·.­û····@¨7··U··
+rcx 0x0000000000000000  84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  ················
+rbx 0x0000000000000006  84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  ················
+rsi 0x0000309cb52085ac  84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  ················
+rdi 0x0002886eb0b8a576  84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  ················
+rbp 0xe100000000000000  84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  ················
+rsp 0x00007ffeb7a21858  5a 19 3d 95 84 55 00 00 e0 17 3d 95 84 55 00 00  Z·=··U··à·=··U··
+ r8 0xf2e8c427c6c57948  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+ r9 0x000000000000003f  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+r10 0x0000000000000000  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+r11 0x89705f3112a28fe5  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+r12 0x0000000000000036  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+r13 0x0002886eb0b8a576  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+r14 0x0000309cb52085ac  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+r15 0x0000000000000006  5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+rip 0x00005584953d1b1a  0f 0b 0f 0b 48 83 fa c0 0f 87 64 ff ff ff 0f 0b  ····H·úÀ··dÿÿÿ··
+rflags 0x0000000000010a03  CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\maximum-xor-product\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func maximumXorProduct(_ a: Int, _ b: Int, _ n: Int) -> Int {
+        let mod = 1_000_000_007
+        let maxVal = (1 << n) - 1
+        let maxXor = a ^ b
+        var maxProduct = 0
+        
+        if n >= 30 {
+            maxProduct = (maxVal ^ (a & maxVal)) * (maxVal ^ (b & maxVal)) % mod
+        } else {
+            for x in 0...maxVal {
+                let product = ((a ^ x) * (b ^ x)) % mod
+                maxProduct = max(maxProduct, product)
+            }
+        }
+        
+        return maxProduct
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000560cdc0cfb71 ***
+Thread 0 ""prog"" crashed:
+0  0x0000560cdc0cfb71 _driver() + 673 in prog
+Registers:
+rax 0x0000309cb52085ac  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x89705f3112a28fe5  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0xf2e8c427c6c57948  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsi 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdi 0x000000000000003f  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbp 0xe100000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rsp 0x00007ffe712e4360  e0 e3 bc dd 0c 56 00 00 00 00 00 00 00 00 00 00  àã¼Ý·V··········
+ r8 0x0000000000000000  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+ r9 0x80000000ffffffff  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r10 0x0000000100000000  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r11 0x69916227b17f6678  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r12 0x0000000000000036  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r13 0x0000309cb52085ac  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r14 0x0002886eb0b8a576  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+r15 0x0000000000000006  e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0 e0  àààààààààààààààà
+rip 0x0000560cdc0cfb71  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 1f 44 00 00 55  ············D··U
+rflags 0x0000000000010a03  CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\maximum-xor-product\responses\Swift\response_swift_2_failed.json,"class Solution {
+    func maximumXorProduct(_ a: Int, _ b: Int, _ n: Int) -> Int {
+        let mod = 1_000_000_007
+        let maxVal = (1 << n) - 1
+        var maxProduct = 0
+        for x in 0...maxVal {
+            let xorA = a ^ x
+            let xorB = b ^ x
+            let product = (xorA * xorB) % mod
+            maxProduct = max(maxProduct, product)
+        }
+        return maxProduct
+    }
+}"
+swift,runtime_error,"__Serializer__/__Serializer__.swift:93: Fatal error: Error when serializing long: 9223372036854775807 out of range [-(2^53-1), 2^53-1]
+*** Program crashed: Illegal instruction at 0x00007fbd0984cc72 ***
+Thread 0 ""prog"" crashed:
+0  0x00007fbd0984cc72 _assertionFailure(_:_:file:line:flags:) + 354 in libswiftCore.so
+Registers:
+rax 0x0000000200000003  30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30  0000000000000000
+rdx 0x0000557fb7576220  46 61 74 61 6c 20 65 72 72 6f 72 00 6b 65 79 20  Fatal error·key 
+rcx 0xfffffffe00000000  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+rbx 0x0000000000000003  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+rsi 0x0000557fb93916e8  03 00 00 00 00 00 00 00 a0 00 00 00 00 00 00 80  ········ ·······
+rdi 0x0000557fb937c010  03 00 03 00 02 00 02 00 01 00 02 00 01 00 01 00  ················
+rbp 0x00007ffd8afd8ca0  30 f7 38 b9 7f 55 00 00 91 4b 50 b7 7f 55 00 00  0÷8¹·U···KP··U··
+rsp 0x00007ffd8afd8c00  50 8c fd 8a fd 7f 00 00 dc 19 99 09 bd 7f 00 00  P·ý·ý···Ü···½···
+ r8 0x0000557fb938f870  8f 68 c3 ee 7a 55 00 00 5d 06 94 49 a2 1a 23 cb  ·hÃîzU··]··I¢·#Ë
+ r9 0x00007ffd8afd8940  46 61 74 61 6c 20 65 72 72 6f 72 3a 20 45 72 72  Fatal error: Err
+r10 0x0000000000000000  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r11 0xcb231aa24994065d  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r12 0x0000000000000000  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r13 0x0000000000000051  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r14 0x0000557fb93916e0  58 2d c5 09 bd 7f 00 00 03 00 00 00 00 00 00 00  X-Å·½···········
+r15 0x000000000000000b  58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58  XXXXXXXXXXXXXXXX
+rip 0x00007fbd0984cc72  0f 0b 48 83 ec 08 48 8d 05 b1 e8 41 00 48 8d 3d  ··H·ì·H··±èA·H·=
+rflags 0x0000000000010246  ZF PF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):
+0x00007fbd096e9000–0x00007fbd09c2fbf0 <no build ID> libswiftCore.so /swift/usr/lib/swift/linux/libswiftCore.so",../questions/Medium\minimum-absolute-difference-between-elements-with-constraint\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func minAbsoluteDifference(_ nums: [Int], _ x: Int) -> Int {
+        var minDiff = Int.max
+        var sortedNums = nums.enumerated().map { ($0.element, $0.offset) }.sorted { $0.0 < $1.0 }
+
+        var left = 0
+        var right = 0
+
+        while right < sortedNums.count {
+            if abs(sortedNums[left].1 - sortedNums[right].1) >= x {
+                minDiff = min(minDiff, abs(sortedNums[left].0 - sortedNums[right].0))
+                left += 1
+            } else {
+                right += 1
+            }
+            if left == right, right < sortedNums.count {
+                right += 1
+            }
+        }
+
+        return minDiff
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000561249951e38 ***
+Thread 0 ""prog"" crashed:
+0  0x0000561249951e38 specialized Solution.minimumBeautifulSubstrings(_:) + 2152 in prog
+Registers:
+rax 0x8000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x0000000000000003  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rcx 0x0000000000000000  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rbx 0x000056124b16c7e0  00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00  ················
+rsi 0x0000000000000031  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rdi 0x0000000000000000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rbp 0x0000000000000001  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+rsp 0x00007ffd4eef1fa0  20 20 ef 4e fd 7f 00 00 04 00 00 00 00 00 00 00    ïNý···········
+ r8 0x0000000000000004  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                  
+ r9 0x0000000000000000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                  
+r10 0x1000000000000000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                  
+r11 0x000056124b16c8e0  31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 e1  1··············á
+r12 0x000056124b16c8c0  b8 8d ea 09 5d 7f 00 00 03 00 00 00 00 00 00 00  ¸·ê·]···········
+r13 0x0000000000000001  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r14 0x0000000000000031  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+r15 0xe100000000000000  b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8 b8  ¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸
+rip 0x0000561249951e38  0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b  ················
+rflags 0x0000000000010a97  SF AF PF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\partition-string-into-minimum-beautiful-substrings\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func minimumBeautifulSubstrings(_ s: String) -> Int {
+        let n = s.count
+        var dp = Array(repeating: Int.max, count: n + 1)
+        dp[0] = 0
+        let sArray = Array(s)
+        
+        func isPowerOfFive(_ num: Int) -> Bool {
+            var num = num
+            while num > 1 {
+                if num % 5 != 0 {
+                    return false
+                }
+                num /= 5
+            }
+            return num == 1
+        }
+        
+        for i in 1...n {
+            if sArray[i - 1] == ""0"" {
+                continue
+            }
+            var num = 0
+            for j in i...n {
+                num = num * 2 + Int(String(sArray[j - 1]))!
+                if num > 0, isPowerOfFive(num) {
+                    dp[j] = min(dp[j], dp[i - 1] + 1)
+                }
+            }
+        }
+        
+        return dp[n] == Int.max ? -1 : dp[n]
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x00005586bd10c09d ***
+Thread 0 ""prog"" crashed:
+0  0x00005586bd10c09d specialized Solution.findPrimePairs(_:) + 749 in prog
+Registers:
+rax 0x0000000000000002  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x00005586be1667c0  16 86 7d e6 83 55 00 00 a8 26 66 15 f1 cf 99 91  ··}æ·U··¨&f·ñÏ··
+rcx 0x0000000000000001  16 16 16 16 16 16 16 16 16 16 16 16 16 16 16 16  ················
+rbx 0x0000000000000000  16 16 16 16 16 16 16 16 16 16 16 16 16 16 16 16  ················
+rsi 0x0000000000000002  16 16 16 16 16 16 16 16 16 16 16 16 16 16 16 16  ················
+rdi 0x0000000000000002  16 16 16 16 16 16 16 16 16 16 16 16 16 16 16 16  ················
+rbp 0x5b2c5d372c335b5b  16 16 16 16 16 16 16 16 16 16 16 16 16 16 16 16  ················
+rsp 0x00007fff55def850  02 00 00 00 00 00 00 00 c0 67 16 be 86 55 00 00  ········Àg·¾·U··
+ r8 0x00005586be1655c0  65 e1 6b 58 05 00 00 00 a8 26 66 15 f1 cf 99 91  eákX····¨&f·ñÏ··
+ r9 0x0000000000000001  65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65  eeeeeeeeeeeeeeee
+r10 0x00007fff55def6d8  00 00 00 00 00 00 00 00 00 f7 de 55 ff 7f 00 00  ·········÷ÞUÿ···
+r11 0x9199cff1156626a8  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r12 0xed00005d5d352c35  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r13 0x00005586be1671c0  67 e1 6b 58 05 00 00 00 a8 26 66 15 f1 cf 99 91  gákX····¨&f·ñÏ··
+r14 0x00005586be1653e0  84 2e ad fb 00 00 00 00 e0 73 16 be 86 55 00 00  ·.­û····às·¾·U··
+r15 0xe100000000000000  84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  ················
+rip 0x00005586bd10c09d  0f 0b 90 55 48 89 e5 53 50 48 8b 07 48 85 c0 78  ···UH·åSPH··H·Àx
+rflags 0x0000000000010293  SF AF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\prime-pairs-with-target-sum\responses\Swift\response_swift_0_failed.json,"class Solution {
+    func findPrimePairs(_ n: Int) -> [[Int]] {
+        func isPrime(_ num: Int) -> Bool {
+            if num <= 1 {
+                return false
+            }
+            if num <= 3 {
+                return true
+            }
+            if num % 2 == 0 || num % 3 == 0 {
+                return false
+            }
+            var i = 5
+            while i * i <= num {
+                if num % i == 0 || num % (i + 2) == 0 {
+                    return false
+                }
+                i += 6
+            }
+            return true
+        }
+        
+        var result = [[Int]]()
+        for x in 2...n/2 {
+            let y = n - x
+            if isPrime(x) && isPrime(y) {
+                result.append([x, y])
+            }
+        }
+        return result
+    }
+}"
+swift,runtime_error,"*** Program crashed: Illegal instruction at 0x0000558549a2dfd5 ***
+Thread 0 ""prog"" crashed:
+0  0x0000558549a2dfd5 specialized Solution.findPrimePairs(_:) + 549 in prog
+Registers:
+rax 0x0000000000000002  07 07 07 07 07 07 07 07 07 07 07 07 07 07 07 07  ················
+rdx 0x000055854a5e77c0  97 d2 0a 12 80 55 00 00 0e e0 5c 00 b6 84 3d 82  ·Ò···U···à\·¶·=·
+rcx 0x0000000000000001  97 97 97 97 97 97 97 97 97 97 97 97 97 97 97 97  ················
+rbx 0x0000000000000000  97 97 97 97 97 97 97 97 97 97 97 97 97 97 97 97  ················
+rsi 0x0000000000000002  97 97 97 97 97 97 97 97 97 97 97 97 97 97 97 97  ················
+rdi 0x0000000000000002  97 97 97 97 97 97 97 97 97 97 97 97 97 97 97 97  ················
+rbp 0x5b2c5d372c335b5b  97 97 97 97 97 97 97 97 97 97 97 97 97 97 97 97  ················
+rsp 0x00007ffcb590d250  02 00 00 00 00 00 00 00 c0 77 5e 4a 85 55 00 00  ········Àw^J·U··
+ r8 0x000055854a5e65c0  e6 a5 54 58 05 00 00 00 0e e0 5c 00 b6 84 3d 82  æ¥TX·····à\·¶·=·
+ r9 0x0000000000000001  e6 e6 e6 e6 e6 e6 e6 e6 e6 e6 e6 e6 e6 e6 e6 e6  ææææææææææææææææ
+r10 0x00007ffcb590d0d8  00 00 00 00 00 00 00 00 00 d1 90 b5 fc 7f 00 00  ·········Ñ·µü···
+r11 0x823d84b6005ce00e  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r12 0xed00005d5d352c35  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ················
+r13 0x000055854a5e81c0  e8 a5 54 58 05 00 00 00 0e e0 5c 00 b6 84 3d 82  è¥TX·····à\·¶·=·
+r14 0x000055854a5e63e0  84 2e ad fb 00 00 00 00 e0 83 5e 4a 85 55 00 00  ·.­û····à·^J·U··
+r15 0xe100000000000000  84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  ················
+rip 0x0000558549a2dfd5  0f 0b 66 0f 1f 84 00 00 00 00 00 55 48 89 e5 53  ··f········UH·åS
+rflags 0x0000000000010293  SF AF CF
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):",../questions/Medium\prime-pairs-with-target-sum\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func findPrimePairs(_ n: Int) -> [[Int]] {
+        func isPrime(_ num: Int) -> Bool {
+            if num <= 1 {
+                return false
+            }
+            if num == 2 {
+                return true
+            }
+            if num % 2 == 0 {
+                return false
+            }
+            var i = 3
+            while i * i <= num {
+                if num % i == 0 {
+                    return false
+                }
+                i += 2
+            }
+            return true
+        }
+        
+        var result = [[Int]]()
+        for x in 2...n/2 {
+            let y = n - x
+            if isPrime(x) && isPrime(y) {
+                result.append([x, y])
+            }
+        }
+        return result
+    }
+}"
+swift,runtime_error,"Swift/StringCharacterView.swift:158: Fatal error: String index is out of bounds
+Current stack trace:
+0    libswiftCore.so                    0x00007fad049396d0 _swift_stdlib_reportFatalErrorInFile + 109
+1    libswiftCore.so                    0x00007fad046057d7 <unavailable> + 1460183
+2    libswiftCore.so                    0x00007fad0460565e <unavailable> + 1459806
+3    libswiftCore.so                    0x00007fad0460539b <unavailable> + 1459099
+4    libswiftCore.so                    0x00007fad04604f30 _assertionFailure(_:_:file:line:flags:) + 230
+5    libswiftCore.so                    0x00007fad04742e5d <unavailable> + 2760285
+6                                       0x000055d07e5f9c86 <unavailable> + 1227910
+7                                       0x000055d07e5fa18e <unavailable> + 1229198
+8                                       0x000055d07e5f9fcf <unavailable> + 1228751
+9                                       0x000055d07e5f9a36 <unavailable> + 1227318
+10   libc.so.6                          0x00007fad035bcd90 <unavailable> + 171408
+11   libc.so.6                          0x00007fad035bcdc0 __libc_start_main + 128
+12                                      0x000055d07e4ffd45 <unavailable> + 204101
+*** Program crashed: Illegal instruction at 0x00007fad046057db ***
+Thread 0 ""prog"" crashed:
+0      0x00007fad046057db closure #1 in closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 315 in libswiftCore.so
+1 [ra] 0x00007fad0460565e closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 365 in libswiftCore.so
+2 [ra] 0x00007fad0460539b closure #1 in _assertionFailure(_:_:file:line:flags:) + 122 in libswiftCore.so
+3 [ra] 0x00007fad04605016 _assertionFailure(_:_:file:line:flags:) + 229 in libswiftCore.so
+4 [ra] 0x00007fad04742e5d String.index(_:offsetBy:) + 588 in libswiftCore.so
+Registers:
+rax 0x0000000000000000  03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03  ················
+rdx 0x0000000000000001  03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03  ················
+rcx 0x0000000000000002  03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03  ················
+rbx 0x000055d522ee79d8  03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03  ················
+rsi 0x0000000000000007  03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03  ················
+rdi 0x000055d07fe85010  02 00 02 00 02 00 02 00 01 00 01 00 00 00 00 00  ················
+rbp 0x00007ffc7ffc3280  10 33 fc 7f fc 7f 00 00 5e 56 60 04 ad 7f 00 00  ·3ü·ü···^V`·­···
+rsp 0x00007ffc7ffc3270  10 3a a2 04 ad 7f 00 00 c0 39 a2 04 ad 7f 00 00  ·:¢·­···À9¢·­···
+ r8 0x000055d07fe98780  d8 79 ee 22 d5 55 00 00 4c 6a 68 ab a4 02 76 5b  Øyî""ÕU··Ljh«¤·v[
+ r9 0x00007ffc7ffc3060  46 61 74 61 6c 20 65 72 72 6f 72 3a 20 53 74 72  Fatal error: Str
+r10 0x0000000000000000  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r11 0x5b7602a4ab686a4c  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r12 0x0000000000040007  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r13 0x0000000000000010  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r14 0x000000000000009e  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+r15 0x0000000000000001  46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46  FFFFFFFFFFFFFFFF
+rip 0x00007fad046057db  0f 0b 48 83 ec 08 48 8d 05 08 d2 41 00 48 8d 3d  ··H·ì·H···ÒA·H·=
+rflags 0x0000000000010202  
+cs 0x0033  fs 0x0000  gs 0x0000
+Images (18 omitted):
+0x00007fad044a1000–0x00007fad049e7bf0 <no build ID> libswiftCore.so /swift/usr/lib/swift/linux/libswiftCore.so",../questions/Medium\shortest-string-that-contains-three-strings\responses\Swift\response_swift_1_failed.json,"class Solution {
+    func minimumString(_ a: String, _ b: String, _ c: String) -> String {
+        func merge(_ s1: String, _ s2: String) -> String {
+            if s1.contains(s2) { return s1 }
+            if s2.contains(s1) { return s2 }
+            
+            for i in 0..<s1.count {
+                let index = s1.index(s1.startIndex, offsetBy: i)
+                if s2.hasPrefix(String(s1[index...])) {
+                    let suffixStart = s1.index(index, offsetBy: s2.count - (s1.count - i))
+                    if suffixStart <= s1.endIndex {
+                        let merged = s1 + s2[s2.index(s2.startIndex, offsetBy: s1.count - i)...]
+                        return String(merged)
+                    }
+                }
+            }
+            return s1 + s2
+        }
+        
+        var result = merge(a, b)
+        result = merge(result, c)
+        
+        let permutations = [
+            (a, b, c),
+            (a, c, b),
+            (b, a, c),
+            (b, c, a),
+            (c, a, b),
+            (c, b, a)
+        ]
+        
+        for (first, second, third) in permutations {
+            let temp = merge(merge(first, second), third)
+            if temp.count < result.count || (temp.count == result.count && temp < result) {
+                result = temp
+            }
+        }
+        
+        return result
+    }
+}"

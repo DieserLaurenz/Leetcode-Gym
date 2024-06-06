@@ -1,0 +1,707 @@
+Language,Error Type,Message,File Path,Code
+python,runtime_error,"ValueError: max() arg is an empty sequence
+    if max(dp[:i] + dp[i+length:]) >= max(dp[i:i+length]):
+Line 25 in incremovableSubarrayCount (Solution.py)
+    ret = Solution().incremovableSubarrayCount(param_1)
+Line 47 in _driver (Solution.py)
+    _driver()
+Line 57 in <module> (Solution.py)",../questions/Easy\count-the-number-of-incremovable-subarrays-i\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def incremovableSubarrayCount(self, nums):
+        """"""
+        :type nums: List[int]
+        :rtype: int
+        """"""
+        n = len(nums)
+        dp = [0] * n
+        total = 0
+
+        for i in range(n):
+            dp[i] = 1
+            for j in range(i):
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+
+        for i in range(n):
+            left = 0 if i == 0 else max(dp[:i])
+            right = 0 if i == n - 1 else max(dp[i+1:])
+            if dp[i] <= left or dp[i] <= right:
+                total += 1
+
+        for length in range(2, n + 1):
+            for i in range(n - length + 1):
+                if max(dp[:i] + dp[i+length:]) >= max(dp[i:i+length]):
+                    total += 1
+
+        return total"
+python,runtime_error,"IndexError: list index out of range
+    dp[i][j] = min(dp[i][j], dp[i - 1][k] + nums[k])
+Line 10 in minimumCost (Solution.py)
+    ret = Solution().minimumCost(param_1)
+Line 31 in _driver (Solution.py)
+    _driver()
+Line 41 in <module> (Solution.py)",../questions/Easy\divide-an-array-into-subarrays-with-minimum-cost-i\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def minimumCost(self, nums):
+        n = len(nums)
+        dp = [[float('inf')] * n for _ in range(4)]
+        dp[0][0] = 0
+
+        for i in range(1, 4):
+            for j in range(i, n + 1 - (3 - i)):
+                for k in range(i - 1, j):
+                    dp[i][j] = min(dp[i][j], dp[i - 1][k] + nums[k])
+
+        return dp[3][n - 1]"
+python,runtime_error,"AttributeError: 'int' object has no attribute 'isdigit'
+    if word.isdigit():
+Line 12 in lastVisitedIntegers (Solution.py)
+    ret = Solution().lastVisitedIntegers(param_1)
+Line 40 in _driver (Solution.py)
+    _driver()
+Line 50 in <module> (Solution.py)",../questions/Easy\last-visited-integers\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def lastVisitedIntegers(self, words):
+        """"""
+        :type words: List[str]
+        :rtype: List[int]
+        """"""
+        result = []
+        nums = []
+        prev_count = 0
+
+        for word in words:
+            if word.isdigit():
+                nums.append(int(word))
+                prev_count = 0
+            else:  # word == ""prev""
+                prev_count += 1
+                if prev_count <= len(nums):
+                    result.append(nums[-prev_count])
+                else:
+                    result.append(-1)
+        return result"
+python,runtime_error,"IndexError: pop from empty list
+    element = nums.pop()
+Line 13 in minOperations (Solution.py)
+    ret = Solution().minOperations(param_1, param_2)
+Line 41 in _driver (Solution.py)
+    _driver()
+Line 51 in <module> (Solution.py)",../questions/Easy\minimum-operations-to-collect-elements\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def minOperations(self, nums, k):
+        """"""
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """"""
+        target_set = set(range(1, k + 1))
+        collected_set = set()
+        operations = 0
+
+        while target_set != collected_set:
+            element = nums.pop()
+            collected_set.add(element)
+            operations += 1
+
+        return operations"
+python,runtime_error,"SyntaxError: invalid syntax
+                ^
+    if c not  and c != k:
+Line 13  (Solution.py)",../questions/Hard\count-complete-substrings\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def countCompleteSubstrings(self, word, k):
+        """"""
+        :type word: str
+        :type k: int
+        :rtype: int
+        """"""
+        def isValid(sub):
+            count = [0] * 26
+            for c in sub:
+                count[ord(c) - ord('a')] += 1
+            for c in count:
+                if c not  and c != k:
+                    return False
+            for i in range(1, len(sub)):
+                if abs(ord(sub[i]) - ord(sub[i-1])) > 2:
+                    return False
+            return True
+        
+        n = len(word)
+        result = 0
+        for i in range(n):
+            for j in range(i+k-1, n):
+                if isValid(word[i:j+1]):
+                    result += 1
+        return result"
+python,runtime_error,"MemoryError
+    for num in range(1, upper_bound + 1):
+Line 10 in count_good_numbers (Solution.py)
+    total_count = count_good_numbers(num2) - count_good_numbers(num1 - 1)
+Line 17 in count (Solution.py)
+    ret = Solution().count(param_1, param_2, param_3, param_4)
+Line 52 in _driver (Solution.py)
+    _driver()
+Line 62 in <module> (Solution.py)",../questions/Hard\count-of-integers\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def count(self, num1, num2, min_sum, max_sum):
+        MOD = 10**9 + 7
+
+        def digit_sum(n):
+            return sum(int(digit) for digit in str(n))
+
+        def count_good_numbers(upper_bound):
+            count = 0
+            for num in range(1, upper_bound + 1):
+                if min_sum <= digit_sum(num) <= max_sum:
+                    count += 1
+            return count
+
+        num1 = int(num1)
+        num2 = int(num2)
+        total_count = count_good_numbers(num2) - count_good_numbers(num1 - 1)
+        return total_count % MOD"
+python,runtime_error,"SyntaxError: invalid syntax
+                 ^
+    nonlocal count
+Line 13  (Solution.py)",../questions/Hard\count-stepping-numbers-in-range\responses\Python2\response_python2_2_failed.json,"class Solution(object):
+    def countSteppingNumbers(self, low, high):
+        """"""
+        :type low: str
+        :type high: str
+        :rtype: int
+        """"""
+        low, high = int(low), int(high)
+        count = 1 if low == 0 else 0
+        MOD = 10**9 + 7
+        
+        def bfs(start, low, high):
+            nonlocal count
+            q = [start]
+            while q:
+                curr = q.pop(0)
+                if low <= curr <= high:
+                    count = (count + 1) % MOD
+                elif curr > high:
+                    continue
+                last_digit = curr % 10
+                if curr > 0 and last_digit < 9:
+                    q.append(curr * 10 + last_digit + 1)
+                if curr > 0 and last_digit > 0:
+                    q.append(curr * 10 + last_digit - 1)
+        
+        for i in range(1, 10):
+            bfs(i, low, high)
+        
+        return count"
+python,runtime_error,"TypeError: inf is not valid value for the expected return type long
+    raise TypeError(str(ret) + "" is not valid value for the expected return type long"");
+Line 57 in _driver (Solution.py)
+    _driver()
+Line 63 in <module> (Solution.py)",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Python2\response_python2_2_failed.json,"class Solution(object):
+    def minimumCost(self, nums, k, dist):
+        """"""
+        :type nums: List[int]
+        :type k: int
+        :type dist: int
+        :rtype: int
+        """"""
+        n = len(nums)
+        dp = [[float('inf')] * (k + 1) for _ in range(n + 1)]
+        dp[n][0] = 0
+
+        for i in range(n - 1, -1, -1):
+            for j in range(1, k + 1):
+                sum_costs = 0
+                for m in range(i, min(i + dist + 1, n - j + 1)):
+                    sum_costs = nums[m]
+                    if m + 1 < n:
+                        sum_costs += dp[m + 1][j - 1]
+                    dp[i][j] = min(dp[i][j], sum_costs)
+                    if dp[m + 1][j - 1] == float('inf'):
+                        break
+
+        return dp[0][k]"
+python,runtime_error,"IndexError: string index out of range
+    if word[i] == text[m + i]:
+Line 31 in kmp_search (Solution.py)
+    a_occurrences = list(kmp_search(s, a))
+Line 42 in beautifulIndices (Solution.py)
+    ret = Solution().beautifulIndices(param_1, param_2, param_3, param_4)
+Line 86 in _driver (Solution.py)
+    _driver()
+Line 96 in <module> (Solution.py)",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\Python2\response_python2_1_failed.json,"class Solution(object):
+    def beautifulIndices(self, s, a, b, k):
+        """"""
+        :type s: str
+        :type a: str
+        :type b: str
+        :type k: int
+        :rtype: List[int]
+        """"""
+        from collections import deque
+        
+        def kmp_table(word):
+            table = [0] * len(word)
+            pos, cnd = 1, 0
+            while pos < len(word):
+                if word[pos] == word[cnd]:
+                    cnd += 1
+                    table[pos] = cnd
+                    pos += 1
+                elif cnd > 0:
+                    cnd = table[cnd - 1]
+                else:
+                    table[pos] = 0
+                    pos += 1
+            return table
+        
+        def kmp_search(text, word):
+            table = kmp_table(word)
+            m, i = 0, 0
+            while m + i < len(text):
+                if word[i] == text[m + i]:
+                    if i == len(word) - 1:
+                        yield m
+                        m = m + i - table[i]
+                        if i > 0: i = table[i - 1]
+                    i += 1
+                else:
+                    m = m + i - table[i]
+                    if i > 0: i = table[i - 1]
+                    else: m += 1
+        
+        a_occurrences = list(kmp_search(s, a))
+        b_occurrences = deque(sorted(list(kmp_search(s, b))))
+        result = []
+        
+        for i in a_occurrences:
+            while b_occurrences and b_occurrences[0] < i - k:
+                b_occurrences.popleft()
+            if b_occurrences and (b_occurrences[0] <= i + k or (b_occurrences and b_occurrences[-1] >= i - k and b_occurrences[-1] <= i + k)):
+                result.append(i)
+                
+        return result"
+python,runtime_error,"MemoryError
+    for _ in range(k):
+Line 14 in getMaxFunctionValue (Solution.py)
+    ret = Solution().getMaxFunctionValue(param_1, param_2)
+Line 43 in _driver (Solution.py)
+    _driver()
+Line 53 in <module> (Solution.py)",../questions/Hard\maximize-value-of-function-in-a-ball-passing-game\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def getMaxFunctionValue(self, receiver, k):
+        """"""
+        :type receiver: List[int]
+        :type k: int
+        :rtype: int
+        """"""
+        n = len(receiver)
+        max_value = 0
+
+        for i in range(n):
+            current_value = i
+            current_index = i
+            for _ in range(k):
+                current_index = receiver[current_index]
+                current_value += current_index
+            max_value = max(max_value, current_value)
+
+        return max_value"
+python,runtime_error,"IndexError: list index out of range
+    dp[i] = max(dp[i], dp[i-1] + 1)
+Line 7 in maxIncreasingGroups (Solution.py)
+    ret = Solution().maxIncreasingGroups(param_1)
+Line 27 in _driver (Solution.py)
+    _driver()
+Line 37 in <module> (Solution.py)",../questions/Hard\maximum-number-of-groups-with-increasing-length\responses\Python2\response_python2_2_failed.json,"class Solution(object):
+    def maxIncreasingGroups(self, usageLimits):
+        usageLimits.sort()
+        dp = [0] * (len(usageLimits) + 1)
+        for limit in usageLimits:
+            for i in range(limit, 0, -1):
+                dp[i] = max(dp[i], dp[i-1] + 1)
+        return max(dp)"
+python,runtime_error,"NameError: global name 'gcd' is not defined
+    g = gcd(n, diff)
+Line 23 in numberOfWays (Solution.py)
+    ret = Solution().numberOfWays(param_1, param_2, param_3)
+Line 69 in _driver (Solution.py)
+    _driver()
+Line 79 in <module> (Solution.py)",../questions/Hard\string-transformation\responses\Python2\response_python2_1_failed.json,"class Solution(object):
+    def numberOfWays(self, s, t, k):
+        """"""
+        :type s: str
+        :type t: str
+        :type k: int
+        :rtype: int
+        """"""
+        mod = 10**9 + 7
+        if s == t:
+            if k % 2 == 0:
+                return pow(len(s) - 1, k, mod)
+            else:
+                return 2
+        diff = sum([s[i] != t[i] for i in range(len(s))])
+        if diff == 0:
+            return (2 if k % 2 == 0 else 0) % mod
+        if k == 1:
+            return 0
+        
+        # Calculate gcd of n and the number of positions at which s and t differ
+        n = len(s)
+        g = gcd(n, diff)
+        
+        # If k is even, there are no ways to transform s into t
+        if k % 2 == 0:
+            return 0
+        
+        # For odd k, calculate the number of ways
+        ways = 0
+        for start in range(1, min(2*g, k + 1)):
+            if (k - start) % 2 == 0:
+                ways += pow(g, k - 1, mod)
+                ways %= mod
+        return ways
+    
+    def gcd(self, a, b):
+        while b:
+            a, b = b, a % b
+        return a"
+python,runtime_error,"IndexError: list index out of range
+    if last and word[0] == words[last-1][-1]:
+Line 15 in dfs (Solution.py)
+    res = min(res, dfs(temp, new_last, memo) + new_last)
+Line 18 in dfs (Solution.py)
+    res = min(res, dfs(temp, new_last, memo) + new_last)
+Line 18 in dfs (Solution.py)
+    return dfs(words, 0, memo)
+Line 23 in minimizeConcatenatedLength (Solution.py)
+    ret = Solution().minimizeConcatenatedLength(param_1)
+Line 42 in _driver (Solution.py)
+    _driver()
+Line 52 in <module> (Solution.py)",../questions/Medium\decremental-string-concatenation\responses\Python2\response_python2_2_failed.json,"class Solution(object):
+    def minimizeConcatenatedLength(self, words):
+        """"""
+        :type words: List[str]
+        :rtype: int
+        """"""
+        def dfs(words, last, memo):
+            if not words:
+                return 0
+            if (last, tuple(words)) in memo:
+                return memo[(last, tuple(words))]
+            res = float('inf')
+            for i, word in enumerate(words):
+                new_last = len(word)
+                if last and word[0] == words[last-1][-1]:
+                    new_last -= 1
+                temp = words[:i] + words[i+1:]
+                res = min(res, dfs(temp, new_last, memo) + new_last)
+            memo[(last, tuple(words))] = res
+            return res
+
+        memo = {}
+        return dfs(words, 0, memo)"
+python,runtime_error,"IndexError: list index out of range
+    dp[i][j] += dp[i - 1][j - k]
+Line 14 in distributeCandies (Solution.py)
+    ret = Solution().distributeCandies(param_1, param_2)
+Line 39 in _driver (Solution.py)
+    _driver()
+Line 49 in <module> (Solution.py)",../questions/Medium\distribute-candies-among-children-ii\responses\Python2\response_python2_1_failed.json,"class Solution(object):
+    def distributeCandies(self, n, limit):
+        """"""
+        :type n: int
+        :type limit: int
+        :rtype: int
+        """"""
+        dp = [[0] * (limit + 1) for _ in range(4)]
+        dp[0][0] = 1
+        for i in range(1, 4):
+            for j in range(n + 1):
+                for k in range(limit + 1):
+                    if j >= k:
+                        dp[i][j] += dp[i - 1][j - k]
+        return dp[3][n]"
+python,runtime_error,"TypeError: inf is not valid value for the expected return type integer
+    raise TypeError(str(ret) + "" is not valid value for the expected return type integer"");
+Line 43 in _driver (Solution.py)
+    _driver()
+Line 49 in <module> (Solution.py)",../questions/Medium\extra-characters-in-a-string\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def minExtraChar(self, s, dictionary):
+        """"""
+        :type s: str
+        :type dictionary: List[str]
+        :rtype: int
+        """"""
+        dp = [float('inf')] * (len(s) + 1)
+        dp[0] = 0
+        for i in range(1, len(s) + 1):
+            for word in dictionary:
+                if s[i-len(word):i] == word:
+                    dp[i] = min(dp[i], dp[i-len(word)])
+            dp[i] += 1
+        return dp[-1] - 1"
+python,runtime_error,"AttributeError: 'Solution' object has no attribute 'getLongestSubsequence'
+    ret = Solution().getLongestSubsequence(param_1, param_2)
+Line 45 in _driver (Solution.py)
+    _driver()
+Line 55 in <module> (Solution.py)",../questions/Medium\longest-unequal-adjacent-groups-subsequence-i\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def getWordsInLongestSubsequence(self, n, words, groups):
+        """"""
+        :type n: int
+        :type words: List[str]
+        :type groups: List[int]
+        :rtype: List[str]
+        """"""
+        dp = [[[], []] for _ in range(n + 1)]  # dp[i][0] or dp[i][1] stores the longest subsequence ending at i with group 0 or 1
+        
+        for i in range(n):
+            if groups[i] == 0:
+                dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + [words[i]], key=len)
+                dp[i][1] = dp[i - 1][1]
+            else:
+                dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + [words[i]], key=len)
+                dp[i][0] = dp[i - 1][0]
+        
+        # Find the longest subsequence among all possibilities
+        longest_subsequence = max(dp[n - 1][0], dp[n - 1][1], key=len)
+        return longest_subsequence"
+python,runtime_error,"AttributeError: 'Solution' object has no attribute 'getLongestSubsequence'
+    ret = Solution().getLongestSubsequence(param_1, param_2)
+Line 47 in _driver (Solution.py)
+    _driver()
+Line 57 in <module> (Solution.py)",../questions/Medium\longest-unequal-adjacent-groups-subsequence-i\responses\Python2\response_python2_1_failed.json,"class Solution(object):
+    def getWordsInLongestSubsequence(self, n, words, groups):
+        """"""
+        :type n: int
+        :type words: List[str]
+        :type groups: List[int]
+        :rtype: List[str]
+        """"""
+        if n == 0:
+            return []
+        elif n == 1:
+            return [words[0]]
+        
+        # Initialize variables to store the current best sequence and the last group encountered
+        best_sequence = [words[0]]
+        last_group = groups[0]
+        
+        for i in range(1, n):
+            if groups[i] != last_group:
+                best_sequence.append(words[i])
+                last_group = groups[i]
+        
+        return best_sequence"
+python,runtime_error,"AttributeError: 'Solution' object has no attribute 'getLongestSubsequence'
+    ret = Solution().getLongestSubsequence(param_1, param_2)
+Line 79 in _driver (Solution.py)
+    _driver()
+Line 89 in <module> (Solution.py)",../questions/Medium\longest-unequal-adjacent-groups-subsequence-i\responses\Python2\response_python2_2_failed.json,"class Solution(object):
+    def getWordsInLongestSubsequence(self, n, words, groups):
+        """"""
+        :type n: int
+        :type words: List[str]
+        :type groups: List[int]
+        :rtype: List[str]
+        """"""
+        # Initialize the dynamic programming table
+        dp = [[-1 for _ in range(2)] for _ in range(n)]
+        parent = [[None for _ in range(2)] for _ in range(n)]
+        
+        # Function to find the maximum length and the last index of the longest subsequence
+        def find_max_length_and_last_index():
+            max_length = 0
+            last_index = -1
+            last_group = -1
+            for i in range(n):
+                for group in range(2):
+                    if dp[i][group] > max_length:
+                        max_length = dp[i][group]
+                        last_index = i
+                        last_group = group
+            return max_length, last_index, last_group
+        
+        # Dynamic programming to fill the table
+        for i in range(n):
+            for group in range(2):
+                if groups[i] == group:
+                    if i == 0:
+                        dp[i][group] = 1
+                    else:
+                        if dp[i-1][1-group] > dp[i-1][group]:
+                            dp[i][group] = dp[i-1][1-group] + 1
+                            parent[i][group] = (i-1, 1-group)
+                        else:
+                            dp[i][group] = dp[i-1][group]
+                            if dp[i-1][group] != -1:
+                                parent[i][group] = (i-1, group)
+                else:
+                    dp[i][group] = dp[i-1][group]
+                    if dp[i-1][group] != -1:
+                        parent[i][group] = (i-1, group)
+        
+        # Backtrack to find the longest subsequence
+        _, last_index, last_group = find_max_length_and_last_index()
+        if last_index == -1:
+            return []
+        
+        sequence = []
+        while last_index is not None:
+            sequence.append(words[last_index])
+            last_index, last_group = parent[last_index][last_group]
+        
+        return sequence[::-1]"
+python,runtime_error,"TypeError: getWordsInLongestSubsequence() takes exactly 4 arguments (3 given)
+    ret = Solution().getWordsInLongestSubsequence(param_1, param_2)
+Line 57 in _driver (Solution.py)
+    _driver()
+Line 67 in <module> (Solution.py)",../questions/Medium\longest-unequal-adjacent-groups-subsequence-ii\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def getWordsInLongestSubsequence(self, n, words, groups):
+        def hammingDistance(s1, s2):
+            return sum(c1 != c2 for c1, c2 in zip(s1, s2))
+        
+        adj = [[] for _ in range(n)]
+        for i in range(n):
+            for j in range(i + 1, n):
+                if words[i] != words[j] and len(words[i]) == len(words[j]) and hammingDistance(words[i], words[j]) == 1 and groups[i] != groups[j]:
+                    adj[i].append(j)
+                    adj[j].append(i)
+        
+        def dfs(node, path):
+            visited[node] = True
+            path.append(node)
+            maxPath = list(path)
+            for nei in adj[node]:
+                if not visited[nei]:
+                    curPath = dfs(nei, path)
+                    if len(curPath) > len(maxPath):
+                        maxPath = curPath
+            path.pop()
+            visited[node] = False
+            return maxPath
+        
+        longest = []
+        for i in range(n):
+            visited = [False] * n
+            curLongest = dfs(i, [])
+            if len(curLongest) > len(longest):
+                longest = curLongest
+                
+        return [words[i] for i in longest]"
+python,runtime_error,"SyntaxError: invalid syntax
+                      ^
+    nonlocal max_length, max_path
+Line 17  (Solution.py)",../questions/Medium\longest-unequal-adjacent-groups-subsequence-ii\responses\Python2\response_python2_1_failed.json,"class Solution(object):
+    def getWordsInLongestSubsequence(self, words, groups):
+        n = len(words)
+        def hammingDistance(s1, s2):
+            return sum(c1 != c2 for c1, c2 in zip(s1, s2))
+        
+        adj = [[] for _ in range(n)]
+        for i in range(n):
+            for j in range(i + 1, n):
+                if len(words[i]) == len(words[j]) and hammingDistance(words[i], words[j]) == 1 and groups[i] != groups[j]:
+                    adj[i].append(j)
+                    adj[j].append(i)
+        
+        max_length, max_path = 0, []
+        
+        def dfs(node, path):
+            nonlocal max_length, max_path
+            if len(path) > max_length:
+                max_length = len(path)
+                max_path = path[:]
+            for next_node in adj[node]:
+                if next_node not in path:
+                    dfs(next_node, path + [next_node])
+        
+        for i in range(n):
+            dfs(i, [i])
+        
+        return [words[i] for i in max_path]"
+python,runtime_error,"TypeError: getWordsInLongestSubsequence() takes exactly 4 arguments (3 given)
+    ret = Solution().getWordsInLongestSubsequence(param_1, param_2)
+Line 51 in _driver (Solution.py)
+    _driver()
+Line 61 in <module> (Solution.py)",../questions/Medium\longest-unequal-adjacent-groups-subsequence-ii\responses\Python2\response_python2_2_failed.json,"class Solution(object):
+    def getWordsInLongestSubsequence(self, n, words, groups):
+        def hammingDistance(s1, s2):
+            return sum(c1 != c2 for c1, c2 in zip(s1, s2))
+        
+        def canFollow(i, j):
+            return groups[i] != groups[j] and len(words[i]) == len(words[j]) and hammingDistance(words[i], words[j]) == 1
+        
+        dp = [1] * n
+        parent = [-1] * n
+        maxLength, maxIndex = 1, 0
+        
+        for i in range(n):
+            for j in range(i):
+                if canFollow(j, i) and dp[j] + 1 > dp[i]:
+                    dp[i] = dp[j] + 1
+                    parent[i] = j
+                    if dp[i] > maxLength:
+                        maxLength = dp[i]
+                        maxIndex = i
+        
+        result = []
+        while maxIndex != -1:
+            result.append(words[maxIndex])
+            maxIndex = parent[maxIndex]
+        
+        return result[::-1]"
+python,runtime_error,"ValueError: negative shift count
+    total += cycles * (1 << (pos - x)) + max(0, remainder - (1 << (pos - x)) + 1)
+Line 15 in bits_in_positions_upto (Solution.py)
+    while bits_in_positions_upto(right) < k:  # Increase the search space exponentially until it exceeds k
+Line 20 in findMaximumNumber (Solution.py)
+    ret = Solution().findMaximumNumber(param_1, param_2)
+Line 55 in _driver (Solution.py)
+    _driver()
+Line 65 in <module> (Solution.py)",../questions/Medium\maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k\responses\Python2\response_python2_2_failed.json,"class Solution(object):
+    def findMaximumNumber(self, k, x):
+        """"""
+        :type k: int
+        :type x: int
+        :rtype: int
+        """"""
+        def bits_in_positions_upto(n):
+            # Count set bits at positions that are multiples of x for all numbers up to n
+            total = 0
+            for pos in range(x-1, 32, x):  # Check bits at positions that are multiples of x
+                # Every 2^pos numbers, there are 2^(pos-1) numbers that have the bit at 'pos' set
+                # Plus the remainder if n exceeds the current cycle
+                cycles, remainder = divmod(n, 1 << pos)
+                total += cycles * (1 << (pos - x)) + max(0, remainder - (1 << (pos - x)) + 1)
+            return total
+
+        # Binary search for the maximum number
+        left, right = 1, 2
+        while bits_in_positions_upto(right) < k:  # Increase the search space exponentially until it exceeds k
+            left = right
+            right <<= 1
+
+        while left < right:
+            mid = (left + right) // 2
+            if bits_in_positions_upto(mid) < k:
+                left = mid + 1
+            else:
+                right = mid
+
+        return left if bits_in_positions_upto(left) == k else left - 1"
+python,runtime_error,"MemoryError
+    for x in range(2**n):
+Line 11 in maximumXorProduct (Solution.py)
+    ret = Solution().maximumXorProduct(param_1, param_2, param_3)
+Line 42 in _driver (Solution.py)
+    _driver()
+Line 52 in <module> (Solution.py)",../questions/Medium\maximum-xor-product\responses\Python2\response_python2_0_failed.json,"class Solution(object):
+    def maximumXorProduct(self, a, b, n):
+        """"""
+        :type a: int
+        :type b: int
+        :type n: int
+        :rtype: int
+        """"""
+        MOD = 10**9 + 7
+        max_val = 0
+        for x in range(2**n):
+            max_val = max(max_val, (a ^ x) * (b ^ x))
+        return max_val % MOD"

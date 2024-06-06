@@ -1,0 +1,315 @@
+Language,Error Type,Message,File Path,Code
+ruby,runtime_error,"Line 10: wrong number of arguments (given 0, expected 1..2) (ArgumentError) in solution.rb (inject)
+  max_beauty = max_beauty_combinations.map(&:inject).max
+                                           ^^^^^^^^
+Line 10 in solution.rb (map)
+Line 10 in solution.rb (count_k_subsequences_with_max_beauty)
+Line 32 in solution.rb (__driver_helper__)
+Line 47 in solution.rb (block in _driver)
+Line 42 in solution.rb (each)
+Line 42 in solution.rb (each_slice)
+Line 42 in solution.rb (_driver)
+Line 59 in solution.rb (<main>)",../questions/Hard\count-k-subsequences-of-a-string-with-maximum-beauty\responses\Ruby\response_ruby_2_failed.json,"# @param {String} s
+# @param {Integer} k
+# @return {Integer}
+def count_k_subsequences_with_max_beauty(s, k)
+  mod = 10**9 + 7
+  count = Hash.new(0)
+  s.each_char { |c| count[c] += 1 }
+  frequencies = count.values.sort.reverse
+  max_beauty_combinations = frequencies.combination(k).select { |combo| combo.inject(:+) == frequencies.first(k).inject(:+) }
+  max_beauty = max_beauty_combinations.map(&:inject).max
+  
+  # Count the number of ways to choose k characters such that their combined frequency equals max_beauty
+  ways = 0
+  count.values.each do |frequency|
+    ways += 1 if frequency == max_beauty
+  end
+  
+  # Calculate combinations of characters that can form the max beauty
+  result = 1
+  count.each do |char, frequency|
+    next if frequency < max_beauty / k
+    result *= frequency
+    result %= mod
+  end
+  
+  result
+end"
+ruby,runtime_error,"Line 11: no implicit conversion of true into Integer (TypeError) in solution.rb (dfs)
+        return dp[pos][tight][sum] if !dp[pos][tight][sum].nil? && !tight
+                                               ^^^^^
+Line 25 in solution.rb (solve)
+Line 30 in solution.rb (count)
+Line 39 in solution.rb (__driver_helper__)
+Line 58 in solution.rb (block in _driver)
+Line 49 in solution.rb (each)
+Line 49 in solution.rb (each_slice)
+Line 49 in solution.rb (_driver)
+Line 70 in solution.rb (<main>)",../questions/Hard\count-of-integers\responses\Ruby\response_ruby_1_failed.json,"# @param {String} num1
+# @param {String} num2
+# @param {Integer} min_sum
+# @param {Integer} max_sum
+# @return {Integer}
+def count(num1, num2, min_sum, max_sum)
+    mod = 10**9 + 7
+
+    def dfs(limits, pos, tight, sum, dp)
+        return 1 if pos == limits.size
+        return dp[pos][tight][sum] if !dp[pos][tight][sum].nil? && !tight
+
+        limit = tight ? limits[pos] : 9
+        res = 0
+        (0..limit).each do |digit|
+            next_tight = tight && digit == limit
+            res += dfs(limits, pos + 1, next_tight, sum + digit, dp) if sum + digit <= max_sum
+        end
+        dp[pos][tight][sum] = res unless tight
+        res
+    end
+
+    def solve(num, min_sum, dp)
+        limits = num.to_s.chars.map(&:to_i)
+        dfs(limits, 0, true, 0, dp) - 1
+    end
+
+    dp1 = Array.new(num1.size) { Array.new(2) { Array.new(max_sum + 1, nil) } }
+    dp2 = Array.new(num2.size) { Array.new(2) { Array.new(max_sum + 1, nil) } }
+    total = solve(num2, min_sum, dp2)
+    total -= solve(num1, min_sum, dp1) unless num1.to_i == 0
+
+    (total % mod + mod) % mod
+end"
+ruby,runtime_error,"Line 19: undefined method `*' for nil:NilClass (NoMethodError) in solution.rb (block in number_of_sequence)
+    (factorial[n] * inv_factorial[k] % mod) * inv_factorial[n - k] % mod
+                  ^
+Line 25 in solution.rb (block in number_of_sequence)
+Line 23 in solution.rb (each)
+Line 23 in solution.rb (number_of_sequence)
+Line 41 in solution.rb (__driver_helper__)
+Line 56 in solution.rb (block in _driver)
+Line 51 in solution.rb (each)
+Line 51 in solution.rb (each_slice)
+Line 51 in solution.rb (_driver)
+Line 68 in solution.rb (<main>)",../questions/Hard\count-the-number-of-infection-sequences\responses\Ruby\response_ruby_2_failed.json,"# @param {Integer} n
+# @param {Integer[]} sick
+# @return {Integer}
+def number_of_sequence(n, sick)
+  mod = 10**9 + 7
+
+  # Calculate the factorial of n modulo mod
+  factorial = [1]
+  (1..n).each { |i| factorial << (factorial[-1] * i) % mod }
+
+  # Calculate the inverse of factorial[i] modulo mod
+  inv_factorial = Array.new(n + 1, 1)
+  inv_factorial[n] = factorial[n].pow(mod - 2, mod)
+  n.downto(2) { |i| inv_factorial[i - 1] = (inv_factorial[i] * i) % mod }
+
+  # Helper method to compute nCk modulo mod
+  define_method(:nCk) do |n, k|
+    return 0 if k > n || k < 0
+    (factorial[n] * inv_factorial[k] % mod) * inv_factorial[n - k] % mod
+  end
+
+  total_ways = 1
+  (1...sick.size).each do |i|
+    gap = sick[i] - sick[i - 1] - 1
+    total_ways = (total_ways * nCk(2 * gap, gap)) % mod
+    total_ways = (total_ways * inv_factorial[gap + 1]) % mod
+  end
+
+  first_gap = sick[0]
+  last_gap = n - 1 - sick[-1]
+  if first_gap > 0 || last_gap > 0
+    total_ways = (total_ways * nCk(first_gap + last_gap, first_gap)) % mod
+  end
+
+  total_ways
+end"
+ruby,runtime_error,"Line 17: undefined method `+' for nil:NilClass (NoMethodError) in solution.rb (minimum_time)
+      max_time = [max_time, prefix_sum.length - 1 + nums1.length - j].max if prefix_sum.last + suffix_sum <= x
+                                                                                             ^
+Line 32 in solution.rb (__driver_helper__)
+Line 49 in solution.rb (block in _driver)
+Line 42 in solution.rb (each)
+Line 42 in solution.rb (each_slice)
+Line 42 in solution.rb (_driver)
+Line 61 in solution.rb (<main>)",../questions/Hard\minimum-time-to-make-array-sum-at-most-x\responses\Ruby\response_ruby_1_failed.json,"# @param {Integer[]} nums1
+# @param {Integer[]} nums2
+# @param {Integer} x
+# @return {Integer}
+def minimum_time(nums1, nums2, x)
+    prefix_sum = [0]
+    nums1.each_with_index { |num, i| prefix_sum << prefix_sum[i] + num }
+    max_time = -1
+    suffix_sum = 0
+    j = nums1.length - 1
+  
+    while j >= 0
+      suffix_sum += nums1[j]
+      while !prefix_sum.empty? && prefix_sum.last + suffix_sum > x
+        prefix_sum.pop
+      end
+      max_time = [max_time, prefix_sum.length - 1 + nums1.length - j].max if prefix_sum.last + suffix_sum <= x
+      j -= 1
+    end
+  
+    nums1.each_with_index do |_, i|
+      break if prefix_sum[i] + suffix_sum > x
+      max_time = [max_time, i].max
+    end
+  
+    max_time == -1 ? -1 : nums1.length - max_time
+end"
+ruby,runtime_error,"Line 7: wrong number of arguments (given 0, expected 1..2) (ArgumentError) in solution.rb (index)
+Line 7 in solution.rb (block in maximum_length)
+Line 5 in solution.rb (each)
+Line 5 in solution.rb (each_with_index)
+Line 5 in solution.rb (maximum_length)
+Line 25 in solution.rb (__driver_helper__)
+Line 38 in solution.rb (block in _driver)
+Line 35 in solution.rb (each)
+Line 35 in solution.rb (each_slice)
+Line 35 in solution.rb (_driver)
+Line 50 in solution.rb (<main>)",../questions/Medium\find-longest-special-substring-that-occurs-thrice-ii\responses\Ruby\response_ruby_0_failed.json,"# @param {String} s
+# @return {Integer}
+def maximum_length(s)
+    max_length = -1
+    s.chars.each_with_index do |char, i|
+        next if i > 0 && char == s[i-1]
+        length = s[i..-1].index { |c| c != char }
+        length = s.length - i if length.nil?
+        while length >= 3
+            sub = s[i, length]
+            count = s.scan(sub).length
+            if count >= 3
+                max_length = [max_length, length].max
+                break
+            end
+            length -= 1
+        end
+    end
+    max_length
+end"
+ruby,runtime_error,"Line 14: undefined method `uniq' for 363:Integer (NoMethodError) in solution.rb (punishment_number)
+    sum.uniq.sum
+       ^^^^^
+Line 20 in solution.rb (__driver_helper__)
+Line 33 in solution.rb (block in _driver)
+Line 30 in solution.rb (each)
+Line 30 in solution.rb (each_slice)
+Line 30 in solution.rb (_driver)
+Line 45 in solution.rb (<main>)",../questions/Medium\find-the-punishment-number-of-an-integer\responses\Ruby\response_ruby_0_failed.json,"# @param {Integer} n
+# @return {Integer}
+def punishment_number(n)
+    sum = 0
+    (1..n).each do |i|
+        square = i * i
+        (1..square.to_s.length).each do |j|
+            (0..square.to_s.length - j).each do |k|
+                parts = [square.to_s[0...k], square.to_s[k, j], square.to_s[k+j..-1]].reject(&:empty?)
+                sum += square if parts.map(&:to_i).sum == i
+            end
+        end
+    end
+    sum.uniq.sum
+end"
+ruby,runtime_error,"Line 20: divided by 0 (ZeroDivisionError) in solution.rb (/)
+Line 20 in solution.rb (block in max_number_of_alloys)
+Line 10 in solution.rb (each)
+Line 10 in solution.rb (max_number_of_alloys)
+Line 30 in solution.rb (__driver_helper__)
+Line 53 in solution.rb (block in _driver)
+Line 40 in solution.rb (each)
+Line 40 in solution.rb (each_slice)
+Line 40 in solution.rb (_driver)
+Line 65 in solution.rb (<main>)",../questions/Medium\maximum-number-of-alloys\responses\Ruby\response_ruby_1_failed.json,"# @param {Integer} n
+# @param {Integer} k
+# @param {Integer} budget
+# @param {Integer[][]} composition
+# @param {Integer[]} stock
+# @param {Integer[]} cost
+# @return {Integer}
+def max_number_of_alloys(n, k, budget, composition, stock, cost)
+  max_alloys = 0
+  (0...k).each do |machine|
+    min_alloys_possible = Float::INFINITY
+    total_cost_for_one_alloy = 0
+    (0...n).each do |metal|
+      required_metal = composition[machine][metal]
+      if stock[metal] < required_metal
+        total_cost_for_one_alloy += (required_metal - stock[metal]) * cost[metal]
+      end
+    end
+    if total_cost_for_one_alloy <= budget
+      alloys_possible_with_budget = budget / total_cost_for_one_alloy
+      max_alloys = [max_alloys, alloys_possible_with_budget].max
+    end
+  end
+  max_alloys
+end"
+ruby,runtime_error,"Line 14: nil can't be coerced into Integer (TypeError) in solution.rb (*)
+    (total * factorial[26-4]) % mod
+             ^^^^^^^^^^^^^^^
+Line 14 in solution.rb (string_count)
+Line 20 in solution.rb (__driver_helper__)
+Line 33 in solution.rb (block in _driver)
+Line 30 in solution.rb (each)
+Line 30 in solution.rb (each_slice)
+Line 30 in solution.rb (_driver)
+Line 45 in solution.rb (<main>)",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\Ruby\response_ruby_0_failed.json,"# @param {Integer} n
+# @return {Integer}
+def string_count(n)
+    mod = 10**9 + 7
+    factorial = [1]
+    (1..n).each { |i| factorial[i] = factorial[i-1] * i % mod }
+    
+    total = factorial[n]
+    ['e','e','l','t'].each do |char|
+        count = 1
+        total = total * factorial[count] % mod
+    end
+    
+    (total * factorial[26-4]) % mod
+end"
+ruby,runtime_error,"Line 12: undefined method `bit_count' for 1:Integer (NoMethodError) in solution.rb (block in special_perm)
+    count = mask.bit_count
+                ^^^^^^^^^^
+Did you mean?  bit_length
+Line 11 in solution.rb (each)
+Line 11 in solution.rb (special_perm)
+Line 34 in solution.rb (__driver_helper__)
+Line 47 in solution.rb (block in _driver)
+Line 44 in solution.rb (each)
+Line 44 in solution.rb (each_slice)
+Line 44 in solution.rb (_driver)
+Line 59 in solution.rb (<main>)",../questions/Medium\special-permutations\responses\Ruby\response_ruby_0_failed.json,"# @param {Integer[]} nums
+# @return {Integer}
+def special_perm(nums)
+  mod = 10**9 + 7
+  n = nums.size
+  dp = Array.new(1 << n, 0)
+  dp[0] = 1
+
+  nums.sort!
+  
+  (1...(1 << n)).each do |mask|
+    count = mask.bit_count
+    nums.each_with_index do |num, i|
+      next if (mask & (1 << i)).zero?
+      prev_mask = mask ^ (1 << i)
+      next if dp[prev_mask].zero?
+      
+      nums.each_with_index do |prev_num, j|
+        next if (prev_mask & (1 << j)).zero?
+        if num % prev_num == 0 || prev_num % num == 0
+          dp[mask] = (dp[mask] + dp[prev_mask]) % mod
+          break
+        end
+      end
+    end
+  end
+
+  dp.last
+end"

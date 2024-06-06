@@ -1,0 +1,1414 @@
+Language,Error Type,Message,File Path,Code
+golang,compile_error,"Line 50: Char 6: main redeclared in this block (solution.go)
+Line 36: Char 6: other declaration of main (solution.go)",../questions/Easy\check-if-the-number-is-fascinating\responses\Go\response_golang_0_failed.json,"package main
+
+import (
+ ""fmt""
+ ""strconv""
+)
+
+func isFascinating(n int) bool {
+ // Concatenate n, 2*n, and 3*n
+ concatenated := strconv.Itoa(n) + strconv.Itoa(2*n) + strconv.Itoa(3*n)
+
+ // Check if the concatenated string contains all digits from 1 to 9 exactly once
+ return containsAllDigits(concatenated)
+}
+
+// Helper function to check if the string contains all digits from 1 to 9 exactly once
+func containsAllDigits(s string) bool {
+ if len(s) != 9 {
+  return false
+ }
+
+ digitCount := make(map[rune]int)
+ for _, char := range s {
+  digitCount[char]++
+ }
+
+ for i := '1'; i <= '9'; i++ {
+  if digitCount[i] != 1 {
+   return false
+  }
+ }
+
+ return true
+}
+
+func main() {
+ // Example tests
+ fmt.Println(isFascinating(192)) // true
+ fmt.Println(isFascinating(100)) // false
+}"
+golang,compile_error,"Line 32: Char 26: invalid character U+003F '?' (solution.go)
+Line 32: Char 28: syntax error: unexpected maxLength at end of statement (solution.go)",../questions/Easy\longest-alternating-subarray\responses\Go\response_golang_2_failed.json,"func alternatingSubarray(nums []int) int {
+    maxLength := -1 // To track the maximum length of an alternating subarray
+    currentLength := 1 // Tracks current potential alternating subarray length
+    
+    // This variable will track whether we're looking for a +1 or -1 difference next.
+    // It is initialized to 0 and will be set to 1 or -1 based on the first comparison.
+    var expectedDiff int
+    
+    for i := 1; i < len(nums); i++ {
+        diff := nums[i] - nums[i-1] // Calculate the difference between consecutive elements
+        
+        // Check if the current difference matches the expected alternating pattern
+        if diff == expectedDiff {
+            currentLength++ // Increment the length of the current alternating subarray
+            if currentLength > maxLength {
+                maxLength = currentLength // Update the maximum length found
+            }
+            // Flip the expected difference for the next element
+            expectedDiff *= -1
+        } else {
+            // Reset for a new potential alternating subarray starting from this element
+            if diff == 1 || diff == -1 {
+                currentLength = 2 // Start counting this new subarray
+                expectedDiff = -diff // Set the expected difference for the next element
+            } else {
+                currentLength = 1 // Reset if not starting a valid alternating pattern
+            }
+        }
+    }
+    
+    // If no alternating subarray of length > 1 is found, return -1
+    return maxLength > 1 ? maxLength : -1
+}"
+golang,compile_error,"Line 46: Char 6: main redeclared in this block (solution.go)
+Line 33: Char 6: other declaration of main (solution.go)",../questions/Easy\number-of-beautiful-pairs\responses\Go\response_golang_0_failed.json,"package main
+
+import ""fmt""
+
+func countBeautifulPairs(nums []int) int {
+    count := 0
+    for i := 0; i < len(nums)-1; i++ {
+        firstDigitI := firstDigit(nums[i])
+        for j := i + 1; j < len(nums); j++ {
+            lastDigitJ := nums[j] % 10
+            if gcd(firstDigitI, lastDigitJ) == 1 {
+                count++
+            }
+        }
+    }
+    return count
+}
+
+func firstDigit(n int) int {
+    for n >= 10 {
+        n /= 10
+    }
+    return n
+}
+
+func gcd(x, y int) int {
+    for y != 0 {
+        x, y = y, x%y
+    }
+    return x
+}
+
+func main() {
+    fmt.Println(countBeautifulPairs([]int{2, 5, 1, 4})) // Example 1
+    fmt.Println(countBeautifulPairs([]int{11, 21, 12})) // Example 2
+}"
+golang,compile_error,"Line 32: Char 6: main redeclared in this block (solution.go)
+Line 16: Char 6: other declaration of main (solution.go)",../questions/Easy\sum-of-squares-of-special-elements\responses\Go\response_golang_0_failed.json,"package main
+
+func sumOfSquares(nums []int) int {
+    sum := 0
+    n := len(nums)
+    for i := 1; i <= n; i++ {
+        if n%i == 0 {
+            // Adjust for 0-indexed array
+            sum += nums[i-1] * nums[i-1]
+        }
+    }
+    return sum
+}
+
+// Example usage
+func main() {
+    example1 := []int{1, 2, 3, 4}
+    println(sumOfSquares(example1)) // Output: 21
+
+    example2 := []int{2, 7, 1, 19, 18, 3}
+    println(sumOfSquares(example2)) // Output: 63
+}"
+golang,compile_error,"Line 28: Char 7: invalid operation: operator ! not defined on tight (variable of type int) (solution.go)
+Line 37: Char 22: invalid operation: tight & (i == up) (mismatched types int and untyped bool) (solution.go)
+Line 40: Char 7: invalid operation: operator ! not defined on tight (variable of type int) (solution.go)
+Line 46: Char 2: inc declared and not used (solution.go)",../questions/Hard\count-of-integers\responses\Go\response_golang_0_failed.json,"package main
+
+import (
+ ""strconv""
+)
+
+func count(num1 string, num2 string, min_sum int, max_sum int) int {
+ const mod = 1e9 + 7
+ dp := make([][][]int, len(num2)+1)
+ for i := range dp {
+  dp[i] = make([][]int, 2)
+  for j := range dp[i] {
+   dp[i][j] = make([]int, max_sum+1)
+   for k := range dp[i][j] {
+    dp[i][j][k] = -1
+   }
+  }
+ }
+
+ var dfs func(pos, tight, sum int, limit string) int
+ dfs = func(pos, tight, sum int, limit string) int {
+  if pos == len(limit) {
+   if sum >= min_sum && sum <= max_sum {
+    return 1
+   }
+   return 0
+  }
+  if !tight && dp[pos][0][sum] != -1 {
+   return dp[pos][0][sum]
+  }
+  up := 9
+  if tight == 1 {
+   up, _ = strconv.Atoi(string(limit[pos]))
+  }
+  ans := 0
+  for i := 0; i <= up; i++ {
+   ans += dfs(pos+1, tight&(i==up), sum+i, limit)
+   ans %= mod
+  }
+  if !tight {
+   dp[pos][0][sum] = ans
+  }
+  return ans
+ }
+
+ inc := func(s string) string {
+  n := len(s)
+  bytes := make([]byte, n)
+  carry := 1
+  for i := n - 1; i >= 0; i-- {
+   sum := int(s[i]-'0') + carry
+   if sum == 10 {
+    bytes[i] = '0'
+   } else {
+    bytes[i] = byte(sum + '0')
+    carry = 0
+    break
+   }
+  }
+  if carry == 1 {
+   return ""1"" + string(bytes)
+  }
+  return string(bytes[:n])
+ }
+
+ num1Int, _ := strconv.Atoi(num1)
+ num1Int--
+ num1 = strconv.Itoa(num1Int)
+ if num1Int == 0 {
+  num1 = ""0""
+ }
+
+ total := dfs(0, 1, 0, num2) - dfs(0, 1, 0, num1)
+ if total < 0 {
+  total += mod
+ }
+ return total
+}"
+golang,compile_error,"Line 16: Char 34: invalid operation: l <= min(j - 1, i - 1 + dist) (mismatched types int and int64) (solution.go)
+Line 16: Char 38: cannot use j - 1 (value of type int) as int64 value in argument to min (solution.go)
+Line 16: Char 43: cannot use i - 1 + dist (value of type int) as int64 value in argument to min (solution.go)
+Line 32: Char 6: min redeclared in this block (solution.go)
+Line 25: Char 6: other declaration of min (solution.go)",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Go\response_golang_2_failed.json,"func minimumCost(nums []int, k int, dist int) int64 {
+    n := len(nums)
+    sum := make([]int64, n+1)
+    for i := 1; i <= n; i++ {
+        sum[i] = sum[i-1] + int64(nums[i-1])
+    }
+
+    dp := make([]int64, n+1)
+    for i := range dp {
+        dp[i] = 1<<63 - 1
+    }
+    dp[0] = 0
+
+    for i := 1; i <= k; i++ {
+        for j := n; j >= i; j-- {
+            for l := i - 1; l <= min(j-1, i-1+dist); l++ {
+                dp[j] = min(dp[j], dp[l]+sum[j]-sum[l]-int64(nums[l]))
+            }
+        }
+    }
+
+    return dp[n]
+}
+
+func min(a, b int64) int64 {
+    if a < b {
+        return a
+    }
+    return b
+}
+
+func min(a, b int) int {
+    if a < b {
+        return a
+    }
+    return b
+}"
+golang,compile_error,"Line 3: Char 5: alen declared and not used (solution.go)
+Line 3: Char 11: blen declared and not used (solution.go)",../questions/Hard\find-beautiful-indices-in-the-given-array-ii\responses\Go\response_golang_0_failed.json,"func beautifulIndices(s string, a string, b string, k int) []int {
+    var beautiful []int
+    alen, blen := len(a), len(b)
+
+    // Function to find all indices of substring in s
+    findIndices := func(sub string) []int {
+        var indices []int
+        for i := 0; i <= len(s)-len(sub); i++ {
+            if s[i:i+len(sub)] == sub {
+                indices = append(indices, i)
+            }
+        }
+        return indices
+    }
+
+    aIndices := findIndices(a)
+    bIndices := findIndices(b)
+
+    for _, ai := range aIndices {
+        for _, bi := range bIndices {
+            if abs(ai-bi) <= k {
+                beautiful = appendIfUnique(beautiful, ai)
+                break
+            }
+        }
+    }
+
+    return beautiful
+}
+
+// Helper function to append value if it's not already in the slice
+func appendIfUnique(slice []int, value int) []int {
+    for _, v := range slice {
+        if v == value {
+            return slice
+        }
+    }
+    return append(slice, value)
+}
+
+// Helper function to calculate absolute value
+func abs(x int) int {
+    if x < 0 {
+        return -x
+    }
+    return x
+}"
+golang,compile_error,Line 17: Char 25: undefined: find (solution.go),../questions/Hard\greatest-common-divisor-traversal\responses\Go\response_golang_0_failed.json,"func gcd(a, b int) int {
+    for b != 0 {
+        a, b = b, a%b
+    }
+    return a
+}
+
+func canTraverseAllPairs(nums []int) bool {
+    n := len(nums)
+    parent := make([]int, n)
+    for i := range parent {
+        parent[i] = i
+    }
+
+    find := func(x int) int {
+        if parent[x] != x {
+            parent[x] = find(parent[x])
+        }
+        return parent[x]
+    }
+
+    union := func(x, y int) {
+        rootX := find(x)
+        rootY := find(y)
+        if rootX != rootY {
+            parent[rootX] = rootY
+        }
+    }
+
+    for i := 0; i < n; i++ {
+        for j := i + 1; j < n; j++ {
+            if gcd(nums[i], nums[j]) > 1 {
+                union(i, j)
+            }
+        }
+    }
+
+    root := find(0)
+    for i := 1; i < n; i++ {
+        if find(i) != root {
+            return false
+        }
+    }
+    return true
+}"
+golang,compile_error,"Line 1: Char 8: ""math"" imported and not used (solution.go)",../questions/Hard\greatest-common-divisor-traversal\responses\Go\response_golang_2_failed.json,"import ""math""
+
+func gcd(a, b int) int {
+    for b != 0 {
+        a, b = b, a%b
+    }
+    return a
+}
+
+func canTraverseAllPairs(nums []int) bool {
+    n := len(nums)
+    if n == 1 {
+        return true
+    }
+
+    // Prime factorization
+    maxVal := int(1e5 + 1)
+    spf := make([]int, maxVal) // Smallest prime factor
+    for i := range spf {
+        spf[i] = i
+    }
+    for i := 2; i*i < maxVal; i++ {
+        if spf[i] == i {
+            for j := i * i; j < maxVal; j += i {
+                if spf[j] == j {
+                    spf[j] = i
+                }
+            }
+        }
+    }
+
+    // Union-find setup
+    parent := make([]int, n)
+    for i := range parent {
+        parent[i] = i
+    }
+    var find func(x int) int
+    find = func(x int) int {
+        if parent[x] != x {
+            parent[x] = find(parent[x])
+        }
+        return parent[x]
+    }
+    union := func(x, y int) {
+        rootX := find(x)
+        rootY := find(y)
+        if rootX != rootY {
+            parent[rootX] = rootY
+        }
+    }
+
+    // Connect components based on common prime factors
+    primeToIndex := make(map[int]int)
+    for i, num := range nums {
+        for num > 1 {
+            prime := spf[num]
+            if _, found := primeToIndex[prime]; found {
+                union(i, primeToIndex[prime])
+            }
+            primeToIndex[prime] = i
+            for num%prime == 0 {
+                num /= prime
+            }
+        }
+    }
+
+    root := find(0)
+    for i := 1; i < n; i++ {
+        if find(i) != root {
+            return false
+        }
+    }
+    return true
+}"
+golang,compile_error,"Line 7: Char 19: syntax error: unexpected x at end of statement (solution.go)
+Line 18: Char 5: syntax error: non-declaration statement outside function body (solution.go)
+Line 19: Char 11: syntax error: unexpected := in parameter list; possibly missing comma or ) (solution.go)
+Line 23: Char 13: syntax error: non-declaration statement outside function body (solution.go)",../questions/Hard\maximum-element-sum-of-a-complete-subset-of-indices\responses\Go\response_golang_0_failed.json,"import ""math""
+
+func maximumSum(nums []int) int64 {
+    factorize := func(x int) map[int]int {
+        factors := make(map[int]int)
+        for i := 2; i*i <= x; i++ {
+            while x%i == 0 {
+                factors[i]++
+                x /= i
+            }
+        }
+        if x > 1 {
+            factors[x] = 1
+        }
+        return factors
+    }
+
+    mask := func(factors map[int]int) int {
+        m := 0
+        for factor, power := range factors {
+            if power%2 != 0 {
+                m |= 1 << uint(factor%30) // Use modulo 30 to reduce the size of the mask.
+            }
+        }
+        return m
+    }
+
+    maxSum := int64(0)
+    sums := make(map[int]int64)
+    for _, num := range nums {
+        m := mask(factorize(num))
+        sums[m] += int64(num)
+        if sums[m] > maxSum {
+            maxSum = sums[m]
+        }
+    }
+
+    // Check for zero mask (perfect squares)
+    if sums[0] > maxSum {
+        maxSum = sums[0]
+    }
+
+    return maxSum
+}"
+golang,compile_error,"Line 9: Char 19: syntax error: unexpected n at end of statement (solution.go)
+Line 20: Char 5: syntax error: non-declaration statement outside function body (solution.go)
+Line 21: Char 9: syntax error: unexpected for, expected ) (solution.go)
+Line 24: Char 13: syntax error: unexpected } after top level declaration (solution.go)",../questions/Hard\maximum-element-sum-of-a-complete-subset-of-indices\responses\Go\response_golang_1_failed.json,"import (
+    ""math""
+)
+
+func maximumSum(nums []int) int64 {
+    getFactors := func(n int) map[int]int {
+        factors := make(map[int]int)
+        for i := 2; i*i <= n; i++ {
+            while n%i == 0 {
+                factors[i]++
+                n /= i
+            }
+        }
+        if n > 1 {
+            factors[n]++
+        }
+        return factors
+    }
+
+    isSquare := func(factors map[int]int) bool {
+        for _, v := range factors {
+            if v%2 != 0 {
+                return false
+            }
+        }
+        return true
+    }
+
+    maxSum := int64(0)
+    for i := 0; i < (1 << uint(len(nums))); i++ {
+        sum := int64(0)
+        factors := make(map[int]int)
+        for j, num := range nums {
+            if (i>>uint(j))&1 == 1 {
+                sum += int64(num)
+                for factor, power := range getFactors(num) {
+                    factors[factor] += power
+                }
+            }
+        }
+        if isSquare(factors) && sum > maxSum {
+            maxSum = sum
+        }
+    }
+    return maxSum
+}"
+golang,compile_error,Line 21: Char 13: effectiveIndex declared and not used (solution.go),../questions/Medium\collecting-chocolates\responses\Go\response_golang_1_failed.json,"func minCost(nums []int, x int) int64 {
+    n := len(nums)
+    // Convert nums to int64 slice for easier handling of large numbers
+    costs := make([]int64, n)
+    for i, cost := range nums {
+        costs[i] = int64(cost)
+    }
+
+    // Calculate the cost of buying chocolates directly without any operation
+    minCost := int64(0)
+    for _, cost := range costs {
+        minCost += cost
+    }
+
+    // Try to find a cheaper cost by rotating the chocolate types
+    for i := 0; i < n; i++ {
+        // For each starting point, calculate the cost considering operations
+        rotateCost := int64(0)
+        for j := 0; j < n; j++ {
+            // The effective index after i rotations
+            effectiveIndex := (i + j) % n
+            // The cost of making this rotation and buying the chocolate
+            currentCost := costs[j] + int64(i)*int64(x)
+            rotateCost += currentCost
+
+            // If rotateCost already exceeds minCost, no need to continue
+            if rotateCost >= minCost {
+                break
+            }
+        }
+        if rotateCost < minCost {
+            minCost = rotateCost
+        }
+    }
+
+    return minCost
+}"
+golang,compile_error,"Line 50: Char 95: not enough arguments in call to pow (solution.go)
+	have (int, int)
+	want (int, int, int)
+Line 53: Char 95: not enough arguments in call to pow (solution.go)
+	have (int, int)
+	want (int, int, int)",../questions/Medium\construct-product-matrix\responses\Go\response_golang_2_failed.json,"func constructProductMatrix(grid [][]int) [][]int {
+    n, m := len(grid), len(grid[0])
+    mod := 12345
+
+    // Initialize matrices to store prefix products
+    rowPrefixProduct := make([][]int, n)
+    colPrefixProduct := make([][]int, m)
+    for i := range rowPrefixProduct {
+        rowPrefixProduct[i] = make([]int, m)
+    }
+    for i := range colPrefixProduct {
+        colPrefixProduct[i] = make([]int, n)
+    }
+
+    // Compute prefix products for rows
+    for i := 0; i < n; i++ {
+        rowPrefixProduct[i][0] = grid[i][0]
+        for j := 1; j < m; j++ {
+            rowPrefixProduct[i][j] = (rowPrefixProduct[i][j-1] * grid[i][j]) % mod
+        }
+    }
+
+    // Compute prefix products for columns
+    for j := 0; j < m; j++ {
+        colPrefixProduct[j][0] = grid[0][j]
+        for i := 1; i < n; i++ {
+            colPrefixProduct[j][i] = (colPrefixProduct[j][i-1] * grid[i][j]) % mod
+        }
+    }
+
+    // Initialize the product matrix
+    productMatrix := make([][]int, n)
+    for i := range productMatrix {
+        productMatrix[i] = make([]int, m)
+    }
+
+    // Calculate the product matrix
+    for i := 0; i < n; i++ {
+        for j := 0; j < m; j++ {
+            product := 1
+            // Multiply by prefix products from the left and above
+            if j > 0 {
+                product = (product * rowPrefixProduct[i][j-1]) % mod
+            }
+            if i > 0 {
+                product = (product * colPrefixProduct[j][i-1]) % mod
+            }
+            // Multiply by suffix products from the right and below
+            if j < m-1 {
+                product = (product * ((rowPrefixProduct[i][m-1] * pow(rowPrefixProduct[i][j], mod-2)) % mod)) % mod
+            }
+            if i < n-1 {
+                product = (product * ((colPrefixProduct[j][n-1] * pow(colPrefixProduct[j][i], mod-2)) % mod)) % mod
+            }
+            productMatrix[i][j] = product
+        }
+    }
+
+    return productMatrix
+}
+
+// pow calculates the power of a number under modulo using fast exponentiation
+func pow(a, b, mod int) int {
+    result := 1
+    a = a % mod
+    for b > 0 {
+        if b&1 != 0 {
+            result = (result * a) % mod
+        }
+        a = (a * a) % mod
+        b >>= 1
+    }
+    return result
+}"
+golang,compile_error,"Line 9: Char 17: undefined: abs (solution.go)
+Line 16: Char 5: min declared and not used (solution.go)
+Line 23: Char 5: max declared and not used (solution.go)
+Line 30: Char 5: abs declared and not used (solution.go)",../questions/Medium\construct-the-longest-new-string\responses\Go\response_golang_0_failed.json,"func longestString(x int, y int, z int) int {
+    // Function to calculate the maximum string length
+    maxLen := func(a, b, c int) int {
+        // If either a or b is 0, the maximum length is the sum of the other plus min(2, c) * 2
+        if a == 0 || b == 0 {
+            return 2*(min(a, b)+min(2, c)) + max(a, b)
+        }
+        // If there are more AB strings than the difference between a and b
+        if c >= abs(a-b)-1 {
+            return 2 * (a + b + min(c, (a+b+c)/3))
+        }
+        // Otherwise, use AB strings to balance out a and b
+        return 2 * (min(a, b) + min(c+1, max(a, b)))
+    }
+    // Helper function to find the minimum of two integers
+    min := func(a, b int) int {
+        if a < b {
+            return a
+        }
+        return b
+    }
+    // Helper function to find the maximum of two integers
+    max := func(a, b int) int {
+        if a > b {
+            return a
+        }
+        return b
+    }
+    // Helper function to find the absolute value
+    abs := func(x int) int {
+        if x < 0 {
+            return -x
+        }
+        return x
+    }
+
+    return maxLen(x, y, z)
+}"
+golang,compile_error,"Line 15: Char 15: syntax error: unexpected freq at end of statement (solution.go)
+Line 23: Char 5: syntax error: non-declaration statement outside function body (solution.go)",../questions/Medium\count-subarrays-where-max-element-appears-at-least-k-times\responses\Go\response_golang_1_failed.json,"func countSubarrays(nums []int, k int) int64 {
+    n := len(nums)
+    maxVal := 0
+    for _, num := range nums {
+        if num > maxVal {
+            maxVal = num
+        }
+    }
+
+    count, left, freq := int64(0), 0, 0
+    for right := 0; right < n; right++ {
+        if nums[right] == maxVal {
+            freq++
+        }
+        while freq >= k {
+            count += int64(n - right)
+            if nums[left] == maxVal {
+                freq--
+            }
+            left++
+        }
+    }
+    return count
+}"
+golang,compile_error,Line 17: Char 27: cannot range over bits.OnesCount(uint(1)) (value of type int) (solution.go),../questions/Medium\find-if-array-can-be-sorted\responses\Go\response_golang_2_failed.json,"func canSortArray(nums []int) bool {
+    bitCountGroups := make(map[int][]int)
+
+    // Populate groups based on bit count
+    for _, num := range nums {
+        count := bits.OnesCount(uint(num))
+        bitCountGroups[count] = append(bitCountGroups[count], num)
+    }
+
+    // Sort each group individually
+    for _, group := range bitCountGroups {
+        sort.Ints(group)
+    }
+
+    // Reconstruct the array from sorted groups
+    sortedNums := make([]int, 0, len(nums))
+    for _, count := range bits.OnesCount(uint(1)) { // This line is incorrect; it's a placeholder to show intent
+        if group, exists := bitCountGroups[count]; exists {
+            sortedNums = append(sortedNums, group...)
+        }
+    }
+
+    // Check if the reconstructed array is sorted
+    for i := 1; i < len(sortedNums); i++ {
+        if sortedNums[i-1] > sortedNums[i] {
+            return false
+        }
+    }
+
+    return true
+}"
+golang,compile_error,"Line 4: Char 45: invalid operation: string('z' - ('a' - (s[i] - 1))) * (len(s) - i - 1) (mismatched types string and int) (solution.go)
+Line 7: Char 12: invalid operation: string('z' - ('a' - (s[0] - 1))) * len(s) (mismatched types string and int) (solution.go)",../questions/Medium\lexicographically-smallest-string-after-substring-operation\responses\Go\response_golang_0_failed.json,"func smallestString(s string) string {
+    for i := 0; i < len(s); i++ {
+        if s[i] > 'a' {
+            return s[:i] + string(s[i]-1) + string('z'-('a'-(s[i]-1)))*(len(s)-i-1)
+        }
+    }
+    return string('z'-('a'-(s[0]-1))) * len(s)
+}"
+golang,compile_error,"Line 10: Char 15: syntax error: unexpected left at end of statement (solution.go)
+Line 20: Char 5: syntax error: non-declaration statement outside function body (solution.go)",../questions/Medium\maximum-beauty-of-an-array-after-applying-operation\responses\Go\response_golang_2_failed.json,"func maximumBeauty(nums []int, k int) int {
+    n := len(nums)
+    if n == 1 {
+        return 1
+    }
+    sort.Ints(nums)
+    maxLen := 1
+    for i := 0; i < n; i++ {
+        left, right := i, n-1
+        while left <= right {
+            mid := left + (right-left)/2
+            if nums[mid] <= nums[i]+k {
+                maxLen = max(maxLen, mid-i+1)
+                left = mid + 1
+            } else {
+                right = mid - 1
+            }
+        }
+    }
+    return maxLen
+}
+
+func max(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}"
+golang,compile_error,Line 11: Char 13: alloysPossibleForMetal declared and not used (solution.go),../questions/Medium\maximum-number-of-alloys\responses\Go\response_golang_2_failed.json,"func maxNumberOfAlloys(n int, k int, budget int, composition [][]int, stock []int, cost []int) int {
+    maxAlloys := 0
+    for machine := 0; machine < k; machine++ {
+        minAlloys := budget // Start with a high number of alloys and find the minimum possible
+        for metalType := 0; metalType < n; metalType++ {
+            requiredUnits := composition[machine][metalType]
+            totalCostForMetal := 0
+            if stock[metalType] < requiredUnits {
+                totalCostForMetal = (requiredUnits - stock[metalType]) * cost[metalType]
+            }
+            alloysPossibleForMetal := budget / totalCostForMetal
+            if requiredUnits > 0 { // Avoid division by zero
+                totalAlloysPossible := (stock[metalType] + (budget / cost[metalType])) / requiredUnits
+                if totalAlloysPossible < minAlloys {
+                    minAlloys = totalAlloysPossible
+                }
+            }
+        }
+        if minAlloys > maxAlloys {
+            maxAlloys = minAlloys
+        }
+    }
+    return maxAlloys
+}"
+golang,compile_error,"Line 16: Char 22: cannot use max(maxVal, int64(minVal1 - minVal2) * int64(maxProduct[j])) (value of type int) as int64 value in assignment (solution.go)
+Line 16: Char 26: cannot use maxVal (variable of type int64) as int value in argument to max (solution.go)
+Line 16: Char 34: cannot use int64(minVal1 - minVal2) * int64(maxProduct[j]) (value of type int64) as int value in argument to max (solution.go)",../questions/Medium\maximum-value-of-an-ordered-triplet-ii\responses\Go\response_golang_0_failed.json,"func maximumTripletValue(nums []int) int64 {
+    maxVal := int64(0)
+    minVal1, minVal2 := int(1e6+1), int(1e6+1)
+    maxProduct := make([]int, len(nums))
+    
+    for i := len(nums) - 1; i >= 0; i-- {
+        if i < len(nums)-1 {
+            maxProduct[i] = max(maxProduct[i+1], nums[i])
+        } else {
+            maxProduct[i] = nums[i]
+        }
+    }
+    
+    for j := 0; j < len(nums); j++ {
+        if nums[j] > minVal1 {
+            maxVal = max(maxVal, int64(minVal1-minVal2)*int64(maxProduct[j]))
+        }
+        if nums[j] < minVal1 {
+            minVal2 = minVal1
+            minVal1 = nums[j]
+        } else if nums[j] < minVal2 {
+            minVal2 = nums[j]
+        }
+    }
+    
+    return maxVal
+}
+
+func max(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}"
+golang,compile_error,Line 5: Char 9: cost declared and not used (solution.go),../questions/Medium\minimum-cost-to-make-all-characters-equal\responses\Go\response_golang_0_failed.json,"func minimumCost(s string) int64 {
+    n := len(s)
+    prefix := make([]int, n+1)
+    suffix := make([]int, n+1)
+    var cost int64 = 0
+
+    for i := 0; i < n; i++ {
+        prefix[i+1] = prefix[i] + int(s[i]-'0')
+    }
+    for i := n - 1; i >= 0; i-- {
+        suffix[i] = suffix[i+1] + int(s[i]-'0')
+    }
+
+    minCost := int64(n) // Maximum cost is changing all to one side
+    for i := 0; i <= n; i++ {
+        // Cost to make all 0s to the left and all 1s to the right
+        costToLeft := int64(i-prefix[i]) + int64(suffix[i]-prefix[i])
+        // Cost to make all 1s to the left and all 0s to the right
+        costToRight := int64(prefix[i]) + int64(n-i-(suffix[i]-prefix[i]))
+        if costToLeft < minCost {
+            minCost = costToLeft
+        }
+        if costToRight < minCost {
+            minCost = costToRight
+        }
+    }
+
+    return minCost
+}"
+golang,compile_error,"Line 15: Char 27: undefined: abs (solution.go)
+Line 20: Char 5: abs declared and not used (solution.go)",../questions/Medium\minimum-cost-to-make-array-equalindromic\responses\Go\response_golang_0_failed.json,"func minimumCost(nums []int) int64 {
+    isPalindrome := func(x int) bool {
+        s := fmt.Sprint(x)
+        for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+            if s[i] != s[j] {
+                return false
+            }
+        }
+        return true
+    }
+
+    minCost := func(target int) int64 {
+        var cost int64 = 0
+        for _, num := range nums {
+            cost += int64(abs(num - target))
+        }
+        return cost
+    }
+
+    abs := func(x int) int {
+        if x < 0 {
+            return -x
+        }
+        return x
+    }
+
+    median := nums[len(nums)/2]
+    cost := minCost(median)
+    for i := 1; i <= 9; i++ {
+        if isPalindrome(median - i) {
+            cost = min(cost, minCost(median-i))
+        }
+        if isPalindrome(median + i) {
+            cost = min(cost, minCost(median+i))
+        }
+    }
+    return cost
+}
+
+func min(a, b int64) int64 {
+    if a < b {
+        return a
+    }
+    return b
+}"
+golang,compile_error,"Line 15: Char 27: undefined: abs (solution.go)
+Line 20: Char 5: abs declared and not used (solution.go)",../questions/Medium\minimum-cost-to-make-array-equalindromic\responses\Go\response_golang_2_failed.json,"func minimumCost(nums []int) int64 {
+    isPalindromic := func(x int) bool {
+        s := fmt.Sprint(x)
+        for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+            if s[i] != s[j] {
+                return false
+            }
+        }
+        return true
+    }
+
+    minCost := func(target int) int64 {
+        var cost int64 = 0
+        for _, num := range nums {
+            cost += int64(abs(num - target))
+        }
+        return cost
+    }
+
+    abs := func(x int) int {
+        if x < 0 {
+            return -x
+        }
+        return x
+    }
+
+    totalCost := int64(1<<63 - 1)
+    for _, num := range nums {
+        if isPalindromic(num) {
+            cost := minCost(num)
+            if cost < totalCost {
+                totalCost = cost
+            }
+        }
+    }
+
+    // Check for palindromic numbers close to the median if not found in nums
+    median := nums[len(nums)/2]
+    for i := 0; i <= 9; i++ {
+        if median-i > 0 && isPalindromic(median-i) {
+            cost := minCost(median - i)
+            if cost < totalCost {
+                totalCost = cost
+            }
+        }
+        if isPalindromic(median + i) {
+            cost := minCost(median + i)
+            if cost < totalCost {
+                totalCost = cost
+            }
+        }
+    }
+
+    return totalCost
+}"
+golang,compile_error,"Line 32: Char 5: targetSum declared and not used (solution.go)
+Line 35: Char 5: sumDiff declared and not used (solution.go)",../questions/Medium\minimum-equal-sum-of-two-arrays-after-replacing-zeros\responses\Go\response_golang_1_failed.json,"func minSum(nums1 []int, nums2 []int) int64 {
+    sum1, sum2 := 0, 0
+    zeroCount1, zeroCount2 := 0, 0
+
+    // Calculate the initial sum of nums1 and nums2, and count zeros in each
+    for _, n := range nums1 {
+        sum1 += n
+        if n == 0 {
+            zeroCount1++
+        }
+    }
+    for _, n := range nums2 {
+        sum2 += n
+        if n == 0 {
+            zeroCount2++
+        }
+    }
+
+    // If both arrays have no zeros and their sums are not equal, return -1
+    if zeroCount1 == 0 && zeroCount2 == 0 && sum1 != sum2 {
+        return -1
+    }
+
+    // Calculate the total number of replacements needed to make sums equal
+    totalReplacements := zeroCount1 + zeroCount2
+    if totalReplacements == 0 {
+        // If no zeros, the arrays already have equal sums
+        return int64(sum1)
+    }
+
+    // The target sum each array needs to reach
+    targetSum := max(sum1, sum2) + max(zeroCount1, zeroCount2)
+
+    // The difference in sums that needs to be balanced by replacing zeros
+    sumDiff := abs(sum1 - sum2)
+
+    // The minimum sum we aim for is the higher sum plus the minimum number of increments needed
+    // to make up for the sum difference across the zeros, ensuring both arrays can reach the same sum
+    if sum1 > sum2 {
+        return int64(sum1 + zeroCount1)
+    } else if sum2 > sum1 {
+        return int64(sum2 + zeroCount2)
+    }
+    // If sums are equal but there are zeros, distribute 1 to each zero
+    return int64(max(sum1, sum2) + totalReplacements)
+}
+
+func abs(x int) int {
+    if x < 0 {
+        return -x
+    }
+    return x
+}
+
+func max(x, y int) int {
+    if x > y {
+        return x
+    }
+    return y
+}"
+golang,compile_error,Line 17: Char 22: assignment mismatch: 3 variables but 2 values (solution.go),../questions/Medium\movement-of-robots\responses\Go\response_golang_2_failed.json,"func sumDistance(nums []int, s string, d int) int {
+    mod := 1000000007
+    n := len(nums)
+    events := make([][2]int, 2*n)
+    for i := 0; i < n; i++ {
+        if s[i] == 'L' {
+            events[2*i] = [2]int{nums[i] - d, -1}
+            events[2*i+1] = [2]int{nums[i], 1}
+        } else {
+            events[2*i] = [2]int{nums[i], -1}
+            events[2*i+1] = [2]int{nums[i] + d, 1}
+        }
+    }
+    sort.Slice(events, func(i, j int) bool {
+        return events[i][0] < events[j][0]
+    })
+    sum, cnt, ans := 0, 0
+    for _, event := range events {
+        if event[1] == 1 {
+            ans = (ans + event[0]*cnt - sum) % mod
+        } else {
+            sum = (sum + event[0]) % mod
+            cnt++
+        }
+    }
+    return (ans + mod) % mod
+}"
+golang,compile_error,"Line 16: Char 20: undefined: gcdExtended (solution.go)
+Line 26: Char 5: gcdExtended declared and not used (solution.go)
+Line 30: Char 24: undefined: gcdExtended (solution.go)",../questions/Medium\number-of-strings-which-can-be-rearranged-to-contain-substring\responses\Go\response_golang_1_failed.json,"func stringCount(n int) int {
+    const mod = 1000000007
+    if n < 4 {
+        return 0
+    }
+
+    // Function to calculate factorial modulo mod
+    factorial := make([]int, n+1)
+    factorial[0] = 1
+    for i := 1; i <= n; i++ {
+        factorial[i] = (factorial[i-1] * i) % mod
+    }
+
+    // Function to calculate modular inverse
+    modInverse := func(a, mod int) int {
+        g, x, _ := gcdExtended(a, mod)
+        if g != 1 {
+            return 0 // Inverse doesn't exist
+        } else {
+            // m is added to handle negative x
+            return (x%mod + mod) % mod
+        }
+    }
+
+    // Extended Euclidean Algorithm
+    gcdExtended := func(a, b int) (int, int, int) {
+        if a == 0 {
+            return b, 0, 1
+        }
+        gcd, x1, y1 := gcdExtended(b%a, a)
+        x := y1 - (b/a)*x1
+        y := x1
+        return gcd, x, y
+    }
+
+    // Function to calculate nCr % mod
+    nCrMod := func(n, r, mod int) int {
+        if r == 0 {
+            return 1
+        }
+        num := factorial[n]
+        den := (factorial[r] * factorial[n-r]) % mod
+        return (num * modInverse(den, mod)) % mod
+    }
+
+    // Calculate the number of good strings
+    goodStrings := 0
+    for i := 4; i <= n; i++ {
+        c := nCrMod(n-1, i-1, mod) // Choose positions for ""leet""
+        rest := i - 4               // Rest of the positions after placing ""leet""
+        permutations := 1
+        for j := 0; j < rest; j++ {
+            permutations = (permutations * 26) % mod // Each position can be any of the 26 letters
+        }
+        goodStrings = (goodStrings + c*permutations) % mod
+    }
+
+    return goodStrings
+}"
+golang,compile_error,"Line 4: Char 49: invalid operation: primes[i] <= n / 2 (mismatched types bool and int) (solution.go)
+Line 5: Char 19: invalid operation: n - primes[i] (mismatched types int and bool) (solution.go)
+Line 6: Char 41: cannot use primes[i] (map index expression of type bool) as int value in array or slice literal (solution.go)
+Line 6: Char 52: invalid operation: n - primes[i] (mismatched types int and bool) (solution.go)",../questions/Medium\prime-pairs-with-target-sum\responses\Go\response_golang_1_failed.json,"func findPrimePairs(n int) [][]int {
+    primes := sieveOfEratosthenes(n)
+    var pairs [][]int
+    for i := 0; i < len(primes) && primes[i] <= n/2; i++ {
+        if primes[n-primes[i]] {
+            pairs = append(pairs, []int{primes[i], n - primes[i]})
+        }
+    }
+    return pairs
+}
+
+func sieveOfEratosthenes(n int) map[int]bool {
+    prime := make([]bool, n+1)
+    for i := 2; i <= n; i++ {
+        prime[i] = true
+    }
+    for p := 2; p*p <= n; p++ {
+        if prime[p] {
+            for i := p * p; i <= n; i += p {
+                prime[i] = false
+            }
+        }
+    }
+    primes := make(map[int]bool)
+    for p := 2; p <= n; p++ {
+        if prime[p] {
+            primes[p] = true
+        }
+    }
+    return primes
+}"
+golang,compile_error,"Line 11: Char 19: syntax error: unexpected onesCount at end of statement (solution.go)
+Line 28: Char 5: syntax error: non-declaration statement outside function body (solution.go)",../questions/Medium\shortest-and-lexicographically-smallest-beautiful-string\responses\Go\response_golang_1_failed.json,"func shortestBeautifulSubstring(s string, k int) string {
+    n := len(s)
+    onesCount, start := 0, 0
+    minLength, minSubstr := n+1, """"
+
+    for end := 0; end < n; end++ {
+        if s[end] == '1' {
+            onesCount++
+        }
+        if onesCount == k {
+            while onesCount == k {
+                if s[start] == '1' {
+                    onesCount--
+                }
+                start++
+            }
+            if end-start+2 < minLength {
+                minLength = end - start + 2
+                minSubstr = s[start-1 : end+1]
+            } else if end-start+2 == minLength {
+                candidate := s[start-1 : end+1]
+                if candidate < minSubstr {
+                    minSubstr = candidate
+                }
+            }
+        }
+    }
+    return minSubstr
+}"
+golang,compile_error,"Line 4: Char 5: ""sort"" imported and not used (solution.go)",../questions/Medium\shortest-string-that-contains-three-strings\responses\Go\response_golang_1_failed.json,"package main
+
+import (
+    ""sort""
+)
+
+func minimumString(a string, b string, c string) string {
+    // Helper function to check if s1 contains s2
+    contains := func(s1, s2 string) bool {
+        return strings.Contains(s1, s2)
+    }
+
+    // Helper function to merge two strings with minimum overlap
+    merge := func(s1, s2 string) string {
+        maxOverlap := 0
+        for i := 1; i <= len(s1) && i <= len(s2); i++ {
+            if strings.HasSuffix(s1, s2[:i]) {
+                maxOverlap = i
+            }
+        }
+        return s1 + s2[maxOverlap:]
+    }
+
+    // Generate all permutations of the strings
+    strs := []string{a, b, c}
+    perms := [][]string{}
+    var permute func([]string, int)
+    permute = func(arr []string, n int) {
+        if n == len(arr)-1 {
+            tmp := make([]string, len(arr))
+            copy(tmp, arr)
+            perms = append(perms, tmp)
+            return
+        }
+        for i := n; i < len(arr); i++ {
+            arr[n], arr[i] = arr[i], arr[n]
+            permute(arr, n+1)
+            arr[n], arr[i] = arr[i], arr[n]
+        }
+    }
+    permute(strs, 0)
+
+    // Try all permutations to find the minimum string
+    minStr := """"
+    for _, perm := range perms {
+        cur := perm[0]
+        for i := 1; i < len(perm); i++ {
+            if contains(cur, perm[i]) {
+                continue
+            } else {
+                cur = merge(cur, perm[i])
+            }
+        }
+        if minStr == """" || len(cur) < len(minStr) || (len(cur) == len(minStr) && cur < minStr) {
+            minStr = cur
+        }
+    }
+
+    return minStr
+}"
+golang,runtime_error,"panic: runtime error: index out of range [47] with length 47
+main.count.func1(0x9?, 0x0?, 0x2e?, {0xc00009c140?, 0xa?})
+solution.go, line 26
+main.count.func1(0x8, 0x0, 0x26, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x7, 0x0, 0x1d, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x6, 0x0, 0x14, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x5, 0x0, 0xb, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x4, 0x0, 0x2, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x3, 0x0, 0x0, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x2, 0x0, 0x0, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x1, 0x0, 0x0, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count.func1(0x0, 0x1, 0x0, {0xc00009c140, 0xa})
+solution.go, line 39
+main.count({0xc00009c110, 0xa}, {0xc00009c140, 0xa}, 0x8, 0x2e)
+solution.go, line 65
+main.__helper__(...)
+solution.go, line 71
+main.main()
+solution.go, line 132",../questions/Hard\count-of-integers\responses\Go\response_golang_1_failed.json,"package main
+
+import ""strconv""
+
+func count(num1 string, num2 string, min_sum int, max_sum int) int {
+ const mod = 1e9 + 7
+ dp := make([][][]int, len(num2)+1)
+ for i := range dp {
+  dp[i] = make([][]int, 2)
+  for j := range dp[i] {
+   dp[i][j] = make([]int, max_sum+1)
+   for k := range dp[i][j] {
+    dp[i][j][k] = -1
+   }
+  }
+ }
+
+ var dfs func(pos, tight, sum int, limit string) int
+ dfs = func(pos, tight, sum int, limit string) int {
+  if pos == len(limit) {
+   if sum >= min_sum && sum <= max_sum {
+    return 1
+   }
+   return 0
+  }
+  if tight == 0 && dp[pos][tight][sum] != -1 {
+   return dp[pos][tight][sum]
+  }
+  up := 9
+  if tight == 1 {
+   up, _ = strconv.Atoi(string(limit[pos]))
+  }
+  ans := 0
+  for i := 0; i <= up; i++ {
+   newTight := tight
+   if i < up {
+    newTight = 0
+   }
+   ans += dfs(pos+1, newTight, sum+i, limit)
+   ans %= mod
+  }
+  if tight == 0 {
+   dp[pos][tight][sum] = ans
+  }
+  return ans
+ }
+
+ subtractOne := func(s string) string {
+  b := []byte(s)
+  for i := len(b) - 1; i >= 0; i-- {
+   if b[i] == '0' {
+    b[i] = '9'
+   } else {
+    b[i]--
+    break
+   }
+  }
+  if b[0] == '0' {
+   b = b[1:]
+  }
+  return string(b)
+ }
+
+ num1 = subtractOne(num1)
+ return (dfs(0, 1, 0, num2) - dfs(0, 1, 0, num1) + mod) % mod
+}"
+golang,runtime_error,"panic: Error when serializing long: -9223372036854775802 out of range [-(2^53-1), 2^53-1]
+leetcode/precompiled.(*Serializer).Serialize(0xc000072e30, {0x4b3220, 0xc0000120d0?})
+serializer.go, line 61
+main.main()
+solution.go, line 93",../questions/Hard\divide-an-array-into-subarrays-with-minimum-cost-ii\responses\Go\response_golang_0_failed.json,"func minimumCost(nums []int, k int, dist int) int64 {
+    n := len(nums)
+    dp := make([][]int64, k+1)
+    for i := range dp {
+        dp[i] = make([]int64, n+1)
+        for j := range dp[i] {
+            dp[i][j] = 1<<63 - 1
+        }
+    }
+    dp[0][0] = 0
+    for i := 1; i <= k; i++ {
+        for j := i; j <= n; j++ {
+            for l := max(i-1, j-dist-1); l < j; l++ {
+                dp[i][j] = min(dp[i][j], dp[i-1][l]+int64(nums[l]))
+            }
+        }
+    }
+    return dp[k][n]
+}
+
+func min(a, b int64) int64 {
+    if a < b {
+        return a
+    }
+    return b
+}
+
+func max(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}"
+golang,runtime_error,"panic: runtime error: index out of range [3] with length 3
+main.minSizeSubarray({0xc000080000?, 0xc000012090?, 0x1?}, 0x4b2060?)
+solution.go, line 28
+main.__helper__(...)
+solution.go, line 48
+main.main()
+solution.go, line 87",../questions/Medium\minimum-size-subarray-in-infinite-array\responses\Go\response_golang_2_failed.json,"func minSizeSubarray(nums []int, target int) int {
+    total := 0
+    for _, num := range nums {
+        total += num
+    }
+    if total < target {
+        return -1
+    }
+
+    result := len(nums) + 1
+    sum, start := 0, 0
+    for end := 0; end < len(nums); end++ {
+        sum += nums[end]
+        for sum >= target {
+            if end-start+1 < result {
+                result = end - start + 1
+            }
+            sum -= nums[start]
+            start++
+        }
+    }
+
+    // Attempt to wrap around the array if needed
+    if total == target {
+        return len(nums)
+    } else if total > target {
+        for end := 0; end < start; end++ {
+            sum += nums[end]
+            for sum >= target {
+                if end+len(nums)-start+1 < result {
+                    result = end + len(nums) - start + 1
+                }
+                sum -= nums[start%len(nums)]
+                start++
+            }
+        }
+    }
+
+    if result == len(nums)+1 {
+        return -1
+    }
+    return result
+}"

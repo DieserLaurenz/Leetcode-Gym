@@ -1,3 +1,0 @@
-Compile Error natürlich nur für Sprachen die auch kompiliert werden z.B. nicht für Python und co.
-
-Balkendiagramme farbig machen (grün, gelb, rot) um schwere des Fehlers zu symbolisieren
