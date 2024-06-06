@@ -1,1 +1,0 @@
-bei den error results dann noch Standart-Nullwerte für nicht erreichte Fehler hinzufügen
