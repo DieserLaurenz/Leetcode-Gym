@@ -18,7 +18,7 @@ Klonen Sie dieses Repository auf Ihren lokalen Computer.
 
 ```bash
 git clone https://github.com/DieserLaurenz/Leetcode-Scraper.git
-cd Leetcode-Scraper
+cd Leetcode-Gym
 ```
 
 ### Schritt 2: Erstellen einer virtuellen Umgebung
