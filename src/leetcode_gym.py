@@ -467,7 +467,7 @@ def is_driver_alive(driver):
 
 
 def main():
-    chatgpt_mode = int(input("0: Manual Mode, 1: Selenium Method\nBitte gewünschten Modus eingeben: "))
+    chatgpt_mode = int(input("0: Manual Mode, 1: Automatic Mode\nBitte gewünschten Modus eingeben: "))
 
     while True:
         try:
