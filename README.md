@@ -86,6 +86,7 @@ python leetcode_gym.py
 
 - `find_problematic_responses.py`: Sucht nach Problemen, die während des Datenerhebungsprozesses aufgetreten sind.
 - `analyse_results.py`: Führt Analysen durch und speichert die Ergebnisse im `results` Ordner.
+- `error_results.py`: Generiert einen Error-Report und speichert diesen im `results` Ordner.
 
 ## Lizenz
 
