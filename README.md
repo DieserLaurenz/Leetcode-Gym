@@ -92,7 +92,7 @@ python leetcode_gym.py
 
 [MIT](LICENSE)
 
-## Beitragende
+## Beiträge
 
 Falls Sie zur Verbesserung dieses Projekts beitragen möchten, sind Ihre Pull-Anfragen willkommen. Für umfangreichere Änderungen eröffnen Sie bitte zunächst ein Issue, um die geplanten Änderungen zu diskutieren.
 
