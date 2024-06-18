@@ -62,7 +62,7 @@ def collect_code_input():
     return '\n'.join(code_lines)
 
 
-def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, attempt, conversation_id, cache_path):
+def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, attempt, conversation_id, cache):
     lang_slug = snippet['langSlug']
     lang = snippet['lang']
     title_slug = question['titleSlug']
@@ -76,19 +76,31 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
     lang_response_directory = os.path.join(response_directory, lang)
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
+
+    if attempt == 0:
+        print(f"Processing: {title_slug} in {lang_slug}.")
+        if check_for_files(lang_response_directory):
+            print(f"Files found: {title_slug} in {lang_slug} but attempt 0. Deleting...")
+            delete_all_files_in_directory(lang_response_directory)
+
+    print("Copied initial prompt to clipboard")
+
     extracted_code = collect_code_input()
 
     submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
 
     # Überprüfe, ob die Lösung akzeptiert wurde
     if submission_response.get("status_msg") == 'Accepted':
-        with shelve.open(cache_path) as cache:
-            cache_key = f"{question_id}_{lang_slug}"
-            cache[cache_key] = submission_response
+        print(f"Korrekte Antwort in Versuch: {attempt}")
+        cache_key = f"{question_id}_{lang_slug}"
+        cache[cache_key] = submission_response
+        print("Answer saved to cache")
+
+        if lang_slug == "python":
+            lang_slug = "python2"
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
         save_response(lang_response_directory, response_filename, submission_response, extracted_code)
-        print(f"Korrekte Antwort")
         return True, "", ""
     else:
         error_prompt = extract_info_and_generate_prompt(submission_response)
@@ -96,10 +108,12 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
 
         if attempt == 2:
             print(f"Versuche überschritten")
-            with shelve.open(cache_path) as cache:
-                cache_key = f"{question_id}_{lang_slug}"
-                cache[cache_key] = submission_response
-                print("Answer saved to cache")
+            cache_key = f"{question_id}_{lang_slug}"
+            cache[cache_key] = submission_response
+            print("Answer saved to cache")
+        
+        if lang_slug == "python":
+            lang_slug = "python2"
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
         save_response(lang_response_directory, response_filename, submission_response, extracted_code)
@@ -339,12 +353,11 @@ def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
             prompt = generate_prompt_content(question, snippet)
 
             pyperclip.copy(prompt)
-            print("Copied initial prompt to clipboard")
 
             while attempt < 3:
                 is_success, error_prompt, conversation_id = process_snippet_with_copy_to_clipboard(subfolder_path, question,
                                                                                                 snippet,
-                                                                                                attempt, conversation_id, cache_path)
+                                                                                                attempt, conversation_id, cache)
                 if is_success:
                     break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
                 attempt += 1
@@ -454,9 +467,7 @@ def is_driver_alive(driver):
 
 
 def main():
-    #chatgpt_mode = int(input("0: Manual Mode, 1: Selenium Method\nBitte gewünschten Modus eingeben: "))
-    # 0: Manual Mode, 1: Selenium Method
-    chatgpt_mode = 1
+    chatgpt_mode = int(input("0: Manual Mode, 1: Selenium Method\nBitte gewünschten Modus eingeben: "))
 
     while True:
         try:
