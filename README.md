@@ -3,7 +3,7 @@
 
 ## Beschreibung
 
-Dieses Projekt wurde im Rahmen der Bachelorarbeit mit dem Titel "Evaluierung der Code-Generierungsfähigkeiten von ChatGPT 4: Eine vergleichende Analyse in 19 Programmiersprachen" entwickelt. Ziel des Projekts ist die Automatisierung der Analyse der Code-Generierungsfähigkeiten von ChatGPT 4, indem das Modell aufgefordert wird, LeetCode-Probleme in 19 verschiedenen Programmiersprachen zu lösen. Im Anschluss werden die Ergebnisse vergleichend untersucht. Dabei werden insbesondere die Lösungsraten, die aufgetretenen Fehler sowie die Speicher- und Laufzeitwerte der generierten Lösungen analysiert.
+Dieses Projekt wurde im Rahmen der Bachelorarbeit mit dem Titel "Evaluierung der Code-Generierungsfähigkeiten von ChatGPT 4: Eine vergleichende Analyse in 19 Programmiersprachen" entwickelt. Ziel des Projekts ist die Automatisierung der Analyse der Code-Generierungsfähigkeiten von ChatGPT 4, indem das Modell auf LeetCode-Probleme in 19 verschiedenen Programmiersprachen getestet wird. Im Anschluss werden die Ergebnisse vergleichend untersucht. Dabei werden insbesondere die Lösungsraten, die aufgetretenen Fehler sowie die Speicher- und Laufzeitwerte der generierten Lösungen analysiert.
 
 ## Voraussetzungen
 
