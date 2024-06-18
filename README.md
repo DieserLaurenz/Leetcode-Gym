@@ -3,7 +3,7 @@
 
 ## Beschreibung
 
-Dieses Projekt ermöglicht das automatische Fetchen und Analysieren von LeetCode-Problemen. Es verwendet Python-Skripte, um LeetCode-Probleme basierend auf spezifischen Kriterien zu sammeln, die Datenerhebung zu organisieren und anschließend die gesammelten Daten zu analysieren. Die Ergebnisse der Analyse werden für weitere Untersuchungen gespeichert.
+Dieses Projekt wurde im Rahmen der Bachelorarbeit mit dem Titel "Evaluierung der Code-Generierungsfähigkeiten von ChatGPT 4: Eine vergleichende Analyse in 19 Programmiersprachen" entwickelt. Ziel des Projekts ist die Automatisierung der Analyse der Code-Generierungsfähigkeiten von ChatGPT 4, indem das Modell aufgefordert wird, LeetCode-Probleme in 19 verschiedenen Programmiersprachen zu lösen. Im Anschluss werden die Ergebnisse vergleichend untersucht. Dabei werden insbesondere die Lösungsraten, die aufgetretenen Fehler sowie die Speicher- und Laufzeitwerte der generierten Lösungen analysiert.
 
 ## Voraussetzungen
 
