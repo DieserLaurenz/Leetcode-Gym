@@ -1,5 +1,5 @@
 
-# Leetcode-Scraper
+# Leetcode-Gym
 
 ## Beschreibung
 
