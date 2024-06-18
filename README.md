@@ -1,9 +1,9 @@
 
-# Leetcode-Scraper
+# Leetcode-Gym
 
 ## Beschreibung
 
-Dieses Projekt ermöglicht das automatische Fetchen und Analysieren von LeetCode-Problemen. Es verwendet Python-Skripte, um LeetCode-Probleme basierend auf spezifischen Kriterien zu sammeln, die Datenerhebung zu organisieren und anschließend die gesammelten Daten zu analysieren. Die Ergebnisse der Analyse werden für weitere Untersuchungen gespeichert.
+Dieses Projekt wurde im Rahmen der Bachelorarbeit mit dem Titel "Evaluierung der Code-Generierungsfähigkeiten von ChatGPT 4: Eine vergleichende Analyse in 19 Programmiersprachen" entwickelt. Ziel des Projekts ist die Automatisierung der Analyse der Code-Generierungsfähigkeiten von ChatGPT 4, indem das Modell auf LeetCode-Probleme in 19 verschiedenen Programmiersprachen getestet wird. Im Anschluss werden die Ergebnisse vergleichend untersucht. Dabei werden insbesondere die Lösungsraten, die aufgetretenen Fehler sowie die Speicher- und Laufzeitwerte der generierten Lösungen analysiert.
 
 ## Voraussetzungen
 
@@ -17,7 +17,7 @@ Dieses Projekt ermöglicht das automatische Fetchen und Analysieren von LeetCode
 Klonen Sie dieses Repository auf Ihren lokalen Computer.
 
 ```bash
-git clone https://github.com/DieserLaurenz/Leetcode-Scraper.git
+git clone https://github.com/DieserLaurenz/Leetcode-Gym.git
 cd Leetcode-Gym
 ```
 
@@ -54,11 +54,11 @@ Kopieren Sie `env.example` und erstellen Sie eine neue Datei namens `.env`. Füg
 
 - `CSRF_TOKEN`: Cookie von eingeloggtem LeetCode.com Account (cookie name: `csrftoken`)
 - `LEETCODE_SESSION`: Cookie von eingeloggtem LeetCode.com Account (cookie name: `LEETCODE_SESSION`)
-- `CHATGPT_SESSION_TOKEN`: Cookie von eingeloggtem ChatGPT Account (cookie name: `__Secure-next-auth.session-token`)
+- `CHATGPT_SESSION_TOKEN`: Cookie von eingeloggtem Chatgpt.com Account (cookie name: `__Secure-next-auth.session-token`)
 
 ### Schritt 5: Ausführen der Skripte
 
-#### LeetCode Frage Scraper
+#### LeetCode Fragen schürfen
 
 Navigieren Sie zum `src` Ordner und führen Sie das `leetcode_question_scraper.py` Skript aus, um LeetCode-Probleme zu fetchen. Passen Sie die Konstanten im Skript nach Bedarf an:
 
@@ -92,7 +92,7 @@ python leetcode_gym.py
 
 [MIT](LICENSE)
 
-## Beitragende
+## Beiträge
 
-Wenn Sie zur Verbesserung dieses Projekts beitragen möchten, sind Ihre Pull-Anfragen willkommen. Für größere Änderungen eröffnen Sie bitte zuerst ein Issue, um zu besprechen, was Sie ändern möchten.
+Falls Sie zur Verbesserung dieses Projekts beitragen möchten, sind Ihre Pull-Anfragen willkommen. Für umfangreichere Änderungen eröffnen Sie bitte zunächst ein Issue, um die geplanten Änderungen zu diskutieren.
 
