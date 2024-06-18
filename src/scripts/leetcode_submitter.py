@@ -3,7 +3,6 @@ import os
 import time
 
 import requests
-from colorama import Fore
 from dotenv import load_dotenv
 from requests.exceptions import RequestException, HTTPError
 
@@ -26,7 +25,7 @@ def create_session():
         leetcode_session = os.getenv('LEETCODE_SESSION')
 
         if not csrf_token or not leetcode_session:
-            logging.error(Fore.LIGHTRED_EX + "Error: CSRF token or LEETCODE_SESSION not set in .env file")
+            logging.error("Error: CSRF token or LEETCODE_SESSION not set in .env file")
             exit()
 
         session.headers.update({
@@ -43,7 +42,7 @@ def create_session():
         return session
 
     except Exception as e:
-        logging.error(Fore.LIGHTRED_EX + f"Error creating session: {e}")
+        logging.error(f"Error creating session: {e}")
         exit()
 
 
@@ -64,11 +63,11 @@ def send_request(method, url, session, json_data=None):
         return response, response.status_code
 
     except HTTPError as http_err:
-        logging.error(Fore.LIGHTRED_EX + f"HTTP error occurred: {http_err}")
+        logging.error(f"HTTP error occurred: {http_err}")
     except RequestException as req_err:
-        logging.error(Fore.LIGHTRED_EX + f"Error while sending request: {req_err}")
+        logging.error(f"Error while sending request: {req_err}")
     except Exception as e:
-        logging.error(Fore.LIGHTRED_EX + f"Unexpected error: {e}")
+        logging.error(f"Unexpected error: {e}")
 
     return None, None
 
@@ -86,7 +85,7 @@ def submit_question(session, problem_url, question_id, lang, code):
     submit_problem_url = f"{problem_url}/submit/"
 
     while True:
-        logging.info(Fore.LIGHTCYAN_EX + "[REQUEST] Submitting question...")
+        logging.info("[REQUEST] Submitting question...")
         submit_question_response, status_code = send_request("POST", submit_problem_url, session, json_data=json_data)
 
         if not submit_question_response or status_code != 200:
@@ -98,11 +97,11 @@ def submit_question(session, problem_url, question_id, lang, code):
             break
 
     submission_id = submit_question_response.json().get("submission_id")
-    logging.info(Fore.LIGHTCYAN_EX + f"Submission ID: {submission_id}")
+    logging.info(f"Submission ID: {submission_id}")
 
     while True:
         time.sleep(RETRY_DELAY)
-        logging.info(Fore.LIGHTCYAN_EX + "[REQUEST] Checking submission...")
+        logging.info("[REQUEST] Checking submission...")
         submission_status_response, status_code = send_request("GET",
                                                                f"https://leetcode.com/submissions/detail/{submission_id}/check/",
                                                                session)
