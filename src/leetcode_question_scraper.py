@@ -7,7 +7,6 @@ from datetime import datetime
 import requests
 from scripts import question_builder
 from bs4 import BeautifulSoup
-from colorama import Fore
 
 # Constants for configuration
 REQUEST_DELAY = 2  # Delay between requests in seconds
@@ -47,7 +46,7 @@ def send_request(url, cookies=None, headers=None, json_data=None):
         return response
 
     except Exception as e:
-        print(Fore.LIGHTRED_EX + "Error while sending request: ", e)
+        print("Error while sending request: ", e)
         exit()
 
 
@@ -81,7 +80,7 @@ def fetch_questions():
     }
 
     try:
-        print(Fore.LIGHTCYAN_EX + "[REQUEST] Fetching questions...")
+        print("[REQUEST] Fetching questions...")
         res = send_request("https://leetcode.com/graphql/", headers=headers, json_data=json_data)
 
         # Check if the HTTP request was successful
@@ -89,23 +88,23 @@ def fetch_questions():
             try:
                 response_data = res.json()
             except ValueError as e:
-                print(Fore.LIGHTRED_EX + "Error decoding JSON:", e)
+                print("Error decoding JSON:", e)
                 exit()
 
             # Safely extract questions from response_data
             questions = response_data.get("data", {}).get("problemsetQuestionList", {}).get("questions")
             if questions is not None:
-                print(Fore.LIGHTGREEN_EX + "Successfully fetched questions!")
+                print("Successfully fetched questions!")
                 return questions
             else:
-                print(Fore.LIGHTRED_EX + "Questions data not found in response")
+                print("Questions data not found in response")
                 exit()
         else:
-            print(Fore.LIGHTRED_EX + f"Failed to fetch questions. HTTP Status Code: {res.status_code}")
+            print(f"Failed to fetch questions. HTTP Status Code: {res.status_code}")
             exit()
 
     except Exception as e:
-        print(Fore.LIGHTRED_EX + "An error occurred:", e)
+        print("An error occurred:", e)
         exit()
 
 
@@ -127,18 +126,18 @@ def filter_questions(questions):
     try:
         start_date_unix = int(time.mktime(datetime.strptime(PROBLEM_FETCH_START_DATE, "%d-%m-%Y").timetuple()))
     except Exception as e:
-        print(Fore.LIGHTRED_EX + "An error occurred while converting datetime to unix timestamp:", e)
+        print(f"An error occurred while converting datetime to unix timestamp:", e)
         exit()
 
     # Filter out paid questions if required
     if FILTER_OUT_PAID_QUESTIONS:
-        print(Fore.LIGHTWHITE_EX + "Filtering out paid questions...")
+        print("Filtering out paid questions...")
         questions = [question for question in questions if not question['paidOnly']]
-        print(Fore.LIGHTGREEN_EX + "Successfully filtered out paid questions!")
+        print("Successfully filtered out paid questions!")
 
     filtered_questions = []
 
-    print(Fore.LIGHTWHITE_EX + "Filtering out questions before cutoff date...")
+    print("Filtering out questions before cutoff date...")
 
     try:
         with shelve.open('../cache/request_cache.db') as cache:
@@ -148,7 +147,7 @@ def filter_questions(questions):
 
                 # Check if data is already in cache
                 if cache_key in cache:
-                    print(Fore.LIGHTYELLOW_EX + f"Timestamp data has already been retrieved: {title}")
+                    print(f"Timestamp data has already been retrieved: {title}")
                     first_submission_timestamp = cache[cache_key]
                 else:
                     # Fetch data and update cache
@@ -157,17 +156,17 @@ def filter_questions(questions):
                         first_submission_timestamp = fetch_first_submission_timestamp(title)
                         cache[cache_key] = first_submission_timestamp
                     except Exception as e:
-                        print(Fore.LIGHTRED_EX + f"An error occurred while fetching timestamp data for {title}:", e)
+                        print(f"An error occurred while fetching timestamp data for {title}:", e)
                         continue
 
                 # Append to filtered questions if criteria are met
                 if first_submission_timestamp >= start_date_unix:
-                    print(Fore.LIGHTGREEN_EX + f"First submission after cutoff date: {title}")
+                    print(f"First submission after cutoff date: {title}")
                     filtered_questions.append(question)
                 else:
-                    print(Fore.LIGHTRED_EX + f"First submission created before cutoff date: {title}")
+                    print(f"First submission created before cutoff date: {title}")
     except Exception as e:
-        print(Fore.LIGHTRED_EX + "An error occurred while accessing the cache database:", e)
+        print("An error occurred while accessing the cache database:", e)
         exit()
 
     return filtered_questions
@@ -206,7 +205,7 @@ def fetch_first_submission_timestamp(title):
     }
 
     try:
-        print(Fore.LIGHTCYAN_EX + f"[REQUEST] Retrieving timestamp data: {title}")
+        print(f"[REQUEST] Retrieving timestamp data: {title}")
         res = send_request('https://leetcode.com/graphql/', headers=headers, json_data=json_data)
 
         # Check if the HTTP request was successful
@@ -214,7 +213,7 @@ def fetch_first_submission_timestamp(title):
             try:
                 response_data = res.json()
             except ValueError as e:
-                print(Fore.LIGHTRED_EX + "Error decoding JSON:", e)
+                print("Error decoding JSON:", e)
                 exit()
 
             # Safely extract first submission timestamp from response_data
@@ -223,17 +222,17 @@ def fetch_first_submission_timestamp(title):
                                                                                                          {}).get(
                     "creationDate")
             if first_submission_timestamp:
-                print(Fore.LIGHTGREEN_EX + f"Timestamp data has successfully been retrieved: {title}")
+                print(f"Timestamp data has successfully been retrieved: {title}")
                 return first_submission_timestamp
             else:
-                print(Fore.LIGHTRED_EX + "First submission timestamp not found in response")
+                print("First submission timestamp not found in response")
                 exit()
         else:
-            print(Fore.LIGHTRED_EX + f"Failed to fetch first submission timestamp. HTTP Status Code: {res.status_code}")
+            print(f"Failed to fetch first submission timestamp. HTTP Status Code: {res.status_code}")
             exit()
 
     except Exception as e:
-        print(Fore.LIGHTRED_EX + "An error occurred:", e)
+        print("An error occurred:", e)
         exit()
 
 
@@ -268,16 +267,16 @@ def fetch_question_content(title):
             try:
                 response_data = res.json()
             except ValueError as e:
-                print(Fore.LIGHTRED_EX + "Error decoding JSON:", e)
+                print("Error decoding JSON:", e)
                 exit()
 
             return response_data
         else:
-            print(Fore.LIGHTRED_EX + f"Failed to fetch question content. HTTP Status Code: {res.status_code}")
+            print(f"Failed to fetch question content. HTTP Status Code: {res.status_code}")
             exit()
 
     except Exception as e:
-        print(Fore.LIGHTRED_EX + "An error occurred:", e)
+        print("An error occurred:", e)
         exit()
 
 
@@ -384,29 +383,29 @@ def add_question_content_and_save_to_file(filtered_questions):
 
         try:
             if os.path.exists(path):
-                print(Fore.LIGHTYELLOW_EX + f"File has already been created: {question['titleSlug']}")
+                print(f"File has already been created: {question['titleSlug']}")
                 continue
 
-            print(Fore.LIGHTCYAN_EX + f"[REQUEST] Fetching question content: {title}")
+            print(f"[REQUEST] Fetching question content: {title}")
 
             try:
                 question_content = fetch_question_content(title)
             except Exception as e:
-                print(Fore.LIGHTRED_EX + f"Error fetching question content for {title}:", e)
+                print(f"Error fetching question content for {title}:", e)
                 continue
 
-            print(Fore.LIGHTGREEN_EX + f"Successfully fetched content: {title}")
+            print(f"Successfully fetched content: {title}")
 
             if REMOVE_QUESTIONS_WITH_IMAGE:
                 if check_content_for_image(question_content["data"]["question"]["content"]):
-                    print(Fore.LIGHTRED_EX + f"Image found in {title}")
+                    print(f"Image found in {title}")
                     continue
 
             try:
                 code_snippets = question_content["data"]["question"]["codeSnippets"]
                 content = clean_content(question_content["data"]["question"]["content"])
             except Exception as e:
-                print(Fore.LIGHTRED_EX + f"Error cleaning content for {title}:", e)
+                print(f"Error cleaning content for {title}:", e)
                 continue
 
             available_languages_for_question = [code_snippet["lang"] for code_snippet in code_snippets]
@@ -414,24 +413,24 @@ def add_question_content_and_save_to_file(filtered_questions):
             is_languages_available = all(language in available_languages_for_question for language in LANGUAGES)
 
             if not is_languages_available:
-                print(Fore.LIGHTRED_EX + f"Not all languages available for {title}")
+                print(f"Not all languages available for {title}")
                 continue
 
             question["codeSnippets"] = code_snippets
             question["content"] = content
 
             try:
-                print(Fore.LIGHTWHITE_EX + f"Saving to: {path}")
+                print(f"Saving to: {path}")
                 os.makedirs(os.path.dirname(path), exist_ok=True)  # Ensure the directory exists
                 save_question_to_folder(question)
             except Exception as e:
-                print(Fore.LIGHTRED_EX + f"Error saving {title} to file:", e)
+                print(f"Error saving {title} to file:", e)
                 continue
 
-            print(Fore.LIGHTGREEN_EX + f"Successfully saved to: {path}")
+            print(f"Successfully saved to: {path}")
             time.sleep(REQUEST_DELAY)
         except Exception as e:
-            print(Fore.LIGHTRED_EX + f"An unexpected error occurred for {title}:", e)
+            print(f"An unexpected error occurred for {title}:", e)
 
 
 def save_question_to_folder(question):
