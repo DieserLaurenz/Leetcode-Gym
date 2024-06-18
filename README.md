@@ -17,7 +17,7 @@ Dieses Projekt wurde im Rahmen der Bachelorarbeit mit dem Titel "Evaluierung der
 Klonen Sie dieses Repository auf Ihren lokalen Computer.
 
 ```bash
-git clone https://github.com/DieserLaurenz/Leetcode-Scraper.git
+git clone https://github.com/DieserLaurenz/Leetcode-Gym.git
 cd Leetcode-Gym
 ```
 
