@@ -8,7 +8,7 @@ import traceback
 
 import pyperclip
 
-from scripts import chatgpt_selenium_automation, leetcode_submitter, chatgptapi_new, generate_results
+from scripts import chatgpt_selenium_automation, leetcode_submitter, generate_results
 
 SKIP_PYTHON = False
 
@@ -62,20 +62,19 @@ def collect_code_input():
     return '\n'.join(code_lines)
 
 
-def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, attempt, conversation_id):
+def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, attempt, conversation_id, cache_path):
     lang_slug = snippet['langSlug']
     lang = snippet['lang']
     title_slug = question['titleSlug']
     question_id = question['questionId']
-    cache_path = '../cache/snippet_cache.db'
     response_directory = os.path.join(subfolder_path, 'responses')
     problem_url = f"https://leetcode.com/problems/{title_slug}"
 
-    if check_cache(cache_path, question_id, lang_slug):
-        print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
-        return True, "", ""
-    else:
-        print(f"Processing: {title_slug} in {lang_slug}.")
+    if lang == "Python":
+        lang = "Python2"
+
+    lang_response_directory = os.path.join(response_directory, lang)
+    problem_url = f"https://leetcode.com/problems/{title_slug}"
 
     extracted_code = collect_code_input()
 
@@ -88,7 +87,7 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
             cache[cache_key] = submission_response
 
         response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
+        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         print(f"Korrekte Antwort")
         return True, "", ""
     else:
@@ -103,7 +102,7 @@ def process_snippet_with_copy_to_clipboard(subfolder_path, question, snippet, at
                 print("Answer saved to cache")
 
         response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(response_directory, response_filename, submission_response, lang, extracted_code)
+        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
         return False, error_prompt, conversation_id
 
 
@@ -144,62 +143,6 @@ def calculate_sleep(time_str):
 
     # Return the sleep_duration
     return sleep_duration
-
-
-def process_snippet_with_web_api(prompt, subfolder_path, question, snippet, attempt, conversation_id):
-    lang_slug = snippet['langSlug']
-    lang = snippet['lang']
-    title_slug = question['titleSlug']
-    question_id = question['questionId']
-    cache_path = '../cache/snippet_cache.db'
-    response_directory = os.path.join(subfolder_path, 'responses')
-    lang_response_directory = os.path.join(response_directory, lang)
-    problem_url = f"https://leetcode.com/problems/{title_slug}"
-
-    if lang_slug in ('python', 'python3'):
-        print(f"Python. Skipping.")
-        return True, "", ""
-
-    if check_cache(cache_path, question_id, lang_slug):
-        print(f"Cache hit for {question_id} in {lang_slug}. Skipping.")
-        return True, "", ""
-    else:
-        print(f"Processing: {title_slug} in {lang_slug}.")
-
-    answer, conversation_id = chatgptapi_new.send_message_with_SyncChatGPT(prompt, conversation_id)
-    extracted_code = extract_code(answer)
-    print(extracted_code)
-
-    if not extracted_code:
-        print("Kein Code gefunden")
-        return False, "", ""
-
-    submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
-
-    # Überprüfe, ob die Lösung akzeptiert wurde
-    if submission_response.get("status_msg") == 'Accepted':
-        with shelve.open(cache_path) as cache:
-            cache_key = f"{question_id}_{lang_slug}"
-            cache[cache_key] = submission_response
-
-        response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
-        print(f"Korrekte Antwort")
-        return True, "", ""
-    else:
-        error_prompt = extract_info_and_generate_prompt(submission_response)
-        print(f"Fehlerhafte Antwort für Versuch {attempt}")
-
-        if attempt == 2:
-            print(f"Versuche überschritten")
-            with shelve.open(cache_path) as cache:
-                cache_key = f"{question_id}_{lang_slug}"
-                cache[cache_key] = submission_response
-                print("Answer saved to cache")
-
-        response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
-        return False, error_prompt, conversation_id
 
 
 def check_for_files(dir):
@@ -374,27 +317,41 @@ def check_cache(cache, question_id, lang_slug):
 
 
 def process_question_with_copy_to_clipboard(json_file_path, subfolder_path):
+    # Not working properly at the moment. Saves to cache even though it was not answered yet.
+    
     question = read_json_file(json_file_path)
+    response_directory = os.path.join(subfolder_path, 'responses')
+    cache_path = '../cache/snippet_cache.db'
 
-    for snippet in question["codeSnippets"]:
-        attempt = 0
-        conversation_id = None
-        prompt = generate_prompt_content(question, snippet)
+    with shelve.open(cache_path) as cache:
+        for snippet in question["codeSnippets"]:
+            lang_slug = snippet['langSlug']
+            question_id = question['questionId']
+            lang_response_directory = os.path.join(response_directory, snippet['lang'])
 
-        pyperclip.copy(prompt)
-        print("Copied initial prompt to clipboard")
 
-        while attempt < 3:
-            is_success, error_prompt, conversation_id = process_snippet_with_copy_to_clipboard(subfolder_path, question,
-                                                                                               snippet,
-                                                                                               attempt, conversation_id)
-            if is_success:
-                break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
-            attempt += 1
-            prompt = error_prompt
+            # Pass the cache object instead of the path
+            if should_skip_snippet(cache, lang_slug, question_id, lang_response_directory):
+                continue  # Skip this snippet and move to the next
+
+            attempt = 0
+            conversation_id = None
+            prompt = generate_prompt_content(question, snippet)
 
             pyperclip.copy(prompt)
-            print("Copied error prompt to clipboard")
+            print("Copied initial prompt to clipboard")
+
+            while attempt < 3:
+                is_success, error_prompt, conversation_id = process_snippet_with_copy_to_clipboard(subfolder_path, question,
+                                                                                                snippet,
+                                                                                                attempt, conversation_id, cache_path)
+                if is_success:
+                    break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
+                attempt += 1
+                prompt = error_prompt
+
+                pyperclip.copy(prompt)
+                print("Copied error prompt to clipboard")
 
 def should_skip_snippet(cache, lang_slug, question_id, lang_response_directory):
     if SKIP_PYTHON:
@@ -458,24 +415,6 @@ def process_question_with_selenium_method(json_file_path, subfolder_path):
                         prompt = error_prompt
 
 
-def process_question_with_web_api(json_file_path, subfolder_path):
-    question = read_json_file(json_file_path)
-
-    for snippet in question["codeSnippets"]:
-        attempt = 0
-        conversation_id = None
-        prompt = generate_prompt_content(question, snippet)
-
-        while attempt < 3:
-            is_success, error_prompt, conversation_id = process_snippet_with_web_api(prompt, subfolder_path, question,
-                                                                                     snippet,
-                                                                                     attempt, conversation_id)
-            if is_success:
-                break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
-            attempt += 1
-            prompt = error_prompt
-
-
 def process_subfolder(base_path, subfolder, chatgpt_mode):
     subfolder_path = os.path.join(base_path, subfolder)
     json_file_path = os.path.join(subfolder_path, f'{subfolder}.json')
@@ -490,8 +429,6 @@ def process_subfolder(base_path, subfolder, chatgpt_mode):
         process_question_with_copy_to_clipboard(json_file_path, subfolder_path)
     if chatgpt_mode == 1:
         process_question_with_selenium_method(json_file_path, subfolder_path)
-    if chatgpt_mode == 2:
-        process_question_with_web_api(json_file_path, subfolder_path)
 
 
 def process_folders(base_path, folders, chatgpt_mode):
@@ -517,8 +454,9 @@ def is_driver_alive(driver):
 
 
 def main():
-    chatgpt_mode = int(input("Bitte gewünschten Modus eingeben: "))
-    # 0: Copy to Clipboard, 1: Selenium Method, 2: ChatGPT Plus WEB Api Method, 3: ChatGPT API Method
+    #chatgpt_mode = int(input("0: Manual Mode, 1: Selenium Method\nBitte gewünschten Modus eingeben: "))
+    # 0: Manual Mode, 1: Selenium Method
+    chatgpt_mode = 1
 
     while True:
         try:
