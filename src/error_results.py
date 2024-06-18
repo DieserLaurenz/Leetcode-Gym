@@ -2,6 +2,29 @@ import json
 import os
 import pandas as pd
 
+def split_errors():
+
+    data = pd.read_csv("../results/errors_report.csv")
+
+    # Extract unique languages
+    languages = data['Language'].unique()
+
+    # Create a separate CSV file for each language
+    output_files = {}
+    for lang in languages:
+        # Filter data for the current language
+        lang_data = data[data['Language'] == lang]
+
+        if not os.path.isdir("../results/Errors by language"):
+            os.mkdir("../results/Errors by language")
+        
+        # Define the output file path
+        output_file_path = f'../results/Errors by language/{lang}_errors.csv'
+        
+        # Save the filtered data to CSV
+        lang_data.to_csv(output_file_path, index=False)
+
+
 def generate_error_report(questions_directory, output_file):
     print("Generating error report...")
     error_data = []
@@ -75,3 +98,4 @@ if __name__ == "__main__":
     questions_directory = "../questions/"
     output_file = "../results/errors_report.csv"
     generate_error_report(questions_directory, output_file)
+    split_errors()

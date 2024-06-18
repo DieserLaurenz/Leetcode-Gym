@@ -250,7 +250,7 @@ def run_analysis():
 
     ranking_df = create_solved_and_total_problems_ranking(df)
     print(ranking_df)
-    ranking_df.to_csv(f"../results/solved_problems_analysis.csv", index=False)
+    ranking_df.to_csv(f"../results/Total/solved_problems_analysis.csv", index=False)
 
     unique_difficulties = df['Difficulty'].unique()
 
