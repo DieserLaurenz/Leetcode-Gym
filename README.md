@@ -54,11 +54,11 @@ Kopieren Sie `env.example` und erstellen Sie eine neue Datei namens `.env`. Füg
 
 - `CSRF_TOKEN`: Cookie von eingeloggtem LeetCode.com Account (cookie name: `csrftoken`)
 - `LEETCODE_SESSION`: Cookie von eingeloggtem LeetCode.com Account (cookie name: `LEETCODE_SESSION`)
-- `CHATGPT_SESSION_TOKEN`: Cookie von eingeloggtem ChatGPT Account (cookie name: `__Secure-next-auth.session-token`)
+- `CHATGPT_SESSION_TOKEN`: Cookie von eingeloggtem Chatgpt.com Account (cookie name: `__Secure-next-auth.session-token`)
 
 ### Schritt 5: Ausführen der Skripte
 
-#### LeetCode Frage Scraper
+#### LeetCode Fragen schürfen
 
 Navigieren Sie zum `src` Ordner und führen Sie das `leetcode_question_scraper.py` Skript aus, um LeetCode-Probleme zu fetchen. Passen Sie die Konstanten im Skript nach Bedarf an:
 
@@ -94,5 +94,5 @@ python leetcode_gym.py
 
 ## Beitragende
 
-Wenn Sie zur Verbesserung dieses Projekts beitragen möchten, sind Ihre Pull-Anfragen willkommen. Für größere Änderungen eröffnen Sie bitte zuerst ein Issue, um zu besprechen, was Sie ändern möchten.
+Falls Sie zur Verbesserung dieses Projekts beitragen möchten, sind Ihre Pull-Anfragen willkommen. Für umfangreichere Änderungen eröffnen Sie bitte zunächst ein Issue, um die geplanten Änderungen zu diskutieren.
 
