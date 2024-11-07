@@ -1,5 +1,3 @@
-![Static Badge](https://img.shields.io/badge/lang-de-blue?style=flat)
-
 # Leetcode-Gym
 
 ## Beschreibung
