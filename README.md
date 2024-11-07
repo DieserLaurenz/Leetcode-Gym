@@ -1,5 +1,7 @@
-[![de](https://img.shields.io/badge/lang-de-blue?style=flat]
+![Static Badge](https://img.shields.io/badge/lang-de-blue?style=flat)(https://github.com/DieserLaurenz/Leetcode-Gym/blob/master/README.de.md)
 
+
+(https://github.com/DieserLaurenz/Leetcode-Gym/blob/master/README.de.md)
 # Leetcode-Gym
 
 ## Description
