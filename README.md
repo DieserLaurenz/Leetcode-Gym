@@ -6,10 +6,6 @@
 
 ⚠️ **This project is not maintained.** The code and dependencies in this repository may be outdated, resulting in potential issues or incompatibilities with other software or systems. Use this project at your own risk. No warranties or guarantees are provided regarding functionality, accuracy, or performance.
 
-### Liability Exclusion
-
-This repository and all its contents are provided "as-is" without any warranty of any kind, whether express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, or non-infringement. By using this project, you agree that the contributors, owners, or maintainers are not liable for any damages or issues arising from its use, including direct, indirect, incidental, special, exemplary, or consequential damages, even if advised of the possibility of such damages.
-
 
 ## Description
 
