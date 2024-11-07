@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/lang-de-blue?style=flat&link=https%3A%2F%2Fgithub.com%2FDieserLaurenz%2FLeetcode-Gym%2Fblob%2Fmaster%2FREADME.de.md)
+[![de](https://img.shields.io/badge/lang-de-blue?style=flat](https://github.com/DieserLaurenz/Leetcode-Gym/blob/master/README.de.md)
 
 # Leetcode-Gym
 
