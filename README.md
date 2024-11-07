@@ -4,7 +4,7 @@
 
 ## Disclaimer
 
-⚠️ **This project is not maintained.** The code and dependencies in this repository may be outdated, resulting in potential issues or incompatibilities with other software or systems. Use this project at your own risk. No warranties or guarantees are provided regarding functionality, accuracy, or performance, and it may be necessary to adjust the code to suit your specific setup.
+⚠️ **This project is not maintained.** The code and dependencies in this repository may be outdated, resulting in potential issues or incompatibilities with other software or systems. Use this project at your own risk. No warranties or guarantees are provided regarding functionality, accuracy, or performance.
 
 ### Liability Exclusion
 
