@@ -1,6 +1,8 @@
 [![Static Badge](https://img.shields.io/badge/lang-de-blue?style=flat)](https://github.com/DieserLaurenz/Leetcode-Gym/blob/master/README.de.md)
 
-# Leetcode-Gym [![ChatGPT](https://img.shields.io/badge/ChatGPT-74aa9c?logo=openai&logoColor=white)](#) [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)](#)
+# Leetcode-Gym
+
+ [![ChatGPT](https://img.shields.io/badge/ChatGPT-74aa9c?logo=openai&logoColor=white)](#) [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)](#)
 
 ## Description
 
