@@ -1,3 +1,5 @@
+[![ChatGPT](https://img.shields.io/badge/ChatGPT-74aa9c?logo=openai&logoColor=white)](#) [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)](#)
+
 # Leetcode-Gym
 
 ## Beschreibung
