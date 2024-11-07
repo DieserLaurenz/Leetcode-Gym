@@ -2,6 +2,15 @@
 
 # Leetcode-Gym
 
+## Disclaimer
+
+⚠️ **This project is not maintained.** The code and dependencies in this repository may be outdated, resulting in potential issues or incompatibilities with other software or systems. Use this project at your own risk. No warranties or guarantees are provided regarding functionality, accuracy, or performance, and it may be necessary to adjust the code to suit your specific setup.
+
+### Liability Exclusion
+
+This repository and all its contents are provided "as-is" without any warranty of any kind, whether express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, or non-infringement. By using this project, you agree that the contributors, owners, or maintainers are not liable for any damages or issues arising from its use, including direct, indirect, incidental, special, exemplary, or consequential damages, even if advised of the possibility of such damages.
+
+
 ## Description
 
 This project was developed as part of the bachelor’s thesis titled “Evaluation of ChatGPT 4's Code Generation Capabilities: A Comparative Analysis in 19 Programming Languages.” The goal of the project is to automate the analysis of ChatGPT 4's code generation capabilities by testing the model on LeetCode problems in 19 different programming languages. The results are then examined comparatively, focusing particularly on solution rates, encountered errors, as well as memory and runtime values of the generated solutions.
