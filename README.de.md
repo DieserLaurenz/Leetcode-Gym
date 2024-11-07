@@ -2,6 +2,10 @@
 
 # Leetcode-Gym
 
+## Haftungsausschluss
+
+⚠️ **Dieses Projekt wird nicht gewartet.** Der Code und die Abhängigkeiten in diesem Repository sind möglicherweise veraltet und können daher zu Problemen oder Inkompatibilitäten mit anderer Software oder Systemen führen. Die Nutzung dieses Projekts erfolgt auf eigenes Risiko. Es wird keine Garantie oder Gewährleistung für die Funktionalität, Genauigkeit oder Leistung übernommen.
+
 ## Beschreibung
 
 Dieses Projekt wurde im Rahmen der Bachelorarbeit mit dem Titel "Evaluierung der Code-Generierungsfähigkeiten von ChatGPT 4: Eine vergleichende Analyse in 19 Programmiersprachen" entwickelt. Ziel des Projekts ist die Automatisierung der Analyse der Code-Generierungsfähigkeiten von ChatGPT 4, indem das Modell auf LeetCode-Probleme in 19 verschiedenen Programmiersprachen getestet wird. Im Anschluss werden die Ergebnisse vergleichend untersucht. Dabei werden insbesondere die Lösungsraten, die aufgetretenen Fehler sowie die Speicher- und Laufzeitwerte der generierten Lösungen analysiert.
