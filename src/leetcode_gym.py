@@ -8,7 +8,7 @@ import traceback
 
 import pyperclip
 
-from scripts import chatgpt_selenium_automation, leetcode_submitter, generate_results
+from scripts import leetcode_submitter, generate_results
 
 SKIP_PYTHON = False
 
@@ -174,100 +174,6 @@ def delete_all_files_in_directory(dir):
             os.remove(file_path)
 
 
-def process_snippet_with_selenium_method(cache, prompt, response_directory, question, snippet, attempt, conversation_id,
-                                         driver):
-    lang_slug = snippet['langSlug']
-    lang = snippet['lang']
-    title_slug = question['titleSlug']
-    question_id = question['questionId']
-
-    if lang == "Python":
-        lang = "Python2"
-
-    lang_response_directory = os.path.join(response_directory, lang)
-    problem_url = f"https://leetcode.com/problems/{title_slug}"
-
-    if attempt == 0:
-        print(f"Processing: {title_slug} in {lang_slug}.")
-        if check_for_files(lang_response_directory):
-            print(f"Files found: {title_slug} in {lang_slug} but attempt 0. Deleting...")
-            delete_all_files_in_directory(lang_response_directory)
-
-    response_message, response_text, extracted_code, conversation_id = chatgpt_selenium_automation.send_message(driver,
-                                                                                                                prompt,
-                                                                                                                attempt,
-                                                                                                                conversation_id)
-
-    if response_message == "message_cap_error":
-        extracted_time = extract_time(response_text)
-        time_to_sleep = calculate_sleep(extracted_time)
-        print(response_message)
-        print(f"Time to sleep: {time_to_sleep}")
-        time.sleep(time_to_sleep + 60)
-        return False, "", conversation_id
-    elif response_message == "unusual_activity_error":
-
-        print(response_message)
-        time.sleep(5)
-        return False, "", conversation_id
-    elif response_message == "network_error":
-
-        print(response_message)
-        time.sleep(5)
-        return False, "", conversation_id
-    elif response_message == "unknown_error":
-
-        print(response_message)
-        time.sleep(5)
-        return False, "", conversation_id
-    elif response_message == "codes_responses_unequal_error":
-
-        print("Amount of codes and responses not equal")
-        time.sleep(5)
-        return False, "", conversation_id
-    elif response_message == "attempt_responses_unequal_error":
-
-        print("Amount of attempts and responses not equal")
-        time.sleep(5)
-        return False, "", conversation_id
-    elif extracted_code == "":
-
-        print("No code found")
-        time.sleep(5)
-        return False, "", conversation_id
-
-    submission_response = leetcode_submitter.main(problem_url, question_id, lang_slug, extracted_code)
-
-    # Überprüfe, ob die Lösung akzeptiert wurde
-    if submission_response.get("status_msg") == 'Accepted':
-        print(f"Korrekte Antwort in Versuch: {attempt}")
-        cache_key = f"{question_id}_{lang_slug}"
-        cache[cache_key] = submission_response
-        print("Answer saved to cache")
-
-        if lang_slug == "python":
-            lang_slug = "python2"
-
-        response_filename = f'response_{lang_slug}_{attempt}_success.json'
-        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
-        return True, "", ""
-    else:
-        error_prompt = extract_info_and_generate_prompt(submission_response)
-        print(f"Fehlerhafte Antwort für Versuch {attempt}")
-
-        if attempt == 2:
-            print(f"Versuche überschritten")
-            cache_key = f"{question_id}_{lang_slug}"
-            cache[cache_key] = submission_response
-            print("Answer saved to cache")
-
-        if lang_slug == "python":
-            lang_slug = "python2"
-
-        response_filename = f'response_{lang_slug}_{attempt}_failed.json'
-        save_response(lang_response_directory, response_filename, submission_response, extracted_code)
-        return False, error_prompt, conversation_id
-
 
 def generate_prompt_content(question, snippet):
     if snippet["lang"] == "Python":
@@ -378,55 +284,6 @@ def should_skip_snippet(cache, lang_slug, question_id, lang_response_directory):
     else:
         return False
 
-def process_question_with_selenium_method(json_file_path, subfolder_path):
-    question = read_json_file(json_file_path)
-    response_directory = os.path.join(subfolder_path, 'responses')
-    driver = None
-    cache_path = '../cache/snippet_cache.db'
-
-    with shelve.open(cache_path) as cache:
-        for snippet in question["codeSnippets"]:
-            lang_slug = snippet['langSlug']
-            question_id = question['questionId']
-            lang_response_directory = os.path.join(response_directory, snippet['lang'])
-
-            # Pass the cache object instead of the path
-            if should_skip_snippet(cache, lang_slug, question_id, lang_response_directory):
-                continue  # Skip this snippet and move to the next
-
-            attempt = 0
-            conversation_id = None
-            prompt = generate_prompt_content(question, snippet)
-
-            while attempt < 3:
-                if attempt == 0:
-                    if is_driver_alive(driver):
-                        driver.quit()
-                    driver = chatgpt_selenium_automation.init_driver()
-
-                is_success, error_prompt, conversation_id = process_snippet_with_selenium_method(cache, prompt, response_directory,
-                                                                                                 question,
-                                                                                                 snippet,
-                                                                                                 attempt, conversation_id,
-                                                                                                 driver)
-                if is_success:
-                    driver.quit()
-                    break  # Beende die Schleife, wenn die Lösung akzeptiert wurde
-                else:
-                    if error_prompt == "":
-                        print("Retrying to fetch the answer from ChatGPT...")
-                        driver.quit()
-                        attempt = 0
-                        conversation_id = None
-                        prompt = generate_prompt_content(question, snippet)
-                        continue
-                    else:
-                        attempt += 1
-                        if attempt == 3:
-                            driver.quit()
-                            break
-                        prompt = error_prompt
-
 
 def process_subfolder(base_path, subfolder, chatgpt_mode):
     subfolder_path = os.path.join(base_path, subfolder)
@@ -441,7 +298,8 @@ def process_subfolder(base_path, subfolder, chatgpt_mode):
     if chatgpt_mode == 0:
         process_question_with_copy_to_clipboard(json_file_path, subfolder_path)
     if chatgpt_mode == 1:
-        process_question_with_selenium_method(json_file_path, subfolder_path)
+        print("Due to changes in the OpenAI API interface, the Automatic Mode is currently unavailable.")
+        exit()
 
 
 def process_folders(base_path, folders, chatgpt_mode):

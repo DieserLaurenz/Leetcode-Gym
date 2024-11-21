@@ -60,7 +60,7 @@ Copy `env.example` and create a new file named `.env`. Add the required values f
 
 - `CSRF_TOKEN`: Cookie from logged-in LeetCode.com account (cookie name: `csrftoken`)
 - `LEETCODE_SESSION`: Cookie from logged-in LeetCode.com account (cookie name: `LEETCODE_SESSION`)
-- `CHATGPT_SESSION_TOKEN`: Cookie from logged-in Chatgpt.com account (cookie name: `__Secure-next-auth.session-token`)
+- `OPENAI_API_KEY`: Find your API Key at https://platform.openai.com/api-keys
 
 ### Step 5: Run Scripts
 
